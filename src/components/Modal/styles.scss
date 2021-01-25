@@ -1,0 +1,102 @@
+.modal-show {
+  display: flex;
+}
+
+.modal-none {
+  display: none;
+
+}
+
+.modal {
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 999;
+}
+
+.modal-dialog {
+  position: relative;
+  width: 100%;
+  box-shadow: none;
+  animation: zoom-in 0.3s ease-in-out;
+  /* // background: #fff; */
+}
+
+.modal-dialog.close{
+  animation: zoom-out 0.5s ease-in-out;
+}
+
+
+
+.modal-footer .save-btn:hover {
+  opacity: 1.5;
+}
+
+.modal .modal-content {
+  border-radius: 10px;
+  transform: all 0.5s;
+}
+
+
+
+@keyframes zoom-in {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+    ;
+  }
+}
+
+@keyframes zoom-out {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+
+/* @-webkit-keyframes zoom {
+  from {
+    -webkit-transform: scale(0);
+  }
+  to {
+    -webkit-transform: scale(1);
+  }
+}
+
+@keyframes zoom {
+  from {
+    transform: translate(0);
+  }
+  to {
+    transform: translate(1);
+  }
+} */
+
+.custom-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgb(0, 0, 0);
+}
+
+.modal-main {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 80%;
+  height: auto;
+  vertical-align: middle;
+  background: white;
+  transform: translate(-50%, -50%);
+}

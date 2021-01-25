@@ -1,0 +1,38 @@
+@import 'assets/styles/mixins';
+
+.wishlistErrorContainer {
+  max-width: 980px;
+  margin: 230px auto 180px;
+  text-align: center;
+  > * {
+    padding: 1em;
+  }
+}
+
+.header {
+  text-transform: uppercase;
+}
+
+.subtitle{
+    color:$text;
+    font-size: 1.2rem;
+    padding:0
+}
+
+.image{
+  width: 10em;
+  margin: 0 auto;
+  img{
+    width:100%
+  }
+  animation: rotate 1s 1;
+}
+
+@keyframes rotate{
+  0%{
+    transform: rotate(30deg)
+  }
+  50%{
+    transform: (0deg)
+  }
+}

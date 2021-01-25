@@ -1,0 +1,41 @@
+$blue: #19b3ef;
+$gray-light: #c0c4c5;
+
+.radio-group {
+  display: flex;
+  justify-content: space-between;
+  width: 50%;
+}
+
+.form-controla.radio {
+  text-align: center;
+  position:relative;
+  input {
+    border: none;
+    font-size: 1em;
+    outline: none;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    &:checked {
+      + label {
+        // background-color: $blue;
+        // box-shadow: 0 0 10px 0 $blue;
+        color: $blue;
+        border-color: $blue;
+      }
+    }
+  }
+  label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: 1px solid $gray-light;
+    border-radius: 50px;
+    width: 100%;
+    height: 100%;
+    padding: 0.8rem;
+    pointer-events: none;
+  }
+}

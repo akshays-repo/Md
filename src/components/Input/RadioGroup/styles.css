@@ -1,0 +1,42 @@
+.radio-group {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 50%;
+}
+
+.form-controla.radio {
+  text-align: center;
+  position: relative;
+}
+
+.form-controla.radio input {
+  border: none;
+  font-size: 1em;
+  outline: none;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+.form-controla.radio input:checked + label {
+  color: #19b3ef;
+  border-color: #19b3ef;
+}
+
+.form-controla.radio label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 1px solid #c0c4c5;
+  border-radius: 50px;
+  width: 100%;
+  height: 100%;
+  padding: 0.8rem;
+  pointer-events: none;
+}
+/*# sourceMappingURL=styles.css.map */

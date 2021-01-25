@@ -1,0 +1,19 @@
+.owl-carousel.products-image-slider {
+  display: flex;
+}
+
+.owl-carousel.products-image-slider .owl-nav {
+  opacity: 0.3;
+}
+
+.owl-carousel.products-image-slider .owl-nav .owl-prev {
+  position: absolute;
+  left: 0;
+  border-radius: 10px;
+}
+
+.owl-carousel.products-image-slider .owl-nav .owl-next {
+  position: absolute;
+  right: 0;
+  border-radius: 10px;
+}

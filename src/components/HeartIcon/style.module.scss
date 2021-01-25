@@ -1,0 +1,80 @@
+@import 'assets/styles/mixins.scss';
+
+.circle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 50%;
+  z-index: -1;
+  border: none;
+  &:nth-child(1) {
+    background: rgb(223, 79, 22);
+    opacity: 0;
+    width: rem(5);
+    height: rem(5);
+    &.active {
+      transform: translate(100px, 200px);
+    }
+  }
+  &:nth-child(2) {
+    background: orange;
+    opacity: 0;
+    // &.active{
+    //     transform:translate(100px,-100px)
+    // }
+  }
+  &:nth-child(3) {
+    background: red;
+    opacity: 0;
+    width: 0.2rem;
+    height: 0.2rem;
+    // &.active{
+    //     transform:translate(-100px,100px)
+    // }
+  }
+  &:nth-child(4) {
+    background: rgb(209, 164, 15);
+    opacity: 0;
+    width: 0.1rem;
+    height: 0.1rem;
+    // &.active{
+    //     transform:translate(300px,-300px)
+    // }
+  }
+  &:nth-child(5) {
+    background: rgb(224, 255, 140);
+    opacity: 0;
+    width: 0.25rem;
+    height: 0.25rem;
+    // &.active{
+    //     transform:translate(-100px,300px)
+    // }
+  }
+  &:nth-child(6) {
+    background: rgb(255, 238, 0);
+    opacity: 0;
+    // &.active{
+    //     transform:translate(100px,100px)
+    // }
+  }
+  &:nth-child(7) {
+    background: rgb(226, 24, 24);
+    opacity: 0;
+    width: 0.5rem;
+    height: 0.5rem;
+    // &.active{
+    //     transform:translate(100px,100px)
+    // }
+  }
+  &:nth-child(8) {
+    background: rgb(240, 204, 44);
+    opacity: 0;
+    width: 0.19rem;
+    height: 0.19rem;
+    // &.active{
+    //     transform:translate(100px,100px)
+    // }
+  }
+}

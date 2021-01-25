@@ -1,0 +1,34 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css");
+.ant-select-selector {
+  height: 50px !important;
+  padding: 12px !important;
+  font-size: 18px;
+  opacity: 0.9;
+  border: 0.5px solid rgba(0, 0, 0, 0.2);
+}
+
+.ant-select-selection-search-input {
+  margin: 10px 0px 0px 0px !important;
+}
+
+.thumbimage {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.thumbimage img {
+  position: relative;
+}
+
+.thumbimage:hover img {
+  background-color: 'linear-gradient(top, rgba(255, 255, 255,0.6)),linear-gradient(top, rgba(255,255,255,0.2))';
+}
+
+.thumbimage button {
+  top: 40px;
+  left: 30px;
+  position: absolute;
+  z-index: 2000;
+  cursor: pointer;
+}

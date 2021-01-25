@@ -1,0 +1,22 @@
+.dashboard-my-reviews .reviews-section {
+  background-color: #ffffff;
+  padding: 20px;
+}
+
+.dashboard-my-reviews hr {
+  background-color: 1px solid #dee2e6 !important;
+}
+
+.dashboard-my-reviews .sub-titile {
+  color: #ee6369;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.dashboard-my-reviews .reviews-section {
+  font-size: 20px;
+}
+
+.dashboard-my-reviews .reviews-row {
+  border-bottom: 1px solid #dee2e6 !important;
+}

@@ -1,0 +1,93 @@
+@import './assets/styles/fontawesome/css/fontawesome.css';
+
+body {
+  margin: 0;
+  font-family: 'work sans', sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+    'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+a {
+  color: none;
+  text-decoration: none;
+}
+:root {
+  --blue: #01b3ed;
+  --indigo: #6610f2;
+  --purple: #6f42c1;
+  --pink: #d63384;
+  --red: #ff0000;
+  --orange: #ffba00;
+  --yellow: #ffba00;
+  --green: #74b100;
+  --teal: #67981a;
+  --cyan: #0583c5;
+  --white: #fff;
+  --gray: #999999;
+  --gray-dark: #343a40;
+  --primarys: #ff5a5f;
+  --secondary: #666666;
+  --success: #67981a;
+  --info: #3f93f3;
+  --warning: #ffba00;
+  --danger: #ff0000;
+  --light: #f0f0f0;
+  --dark: #000;
+  --white: #fff;
+  --gray: #999999;
+  --darker-light: #cccccc;
+  --dark-red: #cc0000;
+  --lighter-dark: #262626;
+  --green: #74b100;
+  --gray-01: #e8edef;
+  --gray-02: #f5f5f5;
+  --gray-03: #eeeeee;
+  --gray-04: #eef1f2;
+  --gray-05: #ecf0f1;
+  --gray-06: #f0f2f3;
+  --breakpoint-xs: 0;
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+  --font-family-sans-serif: 'Work Sans', sans-serif;
+  --font-family-monospace: 'Work Sans', sans-serif;
+}
+
+.loadingdiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.loadingdiv i {
+  font-size: 2rem;
+}
+
+.filterbutton {
+  display: none;
+}
+
+@media (max-width: 992px) {
+  .filterbutton {
+    display: block;
+  }
+}
+
+.errormsg {
+  color: red;
+  font-size: 14px;
+}
+
+
+
+
+

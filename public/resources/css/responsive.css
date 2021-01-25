@@ -1,0 +1,1209 @@
+@media (min-width: 1700px) {
+	.container {
+		max-width: 1631px;
+	}
+
+
+}
+@media (min-width: 768px) and (max-width: 16499px) {
+	.footer-wrapper {
+		padding: 0 15px;
+	}
+}
+@media (max-width: 1699px) {
+	.container {
+	    max-width: 1410px;
+	    width: 100%;
+	}
+	.order-item-address .cart-item-img {
+	    width: 35%;
+	}
+	.cart-item-img img.product-image {
+	    max-width: 60px;
+	}
+
+
+	.products-image-slider {
+	    width: 25%;
+	}
+	.slider {
+	    width: 25%;
+	}
+	.products-details-wrapper {
+	    width: 35%;
+	}
+	.product-detail-head {
+	    font-size: 22px;
+	}
+
+
+
+}
+@media (max-width: 1400px) {
+	.container {
+	    max-width: 1366px;
+	}
+	.inner-container {
+	    max-width: 1370px;
+	    padding: 0 30px;
+	}
+	.big-btn {
+		padding: 10px 25px;
+		min-width: auto;
+	}
+
+	.address-area, .phone-area {
+		width: 47%;
+	}
+
+	.cart-items-wrapper {
+	    width: 58%;
+	}
+	.cart-price-details {
+	    width: 40%;
+	}
+}
+@media (max-width: 1699px) {
+	.top-button {
+	    width: 45%;
+	}
+
+	.menu li a {
+	    font-size: 14px;
+    	padding: 0 15px 0 0;
+	}
+
+	.small-ad {
+		width: 46%;
+	}
+	.small-ad-image {
+	    width: 25%;
+	    overflow: hidden;
+	}
+	.small-ad-image img {
+	    margin: 0 auto 0 -50%;
+	    float: left;
+	}
+
+
+	.med-info-content {
+	    padding: 20px 30px 17px 70px;
+	    margin: 0 0 0 -50px;
+	}
+	.med-info-content h4 {
+	    font-size: 23px;
+	    font-weight: 500;
+	    line-height: 22px;
+	}
+	.ad-area img {
+	    width: 100%;
+	}
+	.step-content {
+	    font-size: 18px;
+	    max-width: 65%;
+	}
+
+	.head-two-boders span {
+		font-size: 16px;
+	}
+
+	.payment-list img {
+	    margin: 0 0 5px;
+	}
+
+
+}
+
+
+@media (max-width: 1366px) {
+	.cancel-btn {
+		font-size: 14px;
+	}
+	.blue-btn {
+	    display: inline-block;
+    	font-size: 13px;
+	}
+	.blue-btn {
+		padding: 6px 7px 6px;
+	}
+	.blue-btn img {
+	    width: 11px;
+	}
+
+	.tabs-wrapper {
+	    width: 60%;
+	}
+	.reviews-wrapper {
+	    width: 37%;
+	}
+
+	
+	.products-image-slider {
+	    width: 23%;
+	}
+	.slider {
+	    width: 23%;
+	}
+	.products-details-wrapper {
+	    width: 36%;
+	}
+
+
+
+}
+@media (max-width: 1200px) {
+	.small-ad-content {
+		padding-right: 20px;
+	}
+
+	.med-info {
+		width: 45%;
+	}
+	.med-info-content {
+		padding: 20px 20px 17px 65px;
+	}
+	.med-info-content h4 {
+	    font-size: 18px;
+		margin-bottom: 6px;
+	}
+	.med-info-content h5 {
+	    font-size: 15px;
+	}
+	
+	.steps {
+		padding: 20px 0 20px 20px;
+	}
+	.step-img img {
+	    max-width: 50px;
+	}
+	.step-content {
+		font-size: 15px;
+	    max-width: 70%;
+	    line-height: 18px
+	}
+
+
+
+	.small-ad-wrapper, .services-wrapper {
+	    flex-wrap: wrap;
+    	justify-content: left;
+	}
+	.service {
+	    width: 35%;
+	    max-width: 350px;
+	    margin: 0 20px 20px 0;
+	}
+
+	.footer-head {
+		font-size: 14px;
+		font-weight: 600
+	}
+	.footer-list li a {
+		font-size: 13px;
+	}
+
+	.head-two-boders span {
+	    font-size: 14px;
+	}
+	.head-two-boders span:before, .head-two-boders span:after {
+		width: 10px;
+	}
+	.head-two-boders span:before {
+		left: -15px
+	}
+	.head-two-boders span:after {
+		right: -26px
+	}
+
+
+	.newsletter-input {
+		width: 60%;
+	}
+	.newsletter-btn {
+	    font-size: 11px;
+	    padding: 8px
+	}
+
+	.footer-social a {
+		font-size: 14px;
+		width: 30px;
+		height: 30px;
+	}
+	.head-two-boders span {
+		font-weight: 600
+	}
+
+}
+
+
+@media (max-width: 1199px) {
+	.logo {
+		width: 20%;
+	}
+	.search-wrapper {
+	    width: 35%;
+	}
+	.search-wrapper input {
+	    width: 80%;
+	}
+
+	.menu li a {
+	    font-size: 12px;
+	    padding: 0 10px 0 0;
+	    font-weight: 400;
+	}
+
+	.upload-btn-wrapper .btn {
+	    padding: 10px 45px 10px 10px;
+	    font-size: 11px;
+	}
+
+	.small-ad-wrapper {
+		justify-content: center;
+	}
+	.small-ad {
+	    width: 45%;
+	    margin: 0 2%;
+	    padding-right: 5px;
+	}
+	.small-ad-image {
+	    width: 20%;
+	}
+	.small-ad-content {
+	    padding-right: 10px;
+	}
+	.small-ad-content h5 {
+	    font-size: 14px;
+	    font-weight: 700;
+	    margin: 0 0 2px;
+	}
+	.small-ad-content p {
+		line-height: 15px;
+	}
+
+	.med-info-img {
+	    width: 100px;
+	    height: 100px;
+	    padding: 16px;
+	}
+	.med-info-content {
+	    padding: 10px 20px 6px 65px;
+	}
+	.med-info-content h4 {
+	    font-size: 17px;
+	    margin-bottom: 3px;
+	}
+	.med-info-content h5 {
+	    font-size: 14px;
+	}
+
+	.service {
+	    width: 45%;
+	    max-width: 400px;
+	}
+
+	.footer-menu-list {
+		width: 52%;
+	}
+	.newsletter-wrapper {
+		width: 23%;
+	}
+
+
+	.product-listing .order-btn {
+		opacity: 1
+	}
+
+
+	.about-img {
+		width: 28%;
+	}
+	.about-right-content {
+		width: 70%;
+	}
+	.speciality-left, .speciality-right {
+	    width: 48%;
+	}
+
+	
+	.contact-details-wrapper {
+	    width: 50%;
+	}
+	.contact-form-wrapper {
+	    width: 46%;
+	}
+
+	.big-btn {
+	    padding: 10px 15px;
+	    min-width: 170px;
+	    font-size: 15px;
+	}
+	.original-price {
+		font-size: 18px;
+	}
+	.original-price i {
+	    font-size: 16px;
+	}
+	.offer-price {
+		font-size: 15px;
+	}
+	.cart-item-offer, .cart-item-offer strong {
+	    font-size: 14px;
+	}
+
+	.delivery-checking {
+		flex-wrap: wrap;
+	}
+	.change-loc {
+	    width: 100%;
+	    text-align: right;
+	    margin: 8px 0 0;
+	}
+	.delivery-checking p {
+	    font-size: 15px;
+	}
+
+
+	/* BOF Login Page */
+	.login-area {
+		padding: 100px 35px;
+	}
+	.slogan {
+	    font-size: 20px;
+	    line-height: 26px;
+	}
+	/* EOF Login Page */
+
+
+	.tabs-wrapper {
+	    width: 72%;
+	}
+	.reviews-wrapper {
+	    width: 26%;
+	}
+
+
+
+	.review-head span {
+		font-size: 16px;
+	}
+	.review-head:after {
+		top: 3px;
+	    width: 25px;
+    	background-size: contain;
+	}
+
+	.review-head span:before {
+		height: 15px;
+		top: 1px;
+	}
+
+
+	.products-detail-3-sections {
+		flex-wrap: wrap;
+	}
+	.products-details-wrapper {
+	    width: 56%;
+	}
+	.products-image-slider {
+	    width: 40%;
+	}
+	.slider {
+	    width: 40%;
+	}
+	.similar-products-offers {
+	    width: 100%;
+	    margin: 30px 0 0;
+	}
+	.similar-products-offers .breadcrumbs-wrapper {
+	    display: none;
+	}
+
+
+	.priscription-upload-btns {
+	    display: -webkit-flex;
+	    display: -moz-flex;
+	    display: -ms-flex;
+	    display: -o-flex;
+	    display: flex;
+	    justify-content: space-between;
+	}
+	.priscription-upload-btns .commmon-btn {
+	    font-size: 12px;
+    	padding: 7px 15px;
+	}
+	.image-upload-area:after {
+		font-size: 1.5em;
+		padding: 0 15px;
+	}
+	.guide-area {
+	    padding: 20px 20px 40px;
+	}
+
+
+
+
+}
+
+
+@media (max-width: 991px) {
+	 .toggle-main {
+        font-size: 1.5em;
+        display: block;
+        position: relative;
+        z-index: 10;
+        color: #fff;
+        top: -6px;
+        margin: -30px 0 0 22px
+    }
+    .toggle-main i {
+        position: absolute;
+        right: 0;
+        top: 8px;
+    }
+    .toggle-main i.fas.fa-times {
+        opacity: 0;
+    }
+    .toggle-main.active i.fas.fa-times {
+        opacity: 1;
+        color: #FFF;
+    }
+    .toggle-main i.fas.fa-bars {
+        opacity: 1;
+    }
+    .toggle-main.active i.fas.fa-bars {
+        opacity: 0;
+    }
+
+    ul.menu {
+        display: flex;
+        height: 100%;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+    nav ul li {
+        display: block;
+        text-align: center;
+    }
+
+    .menu li a {
+	    padding: 0;
+	    margin: 0 0 15px;
+	    font-weight: 500;
+	    display: inline-block;
+    	width: 100%;
+    	font-size: 15px;
+	}
+    
+
+    nav {
+        position: fixed;
+        background: rgba(0, 0, 0, 0.85);
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        z-index: 9;
+        /* opacity: 0; */
+        display: none;
+    }
+    .on {
+        opacity: 1;
+        height: 100%;
+    }
+
+	.top-strip {
+		padding: 10px 0;
+	}
+	.logo {
+	    width: 21%;
+	    align-items: center;
+    	display: inline-flex;
+	}
+	.top-button {
+	    width: 60%;
+	}
+	.top-button .btn {
+		margin: 0;
+	}
+
+	span.loc {
+	    display: none;
+	}
+	.location-btn {
+		padding: 0;
+	}
+	.location-btn span.loc-img {
+		padding: 5px 10px;
+		margin: 0;
+	}
+
+
+    .upload-btn-wrapper .btn {
+    	font-size: 13px;
+    }
+
+
+    .small-ad {
+	    width: 85%;
+	    margin: 0 2% 10px;
+	    padding-right: 15px;
+	}
+
+	
+	.med-info-wrapper {
+		flex-wrap: wrap;
+	}
+	.med-info {
+	    width: 70%;
+	    margin: 0 0 20px;
+	}
+	.med-info-content h4 {
+	    font-size: 20px;
+	    margin-bottom: 7px;
+	}
+
+
+	.four-ads-wrapper {
+		flex-wrap: wrap;
+	}
+	.ad-area {
+	    width: 40%;
+	    margin: 0 1% 10px;
+	    overflow: hidden;
+	}
+
+	.steps-wrapper {
+		flex-wrap: wrap;
+	}
+	.steps {
+	    width: 45%;
+	}
+	.steps:nth-last-child(2n+1) {
+	    border-right: none;
+	}
+
+	.footer-wrapper {
+		flex-wrap: wrap;
+	}
+	.footer-menu-list {
+	    width: 100%;
+	}
+
+	.newsletter-wrapper, .footer-about-wrapper {
+		width: 50%;
+	}
+
+	.footer-menu {
+	    margin: 0 0 30px;
+	}
+
+	/* BOF Cart Page CSS */
+	.cart-item {
+	    flex-wrap: wrap;
+	}
+	.cart-item-img {
+	    width: 30%;
+	}
+	.cart-item-details {
+	    width: 70%;
+	}
+	.cart-item-price-wrapper {
+	    width: 100%;
+	    text-align: left;
+	    position: relative;
+	}
+	.remove-item {
+	    position: absolute;
+	    right: 0;
+	    top: 0;
+	}
+	.cart-item-price {
+	    justify-content: flex-start;
+	    margin: 3px 0;
+	}
+	.cart-item-offer {
+	    margin: 0 0 15px;
+	}
+	.pin-check {
+	    width: 100%;
+	    margin: 5px 0 0;
+	}
+	.price-detail-head {
+	    font-size: 16px;
+	    margin: 0 0 15px;
+	}
+	.price-list-row span {
+	    font-size: 14px;
+	}
+	.tobe-paid span {
+		font-size: 14px;
+	}
+	.tobe-paid span i {
+	    font-size: 17px;
+	}
+	.tobe-paid span strong {
+	    font-size: 20px;
+	}
+	.big-btn {
+	    padding: 10px 10px;
+	    min-width: auto;
+	    font-size: 12px;
+	    font-weight: 500;
+	}
+	.total-savings i {
+	    font-size: 12px;
+	}
+	/* EOF Cart Page CSS */
+
+
+	/* BOF Login Page */
+	.login-area {
+	    padding: 100px 15px;
+	}
+	.login-para {
+		max-width: 100%;
+	}
+	.medium-btn {
+		min-width: 140px;
+    	max-width: 140px;
+	}
+	.medium-btn, .register-btn {
+		font-size: 18px;
+	}
+	.login-image-area {
+		padding: 0 25px 134px 25px;
+	}
+	/* EOF Login Page */
+
+	/* BOF User Profile Page CSS */
+	.information-wrapper {
+	    margin: 0 0 30px;
+	}
+	/* EOF User Profile Page CSS */
+
+	.post-btn-wrapper {
+	    margin: 10px 0 0;
+	    padding: 0;
+	    width: 100%;
+	}
+
+
+	.tabs-reviews-wrapper {
+	    flex-direction: column;
+	}
+	.tabs-wrapper, .reviews-wrapper {
+	    width: 100%;
+	}
+	textarea.form-control {
+	    height: auto;
+	    min-height: 200px;
+	}
+	.review-head:after {
+	    top: -1px;
+	    width: 38px;
+	    background-size: contain;
+	    padding: 0 0 0 18px;
+	}
+
+
+	.product-detail-head {
+	    font-size: 18px;
+	}
+	.h4-left-border:before {
+		top: 3px;
+	    height: 14px;
+	}
+	.price-area .original-price {
+	    font-size: 22px;
+	}
+	.price-area .original-price i {
+	    font-size: 20px;
+	}
+	.price-area .offer-price {
+	    font-size: 18px;
+	}
+	.price-area .offer-price i {
+	    font-size: 17px;
+	}
+	.price-area .offer-price:after {
+		width: 95px;
+	    top: 10px;
+	}
+	.productdetail-qty-wrapper select {
+		max-width: 100px;
+	}
+
+	.tabs-reviews-wrapper {
+		margin: 50px 0 0
+	}
+
+
+
+	.frequently-brought-product-list .original-price {
+		font-size: 14px
+	}
+	.price-area .original-price i {
+	    font-size: 13px;
+	}
+	.price-area .offer-price {
+	    font-size: 13px;
+	}
+	.price-area .offer-price i {
+	    font-size: 11px;
+	}
+
+
+	.priscription-tabs {
+	    display: flex;
+	}
+	.priscription-single-tab {
+	    padding: 0 60px 0 20px;
+	}
+
+	.specify-address-wrapper {
+	    margin: 0 0 40px;
+	}
+	.commmon-btn {
+	    font-size: 14px;
+	    padding: 9px 20px;
+	}
+	.priscription-single-tab {
+	    font-size: 12px;
+	    min-height: 40px;
+	}
+	.priscription-single-tab:after {
+		border: 20px solid transparent;
+	    border-right: 20px solid #ecf0f7;
+	    border-bottom: 20px solid #ecf0f7;
+	    border-top: 20px solid #ecf0f7;
+	}
+
+
+	.specify-list {
+	    margin: 0 0 40px;
+	}
+
+
+
+}
+
+
+
+@media (max-width: 767px) {
+
+	.top-button {
+		display: none;
+	}
+	.search-wrapper {
+	    width: 50%;
+	}
+
+	.service {
+	    width: 100%;
+	    max-width: 100%;
+	}
+	.med-info-content h4 {
+	    font-size: 16px;
+	    margin-bottom: 7px;
+	    font-weight: 700;
+	    line-height: 18px;
+	}
+	
+	.footer-menu {
+		padding: 0 15px;
+	}
+
+	.copy-content {
+		font-size: 12px;
+		flex-wrap: wrap;
+    	text-transform: none
+	}
+	.copyright, .copy-links {
+	    width: 100%;
+	}
+
+	.about-us-wrapper {
+		flex-direction: column;
+	}
+	.about-img, .about-right-content, .speciality-left, .speciality-right {
+	    width: 100%;
+	}
+
+	.about-img {
+	    height: 200px;
+	    margin: 0 auto 20px;
+	}
+	.about-img img {
+	    min-width: 100%;
+	}
+
+	.speciality-wrapper {
+		flex-direction: column;
+	}
+
+	.speciality-head h3 {
+		text-transform: uppercase;
+		font-size: 16px;
+	}
+	.speciality-head h3 img {
+		max-width: 30px;
+	}
+
+
+	.contact-us-wrapper {
+	    flex-direction: column;
+	}
+	.contact-details-wrapper, .contact-form-wrapper {
+	    width: 100%;
+	}
+
+	.search-wrapper {
+	    text-align: right;
+	}
+	
+	.page-heading {
+		margin: 10px 0 0;
+	}
+	.breadcrumbs-wrapper {
+	    text-align: left;
+	    margin: 7px 0 20px;
+	}
+
+
+	.cart-items-wrapper, .cart-price-details {
+	    width: 100%;
+	}
+	.cart-price-details {
+	    margin: 30px 0 0;
+	}
+	
+
+	/* BOF Login Page */
+	.login-area-wrapper {
+	    flex-direction: column;
+	}
+	.login-area {
+	    order: 2;
+	    width: 100%;
+	}
+	.login-image-area-wrapper {
+	    order: 1;
+	    width: 100%;
+	}
+	.login-image-area {
+		padding: 50px 25px;
+	}
+	.name-big {
+	    font-size: 60px;
+	}
+	.sub-heading {
+	    font-size: 16px;
+	}
+	.slogan {
+	    font-size: 16px;
+	    line-height: 20px;
+	}
+
+	.login-para {
+	    margin-bottom: 30px;
+	}
+	.login-area {
+	    padding: 50px 15px;
+	}
+	.social-signup {
+	    margin-top: 30px;
+	}
+	.name-big {
+	    font-size: 50px;
+	    margin: 0 0 2px;
+	}
+	/* EOF Login Page */
+
+	.products-image-slider {
+	    width: 100%;
+	    margin: 0 0 40px;
+	}
+	.slider {
+	    width: 100%;
+	    margin: 0 0 40px;
+	}
+	.products-details-wrapper {
+	    width: 100%;
+	}
+
+	.similar-products-wrapper .owl-theme .owl-nav {
+	    top: -20px;
+	}
+	.similar-product-slider .order-btn {
+	    height: auto;
+	}
+
+	.tab-details h4 {
+	    font-size: 16px;
+	    margin: 0 0 7px;
+	}
+
+	.details-tab-wrapper {
+	    flex-wrap: wrap;
+	}
+	.single-tab {
+		border: 1px solid #ccc
+	}
+	/* .single-tab:nth-child(even) {
+	    background: #2c5592;
+	} */
+/* added */
+	.single-tab:hover:after, .single-tab.active:after {
+		display:none
+	}
+
+	.priscription-tabs {
+	    margin: 15px 0 20px;
+	    padding: 0 0 0 15px;
+	}
+
+
+	.priscription-tabs {
+	    display: inline-block;
+	    padding: 0;
+	}
+	.specify-list-wrapper {
+	    padding: 0;
+	}
+
+	.upload-area-wrapper {
+	    margin: 0 0 30px;
+	}
+
+
+}
+
+
+
+@media (max-width: 575px) {
+	.search-wrapper {
+	    width: 60%;
+	}
+
+	.small-ad {
+	    width: 100%;
+	    margin: 0 0 10px;
+	}
+	.small-ad-content h5 {
+	    font-size: 13px;
+	    margin: 5px 0 2px;
+	}
+	.small-ad-content p {
+		margin: 0 0 10px;
+		font-size: 12px;
+	    line-height: 13px;
+	}
+	
+	.section-heading h2 span.head {
+		text-transform: none;
+		font-size: 16px;
+	}
+
+	.med-info {
+	    width: 100%;
+	}
+
+	.steps, .steps:hover {
+		padding: 20px 0 20px 10px;
+	}
+	.step-content {
+		font-size: 13px;
+	    max-width: 90%;
+	    line-height: 18px;
+	    padding: 0 0 0 10px;
+	}
+
+	.newsletter-wrapper, .footer-about-wrapper {
+		width: 100%;
+	}
+
+	.contact-details {
+		flex-direction: column;
+	}
+	.address-area, .phone-area {
+	    width: 100%;
+	    padding: 0;
+	}
+	.address-area img {
+	    top: -30px;
+	    left: 0;
+	}
+	.phone-area {
+	    margin: 40px 0 0;
+	}
+	.phone-area img {
+	    left: 0;
+	    top: -30px;
+	}
+
+	.contact-email {
+		margin: 40px 0;
+	}
+	.contact-email p span {
+	    display: block;
+	}
+
+	
+	/* BOF Login Page */
+	.log-forgot {
+	    flex-direction: column;
+	}
+	.forgot {
+	    width: 100%;
+	    margin: 5px 0 0;
+	}
+	.social-icon {
+		width: 40px;
+		margin: 0 10px 0 0;
+	}
+	.medium-btn {
+	    min-width: 120px;
+	    max-width: 130px;
+	    min-height: 40px;
+	}
+	.medium-btn, .register-btn {
+	    font-size: 16px;
+	}
+	/* EOF Login Page */
+
+
+
+
+}
+
+
+
+@media (max-width: 420px) {
+	.cart-item-img img.product-image {
+	    max-width: 60px;
+	}
+	.cart-item-img {
+	    width: 22%;
+	    max-width: 80px;
+	}
+	.cart-item-details {
+	    width: 75%;
+	}
+
+	.information-wrapper {
+	    padding: 15px;
+	}
+	.information-head {
+	    font-size: 16px;
+	    text-transform: none;
+	    margin: 0 0 10px;
+	}
+	.information-head-wrapper {
+	    flex-direction: column;
+	}
+	.information-head:after {
+		top: 2px;
+	}
+	.inner-container {
+		padding: 0 15px;
+	}
+	.extra-small-btn {
+	    display: inline-block;
+	    max-width: 130px;
+	    text-align: center;
+	}
+	.gender>span {
+	    font-size: 14px;
+	    text-transform: none;
+	    margin: 0 15px 0 0
+	}
+
+	.form-check-label {
+		font-size: 14px;
+	}
+	.checkmark {
+		top: 5px
+	}
+
+
+
+}
+
+
+
+@media (max-width: 399px) {
+	.logo img {
+	    width: 100%;
+	}
+	.search-wrapper input {
+	    width: 70%;
+	}
+	.small-ad {
+		flex-wrap: wrap
+	}
+	.order-btn {
+	    width: 100%;
+	    padding: 10px;
+	}
+	.owl-theme .owl-nav {
+	    position: relative;
+	    right: 0;
+	    top: 0;
+	}
+
+	.ad-area {
+	    width: 100%;
+	}
+
+	.steps {
+	    width: 100%;
+	    border: none;
+	    border-bottom: 1px solid #e3e3e3;
+	}
+	.steps, .steps:hover {
+	    padding: 5px 0;
+	}
+
+	.footer-menu-wrapper {
+	    flex: 100%;
+	    max-width: 100%;
+	}
+
+
+	.productdetail-qty-addtocart {
+	    flex-direction: column;
+	    align-items: flex-start;
+	}
+	.productdetail-qty-wrapper {
+	    width: 100%;
+	    margin: 0 0 10px;
+	}
+	.product-detail-head {
+	    font-size: 16px;
+	}
+
+	.frequently-brought-product-list {
+		padding: 10px 5px;
+	}
+	.frequently-brought-product-list .original-price {
+	    font-size: 12px;
+	}
+	.price-area .original-price i {
+	    font-size: 10px;
+	}
+	.price-area .offer-price {
+	    font-size: 11px;
+	    margin: 0 0 0 10px;
+	}
+	.frequently-brought-area:after {
+		font-size: 30px;
+	}
+
+
+}
+
+

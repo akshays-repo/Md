@@ -1,0 +1,133 @@
+.modal-show {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.modal-none {
+  display: none;
+}
+
+.modal {
+  width: 100%;
+  height: 100%;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 999;
+}
+
+.modal-dialog {
+  position: relative;
+  width: 100%;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  -webkit-animation: zoom-in 0.3s ease-in-out;
+          animation: zoom-in 0.3s ease-in-out;
+  /* // background: #fff; */
+}
+
+.modal-dialog.close {
+  -webkit-animation: zoom-out 0.5s ease-in-out;
+          animation: zoom-out 0.5s ease-in-out;
+}
+
+.modal-footer .save-btn:hover {
+  opacity: 1.5;
+}
+
+.modal .modal-content {
+  border-radius: 10px;
+  -webkit-transform: all 0.5s;
+          transform: all 0.5s;
+}
+
+@-webkit-keyframes zoom-in {
+  0% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
+@keyframes zoom-in {
+  0% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
+@-webkit-keyframes zoom-out {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  100% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+}
+
+@keyframes zoom-out {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  100% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+}
+
+/* @-webkit-keyframes zoom {
+  from {
+    -webkit-transform: scale(0);
+  }
+  to {
+    -webkit-transform: scale(1);
+  }
+}
+
+@keyframes zoom {
+  from {
+    transform: translate(0);
+  }
+  to {
+    transform: translate(1);
+  }
+} */
+.custom-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+}
+
+.modal-main {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 80%;
+  height: auto;
+  vertical-align: middle;
+  background: white;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+/*# sourceMappingURL=styles.css.map */

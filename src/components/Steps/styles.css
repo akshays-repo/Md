@@ -1,0 +1,8 @@
+.single-tab .active {
+  background: #1f67d7;
+  color: #fff;
+}
+
+.checkout-single-step:hover {
+  cursor: pointer;
+}
