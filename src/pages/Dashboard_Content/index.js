@@ -1,8 +1,7 @@
 import React from 'react';
-import { Layout,List, Avatar , Row, Col } from 'antd';
+import { Row, Col } from 'antd';
 import Sidebar from './sidebar';
 
-const { Header, Footer, Sider, Content } = Layout;
 const Dashboard_Content = ({content}) => {
   return (
     <div className="dashboard__content">
