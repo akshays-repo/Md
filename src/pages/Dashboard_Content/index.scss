@@ -3,3 +3,24 @@
   @include margin-padding(0px, 15px);
   background-color: $container-background;
 }
+
+.dashboard__sidebar{
+  background-color: $container-background;
+  .sidebar_header{
+    flex-direction: column;
+    @include flex( center, center);
+    img{
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+    }
+  }
+  .sidebar_list{
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 300px;
+    max-height: calc(100vh - 274px);
+    overflow-y: auto;
+  }
+}

@@ -11,7 +11,56 @@ const routes = [
   // System Pages
   {
     path: '/',
-    component: loadable(() => import('../pages/Dashboard_Content')),
+    component: loadable(() => import('../pages/Dashboard_Content/Dashboard')),
+    exact: true,
+    authorize: false,
+  },
+  {
+    path: '/appointments',
+    component: loadable(() => import('../pages/Dashboard_Content/Appointments')),
+    exact: true,
+    authorize: false,
+  },{
+    path: '/mypatients',
+    component: loadable(() => import('../pages/Dashboard_Content/MyPatients')),
+    exact: true,
+    authorize: false,
+  },{
+    path: '/schedule-timings',
+    component: loadable(() => import('../pages/Dashboard_Content/ScheduleTimings')),
+    exact: true,
+    authorize: false,
+  },{
+    path: '/calender',
+    component: loadable(() => import('../pages/Dashboard_Content/Calendar')),
+    exact: true,
+    authorize: false,
+  },
+  {
+    path: '/message',
+    component: loadable(() => import('../pages/Dashboard_Content/Message')),
+    exact: true,
+    authorize: false,
+  },{
+    path: '/templates',
+    component: loadable(() => import('../pages/Dashboard_Content/Templates')),
+    exact: true,
+    authorize: false,
+  },{
+    path: '/froms',
+    component: loadable(() => import('../pages/Dashboard_Content/Forms')),
+    exact: true,
+    authorize: false,
+  },
+  {
+    path: '/analytics',
+    component: loadable(() => import('../pages/Dashboard_Content/Analytics')),
+    exact: true,
+    authorize: false,
+  },
+  {
+    path: '/campaigns',
+    component: loadable(() => import('../pages/Dashboard_Content/Campaigns')),
     exact: true,
     authorize: false,
   },
