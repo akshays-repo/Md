@@ -4,70 +4,70 @@ import { Link } from "react-router-dom";
 const sideMenuList = [
   {
     title: 'Dashboard',
-    icon: '',
+    icon: 'fas fa-columns',
     path: '/',
     wologin: true,
     wlogin: true,
   },
   {
     title: 'Appointments',
-    icon: '',
+    icon: 'fas fa-calendar-check',
     path: '/appointments',
     wologin: true,
     wlogin: true,
   },
   {
     title: 'My Patients',
-    icon: '',
+    icon: 'fas fa-user-injured',
     path: '/mypatients',
     wologin: true,
     wlogin: true,
   },
   {
     title: 'Schedule Timings',
-    icon: '',
+    icon: 'fas fa-hourglass-start',
     path: '/schedule-timings',
     wologin: true,
     wlogin: true,
   },
   {
     title: 'Calendar',
-    icon: '',
+    icon: 'far fa-calendar-alt',
     path: '/calender',
     wologin: true,
     wlogin: true,
   },
   {
     title: 'Message',
-    icon: '',
+    icon: 'fas fa-comments',
     path: '/message',
     wologin: true,
     wlogin: true,
   },
   {
     title: 'Templates',
-    icon: '',
+    icon: 'fas fa-stream',
     path: '/templates',
     wologin: true,
     wlogin: true,
   },
   {
     title: 'Campaigns',
-    icon: '',
+    icon: 'fas fa-share-alt',
     path: '/campaigns',
     wologin: true,
     wlogin: true,
   },
   {
     title: 'Forms',
-    icon: '',
+    icon: 'fab fa-wpforms',
     path: '/froms',
     wologin: true,
     wlogin: true,
   },
   {
     title: 'Analytics',
-    icon: '',
+    icon: 'fas fa-chart-line',
     path: '/analytics',
     wologin: true,
     wlogin: true,
@@ -80,8 +80,8 @@ const Sidebar = () => {
       <div className="sidebar_header">
         <img src="https://images.livemint.com/img/2020/07/06/600x338/apollo_1594043446600_1594043458520.jpg" />
 
-        <p>Hospital Name</p>
-        <p>Hospital Address</p>
+        <h2>Billroth Hospitals</h2>
+        <h5 className="hospital_address">Curabitur aliquet quam id dui posuere blandit.</h5>
       </div>
 
       <div className="sidebar_list">
@@ -92,7 +92,7 @@ const Sidebar = () => {
             <List.Item>
               <List.Item.Meta
                 avatar={
-                  <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+                  <i className={item.icon}/>
                 }
                 title={<Link to={item.path}>{item.title}</Link>}
               />
