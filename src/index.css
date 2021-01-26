@@ -72,22 +72,7 @@ a {
   font-size: 2rem;
 }
 
-.filterbutton {
-  display: none;
-}
-
-@media (max-width: 992px) {
-  .filterbutton {
-    display: block;
-  }
-}
-
 .errormsg {
   color: red;
   font-size: 14px;
 }
-
-
-
-
-

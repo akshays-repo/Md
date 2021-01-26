@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import Footer from '../pages/Footer';
-import Header from '../pages/Header';
+import Footer from 'pages/Footer';
+import Header from 'pages/Header';
 import { message, notification } from 'antd';
 
-export const PrivateRoute = ({ authorized, component: Component, path, keys, exact ,history}) => {
+export const PrivateRoute = ({ authorized, component: Component, path, keys, exact, history }) => {
   const [scroll, setscroll] = useState(0);
   useEffect(() => {
     window.scrollTo({

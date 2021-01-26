@@ -1,0 +1,5 @@
+.dashboard__footer {
+  background: $primary;
+  color: $white;
+  @include margin-padding(0px, 10px);
+}

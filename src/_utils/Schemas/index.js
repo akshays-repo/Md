@@ -272,35 +272,35 @@ export const ListingSchema = Yup.object().shape({
     .required('Please upload an image')
     // .test('fileFormat', 'Unsupported Format. Required:(.jpg,.png,.jpeg)', checkFileType),
     .test('fileFormat', 'Unsupported Format. Required:(.jpg,.png,.jpeg)', checkFileType),
-    // .test('fileSize', 'File too large,Please select file of width and height', async function(
-    //   files,
-    // ) {
-    //   console.log(files);
-    //   files = files.filter(result => typeof result != 'string');
-    //   if (files && files.length > 0) {
-    //     return new Promise((resolve, reject) => {
-    //       Promise.all(CheckImage(files))
-    //         .then(result => {
-    //           console.log(result);
-    //           resolve(true);
-    //         })
-    //         .catch(err => {
-    //           console.log(err);
-    //           reject(
-    //             this.createError({
-    //               message: `Please select image of width 300 and height 500 for image name ${err}`,
-    //             }),
-    //           );
-    //         });
-    //     });
-    //   } else {
-    //     console.log(files.length);
+  // .test('fileSize', 'File too large,Please select file of width and height', async function(
+  //   files,
+  // ) {
+  //   console.log(files);
+  //   files = files.filter(result => typeof result != 'string');
+  //   if (files && files.length > 0) {
+  //     return new Promise((resolve, reject) => {
+  //       Promise.all(CheckImage(files))
+  //         .then(result => {
+  //           console.log(result);
+  //           resolve(true);
+  //         })
+  //         .catch(err => {
+  //           console.log(err);
+  //           reject(
+  //             this.createError({
+  //               message: `Please select image of width 300 and height 500 for image name ${err}`,
+  //             }),
+  //           );
+  //         });
+  //     });
+  //   } else {
+  //     console.log(files.length);
 
-    //     return new Promise((resolve, reject) => {
-    //       resolve(true);
-    //     });
-    //   }
-    // }),
+  //     return new Promise((resolve, reject) => {
+  //       resolve(true);
+  //     });
+  //   }
+  // }),
   description: Yup.string().required('Please enter description'),
   // .test('fileSize', 'File too large,Please select file wiht width and height', async function(
   //   files,
@@ -359,14 +359,11 @@ export const HomepagesearchSchema = Yup.object().shape({
   address: Yup.string().required('Please select address'),
 });
 
-
 export const ContactSchema = Yup.object().shape({
   name: Yup.string().required('Please the name'),
   messagae: Yup.string().required('Please enter Message'),
   usermail: Yup.string()
     .required('Please enter email')
     .email('Please enter valid email'),
-  phone: Yup.string()
-    .required('Phone number is required')
-    
+  phone: Yup.string().required('Phone number is required'),
 });

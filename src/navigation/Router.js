@@ -11,7 +11,7 @@ const routes = [
   // System Pages
   {
     path: '/',
-    component: loadable(() => import('../pages/Dashboard')),
+    component: loadable(() => import('../pages/Dashboard_Content')),
     exact: true,
     authorize: false,
   },

@@ -1,0 +1,5 @@
+.dashboard__content {
+  height: 90vh;
+  @include margin-padding(0px, 15px);
+  background-color: $container-background;
+}
