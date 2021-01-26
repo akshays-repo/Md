@@ -1,6 +1,6 @@
 import React from 'react';
 import { List, Avatar } from 'antd';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 const sideMenuList = [
   {
     title: 'Dashboard',
@@ -91,9 +91,7 @@ const Sidebar = () => {
           renderItem={item => (
             <List.Item>
               <List.Item.Meta
-                avatar={
-                  <i className={item.icon}/>
-                }
+                avatar={<i className={item.icon} />}
                 title={<Link to={item.path}>{item.title}</Link>}
               />
             </List.Item>

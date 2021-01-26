@@ -5,7 +5,9 @@ const Dashboard_MyPatients = () =>{
     const MyPatients = () =>{
         return(
             <div>
-            MyPatients
+            <div className="search">
+            
+            </div>
             </div>
         )
     }

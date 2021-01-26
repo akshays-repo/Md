@@ -48,46 +48,47 @@ const PatientAppointment = () => {
       key: '1',
       name: 'John Brown',
       age: 32,
-      date:'',
+      date: '',
       address: 'New York No. 1 Lake Park',
-      purpose:"",
-      amount:"",
-
+      purpose: '',
+      amount: '',
     },
     {
-        key: '2',
-        name: 'akshays',
-        age: 32,
-        date:'',
-        address: 'new york',
-        purpose:"visit doctor",
-        amount:100,
-  
-      },
-      {
-        key: '6',
-        name: 'John Brown',
-        age: 32,
-        date:'',
-        address: 'New York No. 1 Lake Park',
-        purpose:"",
-        amount:"",
-  
-      },    {
-        key: '3',
-        name: 'John Brown',
-        age: 32,
-        date:'',
-        address: 'New York No. 1 Lake Park',
-        purpose:"",
-        amount:"",
-  
-      },
+      key: '2',
+      name: 'akshays',
+      age: 32,
+      date: '',
+      address: 'new york',
+      purpose: 'visit doctor',
+      amount: 100,
+    },
+    {
+      key: '6',
+      name: 'John Brown',
+      age: 32,
+      date: '',
+      address: 'New York No. 1 Lake Park',
+      purpose: '',
+      amount: '',
+    },
+    {
+      key: '3',
+      name: 'John Brown',
+      age: 32,
+      date: '',
+      address: 'New York No. 1 Lake Park',
+      purpose: '',
+      amount: '',
+    },
   ];
 
   return (
     <div className="table-content">
-      <Table columns={columns} dataSource={data} />
+      <Space direction="horizontal">
+        <button>upcoming</button>
+        <button>today</button>
+      </Space>
+      <Table columns={columns} dataSource={data} scroll={{}} />
     </div>
   );
 };
