@@ -64,6 +64,12 @@ const routes = [
     exact: true,
     authorize: false,
   },
+  {
+    path: '/branch',
+    component: loadable(() => import('../pages/Dashboard_Content/Branch')),
+    exact: true,
+    authorize: false,
+  },
 ];
 
 const Router = props => {

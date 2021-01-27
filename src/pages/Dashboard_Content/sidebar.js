@@ -17,6 +17,13 @@ const sideMenuList = [
     wlogin: true,
   },
   {
+    title: 'Branch',
+    icon: 'fas fa-network-wired',
+    path: '/branch',
+    wologin: true,
+    wlogin: true,
+  },
+  {
     title: 'My Patients',
     icon: 'fas fa-user-injured',
     path: '/mypatients',

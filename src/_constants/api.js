@@ -9,3 +9,7 @@ export const api = {
   getListingByID: '/api/backend/v1/listing/',
   viewlisting: '/api/backend/v1/listing_user',
 };
+
+export const branch = {
+  createBranch:"/api/backend/v1/users/register"
+}
