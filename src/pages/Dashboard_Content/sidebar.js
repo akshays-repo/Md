@@ -86,11 +86,9 @@ const Sidebar = () => {
     <div className="dashboard__sidebar">
       <div className="sidebar_header">
         <img src="https://images.livemint.com/img/2020/07/06/600x338/apollo_1594043446600_1594043458520.jpg" />
-
         <h2>Billroth Hospitals</h2>
         <h5 className="hospital_address">Curabitur aliquet quam id dui posuere blandit.</h5>
       </div>
-
       <div className="sidebar_list">
         <List
           itemLayout="horizontal"

@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { ContactSchema } from '_utils/Schemas';
+import { message, Button } from 'antd';
+import { PoweroffOutlined } from '@ant-design/icons';
 import callApi from '_utils/callApi';
-import { createBranch } from '_constants/api';
 const BranchCreationForm = () => {
+  const [loadings, setLoadings] = useState(false);
+  const innerForm = useRef();
   const handleFormSubmission = async values => {
     try {
-      const result = await callApi(createBranch, {
+      const result = await callApi('', {
         method: 'POST',
         body: JSON.stringify(values),
         headers: {
@@ -29,23 +32,53 @@ const BranchCreationForm = () => {
           phone: '',
           avatarlocation: '',
           phone: '',
-          password: '',
           status: '',
           image: '',
-          userTypeId: '',
+          userTypeId: 3,
           package_id: '',
+          hospital_id:'',
         }}
         validationSchema={ContactSchema}
         onSubmit={handleFormSubmission}
         innerRef={innerForm}
       >
         {({ handleSubmit, touched, errors, isSubmitting }) => (
-          <Form className="login__form" handleSubmit={handleSubmit}>
-            <label>Name</label>
+
+          <Form style={{backgroundColor:"#f7f8f8"}} className="login__form" handleSubmit={handleSubmit}>
             <p>
-              <Field name="name" placeholder="Name/Business Name" type="text"></Field>
+            <label className="input-file mr-4">
+                      Upload New picture
+                      <input
+                        type="file"
+                        id="profileImage"
+                        onChange={file => {
+                          const result = URL.createObjectURL(file.currentTarget.files[0]);
+                            }}
+                      />
+                    </label>
+           
+            </p>
+            
+            <label>First Name</label>
+            <p>
+              <Field name="name" placeholder="" type="text"></Field>
               {touched.name && errors.name ? <div className="errormsg">{errors.name}</div> : ''}
             </p>
+            <label>Last Name</label>
+            <p>
+              <Field name="name" placeholder="" type="text"></Field>
+              {touched.name && errors.name ? <div className="errormsg">{errors.name}</div> : ''}
+            </p> 
+            <label>Email</label>
+            <p>
+              <Field name="name" placeholder="" type="text"></Field>
+              {touched.name && errors.name ? <div className="errormsg">{errors.name}</div> : ''}
+            </p> 
+            <label>Phone</label>
+            <p>
+              <Field name="name" placeholder="" type="text"></Field>
+              {touched.name && errors.name ? <div className="errormsg">{errors.name}</div> : ''}
+            </p> 
             <Button
               className="mt-5"
               htmlType="submit"
@@ -53,7 +86,7 @@ const BranchCreationForm = () => {
               loading={loadings}
               className="submitbutton"
             >
-              Send a Message
+             Create a New Branch
             </Button>
           </Form>
         )}
