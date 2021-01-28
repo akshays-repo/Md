@@ -5,10 +5,13 @@
 }
 
 .dashboard__sidebar{
-  background-color: $container-background;
+  background-color:$white;
+  border: 1px solid $gray-light;
   .sidebar_header{
     flex-direction: column;
     @include flex( center, center);
+    @include margin-padding(0px, 20px);
+    border-bottom: 1px solid $gray-light;
     img{
       width: 100px;
       height: 100px;
@@ -21,6 +24,7 @@
     .hospital_address{
 
     }
+    
   }
   .sidebar_list{
     flex-direction: column;
@@ -29,5 +33,11 @@
     min-height: 300px;
     max-height: calc(100vh - 274px);
     overflow-y: auto;
+    .ant-list-item {
+      padding: $padd-0;
+    .ant-list-item-meta{
+      padding: 16px 20px;
+    }
+  }
   }
 }
