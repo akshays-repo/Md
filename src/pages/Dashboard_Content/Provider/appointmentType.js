@@ -16,11 +16,15 @@ const AppointmentTypes = () => {
           <i class="fas fa-plus"></i>
         </button>
       </div>
+      <div>
+          
+      </div>
       <div className="field-section">
         {appointmentField?.map(() => (
           <div>
             <Form>
               <Form.Item label="Select">
+                  <Input type="text" placeholder="Type Name"/>
                 <Select>
                   <Select.Option value="demo">Demo</Select.Option>
                   <Select.Option value="demo">Demo</Select.Option>{' '}
