@@ -1,6 +1,8 @@
-import React from 'react';
+import React , {useState} from 'react';
 import { Table, Tag, Space } from 'antd';
 import Dashboard_Content from '..';
+import PatientCreationForm from './patientCreationForm';
+import { Modal } from 'antd';
 
 const columns = [
   {
@@ -58,6 +60,19 @@ const data = [
 ];
 
 const Dashboard_MyPatients = () => {
+
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+  const handleOk = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+
   const MyPatients = () => {
     return (
       <div>
@@ -66,7 +81,17 @@ const Dashboard_MyPatients = () => {
             <input type="text" placeholder="Search by Name or ID" />
             <button>Search</button>
           </form>
-          <button>Add button</button>
+          <button type="primary" onClick={showModal}>
+              Create a New Branch
+          </button>
+          <Modal
+            title="Create A Branch"
+            visible={isModalVisible}
+            onCancel={handleCancel}
+            width={600}
+            footer={null}>
+            <PatientCreationForm/>
+          </Modal>
         </div>
         <div className="patient_name"></div>
         <Table columns={columns} dataSource={data} />,

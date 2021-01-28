@@ -7,7 +7,7 @@ const Dashboard_Content = ({content}) => {
     <div className="dashboard__content">
 
       <Row>
-      <Col xs={24} xl={6}><Sidebar /></Col>
+      <Col xs={24} xl={6} ><Sidebar /></Col>
       <Col xs={24} xl={18}>{content}</Col>
     </Row>
     </div>

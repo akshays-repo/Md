@@ -367,3 +367,12 @@ export const ContactSchema = Yup.object().shape({
     .email('Please enter valid email'),
   phone: Yup.string().required('Phone number is required'),
 });
+
+export const PatientCreationSchema = Yup.object().shape({
+  name: Yup.string().required('Please the name'),
+  messagae: Yup.string().required('Please enter Message'),
+  usermail: Yup.string()
+    .required('Please enter email')
+    .email('Please enter valid email'),
+  phone: Yup.string().required('Phone number is required'),
+});

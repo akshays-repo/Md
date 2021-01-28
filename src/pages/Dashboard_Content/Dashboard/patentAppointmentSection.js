@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Table, Tag, Space } from 'antd';
 
 //THIS IS ANT DESIGN TABLE : PLEASE REFER THIS IF YOU STUCKED : https://ant.design/components/table/
@@ -81,12 +81,13 @@ const PatientAppointment = () => {
       amount: '',
     },
   ];
+  const [currentButton , setCurrentButton] = useState(1)
 
   return (
     <div className="table-content">
       <Space direction="horizontal">
-        <button>upcoming</button>
-        <button>today</button>
+        <button onClick={() => setCurrentButton(1)} style={currentButton === 1 ? {backgroundColor:"blue"} : {} }>upcoming</button>
+        <button onClick={() => setCurrentButton(2)} style={currentButton === 2 ? {backgroundColor:"blue"} : {} } >today</button>
       </Space>
       <Table columns={columns} dataSource={data} scroll={{}} />
     </div>
