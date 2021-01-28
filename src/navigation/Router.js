@@ -26,8 +26,8 @@ const routes = [
     exact: true,
     authorize: false,
   },{
-    path: '/schedule-timings',
-    component: loadable(() => import('../pages/Dashboard_Content/ScheduleTimings')),
+    path: '/provider',
+    component: loadable(() => import('../pages/Dashboard_Content/Provider')),
     exact: true,
     authorize: false,
   },{

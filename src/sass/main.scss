@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
 @import './global';
 @import './mixins';
 @import '../pages/Header/index';
@@ -11,9 +12,11 @@
 @import '../pages/Dashboard_Content/Analytics/style.scss';
 @import '../pages/Dashboard_Content/Message/style.scss';
 @import '../pages/Dashboard_Content/MyPatients/style.scss';
-@import '../pages/Dashboard_Content/ScheduleTimings/style.scss';
+@import '../pages/Dashboard_Content/Provider/style.scss';
 @import '../pages/Dashboard_Content/Branch/style.scss';
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+@import '../fossilmdComponents/FossilBreadCrumb/style.scss';
+
+
 
 body{
     font-family: 'Poppins', sans-serif;

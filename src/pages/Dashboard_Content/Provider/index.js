@@ -1,8 +1,9 @@
 import React from 'react';
-import {Space } from 'antd';
+import {Col, Row, Space } from 'antd';
 import Dashboard_Content from '..'
-
-const Dashboard_ScheduleTiming = () =>{
+import FossilBreadCrumb from 'fossilmdComponents/FossilBreadCrumb';
+import AppointmentTypes from './appointmentType';
+const Dashboard_Provider = () =>{
     const ScheduleTiming = () =>{
         const weekDays = [
             {   key :1,
@@ -54,7 +55,25 @@ const Dashboard_ScheduleTiming = () =>{
           </div>
         );
     }
-    return <Dashboard_Content content={ScheduleTiming()} />
+    return (
+      <div className="schedule-time">
+        <FossilBreadCrumb currentUrl="/schedule-timings" currentPageName="Schedule Timings"/>
+        <Row>
+          <Col xs={24} xl={7}>
+            <div className="left-side">
+            <AppointmentTypes/>
+            </div>          
+          </Col>
+
+          <Col xs={24} xl={15}>
+            <div className="right-side">
+            {ScheduleTiming()}
+            </div>
+          </Col>
+        </Row>
+      
+        </div>
+    )
 }
 
-export default Dashboard_ScheduleTiming
+export default Dashboard_Provider

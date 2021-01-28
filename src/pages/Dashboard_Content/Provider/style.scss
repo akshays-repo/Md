@@ -1,0 +1,24 @@
+.appointment-type{
+    .header{
+@include flex(space-between , center);
+        padding: 10px;
+        button{
+            border-radius: 50%;
+            border: none;
+            background-color: #57beff;
+            cursor: pointer;
+        }
+        
+
+    }
+}
+.schedule-time{
+    .left-side{
+        background-color:  $container-background;
+        padding: 10px;
+
+    }
+    .right-side{
+        padding: 10px;
+    }
+}

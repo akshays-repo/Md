@@ -31,9 +31,9 @@ const sideMenuList = [
     wlogin: true,
   },
   {
-    title: 'Schedule Timings',
-    icon: 'fas fa-hourglass-start',
-    path: '/schedule-timings',
+    title: 'Provider',
+    icon: 'fas fa-user-md',
+    path: '/provider',
     wologin: true,
     wlogin: true,
   },
@@ -80,7 +80,6 @@ const sideMenuList = [
     wlogin: true,
   },
 ];
-
 const Sidebar = () => {
   return (
     <div className="dashboard__sidebar">
