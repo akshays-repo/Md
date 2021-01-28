@@ -84,6 +84,7 @@ const sideMenuList = [
 const Sidebar = () => {
   return (
     <div className="dashboard__sidebar">
+      <div className="content"> 
       <div className="sidebar_header">
         <img src="https://images.livemint.com/img/2020/07/06/600x338/apollo_1594043446600_1594043458520.jpg" />
         <h2>Billroth Hospitals</h2>
@@ -103,6 +104,8 @@ const Sidebar = () => {
           )}
         />
       </div>
+      </div>
+
     </div>
   );
 };
