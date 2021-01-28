@@ -1,5 +1,5 @@
 import React , {useState} from 'react';
-import { Table, Tag, Space } from 'antd';
+import { Table, Tag, Space, Row, Col  } from 'antd';
 import Dashboard_Content from '..';
 import PatientCreationForm from './patientCreationForm';
 import { Modal } from 'antd';
@@ -75,17 +75,17 @@ const Dashboard_MyPatients = () => {
 
   const MyPatients = () => {
     return (
-      <div>
+      <div className="mypatient">
         <div className="search">
           <form>
             <input type="text" placeholder="Search by Name or ID" />
             <button>Search</button>
           </form>
           <button type="primary" onClick={showModal}>
-              Create a New Branch
+              Create a New Patient
           </button>
           <Modal
-            title="Create A Branch"
+            title=" Create a New Patient"
             visible={isModalVisible}
             onCancel={handleCancel}
             width={600}
