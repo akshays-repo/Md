@@ -1,5 +1,5 @@
 import React from 'react';
-import { Space, Card } from 'antd';
+import { Space, Card, Row, Col } from 'antd';
 import Dashboard_Content from '..';
 const data = [
   {
@@ -59,19 +59,42 @@ const Dashboard_Appointments = () => {
         <Space direction="vertical">
           {data.map(item => (
             <Card style={{ width: 1000 }}>
-              <span style={{ float: 'right' }}>
-                <Space direction="middle">
-                  {' '}
-                  <button>View</button>
-                  <button>Accept</button>
-                  <button>Cancel</button>
-                </Space>
-              </span>
-             <p> {item.name}</p>
-              <p><i class="far fa-clock "></i>{"  "}{item.date}</p>
-              <p><i class="fas fa-map-marker-alt"></i>{"  "}{item.location}</p>
-              <p><i class="fas fa-envelope"></i>{"  "}{item.emailid}</p>
-              <p><i class="fas fa-phone"></i>{"  "}{item.phone}</p>
+              <Row>
+                <Col>
+                  <p> {item.name}</p>
+                  <p>
+                    <i class="far fa-clock "></i>
+                    {'  '}
+                    {item.date}
+                  </p>
+                  <p>
+                    <i class="fas fa-map-marker-alt"></i>
+                    {'  '}
+                    {item.location}
+                  </p>
+                  <p>
+                    <i class="fas fa-envelope"></i>
+                    {'  '}
+                    {item.emailid}
+                  </p>
+                  <p>
+                    <i class="fas fa-phone"></i>
+                    {'  '}
+                    {item.phone}
+                  </p>
+                </Col>
+
+                <Col>
+                  <span style={{ float: 'right' }}>
+                    <Space direction="middle">
+                      {' '}
+                      <button>View</button>
+                      <button>Accept</button>
+                      <button>Cancel</button>
+                    </Space>
+                  </span>
+                </Col>
+              </Row>
             </Card>
           ))}
         </Space>

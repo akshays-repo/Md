@@ -57,7 +57,7 @@ const Dashboard_Provider = () =>{
     }
     return (
       <div className="schedule-time">
-        <FossilBreadCrumb currentUrl="/schedule-timings" currentPageName="Schedule Timings"/>
+        <FossilBreadCrumb currentUrl="/provider" currentPageName="Provider"/>
         <Row>
           <Col xs={24} xl={7}>
             <div className="left-side">
