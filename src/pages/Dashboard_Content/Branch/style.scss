@@ -2,3 +2,11 @@
     background-color: rgba(22,22,22,.5);
     backdrop-filter:blur(10px)
 }
+.table-content {
+    margin-top:50px;
+    .ant-table-thead {
+        .ant-table-cell {
+            background: $white;
+        }
+    }
+}

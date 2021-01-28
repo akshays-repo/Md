@@ -75,11 +75,11 @@ const BranchListTable = () => {
       <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
        <EditBranch id={editId}/>
       </Modal>
-      <div>
+      {/* <div>
         <Space direction="horizontal">
           <button>Filter</button>
         </Space>
-      </div>
+      </div> */}
       <div>
         <Table columns={columns} dataSource={data} />
       </div>
