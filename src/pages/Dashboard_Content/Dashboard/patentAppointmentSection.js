@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Table, Tag, Space } from 'antd';
+import { Table, Tag, Space , Button} from 'antd';
 
 //THIS IS ANT DESIGN TABLE : PLEASE REFER THIS IF YOU STUCKED : https://ant.design/components/table/
 const PatientAppointment = () => {
@@ -35,9 +35,9 @@ const PatientAppointment = () => {
       key: 'action',
       render: (text, record) => (
         <Space size="middle">
-          <button>View </button>
-          <button>Accept</button>
-          <button>Cancel </button>
+          <Button shape="round">View </Button>
+          <Button shape="round">Accept</Button>
+          <Button shape="round">Cancel </Button>
         </Space>
       ),
     },
@@ -85,10 +85,12 @@ const PatientAppointment = () => {
 
   return (
     <div className="table-content">
+      <div className="headerButton">
       <Space direction="horizontal">
-        <button onClick={() => setCurrentButton(1)} style={currentButton === 1 ? {backgroundColor:"blue"} : {} }>upcoming</button>
-        <button onClick={() => setCurrentButton(2)} style={currentButton === 2 ? {backgroundColor:"blue"} : {} } >today</button>
+      <Button  onClick={() => setCurrentButton(1)} style={currentButton === 1 ? {backgroundColor:"blue"} : {} }  type="primary" shape="round"  size={"default"} > upcoming</Button>
+      <Button onClick={() => setCurrentButton(2)} style={currentButton === 2 ? {backgroundColor:"blue"} : {} } type="primary" shape="round"  size={"default"} > today</Button>
       </Space>
+      </div>
       <Table columns={columns} dataSource={data} scroll={{}} />
     </div>
   );

@@ -3,50 +3,52 @@ import { List, Card } from 'antd';
 
 const data = [
   {
-    title: 'Title 1',
-    number: '0',
+    title: 'Booked Via health Nex dashboard',
+    number: '100',
   },
   {
     title: 'Title 2',
+    number: '50',
+  },
+  {
+    title: 'Booked Via health Nex dashboard',
     number: '0',
   },
   {
-    title: 'Title 3',
+    title: 'Titfgfgfgle 4',
+    number: '10',
+  },
+  {
+    title: 'Booked Via health Nex dashboard ',
+    number: '100',
+  },
+  {
+    title: 'Booked Via health Nex dashboard ',
     number: '0',
   },
   {
-    title: 'Title 4',
-    number: '0',
+    title: 'Booked Via health Nex dashboard ',
+    number: '40',
   },
   {
-    title: 'Title 5',
-    number: '0',
-  },
-  {
-    title: 'Title 6',
-    number: '0',
-  },
-  {
-    title: 'Title 7',
-    number: '0',
-  },
-  {
-    title: 'Title 8',
-    number: '0',
+    title: 'Booked Via health Nex dashboard ',
+    number: '670',
   },
 ];
 const CardsSection = () => {
   return (
-    <div>
+    <div className="card-section"> 
       <List
         grid={{ gutter: 16, column: 4 }}
         dataSource={data}
         renderItem={item => (
           <List.Item >
-            <Card className="card">
+            <Card>
+              <div className="inline-card-item">
             <span>{item.number}</span>
             <span>{item.title}</span>
             <span><i className="fas fa-chevron-right"/></span>
+            </div>
             </Card>
           </List.Item>
         )}

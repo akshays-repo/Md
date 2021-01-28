@@ -86,9 +86,11 @@ const Sidebar = () => {
     <div className="dashboard__sidebar">
       <div className="content"> 
       <div className="sidebar_header">
+        <div className="profileDashboard">
         <img src="https://images.livemint.com/img/2020/07/06/600x338/apollo_1594043446600_1594043458520.jpg" />
+        </div>
         <h2>Billroth Hospitals</h2>
-        <h5 className="hospital_address">Curabitur aliquet quam id dui posuere blandit.</h5>
+        <p className="hospital_address">Curabitur aliquet quam id dui posuere blandit.</p>
       </div>
       <div className="sidebar_list">
         <List
