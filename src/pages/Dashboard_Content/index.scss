@@ -1,8 +1,21 @@
 .dashboard__content {
   height: 90vh;
-  @include margin-padding(0px, 15px);
   background-color: $container-background;
-}
+
+  // @include margin-padding(0px, 15px);
+  // @include padding-padding(30px 0 0 0);
+  padding: 30px 0 0;
+  .leftblock-sidenav {
+    padding-left: 30px;
+  }
+  .rightblock-content {
+    padding: 0 30px;
+    .dashboard {
+
+      }
+    }
+  }
+
 
 .dashboard__sidebar{
   background-color:$white;
@@ -12,18 +25,18 @@
     @include flex( center, center);
     @include margin-padding(0px, 20px);
     border-bottom: 1px solid $gray-light;
+    .profileDashboard {
+      @include margin-padding(10px, 8px);
     img{
       width: 100px;
       height: 100px;
       border-radius: 50%;
     }
+  }
     .hospital_name{
       @include font-size(l);
       color:$gray ;
-    }
-    .hospital_address{
-
-    }
+    } 
     
   }
   .sidebar_list{

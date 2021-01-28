@@ -1,5 +1,8 @@
 .dashboard__header {
   background: $primary;
   color: $white;
-  @include margin-padding(0px, 10px);
+  @include margin-padding(0px, 18px);
+  h2 {
+    color: $white;
+  }
 }

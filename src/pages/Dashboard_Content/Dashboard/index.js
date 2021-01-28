@@ -10,8 +10,8 @@ const Dashboard_Dashboard = () => {
         <div>
           <CardsSection />
         </div>
-        <div>
-            <h3>Patient Appointment</h3>
+        <div className="table-content-box">
+            <h2>Patient Appointment</h2>
             <PatientAppointment/>
         </div>
       </div>

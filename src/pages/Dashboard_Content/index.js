@@ -7,8 +7,16 @@ const Dashboard_Content = ({content}) => {
     <div className="dashboard__content">
 
       <Row>
-      <Col xs={24} xl={6} ><Sidebar /></Col>
-      <Col xs={24} xl={18}>{content}</Col>
+      <Col xs={24} xl={6} >
+        <div className="leftblock-sidenav">
+        <Sidebar />
+        </div>
+      </Col>
+      <Col xs={24} xl={18}>
+        <div className="rightblock-content">
+        {content}
+        </div>
+       </Col>
     </Row>
     </div>
   );
