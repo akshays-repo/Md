@@ -39,8 +39,8 @@ const BranchListTable = () => {
       key: 'action',
       render: (record) => (
         <Space size="middle">
-          <button onClick={() => openEditModal(record.key)}>edit</button>
-          <button>delete</button>
+          <button className="edit-button" onClick={() => openEditModal(record.key)}>edit</button>
+          <button className="delete-button">delete</button>
         </Space>
       ),
     },

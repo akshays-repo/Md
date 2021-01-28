@@ -88,9 +88,9 @@ const Dashboard_Appointments = () => {
                   <span style={{ float: 'right' }}>
                     <Space direction="middle">
                       {' '}
-                      <button>View</button>
-                      <button>Accept</button>
-                      <button>Cancel</button>
+                      <button className="view-button">View</button>
+                      <button className="accept-button">Accept</button>
+                      <button className="delete-button">Cancel</button>
                     </Space>
                   </span>
                 </Col>

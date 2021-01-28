@@ -34,9 +34,9 @@
 }
 @mixin border-radius($radius) {
   -webkit-border-radius: $radius;
-  -moz-border-radius: $radius;
-  -ms-border-radius: $radius;
-  border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
 }
 @mixin head {
   font-weight: 600;
@@ -47,35 +47,36 @@
   color: $white;
   border: none;
   box-shadow: none;
+  padding: 5px 20px;
+  outline: none;
   @include border-radius(30px)
   
 }
 
 @mixin add-button {
   background-color: $theme-button;
-  @include button()
+  @include button;
 
 }
 @mixin edit-button {
-  @include small-button-paddding();
+  @include button;
   background-color:$edit-button ;
 
 
 }
 @mixin delete-button {
-  @include small-button-paddding();
+  @include button;
   background-color: $red-button ;
-
-
 }
 @mixin view-button {
-  @include small-button-paddding();
+  @include button;
   background-color:$view-button ;
-
-
 }
 @mixin common-button {
-  background-color:$theme-button ;
-
-
+  @include button;
+  background-color:$theme-button 
+}
+@mixin accept-button {
+  @include button;
+  background-color: $accept-button;
 }
