@@ -2,7 +2,7 @@ import React from 'react';
 
 const Header = () => {
   return <div className="dashboard__header">
-    <h2>Header</h2>
+    <h2>Fosill Md</h2>
     </div>;
 };
 

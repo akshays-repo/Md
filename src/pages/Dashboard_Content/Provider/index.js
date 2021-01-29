@@ -6,9 +6,6 @@ import AppointmentTypes from './appointmentType';
 import ProviderCreationForm from './providerCreationForm';
 import ProviderTable from './providerTable';
 
-
-
-
 const Dashboard_Provider = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -37,24 +34,7 @@ const Dashboard_Provider = () => {
     return (
       <div className="provider">
         <div className="header">
-          <div>
-            Schedule Timings
-            <Form>
-              <Form.Item label="Select the time slot">
-                <Space direction="horizontal">
-                  <Select placeholder="15 min">
-                    <Select.Option value="demo">Demo</Select.Option>
-                    <Select.Option value="demo">Demo</Select.Option>{' '}
-                    <Select.Option value="demo">Demo</Select.Option>{' '}
-                    <Select.Option value="demo">Demo</Select.Option>{' '}
-                    <Select.Option value="demo">Demo</Select.Option>{' '}
-                    <Select.Option value="demo">Demo</Select.Option>{' '}
-                    <Select.Option value="demo">Demo</Select.Option>
-                  </Select>
-                </Space>
-              </Form.Item>
-            </Form>
-          </div>
+          <div></div>
 
           <div>
             <Button type="primary" onClick={showModal} className="button-square">
@@ -88,12 +68,10 @@ const Dashboard_Provider = () => {
 
         <Col xs={24} xl={15}>
           <div className="right-side">
+            <div>{HeaderSection()}</div>
             <div>
-            {HeaderSection()}
-              </div>
-              <div>
-<ProviderTable/>
-              </div>
+              <ProviderTable />
+            </div>
           </div>
         </Col>
       </Row>

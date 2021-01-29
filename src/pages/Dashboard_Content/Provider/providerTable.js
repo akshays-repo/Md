@@ -88,7 +88,7 @@ const ProviderTable = () => {
   return (
     <div>
       <Table columns={columns} dataSource={data} />
-      <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+      <Modal title="Add time for Joseph Silverstein CSAP FNP PA-C" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
         <AddAppointmentTime />
       </Modal>
     </div>
