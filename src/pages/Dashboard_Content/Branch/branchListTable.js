@@ -39,8 +39,8 @@ const BranchListTable = () => {
       key: 'action',
       render: (record) => (
         <Space size="middle">
-          <button onClick={() => openEditModal(record.key)}>edit</button>
-          <button>delete</button>
+          <button className="edit-button" onClick={() => openEditModal(record.key)}>edit</button>
+          <button className="delete-button">delete</button>
         </Space>
       ),
     },
@@ -75,11 +75,11 @@ const BranchListTable = () => {
       <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
        <EditBranch id={editId}/>
       </Modal>
-      <div>
+      {/* <div>
         <Space direction="horizontal">
           <button>Filter</button>
         </Space>
-      </div>
+      </div> */}
       <div>
         <Table columns={columns} dataSource={data} />
       </div>

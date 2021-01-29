@@ -20,6 +20,21 @@
 
 body{
     font-family: 'Poppins', sans-serif;
+    .edit-button{
+        @include edit-button;
+    }
+    .delete-button {
+        @include delete-button;
+    }
+    .view-button {
+        @include view-button;
+    }
+    .accept-button {
+        @include accept-button;
+    }
+    .ant-table-thead .ant-table-cell {
+        background: $bg-white;
+    }
 }
 
 
