@@ -51,6 +51,7 @@
   outline: none;
   @include border-radius(30px);
   font-weight: $bold;
+  cursor: pointer;
 }
 
 @mixin add-button {
