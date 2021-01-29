@@ -70,6 +70,18 @@ const routes = [
     exact: true,
     authorize: false,
   },
+  {
+    path: '/login',
+    component: loadable(() => import('../pages/Login')),
+    exact: true,
+    authorize: false,
+  },
+  {
+    path: '/online-appointment',
+    component: loadable(() => import('../pages/OnlineAppointmentForm')),
+    exact: true,
+    authorize: false,
+  },
 ];
 
 const Router = props => {

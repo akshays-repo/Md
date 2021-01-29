@@ -1,4 +1,17 @@
     .mypatient{
+
+        .search{
+            @include flex(space-between , center);
+            padding: 30px 15px;
+            background: $bg-white;
+            margin-bottom: 30px;
+            .search-area {
+                display: flex;
+                .form-control {
+                    margin-right: 10px;
+                }
+            }
+        }
         .ant-modal-title{
             font-size:24px ;
         }

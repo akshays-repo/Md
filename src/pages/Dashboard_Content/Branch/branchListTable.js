@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Tag, Space, Modal, Button } from 'antd';
+import { Table, Tag, Space, Modal, Button, Popconfirm } from 'antd';
 import { store } from '../../../reducers/configureStore';
 
 import BranchCreationForm from './branchCreation';
@@ -16,6 +16,7 @@ const BranchListTable = props => {
   useEffect(() => {
     props.fetchBranch({ hospitalId: 3, page: 1, limit: 20 });
   }, [props.modal1]);
+
   const handleCancel = () => {
     store.dispatch({ type: 'CLOSE_EDIT_BRANCH_MODAL' });
   };
@@ -50,8 +51,18 @@ const BranchListTable = props => {
       key: 'action',
       render: record => (
         <Space size="middle">
-          <button onClick={() => openEditModal(record.id, record)}>Edit</button>
-          <button>Delete</button>
+          <button className="edit-button" onClick={() => openEditModal(record.id, record)}>
+            Edit
+          </button>
+
+          <Popconfirm
+            title="Are you sure？"
+            onConfirm={()=>props.deleteBranch(record.id)}
+            okText="Yes"
+            cancelText="No"
+          >
+            <button className="delete-button">Delete</button>
+          </Popconfirm>
         </Space>
       ),
     },
@@ -60,14 +71,13 @@ const BranchListTable = props => {
   return (
     <div>
       <Modal title="Basic Modal" onCancel={handleCancel} visible={props.modal1} footer={false}>
-        {/* <EditBranch id={editId} /> */}
         <BranchCreationForm id={editId} values={editData} {...props} />
       </Modal>
-      <div>
+      {/* <div>
         <Space direction="horizontal">
           <button>Filter</button>
         </Space>
-      </div>
+      </div> */}
       <div>
         <Table columns={columns} dataSource={props.data} />
       </div>

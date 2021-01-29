@@ -15,6 +15,8 @@
 @import '../pages/Dashboard_Content/Provider/style.scss';
 @import '../pages/Dashboard_Content/Branch/style.scss';
 @import '../fossilmdComponents/FossilBreadCrumb/style.scss';
+@import '../pages/Login/style.scss';
+@import '../pages/OnlineAppointmentForm/styel.scss';
 
 body {
   font-family: 'Poppins', sans-serif;
@@ -37,5 +39,39 @@ body {
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
     background: #555;
+  }
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  .edit-button {
+    @include edit-button;
+  }
+  .delete-button {
+    @include delete-button;
+  }
+  .view-button {
+    @include view-button;
+  }
+  .accept-button {
+    @include accept-button;
+  }
+  .ant-table-thead .ant-table-cell {
+    background: $bg-white;
+  }
+  .button-square {
+    @include button-square;
+  }
+  .form-control {
+    @include formInput;
+  }
+  .selectBox {
+    @include selectBox;
+  }
+  .text-center {
+    @include text-center;
+  }
+  .fullwidth {
+    width: $full-width;
   }
 }

@@ -34,11 +34,81 @@
 }
 @mixin border-radius($radius) {
   -webkit-border-radius: $radius;
-     -moz-border-radius: $radius;
-      -ms-border-radius: $radius;
-          border-radius: $radius;
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  border-radius: $radius;
 }
 @mixin head {
   font-weight: 600;
   margin-bottom: 20px;
+}
+@mixin button {
+  padding: 15px;
+  color: $white;
+  border: none;
+  box-shadow: none;
+  padding: 5px 20px;
+  outline: none;
+  @include border-radius(30px);
+  font-weight: $bold;
+  cursor: pointer;
+}
+
+@mixin add-button {
+  background-color: $theme-button;
+  @include button;
+}
+@mixin edit-button {
+  @include button;
+  background-color: $edit-button;
+  &:hover {
+    border: 1px solid #20c0f3;
+  }
+}
+@mixin delete-button {
+  @include button;
+  background-color: $red-button;
+}
+@mixin view-button {
+  @include button;
+  background-color: $view-button;
+}
+@mixin common-button {
+  @include button;
+  background-color: $theme-button;
+}
+@mixin accept-button {
+  @include button;
+  background-color: $accept-button;
+}
+@mixin button-square {
+  @include border-radius(5px);
+  height: 45px;
+}
+@mixin formInput {
+  @include border-radius(5px);
+  color: $gray-dark;
+    font-size: 15px;
+    font-weight: normal;
+    line-height: 1.5;
+    border: 1px solid #dcdcdc;
+    padding: 13px;
+    width: 100%;
+    outline: none;
+    height: 45px;
+    min-width: 200px;
+}
+@mixin selectBox {
+  @include border-radius(30px);
+  background-color: transparent;
+    border: 1px solid #D7D9DC;
+    text-align: left;
+    text-transform: none;
+    color: #464B50;
+    padding: 0 1em;
+    min-width: 10em;
+    outline: none;
+}
+@mixin text-center {
+  text-align: center;
 }
