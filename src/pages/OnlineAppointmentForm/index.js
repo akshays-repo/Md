@@ -5,7 +5,7 @@ import { TextField } from 'formik-material-ui';
 import { message, Button, Row, Col } from 'antd';
 import { PoweroffOutlined } from '@ant-design/icons';
 import callApi from '_utils/callApi';
-const ProviderCreationForm = () => {
+const OnllineAppointmentForm = () => {
   const [loadings, setLoadings] = useState(false);
   const innerForm = useRef();
   const handleFormSubmission = async values => {
@@ -46,12 +46,12 @@ const ProviderCreationForm = () => {
         innerRef={innerForm}
       >
         {({ handleSubmit, touched, errors, isSubmitting }) => (
+            <div className="online-appointment-form">
+                <h2>Please enter your exact information</h2>
           <Form
-            style={{ backgroundColor: '#f7f8f8' }}
             className="login__form"
             handleSubmit={handleSubmit}
           >
-            <Row>
               <p>
                 <label className="input-file mr-4">
                   Upload New picture
@@ -64,46 +64,35 @@ const ProviderCreationForm = () => {
                   />
                 </label>
               </p>
-              <Col xs={24} xl={12}>
                 {' '}
-                <label>Full Name</label>
+                <label>First Name</label>
                 <p>
                   <Field component={TextField} name="firstName" placeholder="" type="text"></Field>
                   {touched.name && errors.name ? <div className="errormsg">{errors.name}</div> : ''}
                 </p>{' '}
-              </Col>
-              <Col xs={24} xl={12}>
                 {' '}
                 <label>Last Name</label>
                 <p>
                   <Field component={TextField} name="lastName" placeholder="" type="text"></Field>
                   {touched.name && errors.name ? <div className="errormsg">{errors.name}</div> : ''}
                 </p>
-              </Col>
-              <Col xs={24} xl={12}>
                 <label>Email</label>
                 <p>
                   <Field component={TextField} name="email" placeholder="" type="text"></Field>
                   {touched.name && errors.name ? <div className="errormsg">{errors.name}</div> : ''}
                 </p>{' '}
-              </Col>
-              <Col xs={24} xl={12}>
                 {' '}
                 <label>Phone</label>
                 <p>
                   <Field component={TextField} name="phone" placeholder="" type="phone"></Field>
                   {touched.name && errors.name ? <div className="errormsg">{errors.name}</div> : ''}
                 </p>{' '}
-              </Col>
-              <Col xs={24} xl={12}>
                 {' '}
                 <label>Address</label>
                 <p>
                   <Field component={TextField} name="name" placeholder="" type="text"></Field>
                   {touched.name && errors.name ? <div className="errormsg">{errors.name}</div> : ''}
                 </p>
-              </Col>
-            </Row>
 
             <Button
               className="mt-5"
@@ -112,12 +101,14 @@ const ProviderCreationForm = () => {
               loading={loadings}
               className="submitbutton"
             >
-              Create a New Provider
+              Book Appointment
             </Button>
           </Form>
+            </div>
+
         )}
       </Formik>
     </>
   );
 };
-export default ProviderCreationForm;
+export default OnllineAppointmentForm;

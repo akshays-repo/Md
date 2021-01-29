@@ -3,8 +3,18 @@
         @include flex(space-between , center)
     }
 }
+.appointment-time{
+  .header{
+    margin: 15px 0px;
 
-
+  }    .item{
+    margin:50px 0px;
+    .switch-section{
+      margin-top: 10px
+    }
+  }
+  
+}
 
 
 

@@ -1,8 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   return <div className="dashboard__header">
-    <h2>Fosill Md</h2>
+    <Link to="/">Fosill Md</Link>
     </div>;
 };
 
