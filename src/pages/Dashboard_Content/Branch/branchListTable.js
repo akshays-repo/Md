@@ -1,33 +1,44 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Table, Tag, Space, Modal, Button } from 'antd';
-import EditBranch from './editBranch';
+import { store } from '../../../reducers/configureStore';
 
-const BranchListTable = () => {
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [editId , setEditId] = useState('hyy');
-  const openEditModal = (id) => {
-      setEditId(id)
-    setIsModalVisible(true);
+import BranchCreationForm from './branchCreation';
+
+const BranchListTable = props => {
+  const [editId, setEditId] = useState(null);
+  const [editData, setEditData] = useState('');
+  const openEditModal = (id, data) => {
+    setEditId(id);
+    setEditData(data);
+    store.dispatch({ type: 'OPEN_EDIT_BRANCH_MODAL' });
   };
 
-  const handleOk = () => {
-    setIsModalVisible(false);
-  };
-
+  useEffect(() => {
+    props.fetchBranch({ hospitalId: 3, page: 1, limit: 20 });
+  }, [props.modal1]);
   const handleCancel = () => {
-    setIsModalVisible(false);
+    store.dispatch({ type: 'CLOSE_EDIT_BRANCH_MODAL' });
   };
   const columns = [
     {
-      title: 'Name',
-      dataIndex: 'name',
-      key: 'name',
-      render: text => <a>{text}</a>,
+      title: 'Branch ID',
+      dataIndex: 'id',
+      key: 'id',
     },
     {
-      title: 'Age',
-      dataIndex: 'age',
-      key: 'age',
+      title: 'Fullname',
+      dataIndex: 'fullName',
+      key: 'fullName',
+    },
+    {
+      title: 'Email',
+      dataIndex: 'email',
+      key: 'email',
+    },
+    {
+      title: 'Phone',
+      dataIndex: 'phone',
+      key: 'phone',
     },
     {
       title: 'Address',
@@ -37,43 +48,20 @@ const BranchListTable = () => {
     {
       title: '',
       key: 'action',
-      render: (record) => (
+      render: record => (
         <Space size="middle">
-          <button onClick={() => openEditModal(record.key)}>edit</button>
-          <button>delete</button>
+          <button onClick={() => openEditModal(record.id, record)}>Edit</button>
+          <button>Delete</button>
         </Space>
       ),
     },
   ];
 
-  const data = [
-    {
-      key: '1',
-      name: 'John Brown',
-      age: 32,
-      address: 'New York No. 1 Lake Park',
-      tags: ['nice', 'developer'],
-    },
-    {
-      key: '2',
-      name: 'Jim Green',
-      age: 42,
-      address: 'London No. 1 Lake Park',
-      tags: ['loser'],
-    },
-    {
-      key: '3',
-      name: 'Joe Black',
-      age: 32,
-      address: 'Sidney No. 1 Lake Park',
-      tags: ['cool', 'teacher'],
-    },
-  ];
-
   return (
     <div>
-      <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-       <EditBranch id={editId}/>
+      <Modal title="Basic Modal" onCancel={handleCancel} visible={props.modal1} footer={false}>
+        {/* <EditBranch id={editId} /> */}
+        <BranchCreationForm id={editId} values={editData} {...props} />
       </Modal>
       <div>
         <Space direction="horizontal">
@@ -81,7 +69,7 @@ const BranchListTable = () => {
         </Space>
       </div>
       <div>
-        <Table columns={columns} dataSource={data} />
+        <Table columns={columns} dataSource={props.data} />
       </div>
     </div>
   );

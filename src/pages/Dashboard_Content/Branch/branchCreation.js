@@ -1,47 +1,69 @@
 import React, { useRef, useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { PatientCreationSchema } from '_utils/Schemas';
+import { BranchSchema } from '_utils/Schemas';
 import { TextField } from 'formik-material-ui';
 import { message, Button, Row, Col } from 'antd';
 import { PoweroffOutlined } from '@ant-design/icons';
-import callApi from '_utils/callApi';
-const BranchCreationForm = () => {
+import { getFormData } from '_utils';
+import { actionCreator } from 'reducers/actionCreator';
+
+const BranchCreationForm = props => {
   const [loadings, setLoadings] = useState(false);
   const innerForm = useRef();
   const handleFormSubmission = async values => {
     try {
-      const result = await callApi('', {
-        method: 'POST',
-        body: JSON.stringify(values),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+      values = await getFormData({ ...values, userTypeId: 3 });
+      if (props.id) {
+        props.editBranch(props.id, values);
+      } else {
+        props.addBranch(values);
+      }
     } catch (err) {
       console.log(err);
-      // message.error('Please try again');
+
+      // message.error(err);
     }
   };
+
+  const formField = [
+    {
+      label: 'Fullname',
+      name: 'fullName',
+      type: 'text',
+    },
+    {
+      label: 'Email',
+      name: 'email',
+      type: 'email',
+    },
+    {
+      label: 'Phone no.',
+      name: 'phone',
+      type: 'text',
+    },
+    {
+      label: 'Address',
+      name: 'address',
+      type: 'text',
+    },
+  ];
 
   return (
     <>
       <Formik
         enableReinitialize={true}
-        initialValues={{
-          firstName: '',
-          lastName: '',
-          email: '',
-          phone: '',
-          address: '',
-          avatarlocation: '',
-          phone: '',
-          status: '',
-          image: '',
-          userTypeId: 3,
-          package_id: '',
-          hospital_id: '',
-        }}
-        validationSchema={PatientCreationSchema}
+        initialValues={
+          props.values || {
+            fullName: '',
+            email: '',
+            phone: '',
+            address: '',
+            hospitalId: 3,
+            userTypeId: 3,
+            status: 'active',
+          }
+        }
+        validationSchema={BranchSchema}
         onSubmit={handleFormSubmission}
         innerRef={innerForm}
       >
@@ -52,56 +74,20 @@ const BranchCreationForm = () => {
             handleSubmit={handleSubmit}
           >
             <Row>
-              <p>
-                <label className="input-file mr-4">
-                  Upload New picture
-                  <input
-                    type="file"
-                    id="profileImage"
-                    onChange={file => {
-                      const result = URL.createObjectURL(file.currentTarget.files[0]);
-                    }}
-                  />
-                </label>
-              </p>
-              <Col xs={24} xl={12}>
-                {' '}
-                <label>First Name</label>
-                <p>
-                  <Field component={TextField} name="firstName" placeholder="" type="text"></Field>
-                  {touched.name && errors.name ? <div className="errormsg">{errors.name}</div> : ''}
-                </p>{' '}
-              </Col>
-              <Col xs={24} xl={12}>
-                {' '}
-                <label>Last Name</label>
-                <p>
-                  <Field component={TextField} name="lastName" placeholder="" type="text"></Field>
-                  {touched.name && errors.name ? <div className="errormsg">{errors.name}</div> : ''}
-                </p>
-              </Col>
-              <Col xs={24} xl={12}>
-                <label>Email</label>
-                <p>
-                  <Field component={TextField} name="email" placeholder="" type="text"></Field>
-                  {touched.name && errors.name ? <div className="errormsg">{errors.name}</div> : ''}
-                </p>{' '}
-              </Col>
-              <Col xs={24} xl={12}>
-                {' '}
-                <label>Phone</label>
-                <p>
-                  <Field component={TextField} name="phone" placeholder="" type="phone"></Field>
-                  {touched.name && errors.name ? <div className="errormsg">{errors.name}</div> : ''}
-                </p>{' '}
-              </Col>
-              <Col xs={24} xl={12}>               <label>Address</label>
-            <p>
-              <Field component={TextField} name="name" placeholder="" type="text"></Field>
-              {touched.name && errors.name ? <div className="errormsg">{errors.name}</div> : ''}
-            </p></Col>
+              {formField.map((values, index) => {
+                return (
+                  <Col key={index} xs={24} xl={12}>
+                    <label>{values.label}</label>
 
-          
+                    <Field
+                      component={TextField}
+                      name={values.name}
+                      placeholder=""
+                      type="text"
+                    ></Field>
+                  </Col>
+                );
+              })}
             </Row>
 
             <Button
@@ -111,7 +97,7 @@ const BranchCreationForm = () => {
               loading={loadings}
               className="submitbutton"
             >
-              Create a New Branch
+              {props.id ? 'Edit Branch' : 'Add Branch'}
             </Button>
           </Form>
         )}
@@ -119,4 +105,5 @@ const BranchCreationForm = () => {
     </>
   );
 };
+
 export default BranchCreationForm;
