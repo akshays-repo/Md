@@ -25,7 +25,7 @@ const Dashboard_Forms = () =>{
           key: 'action',
           render: () => (
             <Space size="middle">
-              <button>view</button>
+              <button className="view-button">view</button>
             </Space>
           ),
         },
