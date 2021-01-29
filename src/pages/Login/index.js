@@ -12,6 +12,7 @@ const FossilMdLoginPage = () => {
     const [loadings, setLoadings] = useState(false);
     const innerForm = useRef();
   return (
+<div className="loginWrapper">
     <div className="login-page">
       <Formik
         enableReinitialize={true}
@@ -24,24 +25,23 @@ const FossilMdLoginPage = () => {
         innerRef={innerForm}
       >
         {({ handleSubmit, touched, errors, isSubmitting }) => (
-          <Form className="login__form" handleSubmit={handleSubmit}>
+
+          <Form  className="login__form" handleSubmit={handleSubmit}>
+                      <h1 className="text-center">Log in to continue..</h1>
             {' '}
-            <label>Email</label>
-            <p>
-              <Field component={TextField} name="email" placeholder="" type="text"></Field>
+            <div className="loginInput">
+              <Field label="Email" component={TextField} name="email" placeholder="" type="text"></Field>
               {touched.name && errors.name ? <div className="errormsg">{errors.name}</div> : ''}
-            </p>{' '}
-            <label>password</label>
-            <p>
-              <Field component={TextField} name="email" placeholder="" type="text"></Field>
+            </div>{' '}
+            <div className="loginInput">
+              <Field label="Password" component={TextField} name="password" placeholder="" type="text"></Field>
               {touched.name && errors.name ? <div className="errormsg">{errors.name}</div> : ''}
-            </p>
+            </div>
             <Button
-              className="mt-5"
               htmlType="submit"
               disabled={isSubmitting}
               loading={loadings}
-              className="submitbutton"
+              className="button-square edit-button"
             >
              Login
             </Button>
@@ -49,6 +49,8 @@ const FossilMdLoginPage = () => {
         )}
       </Formik>
     </div>
+    </div>
+
   );
 };
 export default FossilMdLoginPage;

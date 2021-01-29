@@ -46,6 +46,12 @@ body{
     .selectBox {
         @include selectBox;
     }
+    .text-center {
+        @include text-center;
+    }
+    .fullwidth {
+        width: $full-width;
+    }
 }
 
 
