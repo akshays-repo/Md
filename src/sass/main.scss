@@ -35,6 +35,12 @@ body{
     .ant-table-thead .ant-table-cell {
         background: $bg-white;
     }
+    .button-square {
+        @include button-square;
+    }
+    .form-control {
+        @include formInput;
+    }
 }
 
 
