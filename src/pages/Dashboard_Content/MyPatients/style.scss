@@ -1,4 +1,12 @@
     .mypatient{
+
+        .search{
+            @include flex(space-between , center);
+            button {
+                @include common-button;
+            }
+            padding: 30px;
+        }
         .ant-modal-title{
             font-size:24px ;
         }

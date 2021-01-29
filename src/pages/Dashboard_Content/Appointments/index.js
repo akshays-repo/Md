@@ -55,12 +55,12 @@ const data = [
 const Dashboard_Appointments = () => {
   const Appointments = () => {
     return (
-      <div>
+      <div className="appointment-section">
         <Space direction="vertical">
           {data.map(item => (
             <Card style={{ width: 1000 }}>
               <Row>
-                <Col>
+                <Col xl={12}>
                   <p> {item.name}</p>
                   <p>
                     <i class="far fa-clock "></i>
@@ -84,15 +84,15 @@ const Dashboard_Appointments = () => {
                   </p>
                 </Col>
 
-                <Col>
-                  <span style={{ float: 'right' }}>
+                <Col xl={12} className="right-side">
+                  <div  >
                     <Space direction="middle">
                       {' '}
                       <button className="view-button">View</button>
                       <button className="accept-button">Accept</button>
                       <button className="delete-button">Cancel</button>
                     </Space>
-                  </span>
+                  </div>
                 </Col>
               </Row>
             </Card>
