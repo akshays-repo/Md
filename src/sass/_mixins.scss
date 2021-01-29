@@ -50,6 +50,7 @@
   padding: 5px 20px;
   outline: none;
   @include border-radius(30px);
+  font-weight: $bold;
 }
 
 @mixin add-button {
@@ -75,4 +76,21 @@
 @mixin accept-button {
   @include button;
   background-color: $accept-button;
+}
+@mixin button-square {
+  @include border-radius(5px);
+  height: 45px;
+}
+@mixin formInput {
+  @include border-radius(5px);
+  color: $gray-dark;
+    font-size: 15px;
+    font-weight: normal;
+    line-height: 1.5;
+    border: 1px solid #dcdcdc;
+    padding: 13px;
+    width: 100%;
+    outline: none;
+    height: 45px;
+    min-width: 200px;
 }
