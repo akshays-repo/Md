@@ -29,7 +29,7 @@ const ProviderTable = () => {
       key: 'workhour',
       render: (text, record) => (
         <Space size="middle">
-          <button onClick={showModal}>Edit</button>
+          <button onClick={showModal} className="edit-button">Edit</button>
         </Space>
       ),
     },
@@ -41,15 +41,15 @@ const ProviderTable = () => {
         <Space size="middle">
           <Form>
             <Form.Item label="">
-              <Select>
-                <Select.Option value="demo">Demo</Select.Option>
-                <Select.Option value="demo">Demo</Select.Option>{' '}
-                <Select.Option value="demo">Demo</Select.Option>{' '}
-                <Select.Option value="demo">Demo</Select.Option>{' '}
-                <Select.Option value="demo">Demo</Select.Option>{' '}
-                <Select.Option value="demo">Demo</Select.Option>{' '}
-                <Select.Option value="demo">Demo</Select.Option>
-              </Select>
+                <Select className="selectBox">
+                  <Select.Option value="demo">Demo</Select.Option>
+                  <Select.Option value="demo">Demo</Select.Option>{' '}
+                  <Select.Option value="demo">Demo</Select.Option>{' '}
+                  <Select.Option value="demo">Demo</Select.Option>{' '}
+                  <Select.Option value="demo">Demo</Select.Option>{' '}
+                  <Select.Option value="demo">Demo</Select.Option>{' '}
+                  <Select.Option value="demo">Demo</Select.Option>
+                </Select>
             </Form.Item>
           </Form>
         </Space>

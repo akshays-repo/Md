@@ -23,7 +23,7 @@ const Dashboard_Branch = () => {
     return (
       <div>
         <div className="header">
-          <Button type="primary" onClick={showModal}>
+          <Button type="primary" onClick={showModal} className="button-square">
               Create a New Branch
           </Button>
           <Modal

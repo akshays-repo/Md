@@ -54,7 +54,7 @@ const Dashboard_Campaigns = () => {
       title: '',
       key: 'action',
       render: (text, record) => (
-        <Space size="middle">
+        <Space size="middle" className="edit-button">
           <a>edit</a>
         </Space>
       ),

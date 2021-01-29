@@ -35,9 +35,9 @@ const PatientAppointment = () => {
       key: 'action',
       render: (text, record) => (
         <Space size="middle">
-          <Button style={{backgroundColor:"#00398f" , color:"#ffffff"}} shape="round">View </Button>
-          <Button style={{backgroundColor:"#008f05",  color:"#ffffff"}} shape="round">Accept</Button>
-          <Button style={{backgroundColor:"#ad0000",  color:"#ffffff"}} shape="round">Cancel </Button>
+          <button className="view-button">View </button>
+          <button className="accept-button">Accept</button>
+          <button className="delete-button">Cancel </button>
         </Space>
       ),
     },

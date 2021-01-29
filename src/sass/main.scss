@@ -43,6 +43,9 @@ body{
     .form-control {
         @include formInput;
     }
+    .selectBox {
+        @include selectBox;
+    }
 }
 
 

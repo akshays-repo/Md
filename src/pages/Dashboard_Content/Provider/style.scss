@@ -21,11 +21,29 @@
   }
 }
 .schedule-time {
+  padding: 30px 30px 0;
+  .breadcrumb {
+    margin: 0;
+    .breadcrumb-nav {
+      height: auto;
+      padding: 15px 0;
+    }
+  }
   .left-side {
     background-color: $container-background;
-    padding: 10px;
+    padding: 15px;
   }
   .right-side {
-    padding: 10px;
+    padding-left: 30px;
+    .ant-table-content {
+      .selectBox {
+        .ant-select-selector {
+          background-color: transparent;
+          border: none;
+          outline: none;
+        }
+      }
+
+    }
   }
 }

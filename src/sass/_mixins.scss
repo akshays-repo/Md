@@ -94,3 +94,14 @@
     height: 45px;
     min-width: 200px;
 }
+@mixin selectBox {
+  @include border-radius(30px);
+  background-color: transparent;
+    border: 1px solid #D7D9DC;
+    text-align: left;
+    text-transform: none;
+    color: #464B50;
+    padding: 0 1em;
+    min-width: 10em;
+    outline: none;
+}

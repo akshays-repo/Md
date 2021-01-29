@@ -57,7 +57,7 @@ const Dashboard_Provider = () => {
           </div>
 
           <div>
-            <Button type="primary" onClick={showModal}>
+            <Button type="primary" onClick={showModal} className="button-square">
               Create a New Provider
             </Button>
           </div>
