@@ -1,9 +1,22 @@
-import React from 'react'
-import { Table, Tag, Space ,  Input, Button, Radio, Select , Form } from 'antd';
+import React, { useState } from 'react';
+import { Table, Modal, Tag, Space, Input, Button, Radio, Select, Form } from 'antd';
+import AddAppointmentTime from './addAppointmentTime';
 
+const ProviderTable = () => {
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
 
-const columns = [
+  const handleOk = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+  const columns = [
     {
       title: 'Provider',
       dataIndex: 'provider',
@@ -16,7 +29,7 @@ const columns = [
       key: 'workhour',
       render: (text, record) => (
         <Space size="middle">
-          <button>Edit</button>
+          <button onClick={showModal}>Edit</button>
         </Space>
       ),
     },
@@ -28,15 +41,15 @@ const columns = [
         <Space size="middle">
           <Form>
             <Form.Item label="">
-                <Select>
-                  <Select.Option value="demo">Demo</Select.Option>
-                  <Select.Option value="demo">Demo</Select.Option>{' '}
-                  <Select.Option value="demo">Demo</Select.Option>{' '}
-                  <Select.Option value="demo">Demo</Select.Option>{' '}
-                  <Select.Option value="demo">Demo</Select.Option>{' '}
-                  <Select.Option value="demo">Demo</Select.Option>{' '}
-                  <Select.Option value="demo">Demo</Select.Option>
-                </Select>
+              <Select>
+                <Select.Option value="demo">Demo</Select.Option>
+                <Select.Option value="demo">Demo</Select.Option>{' '}
+                <Select.Option value="demo">Demo</Select.Option>{' '}
+                <Select.Option value="demo">Demo</Select.Option>{' '}
+                <Select.Option value="demo">Demo</Select.Option>{' '}
+                <Select.Option value="demo">Demo</Select.Option>{' '}
+                <Select.Option value="demo">Demo</Select.Option>
+              </Select>
             </Form.Item>
           </Form>
         </Space>
@@ -45,14 +58,10 @@ const columns = [
     {
       title: 'Status',
       key: 'status',
-      render: (text, record) => (
-        <Space size="middle">
-
-        </Space>
-      ),
+      render: (text, record) => <Space size="middle"></Space>,
     },
   ];
-  
+
   const data = [
     {
       key: '1',
@@ -76,13 +85,13 @@ const columns = [
       tags: ['cool', 'teacher'],
     },
   ];
-
-
-const ProviderTable = () =>{
-    return(
-        <div>
-<Table columns={columns} dataSource={data} />
-        </div>
-    )
-}
-export default ProviderTable
+  return (
+    <div>
+      <Table columns={columns} dataSource={data} />
+      <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+        <AddAppointmentTime />
+      </Modal>
+    </div>
+  );
+};
+export default ProviderTable;
