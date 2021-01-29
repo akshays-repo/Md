@@ -1,79 +1,103 @@
-import React from 'react';
-import {Col, Row, Space } from 'antd';
-import Dashboard_Content from '..'
+import React, { useState } from 'react';
+import { Col, Row, Form, Input, Button, Modal, Select, Space } from 'antd';
+import Dashboard_Content from '..';
 import FossilBreadCrumb from 'fossilmdComponents/FossilBreadCrumb';
 import AppointmentTypes from './appointmentType';
-const Dashboard_Provider = () =>{
-    const ScheduleTiming = () =>{
-        const weekDays = [
-            {   key :1,
-                day:"Sunday"
+import ProviderCreationForm from './providerCreationForm';
+import ProviderTable from './providerTable';
 
-            },
-            {   key :2,
-                day:"Monday"
 
-            },{   key :3,
-                day:"Tuesday"
 
-            },{   key :4,
-                day:"Wednesday"
+const Dashboard_Provider = () => {
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
-            },{   key :5,
-                day:"Thursday"
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
 
-            },
-            {   key :6,
-                day:"Friday"
+  const handleOk = () => {
+    setIsModalVisible(false);
+  };
 
-            },
-            {   key :7,
-                day:"Saturday"
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+  const HeaderSection = () => {
+    const weekDays = [
+      { key: 1, day: 'Sunday' },
+      { key: 2, day: 'Monday' },
+      { key: 3, day: 'Tuesday' },
+      { key: 4, day: 'Wednesday' },
+      { key: 5, day: 'Thursday' },
+      { key: 6, day: 'Friday' },
+      { key: 7, day: 'Saturday' },
+    ];
 
-            },
-        ]
-        return (
+    return (
+      <div className="provider">
+        <div className="header">
           <div>
             Schedule Timings
-            <form action="/action_page.php">
-              <label for="minutes">Time Slot Duration:</label>
-              <select id="minutes" name="cars">
-                <option value="15">15 min</option>
-                <option value="30">30 min</option>
-                <option value="40">40 min</option>
-                <option value="45">45</option>
-              </select>
-              <input type="submit" value="Submit" />
-            </form>
-            <div>
+            <Form>
+              <Form.Item label="Select the time slot">
+                <Space direction="horizontal">
+                  <Select placeholder="15 min">
+                    <Select.Option value="demo">Demo</Select.Option>
+                    <Select.Option value="demo">Demo</Select.Option>{' '}
+                    <Select.Option value="demo">Demo</Select.Option>{' '}
+                    <Select.Option value="demo">Demo</Select.Option>{' '}
+                    <Select.Option value="demo">Demo</Select.Option>{' '}
+                    <Select.Option value="demo">Demo</Select.Option>{' '}
+                    <Select.Option value="demo">Demo</Select.Option>
+                  </Select>
+                </Space>
+              </Form.Item>
+            </Form>
+          </div>
+
+          <div>
+            <Button type="primary" onClick={showModal}>
+              Create a New Provider
+            </Button>
+          </div>
+        </div>
+
+        {/* <div>
               <Space direction="horizontal">
                 {weekDays.map(item => (
                   <button key={item.key}>{item.day}</button>
                 ))}
               </Space>
-            </div>
+            </div> */}
+      </div>
+    );
+  };
+  return (
+    <div className="schedule-time">
+      <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+        <ProviderCreationForm />
+      </Modal>
+      <FossilBreadCrumb currentUrl="/provider" currentPageName="Provider" />
+      <Row>
+        <Col xs={24} xl={7}>
+          <div className="left-side">
+            <AppointmentTypes />
           </div>
-        );
-    }
-    return (
-      <div className="schedule-time">
-        <FossilBreadCrumb currentUrl="/provider" currentPageName="Provider"/>
-        <Row>
-          <Col xs={24} xl={7}>
-            <div className="left-side">
-            <AppointmentTypes/>
-            </div>          
-          </Col>
+        </Col>
 
-          <Col xs={24} xl={15}>
-            <div className="right-side">
-            {ScheduleTiming()}
-            </div>
-          </Col>
-        </Row>
-      
-        </div>
-    )
-}
+        <Col xs={24} xl={15}>
+          <div className="right-side">
+            <div>
+            {HeaderSection()}
+              </div>
+              <div>
+<ProviderTable/>
+              </div>
+          </div>
+        </Col>
+      </Row>
+    </div>
+  );
+};
 
-export default Dashboard_Provider
+export default Dashboard_Provider;
