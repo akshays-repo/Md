@@ -123,5 +123,5 @@
     "eslint-plugin-react": "^7.17.0",
     "eslint-plugin-react-hooks": "^1.7.0"
   },
-  "proxy": "https://www.backend.foodcan.org/"
+  "proxy": "http://fossilmdbackend.riolabz.com/"
 }
