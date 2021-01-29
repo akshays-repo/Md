@@ -1,3 +1,24 @@
-.online-appointment-form{
-    
+.onlinebookWrapper{
+    background-color: #f4f6f7;
+   // height: 100vh;
+    width: 100%;
+    @include flex(center, center);
+    .login-page {
+width: 30%;
+padding:50px;
+background-color: $bg-white;
+@include border-radius(3px);
+h1 {
+    margin-bottom: 35px;
+}
+.edit-button {
+    margin-top:35px
+}
+.loginInput{
+    div {
+        width:$full-width;
+        margin-bottom: 20px;
+    }
+}
+}
 }
