@@ -26,7 +26,7 @@ const Dashboard_MyPatients = props => {
 
   useEffect(() => {
     props.fetchPatient({ branchId: 3 });
-  }, [props.patient]);
+  }, [props.modal, props.deleted]);
 
   const columns = [
     {
@@ -113,6 +113,7 @@ const mapStoreToProps = ({ Patient }) => {
   return {
     patient: Patient.payload,
     modal: Patient.modal,
+    deleted: Patient.deleted,
   };
 };
 const mapDispatchToProps = dispatch => ({

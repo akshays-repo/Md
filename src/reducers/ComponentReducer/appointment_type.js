@@ -16,7 +16,13 @@ export const AppointmentTypeReducer = (state = AppointmentTypeState, action) => 
       message.success('APPOINTMENT TYPE CREATED SUCCESSFULLY');
       return { ...state, error: action.error, modal: false, message: action.message };
     case 'FETCH_APPOINTMENT_TYPE':
-      return { ...state, error: action.error, payload: action.payload, message: action.message };
+      return {
+        ...state,
+        error: action.error,
+        payload: action.payload,
+        message: action.message,
+        deleted: false,
+      };
     case 'EDIT_APPOINTMENT_TYPE':
       message.success('APPOINTMENT TYPE EDITED SUCCESSFULLY');
 
@@ -25,7 +31,7 @@ export const AppointmentTypeReducer = (state = AppointmentTypeState, action) => 
       return { ...state, error: action.error, payload: action.payload, message: action.message };
     case 'DELETE_APPOINTMENT_TYPE':
       message.success('APPOINTMENT TYPE DELETED SUCCESSFULLY');
-      return { ...state, error: action.error, message: action.message };
+      return { ...state, error: action.error, message: action.message, deleted: true };
     default:
       return state;
   }

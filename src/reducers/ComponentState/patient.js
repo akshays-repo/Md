@@ -4,4 +4,5 @@ export const PatientState = {
   message: '',
   modal: false,
   modal1: false,
+  deleted: false,
 };

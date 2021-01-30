@@ -25,6 +25,7 @@ export const BranchReducer = (state = BranchState, action) => {
         error: action.error,
         payload: action.payload.users,
         message: action.message,
+        deleted: false,
       };
     case 'EDIT_BRANCH':
       message.success('BRANCH EDITED SUCCESSFULLY');
@@ -38,7 +39,13 @@ export const BranchReducer = (state = BranchState, action) => {
       };
     case 'DELETE_BRANCH':
       message.success('BRANCH DELETED SUCCESSFULLY');
-      return { ...state, error: action.error, payload: action.payload, message: action.message };
+      return {
+        ...state,
+        error: action.error,
+        payload: action.payload,
+        message: action.message,
+        deleted: true,
+      };
     case 'FETCH_ERROR':
       message.error(action.message);
       return { ...state };
