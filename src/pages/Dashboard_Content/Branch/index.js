@@ -10,7 +10,7 @@ import { store } from '../../../reducers/configureStore';
 const Dashboard_Branch = props => {
   useEffect(() => {
     props.fetchBranch({ hospitalId: 3, page: 1, limit: 20 });
-  }, [props.modal]);
+  }, [props.branch]);
 
   const Branch = () => {
     return (

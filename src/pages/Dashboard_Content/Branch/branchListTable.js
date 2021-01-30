@@ -15,7 +15,7 @@ const BranchListTable = props => {
 
   useEffect(() => {
     props.fetchBranch({ hospitalId: 3, page: 1, limit: 20 });
-  }, [props.modal1]);
+  }, [props]);
 
   const handleCancel = () => {
     store.dispatch({ type: 'CLOSE_EDIT_BRANCH_MODAL' });
@@ -57,7 +57,7 @@ const BranchListTable = props => {
 
           <Popconfirm
             title="Are you sure？"
-            onConfirm={()=>props.deleteBranch(record.id)}
+            onConfirm={() => props.deleteBranch(record.id)}
             okText="Yes"
             cancelText="No"
           >
