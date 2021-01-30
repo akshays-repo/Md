@@ -384,8 +384,8 @@ export const AppointmentTypeSchema = Yup.object().shape({
 });
 
 export const PatientCreationSchema = Yup.object().shape({
-  firstName: Yup.string().required('Please enter first name'),
-  lastName: Yup.string().required('Please enter last name'),
+  fullName: Yup.string().required('Please enter fullname'),
+
   email: Yup.string()
     .required('Please enter email address')
     .email('Please enter valid email'),

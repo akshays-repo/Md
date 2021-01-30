@@ -9,6 +9,7 @@ import callApi from '_utils/callApi';
 import { generateForm } from '../../../_utils/formgenerator';
 import { useDropzone } from 'react-dropzone';
 import { Thumb } from './thumb';
+import { getFormData, getFormDataA } from '../../../_utils';
 
 const PatientCreationForm = props => {
   const [loadings, setLoadings] = useState(false);
@@ -28,7 +29,7 @@ const PatientCreationForm = props => {
         ),
       );
       console.log(files);
-      innerForm.current.setFieldValue('image', acceptedFiles);
+      innerForm.current.setFieldValue('logo', acceptedFiles);
 
       console.log('****', innerForm.current.values);
     },
@@ -51,13 +52,13 @@ const PatientCreationForm = props => {
     setFiles(prev => prev.filter(result => result.name != name));
 
     innerForm.current.setFieldValue(
-      'image',
-      innerForm.current.values.image.filter(result => result.name != name),
+      'logo',
+      innerForm.current.values.logo.filter(result => result.name != name),
     );
   };
   const handleFormSubmission = async values => {
     try {
-      values = JSON.stringify({ ...values, branchId: 3, hospitalId: 3 });
+      values = await getFormDataA({ ...values, branchId: 3, hospitalId: 3 });
       if (editId) {
         props.editPatient(editId, values);
       } else {
@@ -70,15 +71,11 @@ const PatientCreationForm = props => {
 
   const formField = [
     {
-      label: 'Firstname',
-      name: 'firstName',
+      label: 'Fullname',
+      name: 'fullName',
       type: 'text',
     },
-    {
-      label: 'Lastname',
-      name: 'lastName',
-      type: 'text',
-    },
+
     {
       label: 'Email',
       name: 'email',
@@ -121,17 +118,17 @@ const PatientCreationForm = props => {
       <Formik
         enableReinitialize={true}
         initialValues={{
-          firstName: '',
-          lastName: '',
+          fullName: '',
           email: '',
           phone: '',
           address: '',
           avatarlocation: '',
           phone: '',
-          image: '',
+          logo: '',
           userTypeId: 3,
           gender: 'male',
           hospital_id: '',
+          status: 'active',
         }}
         validationSchema={PatientCreationSchema}
         onSubmit={handleFormSubmission}
@@ -182,13 +179,13 @@ const PatientCreationForm = props => {
                     flexWrap: 'wrap',
                   }}
                 >
-                  {values.image.length > 0
-                    ? values.image.map((result, i) => (
+                  {values.logo.length > 0
+                    ? values.logo.map((result, i) => (
                         <Thumb onImageDelete={onImageDelete} file={result}></Thumb>
                       ))
                     : ''}
                 </div>
-                {errors.image && <div className="errormsg">{errors.image}</div>}
+                {errors.logo && <div className="errormsg">{errors.logo}</div>}
               </p>
             </Row>
 

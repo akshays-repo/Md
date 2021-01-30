@@ -35,11 +35,27 @@ export const actionCreator = result => {
       };
       const response = await callApi(url, config);
       if (response.success) {
-        return dispatch({
-          type: result.action_type,
-          payload: response.data || response.DATA,
-          error: '',
-        });
+        if (result.action_type === 'USER_LOGIN') {
+          if (response.user.userTypeId == 2) {
+            return dispatch({
+              type: result.action_type,
+              payload: { ...response.user, ...response.token },
+              error: '',
+            });
+          } else {
+            return dispatch({
+              type: 'FETCH_ERROR',
+              error: true,
+              message: 'This is the login portal of hospital',
+            });
+          }
+        } else {
+          return dispatch({
+            type: result.action_type,
+            payload: response.data || response.DATA,
+            error: '',
+          });
+        }
       } else {
         return dispatch({ type: 'FETCH_ERROR', error: true, message: response.error });
       }

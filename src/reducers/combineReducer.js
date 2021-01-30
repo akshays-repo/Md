@@ -5,6 +5,8 @@ import { ProviderTypeReducer as ProviderType } from './ComponentReducer/provider
 import { ProviderReducer as Provider } from './ComponentReducer/provider';
 import { PatientReducer as Patient } from './ComponentReducer/patient';
 import { OnlineBookingReducer as OnlineBooking } from './ComponentReducer/online_booking';
+import { LoginReducer as Login } from './ComponentReducer/login';
+
 export const reducers = {
   Hospital,
   Branch,
@@ -13,4 +15,5 @@ export const reducers = {
   Provider,
   Patient,
   OnlineBooking,
+  Login,
 };
