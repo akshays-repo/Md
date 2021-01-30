@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Table, Button, Row, Col, Space, Popconfirm } from 'antd';
 import Dashboard_Content from '..';
 import PatientCreationForm from './patientCreationForm';
@@ -24,15 +24,15 @@ const Dashboard_MyPatients = props => {
     setIsModalVisible(false);
   };
 
+  useEffect(() => {
+    props.fetchPatient({ branchId: 3 });
+  }, [props.patient]);
+
   const columns = [
     {
       title: 'Name',
-      key: 'name',
-      render: record => (
-        <p>
-          {record.firstName} {record.lastName}
-        </p>
-      ),
+      key: 'fullName',
+      dataIndex: 'fullName',
     },
     {
       title: 'Email',
@@ -97,7 +97,7 @@ const Dashboard_MyPatients = props => {
             width={600}
             footer={null}
           >
-            <PatientCreationForm />
+            <PatientCreationForm {...props} />
           </Modal>
         </div>
         <div className="patient_name"></div>

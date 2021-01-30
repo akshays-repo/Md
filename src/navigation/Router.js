@@ -4,6 +4,7 @@ import { Index as NotFoundPage } from '../components/404';
 import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
 import { withRouter } from 'react-router';
+import { store } from '../reducers/configureStore';
 
 const loadable = loader => React.lazy(loader); // added
 
@@ -13,62 +14,67 @@ const routes = [
     path: '/',
     component: loadable(() => import('../pages/Dashboard_Content/Dashboard')),
     exact: true,
-    authorize: false,
+    authorize: true,
   },
   {
     path: '/appointments',
     component: loadable(() => import('../pages/Dashboard_Content/Appointments')),
     exact: true,
-    authorize: false,
-  },{
+    authorize: true,
+  },
+  {
     path: '/mypatients',
     component: loadable(() => import('../pages/Dashboard_Content/MyPatients')),
     exact: true,
-    authorize: false,
-  },{
+    authorize: true,
+  },
+  {
     path: '/provider',
     component: loadable(() => import('../pages/Dashboard_Content/Provider')),
     exact: true,
-    authorize: false,
-  },{
+    authorize: true,
+  },
+  {
     path: '/calender',
     component: loadable(() => import('../pages/Dashboard_Content/Calendar')),
     exact: true,
-    authorize: false,
+    authorize: true,
   },
   {
     path: '/message',
     component: loadable(() => import('../pages/Dashboard_Content/Message')),
     exact: true,
-    authorize: false,
-  },{
+    authorize: true,
+  },
+  {
     path: '/templates',
     component: loadable(() => import('../pages/Dashboard_Content/Templates')),
     exact: true,
-    authorize: false,
-  },{
+    authorize: true,
+  },
+  {
     path: '/froms',
     component: loadable(() => import('../pages/Dashboard_Content/Forms')),
     exact: true,
-    authorize: false,
+    authorize: true,
   },
   {
     path: '/analytics',
     component: loadable(() => import('../pages/Dashboard_Content/Analytics')),
     exact: true,
-    authorize: false,
+    authorize: true,
   },
   {
     path: '/campaigns',
     component: loadable(() => import('../pages/Dashboard_Content/Campaigns')),
     exact: true,
-    authorize: false,
+    authorize: true,
   },
   {
     path: '/branch',
     component: loadable(() => import('../pages/Dashboard_Content/Branch')),
     exact: true,
-    authorize: false,
+    authorize: true,
   },
   {
     path: '/login',
@@ -80,20 +86,18 @@ const routes = [
     path: '/online-appointment',
     component: loadable(() => import('../pages/OnlineAppointmentForm')),
     exact: true,
-    authorize: false,
+    authorize: true,
   },
 ];
 
 const Router = props => {
-  const { history, result } = props;
-
   return (
     <Switch>
       {routes.map(route => {
         if (route.authorize) {
           return (
             <PrivateRoute
-              authorized={result}
+              authorized={store.getState().Login.isLogin}
               key={route.path}
               keys={route.path}
               exact={route.exact}
