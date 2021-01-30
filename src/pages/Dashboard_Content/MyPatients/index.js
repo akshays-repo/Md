@@ -122,7 +122,6 @@ const mapDispatchToProps = dispatch => ({
     dispatch(
       actionCreator({
         method: 'POST',
-
         action_type: 'CREATE_PATIENT',
         values,
       }),

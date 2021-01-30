@@ -24,6 +24,11 @@ const ProviderTable = () => {
       render: text => <a>{text}</a>,
     },
     {
+      title: 'Specialist',
+      dataIndex: 'specialist',
+      key: 'specialist',
+    },
+    {
       title: 'Work Hour',
       dataIndex: 'workhour',
       key: 'workhour',

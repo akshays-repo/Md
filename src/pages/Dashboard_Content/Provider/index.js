@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState , useReducer } from 'react';
 import { Col, Row, Form, Input, Button, Modal, Select, Space } from 'antd';
 import Dashboard_Content from '..';
+import { connect } from 'react-redux';
 import FossilBreadCrumb from 'fossilmdComponents/FossilBreadCrumb';
 import AppointmentTypes from './appointmentType';
 import ProviderCreationForm from './providerCreationForm';
 import ProviderTable from './providerTable';
-
+import { actionCreator } from '../../../reducers/actionCreator';
+import { store } from '../../../reducers/configureStore';
 const Dashboard_Provider = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
