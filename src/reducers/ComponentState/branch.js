@@ -7,6 +7,5 @@ export const BranchState = {
   message: '',
   modal: false,
   modal1: false,
-  deleted: false,
-  edited: false,
+  changed: false,
 };

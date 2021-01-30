@@ -70,7 +70,7 @@ const AppointmentTypes = props => {
   useEffect(() => {
     console.log('Loading');
     props.fetchAppointmentType({ branchId: 3 });
-  }, [props.modal, props.deleted]);
+  }, [props.changed]);
   return (
     <div className="appointment-type">
       <div className="header">
@@ -125,7 +125,7 @@ const mapStoreToProps = ({ AppointmentType }) => {
   return {
     appointment_type: AppointmentType.payload,
     modal: AppointmentType.modal,
-    deleted: AppointmentType.deleted,
+    changed: AppointmentType.changed,
   };
 };
 const mapDispatchToProps = dispatch => ({

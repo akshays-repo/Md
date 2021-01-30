@@ -4,5 +4,5 @@ export const AppointmentTypeState = {
   message: '',
   modal: false,
   modal1: false,
-  deleted: false,
+  changed: false,
 };
