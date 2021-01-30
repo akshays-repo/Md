@@ -4,4 +4,5 @@ export const ProviderState = {
   message: '',
   modal: false,
   modal1: false,
+  changed: false
 };

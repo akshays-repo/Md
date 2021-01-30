@@ -3,7 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { ProviderCreationSchema } from '_utils/Schemas';
 import { Button, Row, Col, message } from 'antd';
 import { generateForm } from '../../../_utils/formgenerator';
-import { getFormData } from '_utils';
+import { getFormData , getFormDataA } from '_utils';
 import { store } from '../../../reducers/configureStore';
 
 const ProviderCreationForm = props => {
@@ -11,11 +11,12 @@ const ProviderCreationForm = props => {
   const innerForm = useRef();
 
   const handleFormSubmission = async values => {
+    let data = await getFormDataA({ ...values })
     try {
       if (props.id) {
-        await props.editProvider(getFormData({ ...values }));
+        await props.editProvider(data);
       } else {
-        await props.addProvider(getFormData({ ...values }));
+        await props.addProvider(data);
       }
       store.dispatch({ type: 'CLOSE_PROVIDER_CREATE_MODAL' });
     } catch (err) {

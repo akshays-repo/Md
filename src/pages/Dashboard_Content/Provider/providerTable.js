@@ -3,20 +3,22 @@ import { Table, Modal, Tag, Space, Input, Button, Radio, Select, Form } from 'an
 import AddAppointmentTime from './addAppointmentTime';
 import { store } from '../../../reducers/configureStore';
 import ProviderCreationForm from './providerCreationForm';
-import { set } from 'store';
+import { connect } from 'react-redux';
+import { getFormDataA } from '_utils';
 
 
 const ProviderTable = (props) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [editModalVisible, seteditModalVisible] = useState(false);
-  
+  const [appointmentTypes , setAppointmentTypes] = useState([])
 
   const [editId, setEditId] = useState(null);
   const [editData, setEditData] = useState('');
 
   useEffect(() =>{
-    console.log("store.dispatch",store.getState());
-  }, [])
+    setAppointmentTypes(store.getState().AppointmentType.payload)
+    console.log("ssssssssss",appointmentTypes)
+  }, )
 
 
   const showModal = () => {
@@ -30,6 +32,7 @@ const ProviderTable = (props) => {
   const handleCancel = () => {
     store.dispatch({ type: 'CLOSE_PROVIDER_CREATE_MODAL' })
     seteditModalVisible(false)
+    setIsModalVisible(false)
   };
   
   const handleEditModal = (id , data) =>{
@@ -37,7 +40,20 @@ const ProviderTable = (props) => {
     setEditId(id)
     store.dispatch({ type: 'OPEN_PROVIDER_CREATE_MODAL' })
     seteditModalVisible(true)
+
   }
+
+  const handleApptChange = async values => {
+    let intValues = {
+      appointment_type:values
+    }
+    console.log("intValuesz",intValues)
+    try {
+      await props.editProvider(getFormDataA({ ...intValues }));
+    } catch (err) {
+      console.log("edit error",err);
+    }
+  };
 
   useEffect(() => {
     console.log('poooops', props)
@@ -48,7 +64,9 @@ const ProviderTable = (props) => {
       title: 'Full Name',
       dataIndex: 'fullName',
       key: 'fullName',
-      render: text => <a>{text}</a>,
+      render: (text, record) => <span>{text}<br/> 
+      <span style={{color:"ButtonShadow"}}>{record.provider_type.name}</span>  
+      </span>,
     },
     {
       title: 'Email',
@@ -73,14 +91,11 @@ const ProviderTable = (props) => {
         <Space size="middle">
           <Form>
             <Form.Item label="">
-                <Select className="selectBox">
-                  <Select.Option value="demo">Demo</Select.Option>
-                  <Select.Option value="demo">Demo</Select.Option>{' '}
-                  <Select.Option value="demo">Demo</Select.Option>{' '}
-                  <Select.Option value="demo">Demo</Select.Option>{' '}
-                  <Select.Option value="demo">Demo</Select.Option>{' '}
-                  <Select.Option value="demo">Demo</Select.Option>{' '}
-                  <Select.Option value="demo">Demo</Select.Option>
+                <Select className="selectBox" onChange={handleApptChange}  mode="multiple">
+                {appointmentTypes.map((type) =>{return(
+                  <Select.Option value={type.id}>{type.name}</Select.Option>
+                )
+                })}
                 </Select>
             </Form.Item>
           </Form>
@@ -138,5 +153,12 @@ const ProviderTable = (props) => {
     </div>
   );
 };
+const mapStoreToProps = ({ AppointmentType }) => {
+  return {
+    appointment_type: AppointmentType.payload,
+    modal: AppointmentType.modal,
+    changed: AppointmentType.changed,
+  };
+};
+export default connect(mapStoreToProps)(ProviderTable);
 
-export default ProviderTable;

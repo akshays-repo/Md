@@ -15,7 +15,8 @@ const Dashboard_Provider = (props) => {
 
   useEffect(() => {
     props.fetchProvider({ branchId: 3, page: 1, limit: 60 });
-  }, []);
+    console.log("prooo", props)
+  }, [props.changed]);
 
   const HeaderSection = () => {
     const weekDays = [
@@ -86,6 +87,7 @@ const mapStoreToProps = ({ Provider }) => {
     message: Provider.message,
     modal: Provider.modal,
     modal1: Provider.modal1,
+    changed:Provider.changed
   };
 };
 const mapDispatchToProps = dispatch => ({
@@ -93,7 +95,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_PROVIDER', param })),
   addProvider: values =>
     dispatch(actionCreator({ method: 'POST', action_type: 'CREATE_PROVIDER', values })),
-  editProvider: (id, values) =>
+  editProvider: (values) =>
     dispatch(actionCreator({ method: 'PUT', action_type: 'EDIT_PROVIDER',  values })),
   deleteProvider: id =>
     dispatch(actionCreator({ method: 'DELETE', action_type: 'DELETE_PROVIDER', id })),
