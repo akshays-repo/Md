@@ -49,7 +49,7 @@ const ProviderCreationForm = props => {
           status: 'active',
           userTypeId: 4,
           branchId: 3,
-          provider_typeId: '',
+          provider_typeId: 1,
           phone: '',
         }}
         validationSchema={ProviderCreationSchema}
