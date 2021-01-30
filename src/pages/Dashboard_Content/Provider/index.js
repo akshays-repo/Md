@@ -60,7 +60,7 @@ const Dashboard_Provider = () => {
       </Modal>
       <FossilBreadCrumb currentUrl="/provider" currentPageName="Provider" />
       <Row>
-        <Col xs={24} xl={7}>
+        <Col xs={24} xl={8}>
           <div className="left-side">
             <AppointmentTypes />
           </div>

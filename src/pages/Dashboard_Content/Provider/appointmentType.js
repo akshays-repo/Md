@@ -1,88 +1,163 @@
 import React, { useEffect, useState } from 'react';
-import { Space, Row, Col } from 'antd';
-import { Form, Input, Button, Radio, Select } from 'antd';
+import { Space, Row, Col, Table, Popconfirm, Modal } from 'antd';
+import { actionCreator } from '../../../reducers/actionCreator';
+import { Form, Input, Select } from 'formik-antd';
+import { connect } from 'react-redux';
+import { Formik } from 'formik';
+import { AppointmentTypeSchema } from '../../../_utils/Schemas';
+import { store } from '../../../reducers/configureStore';
+import { AppointmentTypeForm } from './appointmentTypeForm';
 
-const appointments = [
-  {
-    type: 'specal doctor',
-    minutes: '15',
-  },
-  {
-    type: 'specal Offer',
-    minutes: '25',
-  },
-  {
-    type: 'specal check up',
-    minutes: '25',
-  },
-  {
-    type: 'eye doctor',
-    minutes: '15',
-  },
-];
-
-const AppointmentTypes = () => {
-  const [appointmentField, setAppointmentField] = useState([1]);
-  const AddNewField = () => {
-    setAppointmentField([...appointmentField, appointmentField.push(1)]);
+const AppointmentTypes = props => {
+  const [editId, setEditId] = useState(null);
+  const [editData, setEditData] = useState('');
+  const openEditModal = (id, data) => {
+    setEditId(id);
+    setEditData(data);
+    store.dispatch({ type: 'OPEN_APPOINTMENT_TYPE_MODAL' });
   };
 
+  const handleFormSubmission = async values => {
+    try {
+      values = JSON.stringify({ ...values, branchId: 3, hospitalId: 3 });
+      if (editId) {
+        props.editAppointmentType(editId, values);
+      } else {
+        props.addAppointmentType(values);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const columns = [
+    {
+      title: 'Name',
+      key: 'name',
+      dataIndex: 'name',
+    },
+    {
+      title: 'Timeslot',
+      key: 'time_slot',
+      render: record => {
+        return <>{record.time_slot} minutes</>;
+      },
+    },
+    {
+      title: '',
+      key: 'action',
+      render: record => (
+        <Space size="middle">
+          <button className="edit-button" onClick={() => openEditModal(record.id, record)}>
+            <i className="fa fa-edit"></i>
+          </button>
+          <Popconfirm
+            title="Are you sure？"
+            onConfirm={() => props.deleteAppointmentType(record.id)}
+            okText="Yes"
+            cancelText="No"
+          >
+            <button className="delete-button">
+              <i className="fa fa-trash"></i>
+            </button>
+          </Popconfirm>
+        </Space>
+      ),
+    },
+  ];
+
+  useEffect(() => {
+    props.fetchAppointmentType({ branchId: 3 });
+  }, [props.appointment_type]);
   return (
     <div className="appointment-type">
       <div className="header">
         <h2>Appointment types</h2>
-        <button className="plus-button" onClick={() => AddNewField()}>
-          <i class="fas fa-plus"></i>
+        <button
+          className="plus-button"
+          onClick={() => {
+            setEditId(null);
+            store.dispatch({ type: 'OPEN_APPOINTMENT_TYPE_MODAL' });
+          }}
+        >
+          <i className="fas fa-plus"></i>
         </button>
       </div>
       <div className="defined -field">
-      {  appointments?.map((type) =>(
-          <div>
-          <Form>
-            <Form.Item label="">
-              <Space direction="horizontal">
-                <Input type="text" value={`${type.type}`}  placeholder="Type Name" />
-                <Select value={`${type.minutes}min`} placeholder={type.minutes}>
-                  <Select.Option value="demo">Demo</Select.Option>
-                  <Select.Option value="demo">Demo</Select.Option>{' '}
-                  <Select.Option value="demo">Demo</Select.Option>{' '}
-                  <Select.Option value="demo">Demo</Select.Option>{' '}
-                  <Select.Option value="demo">Demo</Select.Option>{' '}
-                  <Select.Option value="demo">Demo</Select.Option>{' '}
-                  <Select.Option value="demo">Demo</Select.Option>
-                </Select>
-              </Space>
-            </Form.Item>
-          </Form>
-        </div>
-        ))
-      }
-
+        <Table dataSource={props.appointment_type} columns={columns}></Table>
       </div>
-      <div className="field-section">
-        {appointmentField?.map(() => (
-          <div>
-            <Form>
-              <Form.Item label="">
-                <Space direction="horizontal">
-                  <Input type="text" placeholder="Type Name" />
-                  <Select placeholder="15 min">
-                    <Select.Option value="demo">Demo</Select.Option>
-                    <Select.Option value="demo">Demo</Select.Option>{' '}
-                    <Select.Option value="demo">Demo</Select.Option>{' '}
-                    <Select.Option value="demo">Demo</Select.Option>{' '}
-                    <Select.Option value="demo">Demo</Select.Option>{' '}
-                    <Select.Option value="demo">Demo</Select.Option>{' '}
-                    <Select.Option value="demo">Demo</Select.Option>
-                  </Select>
-                </Space>
-              </Form.Item>
-            </Form>
-          </div>
-        ))}
-      </div>
+      <Modal
+        title={editId ? 'EDIT APPOINTMENT TYPE' : 'ADD APPOINTMENT TYPE'}
+        onCancel={() => {
+          setEditId(null);
+          setEditData(null);
+          store.dispatch({ type: 'CLOSE_APPOINTMENT_TYPE_MODAL' });
+        }}
+        visible={props.modal}
+        footer={false}
+        destroyOnClose
+      >
+        {editId ? (
+          <Formik
+            initialValues={editData}
+            validationSchema={AppointmentTypeSchema}
+            onSubmit={handleFormSubmission}
+          >
+            <AppointmentTypeForm id={editId} values={editData} {...props} />
+          </Formik>
+        ) : (
+          <Formik
+            initialValues={{ name: '', time_slot: 15 }}
+            validationSchema={AppointmentTypeSchema}
+            onSubmit={handleFormSubmission}
+          >
+            <AppointmentTypeForm {...props}></AppointmentTypeForm>
+          </Formik>
+        )}
+      </Modal>
     </div>
   );
 };
 
-export default AppointmentTypes;
+const mapStoreToProps = ({ AppointmentType }) => {
+  console.log('Store', AppointmentType);
+  return {
+    appointment_type: AppointmentType.payload,
+    modal: AppointmentType.modal,
+  };
+};
+const mapDispatchToProps = dispatch => ({
+  fetchAppointmentType: param =>
+    dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_APPOINTMENT_TYPE', param })),
+  addAppointmentType: values =>
+    dispatch(
+      actionCreator({
+        method: 'POST',
+        contentType: 'JSON',
+        action_type: 'CREATE_APPOINTMENT_TYPE',
+        values,
+      }),
+    ),
+  editAppointmentType: (id, values) =>
+    dispatch(
+      actionCreator({
+        method: 'PATCH',
+        contentType: 'JSON',
+        action_type: 'EDIT_APPOINTMENT_TYPE',
+        id,
+        values,
+      }),
+    ),
+  deleteAppointmentType: id =>
+    dispatch(actionCreator({ method: 'DELETE', action_type: 'DELETE_APPOINTMENT_TYPE', id })),
+  filterAppointmentType: param =>
+    dispatch(
+      actionCreator({
+        method: 'GET',
+        action_type: 'FILTER_APPOINTMENT_TYPE',
+        param,
+      }),
+    ),
+});
+
+export default connect(mapStoreToProps, mapDispatchToProps)(AppointmentTypes);

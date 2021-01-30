@@ -15,4 +15,8 @@ export const backend_api = {
   FETCH_BRANCH: '/api/backend/v1/branches',
   EDIT_BRANCH: '/api/backend/v1/users',
   DELETE_BRANCH: '/api/backend/v1/users',
+  CREATE_APPOINTMENT_TYPE: '/api/backend/v1/appointment_type',
+  FETCH_APPOINTMENT_TYPE: '/api/backend/v1/appointment_type',
+  EDIT_APPOINTMENT_TYPE: '/api/backend/v1/appointment_type',
+  DELETE_APPOINTMENT_TYPE: '/api/backend/v1/appointment_type',
 };

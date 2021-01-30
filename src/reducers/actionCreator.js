@@ -37,7 +37,7 @@ export const actionCreator = result => {
       if (response.success) {
         return dispatch({
           type: result.action_type,
-          payload: response.data,
+          payload: response.data || response.DATA,
           error: '',
         });
       } else {
