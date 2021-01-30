@@ -160,22 +160,22 @@ const PatientCreationForm = props => {
               <p>
                 <div
                   style={{
-                    padding: 10,
-                    borderRadius: 5,
+                    // padding: 10,
+                    // borderRadius: 5,
                     width: '100%',
                   }}
                   {...getRootProps({ className: 'dropzone' })}
                 >
                   <div className="title">
+                  <input {...getInputProps()} multiple={false} />
+<div className="upload-btn-wrapper">
+  <button type="button" className="view-button button-square font-size-md px-5">
+    Browse Image
+  </button>
+</div>
                     <span>Upload Patient Image</span>
                   </div>
-                  <input {...getInputProps()} multiple={false} />
-
-                  <div className="upload-btn-wrapper">
-                    <button type="button" className="btn btn-primary font-size-md px-5">
-                      Browse Image
-                    </button>
-                  </div>
+                 
                 </div>
                 <div
                   style={{
@@ -194,16 +194,16 @@ const PatientCreationForm = props => {
                 {errors.logo && <div className="errormsg">{errors.logo}</div>}
               </p>
             </Row>
-
+<div className="fullwidth-right">
             <Button
-              className="mt-5"
               htmlType="submit"
               disabled={isSubmitting}
               loading={loadings}
-              className="submitbutton"
+              className="submitbutton edit-button button-square"
             >
               Create a New Patient
             </Button>
+            </div>
           </Form>
         )}
       </Formik>

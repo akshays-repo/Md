@@ -72,6 +72,32 @@ body {
     @include text-center;
   }
   .fullwidth {
-    width: $full-width;
+    width: $full-width; 
+  }
+  .fullwidth-right {
+    @include flex(flex-end, flex-end);
+  }
+  .ant-modal-content {
+    .ant-modal-title {
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 30px;
+    }
+  .ant-modal-body {
+    form {
+      background:transparent!important;
+      .title {
+         @include flex(start, center);
+         margin-top: 30px;
+         input:focus {
+          outline: none;
+         }
+         span {
+           display: inline-block;
+           margin-left: 15px;
+         }
+      }
+    }
+  }
   }
 }
