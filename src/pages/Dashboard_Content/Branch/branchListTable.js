@@ -15,7 +15,7 @@ const BranchListTable = props => {
 
   useEffect(() => {
     props.fetchBranch({ hospitalId: 3, page: 1, limit: 20 });
-  }, [props]);
+  }, [props.Branch]);
 
   const handleCancel = () => {
     store.dispatch({ type: 'CLOSE_EDIT_BRANCH_MODAL' });
