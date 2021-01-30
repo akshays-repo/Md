@@ -71,8 +71,13 @@ const PatientCreationForm = props => {
 
   const formField = [
     {
-      label: 'Fullname',
-      name: 'fullName',
+      label: 'Firstname',
+      name: 'firstName',
+      type: 'text',
+    },
+    {
+      label: 'Lastname',
+      name: 'lastName',
       type: 'text',
     },
 
@@ -118,7 +123,8 @@ const PatientCreationForm = props => {
       <Formik
         enableReinitialize={true}
         initialValues={{
-          fullName: '',
+          firstName: '',
+          lastName: '',
           email: '',
           phone: '',
           address: '',
@@ -127,8 +133,8 @@ const PatientCreationForm = props => {
           logo: '',
           userTypeId: 3,
           gender: 'male',
-          hospital_id: '',
           status: 'active',
+          patient_status: 'new',
         }}
         validationSchema={PatientCreationSchema}
         onSubmit={handleFormSubmission}

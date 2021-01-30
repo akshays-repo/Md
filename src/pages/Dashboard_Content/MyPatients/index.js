@@ -26,13 +26,18 @@ const Dashboard_MyPatients = props => {
 
   useEffect(() => {
     props.fetchPatient({ branchId: 3 });
-  }, [props.patient]);
+  }, [props.modal, props.deleted]);
 
   const columns = [
     {
       title: 'Name',
-      key: 'fullName',
-      dataIndex: 'fullName',
+      key: 'name',
+      render: record => `${record.firstName} ${record.lastName}`,
+    },
+    {
+      title: 'Lastname',
+      key: 'lastName',
+      dataIndex: 'lastName',
     },
     {
       title: 'Email',
@@ -113,6 +118,7 @@ const mapStoreToProps = ({ Patient }) => {
   return {
     patient: Patient.payload,
     modal: Patient.modal,
+    deleted: Patient.deleted,
   };
 };
 const mapDispatchToProps = dispatch => ({

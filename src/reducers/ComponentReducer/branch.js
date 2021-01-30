@@ -25,20 +25,35 @@ export const BranchReducer = (state = BranchState, action) => {
         error: action.error,
         payload: action.payload.users,
         message: action.message,
+        deleted: false,
+        edited: false,
       };
     case 'EDIT_BRANCH':
       message.success('BRANCH EDITED SUCCESSFULLY');
-      return { ...state, error: action.error, modal1: false, message: action.message };
+      return {
+        ...state,
+        error: action.error,
+        modal1: false,
+        edited: true,
+        message: action.message,
+      };
     case 'FILTER_BRANCH':
       return {
         ...state,
         error: action.error,
         payload: action.payload.users,
         message: action.message,
+        edited: false,
       };
     case 'DELETE_BRANCH':
       message.success('BRANCH DELETED SUCCESSFULLY');
-      return { ...state, error: action.error, payload: action.payload, message: action.message };
+      return {
+        ...state,
+        error: action.error,
+        payload: action.payload,
+        message: action.message,
+        deleted: true,
+      };
     case 'FETCH_ERROR':
       message.error(action.message);
       return { ...state };

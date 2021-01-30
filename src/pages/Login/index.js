@@ -34,9 +34,9 @@ const FossilMdLoginPage = props => {
             onSubmit={handleFormSubmission}
             innerRef={innerForm}
           >
-            {({ handleSubmit, touched, errors, isSubmitting }) => (
-              <Form className="login__form" autoComplete={'off'} handleSubmit={handleSubmit}>
-                <h1 className="text-center">Log in to continue..</h1>{' '}
+            {({ isSubmitting }) => (
+              <Form className="login__form" autoComplete={'off'}>
+                <h1 className="text-center">Log in to continue..</h1>
                 <div className="loginInput">
                   <Field
                     label="Email"
@@ -45,20 +45,22 @@ const FossilMdLoginPage = props => {
                     placeholder=""
                     type="text"
                   ></Field>
-                </div>{' '}
+                </div>
                 <div className="loginInput">
                   <Field
                     label="Password"
                     component={TextField}
                     name="password"
                     placeholder=""
-                    type="text"
+                    type="password"
                   ></Field>
                 </div>
                 <Button
                   htmlType="submit"
                   // disabled={isSubmitting}
                   // loading={loadings}
+                  disabled={isSubmitting}
+                  loading={loadings}
                   className="button-square edit-button"
                 >
                   Login

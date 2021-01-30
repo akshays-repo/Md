@@ -5,6 +5,7 @@ import { TextField } from 'formik-material-ui';
 import { message, Button, Row, Col } from 'antd';
 import { PoweroffOutlined } from '@ant-design/icons';
 import { getFormData } from '_utils';
+import { actionCreator } from 'reducers/actionCreator';
 
 const BranchCreationForm = props => {
   const [loadings, setLoadings] = useState(false);
@@ -19,6 +20,8 @@ const BranchCreationForm = props => {
       }
     } catch (err) {
       console.log(err);
+
+      // message.error(err);
     }
   };
 
@@ -75,14 +78,13 @@ const BranchCreationForm = props => {
                 return (
                   <Col key={index} xs={24} xl={12}>
                     <label>{values.label}</label>
-                    <p>
-                      <Field
-                        component={TextField}
-                        name={values.name}
-                        placeholder=""
-                        type="text"
-                      ></Field>
-                    </p>
+
+                    <Field
+                      component={TextField}
+                      name={values.name}
+                      placeholder=""
+                      type="text"
+                    ></Field>
                   </Col>
                 );
               })}

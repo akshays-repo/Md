@@ -1,12 +1,25 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Tag, Space, Modal, Button, Popconfirm } from 'antd';
+import { Table, Tag, Space, Modal, Button, Popconfirm, Dropdown } from 'antd';
 import { store } from '../../../reducers/configureStore';
+import Menu from 'components/Menu';
 
 import BranchCreationForm from './branchCreation';
+import { getFormData } from '../../../_utils';
+const menuItems = [
+  {
+    key: 'active',
+    title: 'Active',
+  },
+  {
+    key: 'hold',
+    title: 'Hold',
+  },
+];
 
 const BranchListTable = props => {
   const [editId, setEditId] = useState(null);
   const [editData, setEditData] = useState('');
+
   const openEditModal = (id, data) => {
     setEditId(id);
     setEditData(data);
@@ -15,17 +28,20 @@ const BranchListTable = props => {
 
   useEffect(() => {
     props.fetchBranch({ hospitalId: 3, page: 1, limit: 20 });
-  }, [props]);
+  }, [props.Branch]);
 
   const handleCancel = () => {
     store.dispatch({ type: 'CLOSE_EDIT_BRANCH_MODAL' });
   };
+
+  const handleMenuClick = async e => {
+    alert(e.key);
+    const values = await getFormData({ ...editData, userTypeId: 3, status: e.key });
+    props.editBranch(editId, values);
+  };
+  const menu = <Menu items={menuItems} onClick={handleMenuClick} />;
+
   const columns = [
-    {
-      title: 'Branch ID',
-      dataIndex: 'id',
-      key: 'id',
-    },
     {
       title: 'Fullname',
       dataIndex: 'fullName',
@@ -45,6 +61,34 @@ const BranchListTable = props => {
       title: 'Address',
       dataIndex: 'address',
       key: 'address',
+    },
+    {
+      title: 'Status',
+      key: 'status',
+      dataIndex: 'status',
+
+      render: (text, record) => {
+        console.log('Record', record);
+        let badge = 'badge-success';
+        if (record.status === 'hold') badge = 'badge-danger';
+        return (
+          <Dropdown
+            overlay={menu}
+            // ref={this.clickId}
+            id={record.id}
+            onClick={() => {
+              setEditId(record.id);
+              setEditData(record);
+            }}
+            trigger={['click']}
+          >
+            <span className={`font-size-12 badge ${badge} 'badgeText'`}>
+              {text}
+              {/* <Icon type="down" /> */}
+            </span>
+          </Dropdown>
+        );
+      },
     },
     {
       title: '',

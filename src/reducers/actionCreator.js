@@ -39,7 +39,7 @@ export const actionCreator = result => {
           if (response.user.userTypeId == 2) {
             return dispatch({
               type: result.action_type,
-              payload: { ...response.user, ...response.token },
+              payload: { ...response.user, token: response.token },
               error: '',
             });
           } else {
