@@ -78,5 +78,33 @@ const Dashboard_Provider = () => {
     </div>
   );
 };
+const mapStoreToProps = ({ Provider }) => {
+  console.log('Store', Provider);
+  return {
+    branch: Provider.payload,
+    error: Provider.error,
+    message: Provider.message,
+    modal: Provider.modal,
+    modal1: Provider.modal1,
+  };
+};
+const mapDispatchToProps = dispatch => ({
+  fetchProvider: param =>
+    dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_PROVIDER', param })),
+  addProvider: values =>
+    dispatch(actionCreator({ method: 'POST', action_type: 'CREATE_PROVIDER', values })),
+  editProvider: (id, values) =>
+    dispatch(actionCreator({ method: 'PUT', action_type: 'EDIT_PROVIDER', id, values })),
+  deleteProvider: id =>
+    dispatch(actionCreator({ method: 'DELETE', action_type: 'DELETE_PROVIDER', id })),
+  filterProvider: param =>
+    dispatch(
+      actionCreator({
+        method: 'GET',
+        action_type: 'FILTER_PROVIDER',
+        param,
+      }),
+    ),
+});
 
-export default Dashboard_Provider;
+export default connect(mapStoreToProps, mapDispatchToProps)(Dashboard_Provider);
