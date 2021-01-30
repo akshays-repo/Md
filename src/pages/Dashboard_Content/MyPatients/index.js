@@ -12,21 +12,26 @@ const Dashboard_MyPatients = props => {
   const [editData, setEditData] = useState('');
   const openEditModal = (id, data) => {
     setEditId(id);
-    setEditData(data);
+    setEditData({ ...data, dob: data.dob.split('T')[0] });
     store.dispatch({ type: 'OPEN_PATIENT_MODAL' });
   };
-  const [isModalVisible, setIsModalVisible] = useState(false);
+
   const showModal = () => {
-    setIsModalVisible(true);
+    setEditId(null);
+    setEditData(null);
+    store.dispatch({ type: 'OPEN_PATIENT_MODAL' });
   };
 
   const handleCancel = () => {
-    setIsModalVisible(false);
+    // setIsModalVisible(false);
+    setEditId(null);
+    setEditData(null);
+    store.dispatch({ type: 'CLOSE_PATIENT_MODAL' });
   };
 
   useEffect(() => {
-    props.fetchPatient({ branchId: 3 });
-  }, [props.modal, props.deleted]);
+    if (!props.modal) props.fetchPatient({ branchId: 3 });
+  }, [props.changed, props.deleted]);
 
   const columns = [
     {
@@ -49,11 +54,11 @@ const Dashboard_MyPatients = props => {
       dataIndex: 'phone',
       key: 'phone',
     },
-    {
-      title: 'Address',
-      dataIndex: 'address',
-      key: 'address',
-    },
+    // {
+    //   title: 'Address',
+    //   dataIndex: 'address',
+    //   key: 'address',
+    // },
 
     {
       title: 'Status',
@@ -96,13 +101,17 @@ const Dashboard_MyPatients = props => {
             Create a New Patient
           </Button>
           <Modal
-            title=" Create a New Patient"
-            visible={isModalVisible}
+            title={editId ? 'Edit Patient Details' : 'Add Patient Details'}
+            visible={props.modal}
             onCancel={handleCancel}
             width={600}
             footer={null}
           >
-            <PatientCreationForm {...props} />
+            {editId ? (
+              <PatientCreationForm id={editId} values={editData} {...props}></PatientCreationForm>
+            ) : (
+              <PatientCreationForm {...props} />
+            )}
           </Modal>
         </div>
         <div className="patient_name"></div>
@@ -118,7 +127,7 @@ const mapStoreToProps = ({ Patient }) => {
   return {
     patient: Patient.payload,
     modal: Patient.modal,
-    deleted: Patient.deleted,
+    changed: Patient.changed,
   };
 };
 const mapDispatchToProps = dispatch => ({
@@ -136,7 +145,7 @@ const mapDispatchToProps = dispatch => ({
   editPatient: (id, values) =>
     dispatch(
       actionCreator({
-        method: 'PATCH',
+        method: 'PUT',
         action_type: 'EDIT_PATIENT',
         id,
         values,

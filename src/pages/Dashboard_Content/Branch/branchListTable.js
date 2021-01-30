@@ -5,6 +5,7 @@ import Menu from 'components/Menu';
 
 import BranchCreationForm from './branchCreation';
 import { getFormData } from '../../../_utils';
+import { DownOutlined } from '@ant-design/icons';
 const menuItems = [
   {
     key: 'active',
@@ -27,7 +28,7 @@ const BranchListTable = props => {
   };
 
   useEffect(() => {
-    props.fetchBranch({ hospitalId: 3, page: 1, limit: 20 });
+    props.fetchBranch({ hospitalId: localStorage.getItem('hospital_id'), page: 1, limit: 20 });
   }, [props.Branch]);
 
   const handleCancel = () => {
@@ -35,7 +36,6 @@ const BranchListTable = props => {
   };
 
   const handleMenuClick = async e => {
-    alert(e.key);
     const values = await getFormData({ ...editData, userTypeId: 3, status: e.key });
     props.editBranch(editId, values);
   };
@@ -46,11 +46,6 @@ const BranchListTable = props => {
       title: 'Fullname',
       dataIndex: 'fullName',
       key: 'fullName',
-    },
-    {
-      title: 'Email',
-      dataIndex: 'email',
-      key: 'email',
     },
     {
       title: 'Phone',
@@ -83,7 +78,8 @@ const BranchListTable = props => {
             trigger={['click']}
           >
             <span className={`font-size-12 badge ${badge} 'badgeText'`}>
-              {text}
+              {text == 'active' ? 'Active' : 'Hold'} &nbsp;
+              <DownOutlined />
               {/* <Icon type="down" /> */}
             </span>
           </Dropdown>
@@ -99,14 +95,14 @@ const BranchListTable = props => {
             Edit
           </button>
 
-          <Popconfirm
+          {/* <Popconfirm
             title="Are you sure？"
             onConfirm={() => props.deleteBranch(record.id)}
             okText="Yes"
             cancelText="No"
           >
             <button className="delete-button">Delete</button>
-          </Popconfirm>
+          </Popconfirm> */}
         </Space>
       ),
     },
@@ -114,7 +110,12 @@ const BranchListTable = props => {
 
   return (
     <div>
-      <Modal title="Basic Modal" onCancel={handleCancel} visible={props.modal1} footer={false}>
+      <Modal
+        title="Edit branch details"
+        onCancel={handleCancel}
+        visible={props.modal1}
+        footer={false}
+      >
         <BranchCreationForm id={editId} values={editData} {...props} />
       </Modal>
       {/* <div>
