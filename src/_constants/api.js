@@ -10,6 +10,9 @@ export const api = {
   viewlisting: '/api/backend/v1/listing_user',
 };
 
-export const branch = {
-  createBranch:"/api/backend/v1/users/register"
-}
+export const backend_api = {
+  CREATE_BRANCH: '/api/backend/v1/users/register',
+  FETCH_BRANCH: '/api/backend/v1/branches',
+  EDIT_BRANCH: '/api/backend/v1/users',
+  DELETE_BRANCH: '/api/backend/v1/users',
+};

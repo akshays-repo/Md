@@ -368,6 +368,16 @@ export const ContactSchema = Yup.object().shape({
   phone: Yup.string().required('Phone number is required'),
 });
 
+export const BranchSchema = Yup.object().shape({
+  fullName: Yup.string().required('Please enter fullname'),
+  email: Yup.string()
+    .required('Please enter email')
+    .email('Please enter valid email'),
+  phone: Yup.string().required('Please enter phone no '),
+  hospitalId: Yup.number(),
+  address: Yup.string().required('Please enter address'),
+});
+
 export const PatientCreationSchema = Yup.object().shape({
   name: Yup.string().required('Please the name'),
   messagae: Yup.string().required('Please enter Message'),

@@ -1,4 +1,5 @@
 .dashboard__content {
+  height: 100vh;
   background-color: $container-background;
 
   // @include margin-padding(0px, 15px);
@@ -10,35 +11,32 @@
   .rightblock-content {
     padding: 0 30px;
     .dashboard {
-
-      }
     }
   }
+}
 
-
-.dashboard__sidebar{
-  background-color:$white;
+.dashboard__sidebar {
+  background-color: $white;
   border: 1px solid $gray-light;
-  .sidebar_header{
+  .sidebar_header {
     flex-direction: column;
-    @include flex( center, center);
+    @include flex(center, center);
     @include margin-padding(0px, 20px);
     border-bottom: 1px solid $gray-light;
     .profileDashboard {
       @include margin-padding(10px, 8px);
-    img{
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
+      img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+      }
+    }
+    .hospital_name {
+      @include font-size(l);
+      color: $gray;
     }
   }
-    .hospital_name{
-      @include font-size(l);
-      color:$gray ;
-    } 
-    
-  }
-  .sidebar_list{
+  .sidebar_list {
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -47,9 +45,9 @@
     overflow-y: auto;
     .ant-list-item {
       padding: $padd-0;
-    .ant-list-item-meta{
-      padding: 16px 20px;
+      .ant-list-item-meta {
+        padding: 16px 20px;
+      }
     }
-  }
   }
 }
