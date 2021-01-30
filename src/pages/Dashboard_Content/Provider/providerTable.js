@@ -1,9 +1,23 @@
 import React, { useState , useEffect} from 'react';
 import { Table, Modal, Tag, Space, Input, Button, Radio, Select, Form } from 'antd';
 import AddAppointmentTime from './addAppointmentTime';
+import { store } from '../../../reducers/configureStore';
+import ProviderCreationForm from './providerCreationForm';
+import { set } from 'store';
+
 
 const ProviderTable = (props) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [editModalVisible, seteditModalVisible] = useState(false);
+  
+
+  const [editId, setEditId] = useState(null);
+  const [editData, setEditData] = useState('');
+
+  useEffect(() =>{
+    console.log("store.dispatch",props);
+  }, [])
+
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -14,9 +28,17 @@ const ProviderTable = (props) => {
   };
 
   const handleCancel = () => {
-    setIsModalVisible(false);
+    store.dispatch({ type: 'CLOSE_PROVIDER_CREATE_MODAL' })
+    seteditModalVisible(false)
   };
-   
+  
+  const handleEditModal = (id , data) =>{
+    setEditData(data);
+    setEditId(id)
+    store.dispatch({ type: 'OPEN_PROVIDER_CREATE_MODAL' })
+    seteditModalVisible(true)
+  }
+
   useEffect(() => {
     console.log('poooops', props)
   })
@@ -68,7 +90,14 @@ const ProviderTable = (props) => {
     {
       title: 'Status',
       key: 'status',
-      render: (text, record) => <Space size="middle"></Space>,
+      render: (text, record) => <Space size="middle">{record.status}</Space>,
+    },
+    {
+      key: 'action',
+      render: (text, record) => <Space size="middle"> 
+      <button  className="edit-button" onClick={() =>handleEditModal(record.id , record) }> Edit </button> 
+      <button className="delete-button"> Delete</button>
+      </Space>,
     },
   ];
 
@@ -98,8 +127,13 @@ const ProviderTable = (props) => {
   return (
     <div>
       <Table columns={columns} dataSource={props.provider.users} />
-      <Modal width={800}  title="Add time for Joseph Silverstein CSAP FNP PA-C" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-        <AddAppointmentTime />
+      <Modal footer={false} width={800}  title="" 
+      visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+        <AddAppointmentTime  {...props}/>
+      </Modal>
+      <Modal footer={false} width={800}  title="" 
+      visible={props.modal} onOk={handleOk} onCancel={handleCancel}>
+        <ProviderCreationForm id={editId} values={editData}  {...props}/>
       </Modal>
     </div>
   );

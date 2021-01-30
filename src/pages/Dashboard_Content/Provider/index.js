@@ -13,22 +13,10 @@ import CreateProviderType from './createProviderType';
 const Dashboard_Provider = (props) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-
   useEffect(() => {
     props.fetchProvider({ branchId: 3, page: 1, limit: 20 });
-  }, [props.modal, props.modal1, props.deleted, props.edited]);
+  }, []);
 
-  const showModal = () => {
-    setIsModalVisible(true);
-  };
-
-  const handleOk = () => {
-    setIsModalVisible(false);
-  };
-
-  const handleCancel = () => {
-    setIsModalVisible(false);
-  };
   const HeaderSection = () => {
     const weekDays = [
       { key: 1, day: 'Sunday' },
@@ -44,9 +32,7 @@ const Dashboard_Provider = (props) => {
       <div className="provider">
         <div className="header">
           <div>
-          <Button type="primary"  className="button-square">
-              Create a New Provider Type
-           </Button>
+
           </div>
 
           <div>
@@ -108,7 +94,7 @@ const mapDispatchToProps = dispatch => ({
   addProvider: values =>
     dispatch(actionCreator({ method: 'POST', action_type: 'CREATE_PROVIDER', values })),
   editProvider: (id, values) =>
-    dispatch(actionCreator({ method: 'PUT', action_type: 'EDIT_PROVIDER', id, values })),
+    dispatch(actionCreator({ method: 'PUT', action_type: 'EDIT_PROVIDER',  values })),
   deleteProvider: id =>
     dispatch(actionCreator({ method: 'DELETE', action_type: 'DELETE_PROVIDER', id })),
   filterProvider: param =>

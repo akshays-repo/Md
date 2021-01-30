@@ -14,6 +14,7 @@ export const ProviderReducer = (state = ProviderState, action) => {
     case 'FETCH_PROVIDER':
       return { error: action.error, payload: action.payload, message: action.message };
     case 'EDIT_PROVIDER':
+      message.success('PROVIDER EDITED SUCCESSFULLY');
       return { error: action.error, payload: action.payload, message: action.message };
     case 'FILTER_PROVIDER':
       return { error: action.error, payload: action.payload, message: action.message };
