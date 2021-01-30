@@ -10,7 +10,7 @@ import { store } from '../../../reducers/configureStore';
 const Dashboard_Branch = props => {
   useEffect(() => {
     props.fetchBranch({ hospitalId: 3, page: 1, limit: 20 });
-  }, [props.modal, props.modal1, props.deleted]);
+  }, [props.modal, props.modal1, props.deleted, props.edited]);
 
   const Branch = () => {
     return (
@@ -50,6 +50,7 @@ const mapStoreToProps = ({ Branch }) => {
     modal: Branch.modal,
     modal1: Branch.modal1,
     deleted: Branch.deleted,
+    edited: Branch.edited,
   };
 };
 const mapDispatchToProps = dispatch => ({

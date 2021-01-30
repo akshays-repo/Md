@@ -8,4 +8,5 @@ export const BranchState = {
   modal: false,
   modal1: false,
   deleted: false,
+  edited: false,
 };

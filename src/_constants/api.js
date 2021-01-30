@@ -19,9 +19,9 @@ export const backend_api = {
   FETCH_APPOINTMENT_TYPE: '/api/backend/v1/appointment_type',
   EDIT_APPOINTMENT_TYPE: '/api/backend/v1/appointment_type',
   DELETE_APPOINTMENT_TYPE: '/api/backend/v1/appointment_type',
-  CREATE_PATIENT: '/api/backend/v1/users/register',
-  FETCH_PATIENT: '/api/backend/v1/patients',
+  CREATE_PATIENT: '/api/backend/v1/users/patiant',
+  FETCH_PATIENT: '/api/backend/v1/patiant',
   EDIT_PATIENT: '/api/backend/v1/users/register',
-  DELETE_PATIENT: '/api/backend/v1/users/register',
+  DELETE_PATIENT: '/api/backend/v1/patiant',
   USER_LOGIN: '/api/backend/v1/users/login',
 };

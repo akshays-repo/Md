@@ -42,7 +42,7 @@ export const PrivateRoute = ({ authorized, component: Component, path, keys, exa
             message: 'Unauthorized Access',
             description: 'Please Login to Access the Page !',
           });
-          history.push('/');
+          history.push('/login');
           // window.location.href = '/';
         }
         // } else {

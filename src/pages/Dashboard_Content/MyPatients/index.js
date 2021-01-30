@@ -31,8 +31,13 @@ const Dashboard_MyPatients = props => {
   const columns = [
     {
       title: 'Name',
-      key: 'fullName',
-      dataIndex: 'fullName',
+      key: 'name',
+      render: record => `${record.firstName} ${record.lastName}`,
+    },
+    {
+      title: 'Lastname',
+      key: 'lastName',
+      dataIndex: 'lastName',
     },
     {
       title: 'Email',
