@@ -14,7 +14,7 @@ const Dashboard_Provider = (props) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   useEffect(() => {
-    props.fetchProvider({ branchId: 3, page: 1, limit: 20 });
+    props.fetchProvider({ branchId: 3, page: 1, limit: 60 });
   }, []);
 
   const HeaderSection = () => {

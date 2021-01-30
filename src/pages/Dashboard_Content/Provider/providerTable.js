@@ -15,7 +15,7 @@ const ProviderTable = (props) => {
   const [editData, setEditData] = useState('');
 
   useEffect(() =>{
-    console.log("store.dispatch",props);
+    console.log("store.dispatch",store.getState());
   }, [])
 
 
@@ -138,4 +138,5 @@ const ProviderTable = (props) => {
     </div>
   );
 };
+
 export default ProviderTable;
