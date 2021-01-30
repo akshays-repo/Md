@@ -36,7 +36,11 @@ const Dashboard_Provider = () => {
     return (
       <div className="provider">
         <div className="header">
-          <div></div>
+          <div>
+          <Button type="primary" onClick={showModal} className="button-square">
+              Create a New Provider Type
+            </Button>
+          </div>
 
           <div>
             <Button type="primary" onClick={showModal} className="button-square">
