@@ -15,6 +15,7 @@ const AppointmentTypes = props => {
     setEditId(id);
     setEditData(data);
     store.dispatch({ type: 'OPEN_APPOINTMENT_TYPE_MODAL' });
+    console.log("props",props)
   };
 
   const handleFormSubmission = async values => {

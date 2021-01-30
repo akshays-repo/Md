@@ -1,4 +1,4 @@
-import React, { useState , useReducer } from 'react';
+import React, { useState , useReducer , useEffect } from 'react';
 import { Col, Row, Form, Input, Button, Modal, Select, Space } from 'antd';
 import Dashboard_Content from '..';
 import { connect } from 'react-redux';
@@ -8,7 +8,9 @@ import ProviderCreationForm from './providerCreationForm';
 import ProviderTable from './providerTable';
 import { actionCreator } from '../../../reducers/actionCreator';
 import { store } from '../../../reducers/configureStore';
-const Dashboard_Provider = () => {
+import CreateProviderType from './createProviderType';
+
+const Dashboard_Provider = (props) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const showModal = () => {
@@ -33,6 +35,9 @@ const Dashboard_Provider = () => {
       { key: 7, day: 'Saturday' },
     ];
 
+    useEffect(() =>{
+      console.log("props",props)
+    })
     return (
       <div className="provider">
         <div className="header">
@@ -61,14 +66,17 @@ const Dashboard_Provider = () => {
   };
   return (
     <div className="schedule-time">
-      <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-        <ProviderCreationForm />
+        <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+        <CreateProviderType />
+      </Modal>
+      <Modal title="Basic Modal" footer={false} visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+        <ProviderCreationForm {...props}/>
       </Modal>
       <FossilBreadCrumb currentUrl="/provider" currentPageName="Provider" />
       <Row>
         <Col xs={24} xl={8}>
           <div className="left-side">
-            <AppointmentTypes />
+            <AppointmentTypes  />
           </div>
         </Col>
 
@@ -87,7 +95,7 @@ const Dashboard_Provider = () => {
 const mapStoreToProps = ({ Provider }) => {
   console.log('Store', Provider);
   return {
-    branch: Provider.payload,
+    provider: Provider.payload,
     error: Provider.error,
     message: Provider.message,
     modal: Provider.modal,

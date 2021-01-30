@@ -397,11 +397,9 @@ export const PatientCreationSchema = Yup.object().shape({
 
 
 export const ProviderCreationSchema = Yup.object().shape({
-  fullname: Yup.string().required('Please enter full name'),
+  fullName: Yup.string().required('Please enter full name'),
   email: Yup.string()
     .email('Please enter valid email'),
   address: Yup.string().required('Please enter address'),
   phone: Yup.string().required('Phone number is required'),
-  dob: Yup.date().required('Please select DOB'),
-  zipcode: Yup.date().required('Please enter zipcode'),
 });

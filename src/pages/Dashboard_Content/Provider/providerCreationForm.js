@@ -1,22 +1,21 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { ProviderCreationSchema } from '_utils/Schemas';
 import { TextField } from 'formik-material-ui';
 import { message, Button, Row, Col } from 'antd';
 import { generateForm } from '../../../_utils/formgenerator';
-
+import { getFormData } from '_utils';
 import { PoweroffOutlined } from '@ant-design/icons';
 import callApi from '_utils/callApi';
-const ProviderCreationForm = (props) => {
+const ProviderCreationForm = props => {
   const [loadings, setLoadings] = useState(false);
   const innerForm = useRef();
 
-
   const handleFormSubmission = async values => {
-    console.log("DADADADAD",  props.addProvider())
+    console.log('DADADADAD', props.addProvider);
     try {
-      values = JSON.stringify({ ...values, branchId: 3 });
-        props.addProvider(values);
+      const formData = getFormData({ ...values });
+      props.addProvider(values);
     } catch (err) {
       console.log(err);
     }
@@ -25,7 +24,7 @@ const ProviderCreationForm = (props) => {
   const formField = [
     {
       label: 'Full Name',
-      name: 'fullname',
+      name: 'fullName',
       type: 'text',
     },
     {
@@ -71,7 +70,6 @@ const ProviderCreationForm = (props) => {
               disabled={isSubmitting}
               loading={loadings}
               className="submitbutton"
-              onSubmit={handleSubmit}
             >
               Create a New Provider
             </Button>
