@@ -1,4 +1,5 @@
 import { ProviderState } from '../ComponentState/provider';
+import { message } from 'antd';
 
 /**
  * @param state
@@ -8,6 +9,7 @@ import { ProviderState } from '../ComponentState/provider';
 export const ProviderReducer = (state = ProviderState, action) => {
   switch (action.type) {
     case 'CREATE_PROVIDER':
+      message.success('PROVIDER CREATED SUCCESSFULLY');
       return { error: action.error, payload: action.payload, message: action.message };
     case 'FETCH_PROVIDER':
       return { error: action.error, payload: action.payload, message: action.message };
@@ -17,6 +19,10 @@ export const ProviderReducer = (state = ProviderState, action) => {
       return { error: action.error, payload: action.payload, message: action.message };
     case 'DELETE_PROVIDER':
       return { error: action.error, payload: action.payload, message: action.message };
+      case 'OPEN_PROVIDER_CREATE_MODAL':
+        return { ...state, modal: true };
+      case 'CLOSE_PROVIDER_CREATE_MODAL':
+        return { ...state, modal: false };
     default:
       return state;
   }

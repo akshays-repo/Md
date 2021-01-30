@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect} from 'react';
 import { Table, Modal, Tag, Space, Input, Button, Radio, Select, Form } from 'antd';
 import AddAppointmentTime from './addAppointmentTime';
 
-const ProviderTable = () => {
+const ProviderTable = (props) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const showModal = () => {
@@ -16,17 +16,22 @@ const ProviderTable = () => {
   const handleCancel = () => {
     setIsModalVisible(false);
   };
+   
+  useEffect(() => {
+    console.log('poooops', props)
+  })
+
   const columns = [
     {
-      title: 'Provider',
-      dataIndex: 'provider',
-      key: 'provider',
+      title: 'Full Name',
+      dataIndex: 'fullName',
+      key: 'fullName',
       render: text => <a>{text}</a>,
     },
     {
-      title: 'Specialist',
-      dataIndex: 'specialist',
-      key: 'specialist',
+      title: 'Email',
+      dataIndex: 'email',
+      key: 'email',
     },
     {
       title: 'Work Hour',
@@ -92,7 +97,7 @@ const ProviderTable = () => {
   ];
   return (
     <div>
-      <Table columns={columns} dataSource={data} />
+      <Table columns={columns} dataSource={props.provider.users} />
       <Modal width={800}  title="Add time for Joseph Silverstein CSAP FNP PA-C" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
         <AddAppointmentTime />
       </Modal>

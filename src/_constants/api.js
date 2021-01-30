@@ -25,4 +25,5 @@ export const backend_api = {
   DELETE_PATIENT: '/api/backend/v1/patiant',
   USER_LOGIN: '/api/backend/v1/users/login',
   CREATE_PROVIDER:' /api/backend/v1/users/register',
+  FETCH_PROVIDER:'/api/backend/v1/providers',
 };

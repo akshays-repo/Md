@@ -13,6 +13,11 @@ import CreateProviderType from './createProviderType';
 const Dashboard_Provider = (props) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
+
+  useEffect(() => {
+    props.fetchProvider({ branchId: 3, page: 1, limit: 20 });
+  }, [props.modal, props.modal1, props.deleted, props.edited]);
+
   const showModal = () => {
     setIsModalVisible(true);
   };
@@ -35,22 +40,19 @@ const Dashboard_Provider = (props) => {
       { key: 7, day: 'Saturday' },
     ];
 
-    useEffect(() =>{
-      console.log("props",props)
-    })
     return (
       <div className="provider">
         <div className="header">
           <div>
-          <Button type="primary" onClick={showModal} className="button-square">
+          <Button type="primary"  className="button-square">
               Create a New Provider Type
-            </Button>
+           </Button>
           </div>
 
           <div>
-            <Button type="primary" onClick={showModal} className="button-square">
+            <Button type="primary" onClick={() => store.dispatch({ type: 'OPEN_PROVIDER_CREATE_MODAL' })} className="button-square">
               Create a New Provider
-            </Button>
+            </ Button>
           </div>
         </div>
 
@@ -66,10 +68,8 @@ const Dashboard_Provider = (props) => {
   };
   return (
     <div className="schedule-time">
-        <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-        <CreateProviderType />
-      </Modal>
-      <Modal title="Basic Modal" footer={false} visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+
+      <Modal title="Basic Modal" footer={false} visible={props.modal}  onCancel={() =>  store.dispatch({ type: 'CLOSE_PROVIDER_CREATE_MODAL' })}>
         <ProviderCreationForm {...props}/>
       </Modal>
       <FossilBreadCrumb currentUrl="/provider" currentPageName="Provider" />
@@ -84,7 +84,7 @@ const Dashboard_Provider = (props) => {
           <div className="right-side">
             <div>{HeaderSection()}</div>
             <div>
-              <ProviderTable />
+              <ProviderTable  {...props} />
             </div>
           </div>
         </Col>

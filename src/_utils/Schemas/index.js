@@ -401,6 +401,5 @@ export const ProviderCreationSchema = Yup.object().shape({
   fullName: Yup.string().required('Please enter full name'),
   email: Yup.string()
     .email('Please enter valid email'),
-  address: Yup.string().required('Please enter address'),
   phone: Yup.string().required('Phone number is required'),
 });
