@@ -17,7 +17,6 @@ const ProviderTable = (props) => {
 
   useEffect(() =>{
     setAppointmentTypes(store.getState().AppointmentType.payload)
-    console.log("ssssssssss",appointmentTypes)
   }, )
 
 
@@ -38,7 +37,6 @@ const ProviderTable = (props) => {
   const handleEditModal = (id , data) =>{
     setEditData(data);
     setEditId(id)
-    store.dispatch({ type: 'OPEN_PROVIDER_CREATE_MODAL' })
     seteditModalVisible(true)
 
   }
@@ -109,7 +107,8 @@ const ProviderTable = (props) => {
     },
     {
       key: 'action',
-      render: (text, record) => <Space size="middle"> 
+      render: (text, record) => 
+      <Space size="middle"> 
       <button  className="edit-button" onClick={() =>handleEditModal(record.id , record) }> Edit </button> 
       <button className="delete-button"> Delete</button>
       </Space>,
@@ -147,7 +146,7 @@ const ProviderTable = (props) => {
         <AddAppointmentTime  {...props}/>
       </Modal>
       <Modal footer={false} width={800}  title="" 
-      visible={props.modal} onOk={handleOk} onCancel={handleCancel}>
+      visible={editModalVisible} onOk={handleOk} onCancel={handleCancel}>
         <ProviderCreationForm id={editId} values={editData}  {...props}/>
       </Modal>
     </div>

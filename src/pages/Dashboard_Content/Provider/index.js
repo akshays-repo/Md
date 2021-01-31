@@ -95,8 +95,8 @@ const mapDispatchToProps = dispatch => ({
     dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_PROVIDER', param })),
   addProvider: values =>
     dispatch(actionCreator({ method: 'POST', action_type: 'CREATE_PROVIDER', values })),
-  editProvider: (values) =>
-    dispatch(actionCreator({ method: 'PUT', action_type: 'EDIT_PROVIDER',  values })),
+  editProvider: (id , values) =>
+    dispatch(actionCreator({ method: 'PUT', action_type: 'EDIT_PROVIDER',  id, values })),
   deleteProvider: id =>
     dispatch(actionCreator({ method: 'DELETE', action_type: 'DELETE_PROVIDER', id })),
   filterProvider: param =>

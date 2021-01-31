@@ -3,7 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { ProviderCreationSchema } from '_utils/Schemas';
 import { Button, Row, Col, message } from 'antd';
 import { generateForm } from '../../../_utils/formgenerator';
-import { getFormData , getFormDataA } from '_utils';
+import { getFormData, getFormDataA } from '_utils';
 import { store } from '../../../reducers/configureStore';
 
 const ProviderCreationForm = props => {
@@ -11,22 +11,23 @@ const ProviderCreationForm = props => {
   const innerForm = useRef();
 
   const handleFormSubmission = async values => {
-    let data = await getFormDataA({ ...values })
+    let datas= delete values.provider_type
+    let data = await getFormDataA({ ...values });
     try {
       if (props.id) {
-        await props.editProvider(data);
+        await props.editProvider(props.id, data);
       } else {
         await props.addProvider(data);
       }
       store.dispatch({ type: 'CLOSE_PROVIDER_CREATE_MODAL' });
     } catch (err) {
-      console.log("edit error",err);
+      console.log('edit error', err);
     }
   };
 
   useEffect(() => {
     console.log('POPOPOP', props);
-  }, []);
+  },);
 
   const formField = [
     {
@@ -67,7 +68,7 @@ const ProviderCreationForm = props => {
       >
         {({ handleSubmit, touched, errors, isSubmitting }) => (
           <Form
-            style={{ backgroundColor: '#f7f8f8' }}
+          
             className="login__form"
             handleSubmit={handleSubmit}
           >
@@ -80,7 +81,7 @@ const ProviderCreationForm = props => {
               loading={loadings}
               className="submitbutton"
             >
-              Create a New Provider
+              {props.id ? ' Edit a Provider' : ' Create a New Provider'}
             </Button>
           </Form>
         )}
