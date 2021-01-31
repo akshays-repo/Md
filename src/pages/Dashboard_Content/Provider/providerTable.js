@@ -1,25 +1,24 @@
-import React, { useState , useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { Table, Modal, Tag, Space, Input, Button, Radio, Select, Form } from 'antd';
 import AddAppointmentTime from './addAppointmentTime';
 import { store } from '../../../reducers/configureStore';
 import ProviderCreationForm from './providerCreationForm';
 import { set } from 'store';
 
-
-const ProviderTable = (props) => {
+const ProviderTable = props => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [editModalVisible, seteditModalVisible] = useState(false);
-  
 
   const [editId, setEditId] = useState(null);
   const [editData, setEditData] = useState('');
 
-  useEffect(() =>{
-    console.log("store.dispatch",store.getState());
-  }, [])
+  useEffect(() => {
+    console.log('store.dispatch', store.getState());
+  }, []);
 
-
-  const showModal = () => {
+  const showModal = (id, data) => {
+    setEditId(id);
+    setEditData(data);
     setIsModalVisible(true);
   };
 
@@ -28,20 +27,21 @@ const ProviderTable = (props) => {
   };
 
   const handleCancel = () => {
-    store.dispatch({ type: 'CLOSE_PROVIDER_CREATE_MODAL' })
-    seteditModalVisible(false)
+    store.dispatch({ type: 'CLOSE_PROVIDER_CREATE_MODAL' });
+    setIsModalVisible(false);
+    seteditModalVisible(false);
   };
-  
-  const handleEditModal = (id , data) =>{
+
+  const handleEditModal = (id, data) => {
     setEditData(data);
-    setEditId(id)
-    store.dispatch({ type: 'OPEN_PROVIDER_CREATE_MODAL' })
-    seteditModalVisible(true)
-  }
+    setEditId(id);
+    store.dispatch({ type: 'OPEN_PROVIDER_CREATE_MODAL' });
+    seteditModalVisible(true);
+  };
 
   useEffect(() => {
-    console.log('poooops', props)
-  })
+    console.log('poooops', props);
+  });
 
   const columns = [
     {
@@ -61,7 +61,9 @@ const ProviderTable = (props) => {
       key: 'workhour',
       render: (text, record) => (
         <Space size="middle">
-          <button onClick={showModal} className="edit-button">Edit</button>
+          <button onClick={() => showModal(record.id, record)} className="edit-button">
+            Edit
+          </button>
         </Space>
       ),
     },
@@ -73,15 +75,15 @@ const ProviderTable = (props) => {
         <Space size="middle">
           <Form>
             <Form.Item label="">
-                <Select className="selectBox">
-                  <Select.Option value="demo">Demo</Select.Option>
-                  <Select.Option value="demo">Demo</Select.Option>{' '}
-                  <Select.Option value="demo">Demo</Select.Option>{' '}
-                  <Select.Option value="demo">Demo</Select.Option>{' '}
-                  <Select.Option value="demo">Demo</Select.Option>{' '}
-                  <Select.Option value="demo">Demo</Select.Option>{' '}
-                  <Select.Option value="demo">Demo</Select.Option>
-                </Select>
+              <Select className="selectBox">
+                <Select.Option value="demo">Demo</Select.Option>
+                <Select.Option value="demo">Demo</Select.Option>{' '}
+                <Select.Option value="demo">Demo</Select.Option>{' '}
+                <Select.Option value="demo">Demo</Select.Option>{' '}
+                <Select.Option value="demo">Demo</Select.Option>{' '}
+                <Select.Option value="demo">Demo</Select.Option>{' '}
+                <Select.Option value="demo">Demo</Select.Option>
+              </Select>
             </Form.Item>
           </Form>
         </Space>
@@ -94,10 +96,15 @@ const ProviderTable = (props) => {
     },
     {
       key: 'action',
-      render: (text, record) => <Space size="middle"> 
-      <button  className="edit-button" onClick={() =>handleEditModal(record.id , record) }> Edit </button> 
-      <button className="delete-button"> Delete</button>
-      </Space>,
+      render: (text, record) => (
+        <Space size="middle">
+          <button className="edit-button" onClick={() => handleEditModal(record.id, record)}>
+            {' '}
+            Edit{' '}
+          </button>
+          <button className="delete-button"> Delete</button>
+        </Space>
+      ),
     },
   ];
 
@@ -127,13 +134,25 @@ const ProviderTable = (props) => {
   return (
     <div>
       <Table columns={columns} dataSource={props.provider.users} />
-      <Modal footer={false} width={800}  title="" 
-      visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-        <AddAppointmentTime  {...props}/>
+      <Modal
+        footer={false}
+        width={800}
+        title={`Add time for ${editData.fullName}`}
+        visible={isModalVisible}
+        onOk={handleOk}
+        onCancel={handleCancel}
+      >
+        <AddAppointmentTime id={editId} {...props} />
       </Modal>
-      <Modal footer={false} width={800}  title="" 
-      visible={props.modal} onOk={handleOk} onCancel={handleCancel}>
-        <ProviderCreationForm id={editId} values={editData}  {...props}/>
+      <Modal
+        footer={false}
+        width={800}
+        title=""
+        visible={props.modal}
+        onOk={handleOk}
+        onCancel={handleCancel}
+      >
+        <ProviderCreationForm id={editId} values={editData} {...props} />
       </Modal>
     </div>
   );

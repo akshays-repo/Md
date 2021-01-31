@@ -24,7 +24,9 @@ export const backend_api = {
   EDIT_PATIENT: '/api/backend/v1/users/patiant',
   DELETE_PATIENT: '/api/backend/v1/users/patiant',
   USER_LOGIN: '/api/backend/v1/users/login',
-  CREATE_PROVIDER:' /api/backend/v1/users/register',
-  FETCH_PROVIDER:'/api/backend/v1/providers',
-  EDIT_PROVIDER:'/api/backend/v1/users/7'
+  CREATE_PROVIDER: ' /api/backend/v1/users/register',
+  FETCH_PROVIDER: '/api/backend/v1/providers',
+  EDIT_PROVIDER: '/api/backend/v1/users/7',
+  FETCH_SCHEDULE: '/api/backend/v1/newshedule',
+  CREATE_SCHEDULE: '/api/backend/v1/newshedule',
 };
