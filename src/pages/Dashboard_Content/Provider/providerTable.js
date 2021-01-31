@@ -122,7 +122,7 @@ const handleStatus = async ( record , values) =>{
                mode="multiple"
               style={{ width: '100%' }}
               placeholder="Select the type"
-              defaultValue={record?.provider_and_types?.map((type) => type.appointment_type?.name)}
+              defaultValue={record?.provider_and_types?.map((type) => type.appointment_type?.name !== null ? type.appointment_type?.name : null)}
               onChange={(e) => handleApptChange(record, e)}
               style={{width:"200px"}}
             >
@@ -196,7 +196,7 @@ const handleStatus = async ( record , values) =>{
         onOk={handleOk}
         onCancel={handleCancel}
       >
-        <AddAppointmentTime {...props} />
+      <AddAppointmentTime {...props} />
       </Modal>
       <Modal
         footer={false}
@@ -211,6 +211,7 @@ const handleStatus = async ( record , values) =>{
     </div>
   );
 };
+
 const mapStoreToProps = ({ AppointmentType }) => {
   return {
     appointment_type: AppointmentType.payload,

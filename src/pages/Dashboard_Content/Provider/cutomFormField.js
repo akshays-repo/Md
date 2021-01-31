@@ -1,59 +1,145 @@
-import React, { useState } from 'react'
-import { Menu, Dropdown } from 'antd';
-import { DownOutlined, UserOutlined } from '@ant-design/icons';
+import React, { useState, useRef, useEffect } from 'react';
+import { Menu, Dropdown, Button, Switch } from 'antd';
+import { DownOutlined, UserOutlined, PlusOutlined } from '@ant-design/icons';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { connect } from 'react-redux';
+import { actionCreator } from '../../../reducers/actionCreator';
 
-const CustomFormField = () => {
-    const [field , setField] = useState()
-    const menuItems = [
-        {
-          key: 'active',
-          title: 'Active',
-        },
-        {
-          key: 'hold',
-          title: 'Hold',
-        },
-      ];
+const CustomFormField = (props) => {
+  const [field, setField] = useState();
+  const [addNewField, setAddNewField] = useState([]);
+  const [loadings, setLoadings] = useState(false);
+  const innerForm = useRef();
 
-      
-      const handleMenuClick = () =>{
-console.log("daada")
-      }
-    const menu = <Menu items={menuItems} onClick={handleMenuClick} />;
+  useEffect(() => {
+    let param = '3'
+    props.fetchCustomForm(param);
+    console.log(props.CustomForm)
+  }, [])
+  const handleMenuClick = e => {
+    console.log('keyyykeyyy', e);
+    let text = e.key;
+    setAddNewField([...addNewField, text]);
+    console.log('keyyykeyyy', addNewField);
+  };
 
-return(
+  const menu = (
+    <Menu onClick={handleMenuClick}>
+      <Menu.Item key="text" icon={<UserOutlined />}>
+        Text
+      </Menu.Item>
+      <Menu.Item key="note" icon={<UserOutlined />}>
+        Note
+      </Menu.Item>
+      <Menu.Item key="checkbox" icon={<UserOutlined />}>
+        Check box
+      </Menu.Item>
+      <Menu.Item key="dropdown" icon={<UserOutlined />}>
+        Drop Down List
+      </Menu.Item>
+      <Menu.Item key="date" icon={<UserOutlined />}>
+        Date
+      </Menu.Item>
+      <Menu.Item key="date" icon={<UserOutlined />}>
+        Number
+      </Menu.Item>
+    </Menu>
+  );
+
+  const handleFormSubmission = async values => {
+    console.log('valueee', values);
+    console.log('valueee props', props);
+    let contentType = 'JSON'
+    await props.addCustomForm(JSON.stringify(values), contentType);
+  };
+
+  return (
     <div>
-        CUSTOM FORM FIELD
-
+      CUSTOM FORM FIELD
+      <div>
         <div>
-        <div>
-        This is what FossilMd asks your patients by default.
-        You can create additional questions and fields by clicking on the plus sign below.
-
-
-        <Dropdown
-        overlay={menu}
-        trigger={['click']}
-
-      >
-        <button>Create a New Field</button>
-      </Dropdown>
-
-      This is what FossilMd asks your patients by default.
-        You can create additional questions and fields by clicking on the plus sign below.
-        This is what FossilMd asks your patients by default.
-        You can create additional questions and fields by clicking on the plus sign below.
-        This is what FossilMd asks your patients by default.
-        You can create additional questions and fields by clicking on the plus sign below.
-
-
-
+          This is what FossilMd asks your patients by default. You can create additional questions
+          and fields by clicking on the plus sign below.
+          {addNewField.map(type => {
+            return (
+              <div>
+                <Formik
+                  enableReinitialize={true}
+                  initialValues={{
+                    hospital_id: parseInt(localStorage.getItem('hospital_id')),
+                    formData: [
+                      {
+                        custom_types: type,
+                        required: true,
+                        Key_name: '',
+                        
+                      },
+                    ],
+                  }}
+                  onSubmit={handleFormSubmission}
+                  innerRef={innerForm}>
+                  {({ handleSubmit ,  }) => (
+                    <Form className="login__form" handleSubmit={handleSubmit}>
+                        <Field type="text" name="formData[0].Key_name" placeholder={type} />
+                        <Switch
+                          checkedChildren="Required"
+                          unCheckedChildren="Not Required"
+                          name="required"
+                          defaultChecked
+                        />
+                      <Button
+                        className="mt-5"
+                        htmlType="submit"
+                        className="submitbutton"
+                      >
+                        submit
+                      </Button>
+                    </Form>
+                  )}
+                </Formik>
+              </div>
+            );
+          })}
+          <Dropdown overlay={menu}>
+            <Button>
+              Add New Field <PlusOutlined />
+            </Button>
+          </Dropdown>
         </div>
-
-
-
-        </div>
+      </div>
     </div>
-)
-}
-export default CustomFormField
+  );
+};
+
+const mapStoreToProps = ({  CustomForm }) => {
+    console.log('Store CustomForm', CustomForm);
+    return {
+      CustomForm: CustomForm.payload,
+      CustomFormerror: CustomForm.error,
+      CustomFormmessage: CustomForm.message,
+      CustomFormmodal: CustomForm.modal,
+      CustomFormmodal1: CustomForm.modal1,
+      CustomFormchanged:CustomForm.changed,
+    };
+  };
+
+
+const mapDispatchToProps = dispatch => ({
+  fetchCustomForm: id =>
+    dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_CUSTOMFORM', id })),
+  addCustomForm: (values, contentType) =>
+    dispatch(actionCreator({ method: 'POST', action_type: 'CREATE_CUSTOMFORM', values , contentType })),
+  editCustomForm: (id, values) =>
+    dispatch(actionCreator({ method: 'PUT', action_type: 'EDIT_PROVIDER', id, values })),
+  deleteCustomForm: id =>
+    dispatch(actionCreator({ method: 'DELETE', action_type: 'DELETE_PROVIDER', id })),
+  filterCustomForm: param =>
+    dispatch(
+      actionCreator({
+        method: 'GET',
+        action_type: 'FILTER_PROVIDER',
+        param,
+      }),
+    ),
+});
+export default connect(mapStoreToProps, mapDispatchToProps)(CustomFormField);
