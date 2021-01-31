@@ -11,12 +11,11 @@ const ProviderCreationForm = props => {
   const innerForm = useRef();
 
   const handleFormSubmission = async values => {
-    let datas= delete values.provider_type
     let data = await getFormDataA({ ...values  , userTypeId: 4 });
     try {
       if (props.id) {
         await props.editProvider(props.id, data);
-        store.dispatch({ type: 'CLOSE_PROVIDER_CREATE_MODAL' });
+        store.dispatch({ type: 'CLOSE_PROVIDER_EDIT_MODAL' });
       } else {
         await props.addProvider(data);
         store.dispatch({ type: 'CLOSE_PROVIDER_CREATE_MODAL' });
@@ -27,9 +26,6 @@ const ProviderCreationForm = props => {
     }
   };
 
-  useEffect(() => {
-    console.log('POPOPOP', props);
-  },);
 
   const formField = [
     {

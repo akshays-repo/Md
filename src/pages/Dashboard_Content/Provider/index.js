@@ -9,6 +9,7 @@ import ProviderTable from './providerTable';
 import { actionCreator } from '../../../reducers/actionCreator';
 import { store } from '../../../reducers/configureStore';
 import CreateProviderType from './createProviderType';
+import CustomFormField from './cutomFormField';
 
 const Dashboard_Provider = (props) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -19,21 +20,13 @@ const Dashboard_Provider = (props) => {
   }, [props.changed]);
 
   const HeaderSection = () => {
-    const weekDays = [
-      { key: 1, day: 'Sunday' },
-      { key: 2, day: 'Monday' },
-      { key: 3, day: 'Tuesday' },
-      { key: 4, day: 'Wednesday' },
-      { key: 5, day: 'Thursday' },
-      { key: 6, day: 'Friday' },
-      { key: 7, day: 'Saturday' },
-    ];
-
     return (
       <div className="provider">
         <div className="header">
           <div>
-
+          <Button type="primary" onClick={() => store.dispatch({ type: 'OPEN_CUSTOMFORM_CREATE_MODAL' })} className="button-square">
+            Custom Form 
+            </ Button>
           </div>
 
           <div>
@@ -55,11 +48,17 @@ const Dashboard_Provider = (props) => {
   };
   return (
     <div className="schedule-time">
+      <Modal title="" footer={false} visible={props.CustomFormmodal}  
+      onCancel={() =>  store.dispatch({ type: 'CLOSE_CUSTOMFORM_CREATE_MODAL' })}>
+        <CustomFormField {...props}/>
+      </Modal>
 
-      <Modal title="Basic Modal" footer={false} visible={props.modal}  onCancel={() =>  store.dispatch({ type: 'CLOSE_PROVIDER_CREATE_MODAL' })}>
+      <Modal title="" footer={false} visible={props.modal}  onCancel={() =>  store.dispatch({ type: 'CLOSE_PROVIDER_CREATE_MODAL' })}>
         <ProviderCreationForm {...props}/>
       </Modal>
+
       <FossilBreadCrumb currentUrl="/provider" currentPageName="Provider" />
+      
       <Row>
         <Col xs={24} xl={8}>
           <div className="left-side">
@@ -79,17 +78,27 @@ const Dashboard_Provider = (props) => {
     </div>
   );
 };
-const mapStoreToProps = ({ Provider }) => {
+const mapStoreToProps = ({ Provider , CustomForm }) => {
   console.log('Store', Provider);
+  console.log('Store CustomForm', CustomForm);
   return {
     provider: Provider.payload,
     error: Provider.error,
     message: Provider.message,
     modal: Provider.modal,
     modal1: Provider.modal1,
-    changed:Provider.changed
+    changed:Provider.changed,
+
+    CustomForm: CustomForm.payload,
+    CustomFormerror: CustomForm.error,
+    CustomFormmessage: CustomForm.message,
+    CustomFormmodal: CustomForm.modal,
+    CustomFormmodal1: CustomForm.modal1,
+    CustomFormchanged:CustomForm.changed,
   };
 };
+
+
 const mapDispatchToProps = dispatch => ({
   fetchProvider: param =>
     dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_PROVIDER', param })),

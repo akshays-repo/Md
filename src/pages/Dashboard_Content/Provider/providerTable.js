@@ -1,24 +1,23 @@
-import React, { useState , useEffect} from 'react';
-import { Table, Modal, Tag, Space, Input, Button, Radio, Select, Form } from 'antd';
+import React, { useState, useEffect } from 'react';
+import { Table, Modal, Tag, Space, Input, Button, Radio, Select, Form , } from 'antd';
 import AddAppointmentTime from './addAppointmentTime';
 import { store } from '../../../reducers/configureStore';
 import ProviderCreationForm from './providerCreationForm';
 import { connect } from 'react-redux';
 import { getFormDataA } from '_utils';
+import { valuesIn } from 'lodash';
 
-
-const ProviderTable = (props) => {
+const ProviderTable = props => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [editModalVisible, seteditModalVisible] = useState(false);
-  const [appointmentTypes , setAppointmentTypes] = useState([])
-
+  const [appointmentTypes, setAppointmentTypes] = useState([]);
+  const [selectedItems, setSelectedItem] = useState([]);
   const [editId, setEditId] = useState(null);
   const [editData, setEditData] = useState('');
 
-  useEffect(() =>{
-    setAppointmentTypes(store.getState().AppointmentType.payload)
-  }, )
-
+  useEffect(() => {
+    setAppointmentTypes(store.getState().AppointmentType.payload);
+  });
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -29,43 +28,69 @@ const ProviderTable = (props) => {
   };
 
   const handleCancel = () => {
-    store.dispatch({ type: 'CLOSE_PROVIDER_CREATE_MODAL' })
-    seteditModalVisible(false)
-    setIsModalVisible(false)
+    store.dispatch({ type: 'CLOSE_PROVIDER_EDIT_MODAL' });
+    seteditModalVisible(false);
+    setIsModalVisible(false);
   };
-  
-  const handleEditModal = (id , data) =>{
+
+  const handleEditModal = (id, data) => {
     setEditData(data);
-    setEditId(id)
-    seteditModalVisible(true)
+    setEditId(id);
+    store.dispatch({ type: 'OPEN_PROVIDER_EDIT_MODAL' });
+  };
 
-  }
-
-  const handleApptChange = async values => {
+  const handleApptChange = async (record, values) => {
+    let currentValue = []
+    record.provider_and_types.map((type) => currentValue.push(type.appointment_type.id))
+    let DeletedArray =  currentValue.filter(e => !values.includes(e));
     let intValues = {
-      appointment_type:values,
-      userTypeId: 4
-    }
-    console.log("intValuesz",intValues)
+      userTypeId: 4,
+      id: record.id,
+      fullName: record.fullName,
+      status: record.status,
+      branchId: record.branchId,
+      provider_typeId: record.provider_typeId,
+    };
+    console.log("ISARRAY",Array.isArray(intValues.appointment_type))
     try {
-      await props.editProvider(getFormDataA({ ...intValues}));
+      let sentinData = getFormDataA({...intValues})
+      values.map((va,i)=>sentinData.append('appointment_type[]',va))
+    await props.editProvider(record.id,sentinData);
     } catch (err) {
-      console.log("edit error",err);
+      console.log('edit error', err);
     }
   };
 
-  useEffect(() => {
-    console.log('poooops', props)
-  })
+const handleStatus = async ( record , values) =>{
+  let intValues = {
+    appointment_type: record.appointment_type,
+    userTypeId: 4,
+    id: record.id,
+    fullName: record.fullName,
+    status: values,
+    branchId: record.branchId,
+    provider_typeId: record.provider_typeId,
+  };
+
+  try {
+    await props.editProvider(record.id, getFormDataA({ ...intValues }));
+  } catch (err) {
+    console.log('error', err);
+  }
+}
 
   const columns = [
     {
       title: 'Full Name',
       dataIndex: 'fullName',
       key: 'fullName',
-      render: (text, record) => <span>{text}<br/> 
-      <span style={{color:"ButtonShadow"}}>{record.provider_type.name}</span>  
-      </span>,
+      render: (text, record) => (
+        <span>
+          {text}
+          <br />
+          <span style={{ color: 'ButtonShadow' }}>{record.provider_type.name}</span>
+        </span>
+      ),
     },
     {
       title: 'Email',
@@ -78,7 +103,9 @@ const ProviderTable = (props) => {
       key: 'workhour',
       render: (text, record) => (
         <Space size="middle">
-          <button onClick={showModal} className="edit-button">Edit</button>
+          <button onClick={showModal} className="edit-button">
+            Edit
+          </button>
         </Space>
       ),
     },
@@ -86,33 +113,52 @@ const ProviderTable = (props) => {
       title: 'Appt Type',
       dataIndex: 'appt',
       key: 'appt',
-      render: (text, record) => (
-        <Space size="middle">
-          <Form>
-            <Form.Item label="">
-                <Select className="selectBox" onChange={handleApptChange}  mode="multiple">
-                {appointmentTypes.map((type) =>{return(
-                  <Select.Option value={type.id}>{type.name}</Select.Option>
-                )
-                })}
-                </Select>
-            </Form.Item>
-          </Form>
-        </Space>
-      ),
+      render: (text, record) => {
+       
+
+        return (
+          <Space size="middle">
+            <Select
+               mode="multiple"
+              style={{ width: '100%' }}
+              placeholder="Select the type"
+              defaultValue={record?.provider_and_types?.map((type) => type.appointment_type?.name)}
+              onChange={(e) => handleApptChange(record, e)}
+              style={{width:"200px"}}
+            >
+            {appointmentTypes.map((type) =>(
+              <Select.Option key={type.id}>{type.name}</Select.Option>
+            ))}
+            </Select>
+          </Space>
+        );
+      },
     },
     {
       title: 'Status',
       key: 'status',
-      render: (text, record) => <Space size="middle">{record.status}</Space>,
+      render: (text, record) => 
+      <Space size="middle">
+      <Select 
+       defaultValue={record.status}
+       onChange={(record,e) => handleStatus(e, record)}>
+      <Select.Option value="active">Active</Select.Option>
+      <Select.Option value="hold">Hold</Select.Option>
+    </Select>
+
+      </Space>,
     },
     {
       key: 'action',
-      render: (text, record) => 
-      <Space size="middle"> 
-      <button  className="edit-button" onClick={() =>handleEditModal(record.id , record) }> Edit </button> 
-      <button className="delete-button"> Delete</button>
-      </Space>,
+      render: (text, record) => (
+        <Space size="middle">
+          <button className="edit-button" onClick={() => handleEditModal(record.id, record)}>
+            {' '}
+            Edit{' '}
+          </button>
+          <button className="delete-button"> Delete</button>
+        </Space>
+      ),
     },
   ];
 
@@ -142,13 +188,25 @@ const ProviderTable = (props) => {
   return (
     <div>
       <Table columns={columns} dataSource={props.provider.users} />
-      <Modal footer={false} width={800}  title="" 
-      visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-        <AddAppointmentTime  {...props}/>
+      <Modal
+        footer={false}
+        width={800}
+        title=""
+        visible={isModalVisible}
+        onOk={handleOk}
+        onCancel={handleCancel}
+      >
+        <AddAppointmentTime {...props} />
       </Modal>
-      <Modal footer={false} width={800}  title="" 
-      visible={editModalVisible} onOk={handleOk} onCancel={handleCancel}>
-        <ProviderCreationForm id={editId} values={editData}  {...props}/>
+      <Modal
+        footer={false}
+        width={800}
+        title=""
+        visible={props.modal1}
+        onOk={handleOk}
+        onCancel={handleCancel}
+      >
+        <ProviderCreationForm id={editId} values={editData} {...props} />
       </Modal>
     </div>
   );
@@ -161,4 +219,3 @@ const mapStoreToProps = ({ AppointmentType }) => {
   };
 };
 export default connect(mapStoreToProps)(ProviderTable);
-

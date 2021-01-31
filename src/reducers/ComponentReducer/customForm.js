@@ -1,4 +1,4 @@
-import { ProviderState } from '../ComponentState/provider';
+import { CustomFormState } from '../ComponentState/customForm';
 import { message } from 'antd';
 
 /**
@@ -6,27 +6,27 @@ import { message } from 'antd';
  * @param action
  */
 
-export const ProviderReducer = (state = ProviderState, action) => {
+export const CustomFormReducer = (state = CustomFormState, action) => {
   switch (action.type) {
-    case 'CREATE_PROVIDER':
-      message.success('PROVIDER CREATED SUCCESSFULLY');
+    case 'CREATE_CUSTOMFORM':
+      message.success('CUSTOMFORM CREATED SUCCESSFULLY');
       return { error: action.error, payload: action.payload, message: action.message ,changed: true };
-    case 'FETCH_PROVIDER':
+    case 'FETCH_CUSTOMFORM':
       return { error: action.error, payload: action.payload, message: action.message };
-    case 'EDIT_PROVIDER':
-      message.success('PROVIDER EDITED SUCCESSFULLY');
+    case 'EDIT_CUSTOMFORM':
+      message.success('CUSTOMFORM EDITED SUCCESSFULLY');
       return { error: action.error, payload: action.payload, message: action.message, changed: true };
-    case 'FILTER_PROVIDER':
+    case 'FILTER_CUSTOMFORM':
       return { error: action.error, payload: action.payload, message: action.message };
-    case 'DELETE_PROVIDER':
+    case 'DELETE_CUSTOMFORM':
       return { error: action.error, payload: action.payload, message: action.message };
-      case 'OPEN_PROVIDER_CREATE_MODAL':
+      case 'OPEN_CUSTOMFORM_CREATE_MODAL':
         return { ...state, modal: true };
-      case 'CLOSE_PROVIDER_CREATE_MODAL':
+      case 'CLOSE_CUSTOMFORM_CREATE_MODAL':
         return { ...state, modal: false };
-        case 'OPEN_PROVIDER_EDIT_MODAL':
+        case 'OPEN_CUSTOMFORM_EDIT_MODAL':
         return { ...state, modal1: true };
-      case 'CLOSE_PROVIDER_EDIT_MODAL':
+      case 'CLOSE_CUSTOMFORM_EDIT_MODAL':
         return { ...state, modal1: false };
     default:
       return state;
