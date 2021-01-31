@@ -12,14 +12,16 @@ const ProviderCreationForm = props => {
 
   const handleFormSubmission = async values => {
     let datas= delete values.provider_type
-    let data = await getFormDataA({ ...values });
+    let data = await getFormDataA({ ...values  , userTypeId: 4 });
     try {
       if (props.id) {
         await props.editProvider(props.id, data);
+        store.dispatch({ type: 'CLOSE_PROVIDER_CREATE_MODAL' });
       } else {
         await props.addProvider(data);
+        store.dispatch({ type: 'CLOSE_PROVIDER_CREATE_MODAL' });
       }
-      store.dispatch({ type: 'CLOSE_PROVIDER_CREATE_MODAL' });
+     
     } catch (err) {
       console.log('edit error', err);
     }

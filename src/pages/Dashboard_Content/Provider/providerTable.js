@@ -43,11 +43,12 @@ const ProviderTable = (props) => {
 
   const handleApptChange = async values => {
     let intValues = {
-      appointment_type:values
+      appointment_type:values,
+      userTypeId: 4
     }
     console.log("intValuesz",intValues)
     try {
-      await props.editProvider(getFormDataA({ ...intValues }));
+      await props.editProvider(getFormDataA({ ...intValues}));
     } catch (err) {
       console.log("edit error",err);
     }
