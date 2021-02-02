@@ -28,7 +28,7 @@ export const backend_api = {
   FETCH_PROVIDER:'/api/backend/v1/providers',
   EDIT_PROVIDER:'/api/backend/v1/users',
   CREATE_CUSTOMFORM:'/api/backend/v1/custom_form',
-  FETCH_CUSTOMFORM:'/api/backend/v1/custom_form/'
-  
-
+  FETCH_CUSTOMFORM:'/api/backend/v1/custom_form/',
+  FETCH_SCHEDULE: '/api/backend/v1/newshedule',
+  CREATE_SCHEDULE: '/api/backend/v1/newshedule',
 };

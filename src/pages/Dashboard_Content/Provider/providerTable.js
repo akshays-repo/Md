@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Modal, Tag, Space, Input, Button, Radio, Select, Form , } from 'antd';
+import { Table, Modal, Tag, Space, Input, Button, Radio, Select, Form } from 'antd';
 import AddAppointmentTime from './addAppointmentTime';
 import { store } from '../../../reducers/configureStore';
 import ProviderCreationForm from './providerCreationForm';
@@ -12,6 +12,7 @@ const ProviderTable = props => {
   const [editModalVisible, seteditModalVisible] = useState(false);
   const [appointmentTypes, setAppointmentTypes] = useState([]);
   const [selectedItems, setSelectedItem] = useState([]);
+
   const [editId, setEditId] = useState(null);
   const [editData, setEditData] = useState('');
 
@@ -19,7 +20,9 @@ const ProviderTable = props => {
     setAppointmentTypes(store.getState().AppointmentType.payload);
   });
 
-  const showModal = () => {
+  const showModal = (id, data) => {
+    setEditId(id);
+    setEditData(data);
     setIsModalVisible(true);
   };
 
@@ -103,7 +106,7 @@ const handleStatus = async ( record , values) =>{
       key: 'workhour',
       render: (text, record) => (
         <Space size="middle">
-          <button onClick={showModal} className="edit-button">
+          <button onClick={() => showModal(record.id, record)} className="edit-button">
             Edit
           </button>
         </Space>
@@ -191,18 +194,18 @@ const handleStatus = async ( record , values) =>{
       <Modal
         footer={false}
         width={800}
-        title=""
+        title={`Add time for ${editData.fullName}`}
         visible={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
       >
-      <AddAppointmentTime {...props} />
+        <AddAppointmentTime id={editId} {...props} />
       </Modal>
       <Modal
         footer={false}
         width={800}
         title=""
-        visible={props.modal1}
+        visible={props.modal}
         onOk={handleOk}
         onCancel={handleCancel}
       >

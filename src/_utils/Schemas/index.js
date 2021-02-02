@@ -396,10 +396,58 @@ export const PatientCreationSchema = Yup.object().shape({
   zipcode: Yup.date().required('Please enter zipcode'),
 });
 
-
 export const ProviderCreationSchema = Yup.object().shape({
   fullName: Yup.string().required('Please enter full name'),
-  email: Yup.string()
-    .email('Please enter valid email'),
+  email: Yup.string().email('Please enter valid email'),
   phone: Yup.string().required('Phone number is required'),
+});
+
+export const SchedulingSchema = Yup.object().shape({
+  provider_id: Yup.number().required('Please provider provider_id'),
+  formData: Yup.array().of(
+    Yup.object().shape({
+      type: Yup.string()
+        .oneOf(['daily', 'fixed', 'custom'])
+        .required('Select type'),
+      FromTime: Yup.string().required('Please select from time'),
+      ToTime: Yup.string().required('Please select to time'),
+      date: Yup.array().when('type', {
+        is: 'daily',
+        then: Yup.array()
+          .of(Yup.number())
+          .required('Please select days'),
+        otherwise: Yup.array()
+          .of(Yup.date())
+          .required('Please select date'),
+      }),
+      frequency: Yup.number()
+        .when('type', {
+          is: 'custom',
+          then: Yup.number().required('Please select frequency'),
+        })
+        .nullable(),
+      // frequency: Yup.lazy(val =>
+      //   Array.isArray(val)
+      //     ? Yup.array()
+      //         .of(Yup.number())
+      //         .nullable()
+      //     : Yup.number()
+      //         .when('type', {
+      //           is: 'custom',
+      //           then: Yup.number()
+      //             .required('Please select frequency')
+      //             .nullable(),
+      //         })
+      //         .required('Please select days')
+      //         .nullable(),
+      // ),
+      unit: Yup.string().when('type', {
+        is: 'custom',
+        then: Yup.string()
+          .required('Please select unit')
+          .nullable(),
+        otherwise: Yup.string().nullable(),
+      }),
+    }),
+  ),
 });
