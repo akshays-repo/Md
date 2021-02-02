@@ -11,13 +11,20 @@ import { store } from '../../../reducers/configureStore';
 import CreateProviderType from './createProviderType';
 import CustomFormField from './cutomFormField';
 
+
 const Dashboard_Provider = (props) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   useEffect(() => {
     props.fetchProvider({ branchId: 3, page: 1, limit: 60 });
+    props.fetchBranch({ branchId: 3, page: 1, limit: 60 });
     console.log("prooo", props)
   }, [props.changed]);
+
+  useEffect(() => {
+       props.fetchBranch({ hospitalId: localStorage.getItem('hospital_id'), page: 1, limit: 50 });
+  }, );
+
 
   const HeaderSection = () => {
     return (
@@ -100,6 +107,8 @@ const mapStoreToProps = ({ Provider , CustomForm }) => {
 
 
 const mapDispatchToProps = dispatch => ({
+  fetchBranch: param =>
+  dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_BRANCH', param })),
   fetchProvider: param =>
     dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_PROVIDER', param })),
   addProvider: values =>

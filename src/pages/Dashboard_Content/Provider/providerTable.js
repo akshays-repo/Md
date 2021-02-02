@@ -9,7 +9,6 @@ import { valuesIn } from 'lodash';
 
 const ProviderTable = props => {
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [editModalVisible, seteditModalVisible] = useState(false);
   const [appointmentTypes, setAppointmentTypes] = useState([]);
   const [selectedItems, setSelectedItem] = useState([]);
 
@@ -32,7 +31,6 @@ const ProviderTable = props => {
 
   const handleCancel = () => {
     store.dispatch({ type: 'CLOSE_PROVIDER_EDIT_MODAL' });
-    seteditModalVisible(false);
     setIsModalVisible(false);
   };
 
@@ -205,7 +203,7 @@ const handleStatus = async ( record , values) =>{
         footer={false}
         width={800}
         title=""
-        visible={props.modal}
+        visible={props.modal1}
         onOk={handleOk}
         onCancel={handleCancel}
       >
