@@ -7,6 +7,8 @@ import { PatientReducer as Patient } from './ComponentReducer/patient';
 import { OnlineBookingReducer as OnlineBooking } from './ComponentReducer/online_booking';
 import { LoginReducer as Login } from './ComponentReducer/login';
 import {CustomFormReducer as CustomForm} from './ComponentReducer/customForm'
+import { ScheduleReducer as Schedule } from './ComponentReducer/schedule';
+
 export const reducers = {
   Hospital,
   Branch,
@@ -16,5 +18,6 @@ export const reducers = {
   Patient,
   OnlineBooking,
   Login,
-  CustomForm
+  CustomForm,
+  Schedule,
 };
