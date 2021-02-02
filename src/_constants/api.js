@@ -31,6 +31,7 @@ export const backend_api = {
   CREATE_PROVIDER:' /api/backend/v1/users/register',
   FETCH_PROVIDER:'/api/backend/v1/providers',
   EDIT_PROVIDER:'/api/backend/v1/users',
+  DELETE_PROVIDER:'/api/backend/v1/provider',
   
   CREATE_CUSTOMFORM:'/api/backend/v1/custom_form',
   FETCH_CUSTOMFORM:'/api/backend/v1/custom_form/',

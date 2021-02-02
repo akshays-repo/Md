@@ -5,24 +5,24 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { connect } from 'react-redux';
 import { actionCreator } from '../../../reducers/actionCreator';
 
-const CustomFormField = (props) => {
+const CustomFormField = props => {
   const [field, setField] = useState();
   const [addNewField, setAddNewField] = useState([]);
   const [loadings, setLoadings] = useState(false);
   const innerForm = useRef();
+  const [listCustomField, setListCustomField] = useState({});
 
-  useEffect(() => {
-    let param = '3'
-    props.fetchCustomForm(param);
-    console.log(props.CustomForm)
-  }, [])
   const handleMenuClick = e => {
-    console.log('keyyykeyyy', e);
     let text = e.key;
     setAddNewField([...addNewField, text]);
-    console.log('keyyykeyyy', addNewField);
+  };
+  const handleChange = e => {
+    let formData = {};
   };
 
+  useEffect(() =>{
+    setListCustomField(props.custom_form)
+  })
   const menu = (
     <Menu onClick={handleMenuClick}>
       <Menu.Item key="text" icon={<UserOutlined />}>
@@ -49,17 +49,59 @@ const CustomFormField = (props) => {
   const handleFormSubmission = async values => {
     console.log('valueee', values);
     console.log('valueee props', props);
-    let contentType = 'JSON'
+    let contentType = 'JSON';
+
     await props.addCustomForm(JSON.stringify(values), contentType);
   };
 
   return (
-    <div>
+    <div style={{ minHeight: '500px' }}>
       CUSTOM FORM FIELD
       <div>
         <div>
           This is what FossilMd asks your patients by default. You can create additional questions
           and fields by clicking on the plus sign below.
+
+          {/* {listCustomField.map(type => {
+            return (
+              <div>
+                <Formik
+                  enableReinitialize={true}
+                  initialValues={{
+                    hospital_id: parseInt(localStorage.getItem('hospital_id')),
+                    formData: [
+                      {
+                        custom_types: '',
+                        required: true,
+                        Key_name: '',
+                      },
+                    ],
+                  }}
+                  onSubmit={handleFormSubmission}
+                  innerRef={innerForm}
+                >
+                  {({ handleSubmit }) => (
+                    <Form className="login__form" handleSubmit={handleSubmit}>
+                      <input type="text" onChange={handleChange} name="name" />
+                      <Switch
+                        checkedChildren="Required"
+                        unCheckedChildren="Not Required"
+                        name="required"
+                        defaultChecked
+                      />
+                      <Button className="mt-5" htmlType="submit" className="submitbutton">
+                        submit
+                      </Button>
+                    </Form>
+                  )}
+                </Formik>
+              </div>
+            );
+          })} */}
+
+
+
+
           {addNewField.map(type => {
             return (
               <div>
@@ -72,26 +114,22 @@ const CustomFormField = (props) => {
                         custom_types: type,
                         required: true,
                         Key_name: '',
-                        
                       },
                     ],
                   }}
                   onSubmit={handleFormSubmission}
-                  innerRef={innerForm}>
-                  {({ handleSubmit ,  }) => (
+                  innerRef={innerForm}
+                >
+                  {({ handleSubmit }) => (
                     <Form className="login__form" handleSubmit={handleSubmit}>
-                        <Field type="text" name="formData[0].Key_name" placeholder={type} />
-                        <Switch
-                          checkedChildren="Required"
-                          unCheckedChildren="Not Required"
-                          name="required"
-                          defaultChecked
-                        />
-                      <Button
-                        className="mt-5"
-                        htmlType="submit"
-                        className="submitbutton"
-                      >
+                      <input type="text" onChange={handleChange} name="name" />
+                      <Switch
+                        checkedChildren="Required"
+                        unCheckedChildren="Not Required"
+                        name="required"
+                        defaultChecked
+                      />
+                      <Button className="mt-5" htmlType="submit" className="submitbutton">
                         submit
                       </Button>
                     </Form>
@@ -100,8 +138,8 @@ const CustomFormField = (props) => {
               </div>
             );
           })}
-          <Dropdown overlay={menu}>
-            <Button>
+          <Dropdown trigger={['click']} overlay={menu}>
+            <Button onClick={e => e.preventDefault()}>
               Add New Field <PlusOutlined />
             </Button>
           </Dropdown>
@@ -111,24 +149,25 @@ const CustomFormField = (props) => {
   );
 };
 
-const mapStoreToProps = ({  CustomForm }) => {
-    console.log('Store CustomForm', CustomForm);
-    return {
-      CustomForm: CustomForm.payload,
-      CustomFormerror: CustomForm.error,
-      CustomFormmessage: CustomForm.message,
-      CustomFormmodal: CustomForm.modal,
-      CustomFormmodal1: CustomForm.modal1,
-      CustomFormchanged:CustomForm.changed,
-    };
+const mapStoreToProps = ({ CustomForm }) => {
+  console.log('Store CustomForm', CustomForm);
+  return {
+    CustomForm: CustomForm.payload,
+    CustomFormerror: CustomForm.error,
+    CustomFormmessage: CustomForm.message,
+    CustomFormmodal: CustomForm.modal,
+    CustomFormmodal1: CustomForm.modal1,
+    CustomFormchanged: CustomForm.changed,
   };
-
+};
 
 const mapDispatchToProps = dispatch => ({
   fetchCustomForm: id =>
     dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_CUSTOMFORM', id })),
   addCustomForm: (values, contentType) =>
-    dispatch(actionCreator({ method: 'POST', action_type: 'CREATE_CUSTOMFORM', values , contentType })),
+    dispatch(
+      actionCreator({ method: 'POST', action_type: 'CREATE_CUSTOMFORM', values, contentType }),
+    ),
   editCustomForm: (id, values) =>
     dispatch(actionCreator({ method: 'PUT', action_type: 'EDIT_PROVIDER', id, values })),
   deleteCustomForm: id =>

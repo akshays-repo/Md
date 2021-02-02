@@ -17,7 +17,7 @@ const ProviderTable = props => {
 
   useEffect(() => {
     setAppointmentTypes(store.getState().AppointmentType.payload);
-  });
+  },);
 
   const showModal = (id, data) => {
     setEditId(id);
@@ -78,6 +78,11 @@ const handleStatus = async ( record , values) =>{
   } catch (err) {
     console.log('error', err);
   }
+}
+
+const handleDelete = async (id) =>{
+console.log("deleter",props)
+await props.deleteProvider(id)
 }
 
   const columns = [
@@ -157,7 +162,7 @@ const handleStatus = async ( record , values) =>{
             {' '}
             Edit{' '}
           </button>
-          <button className="delete-button"> Delete</button>
+          <button className="delete-button" onClick={() => handleDelete(record.id)}> Delete</button>
         </Space>
       ),
     },

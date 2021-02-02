@@ -21,6 +21,12 @@ const Dashboard_Provider = (props) => {
     console.log("prooo", props)
   }, [props.changed]);
 
+
+  useEffect(() => {
+    props.fetchCustomForm(parseInt(localStorage.getItem('hospital_id')));
+  }, []);
+
+
   useEffect(() => {
        props.fetchBranch({ hospitalId: localStorage.getItem('hospital_id'), page: 1, limit: 50 });
   }, );
@@ -55,8 +61,12 @@ const Dashboard_Provider = (props) => {
   };
   return (
     <div className="schedule-time">
-      <Modal title="" footer={false} visible={props.CustomFormmodal}  
-      onCancel={() =>  store.dispatch({ type: 'CLOSE_CUSTOMFORM_CREATE_MODAL' })}>
+      <Modal title="" 
+      footer={false} 
+      height="800" 
+      visible={props.CustomFormmodal}  
+      onCancel={() =>  store.dispatch({ type: 'CLOSE_CUSTOMFORM_CREATE_MODAL' })}
+      destroyOnClose>
         <CustomFormField {...props}/>
       </Modal>
 
@@ -107,8 +117,18 @@ const mapStoreToProps = ({ Provider , CustomForm }) => {
 
 
 const mapDispatchToProps = dispatch => ({
+
+
   fetchBranch: param =>
   dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_BRANCH', param })),
+  
+  fetchCustomForm: id =>
+    dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_CUSTOMFORM', id })),
+  addCustomForm: (values, contentType) =>
+    dispatch(
+      actionCreator({ method: 'POST', action_type: 'CREATE_CUSTOMFORM', values, contentType }),
+    ),
+
   fetchProvider: param =>
     dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_PROVIDER', param })),
   addProvider: values =>
@@ -125,6 +145,8 @@ const mapDispatchToProps = dispatch => ({
         param,
       }),
     ),
+
+    
 });
 
 export default connect(mapStoreToProps, mapDispatchToProps)(Dashboard_Provider);
