@@ -9,44 +9,24 @@ import ProviderTable from './providerTable';
 import { actionCreator } from '../../../reducers/actionCreator';
 import { store } from '../../../reducers/configureStore';
 import CreateProviderType from './createProviderType';
+import CustomFormField from './cutomFormField';
 
 const Dashboard_Provider = (props) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-
   useEffect(() => {
-    props.fetchProvider({ branchId: 3, page: 1, limit: 20 });
-  }, [props.modal, props.modal1, props.deleted, props.edited]);
+    props.fetchProvider({ branchId: 3, page: 1, limit: 60 });
+    console.log("prooo", props)
+  }, [props.changed]);
 
-  const showModal = () => {
-    setIsModalVisible(true);
-  };
-
-  const handleOk = () => {
-    setIsModalVisible(false);
-  };
-
-  const handleCancel = () => {
-    setIsModalVisible(false);
-  };
   const HeaderSection = () => {
-    const weekDays = [
-      { key: 1, day: 'Sunday' },
-      { key: 2, day: 'Monday' },
-      { key: 3, day: 'Tuesday' },
-      { key: 4, day: 'Wednesday' },
-      { key: 5, day: 'Thursday' },
-      { key: 6, day: 'Friday' },
-      { key: 7, day: 'Saturday' },
-    ];
-
     return (
       <div className="provider">
         <div className="header">
           <div>
-          <Button type="primary"  className="button-square">
-              Create a New Provider Type
-           </Button>
+          <Button type="primary" onClick={() => store.dispatch({ type: 'OPEN_CUSTOMFORM_CREATE_MODAL' })} className="button-square">
+            Custom Form 
+            </ Button>
           </div>
 
           <div>
@@ -68,11 +48,17 @@ const Dashboard_Provider = (props) => {
   };
   return (
     <div className="schedule-time">
+      <Modal title="" footer={false} visible={props.CustomFormmodal}  
+      onCancel={() =>  store.dispatch({ type: 'CLOSE_CUSTOMFORM_CREATE_MODAL' })}>
+        <CustomFormField {...props}/>
+      </Modal>
 
-      <Modal title="Basic Modal" footer={false} visible={props.modal}  onCancel={() =>  store.dispatch({ type: 'CLOSE_PROVIDER_CREATE_MODAL' })}>
+      <Modal title="" footer={false} visible={props.modal}  onCancel={() =>  store.dispatch({ type: 'CLOSE_PROVIDER_CREATE_MODAL' })}>
         <ProviderCreationForm {...props}/>
       </Modal>
+
       <FossilBreadCrumb currentUrl="/provider" currentPageName="Provider" />
+      
       <Row>
         <Col xs={24} xl={8}>
           <div className="left-side">
@@ -80,10 +66,10 @@ const Dashboard_Provider = (props) => {
           </div>
         </Col>
 
-        <Col xs={24} xl={15}>
+        <Col xs={24} xl={16}>
           <div className="right-side">
             <div>{HeaderSection()}</div>
-            <div>
+            <div className="full-width-table">
               <ProviderTable  {...props} />
             </div>
           </div>
@@ -92,23 +78,34 @@ const Dashboard_Provider = (props) => {
     </div>
   );
 };
-const mapStoreToProps = ({ Provider }) => {
+const mapStoreToProps = ({ Provider , CustomForm }) => {
   console.log('Store', Provider);
+  console.log('Store CustomForm', CustomForm);
   return {
     provider: Provider.payload,
     error: Provider.error,
     message: Provider.message,
     modal: Provider.modal,
     modal1: Provider.modal1,
+    changed:Provider.changed,
+
+    CustomForm: CustomForm.payload,
+    CustomFormerror: CustomForm.error,
+    CustomFormmessage: CustomForm.message,
+    CustomFormmodal: CustomForm.modal,
+    CustomFormmodal1: CustomForm.modal1,
+    CustomFormchanged:CustomForm.changed,
   };
 };
+
+
 const mapDispatchToProps = dispatch => ({
   fetchProvider: param =>
     dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_PROVIDER', param })),
   addProvider: values =>
     dispatch(actionCreator({ method: 'POST', action_type: 'CREATE_PROVIDER', values })),
-  editProvider: (id, values) =>
-    dispatch(actionCreator({ method: 'PUT', action_type: 'EDIT_PROVIDER', id, values })),
+  editProvider: (id , values) =>
+    dispatch(actionCreator({ method: 'PUT', action_type: 'EDIT_PROVIDER',  id, values })),
   deleteProvider: id =>
     dispatch(actionCreator({ method: 'DELETE', action_type: 'DELETE_PROVIDER', id })),
   filterProvider: param =>

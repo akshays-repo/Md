@@ -99,5 +99,22 @@ body {
       }
     }
   }
+  .mt-5 {
+    margin-top: 30px;
   }
+  }
+  .ant-pagination-item-active a {
+    color: #fff;
+    background: #15558d;
+    border-color: #15558d;
+    &:hover {
+      background-color: #20c0f3;
+      color: #fff;
+    }
 }
+.MuiInputBase-input {
+  font-size: 15px;
+  color: #7d7d7d;
+}
+}
+

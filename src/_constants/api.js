@@ -21,9 +21,14 @@ export const backend_api = {
   DELETE_APPOINTMENT_TYPE: '/api/backend/v1/appointment_type',
   CREATE_PATIENT: '/api/backend/v1/users/patiant',
   FETCH_PATIENT: '/api/backend/v1/patiant',
-  EDIT_PATIENT: '/api/backend/v1/users/register',
-  DELETE_PATIENT: '/api/backend/v1/patiant',
+  EDIT_PATIENT: '/api/backend/v1/users/patiant',
+  DELETE_PATIENT: '/api/backend/v1/users/patiant',
   USER_LOGIN: '/api/backend/v1/users/login',
   CREATE_PROVIDER:' /api/backend/v1/users/register',
   FETCH_PROVIDER:'/api/backend/v1/providers',
+  EDIT_PROVIDER:'/api/backend/v1/users',
+  CREATE_CUSTOMFORM:'/api/backend/v1/custom_form',
+  FETCH_CUSTOMFORM:'/api/backend/v1/custom_form/'
+  
+
 };

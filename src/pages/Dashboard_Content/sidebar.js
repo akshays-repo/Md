@@ -81,32 +81,36 @@ const sideMenuList = [
   },
 ];
 const Sidebar = () => {
+  const {
+    avatarlocation = 'https://images.livemint.com/img/2020/07/06/600x338/apollo_1594043446600_1594043458520.jpg',
+  } = JSON.parse(localStorage.getItem('user_data'));
+
   return (
     <div className="dashboard__sidebar">
-      <div className="content"> 
-      <div className="sidebar_header">
-        <div className="profileDashboard">
-        <img src="https://images.livemint.com/img/2020/07/06/600x338/apollo_1594043446600_1594043458520.jpg" />
+      <div className="content">
+        <div className="sidebar_header">
+          <div className="profileDashboard">
+            {/* <img src="https://images.livemint.com/img/2020/07/06/600x338/apollo_1594043446600_1594043458520.jpg" /> */}
+            <img src={avatarlocation} />
+          </div>
+          <h2 style={{ textTransform: 'uppercase' }}>{localStorage.getItem('name')}</h2>
+          <p className="hospital_address">Curabitur aliquet quam id dui posuere blandit.</p>
         </div>
-        <h2>Billroth Hospitals</h2>
-        <p className="hospital_address">Curabitur aliquet quam id dui posuere blandit.</p>
+        <div className="sidebar_list">
+          <List
+            itemLayout="horizontal"
+            dataSource={sideMenuList}
+            renderItem={item => (
+              <List.Item>
+                <List.Item.Meta
+                  avatar={<i className={item.icon} />}
+                  title={<Link to={item.path}>{item.title}</Link>}
+                />
+              </List.Item>
+            )}
+          />
+        </div>
       </div>
-      <div className="sidebar_list">
-        <List
-          itemLayout="horizontal"
-          dataSource={sideMenuList}
-          renderItem={item => (
-            <List.Item>
-              <List.Item.Meta
-                avatar={<i className={item.icon} />}
-                title={<Link to={item.path}>{item.title}</Link>}
-              />
-            </List.Item>
-          )}
-        />
-      </div>
-      </div>
-
     </div>
   );
 };

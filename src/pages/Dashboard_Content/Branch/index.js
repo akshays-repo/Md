@@ -9,15 +9,15 @@ import { actionCreator } from '../../../reducers/actionCreator';
 import { store } from '../../../reducers/configureStore';
 const Dashboard_Branch = props => {
   useEffect(() => {
-    props.fetchBranch({ hospitalId: 3, page: 1, limit: 20 });
-  }, [props.modal, props.modal1, props.deleted, props.edited]);
+    props.fetchBranch({ hospitalId: localStorage.getItem('hospital_id'), page: 1, limit: 50 });
+  }, [props.changed]);
 
   const Branch = () => {
     return (
       <div>
         <div className="header">
           <Button
-            type="primary"
+            type="primary" className="button-square"
             onClick={() => store.dispatch({ type: 'OPEN_CREATE_BRANCH_MODAL' })}
           >
             Create a New Branch
@@ -49,8 +49,7 @@ const mapStoreToProps = ({ Branch }) => {
     message: Branch.message,
     modal: Branch.modal,
     modal1: Branch.modal1,
-    deleted: Branch.deleted,
-    edited: Branch.edited,
+    changed: Branch.changed,
   };
 };
 const mapDispatchToProps = dispatch => ({

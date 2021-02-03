@@ -29,7 +29,7 @@ const PatientCreationForm = props => {
         ),
       );
       console.log(files);
-      innerForm.current.setFieldValue('logo', acceptedFiles);
+      innerForm.current.setFieldValue('image', acceptedFiles);
 
       console.log('****', innerForm.current.values);
     },
@@ -52,15 +52,31 @@ const PatientCreationForm = props => {
     setFiles(prev => prev.filter(result => result.name != name));
 
     innerForm.current.setFieldValue(
-      'logo',
-      innerForm.current.values.logo.filter(result => result.name != name),
+      'image',
+      innerForm.current.values.image.filter(result => result.name != name),
     );
   };
   const handleFormSubmission = async values => {
+    console.log('Edit values', values);
+    const { avatarLocation, avatarType, deletedAt, image, ...rest } = values;
     try {
-      values = await getFormDataA({ ...values, branchId: 3, hospitalId: 3 });
-      if (editId) {
-        props.editPatient(editId, values);
+      if (Array.isArray(image)) {
+        values = await getFormDataA({
+          ...rest,
+          image,
+          branchId: 3,
+          hospitalId: localStorage.getItem('hospital_id'),
+        });
+      } else {
+        values = await getFormDataA({
+          ...rest,
+          branchId: 3,
+          hospitalId: localStorage.getItem('hospital_id'),
+        });
+      }
+
+      if (props.id) {
+        props.editPatient(props.id, values);
       } else {
         props.addPatient(values);
       }
@@ -122,20 +138,24 @@ const PatientCreationForm = props => {
     <>
       <Formik
         enableReinitialize={true}
-        initialValues={{
-          firstName: '',
-          lastName: '',
-          email: '',
-          phone: '',
-          address: '',
-          avatarlocation: '',
-          phone: '',
-          logo: '',
-          userTypeId: 3,
-          gender: 'male',
-          status: 'active',
-          patient_status: 'new',
-        }}
+        initialValues={
+          props.values || {
+            firstName: '',
+            lastName: '',
+            email: '',
+            phone: '',
+            address: '',
+            avatarlocation: '',
+            phone: '',
+            image: '',
+            userTypeId: 3,
+            gender: 'male',
+            status: 'active',
+            patient_status: 'new',
+            dob: '',
+            zipcode: '',
+          }
+        }
         validationSchema={PatientCreationSchema}
         onSubmit={handleFormSubmission}
         innerRef={innerForm}
@@ -167,6 +187,27 @@ const PatientCreationForm = props => {
                   {...getRootProps({ className: 'dropzone' })}
                 >
                   <div className="title">
+                  <div
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    flexWrap: 'wrap',
+                  }}
+                >
+                  {Array.isArray(values.image) ? (
+                    values.image.map((result, i) => (
+                      <Thumb onImageDelete={onImageDelete} file={result}></Thumb>
+                    ))
+                  ) : (
+                    <img
+                      style={{ width: 90, height: 90, borderRadius: 100, marginRight:10, objectFit: "cover"}}
+                      src={
+                        values.image ||
+                        'https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png'
+                      }
+                    />
+                  )}
+                </div>
                   <input {...getInputProps()} multiple={false} />
 <div className="upload-btn-wrapper">
   <button type="button" className="view-button button-square font-size-md px-5">
@@ -177,21 +218,8 @@ const PatientCreationForm = props => {
                   </div>
                  
                 </div>
-                <div
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    width: '100%',
-                    flexWrap: 'wrap',
-                  }}
-                >
-                  {values.logo.length > 0
-                    ? values.logo.map((result, i) => (
-                        <Thumb onImageDelete={onImageDelete} file={result}></Thumb>
-                      ))
-                    : ''}
-                </div>
-                {errors.logo && <div className="errormsg">{errors.logo}</div>}
+                
+                {errors.image && <div className="errormsg">{errors.image}</div>}
               </p>
             </Row>
 <div className="fullwidth-right">
@@ -201,7 +229,7 @@ const PatientCreationForm = props => {
               loading={loadings}
               className="submitbutton edit-button button-square"
             >
-              Create a New Patient
+              {props.id ? 'EDIT' : 'ADD'}
             </Button>
             </div>
           </Form>

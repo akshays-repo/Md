@@ -1,12 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useDebugValue, useEffect, useRef, useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { ProviderCreationSchema } from '_utils/Schemas';
-import { TextField } from 'formik-material-ui';
-import {  Button, Row, Col ,message } from 'antd';
+import { Button, Row, Col, message } from 'antd';
 import { generateForm } from '../../../_utils/formgenerator';
-import { getFormData } from '_utils';
-import { PoweroffOutlined } from '@ant-design/icons';
-import callApi from '_utils/callApi';
+import { getFormData, getFormDataA } from '_utils';
 import { store } from '../../../reducers/configureStore';
 
 const ProviderCreationForm = props => {
@@ -14,14 +11,21 @@ const ProviderCreationForm = props => {
   const innerForm = useRef();
 
   const handleFormSubmission = async values => {
-    console.log('DADADADAD', values);
+    let data = await getFormDataA({ ...values  , userTypeId: 4 });
     try {
-      await props.addProvider(getFormData({ ...values }));
-      store.dispatch({ type: 'CLOSE_PROVIDER_CREATE_MODAL' })
+      if (props.id) {
+        await props.editProvider(props.id, data);
+        store.dispatch({ type: 'CLOSE_PROVIDER_EDIT_MODAL' });
+      } else {
+        await props.addProvider(data);
+        store.dispatch({ type: 'CLOSE_PROVIDER_CREATE_MODAL' });
+      }
+     
     } catch (err) {
-      console.log(err);
+      console.log('edit error', err);
     }
   };
+
 
   const formField = [
     {
@@ -45,35 +49,37 @@ const ProviderCreationForm = props => {
     <>
       <Formik
         enableReinitialize={true}
-        initialValues={{
-          fullName: '',
-          email: '',
-          status: 'active',
-          userTypeId: 4,
-          branchId: 3,
-          provider_typeId: 3,
-          phone: '',
-        }}
+        initialValues={
+          props.values || {
+            fullName: '',
+            email: '',
+            status: 'active',
+            userTypeId: 4,
+            branchId: 3,
+            provider_typeId: 3,
+            phone: '',
+          }
+        }
         validationSchema={ProviderCreationSchema}
         onSubmit={handleFormSubmission}
         innerRef={innerForm}
       >
         {({ handleSubmit, touched, errors, isSubmitting }) => (
           <Form
-            style={{ backgroundColor: '#f7f8f8' }}
+          
             className="login__form"
             handleSubmit={handleSubmit}
           >
             <Row>{generateForm(formField)}</Row>
 
             <Button
-              className="mt-5"
+
               htmlType="submit"
               disabled={isSubmitting}
               loading={loadings}
-              className="submitbutton"
+              className="view-button button-square mt-5"
             >
-              Create a New Provider
+              {props.id ? ' Edit a Provider' : ' Create a New Provider'}
             </Button>
           </Form>
         )}

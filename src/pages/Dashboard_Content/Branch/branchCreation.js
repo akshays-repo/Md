@@ -58,7 +58,7 @@ const BranchCreationForm = props => {
             email: '',
             phone: '',
             address: '',
-            hospitalId: 3,
+            hospitalId: localStorage.getItem('hospital_id'),
             userTypeId: 3,
             status: 'active',
           }
@@ -78,24 +78,25 @@ const BranchCreationForm = props => {
                 return (
                   <Col key={index} xs={24} xl={12}>
                     <label>{values.label}</label>
-
-                    <Field
-                      component={TextField}
-                      name={values.name}
-                      placeholder=""
-                      type="text"
-                    ></Field>
+                    <p>
+                      <Field
+                        component={TextField}
+                        name={values.name}
+                        placeholder=""
+                        type="text"
+                      ></Field>
+                    </p>
                   </Col>
                 );
               })}
             </Row>
 
             <Button
-              className="mt-5"
+              className="mt-5 edit-button button-square"
               htmlType="submit"
               disabled={isSubmitting}
               loading={loadings}
-              className="submitbutton"
+             
             >
               {props.id ? 'Edit Branch' : 'Add Branch'}
             </Button>

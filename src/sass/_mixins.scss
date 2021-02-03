@@ -62,7 +62,8 @@
   @include button;
   background-color: $edit-button;
   &:hover {
-    border: 1px solid #20c0f3;
+   background: #20c0f3;
+   color: #fff;
   }
 }
 @mixin delete-button {
@@ -72,6 +73,10 @@
 @mixin view-button {
   @include button;
   background-color: $view-button;
+  &:hover {
+    background-color: $view-button;
+    color: #fff;
+  }
 }
 @mixin common-button {
   @include button;
@@ -111,4 +116,8 @@
 }
 @mixin text-center {
   text-align: center;
+}
+@mixin formTo {
+  display: inline;
+  padding: 0 15px;
 }

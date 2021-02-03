@@ -18,7 +18,7 @@ const AddAppointmentTime = () => {
   return (
     <div className="appointment-time">
       <div className="header">
-        <button onClick={() => AddNewField()}>Add New</button>
+        <button  className="button-square" onClick={() => AddNewField()}>Add New</button>
       </div>
       {appointmentField?.map(() => (
         <div className="item">
@@ -36,7 +36,7 @@ const AddAppointmentTime = () => {
             ))}
           </Select>
           {'  '}
-          From:
+          <span className="from-to">From:</span>
           <Select defaultValue="09">
             <Option value="10">10</Option>
             <Option value="11">11</Option>
@@ -49,7 +49,7 @@ const AddAppointmentTime = () => {
             <Option value="AM">AM</Option>
             <Option value="PM">PM</Option>
           </Select>{'  '}
-          To:{'  '}
+          <span className="from-to">To:</span>{'  '}
           <Select defaultValue="09">
             <Option value="10">10</Option>
             <Option value="11">11</Option>
@@ -65,9 +65,8 @@ const AddAppointmentTime = () => {
 <br/>          <div className="switch-section"> 
 
 
-<Switch defaultChecked onChange={onChange} />On a specific date
-
-<Switch defaultChecked onChange={onChange} />Custom repeat
+<Switch defaultChecked onChange={onChange} /><span className="from-to">On a specific date</span>
+<span className="from-to"></span><Switch defaultChecked onChange={onChange} /><span className="from-to">Custom repeat</span>
 </div>
 
           

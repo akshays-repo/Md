@@ -64,7 +64,8 @@ export const AppointmentTypeForm = props => {
         })}
       </Row>
 
-      <Button className="mt-5" htmlType="submit" className="submitbutton">
+      <Button  htmlType="submit" className="
+      edit-button button-square mt-5">
         {props.id ? 'EDIT' : 'ADD'}
       </Button>
     </Form>
