@@ -15,20 +15,27 @@ export const backend_api = {
   FETCH_BRANCH: '/api/backend/v1/branches',
   EDIT_BRANCH: '/api/backend/v1/users',
   DELETE_BRANCH: '/api/backend/v1/users',
+
   CREATE_APPOINTMENT_TYPE: '/api/backend/v1/appointment_type',
   FETCH_APPOINTMENT_TYPE: '/api/backend/v1/appointment_type',
   EDIT_APPOINTMENT_TYPE: '/api/backend/v1/appointment_type',
   DELETE_APPOINTMENT_TYPE: '/api/backend/v1/appointment_type',
+  
   CREATE_PATIENT: '/api/backend/v1/users/patiant',
   FETCH_PATIENT: '/api/backend/v1/patiant',
   EDIT_PATIENT: '/api/backend/v1/users/patiant',
   DELETE_PATIENT: '/api/backend/v1/users/patiant',
+  
   USER_LOGIN: '/api/backend/v1/users/login',
+  
   CREATE_PROVIDER:' /api/backend/v1/users/register',
   FETCH_PROVIDER:'/api/backend/v1/providers',
   EDIT_PROVIDER:'/api/backend/v1/users',
-  CREATE_CUSTOMFORM:'/api/backend/v1/custom_form',
-  FETCH_CUSTOMFORM:'/api/backend/v1/custom_form/'
+  DELETE_PROVIDER:'/api/backend/v1/provider',
   
-
+  CREATE_CUSTOMFORM:'/api/backend/v1/custom_form',
+  FETCH_CUSTOMFORM:'/api/backend/v1/custom_form/',
+  
+  FETCH_SCHEDULE: '/api/backend/v1/newshedule',
+  CREATE_SCHEDULE: '/api/backend/v1/newshedule',
 };

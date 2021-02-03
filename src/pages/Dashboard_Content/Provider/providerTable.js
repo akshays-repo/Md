@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Modal, Tag, Space, Input, Button, Radio, Select, Form , } from 'antd';
+import { Table, Modal, Tag, Space, Input, Button, Radio, Select, Form } from 'antd';
 import AddAppointmentTime from './addAppointmentTime';
 import { store } from '../../../reducers/configureStore';
 import ProviderCreationForm from './providerCreationForm';
@@ -9,17 +9,19 @@ import { valuesIn } from 'lodash';
 
 const ProviderTable = props => {
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [editModalVisible, seteditModalVisible] = useState(false);
   const [appointmentTypes, setAppointmentTypes] = useState([]);
   const [selectedItems, setSelectedItem] = useState([]);
+
   const [editId, setEditId] = useState(null);
   const [editData, setEditData] = useState('');
 
   useEffect(() => {
     setAppointmentTypes(store.getState().AppointmentType.payload);
-  });
+  },);
 
-  const showModal = () => {
+  const showModal = (id, data) => {
+    setEditId(id);
+    setEditData(data);
     setIsModalVisible(true);
   };
 
@@ -29,7 +31,6 @@ const ProviderTable = props => {
 
   const handleCancel = () => {
     store.dispatch({ type: 'CLOSE_PROVIDER_EDIT_MODAL' });
-    seteditModalVisible(false);
     setIsModalVisible(false);
   };
 
@@ -79,6 +80,11 @@ const handleStatus = async ( record , values) =>{
   }
 }
 
+const handleDelete = async (id) =>{
+console.log("deleter",props)
+await props.deleteProvider(id)
+}
+
   const columns = [
     {
       title: 'Full Name',
@@ -103,7 +109,7 @@ const handleStatus = async ( record , values) =>{
       key: 'workhour',
       render: (text, record) => (
         <Space size="middle">
-          <button onClick={showModal} className="edit-button">
+          <button onClick={() => showModal(record.id, record)} className="edit-button">
             Edit
           </button>
         </Space>
@@ -156,7 +162,7 @@ const handleStatus = async ( record , values) =>{
             {' '}
             Edit{' '}
           </button>
-          <button className="delete-button"> Delete</button>
+          <button className="delete-button" onClick={() => handleDelete(record.id)}> Delete</button>
         </Space>
       ),
     },
@@ -191,12 +197,12 @@ const handleStatus = async ( record , values) =>{
       <Modal
         footer={false}
         width={800}
-        title=""
+        title={`Add time for ${editData.fullName}`}
         visible={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
       >
-      <AddAppointmentTime {...props} />
+        <AddAppointmentTime id={editId} {...props} />
       </Modal>
       <Modal
         footer={false}
