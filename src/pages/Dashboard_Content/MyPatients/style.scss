@@ -1,5 +1,4 @@
     .mypatient{
-
         .search{
             @include flex(space-between , center);
             padding: 30px 15px;
@@ -16,4 +15,15 @@
             font-size:24px ;
         }
     }
+    .dropzone {
+        outline: none;
+    }
+
+// .thumbimage {
+//         max-height: 100px;
+//         max-width: 100px;
+//         height: 100px;
+//         width: 100px;
+//         border-radius: 100px;
+//     }
 

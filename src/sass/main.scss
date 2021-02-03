@@ -103,14 +103,32 @@ body {
     margin-top: 30px;
   }
   }
-  .ant-pagination-item-active a {
-    color: #fff;
-    background: #15558d;
-    border-color: #15558d;
-    &:hover {
-      background-color: #20c0f3;
-      color: #fff;
+  .ant-pagination {
+    .ant-pagination-disabled {
+      .ant-pagination-item-link {
+        color: #333;
+        background-color: #dedede;
+      }
     }
+//   .ant-pagination-item-active a {
+//     color: #fff;
+//     background: #15558d;
+//     &:hover {
+//       background-color: #20c0f3;
+//       color: #fff;
+// }
+// }
+.ant-pagination-item-active {
+  background: #15558d;
+  border-color: #15558d;
+  &:hover {
+    background-color: #20c0f3;
+    border-color: #20c0f3;
+  }
+  a {
+  color: #fff;
+  }
+}
 }
 .MuiInputBase-input {
   font-size: 15px;

@@ -1,5 +1,5 @@
 .dashboard__content {
-  height: 100vh;
+  // height: 100vh;
   background-color: $container-background;
 
   // @include margin-padding(0px, 15px);
@@ -45,6 +45,12 @@
     overflow-y: auto;
     .ant-list-item {
       padding: $padd-0;
+      &:hover i {
+        color: #15558d
+      }
+      &:hover a {
+        color: #15558d
+      }
       .ant-list-item-meta {
         padding: 16px 20px;
       }

@@ -83,8 +83,16 @@
   font-size: 16px;
   font-weight: 500;
   color: #15558d;
-  padding: 0 30px;
+  padding: 0 30px;  
 }
 }
-
+.switch-section {
+  .ant-space {
+    display: flex;
+    flex-direction: row;
+    .ant-space-item {
+      @include margin-padding(5px, 0);
+    }
+  }
+}
 
