@@ -79,6 +79,13 @@ const sideMenuList = [
     wologin: true,
     wlogin: true,
   },
+  {
+    title: 'Log Out',
+    icon: 'fas fa-sign-out-alt',
+    path: '/analytics',
+    wologin: true,
+    wlogin: true,
+  }
 ];
 const Sidebar = () => {
   const {

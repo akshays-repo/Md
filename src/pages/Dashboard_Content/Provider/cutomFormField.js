@@ -4,24 +4,65 @@ import { DownOutlined, UserOutlined, PlusOutlined } from '@ant-design/icons';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { connect } from 'react-redux';
 import { actionCreator } from '../../../reducers/actionCreator';
+import { indexOf } from 'lodash';
 
-const CustomFormField = (props) => {
+const CustomFormField = props => {
   const [field, setField] = useState();
   const [addNewField, setAddNewField] = useState([]);
   const [loadings, setLoadings] = useState(false);
   const innerForm = useRef();
-
-  useEffect(() => {
-    let param = '3'
-    props.fetchCustomForm(param);
-    console.log(props.CustomForm)
-  }, [])
+  const [listCustomField, setListCustomField] = useState([]);
+  const [editIndex , setEditIndex] = useState('')
   const handleMenuClick = e => {
-    console.log('keyyykeyyy', e);
     let text = e.key;
     setAddNewField([...addNewField, text]);
-    console.log('keyyykeyyy', addNewField);
   };
+
+  useEffect(() =>{
+    setListCustomField(props.CustomForm.custom_form)
+    console.log('CUSTOFORM', props.CustomForm.custom_form)
+  })
+
+
+  const handleFormSubmission = async values => {
+    let contentType = 'JSON';
+    let data = listCustomField;
+    data.push(values)
+    let sendingData = {
+      hospital_id: parseInt(localStorage.getItem('hospital_id')),
+      formData:data
+    }
+    console.log("sendingData" , sendingData)
+    await props.addCustomForm(JSON.stringify(sendingData), contentType);
+  };
+
+  const deleteItem = async (index) =>{
+    let data = listCustomField;
+    data.splice(index, 1);
+    let contentType = 'JSON';
+    let sendingData = {
+      hospital_id: parseInt(localStorage.getItem('hospital_id')),
+      formData:data
+    }
+    await props.addCustomForm(JSON.stringify(sendingData), contentType);
+  }
+
+  const handleEditItem = async(values) =>{
+        console.log("handleEditItem", values)
+        console.log("handleEditItem index",editIndex)
+        let data = listCustomField;
+        if (editIndex !== -1) {
+          data[editIndex] = values;
+      }
+      let contentType = 'JSON';
+      let sendingData = {
+        hospital_id: parseInt(localStorage.getItem('hospital_id')),
+        formData:data
+      }
+      await props.addCustomForm(JSON.stringify(sendingData), contentType);
+      }
+
+
 
   const menu = (
     <Menu onClick={handleMenuClick}>
@@ -45,53 +86,74 @@ const CustomFormField = (props) => {
       </Menu.Item>
     </Menu>
   );
-
-  const handleFormSubmission = async values => {
-    console.log('valueee', values);
-    console.log('valueee props', props);
-    let contentType = 'JSON'
-    await props.addCustomForm(JSON.stringify(values), contentType);
-  };
-
   return (
-    <div className="custom-field">
-      <h3>CUSTOM FORM FIELD</h3>
-      <div className="inner-box">
+    <div className="custom-field" style={{ minHeight: '500px' }}>
+      CUSTOM FORM FIELD
+      <div  className="inner-box">
         <div>
           This is what FossilMd asks your patients by default. You can create additional questions
           and fields by clicking on the plus sign below.
+
+          {listCustomField?.map((type , index)=> {
+            return (
+              <div>
+                <Formik
+                  enableReinitialize={true}
+                  initialValues={{
+                    custom_types: type.type,
+                    required: true,
+                    Key_name: type.Key_name,
+                  }}
+                  onSubmit={handleEditItem}
+                  innerRef={innerForm}
+                >
+                  {({ handleSubmit }) => (
+                    <Form className="login__form" handleSubmit={handleSubmit}>
+                     <Field name="Key_name" type="text"/>
+                      <Switch
+                        checkedChildren="Required"
+                        unCheckedChildren="Not Required"
+                        name="required"
+                        defaultChecked
+                      />
+                      <Button onClick={() => setEditIndex(index)} className="mt-5" htmlType="submit" className="submitbutton">
+                        edit
+                      </Button>
+                      <Button onClick={() => deleteItem(index)}>Delete</Button>
+                    </Form>
+                  )}
+                </Formik>
+              </div>
+            );
+          })}
+
+
+
+
           {addNewField.map(type => {
             return (
               <div>
                 <Formik
                   enableReinitialize={true}
                   initialValues={{
-                    hospital_id: parseInt(localStorage.getItem('hospital_id')),
-                    formData: [
-                      {
-                        custom_types: type,
-                        required: true,
-                        Key_name: '',
-                        
-                      },
-                    ],
+                  custom_types: type,
+                  required: true,
+                  Key_name: '',
                   }}
                   onSubmit={handleFormSubmission}
-                  innerRef={innerForm}>
-                  {({ handleSubmit ,  }) => (
+                  innerRef={innerForm}
+                >
+                  {({ handleSubmit }) => (
                     <Form className="login__form" handleSubmit={handleSubmit}>
-                        <Field type="text" name="formData[0].Key_name" placeholder={type} />
-                        <span className="form-to"><Switch
-                          checkedChildren="Required"
-                          unCheckedChildren="Not Required"
-                          name="required"
-                          defaultChecked
-                        /></span>
-                      <Button
-                        className="mt-5 button-square view-button"
-                        htmlType="submit"
-                        
-                      >
+                      <Field type="text" name="Key_name"/>
+                      <span className="form-to">
+                      <Switch
+                        checkedChildren="Required"
+                        unCheckedChildren="Not Required"
+                        name="required"
+                        defaultChecked
+                      /></span>
+                      <Button className="mt-5 button-square view-button" htmlType="submit" className="submitbutton">
                         submit
                       </Button>
                     </Form>
@@ -100,8 +162,8 @@ const CustomFormField = (props) => {
               </div>
             );
           })}
-          <Dropdown overlay={menu}>
-            <Button className="mt-5 button-square edit-button">
+          <Dropdown trigger={['click']} overlay={menu}>
+            <Button className="mt-5 button-square edit-button" onClick={e => e.preventDefault()}>
               Add New Field <PlusOutlined />
             </Button>
           </Dropdown>
@@ -111,24 +173,25 @@ const CustomFormField = (props) => {
   );
 };
 
-const mapStoreToProps = ({  CustomForm }) => {
-    console.log('Store CustomForm', CustomForm);
-    return {
-      CustomForm: CustomForm.payload,
-      CustomFormerror: CustomForm.error,
-      CustomFormmessage: CustomForm.message,
-      CustomFormmodal: CustomForm.modal,
-      CustomFormmodal1: CustomForm.modal1,
-      CustomFormchanged:CustomForm.changed,
-    };
+const mapStoreToProps = ({ CustomForm }) => {
+  console.log('Store CustomForm', CustomForm);
+  return {
+    CustomForm: CustomForm.payload,
+    CustomFormerror: CustomForm.error,
+    CustomFormmessage: CustomForm.message,
+    CustomFormmodal: CustomForm.modal,
+    CustomFormmodal1: CustomForm.modal1,
+    CustomFormchanged: CustomForm.changed,
   };
-
+};
 
 const mapDispatchToProps = dispatch => ({
   fetchCustomForm: id =>
     dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_CUSTOMFORM', id })),
   addCustomForm: (values, contentType) =>
-    dispatch(actionCreator({ method: 'POST', action_type: 'CREATE_CUSTOMFORM', values , contentType })),
+    dispatch(
+      actionCreator({ method: 'POST', action_type: 'CREATE_CUSTOMFORM', values, contentType }),
+    ),
   editCustomForm: (id, values) =>
     dispatch(actionCreator({ method: 'PUT', action_type: 'EDIT_PROVIDER', id, values })),
   deleteCustomForm: id =>
