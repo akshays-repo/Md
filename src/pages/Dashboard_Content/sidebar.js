@@ -98,7 +98,7 @@ const Sidebar = () => {
         <div className="sidebar_header">
           <div className="profileDashboard">
             {/* <img src="https://images.livemint.com/img/2020/07/06/600x338/apollo_1594043446600_1594043458520.jpg" /> */}
-            <img src={avatarlocation} />
+            <img src={'https://images.livemint.com/img/2020/07/06/600x338/apollo_1594043446600_1594043458520.jpg'} />
           </div>
           <h2 style={{ textTransform: 'uppercase' }}>{localStorage.getItem('name')}</h2>
           <p className="hospital_address">Curabitur aliquet quam id dui posuere blandit.</p>

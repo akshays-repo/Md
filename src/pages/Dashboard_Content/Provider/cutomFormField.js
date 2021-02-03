@@ -153,6 +153,13 @@ const CustomFormField = props => {
                         name="required"
                         defaultChecked
                       /></span>
+
+                      {type === 'checkbox' || 'drop-down' && (
+                        <div>
+                           <Button></Button>
+                        </div>
+                       
+                      )}
                       <Button className="mt-5 button-square view-button" htmlType="submit" className="submitbutton">
                         submit
                       </Button>
