@@ -19,6 +19,7 @@ export const CustomFormReducer = (state = CustomFormState, action) => {
     case 'FILTER_CUSTOMFORM':
       return { error: action.error, payload: action.payload, message: action.message };
     case 'DELETE_CUSTOMFORM':
+      message.success('CUSTOMFORM DELETED SUCCESSFULLY');
       return { error: action.error, payload: action.payload, message: action.message };
       case 'OPEN_CUSTOMFORM_CREATE_MODAL':
         return { ...state, modal: true };

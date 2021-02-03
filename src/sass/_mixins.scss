@@ -69,6 +69,10 @@
 @mixin delete-button {
   @include button;
   background-color: $red-button;
+  &:hover {
+    background-color: $red-button;
+    color: #fff;
+  }
 }
 @mixin view-button {
   @include button;

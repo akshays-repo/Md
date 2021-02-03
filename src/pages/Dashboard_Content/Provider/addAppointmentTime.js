@@ -90,23 +90,23 @@ const AddAppointmentTime = props => {
                     errors={errors}
                     touched={touched}
                   />
-                  <button
+                  <button className="delete-button button-square"
                     onClick={() => deleteAppointment(index)}
-                    style={{
-                      cursor: 'pointer',
-                      background: 'transparent',
-                      border: 'none',
-                      outline: 'none',
-                    }}
+                    // style={{
+                    //   cursor: 'pointer',
+                    //   background: 'transparent',
+                    //   border: 'none',
+                    //   outline: 'none',
+                    // }}
                   >
-                    <i className="fa fa-trash" style={{ color: 'red' }}></i>
+                    <i className="fa fa-trash" style={{ color: 'white' }}></i>
                   </button>
                 </Space>
               ))}
               <div style={{ textAlign: 'center', marginTop: 20 }}>
                 <Space>
-                  <Button htmlType="submit">Save</Button>
-                  <Button type="default">Cancel</Button>
+                  <Button className="edit-button button-square" htmlType="submit">Save</Button>
+                  <Button className="delete-button button-square" type="default">Cancel</Button>
                 </Space>
               </div>
             </Form>

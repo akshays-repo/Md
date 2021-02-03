@@ -94,7 +94,7 @@ export const Scheduling = ({ values, setFieldValue, setValues, index, errors, to
               //   allowClear
               placeholder="Select Day"
               onChange={value => handleChange(value, 'date')}
-              style={{ width: '180px' }}
+              style={{ width: '225px' }}
             >
               {weekDays.map((day, i) => (
                 <Option value={i + 1} label={day}>
@@ -128,7 +128,7 @@ export const Scheduling = ({ values, setFieldValue, setValues, index, errors, to
               }
               placeholder="Select Date"
               onChange={value => handleDate(value, 'date')}
-              style={{ width: '180px' }}
+              style={{ width: '225px' }}
               format={dateFormat}
             ></DatePicker>
             <div className="errormsg">
@@ -170,8 +170,8 @@ export const Scheduling = ({ values, setFieldValue, setValues, index, errors, to
           </Space>
         )}
         {'  '}
-        <Space direction="horizontal">
-          From:
+        <Space direction="horizontal" className="mt-5">
+          <span className="form-to">From:</span>
           <Select onChange={value => handleFrom(value, 'hour')} value={fromHour}>
             {array_hours.map((result, i) => (
               <Option key={i} value={result}>
@@ -190,7 +190,7 @@ export const Scheduling = ({ values, setFieldValue, setValues, index, errors, to
             <Option value="AM">AM</Option>
             <Option value="PM">PM</Option>
           </Select>
-          To:
+          <span className="form-to">To:</span>
           <Select onChange={value => handleTo(value, 'hour')} value={toHour}>
             {array_hours.map((result, i) => (
               <Option key={i} value={result}>
@@ -215,7 +215,7 @@ export const Scheduling = ({ values, setFieldValue, setValues, index, errors, to
         </Space>
         <br />
         <br />
-        <div className="switch-section">
+        <div className="switch-section" style={{ marginLeft:15 }}>
           <Space direction="vertical">
             <div>
               <Switch
@@ -232,8 +232,10 @@ export const Scheduling = ({ values, setFieldValue, setValues, index, errors, to
                 />
                 &nbsp; Custom repeat
               </div>
-              {values[index].type === 'custom' && (
-                <div style={{ marginLeft: 20 }}>
+             
+            </div>
+            {values[index].type === 'custom' && (
+                <div>
                   <Space direction="vertical">
                     <Select
                       value={values[index]?.frequency || null}
@@ -256,7 +258,7 @@ export const Scheduling = ({ values, setFieldValue, setValues, index, errors, to
                         : ''}
                     </div>
                   </Space>
-                  <Space direction="vertical" style={{ marginLeft: 20 }}>
+                  <Space direction="vertical" style={{ marginTop: 20 }}>
                     <Select
                       value={values[index]?.unit || null}
                       onChange={value => handleChange(value, 'unit')}
@@ -278,7 +280,6 @@ export const Scheduling = ({ values, setFieldValue, setValues, index, errors, to
                   </Space>
                 </div>
               )}
-            </div>
           </Space>
         </div>
       </div>

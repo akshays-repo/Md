@@ -1,11 +1,13 @@
-import React, { useDebugValue, useEffect, useRef, useState } from 'react';
-import { Formik, Form, Field, ErrorMessage, FormikProps } from 'formik';
+import React, {  useEffect, useRef, useState } from 'react';
+import { Formik, Form, Field } from 'formik';
 import { ProviderCreationSchema } from '_utils/Schemas';
-import { Button, Row, Col, message, Select } from 'antd';
+import { Button, Row, Select, Col } from 'antd';
+import { Select as matSeclect } from 'formik-material-ui';
+import MenuItem from '@material-ui/core/MenuItem';
 import { generateForm } from '../../../_utils/formgenerator';
-import { getFormData, getFormDataA } from '_utils';
+import {  getFormDataA } from '_utils';
 import { store } from '../../../reducers/configureStore';
-import { listenerCount } from 'superagent';
+
 const { Option } = Select;
 
 const ProviderCreationForm = props => {
@@ -72,13 +74,16 @@ const ProviderCreationForm = props => {
       >
         {({ handleSubmit, touched, errors, isSubmitting }) => (
           <Form className="login__form" handleSubmit={handleSubmit}>
-            <Row>{generateForm(formField)}</Row>
-
-            <Field as="select" style={{ width: 120 }} name="branchId">
+            <Row>{generateForm(formField)}
+            <Col xs={24} xl={12}>
+            <Field as="select" name="branchId"   component={matSeclect}>
               {branchList?.map(branch => {
-                return <option value={branch.id}>{branch.fullName}</option>;
+                return <MenuItem value={branch.id}>{branch.fullName}</MenuItem>;
               })}
             </Field>
+            </Col>
+            </Row>
+
             <Button
 
               htmlType="submit"

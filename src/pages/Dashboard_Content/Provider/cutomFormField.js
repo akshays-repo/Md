@@ -1,11 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Menu, Dropdown, Button, Switch } from 'antd';
+import { Menu, Dropdown, Button,  } from 'antd';
+import {Switch} from "formik-antd" 
 import { DownOutlined, UserOutlined, PlusOutlined } from '@ant-design/icons';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { TextField} from 'formik-material-ui';
 import { connect } from 'react-redux';
 import { actionCreator } from '../../../reducers/actionCreator';
-import { indexOf } from 'lodash';
-
+import { customFormSchema } from '_utils/Schemas';
 const CustomFormField = props => {
   const [field, setField] = useState();
   const [addNewField, setAddNewField] = useState([]);
@@ -69,19 +70,24 @@ const CustomFormField = props => {
       <Menu.Item key="text" icon={<UserOutlined />}>
         Text
       </Menu.Item>
+
       <Menu.Item key="note" icon={<UserOutlined />}>
         Note
       </Menu.Item>
+
       <Menu.Item key="checkbox" icon={<UserOutlined />}>
         Check box
       </Menu.Item>
-      <Menu.Item key="dropdown" icon={<UserOutlined />}>
-        Drop Down List
+
+      <Menu.Item key="drop-down" icon={<UserOutlined />}>
+        Drop Down 
       </Menu.Item>
+
       <Menu.Item key="date" icon={<UserOutlined />}>
         Date
       </Menu.Item>
-      <Menu.Item key="date" icon={<UserOutlined />}>
+
+      <Menu.Item key="number" icon={<UserOutlined />}>
         Number
       </Menu.Item>
     </Menu>
@@ -101,15 +107,16 @@ const CustomFormField = props => {
                   enableReinitialize={true}
                   initialValues={{
                     custom_types: type.type,
-                    required: true,
+                    required: type.required,
                     Key_name: type.Key_name,
                   }}
                   onSubmit={handleEditItem}
                   innerRef={innerForm}
+                  validationSchema={customFormSchema}
                 >
                   {({ handleSubmit }) => (
                     <Form className="login__form" handleSubmit={handleSubmit}>
-                     <Field name="Key_name" type="text"/>
+                     <Field style={{width:"50%"}} component={TextField} name="Key_name" type="text"/>
                       <Switch
                         checkedChildren="Required"
                         unCheckedChildren="Not Required"
@@ -131,6 +138,7 @@ const CustomFormField = props => {
 
 
           {addNewField.map(type => {
+            let option = [];
             return (
               <div>
                 <Formik
@@ -139,24 +147,42 @@ const CustomFormField = props => {
                   custom_types: type,
                   required: true,
                   Key_name: '',
+                  values:[]
                   }}
+        
                   onSubmit={handleFormSubmission}
                   innerRef={innerForm}
                 >
-                  {({ handleSubmit }) => (
+                  {({ handleSubmit , touched, errors, isSubmitting}) => (
+                    <div>
                     <Form className="login__form" handleSubmit={handleSubmit}>
-                      <Field type="text" name="Key_name"/>
+                      <Field style={{width:"50%"}} component={TextField}  placeholder={type} type="text" name="Key_name"
+                       />
                       <span className="form-to">
                       <Switch
                         checkedChildren="Required"
                         unCheckedChildren="Not Required"
                         name="required"
                         defaultChecked
+                        
                       /></span>
+
+                      {type === 'checkbox' || type === 'drop-down' ?
+                      <div>
+                      {option?.map(() => (
+                        <div>
+                       <Field type="text" name=""/>
+                          </div>
+                      ))}
+                       <Button onClick={() => option.push('')}> Add Option</Button>
+                    </div>
+                    : '' }
                       <Button className="mt-5 button-square view-button" htmlType="submit" className="submitbutton">
-                        submit
+                     Submit
                       </Button>
                     </Form>
+                    </div>
+
                   )}
                 </Formik>
               </div>
