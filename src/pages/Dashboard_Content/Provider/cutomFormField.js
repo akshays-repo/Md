@@ -134,15 +134,16 @@ const CustomFormField = props => {
         <div>
           This is what FossilMd asks your patients by default. You can create additional questions
           and fields by clicking on the plus sign below.
-          <Button> PREVIEW </Button>
+          <Button onClick={() => setIsModalVisible(true)}> PREVIEW </Button>
+
           <Modal
-            title="Basic Modal"
+            title="PREVIEW CUTOM FORM"
             visible={isModalVisible}
             onOk={handleOk}
             onCancel={handleCancel}
           >
 
-<CustomFormReview/>
+<CustomFormReview {...props}/>
 
           </Modal>
           {listCustomField?.map((type, index) => {

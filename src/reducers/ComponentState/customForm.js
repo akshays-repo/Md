@@ -4,6 +4,7 @@ export const CustomFormState = {
     message: '',
     modal: false,
     modal1: false,
-    changed: false
+    changed: false,
+    modal2:false
   };
   
