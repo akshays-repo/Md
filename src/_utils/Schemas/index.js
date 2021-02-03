@@ -451,3 +451,7 @@ export const SchedulingSchema = Yup.object().shape({
     }),
   ),
 });
+
+export const customFormSchema = Yup.object().shape({
+  Key_name: Yup.string().required('Please enter key name'),
+});

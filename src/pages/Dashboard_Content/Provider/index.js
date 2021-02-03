@@ -63,7 +63,7 @@ const Dashboard_Provider = (props) => {
     <div className="schedule-time">
       <Modal title="" 
       footer={false} 
-      height="800" 
+      width={800}
       visible={props.CustomFormmodal}  
       onCancel={() =>  store.dispatch({ type: 'CLOSE_CUSTOMFORM_CREATE_MODAL' })}
       destroyOnClose>
