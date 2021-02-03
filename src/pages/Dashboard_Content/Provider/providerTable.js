@@ -16,8 +16,8 @@ const ProviderTable = props => {
   const [editData, setEditData] = useState('');
 
   useEffect(() => {
-    setAppointmentTypes(store.getState().AppointmentType.payload);
-  },);
+    console.log("proporperoeporperpe",props)
+  },[]);
 
   const showModal = (id, data) => {
     setEditId(id);
