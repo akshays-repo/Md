@@ -5,7 +5,6 @@ import { store } from '../../../reducers/configureStore';
 import ProviderCreationForm from './providerCreationForm';
 import { connect } from 'react-redux';
 import { getFormDataA } from '_utils';
-import { valuesIn } from 'lodash';
 
 const ProviderTable = props => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -16,8 +15,8 @@ const ProviderTable = props => {
   const [editData, setEditData] = useState('');
 
   useEffect(() => {
-    console.log("proporperoeporperpe",props)
-  },[]);
+    setAppointmentTypes(props.appointment_type)
+  },);
 
   const showModal = (id, data) => {
     setEditId(id);
