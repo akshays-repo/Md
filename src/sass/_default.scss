@@ -1,6 +1,6 @@
 body {
     font-family: 'Poppins', sans-serif;
-    height: 100vh;
+   
     /* width */
     ::-webkit-scrollbar {
       width: 7px;
@@ -24,6 +24,7 @@ body {
   
   body {
     font-family: 'Poppins', sans-serif;
+    
     .edit-button {
       @include edit-button;
     }

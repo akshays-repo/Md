@@ -129,13 +129,13 @@ const CustomFormField = props => {
 
   return (
     <div className="custom-field" style={{ minHeight: '500px' }}>
-      <h2>CUSTOM FORM FIELD</h2>
+      CUSTOM FORM FIELD
       <div className="inner-box">
         <div>
-          <p>
           This is what FossilMd asks your patients by default. You can create additional questions
-          and fields by clicking on the plus sign below.</p>
-          <Button className="edit-button button-square" onClick={() => setIsModalVisible(true)}> PREVIEW </Button>
+          and fields by clicking on the plus sign below.
+          <Button onClick={() => setIsModalVisible(true)}> PREVIEW </Button>
+
           <Modal
             title="PREVIEW CUTOM FORM"
             visible={isModalVisible}
@@ -172,7 +172,7 @@ const CustomFormField = props => {
                         name="Key_name"
                         type="text"
                       />
-                      <Switch className="ml4"
+                      <Switch
                         checkedChildren="Required"
                         unCheckedChildren="Not Required"
                         name="required"
@@ -180,12 +180,13 @@ const CustomFormField = props => {
                       />
                       <Button
                         onClick={() => setEditIndex(index)}
-                        className="ml4 mt3 edit-button"
+                        className="mt-5"
                         htmlType="submit"
+                        className="submitbutton"
                       >
                         edit
                       </Button>
-                      <Button className="ml4 delete-button" onClick={() => deleteItem(index)}>Delete</Button>
+                      <Button onClick={() => deleteItem(index)}>Delete</Button>
                       {Values.length !== 0 && (
                         <div>
                           <AntForm
@@ -252,7 +253,7 @@ const CustomFormField = props => {
                             </AntForm.List>
                             <AntForm.Item>
                               <Button type="primary" htmlType="submit">
-                                Submit
+                                Submit 
                               </Button>
                             </AntForm.Item>
                           </AntForm>
