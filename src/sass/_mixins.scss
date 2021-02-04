@@ -62,6 +62,11 @@
   @include button;
   background-color: $edit-button;
   &:hover {
+    background-color: #178fb5;
+    color: #fff;
+  }
+  &:active,
+  &:focus {
    background: #20c0f3;
    color: #fff;
   }
@@ -70,6 +75,11 @@
   @include button;
   background-color: $red-button;
   &:hover {
+    background-color: #ad2428;
+    color: #fff;
+  }
+  &:active,
+  &:focus  {
     background-color: $red-button;
     color: #fff;
   }
@@ -77,7 +87,9 @@
 @mixin view-button {
   @include button;
   background-color: $view-button;
-  &:hover {
+  &:hover,
+  &:active,
+  &:focus  {
     background-color: $view-button;
     color: #fff;
   }
@@ -125,3 +137,19 @@
   display: inline;
   padding: 0 15px;
 }
+$sizes: 12;
+
+@mixin margin-classes {
+  @for $i from 1 through $sizes {
+     $margin: $i * 0.25rem;
+    /* margin #{$margin} */
+    .m#{$i}  {margin: $margin;}
+    .ml#{$i} {margin-left: $margin;}
+    .mr#{$i} {margin-right: $margin;}
+    .mt#{$i} {margin-top: $margin;}
+    .mb#{$i} {margin-bottom: $margin;}
+    .mx#{$i} {margin-left: $margin; margin-right: $margin;}
+    .my#{$i} {margin-top: $margin; margin-bottom: $margin;}
+  }
+}
+@include margin-classes;

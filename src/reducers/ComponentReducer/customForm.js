@@ -29,6 +29,10 @@ export const CustomFormReducer = (state = CustomFormState, action) => {
         return { ...state, modal1: true };
       case 'CLOSE_CUSTOMFORM_EDIT_MODAL':
         return { ...state, modal1: false };
+        case 'OPEN_CUSTOMFORM_PREVIEW_MODAL':
+          return { ...state, modal2: false };
+        case 'CLOSE_CUSTOMFORM_PREVIEW_MODAL':
+          return { ...state, modal2: false };
     default:
       return state;
   }
