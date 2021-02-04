@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Menu, Dropdown, Button,  } from 'antd';
-import {Switch} from "formik-antd" 
-import { DownOutlined, UserOutlined, PlusOutlined } from '@ant-design/icons';
+import { Menu, Dropdown, Button, Input, Form as AntForm } from 'antd';
+import { Switch } from 'formik-antd';
+import { DownOutlined, UserOutlined, MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { TextField} from 'formik-material-ui';
+import { TextField } from 'formik-material-ui';
 import { connect } from 'react-redux';
 import { actionCreator } from '../../../reducers/actionCreator';
 import { customFormSchema } from '_utils/Schemas';
@@ -13,57 +13,82 @@ const CustomFormField = props => {
   const [loadings, setLoadings] = useState(false);
   const innerForm = useRef();
   const [listCustomField, setListCustomField] = useState([]);
-  const [editIndex , setEditIndex] = useState('')
+  const [editIndex, setEditIndex] = useState('');
+  const [optionValue, setOptionValues] =useState([]);
+  
+  const formItemLayout = {
+    labelCol: {
+      xs: { span: 24 },
+      sm: { span: 4 },
+    },
+    wrapperCol: {
+      xs: { span: 24 },
+      sm: { span: 20 },
+    },
+  };
+  const formItemLayoutWithOutLabel = {
+    wrapperCol: {
+      xs: { span: 24, offset: 0 },
+      sm: { span: 20, offset: 4 },
+    },
+  };
+
   const handleMenuClick = e => {
     let text = e.key;
     setAddNewField([...addNewField, text]);
+    console.log('NEWWWARRAY', addNewField);
   };
 
-  useEffect(() =>{
-    setListCustomField(props.CustomForm.custom_form)
-    console.log('CUSTOFORM', props.CustomForm.custom_form)
-  })
-
+  const updateArrayForOptionField = index => {
+    console.log('NEWWWARRAY: ' + index);
+    let newArr = [...addNewField];
+    let type = newArr[index];
+    newArr[index] = { type, values: [''] };
+    setAddNewField(newArr);
+    console.log('NEWWWARRAY', newArr);
+  };
+  useEffect(() => {
+    setListCustomField(props.CustomForm.custom_form);
+    console.log('CUSTOFORM', props.CustomForm.custom_form);
+  });
 
   const handleFormSubmission = async values => {
     let contentType = 'JSON';
     let data = listCustomField;
-    data.push(values)
+    data.push(values);
     let sendingData = {
       hospital_id: parseInt(localStorage.getItem('hospital_id')),
-      formData:data
-    }
-    console.log("sendingData" , sendingData)
+      formData: data,
+    };
+    console.log('sendingData', sendingData);
     await props.addCustomForm(JSON.stringify(sendingData), contentType);
   };
 
-  const deleteItem = async (index) =>{
+  const deleteItem = async index => {
     let data = listCustomField;
     data.splice(index, 1);
     let contentType = 'JSON';
     let sendingData = {
       hospital_id: parseInt(localStorage.getItem('hospital_id')),
-      formData:data
-    }
+      formData: data,
+    };
     await props.addCustomForm(JSON.stringify(sendingData), contentType);
-  }
+  };
 
-  const handleEditItem = async(values) =>{
-        console.log("handleEditItem", values)
-        console.log("handleEditItem index",editIndex)
-        let data = listCustomField;
-        if (editIndex !== -1) {
-          data[editIndex] = values;
-      }
-      let contentType = 'JSON';
-      let sendingData = {
-        hospital_id: parseInt(localStorage.getItem('hospital_id')),
-        formData:data
-      }
-      await props.addCustomForm(JSON.stringify(sendingData), contentType);
-      }
-
-
+  const handleEditItem = async values => {
+    console.log('handleEditItem', values);
+    console.log('handleEditItem index', editIndex);
+    let data = listCustomField;
+    if (editIndex !== -1) {
+      data[editIndex] = values;
+    }
+    let contentType = 'JSON';
+    let sendingData = {
+      hospital_id: parseInt(localStorage.getItem('hospital_id')),
+      formData: data,
+    };
+    await props.addCustomForm(JSON.stringify(sendingData), contentType);
+  };
 
   const menu = (
     <Menu onClick={handleMenuClick}>
@@ -80,7 +105,7 @@ const CustomFormField = props => {
       </Menu.Item>
 
       <Menu.Item key="drop-down" icon={<UserOutlined />}>
-        Drop Down 
+        Drop Down
       </Menu.Item>
 
       <Menu.Item key="date" icon={<UserOutlined />}>
@@ -92,17 +117,21 @@ const CustomFormField = props => {
       </Menu.Item>
     </Menu>
   );
+
+
+  const onFinish = values => {
+    console.log('Received values of form:', values);
+  };
   return (
     <div className="custom-field" style={{ minHeight: '500px' }}>
       CUSTOM FORM FIELD
-      <div  className="inner-box">
+      <div className="inner-box">
         <div>
           This is what FossilMd asks your patients by default. You can create additional questions
           and fields by clicking on the plus sign below.
-
-          {listCustomField?.map((type , index)=> {
+          {listCustomField?.map((type, index) => {
             return (
-              <div>
+              <div style={{ marginTop: '30px' }}>
                 <Formik
                   enableReinitialize={true}
                   initialValues={{
@@ -116,14 +145,24 @@ const CustomFormField = props => {
                 >
                   {({ handleSubmit }) => (
                     <Form className="login__form" handleSubmit={handleSubmit}>
-                     <Field style={{width:"50%"}} component={TextField} name="Key_name" type="text"/>
+                      <Field
+                        style={{ width: '50%' }}
+                        component={TextField}
+                        name="Key_name"
+                        type="text"
+                      />
                       <Switch
                         checkedChildren="Required"
                         unCheckedChildren="Not Required"
                         name="required"
                         defaultChecked
                       />
-                      <Button onClick={() => setEditIndex(index)} className="mt-5" htmlType="submit" className="submitbutton">
+                      <Button
+                        onClick={() => setEditIndex(index)}
+                        className="mt-5"
+                        htmlType="submit"
+                        className="submitbutton"
+                      >
                         edit
                       </Button>
                       <Button onClick={() => deleteItem(index)}>Delete</Button>
@@ -133,56 +172,116 @@ const CustomFormField = props => {
               </div>
             );
           })}
-
-
-
-
-          {addNewField.map(type => {
-            let option = [];
+          {addNewField.map((item, index) => {
             return (
               <div>
                 <Formik
                   enableReinitialize={true}
                   initialValues={{
-                  custom_types: type,
-                  required: true,
-                  Key_name: '',
-                  values:[]
+                    custom_types: item.type,
+                    required: true,
+                    Key_name: '',
+                    values: [],
                   }}
-        
                   onSubmit={handleFormSubmission}
                   innerRef={innerForm}
                 >
-                  {({ handleSubmit , touched, errors, isSubmitting}) => (
-                    <div>
-                    <Form className="login__form" handleSubmit={handleSubmit}>
-                      <Field style={{width:"50%"}} component={TextField}  placeholder={type} type="text" name="Key_name"
-                       />
-                      <span className="form-to">
-                      <Switch
-                        checkedChildren="Required"
-                        unCheckedChildren="Not Required"
-                        name="required"
-                        defaultChecked
-                        
-                      /></span>
+                  {({ handleSubmit, touched, errors, isSubmitting }) => (
+                    <div style={{ marginTop: '30px' }}>
+                      <Form className="login__form" handleSubmit={handleSubmit}>
+                        <Field
+                          style={{ width: '50%' }}
+                          component={TextField}
+                          placeholder={item}
+                          type="text"
+                          name="Key_name"
+                        />
+                        <span className="form-to">
+                          <Switch
+                            checkedChildren="Required"
+                            unCheckedChildren="Not Required"
+                            name="required"
+                            defaultChecked
+                          />
+                        </span>
 
-                      {type === 'checkbox' || type === 'drop-down' ?
-                      <div>
-                      {option?.map(() => (
-                        <div>
-                       <Field type="text" name=""/>
+                        {item === 'checkbox' || item === 'drop-down' ? (
+                          <div>
+                            <AntForm
+                              name="dynamic_form_item"
+                              {...formItemLayoutWithOutLabel}
+                              onFinish={onFinish}
+                            >
+                              <AntForm.List name="names">
+                                {(fields, { add, remove }, { errors }) => (
+                                  <>
+                                    {fields.map((field, index) => (
+                                      <AntForm.Item
+                                        {...(index === 0
+                                          ? formItemLayout
+                                          : formItemLayoutWithOutLabel)}
+                                        label={index === 0 ? 'Add Option' : ''}
+                                        required={false}
+                                        key={field.key}
+                                      >
+                                        <AntForm.Item
+                                          {...field}
+                                          validateTrigger={['onChange', 'onBlur']}
+                                          rules={[
+                                            {
+                                              required: true,
+                                              whitespace: true,
+                                              message: 'Please input option or delete this field.',
+                                            },
+                                          ]}
+                                          noStyle
+                                        >
+                                          <Input
+                                            placeholder="Enter Option"
+                                            style={{ width: '60%' }}
+                                          />
+                                        </AntForm.Item>
+                                        {fields.length > 1 ? (
+                                          <MinusCircleOutlined
+                                            className="dynamic-delete-button"
+                                            onClick={() => remove(field.name)}
+                                          />
+                                        ) : null}
+                                      </AntForm.Item>
+                                    ))}
+                                    <AntForm.Item>
+                                      <Button
+                                        type="dashed"
+                                        onClick={() => add()}
+                                        style={{ width: '60%' }}
+                                        icon={<PlusOutlined />}
+                                      >
+                                        Add Option
+                                      </Button>
+                                      <AntForm.ErrorList errors={errors} />
+                                    </AntForm.Item>
+                                  </>
+                                )}
+                              </AntForm.List>
+                              <AntForm.Item>
+                                <Button type="primary" htmlType="submit">
+                                  Submit
+                                </Button>
+                              </AntForm.Item>
+                            </AntForm>
                           </div>
-                      ))}
-                       <Button onClick={() => option.push('')}> Add Option</Button>
+                        ) : (
+                          ''
+                        )}
+                        <Button
+                          className="mt-5 button-square view-button"
+                          htmlType="submit"
+                          className="submitbutton"
+                        >
+                          Submit
+                        </Button>
+                      </Form>
                     </div>
-                    : '' }
-                      <Button className="mt-5 button-square view-button" htmlType="submit" className="submitbutton">
-                     Submit
-                      </Button>
-                    </Form>
-                    </div>
-
                   )}
                 </Formik>
               </div>

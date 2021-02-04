@@ -58,13 +58,39 @@
     }
   }
 }
-.form-to {
-  @include formTo
-}
-.full-width-table {
-  .ant-table-wrapper {
-    overflow-x: scroll;
+
+.custom-field{
+  .inner-box{
+    .form-to {
+      @include formTo
+    }
+    .full-width-table {
+      .ant-table-wrapper {
+        overflow-x: scroll;
+      }
+    }
+    .ant-table-pagination.ant-pagination {
+      margin: 25px 0;
+    }
+    .appointment-time .item .switch-section {
+      margin-top: 20px;
+    }
+    .ant-tabs {
+    // .ant-tabs-tab.ant-tabs-tab-active {
+    //   .ant-tabs-tab-btn {
+    //     padding: 0 30px;
+    //     font-size: 16px;
+    //   color: #2be0fd;
+    // }
+    .ant-tabs-tab-btn {
+      font-size: 16px;
+      font-weight: 500;
+      color: #15558d;
+      padding: 0 30px;
+    }
+    }
   }
+  
 }
 .ant-table-pagination.ant-pagination {
   margin: 25px 0;
