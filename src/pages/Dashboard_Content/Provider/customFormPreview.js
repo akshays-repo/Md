@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Checkbox ,Select ,DatePicker, Space ,InputNumber} from 'antd'
+import TextField from '@material-ui/core/TextField';
 import moment from 'moment';
+
 const CustomFormReview = props => {
   const [customForms, setCustomForm] = useState([]);
   useEffect(() => {
@@ -14,8 +16,8 @@ const CustomFormReview = props => {
           {forms.custom_types === 'text' || forms.custom_types === 'note' ? (
             <div>
               {' '}
-              <p>{forms.Key_name}</p>
-              <input type="text" placeholder="type something" />
+              <p></p>
+              <TextField id="standard-basic" label={forms.Key_name} />
               <p></p>
             </div>
           ) : (
