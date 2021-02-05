@@ -115,16 +115,22 @@ const OnllineAppointmentForm = props => {
     },
   ];
 
-  let resultSucess = <Result
+  const resultSucess = <Result
   status="success"
   title="Successfully Booked the Appoinment"
   subTitle="Thank you"/>
 
+    const onOkay =() => {
+      window.location.href = window.location.pathname
+    }
+
   const  success = () => {
     Modal.success({
-      content: resultSucess
+      content: resultSucess,
+      onOk :onOkay
     });
   }
+  
   return (
     <div className="onlinebookWrapper">
       <div className="login-page">
