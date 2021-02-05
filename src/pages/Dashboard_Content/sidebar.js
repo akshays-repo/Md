@@ -88,9 +88,9 @@ const sideMenuList = [
   }
 ];
 const Sidebar = () => {
-  const {
-    avatarlocation = 'https://images.livemint.com/img/2020/07/06/600x338/apollo_1594043446600_1594043458520.jpg',
-  } = JSON.parse(localStorage.getItem('user_data'));
+  // const {
+  //   avatarlocation = 'https://images.livemint.com/img/2020/07/06/600x338/apollo_1594043446600_1594043458520.jpg',
+  // } = JSON.parse(localStorage.getItem('user_data'));
 
   return (
     <div className="dashboard__sidebar">

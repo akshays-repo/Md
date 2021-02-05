@@ -12,6 +12,11 @@ export const AppointmentTypeReducer = (state = AppointmentTypeState, action) => 
       return { ...state, modal: true };
     case 'CLOSE_APPOINTMENT_TYPE_MODAL':
       return { ...state, modal: false };
+      case 'OPEN_APPOINTMENT_TYPE_MODAL2':
+        return { ...state, modal2: true };
+      case 'CLOSE_APPOINTMENT_TYPE_MODAL2':
+        return { ...state, modal2: false };
+
     case 'CREATE_APPOINTMENT_TYPE':
       message.success('APPOINTMENT TYPE CREATED SUCCESSFULLY');
       return {

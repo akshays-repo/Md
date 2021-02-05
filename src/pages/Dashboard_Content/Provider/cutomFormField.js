@@ -330,7 +330,7 @@ const CustomFormField = props => {
                                         {...(index === 0
                                           ? formItemLayout
                                           : formItemLayoutWithOutLabel)}
-                                        label={index === 0 ? 'Add Option' : ''}
+                                        label={index === 0 ? '' : ''}
                                         required={false}
                                         key={field.key}
                                       >

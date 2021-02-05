@@ -86,7 +86,7 @@ const routes = [
     path: '/online-appointment/:id',
     component: loadable(() => import('../pages/OnlineAppointmentForm')),
     exact: true,
-    authorize: true,
+    authorize: false,
   },
 ];
 
