@@ -26,20 +26,20 @@ const data = [
     title: 'Booked Via health Nex dashboard ',
     number: '0',
   },
-  {
-    title: 'Booked Via health Nex dashboard ',
-    number: '40',
-  },
-  {
-    title: 'Booked Via health Nex dashboard ',
-    number: '670',
-  },
+  // {
+  //   title: 'Booked Via health Nex dashboard ',
+  //   number: '40',
+  // },
+  // {
+  //   title: 'Booked Via health Nex dashboard ',
+  //   number: '670',
+  // },
 ];
 const CardsSection = () => {
   return (
     <div className="card-section"> 
       <List
-        grid={{ gutter: 16, column: 4 }}
+        grid={{ gutter: 16, column: 3 }}
         dataSource={data}
         renderItem={item => (
           <List.Item >
