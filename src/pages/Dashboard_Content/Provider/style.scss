@@ -1,6 +1,6 @@
 .provider{
     .header{
-        @include flex(space-between , center)
+        @include flex(flex-end , center)
     }
 }
 .appointment-time{
@@ -35,7 +35,7 @@
   }
 }
 .schedule-time {
-  padding: 30px 30px 0;
+  padding: 0px 30px 0;
   .breadcrumb {
     margin: 0;
     .breadcrumb-nav {
