@@ -38,4 +38,6 @@ export const backend_api = {
   
   FETCH_SCHEDULE: '/api/backend/v1/newshedule',
   CREATE_SCHEDULE: '/api/backend/v1/newshedule',
+
+  CREATE_ONLINE_APPOINTMENT:'/api/backend/v1/online_booking'
 };
