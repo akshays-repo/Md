@@ -7,6 +7,9 @@
 .view-color {
     color: #1a568b;
 }
+.success {
+  color: $success;
+}
 body {
     font-family: 'Roboto', sans-serif;
     height: 100vh;
@@ -153,4 +156,10 @@ body {
     color: #7d7d7d;
   }
   }
+  .ant-select:not(.ant-select-customize-input) {
+    .ant-select-selector {
+      border: 1px solid #f0f0f0;
+  }
+
+}
     

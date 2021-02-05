@@ -101,7 +101,7 @@
 }
 @mixin common-button {
   @include button;
-  background-color: $theme-button;
+  background-color: $view-button; 
 }
 @mixin accept-button {
   @include button;

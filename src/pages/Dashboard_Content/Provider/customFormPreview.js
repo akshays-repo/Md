@@ -1,18 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import { Checkbox ,Select ,DatePicker, Space ,InputNumber} from 'antd'
+import { Checkbox ,Select ,DatePicker, Space ,InputNumber, Row} from 'antd'
 import TextField from '@material-ui/core/TextField';
 import moment from 'moment';
+import HardCoreForm from './cutomFormhardCore';
 
 const CustomFormReview = props => {
   const [customForms, setCustomForm] = useState([]);
+
+
+
   useEffect(() => {
     setCustomForm(props.CustomForm.custom_form);
   });
 
   return (
     <div>
+    
+       <HardCoreForm/>
       {customForms?.map(forms => (
         <div>
+          
           {forms.custom_types === 'text' || forms.custom_types === 'note' ? (
             <div>
               {' '}

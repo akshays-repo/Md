@@ -114,7 +114,12 @@
     margin-left: 0;
   }
 }
-
+.appt-type-select {
+  .ant-select-selection-item {
+    background: #def0ff;
+    border: 1px solid #def0ff;
+  }
+}
 // .switch-section {
 //   .ant-space {
 //     display: flex;
