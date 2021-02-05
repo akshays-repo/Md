@@ -1,4 +1,14 @@
 .appointment-section{
+    .title-name {
+        font-weight: 600;
+        font-size: 14px;
+    }
+    .iconAppt {
+        i {
+            width: 20px;
+        }
+       
+    }
     .right-side{
         @include flex(center, center)
     }

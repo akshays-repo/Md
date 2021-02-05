@@ -87,22 +87,18 @@ const PatientAppointment = () => {
     <div className="table-content">
       <div className="headerButton">
         <Space direction="horizontal">
-          <Button
+          <Button className="view-button"
             onClick={() => setCurrentButton(1)}
-            style={currentButton === 1 ? { backgroundColor: 'blue' } : {}}
+            style={currentButton === 1 ? { backgroundColor: 'black' } : {}}
             type="primary"
-            shape="round"
-            size={'default'}
           >
             {' '}
             upcoming
           </Button>
-          <Button
+          <Button className="edit-button"
             onClick={() => setCurrentButton(2)}
-            style={currentButton === 2 ? { backgroundColor: 'blue' } : {}}
+            style={currentButton === 2 ? { backgroundColor: 'black' } : {}}
             type="primary"
-            shape="round"
-            size={'default'}
           >
             {' '}
             today

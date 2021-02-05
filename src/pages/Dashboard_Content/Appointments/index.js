@@ -61,23 +61,23 @@ const Dashboard_Appointments = () => {
             <Card style={{ width: 1000 }}>
               <Row>
                 <Col xl={12}>
-                  <p> {item.name}</p>
-                  <p>
+                  <p className="title-name"> {item.name}</p>
+                  <p className="iconAppt">
                     <i class="far fa-clock "></i>
                     {'  '}
                     {item.date}
                   </p>
-                  <p>
+                  <p className="iconAppt">
                     <i class="fas fa-map-marker-alt"></i>
                     {'  '}
                     {item.location}
                   </p>
-                  <p>
+                  <p className="iconAppt">
                     <i class="fas fa-envelope"></i>
                     {'  '}
                     {item.emailid}
                   </p>
-                  <p>
+                  <p className="iconAppt">
                     <i class="fas fa-phone"></i>
                     {'  '}
                     {item.phone}

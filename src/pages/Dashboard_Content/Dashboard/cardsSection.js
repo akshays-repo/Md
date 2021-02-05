@@ -45,7 +45,7 @@ const CardsSection = () => {
           <List.Item >
             <Card>
               <div className="inline-card-item">
-            <span>{item.number}</span>
+            <span className="count-round-bg">{item.number}</span>
             <span>{item.title}</span>
             <span><i className="fas fa-chevron-right"/></span>
             </div>

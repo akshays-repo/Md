@@ -28,15 +28,23 @@
             
           .ant-card-body {
               @include flex(center, center);
-            @include border-radius(5px);
             flex: 1;
             box-shadow: 0 8px 15px #dcdfe6;
             padding: 15px !important;
             min-height: 90px;
             .inline-card-item{
                 flex: 1;
-    display: flex;
-    justify-content: space-between;
+                @include flex(space-between, center);
+
+    .count-round-bg {
+        width: 55px;
+        height: 55px;
+        @include border-radius(100px);
+        background-color: rgb(66, 165, 246);
+        @include flex(center, center);
+        color: $white;
+        font: 600;
+    }
             }
           }          
           }}

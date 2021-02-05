@@ -1,5 +1,13 @@
-.edit-button {
-    a {
-        color: $white;
-    }
+.ant-tabs {
+    // .ant-tabs-tab.ant-tabs-tab-active {
+    //   .ant-tabs-tab-btn {
+    //     padding: 0 30px;
+    //     font-size: 16px;
+    //   color: #2be0fd;
+    // }
+    .ant-tabs-tab-btn {
+      font-weight: 500;
+      color: #15558d;
+      padding: 0 30px;
+}
 }
