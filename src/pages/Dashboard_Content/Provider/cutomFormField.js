@@ -8,6 +8,8 @@ import { connect } from 'react-redux';
 import { actionCreator } from '../../../reducers/actionCreator';
 import { customFormSchema } from '_utils/Schemas';
 import CustomFormReview from './customFormPreview';
+import HardCoreForm from './cutomFormhardCore';
+
 const CustomFormField = props => {
   const [field, setField] = useState();
   const [addNewField, setAddNewField] = useState([]);
@@ -129,24 +131,27 @@ const CustomFormField = props => {
 
   return (
     <div className="custom-field" style={{ minHeight: '500px' }}>
-      CUSTOM FORM FIELD
+      CUSTOM FORM FIELD <Button className="edit-button" onClick={() => setIsModalVisible(true)}> PREVIEW </Button>
       <div className="inner-box">
         <div>
           <p>
           This is what FossilMd asks your patients by default. You can create additional questions
           and fields by clicking on the plus sign below.</p>
           
-          <Button className="edit-button" onClick={() => setIsModalVisible(true)}> PREVIEW </Button>
+         
           <Modal
             title="PREVIEW CUTOM FORM"
             visible={isModalVisible}
-            onOk={handleOk}
+          footer={false}
             onCancel={handleCancel}
           >
 
 <CustomFormReview {...props}/>
 
           </Modal>
+
+<HardCoreForm/>
+
           {listCustomField?.map((type, index) => {
             console.log('typeee', type);
             let Values = type.values;
