@@ -124,7 +124,7 @@ await props.deleteProvider(id)
 
         return (
           <Space size="middle">
-            <Select
+            <Select className="appt-type-select"
                mode="multiple"
               style={{ width: '100%' }}
               placeholder="Select the type"
