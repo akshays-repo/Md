@@ -132,16 +132,11 @@ const CustomFormField = props => {
       CUSTOM FORM FIELD
       <div className="inner-box">
         <div>
+          <p>
           This is what FossilMd asks your patients by default. You can create additional questions
-<<<<<<< HEAD
           and fields by clicking on the plus sign below.</p>
           
           <Button className="edit-button" onClick={() => setIsModalVisible(true)}> PREVIEW </Button>
-=======
-          and fields by clicking on the plus sign below.
-          <Button onClick={() => setIsModalVisible(true)}> PREVIEW </Button>
-
->>>>>>> ca8290ebc167953ec87b612cbe550176be5b2049
           <Modal
             title="PREVIEW CUTOM FORM"
             visible={isModalVisible}
@@ -180,12 +175,8 @@ const CustomFormField = props => {
                         name="Key_name"
                         type="text"
                       />
-<<<<<<< HEAD
                     <div className="mt4">
                       <Switch className="ml4"
-=======
-                      <Switch
->>>>>>> ca8290ebc167953ec87b612cbe550176be5b2049
                         checkedChildren="Required"
                         unCheckedChildren="Not Required"
                         name="required"
@@ -193,26 +184,16 @@ const CustomFormField = props => {
                       />
                       <span
                         onClick={() => setEditIndex(index)}
-<<<<<<< HEAD
                         className="ml4 mt3 edit-color"
-=======
-                        className="mt-5"
->>>>>>> ca8290ebc167953ec87b612cbe550176be5b2049
                         htmlType="submit"
                         className="submitbutton"
                       >
-<<<<<<< HEAD
                         <i className="fa fa-edit"></i>
                       </span>
                       <span className="ml4 delete-color" onClick={() => deleteItem(index)}><i className="fa fa-trash"></i></span>
                       </div>
 
                       </div>
-=======
-                        edit
-                      </Button>
-                      <Button onClick={() => deleteItem(index)}>Delete</Button>
->>>>>>> ca8290ebc167953ec87b612cbe550176be5b2049
                       {Values.length !== 0 && (
 
                       //  ADD SECTIION OF EDIT START HERE
@@ -280,13 +261,8 @@ const CustomFormField = props => {
                               }}
                             </AntForm.List>
                             <AntForm.Item>
-<<<<<<< HEAD
                               <Button className="view-button square-button" type="primary" htmlType="submit">
                                 Submit
-=======
-                              <Button type="primary" htmlType="submit">
-                                Submit 
->>>>>>> ca8290ebc167953ec87b612cbe550176be5b2049
                               </Button>
                             </AntForm.Item>
                           </AntForm>
