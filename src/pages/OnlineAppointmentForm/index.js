@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { PatientCreationSchema } from '_utils/Schemas';
 import { TextField } from 'formik-material-ui';
@@ -8,13 +8,24 @@ import { connect } from 'react-redux';
 import { actionCreator } from '../../reducers/actionCreator';
 import { PoweroffOutlined } from '@ant-design/icons';
 import { generateForm } from '_utils/formgenerator';
-const OnllineAppointmentForm =(props) => {
+import { set } from 'store';
+const OnllineAppointmentForm = props => {
+  const [customFormField, setCustomFormField] = useState([]);
 
-  const handleFormSubmission = async (values) => {
-    console.log("vavavavaavavavva",values)
+  const handleFormSubmission = async values => {
     let contentType = 'JSON';
     await props.createOnlineForm(JSON.stringify(values), contentType);
   };
+
+  useEffect(() => {
+    const fetchForm = async () => {
+      if (customFormField.length === 0) {
+        await props.fetchCustomForm(id);
+        setCustomFormField(props.CustomForm);
+      }
+    };
+    fetchForm();
+  });
 
   const [loadings, setLoadings] = useState(false);
   const innerForm = useRef();
@@ -107,23 +118,22 @@ const OnllineAppointmentForm =(props) => {
             userTypeId: 5,
             address: '',
             comment: '',
-            response:[
+            response: [
               {
-      custom_types:"note",
-      required:false,
-      key_name:"your father name",
-      answer:["asfg"]
-      },
-      {
-      custom_types:"checkbox",
-      required:true,
-      key_name:"select one",
-      values:["a","b"],
-      answer:["safg"]
-      }
-          ]
+                custom_types: 'note',
+                required: false,
+                key_name: 'your father name',
+                answer: ['asfg'],
+              },
+              {
+                custom_types: 'checkbox',
+                required: true,
+                key_name: 'select one',
+                values: ['a', 'b'],
+                answer: ['safg'],
+              },
+            ],
           }}
-    
           onSubmit={handleFormSubmission}
           innerRef={innerForm}
         >
@@ -148,18 +158,28 @@ const OnllineAppointmentForm =(props) => {
     </div>
   );
 };
-const mapStoreToProps = ({ OnlineBookingForm }) => {
+const mapStoreToProps = ({ OnlineBookingForm, CustomForm }) => {
   console.log('Store CustomForm', OnlineBookingForm);
   return {
     OnlineBookingForm: OnlineBookingForm.payload,
     OnlineBookingForm: OnlineBookingForm.error,
     OnlineBookingForm: OnlineBookingForm.message,
+
+    CustomForm: CustomForm.payload,
   };
 };
 const mapDispatchToProps = dispatch => ({
+  fetchCustomForm: id =>
+    dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_CUSTOMFORM', id })),
+
   createOnlineForm: (values, contentType) =>
     dispatch(
-      actionCreator({ method: 'POST', action_type: 'CREATE_ONLINE_APPOINTMENT', values, contentType }),
+      actionCreator({
+        method: 'POST',
+        action_type: 'CREATE_ONLINE_APPOINTMENT',
+        values,
+        contentType,
+      }),
     ),
 });
 
