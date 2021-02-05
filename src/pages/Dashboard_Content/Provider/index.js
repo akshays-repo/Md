@@ -32,7 +32,7 @@ const Dashboard_Provider = props => {
     return (
       <div className="provider">
         <div className="header mb10">
-          <div>
+          <div className="provider-head mr2">
             <Button
               type="primary"
               onClick={() => store.dispatch({ type: 'OPEN_CUSTOMFORM_CREATE_MODAL' })}
@@ -41,7 +41,7 @@ const Dashboard_Provider = props => {
               Custom Form
             </Button>
           </div>
-          <div>
+          <div className="provider-head mr2">
             <Button
               type="primary"
               onClick={() => store.dispatch({ type: 'OPEN_APPOINTMENT_TYPE_MODAL2' })}
@@ -50,7 +50,7 @@ const Dashboard_Provider = props => {
               Appointment types
             </Button>
           </div>
-          <div>
+          <div className="provider-head mr2">
             <Button
               type="primary"
               // onClick={() => store.dispatch({ type: 'OPEN_CUSTOMFORM_CREATE_MODAL' })}
@@ -60,7 +60,7 @@ const Dashboard_Provider = props => {
             </Button>
           </div>
 
-          <div>
+          <div className="provider-head">
             <Button
               type="primary"
               onClick={() => store.dispatch({ type: 'OPEN_PROVIDER_CREATE_MODAL' })}

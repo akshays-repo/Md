@@ -35,7 +35,6 @@
             .inline-card-item{
                 flex: 1;
                 @include flex(space-between, center);
-
     .count-round-bg {
         width: 55px;
         height: 55px;
@@ -44,10 +43,11 @@
         @include flex(center, center);
         color: $white;
         font: 600;
-    }
-            }
-          }          
-          }}
-        }
+}
+}
+}          
+}
+}
+}
 }
 
