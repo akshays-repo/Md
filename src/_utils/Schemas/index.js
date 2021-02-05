@@ -455,3 +455,19 @@ export const SchedulingSchema = Yup.object().shape({
 export const customFormSchema = Yup.object().shape({
   Key_name: Yup.string().required('Please enter key name'),
 });
+
+export const OnlineBookingSchema = Yup.object().shape({
+  firstName: Yup.string().required('Please enter firstname'),
+  lastName: Yup.string().required('Please enter lastname'),
+  email: Yup.string()
+    .required('Please enter email address')
+    .email('Please enter valid email'),
+  address: Yup.string().required('Please enter address'),
+  phone: Yup.string().required('Phone number is required'),
+  dob: Yup.date().required('Please select DOB'),
+  zipcode: Yup.date().required('Please enter zipcode'),
+  gender:Yup.string().required('Please select the gender'),
+  comment:Yup.string(),
+  appointment_for:Yup.string().required('Please select the option')
+
+});

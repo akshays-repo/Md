@@ -146,6 +146,7 @@ await props.deleteProvider(id)
       render: (text, record) => 
       <Space size="middle">
       <Select 
+      style={record.status === 'active' ?{color:"green"} : {color:'red'}}
        defaultValue={record.status}
        onChange={(record,e) => handleStatus(e, record)}>
       <Select.Option value="active">Active</Select.Option>

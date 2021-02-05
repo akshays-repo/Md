@@ -1,23 +1,26 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { PatientCreationSchema } from '_utils/Schemas';
-// import { TextField } from 'formik-material-ui';
+import { OnlineBookingSchema } from '_utils/Schemas';
 import { useParams } from 'react-router';
 import { message, Button, Row, Col, Checkbox, Select, DatePicker, Space, InputNumber } from 'antd';
 import { connect } from 'react-redux';
 import { actionCreator } from '../../reducers/actionCreator';
-import { PoweroffOutlined } from '@ant-design/icons';
 import { generateForm } from '_utils/formgenerator';
-import { set } from 'store';
 import TextField from '@material-ui/core/TextField';
 import moment from 'moment';
-import cutomFormField from 'pages/Dashboard_Content/Provider/cutomFormField';
+import { Result,Modal  } from 'antd';
+
 const OnllineAppointmentForm = props => {
   const [customFormField, setCustomFormField] = useState([]);
 
   const handleFormSubmission = async values => {
     let contentType = 'JSON';
-    await props.createOnlineForm(JSON.stringify({...values, response:[customFormField]}), contentType);
+   const response =  await props.createOnlineForm(JSON.stringify({...values, response:customFormField}), contentType);
+    console.log("MessageResponse",response)
+    if(response.error === ''){
+       success()
+       innerForm.current.reset()
+    }
   };
 
   const handleChange = (e, index) => {
@@ -25,8 +28,6 @@ const OnllineAppointmentForm = props => {
     let item = items[index];
     item.answer = [e];
     items[index] = item;
-    console.log('DATADATASasa', e);
-    console.log('DATADATASasa', items);
   };
 
   const handleChangeText  = (e , index) =>{
@@ -34,7 +35,6 @@ const OnllineAppointmentForm = props => {
     let item = items[index]
     item.answer = [e.target.value]
     items[index] = item
-    console.log("DATADATASasa",items)
 
 
   }
@@ -54,43 +54,43 @@ const OnllineAppointmentForm = props => {
 
   const formField = [
     {
-      label: 'Firstname',
+      label: 'Firstname *',
       name: 'firstName',
       type: 'text',
     },
     {
-      label: 'Lastname',
+      label: 'Lastname *',
       name: 'lastName',
       type: 'text',
     },
 
     {
-      label: 'Email',
+      label: 'Email *',
       name: 'email',
       type: 'text',
     },
     {
-      label: 'Phone no.',
+      label: 'Phone no. *',
       name: 'phone',
       type: 'text',
     },
     {
-      label: 'Address',
+      label: 'Address *',
       name: 'address',
       type: 'text',
     },
     {
-      label: 'Zipcode',
+      label: 'Zipcode *',
       name: 'zipcode',
       type: 'text',
     },
     {
-      label: 'Date of Birth',
+      label: 'Date of Birth *',
       name: 'dob',
       type: 'datepicker',
     },
     {
-      label: 'Gender',
+      label: 'Gender *',
       name: 'gender',
       type: 'select',
       options: [
@@ -100,7 +100,7 @@ const OnllineAppointmentForm = props => {
       ],
     },
     {
-      label: 'Appointment For',
+      label: 'Appointment For *',
       name: 'appointment_for',
       type: 'select',
       options: [
@@ -115,6 +115,16 @@ const OnllineAppointmentForm = props => {
     },
   ];
 
+  let resultSucess = <Result
+  status="success"
+  title="Successfully Booked the Appoinment"
+  subTitle="Thank you"/>
+
+  const  success = () => {
+    Modal.success({
+      content: resultSucess
+    });
+  }
   return (
     <div className="onlinebookWrapper">
       <div className="login-page">
@@ -142,6 +152,7 @@ const OnllineAppointmentForm = props => {
           }}
           onSubmit={handleFormSubmission}
           innerRef={innerForm}
+          validationSchema={OnlineBookingSchema}
         >
           {({ handleSubmit, touched, errors, isSubmitting }) => (
             <Form className="" handleSubmit={handleSubmit}>
@@ -169,7 +180,7 @@ const OnllineAppointmentForm = props => {
                   {forms.custom_types === 'checkbox' ? (
                     <div>
                       {' '}
-                      <p>{forms.Key_name}</p>
+                      <p>{forms.Key_name}{forms.required ? ' * (required) ':'' }</p>
                       <Checkbox.Group
                       required={forms.required}
                         onChange={e => handleChange(e, index)}
@@ -184,7 +195,7 @@ const OnllineAppointmentForm = props => {
                   {forms.custom_types === 'drop-down' ? (
                     <div>
                       {' '}
-                      <p>{forms.Key_name}</p>
+                      <p>{forms.Key_name}{forms.required ? ' * (required) ' :'' }</p>
                       <Select required={forms.required} onChange={e => handleChange(e, index)} style={{ width: 120 }}>
                         {forms.values.map(option => (
                           <Select.Option value={option}>{option}</Select.Option>
@@ -199,11 +210,10 @@ const OnllineAppointmentForm = props => {
                   {forms.custom_types === 'date' ? (
                     <div>
                       {' '}
-                      <p>{forms.Key_name}</p>
+                      <p>{forms.Key_name}{forms.required ?' * (required) ' :'' }</p>
                       <DatePicker
                       required={forms.required}
                         onChange={e => handleChange(e, index)}
-                        defaultValue={moment('2015/01/01', 'YYYY/MM')}
                         format={'YYYY/MM'}
                       />
                       <p></p>
@@ -215,13 +225,12 @@ const OnllineAppointmentForm = props => {
                   {forms.custom_types === 'number' ? (
                     <div>
                       {' '}
-                      <p>{forms.Key_name}</p>
+                      <p>{forms.Key_name}{forms.required ?' * (required) ' :'' }</p>
                       <InputNumber
                       required={forms.required}
                         onChange={e => handleChange(e, index)}
                         min={1}
                         max={100}
-                        defaultValue={3}
                       />
                       <p></p>
                     </div>
@@ -248,9 +257,9 @@ const OnllineAppointmentForm = props => {
 const mapStoreToProps = ({ OnlineBookingForm, CustomForm }) => {
   console.log('Store CustomForm', OnlineBookingForm);
   return {
-    OnlineBookingForm: OnlineBookingForm.payload,
-    OnlineBookingForm: OnlineBookingForm.error,
-    OnlineBookingForm: OnlineBookingForm.message,
+    OnlineBookingFormPayload: OnlineBookingForm.payload,
+    OnlineBookingFormError: OnlineBookingForm.error,
+    OnlineBookingFormMessage: OnlineBookingForm.message,
 
     CustomForm: CustomForm.payload,
   };
