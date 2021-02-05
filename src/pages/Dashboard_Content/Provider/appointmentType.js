@@ -49,18 +49,18 @@ const AppointmentTypes = props => {
       key: 'action',
       render: record => (
         <Space size="middle">
-          <button className="edit-button" onClick={() => openEditModal(record.id, record)}>
+          <span className="edit-color icon-button" onClick={() => openEditModal(record.id, record)}>
             <i className="fa fa-edit"></i>
-          </button>
+          </span>
           <Popconfirm
             title="Are you sure？"
             onConfirm={() => props.deleteAppointmentType(record.id)}
             okText="Yes"
             cancelText="No"
           >
-            <button className="delete-button">
+            <span className="delete-color icon-button">
               <i className="fa fa-trash"></i>
-            </button>
+            </span>
           </Popconfirm>
         </Space>
       ),

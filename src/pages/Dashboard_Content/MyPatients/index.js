@@ -70,18 +70,18 @@ const Dashboard_MyPatients = props => {
       key: 'action',
       render: record => (
         <Space size="middle">
-          <button className="edit-button" onClick={() => openEditModal(record.id, record)}>
+          <span className="edit-color icon-button" onClick={() => openEditModal(record.id, record)}>
             <i className="fa fa-edit"></i>
-          </button>
+          </span>
           <Popconfirm
             title="Are you sure？"
             onConfirm={() => props.deletePatient(record.id)}
             okText="Yes"
             cancelText="No"
           >
-            <button className="delete-button">
+            <span className="delete-color icon-button">
               <i className="fa fa-trash"></i>
-            </button>
+            </span>
           </Popconfirm>
         </Space>
       ),
@@ -94,10 +94,10 @@ const Dashboard_MyPatients = props => {
         <div className="search">
           <form className="search-area">
             <input type="text" placeholder="Search by Name or ID" className="form-control" />
-            <button className="edit-button button-square">Search</button>
+            <button className="view-button button-square">Search</button>
           </form>
 
-          <Button className="edit-button button-square" type="primary" onClick={showModal}>
+          <Button className="view-button button-square" type="primary" onClick={showModal}>
             Create a New Patient
           </Button>
           <Modal

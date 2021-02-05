@@ -35,7 +35,7 @@ const Dashboard_Provider = (props) => {
   const HeaderSection = () => {
     return (
       <div className="provider">
-        <div className="header">
+        <div className="header mb10">
           <div>
           <Button type="primary" onClick={() => store.dispatch({ type: 'OPEN_CUSTOMFORM_CREATE_MODAL' })} className="button-square">
             Custom Form 

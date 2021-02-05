@@ -135,7 +135,8 @@ const CustomFormField = props => {
           <p>
           This is what FossilMd asks your patients by default. You can create additional questions
           and fields by clicking on the plus sign below.</p>
-          <Button className="edit-button button-square" onClick={() => setIsModalVisible(true)}> PREVIEW </Button>
+          
+          <Button className="edit-button" onClick={() => setIsModalVisible(true)}> PREVIEW </Button>
           <Modal
             title="PREVIEW CUTOM FORM"
             visible={isModalVisible}
@@ -166,34 +167,42 @@ const CustomFormField = props => {
                 >
                   {({ handleSubmit }) => (
                     <Form className="login__form" handleSubmit={handleSubmit}>
+                    
+                    <div className="add-field-box">
                       <Field
                         style={{ width: '50%' }}
                         component={TextField}
                         name="Key_name"
                         type="text"
                       />
+                    <div className="mt4">
                       <Switch className="ml4"
                         checkedChildren="Required"
                         unCheckedChildren="Not Required"
                         name="required"
                         defaultChecked
                       />
-                      <Button
+                      <span
                         onClick={() => setEditIndex(index)}
-                        className="ml4 mt3 edit-button"
+                        className="ml4 mt3 edit-color"
                         htmlType="submit"
                       >
-                        edit
-                      </Button>
-                      <Button className="ml4 delete-button" onClick={() => deleteItem(index)}>Delete</Button>
+                        <i className="fa fa-edit"></i>
+                      </span>
+                      <span className="ml4 delete-color" onClick={() => deleteItem(index)}><i className="fa fa-trash"></i></span>
+                      </div>
+
+                      </div>
                       {Values.length !== 0 && (
-                        <div>
+
+                      //  ADD SECTIION OF EDIT START HERE
+                        <div className="addOption mt8">
                           <AntForm
                             name="dynamic_form_item"
                             {...formItemLayoutWithOutLabel}
                             onFinish={onFinish}
                           >
-                            <AntForm.List name="names">
+                            <AntForm.List name="names" className="add-plus-form">
                               {(fields, { add, remove }, { errors }) => {
                                 console.log('888888888888888', Values);
                                 return (
@@ -204,11 +213,11 @@ const CustomFormField = props => {
                                           {...(index === 0
                                             ? formItemLayout
                                             : formItemLayoutWithOutLabel)}
-                                          label={index === 0 ? 'Add Option' : ''}
+                                          label={index === 0 ? '' : ''}
                                           required={false}
                                           key={field.key}
                                         >
-                                          <AntForm.Item
+                                          <AntForm.Item className="error-message"
                                             {...field}
                                             validateTrigger={['onChange', 'onBlur']}
                                             rules={[
@@ -221,7 +230,7 @@ const CustomFormField = props => {
                                             ]}
                                             noStyle
                                           >
-                                            <Input
+                                            <Input className="mr4"
                                               placeholder="Enter Option"
                                               style={{ width: '60%' }}
                                             />
@@ -236,14 +245,14 @@ const CustomFormField = props => {
                                       );
                                     })}
                                     <AntForm.Item>
-                                      <Button
+                                      <button className="plus-button" 
                                         type="dashed"
                                         onClick={() => add()}
-                                        style={{ width: '60%' }}
+                                        // style={{ width: '60%' }}
                                         icon={<PlusOutlined />}
                                       >
-                                        Add Option
-                                      </Button>
+                                        <i className="fa fa-plus"></i> Add
+                                      </button>
                                       <AntForm.ErrorList errors={errors} />
                                     </AntForm.Item>
                                   </>
@@ -251,12 +260,14 @@ const CustomFormField = props => {
                               }}
                             </AntForm.List>
                             <AntForm.Item>
-                              <Button type="primary" htmlType="submit">
+                              <Button className="view-button square-button" type="primary" htmlType="submit">
                                 Submit
                               </Button>
                             </AntForm.Item>
                           </AntForm>
                         </div>
+
+                        // ADD SECTION EDIT ENDS HERE
                       )}
                     </Form>
                   )}
@@ -299,8 +310,12 @@ const CustomFormField = props => {
                           />
                         </span>
 
+
+                       
                         {item === 'checkbox' || item === 'drop-down' ? (
-                          <div>
+                          // ADD SECTION START HERE
+                          <div className="addOption">
+                            
                             <AntForm
                               name="dynamic_form_item"
                               {...formItemLayoutWithOutLabel}
@@ -364,6 +379,7 @@ const CustomFormField = props => {
                               </AntForm.Item>
                             </AntForm>
                           </div>
+                          // ADD SECTION ENDS HERE
                         ) : (
                           ''
                         )}

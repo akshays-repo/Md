@@ -108,9 +108,9 @@ await props.deleteProvider(id)
       key: 'workhour',
       render: (text, record) => (
         <Space size="middle">
-          <button onClick={() => showModal(record.id, record)} className="edit-button">
-            Edit
-          </button>
+          <span onClick={() => showModal(record.id, record)} className="icon-button edit-color">
+          <i class="fa fa-edit"></i>
+          </span>
         </Space>
       ),
     },
@@ -157,11 +157,11 @@ await props.deleteProvider(id)
       key: 'action',
       render: (text, record) => (
         <Space size="middle">
-          <button className="edit-button" onClick={() => handleEditModal(record.id, record)}>
+          <span className="edit-color icon-button" onClick={() => handleEditModal(record.id, record)}>
             {' '}
-            Edit{' '}
-          </button>
-          <button className="delete-button" onClick={() => handleDelete(record.id)}> Delete</button>
+            <i className="fa fa-edit"></i>{' '}
+          </span>
+          <span className="delete-color" onClick={() => handleDelete(record.id)}> <i className="fa fa-trash"></i></span>
         </Space>
       ),
     },

@@ -25,7 +25,9 @@ const Dashboard_Forms = () =>{
           key: 'action',
           render: () => (
             <Space size="middle">
-              <button className="view-button">view</button>
+              <span className="view-color icon-button">
+              <i class="fa fa-eye"></i>
+              </span>
             </Space>
           ),
         },
