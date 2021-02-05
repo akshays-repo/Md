@@ -90,7 +90,7 @@ const AddAppointmentTime = props => {
                     errors={errors}
                     touched={touched}
                   />
-                  <button className="delete-button button-square"
+                  <span className="delete-color icon-button"
                     onClick={() => deleteAppointment(index)}
                     // style={{
                     //   cursor: 'pointer',
@@ -99,8 +99,8 @@ const AddAppointmentTime = props => {
                     //   outline: 'none',
                     // }}
                   >
-                    <i className="fa fa-trash" style={{ color: 'white' }}></i>
-                  </button>
+                    <i className="fa fa-trash"></i>
+                  </span>
                 </Space>
               ))}
               <div style={{ textAlign: 'center', marginTop: 20 }}>

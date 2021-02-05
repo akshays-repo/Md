@@ -91,9 +91,9 @@ const BranchListTable = props => {
       key: 'action',
       render: record => (
         <Space size="middle">
-          <button className="edit-button" onClick={() => openEditModal(record.id, record)}>
-            Edit
-          </button>
+          <span className="edit-color icon-button" onClick={() => openEditModal(record.id, record)}>
+            <i className="fa fa-edit"></i>
+          </span>
 
           {/* <Popconfirm
             title="Are you sure？"

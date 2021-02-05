@@ -115,15 +115,32 @@
 }
 }
 .login__form {
-  .ant-switch-checked {
-    .ant-switch-inner{
+  .add-field-box {
+    display: flex;
+    .ant-switch-checked {
+      .ant-switch-inner{
+        min-width: 5rem;
+      }
+    }
+    .ant-switch-inner {
       min-width: 5rem;
     }
   }
-  .ant-switch-inner {
-    min-width: 5rem;
+
+}
+.addOption {
+  // .ant-form-item {
+  //   flex-direction: column;
+  // }
+
+  .ant-form-item-label {
+    text-align: left;
+  }
+  .ant-col-sm-offset-4 {
+    margin-left: 0;
   }
 }
+
 // .switch-section {
 //   .ant-space {
 //     display: flex;

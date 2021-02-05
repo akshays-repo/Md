@@ -49,11 +49,16 @@
   box-shadow: none;
   padding: 5px 20px;
   outline: none;
-  @include border-radius(30px);
+  @include border-radius(4px);
   font-weight: $bold;
   cursor: pointer;
+  color: $white;
 }
-
+@mixin plus-button {
+  @include button;
+  min-width: 3rem;
+  background-color: #57beff;
+}
 @mixin add-button {
   background-color: $theme-button;
   @include button;
@@ -102,10 +107,7 @@
   @include button;
   background-color: $accept-button;
 }
-@mixin button-square {
-  @include border-radius(5px);
-  height: 45px;
-}
+
 @mixin formInput {
   @include border-radius(5px);
   color: $gray-dark;

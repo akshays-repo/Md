@@ -25,8 +25,8 @@
     .profileDashboard {
       @include margin-padding(10px, 8px);
       img {
-        width: 100px;
-        height: 100px;
+        width: 85px;
+        height: 85px;
         border-radius: 50%;
       }
     }
@@ -52,6 +52,9 @@
       }
       .ant-list-item-meta {
         padding: 16px 20px;
+        a {
+          font-size: 14px;
+        }
       }
     }
   }
