@@ -20,12 +20,15 @@ const Dashboard_Provider = props => {
     console.log('prooo', props);
   }, [props.changed]);
 
+
   useEffect(() => {
     props.fetchCustomForm(parseInt(localStorage.getItem('hospital_id')));
+    
   }, []);
 
   useEffect(() => {
     props.fetchBranch({ hospitalId: localStorage.getItem('hospital_id'), page: 1, limit: 50 });
+    props.fetchAppointmentType({ branchId: 3 });
   });
 
   const HeaderSection = () => {
@@ -183,6 +186,9 @@ const mapDispatchToProps = dispatch => ({
         param,
       }),
     ),
+
+    fetchAppointmentType: param =>
+    dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_APPOINTMENT_TYPE', param })),
 });
 
 export default connect(mapStoreToProps, mapDispatchToProps)(Dashboard_Provider);

@@ -16,7 +16,8 @@ const ProviderTable = props => {
 
   useEffect(() => {
     setAppointmentTypes(props.appointment_type)
-  },);
+  
+  });
 
   const showModal = (id, data) => {
     setEditId(id);

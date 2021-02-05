@@ -1,27 +1,48 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { PatientCreationSchema } from '_utils/Schemas';
-import { TextField } from 'formik-material-ui';
+// import { TextField } from 'formik-material-ui';
 import { useParams } from 'react-router';
-import { message, Button, Row, Col } from 'antd';
+import { message, Button, Row, Col, Checkbox, Select, DatePicker, Space, InputNumber } from 'antd';
 import { connect } from 'react-redux';
 import { actionCreator } from '../../reducers/actionCreator';
 import { PoweroffOutlined } from '@ant-design/icons';
 import { generateForm } from '_utils/formgenerator';
 import { set } from 'store';
+import TextField from '@material-ui/core/TextField';
+import moment from 'moment';
+import cutomFormField from 'pages/Dashboard_Content/Provider/cutomFormField';
 const OnllineAppointmentForm = props => {
   const [customFormField, setCustomFormField] = useState([]);
 
   const handleFormSubmission = async values => {
     let contentType = 'JSON';
-    await props.createOnlineForm(JSON.stringify(values), contentType);
+    await props.createOnlineForm(JSON.stringify({...values, response:[customFormField]}), contentType);
   };
 
+  const handleChange = (e, index) => {
+    let items = { ...customFormField };
+    let item = items[index];
+    item.answer = [e];
+    items[index] = item;
+    console.log('DATADATASasa', e);
+    console.log('DATADATASasa', items);
+  };
+
+  const handleChangeText  = (e , index) =>{
+    let items = {...customFormField}
+    let item = items[index]
+    item.answer = [e.target.value]
+    items[index] = item
+    console.log("DATADATASasa",items)
+
+
+  }
   useEffect(() => {
     const fetchForm = async () => {
-      if (customFormField.length === 0) {
+      if (customFormField?.length === 0) {
         await props.fetchCustomForm(id);
-        setCustomFormField(props.CustomForm);
+        setCustomFormField(props.CustomForm.custom_form);
       }
     };
     fetchForm();
@@ -118,21 +139,6 @@ const OnllineAppointmentForm = props => {
             userTypeId: 5,
             address: '',
             comment: '',
-            response: [
-              {
-                custom_types: 'note',
-                required: false,
-                key_name: 'your father name',
-                answer: ['asfg'],
-              },
-              {
-                custom_types: 'checkbox',
-                required: true,
-                key_name: 'select one',
-                values: ['a', 'b'],
-                answer: ['safg'],
-              },
-            ],
           }}
           onSubmit={handleFormSubmission}
           innerRef={innerForm}
@@ -143,6 +149,87 @@ const OnllineAppointmentForm = props => {
               <div className="">
                 <Row> {generateForm(formField)} </Row>
               </div>{' '}
+              {customFormField?.map((forms, index) => (
+                <div>
+                  {forms.custom_types === 'text' || forms.custom_types === 'note' ? (
+                    <div>
+                      {' '}
+                      <p></p>
+                      <TextField
+                        onChange={e => handleChangeText(e, index)}
+                        id="standard-basic"
+                        label={forms.Key_name}
+                        required={forms.required}
+                      />
+                      <p></p>
+                    </div>
+                  ) : (
+                    ''
+                  )}
+                  {forms.custom_types === 'checkbox' ? (
+                    <div>
+                      {' '}
+                      <p>{forms.Key_name}</p>
+                      <Checkbox.Group
+                      required={forms.required}
+                        onChange={e => handleChange(e, index)}
+                        options={forms.values}
+                      />
+                      <p></p>
+                    </div>
+                  ) : (
+                    ''
+                  )}
+
+                  {forms.custom_types === 'drop-down' ? (
+                    <div>
+                      {' '}
+                      <p>{forms.Key_name}</p>
+                      <Select required={forms.required} onChange={e => handleChange(e, index)} style={{ width: 120 }}>
+                        {forms.values.map(option => (
+                          <Select.Option value={option}>{option}</Select.Option>
+                        ))}
+                      </Select>
+                      <p></p>
+                    </div>
+                  ) : (
+                    ''
+                  )}
+
+                  {forms.custom_types === 'date' ? (
+                    <div>
+                      {' '}
+                      <p>{forms.Key_name}</p>
+                      <DatePicker
+                      required={forms.required}
+                        onChange={e => handleChange(e, index)}
+                        defaultValue={moment('2015/01/01', 'YYYY/MM')}
+                        format={'YYYY/MM'}
+                      />
+                      <p></p>
+                    </div>
+                  ) : (
+                    ''
+                  )}
+
+                  {forms.custom_types === 'number' ? (
+                    <div>
+                      {' '}
+                      <p>{forms.Key_name}</p>
+                      <InputNumber
+                      required={forms.required}
+                        onChange={e => handleChange(e, index)}
+                        min={1}
+                        max={100}
+                        defaultValue={3}
+                      />
+                      <p></p>
+                    </div>
+                  ) : (
+                    ''
+                  )}
+                </div>
+              ))}
               <Button
                 htmlType="submit"
                 disabled={isSubmitting}
