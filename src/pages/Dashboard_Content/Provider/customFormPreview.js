@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Checkbox ,Select ,DatePicker, Space ,InputNumber, Row} from 'antd'
+import { Checkbox, Select, DatePicker, Space, InputNumber, Row } from 'antd';
 import TextField from '@material-ui/core/TextField';
 import moment from 'moment';
-import HardCoreForm from './cutomFormhardCore';
+import HardCoreForm from './customFormhardCore';
 
 const CustomFormReview = props => {
   const [customForms, setCustomForm] = useState([]);
-
-
 
   useEffect(() => {
     setCustomForm(props.CustomForm.custom_form);
@@ -15,11 +13,9 @@ const CustomFormReview = props => {
 
   return (
     <div>
-    
-       <HardCoreForm/>
+      <HardCoreForm />
       {customForms?.map(forms => (
         <div>
-          
           {forms.custom_types === 'text' || forms.custom_types === 'note' ? (
             <div>
               {' '}
@@ -30,7 +26,7 @@ const CustomFormReview = props => {
           ) : (
             ''
           )}
- {forms.custom_types === 'checkbox'  ? (
+          {forms.custom_types === 'checkbox' ? (
             <div>
               {' '}
               <p>{forms.Key_name}</p>
@@ -41,23 +37,22 @@ const CustomFormReview = props => {
             ''
           )}
 
-{forms.custom_types === 'drop-down'  ? (
+          {forms.custom_types === 'drop-down' ? (
             <div>
               {' '}
               <p>{forms.Key_name}</p>
-              <Select  style={{ width: 120 }} >
-                {forms.values.map((option) => (
-                    <Select.Option value={option}>{option}</Select.Option>
-                ))} 
-    
-    </Select>
+              <Select style={{ width: 120 }}>
+                {forms.values.map(option => (
+                  <Select.Option value={option}>{option}</Select.Option>
+                ))}
+              </Select>
               <p></p>
             </div>
           ) : (
             ''
           )}
 
-{forms.custom_types === 'date'  ? (
+          {forms.custom_types === 'date' ? (
             <div>
               {' '}
               <p>{forms.Key_name}</p>
@@ -68,11 +63,11 @@ const CustomFormReview = props => {
             ''
           )}
 
-{forms.custom_types === 'number'  ? (
+          {forms.custom_types === 'number' ? (
             <div>
               {' '}
               <p>{forms.Key_name}</p>
-              <InputNumber min={1} max={10} defaultValue={3}  />
+              <InputNumber min={1} max={10} defaultValue={3} />
               <p></p>
             </div>
           ) : (
@@ -83,6 +78,5 @@ const CustomFormReview = props => {
     </div>
   );
 };
-
 
 export default CustomFormReview;

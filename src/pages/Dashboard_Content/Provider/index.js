@@ -2,17 +2,14 @@ import React, { useState, useReducer, useEffect } from 'react';
 import { Col, Row, Form, Input, Button, Modal, Select, Space } from 'antd';
 import Dashboard_Content from '..';
 import { connect } from 'react-redux';
-import FossilBreadCrumb from 'fossilmdComponents/FossilBreadCrumb';
 import AppointmentTypes from './appointmentType';
 import ProviderCreationForm from './providerCreationForm';
 import ProviderTable from './providerTable';
 import { actionCreator } from '../../../reducers/actionCreator';
 import { store } from '../../../reducers/configureStore';
-import CreateProviderType from './createProviderType';
-import CustomFormField from './cutomFormField';
-
+import CustomFormField from './customFormField';
+import ProviderType from './providerType';
 const Dashboard_Provider = props => {
-  const [isModalVisible, setIsModalVisible] = useState(false);
 
   useEffect(() => {
     props.fetchProvider({ branchId: 3, page: 1, limit: 60 });
@@ -20,10 +17,8 @@ const Dashboard_Provider = props => {
     console.log('prooo', props);
   }, [props.changed]);
 
-
   useEffect(() => {
     props.fetchCustomForm(parseInt(localStorage.getItem('hospital_id')));
-    
   }, []);
 
   useEffect(() => {
@@ -56,7 +51,7 @@ const Dashboard_Provider = props => {
           <div className="provider-head mr2">
             <Button
               type="primary"
-              // onClick={() => store.dispatch({ type: 'OPEN_CUSTOMFORM_CREATE_MODAL' })}
+              onClick={() => store.dispatch({ type: 'OPEN_PROVIDERTYPE_MODAL' })}
               className="button-square"
             >
               Provider types
@@ -84,20 +79,20 @@ const Dashboard_Provider = props => {
       </div>
     );
   };
-  const Provider_Content = () =>{
+  const Provider_Content = () => {
     return (
       <div className="schedule-time">
         <Modal
-          title=""
+          title="CUSTOM FORM FIELD"
           footer={false}
-          width={800}
+         
           visible={props.CustomFormmodal}
           onCancel={() => store.dispatch({ type: 'CLOSE_CUSTOMFORM_CREATE_MODAL' })}
           destroyOnClose
         >
           <CustomFormField {...props} />
         </Modal>
-  
+
         <Modal
           title=""
           footer={false}
@@ -105,40 +100,45 @@ const Dashboard_Provider = props => {
           onCancel={() => store.dispatch({ type: 'CLOSE_APPOINTMENT_TYPE_MODAL2' })}
         >
           <AppointmentTypes />
-
         </Modal>
-  
-  
+
         <Modal
-          title=""
+          title="PROVIDER"
           footer={false}
-          width={800}
+          
           visible={props.modal}
           onCancel={() => store.dispatch({ type: 'CLOSE_PROVIDER_CREATE_MODAL' })}
           destroyOnClose
         >
           <ProviderCreationForm {...props} />
         </Modal>
-  
-  
-        {/* <FossilBreadCrumb currentUrl="/provider" currentPageName="Provider" /> */}
-        {/* <div className="right-side"> */}
-          <div>{HeaderSection()}</div>
-          <div className="full-width-table">
-            <ProviderTable {...props} />
-          </div>
-        </div>
-      // </div>
-    );
 
-  }
-  return(
+        <Modal
+          title=""
+          footer={false}
+          
+          visible={props.ProviderTypemodal}
+          onCancel={() => store.dispatch({ type: 'CLOSE_PROVIDERTYPE_MODAL' })}
+          destroyOnClose
+        >
+          <ProviderType {...props} />
+        </Modal>
+
+
+        <div>{HeaderSection()}</div>
+        <div className="full-width-table">
+          <ProviderTable {...props} />
+        </div>
+      </div>
+    );
+  };
+  return (
     <div>
-       <Dashboard_Content content={Provider_Content()} />
+      <Dashboard_Content content={Provider_Content()} />
     </div>
-  )
+  );
 };
-const mapStoreToProps = ({ Provider, CustomForm , AppointmentType }) => {
+const mapStoreToProps = ({ Provider, CustomForm, AppointmentType ,ProviderType }) => {
   console.log('Store', Provider);
   console.log('Store CustomForm', CustomForm);
   return {
@@ -156,7 +156,9 @@ const mapStoreToProps = ({ Provider, CustomForm , AppointmentType }) => {
     CustomFormmodal1: CustomForm.modal1,
     CustomFormchanged: CustomForm.changed,
 
-    AppointmentTypeModal2:AppointmentType.modal2
+    AppointmentTypeModal2: AppointmentType.modal2,
+
+    ProviderTypemodal: ProviderType.modal,
   };
 };
 
@@ -187,7 +189,7 @@ const mapDispatchToProps = dispatch => ({
       }),
     ),
 
-    fetchAppointmentType: param =>
+  fetchAppointmentType: param =>
     dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_APPOINTMENT_TYPE', param })),
 });
 
