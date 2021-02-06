@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import MessageHeader from '../Components/Header';
 import MessageDetail from './MessageDetail';
 import MessageList from './MessageList';
 import socketIOClient from 'socket.io-client';
