@@ -34,7 +34,7 @@ export const backend_api = {
   DELETE_PROVIDER:'/api/backend/v1/provider',
   
   CREATE_CUSTOMFORM:'/api/backend/v1/custom_form',
-  FETCH_CUSTOMFORM:'/api/backend/v1/custom_form/',
+  FETCH_CUSTOMFORM:'/api/backend/v1/custom_form',
   
   FETCH_SCHEDULE: '/api/backend/v1/newshedule',
   CREATE_SCHEDULE: '/api/backend/v1/newshedule',
