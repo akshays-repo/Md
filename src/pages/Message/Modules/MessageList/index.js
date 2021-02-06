@@ -2,17 +2,16 @@ import React from "react";
 import { GrAddCircle } from "react-icons/gr";
 import { chatList } from "./chatListDummyData";
 import MessageHead from "./messageHead";
-import 'bootstrap/dist/css/bootstrap.min.css';
 import "./style.scss";
 const MessageList = () => {
   console.log(chatList);
   return (
     <div className="messagelist">
       <div className="detail-header">
-        <span>chat</span>
+        {/* <span>chat</span>
         <button className="chatadd-button">
           <GrAddCircle />
-        </button>
+        </button> */}
       </div>
       <div className="search-chat">
         <form>

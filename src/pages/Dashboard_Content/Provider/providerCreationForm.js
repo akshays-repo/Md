@@ -75,7 +75,7 @@ const ProviderCreationForm = props => {
           <Form className="login__form" handleSubmit={handleSubmit}>
             <Row>{generateForm(formField)}
             <Col xs={24} xl={12}>
-            <Field as="select" name="branchId"   component={matSeclect}>
+            <Field as="select" name="branchId" style={{width:"80%"}} placeholder="Branch"  component={matSeclect}>
               {branchList?.map(branch => {
                 return <MenuItem value={branch.id}>{branch.fullName}</MenuItem>;
               })}

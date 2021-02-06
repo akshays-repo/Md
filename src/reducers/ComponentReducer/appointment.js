@@ -23,7 +23,7 @@ export const AppointmentReducer = (state = BranchState, action) => {
       return {
         ...state,
         error: action.error,
-        payload: action.payload.users,
+        payload: action.payload,
         message: action.message,
         changed: false,
       };
