@@ -17,7 +17,6 @@ const ProviderCreationForm = props => {
 
   useEffect(() => {
     setBranchList(store.getState().Branch.payload);
-    console.log('ASASASASA', branchList);
   });
 
   const handleFormSubmission = async values => {

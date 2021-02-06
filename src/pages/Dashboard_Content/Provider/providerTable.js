@@ -194,7 +194,7 @@ await props.deleteProvider(id)
   ];
   return (
     <div>
-      <Table columns={columns} dataSource={props.provider.users} />
+      <Table columns={columns} dataSource={props.provider?.users} />
       <Modal
         footer={false}
         width={800}
