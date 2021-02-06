@@ -1,103 +1,51 @@
 import React from 'react';
-import { Space, Card, Row, Col } from 'antd';
+import { Space, Card, Row, Col ,Table, Tag, } from 'antd';
 import Dashboard_Content from '..';
-const data = [
+
+const columns = [
   {
-    name: 'Akshays',
-    date: '13/12/21 10:00AM',
-    location: 'New York, united states, ',
-    emailid: 'akshays@oi.com',
-    phone: '+91 2039203940',
+    title: 'Name',
+    dataIndex: 'name',
+    key: 'name',
   },
   {
-    name: 'Akshays',
-    date: '13/12/21 10:00AM',
-    location: 'New York, united states, ',
-    emailid: 'akshays@oi.com',
-    phone: '+91 2039203940',
+    title: 'Age',
+    dataIndex: 'age',
+    key: 'age',
   },
   {
-    name: 'Akshays',
-    date: '13/12/21 10:00AM',
-    location: 'New York, united states, ',
-    emailid: 'akshays@oi.com',
-    phone: '+91 2039203940',
+    title: 'Email',
+    dataIndex: 'email',
+    key: 'email',
   },
   {
-    name: 'Akshays',
-    date: '13/12/21 10:00AM',
-    location: 'New York, united states, ',
-    emailid: 'akshays@oi.com',
-    phone: '+91 2039203940',
+    title: 'Phone',
+    dataIndex: 'phone',
+    key: 'phone',
   },
   {
-    name: 'Akshays',
-    date: '13/12/21 10:00AM',
-    location: 'New York, united states, ',
-    emailid: 'akshays@oi.com',
-    phone: '+91 2039203940',
+    title: 'Appointment Time',
+    dataIndex: 'appointment_start',
+    key: 'appointment_start',
   },
   {
-    name: 'Akshays',
-    date: '13/12/21 10:00AM',
-    location: 'New York, united states, ',
-    emailid: 'akshays@oi.com',
-    phone: '+91 2039203940',
+    title: 'Payment Status',
+    dataIndex: 'payment_status',
+    key: 'payment_status',
   },
   {
-    name: 'Akshays',
-    date: '13/12/21 10:00AM',
-    location: 'New York, united states, ',
-    emailid: 'akshays@oi.com',
-    phone: '+91 2039203940',
+    title: 'Status',
+    dataIndex: 'status',
+    key: 'status',
   },
+
 ];
+
 const Dashboard_Appointments = () => {
   const Appointments = () => {
     return (
       <div className="appointment-section">
-        <Space direction="vertical">
-          {data.map(item => (
-            <Card style={{ width: 1000 }}>
-              <Row>
-                <Col xl={12}>
-                  <p className="title-name"> {item.name}</p>
-                  <p className="iconAppt">
-                    <i class="far fa-clock "></i>
-                    {'  '}
-                    {item.date}
-                  </p>
-                  <p className="iconAppt">
-                    <i class="fas fa-map-marker-alt"></i>
-                    {'  '}
-                    {item.location}
-                  </p>
-                  <p className="iconAppt">
-                    <i class="fas fa-envelope"></i>
-                    {'  '}
-                    {item.emailid}
-                  </p>
-                  <p className="iconAppt">
-                    <i class="fas fa-phone"></i>
-                    {'  '}
-                    {item.phone}
-                  </p>
-                </Col>
-
-                <Col xl={12} className="right-side">
-                  <div  >
-                    <Space direction="middle">
-                      {' '}
-                      <button className="view-button">View</button>
-                      <button className="accept-button">Accept</button>
-                      <button className="delete-button">Cancel</button>
-                    </Space>
-                  </div>
-                </Col>
-              </Row>
-            </Card>
-          ))}
-        </Space>
+      <Table columns={columns}  />
       </div>
     );
   };
