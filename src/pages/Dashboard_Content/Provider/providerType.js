@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { store } from '../../../reducers/configureStore';
 import { actionCreator } from '../../../reducers/actionCreator';
@@ -8,6 +8,10 @@ const ProviderType = props => {
   const openEditModal = () => {
     //
   };
+  useEffect(() =>{
+      console.log("asasasasasasasas",props)
+  })
+
   const columns = [
     {
       title: 'TYPE',

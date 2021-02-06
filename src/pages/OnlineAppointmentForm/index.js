@@ -166,6 +166,7 @@ const OnllineAppointmentForm = props => {
               <div className="">
                 <Row> {generateForm(formField)} </Row>
               </div>{' '}
+              
               {customFormField?.map((forms, index) => (
                 <div>
                   {forms.custom_types === 'text' || forms.custom_types === 'note' ? (

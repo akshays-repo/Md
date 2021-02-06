@@ -12,13 +12,13 @@ import ProviderType from './providerType';
 const Dashboard_Provider = props => {
 
   useEffect(() => {
-    props.fetchProvider({ branchId: 3, page: 1, limit: 60 });
+    props.fetchProvider({ page: 1, limit: 60 });
     props.fetchBranch({ branchId: 3, page: 1, limit: 60 });
     console.log('prooo', props);
   }, [props.changed]);
 
   useEffect(() => {
-    props.fetchCustomForm(parseInt(localStorage.getItem('hospital_id')));
+    props.fetchCustomForm();
   }, []);
 
   useEffect(() => {
@@ -165,8 +165,8 @@ const mapStoreToProps = ({ Provider, CustomForm, AppointmentType ,ProviderType }
 const mapDispatchToProps = dispatch => ({
   fetchBranch: param =>
     dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_BRANCH', param })),
-  fetchCustomForm: id =>
-    dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_CUSTOMFORM', id })),
+  fetchCustomForm: () =>
+    dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_CUSTOMFORM' })),
   addCustomForm: (values, contentType) =>
     dispatch(
       actionCreator({ method: 'POST', action_type: 'CREATE_CUSTOMFORM', values, contentType }),
