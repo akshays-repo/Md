@@ -16,6 +16,7 @@ const ProviderTable = props => {
 
   useEffect(() => {
     setAppointmentTypes(props.appointment_type)
+    console.log("props000", props.provider)
   
   });
 
@@ -94,7 +95,7 @@ await props.deleteProvider(id)
         <span>
           {text}
           <br />
-          <span style={{ color: 'ButtonShadow' }}>{record.provider_type.name}</span>
+          <span style={{ color: 'ButtonShadow' }}>{record.provider_type?.name}</span>
         </span>
       ),
     },
@@ -194,7 +195,7 @@ await props.deleteProvider(id)
   ];
   return (
     <div>
-      <Table columns={columns} dataSource={props.provider?.users} />
+      <Table columns={columns} dataSource={props.provider} />
       <Modal
         footer={false}
         width={800}

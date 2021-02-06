@@ -28,8 +28,8 @@ export const backend_api = {
   
   USER_LOGIN: '/api/backend/v1/users/login',
   
-  CREATE_PROVIDER:' /api/backend/v1/users/register',
-  FETCH_PROVIDER:'/api/backend/v1/providers/hospital',
+  CREATE_PROVIDER:'/api/backend/v1/users/register',
+  FETCH_PROVIDER:'/api/backend/v1/providers',
   EDIT_PROVIDER:'/api/backend/v1/users',
   DELETE_PROVIDER:'/api/backend/v1/provider',
   
@@ -41,5 +41,8 @@ export const backend_api = {
 
   CREATE_ONLINE_APPOINTMENT:'/api/backend/v1/online_booking',
 
-  CREATE_PROVIDER_TYPE:'/api/backend/v1/provider_type'
+  CREATE_PROVIDER_TYPE:'/api/backend/v1/provider_type',
+  FETCH_PROVIDER_TYPE:'/api/backend/v1/provider_types',
+  EDIT_PROVIDER_TYPE:' /api/backend/v1/provider_type',
+  DELETE_PROVIDER_TYPE:'/api/backend/v1/provider_type',
 };

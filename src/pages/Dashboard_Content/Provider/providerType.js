@@ -1,22 +1,33 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { store } from '../../../reducers/configureStore';
 import { actionCreator } from '../../../reducers/actionCreator';
 import { Table, Tag, Space, Modal, Popconfirm } from 'antd';
 import ProviderTypeForm from './providerTypeForm';
 const ProviderType = props => {
-  const openEditModal = () => {
-    //
-  };
-  useEffect(() =>{
-      console.log("asasasasasasasas",props)
-  })
+  const [visibleEditModal, setEditModal] = useState(false);
+  const [editId, setEditId] = useState('');
+  const [itemRecord, setRecord] = useState('');
 
+  const openEditModal = (id, record) => {
+    setEditId(id);
+    setRecord(record);
+    setEditModal(true);
+  };
+
+  const closeEditModal = () => {
+    setEditModal(false);
+  };
   const columns = [
     {
       title: 'TYPE',
       key: 'name',
       dataIndex: 'name',
+    },
+    {
+      status: 'STATUS',
+      key: 'status',
+      dataIndex: 'status',
     },
     {
       title: '',
@@ -28,7 +39,7 @@ const ProviderType = props => {
           </span>
           <Popconfirm
             title="Are you sure？"
-            onConfirm={() => props.deleteAppointmentType(record.id)}
+            onConfirm={() => props.deleteProviderType(record.id)}
             okText="Yes"
             cancelText="No"
           >
@@ -56,19 +67,28 @@ const ProviderType = props => {
           </button>
         </div>
         <div className="defined -field">
-          <Table dataSource={props.appointment_type} columns={columns}></Table>
+          <Table dataSource={props.ProviderType} columns={columns}></Table>
         </div>
       </div>
       <Modal
-          title=""
-          footer={false}
-          visible={props.ProviderTypemodal1}
-          onCancel={() => store.dispatch({ type: 'CLOSE_PROVIDERTYPE_MODAL1' })}
-          destroyOnClose
-        >
-          <ProviderTypeForm {...props} />
-        </Modal>
+        title="CREATE NEW PROVIDER"
+        footer={false}
+        visible={props.ProviderTypemodal1}
+        onCancel={() => store.dispatch({ type: 'CLOSE_PROVIDERTYPE_MODAL1' })}
+        destroyOnClose
+      >
+        <ProviderTypeForm {...props} />
+      </Modal>
 
+      <Modal
+        title="EDIT A PROVIDER"
+        footer={false}
+        visible={visibleEditModal}
+        onCancel={closeEditModal}
+        destroyOnClose
+      >
+        <ProviderTypeForm id={editId} values={itemRecord} {...props} />
+      </Modal>
     </div>
   );
 };
@@ -87,19 +107,27 @@ const mapStoreToProps = ({ ProviderType }) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  fetchProviderType: id =>
-    dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_PROVIDERTYPE', id })),
+  fetchProviderType: () =>
+    dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_PROVIDER_TYPE' })),
 
-  addProviderType: (values , contentType) =>
+  addProviderType: (values ,contentType) =>
     dispatch(
       actionCreator({ method: 'POST', action_type: 'CREATE_PROVIDER_TYPE', values ,contentType }),
     ),
 
-  editProviderType: (id, values) =>
-    dispatch(actionCreator({ method: 'PUT', action_type: 'EDIT_PROVIDERTYPE', id, values })),
+  editProviderType: (id, values, contentType) =>
+    dispatch(
+      actionCreator({
+        method: 'PATCH',
+        action_type: 'EDIT_PROVIDER_TYPE',
+        id,
+        values,
+        contentType
+      }),
+    ),
 
   deleteProviderType: id =>
-    dispatch(actionCreator({ method: 'DELETE', action_type: 'DELETE_PROVIDERTYPE', id })),
+    dispatch(actionCreator({ method: 'DELETE', action_type: 'DELETE_PROVIDER_TYPE', id })),
 
   filterProviderType: param =>
     dispatch(

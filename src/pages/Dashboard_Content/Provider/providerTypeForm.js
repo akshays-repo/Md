@@ -4,17 +4,28 @@ import { Formik, Form, Field } from 'formik';
 import { Button, Row, Select, Col } from 'antd';
 import { getFormDataA } from '_utils';
 import { generateForm } from '_utils/formgenerator';
+import { filter } from 'lodash';
 const ProviderTypeForm = props => {
   const [branchList, setBranchList] = useState([]);
   const innerForm = useRef();
 
   useEffect(() => {
     setBranchList(store.getState().Branch.payload);
+    console.log("editeditedit",props.editId)
   });
+
+
 
   const handleFormSubmission = async (values) =>{
     let contentType = 'JSON';
-    await props.addProviderType(JSON.stringify(values), contentType);
+    if(props.id){
+        const {name,status,hospitalId} = values;
+        let filterValues = {name,status,hospitalId}
+        await props.editProviderType(props.id, JSON.stringify(filterValues), contentType);
+      
+    }else{
+        await props.addProviderType(JSON.stringify(values), contentType);
+    }
     
   }
 
