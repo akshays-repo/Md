@@ -10,6 +10,9 @@
 .success {
   color: $success;
 }
+.d-block {
+  display: block;
+}
 body {
     font-family: 'Roboto', sans-serif;
     height: 100vh;
@@ -61,6 +64,9 @@ body {
     .accept-button {
       @include accept-button;
     }
+    .d-flex {
+      @include flex(space-between, center);
+    }
     .ant-table-thead .ant-table-cell {
         color: rgb(120, 129, 149);
         background-color: rgb(241, 243, 246);
@@ -96,6 +102,7 @@ body {
         font-size: 20px;
         line-height: 30px;
       }
+
     }
 
     .ant-modal-body {

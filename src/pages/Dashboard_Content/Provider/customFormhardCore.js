@@ -78,7 +78,7 @@ const HardCoreForm = () =>{
         >
           {({ handleSubmit, touched, errors, isSubmitting }) => (
             <Form className="" handleSubmit={handleSubmit}>
-              <h1 className="text-center">Fill the Form To Book A Appointment</h1>{' '}
+              <h2 className="text-center mb4">Fill the Form To Book A Appointment</h2>{' '}
               <div className="">
                 <Row> {generateForm(formField)} </Row>
               </div>{' '}
