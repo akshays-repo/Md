@@ -309,8 +309,9 @@ const CustomFormField = props => {
                   innerRef={innerForm}
                 >
                   {({ handleSubmit, touched, errors, isSubmitting }) => (
-                    <div style={{ marginTop: '30px' }}>
+                    <div  style={{ marginTop: '30px' }}>
                       <Form className="login__form" handleSubmit={handleSubmit}>
+<div className="add-field-box">
                         <Field
                           style={{ width: '50%' }}
                           component={TextField}
@@ -318,7 +319,7 @@ const CustomFormField = props => {
                           type="text"
                           name="Key_name"
                         />
-                        <span className="form-to">
+                        <span className="mt4 form-to">
                           <Switch
                             checkedChildren="Required"
                             unCheckedChildren="Not Required"
@@ -404,6 +405,7 @@ const CustomFormField = props => {
                         >
                           Submit
                         </Button>
+                        </div>
                       </Form>
                     </div>
                   )}
