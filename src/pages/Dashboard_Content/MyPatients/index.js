@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Button, Row, Col, Space, Popconfirm } from 'antd';
+import { Table, Button, Row, Col, Space, Popconfirm, Select, Tag, DatePicker, Input } from 'antd';
 import Dashboard_Content from '..';
 import PatientCreationForm from './patientCreationForm';
 import { Modal } from 'antd';
 import { store } from '../../../reducers/configureStore';
 import { actionCreator } from '../../../reducers/actionCreator';
 import { connect } from 'react-redux';
+
+const { Option } = Select;
 
 const Dashboard_MyPatients = props => {
   const [editId, setEditId] = useState(null);
@@ -89,12 +91,53 @@ const Dashboard_MyPatients = props => {
   ];
 
   const MyPatients = () => {
+    const [status, setStatus] = useState('');
+    const [search, setSearch] = useState('');
+
+    const handleChangeSearch = e => {
+      e.preventDefault();
+      setSearch(e.target.value);
+    };
+
+    const handleSearchSubmission = e => {
+      e.preventDefault();
+      let parms = {};
+      if (search) parms.search = search;
+      if (status) parms.search = status;
+      props.filterPatient(parms);
+    };
+
+    const clearFilter = e => {
+      e.preventDefault();
+      setStatus('')
+      setSearch('')
+      props.fetchPatient({ branchId: 3 })
+    };
+
     return (
       <div className="mypatient">
         <div className="search">
           <form className="search-area">
-            <input type="text" placeholder="Search by Name or ID" className="form-control" />
-            <button className="view-button button-square">Search</button>
+            <div style={{ marginBottom: '10px' }} className="search">
+              <Space direction="horizontal">
+                <Input
+                  type="text"
+                  placeholder=" Name Email or Phone"
+                  onChange={handleChangeSearch}
+                  value={search}
+                />
+                <Select placeholder="status" onChange={e => setStatus(e)} style={{ width: 120 }}>
+                  <Option value="hold">Hold</Option>
+                  <Option value="active">Active</Option>
+                </Select>
+                <button className="view-button button-square" onClick={handleSearchSubmission}>
+                  Filter
+                </button>
+                <button className="view-button button-square" onClick={clearFilter}>
+                  clear
+                </button>
+              </Space>
+            </div>
           </form>
 
           <Button className="view-button button-square" type="primary" onClick={showModal}>

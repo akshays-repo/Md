@@ -14,7 +14,6 @@ const ProviderType = props => {
     setRecord(record);
     setEditModal(true);
   };
-
   const closeEditModal = () => {
     setEditModal(false);
   };
@@ -67,7 +66,7 @@ const ProviderType = props => {
           </button>
         </div>
         <div className="defined -field">
-          <Table dataSource={props.ProviderType} columns={columns}></Table>
+          <Table dataSource={props.ProviderTypePayload} columns={columns}></Table>
         </div>
       </div>
       <Modal
@@ -97,7 +96,7 @@ const ProviderType = props => {
 const mapStoreToProps = ({ ProviderType }) => {
   console.log('Store ProviderType', ProviderType);
   return {
-    ProviderType: ProviderType.payload,
+    ProviderTypePayload: ProviderType.payload,
     ProviderTypeerror: ProviderType.error,
     ProviderTypemessage: ProviderType.message,
     ProviderTypemodal: ProviderType.modal,
@@ -110,9 +109,9 @@ const mapDispatchToProps = dispatch => ({
   fetchProviderType: () =>
     dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_PROVIDER_TYPE' })),
 
-  addProviderType: (values ,contentType) =>
+  addProviderType: (values, contentType) =>
     dispatch(
-      actionCreator({ method: 'POST', action_type: 'CREATE_PROVIDER_TYPE', values ,contentType }),
+      actionCreator({ method: 'POST', action_type: 'CREATE_PROVIDER_TYPE', values, contentType }),
     ),
 
   editProviderType: (id, values, contentType) =>
@@ -122,7 +121,7 @@ const mapDispatchToProps = dispatch => ({
         action_type: 'EDIT_PROVIDER_TYPE',
         id,
         values,
-        contentType
+        contentType,
       }),
     ),
 

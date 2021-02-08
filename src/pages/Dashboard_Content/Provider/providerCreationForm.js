@@ -63,7 +63,7 @@ const ProviderCreationForm = props => {
             status: 'active',
             userTypeId: 4,
             branchId: '',
-            provider_typeId: 3,
+            provider_typeId: 15,
             phone: '',
           }
         }
@@ -77,7 +77,7 @@ const ProviderCreationForm = props => {
             <Col xs={24} xl={12}>
             <Field as="select" name="branchId" style={{width:"80%"}} placeholder="Branch"  component={matSeclect}>
               {branchList?.map(branch => {
-                return <MenuItem value={branch.id}>{branch.fullName}</MenuItem>;
+                return <MenuItem value={branch.id}>{branch.id}</MenuItem>;
               })}
             </Field>
             </Col>
