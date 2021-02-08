@@ -71,6 +71,7 @@ const AppointmentTypes = props => {
     console.log('Loading');
     props.fetchAppointmentType({ branchId: 3 });
   }, [props.changed]);
+  
   return (
     <div className="appointment-type">
       <div className="header">

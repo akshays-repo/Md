@@ -25,6 +25,7 @@ export const backend_api = {
   FETCH_PATIENT: '/api/backend/v1/patiant',
   EDIT_PATIENT: '/api/backend/v1/users/patiant',
   DELETE_PATIENT: '/api/backend/v1/users/patiant',
+  FILTER_PATIENT:'/api/backend/v1/patiant/filter',
   
   USER_LOGIN: '/api/backend/v1/users/login',
   
@@ -41,6 +42,7 @@ export const backend_api = {
 
   CREATE_ONLINE_APPOINTMENT:'/api/backend/v1/online_booking',
   FETCH_APPOINTMENT:'/api/backend/v1/online_booking',
+  FILTER_APPOINTMENT:'/api/backend/v1/online_booking/filter',
 
   CREATE_PROVIDER_TYPE:'/api/backend/v1/provider_type',
   FETCH_PROVIDER_TYPE:'/api/backend/v1/provider_types',

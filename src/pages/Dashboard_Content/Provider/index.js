@@ -10,12 +10,11 @@ import { store } from '../../../reducers/configureStore';
 import CustomFormField from './customFormField';
 import ProviderType from './providerType';
 const Dashboard_Provider = props => {
-  const [providerTypes, setProviderTypes] = useState([]);
 
   useEffect(() => {
-    let branch_id = 2;
+    let branch_id = 15;
     props.fetchProvider(branch_id);
-    let response = props.fetchBranch({ branchId: 3, page: 1, limit: 60 });
+    let response = props.fetchBranch({ branchId: 5, page: 1, limit: 60 });
     console.log('prooo', response);
   }, [props.changed]);
 
@@ -25,8 +24,8 @@ const Dashboard_Provider = props => {
 
   useEffect(() => {
     props.fetchProviderType();
-    setProviderTypes(store.getState().ProviderType.payload);
-  }, [props.ProviderTypeChanges]);
+  }, [props.ProviderTypeChanged , props.ProviderDeleted]);
+
 
   useEffect(() => {
     props.fetchBranch({ hospitalId: localStorage.getItem('hospital_id'), page: 1, limit: 50 });
@@ -123,9 +122,8 @@ const Dashboard_Provider = props => {
           footer={false}
           visible={props.ProviderTypemodal}
           onCancel={() => store.dispatch({ type: 'CLOSE_PROVIDERTYPE_MODAL' })}
-          destroyOnClose
         >
-          <ProviderType {...providerTypes} {...props} />
+          <ProviderType />
         </Modal>
 
         <div>{HeaderSection()}</div>
@@ -162,8 +160,8 @@ const mapStoreToProps = ({ Provider, CustomForm, AppointmentType, ProviderType }
     AppointmentTypeModal2: AppointmentType.modal2,
 
     ProviderTypemodal: ProviderType.modal,
-    ProviderType: ProviderType.payload,
-    ProviderTypeChanges: ProviderType.changed,
+    ProviderTypeChanged: ProviderType.changed,
+    ProviderDeleted:ProviderType.deleted
   };
 };
 
@@ -194,11 +192,12 @@ const mapDispatchToProps = dispatch => ({
       }),
     ),
 
+    fetchProviderType: () =>
+    dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_PROVIDER_TYPE' })),
+
+
   fetchAppointmentType: param =>
     dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_APPOINTMENT_TYPE', param })),
-
-  fetchProviderType: () =>
-    dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_PROVIDER_TYPE' })),
 });
 
 export default connect(mapStoreToProps, mapDispatchToProps)(Dashboard_Provider);

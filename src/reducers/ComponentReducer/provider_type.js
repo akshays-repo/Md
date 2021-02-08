@@ -1,4 +1,5 @@
 import { ProviderTypeState } from '../ComponentState/provider_type';
+import { message } from 'antd';
 
 /**
  * @param state
@@ -16,15 +17,41 @@ export const ProviderTypeReducer = (state = ProviderTypeState, action) => {
     case 'CLOSE_PROVIDERTYPE_MODAL1':
       return { ...state, modal1: false };
     case 'CREATE_PROVIDER_TYPE':
+      message.success('PROVIDER TYPE CREATED SUCCESSFULLY');
+
       return { ...state, error: action.error, message: action.message };
     case 'FETCH_PROVIDER_TYPE':
-      return { error: action.error, payload: action.payload, message: action.message };
+      return {
+        error: action.error,
+        payload: action.payload,
+        message: action.message,
+        changed: true,
+      };
     case 'EDIT_PROVIDER_TYPE':
-      return { ...state, error: action.error, payload: action.payload, message: action.message };
+      message.success('PROVIDER EDITED SUCCESSFULLY');
+      return {
+        ...state,
+        error: action.error,
+        message: action.message,
+        changed: true,
+      };
     case 'FILTER_PROVIDER_TYPE':
-      return { ...state, error: action.error, payload: action.payload, message: action.message };
+      return {
+        ...state,
+        error: action.error,
+        payload: action.payload,
+        message: action.message,
+        changed: true,
+      };
     case 'DELETE_PROVIDER_TYPE':
-      return { ...state, error: action.error, payload: action.payload, message: action.message };
+      message.success('PROVIDER DELETED SUCCESSFULLY');
+      return {
+        ...state,
+        error: action.error,
+        message: action.message,
+        changed: true,
+        deleted:true
+      };
     default:
       return state;
   }
