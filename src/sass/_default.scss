@@ -15,6 +15,8 @@
 }
 .lead {
   font-size: 1.2rem!important;
+.d-block {
+  display: block;
 }
 body {
     font-family: 'Roboto', sans-serif;
@@ -67,6 +69,9 @@ body {
     .accept-button {
       @include accept-button;
     }
+    .d-flex {
+      @include flex(space-between, center);
+    }
     .ant-table-thead .ant-table-cell {
         color: rgb(120, 129, 149);
         background-color: rgb(241, 243, 246);
@@ -102,6 +107,7 @@ body {
         font-size: 20px;
         line-height: 30px;
       }
+
     }
 
     .ant-modal-body {
@@ -167,5 +173,4 @@ body {
       border: 1px solid #f0f0f0;
   }
 
-}
-    
+}}

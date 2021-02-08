@@ -5,19 +5,27 @@ import { store } from '../../../reducers/configureStore';
 import ProviderCreationForm from './providerCreationForm';
 import { connect } from 'react-redux';
 import { getFormDataA } from '_utils';
+import { map } from 'lodash';
 
 const ProviderTable = props => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [appointmentTypes, setAppointmentTypes] = useState([]);
   const [selectedItems, setSelectedItem] = useState([]);
-
+  const [providers , setProviders] = useState([])
   const [editId, setEditId] = useState(null);
   const [editData, setEditData] = useState('');
 
   useEffect(() => {
     setAppointmentTypes(props.appointment_type)
-  },);
-
+    
+  
+  });
+  const getProvider = () =>{
+    console.log("props000", props.provider)
+    let newData = []
+    props.provider.map((data) => newData.push(data.provider))
+    return newData
+  }
   const showModal = (id, data) => {
     setEditId(id);
     setEditData(data);
@@ -93,7 +101,7 @@ await props.deleteProvider(id)
         <span>
           {text}
           <br />
-          <span style={{ color: 'ButtonShadow' }}>{record.provider_type.name}</span>
+          <span style={{ color: 'ButtonShadow' }}>{record.provider_type?.name}</span>
         </span>
       ),
     },
@@ -145,6 +153,7 @@ await props.deleteProvider(id)
       render: (text, record) => 
       <Space size="middle">
       <Select 
+      style={record.status === 'active' ?{color:"green"} : {color:'red'}}
        defaultValue={record.status}
        onChange={(record,e) => handleStatus(e, record)}>
       <Select.Option value="active">Active</Select.Option>
@@ -167,32 +176,9 @@ await props.deleteProvider(id)
     },
   ];
 
-  const data = [
-    {
-      key: '1',
-      name: 'John Brown',
-      age: 32,
-      address: 'New York No. 1 Lake Park',
-      tags: ['nice', 'developer'],
-    },
-    {
-      key: '2',
-      name: 'Jim Green',
-      age: 42,
-      address: 'London No. 1 Lake Park',
-      tags: ['loser'],
-    },
-    {
-      key: '3',
-      name: 'Joe Black',
-      age: 32,
-      address: 'Sidney No. 1 Lake Park',
-      tags: ['cool', 'teacher'],
-    },
-  ];
   return (
     <div>
-      <Table columns={columns} dataSource={props.provider.users} />
+      <Table columns={columns} dataSource={getProvider()} />
       <Modal
         footer={false}
         width={800}

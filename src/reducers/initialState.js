@@ -5,7 +5,9 @@ import { ProviderTypeState as ProviderType } from './ComponentState/provider_typ
 import { ProviderState as Provider } from './ComponentState/provider';
 import { PatientState as Patient } from './ComponentState/patient';
 import { OnlineBookingState as OnlineBooking } from './ComponentState/online_booking';
-import {CustomFormReducer as CustomForm} from './ComponentState/customForm'
+import {CustomFormState as CustomForm} from './ComponentState/customForm'
+import {AppointmentState as Appointment} from './ComponentState/customForm'
+
 
 export const initialState = {
   Hospital,
@@ -15,5 +17,6 @@ export const initialState = {
   Provider,
   Patient,
   OnlineBooking,
-  CustomForm
+  CustomForm,
+  Appointment
 };

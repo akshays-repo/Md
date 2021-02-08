@@ -2,30 +2,35 @@ import React, { useState, useReducer, useEffect } from 'react';
 import { Col, Row, Form, Input, Button, Modal, Select, Space } from 'antd';
 import Dashboard_Content from '..';
 import { connect } from 'react-redux';
-import FossilBreadCrumb from 'fossilmdComponents/FossilBreadCrumb';
 import AppointmentTypes from './appointmentType';
 import ProviderCreationForm from './providerCreationForm';
 import ProviderTable from './providerTable';
 import { actionCreator } from '../../../reducers/actionCreator';
 import { store } from '../../../reducers/configureStore';
-import CreateProviderType from './createProviderType';
-import CustomFormField from './cutomFormField';
-
+import CustomFormField from './customFormField';
+import ProviderType from './providerType';
 const Dashboard_Provider = props => {
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [providerTypes, setProviderTypes] = useState([]);
 
   useEffect(() => {
-    props.fetchProvider({ branchId: 3, page: 1, limit: 60 });
-    props.fetchBranch({ branchId: 3, page: 1, limit: 60 });
-    console.log('prooo', props);
+    let branch_id = 2;
+    props.fetchProvider(branch_id);
+    let response = props.fetchBranch({ branchId: 3, page: 1, limit: 60 });
+    console.log('prooo', response);
   }, [props.changed]);
 
   useEffect(() => {
-    props.fetchCustomForm(parseInt(localStorage.getItem('hospital_id')));
+    props.fetchCustomForm();
   }, []);
 
   useEffect(() => {
+    props.fetchProviderType();
+    setProviderTypes(store.getState().ProviderType.payload);
+  }, [props.ProviderTypeChanges]);
+
+  useEffect(() => {
     props.fetchBranch({ hospitalId: localStorage.getItem('hospital_id'), page: 1, limit: 50 });
+    props.fetchAppointmentType({ branchId: 3 });
   });
 
   const HeaderSection = () => {
@@ -53,7 +58,7 @@ const Dashboard_Provider = props => {
           <div className="provider-head mr2">
             <Button
               type="primary"
-              // onClick={() => store.dispatch({ type: 'OPEN_CUSTOMFORM_CREATE_MODAL' })}
+              onClick={() => store.dispatch({ type: 'OPEN_PROVIDERTYPE_MODAL' })}
               className="button-square"
             >
               Provider types
@@ -81,20 +86,19 @@ const Dashboard_Provider = props => {
       </div>
     );
   };
-  const Provider_Content = () =>{
+  const Provider_Content = () => {
     return (
       <div className="schedule-time">
         <Modal
-          title=""
+          title="CUSTOM FORM FIELD"
           footer={false}
-          width={800}
           visible={props.CustomFormmodal}
           onCancel={() => store.dispatch({ type: 'CLOSE_CUSTOMFORM_CREATE_MODAL' })}
           destroyOnClose
         >
           <CustomFormField {...props} />
         </Modal>
-  
+
         <Modal
           title=""
           footer={false}
@@ -102,40 +106,42 @@ const Dashboard_Provider = props => {
           onCancel={() => store.dispatch({ type: 'CLOSE_APPOINTMENT_TYPE_MODAL2' })}
         >
           <AppointmentTypes />
-
         </Modal>
-  
-  
+
         <Modal
-          title=""
+          title="PROVIDER"
           footer={false}
-          width={800}
           visible={props.modal}
           onCancel={() => store.dispatch({ type: 'CLOSE_PROVIDER_CREATE_MODAL' })}
           destroyOnClose
         >
           <ProviderCreationForm {...props} />
         </Modal>
-  
-  
-        {/* <FossilBreadCrumb currentUrl="/provider" currentPageName="Provider" /> */}
-        {/* <div className="right-side"> */}
-          <div>{HeaderSection()}</div>
-          <div className="full-width-table">
-            <ProviderTable {...props} />
-          </div>
-        </div>
-      // </div>
-    );
 
-  }
-  return(
+        <Modal
+          title=""
+          footer={false}
+          visible={props.ProviderTypemodal}
+          onCancel={() => store.dispatch({ type: 'CLOSE_PROVIDERTYPE_MODAL' })}
+          destroyOnClose
+        >
+          <ProviderType {...providerTypes} {...props} />
+        </Modal>
+
+        <div>{HeaderSection()}</div>
+        <div className="full-width-table">
+          <ProviderTable {...props} />
+        </div>
+      </div>
+    );
+  };
+  return (
     <div>
-       <Dashboard_Content content={Provider_Content()} />
+      <Dashboard_Content content={Provider_Content()} />
     </div>
-  )
+  );
 };
-const mapStoreToProps = ({ Provider, CustomForm , AppointmentType }) => {
+const mapStoreToProps = ({ Provider, CustomForm, AppointmentType, ProviderType }) => {
   console.log('Store', Provider);
   console.log('Store CustomForm', CustomForm);
   return {
@@ -153,22 +159,26 @@ const mapStoreToProps = ({ Provider, CustomForm , AppointmentType }) => {
     CustomFormmodal1: CustomForm.modal1,
     CustomFormchanged: CustomForm.changed,
 
-    AppointmentTypeModal2:AppointmentType.modal2
+    AppointmentTypeModal2: AppointmentType.modal2,
+
+    ProviderTypemodal: ProviderType.modal,
+    ProviderType: ProviderType.payload,
+    ProviderTypeChanges: ProviderType.changed,
   };
 };
 
 const mapDispatchToProps = dispatch => ({
   fetchBranch: param =>
     dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_BRANCH', param })),
-  fetchCustomForm: id =>
-    dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_CUSTOMFORM', id })),
+  fetchCustomForm: () =>
+    dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_CUSTOMFORM' })),
   addCustomForm: (values, contentType) =>
     dispatch(
       actionCreator({ method: 'POST', action_type: 'CREATE_CUSTOMFORM', values, contentType }),
     ),
 
-  fetchProvider: param =>
-    dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_PROVIDER', param })),
+  fetchProvider: id =>
+    dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_PROVIDER', id })),
   addProvider: values =>
     dispatch(actionCreator({ method: 'POST', action_type: 'CREATE_PROVIDER', values })),
   editProvider: (id, values) =>
@@ -183,6 +193,12 @@ const mapDispatchToProps = dispatch => ({
         param,
       }),
     ),
+
+  fetchAppointmentType: param =>
+    dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_APPOINTMENT_TYPE', param })),
+
+  fetchProviderType: () =>
+    dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_PROVIDER_TYPE' })),
 });
 
 export default connect(mapStoreToProps, mapDispatchToProps)(Dashboard_Provider);

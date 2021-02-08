@@ -1,107 +1,121 @@
-import React from 'react';
-import { Space, Card, Row, Col } from 'antd';
+import React, { useEffect ,useState} from 'react';
+import { Space, Card, Row, Col ,Table, Tag, } from 'antd';
 import Dashboard_Content from '..';
-const data = [
+import { actionCreator } from '../../../reducers/actionCreator';
+import { store } from '../../../reducers/configureStore';
+import { connect } from 'react-redux';
+import moment from 'moment'
+const columns = [
   {
-    name: 'Akshays',
-    date: '13/12/21 10:00AM',
-    location: 'New York, united states, ',
-    emailid: 'akshays@oi.com',
-    phone: '+91 2039203940',
+    title: 'Name',
+    dataIndex: 'firstName',
+    key: 'firstName',
+    render: (text, record) => (
+        <span>{record.firstName} {record.lastName}</span>         ),
   },
   {
-    name: 'Akshays',
-    date: '13/12/21 10:00AM',
-    location: 'New York, united states, ',
-    emailid: 'akshays@oi.com',
-    phone: '+91 2039203940',
+    title: 'Email',
+    dataIndex: 'email',
+    key: 'email',
   },
   {
-    name: 'Akshays',
-    date: '13/12/21 10:00AM',
-    location: 'New York, united states, ',
-    emailid: 'akshays@oi.com',
-    phone: '+91 2039203940',
+    title: 'Phone',
+    dataIndex: 'phone',
+    key: 'phone',
   },
   {
-    name: 'Akshays',
-    date: '13/12/21 10:00AM',
-    location: 'New York, united states, ',
-    emailid: 'akshays@oi.com',
-    phone: '+91 2039203940',
+    title: 'Appointment Start',
+    dataIndex: 'appointment_start',
+    key: 'appointment_start',
+    render:(record) =>(
+      <span> {moment(record.appointment_start).format('MMM DD h:mm A')} </span> 
+    )
+    
+    
   },
   {
-    name: 'Akshays',
-    date: '13/12/21 10:00AM',
-    location: 'New York, united states, ',
-    emailid: 'akshays@oi.com',
-    phone: '+91 2039203940',
+    title: 'Payment Status',
+    dataIndex: 'payment_status',
+    key: 'payment_status',
   },
   {
-    name: 'Akshays',
-    date: '13/12/21 10:00AM',
-    location: 'New York, united states, ',
-    emailid: 'akshays@oi.com',
-    phone: '+91 2039203940',
+    title: 'Status',
+    dataIndex: 'status',
+    key: 'status',
   },
   {
-    name: 'Akshays',
-    date: '13/12/21 10:00AM',
-    location: 'New York, united states, ',
-    emailid: 'akshays@oi.com',
-    phone: '+91 2039203940',
+    title: '',
+    dataIndex: 'status',
+    key: 'status',
+    render:(record) =>(
+      <Space size="middle">
+      <span className="edit-color icon-button">
+        {' '}
+        <i className="fa fa-eye"></i>{' '}
+      </span>
+      <span className="edit-color icon-button">
+        {' '}
+        <i className="fa fa-edit"></i>{' '}
+      </span>
+      <span className="delete-color"> <i className="fa fa-trash"></i></span>
+    </Space>
+    
+    )
+    
   },
+
 ];
-const Dashboard_Appointments = () => {
+
+const Dashboard_Appointments = (props) => {
   const Appointments = () => {
+
+    const [AppointmentList , setAppointmentList] = useState(store.getState().Appointment.payload)
+    useEffect(() =>{
+    props.fetchAppointment() 
+    },[])
+
+    useEffect(() =>{
+      setAppointmentList(props.Appointment)
+      })
+
     return (
       <div className="appointment-section">
-        <Space direction="vertical">
-          {data.map(item => (
-            <Card style={{ width: 1000 }}>
-              <Row>
-                <Col xl={12}>
-                  <p className="title-name"> {item.name}</p>
-                  <p className="iconAppt">
-                    <i class="far fa-clock "></i>
-                    {'  '}
-                    {item.date}
-                  </p>
-                  <p className="iconAppt">
-                    <i class="fas fa-map-marker-alt"></i>
-                    {'  '}
-                    {item.location}
-                  </p>
-                  <p className="iconAppt">
-                    <i class="fas fa-envelope"></i>
-                    {'  '}
-                    {item.emailid}
-                  </p>
-                  <p className="iconAppt">
-                    <i class="fas fa-phone"></i>
-                    {'  '}
-                    {item.phone}
-                  </p>
-                </Col>
-
-                <Col xl={12} className="right-side">
-                  <div  >
-                    <Space direction="middle">
-                      {' '}
-                      <button className="view-button">View</button>
-                      <button className="accept-button">Accept</button>
-                      <button className="delete-button">Cancel</button>
-                    </Space>
-                  </div>
-                </Col>
-              </Row>
-            </Card>
-          ))}
-        </Space>
+      <Table dataSource={AppointmentList} columns={columns}  />
       </div>
     );
   };
   return <Dashboard_Content content={Appointments()} />;
 };
 
-export default Dashboard_Appointments;
+
+const mapStoreToProps = ({ Appointment }) => {
+  console.log('Store', Appointment);
+  return {
+    Appointment: Appointment.payload,
+    error: Appointment.error,
+    message: Appointment.message,
+    modal: Appointment.modal,
+    modal1: Appointment.modal1,
+    changed: Appointment.changed,
+  };
+};
+const mapDispatchToProps = dispatch => ({
+  fetchAppointment: () =>
+    dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_APPOINTMENT' })),
+  addAppointment: values =>
+    dispatch(actionCreator({ method: 'POST', action_type: 'CREATE_BRANCH', values })),
+  editAppointment: (id, values) =>
+    dispatch(actionCreator({ method: 'PUT', action_type: 'EDIT_BRANCH', id, values })),
+  deleteAppointment: id =>
+    dispatch(actionCreator({ method: 'DELETE', action_type: 'DELETE_BRANCH', id })),
+  filterAppointment: param =>
+    dispatch(
+      actionCreator({
+        method: 'GET',
+        action_type: 'FILTER_BRANCH',
+        param,
+      }),
+    ),
+});
+
+export default connect(mapStoreToProps, mapDispatchToProps)(Dashboard_Appointments);

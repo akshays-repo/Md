@@ -1,20 +1,14 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form,  } from 'formik';
 import { PatientCreationSchema } from '_utils/Schemas';
-import { TextField, Select as MatSelect } from 'formik-material-ui';
-import MenuItem from '@material-ui/core/MenuItem';
-import { message, Button, Row, Col, Upload } from 'antd';
-import { PoweroffOutlined } from '@ant-design/icons';
-import callApi from '_utils/callApi';
+import {  Button, Row,} from 'antd';
 import { generateForm } from '../../../_utils/formgenerator';
 import { useDropzone } from 'react-dropzone';
 import { Thumb } from './thumb';
-import { getFormData, getFormDataA } from '../../../_utils';
+import {  getFormDataA } from '../../../_utils';
 
 const PatientCreationForm = props => {
   const [loadings, setLoadings] = useState(false);
-  const [editId, setEditId] = useState(null);
-  const [editData, setEditData] = useState('');
   const innerForm = useRef();
   const [files, setFiles] = useState([]);
 

@@ -1,11 +1,12 @@
 import React from 'react';
+import MessageLayout from 'pages/Message/Modules';
 import Dashboard_Content from '..'
 
 const Dashboard_Message = () =>{
     const Messages = () =>{
         return(
-            <div>
-            Messages
+            <div >
+            <MessageLayout/>
             </div>
         )
     }

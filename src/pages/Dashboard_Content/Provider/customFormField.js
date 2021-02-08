@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import { actionCreator } from '../../../reducers/actionCreator';
 import { customFormSchema } from '_utils/Schemas';
 import CustomFormReview from './customFormPreview';
-import HardCoreForm from './cutomFormhardCore';
+import HardCoreForm from './customFormhardCore';
 
 const CustomFormField = props => {
   const [field, setField] = useState();
@@ -131,26 +131,30 @@ const CustomFormField = props => {
 
   return (
     <div className="custom-field" style={{ minHeight: '500px' }}>
-      CUSTOM FORM FIELD <Button className="edit-button" onClick={() => setIsModalVisible(true)}> PREVIEW </Button>
+      <div className="d-flex mb4">
+      <h3>CUSTOM FORM FIELD{' '}</h3>
+      <Button className="edit-button" onClick={() => setIsModalVisible(true)}>
+        {' '}
+        PREVIEW{' '}
+      </Button>
+      </div>
       <div className="inner-box">
         <div>
           <p>
-          This is what FossilMd asks your patients by default. You can create additional questions
-          and fields by clicking on the plus sign below.</p>
-          
-         
+            This is what FossilMd asks your patients by default. You can create additional questions
+            and fields by clicking on the plus sign below.
+          </p>
+
           <Modal
             title="PREVIEW CUTOM FORM"
             visible={isModalVisible}
-          footer={false}
+            footer={false}
             onCancel={handleCancel}
           >
-
-<CustomFormReview {...props}/>
-
+            <CustomFormReview {...props} />
           </Modal>
 
-<HardCoreForm/>
+          <HardCoreForm />
 
           {listCustomField?.map((type, index) => {
             console.log('typeee', type);
@@ -172,36 +176,36 @@ const CustomFormField = props => {
                 >
                   {({ handleSubmit }) => (
                     <Form className="login__form" handleSubmit={handleSubmit}>
-                    
-                    <div className="add-field-box">
-                      <Field
-                        style={{ width: '50%' }}
-                        component={TextField}
-                        name="Key_name"
-                        type="text"
-                      />
-                    <div className="mt4">
-                      <Switch className="ml4"
-                        checkedChildren="Required"
-                        unCheckedChildren="Not Required"
-                        name="required"
-                        defaultChecked
-                      />
-                      <span
-                        onClick={() => setEditIndex(index)}
-                        className="ml4 mt3 edit-color"
-                        htmlType="submit"
-                        className="submitbutton"
-                      >
-                        <i className="fa fa-edit"></i>
-                      </span>
-                      <span className="ml4 delete-color" onClick={() => deleteItem(index)}><i className="fa fa-trash"></i></span>
+                      <div className="add-field-box">
+                        <Field
+                          style={{ width: '50%' }}
+                          component={TextField}
+                          name="Key_name"
+                          type="text"
+                        />
+                        <div className="mt4">
+                          <Switch
+                            className="ml4"
+                            checkedChildren="Required"
+                            unCheckedChildren="Not Required"
+                            name="required"
+                            defaultChecked
+                          />
+                          <span
+                            onClick={() => setEditIndex(index)}
+                            className="ml4 mt3 edit-color"
+                            htmlType="submit"
+                            className="ml4 submitbutton"
+                          >
+                            <i className="fa fa-edit"></i>
+                          </span>
+                          <span className="ml4 delete-color" onClick={() => deleteItem(index)}>
+                            <i className="fa fa-trash"></i>
+                          </span>
+                        </div>
                       </div>
-
-                      </div>
-                      {Values.length !== 0 && (
-
-                      //  ADD SECTIION OF EDIT START HERE
+                      {Values?.length !== 0 && (
+                        //   SECTIION  EDIT START HERE
                         <div className="addOption mt8">
                           <AntForm
                             name="dynamic_form_item"
@@ -223,7 +227,8 @@ const CustomFormField = props => {
                                           required={false}
                                           key={field.key}
                                         >
-                                          <AntForm.Item className="error-message"
+                                          <AntForm.Item
+                                            className="error-message mb2"
                                             {...field}
                                             validateTrigger={['onChange', 'onBlur']}
                                             rules={[
@@ -231,12 +236,13 @@ const CustomFormField = props => {
                                                 required: true,
                                                 whitespace: true,
                                                 message:
-                                                  'Please input option or delete this field.',
+                                                  <span className="d-block mb3">Please input option or delete this field.</span>,
                                               },
                                             ]}
                                             noStyle
                                           >
-                                            <Input className="mr4"
+                                            <Input
+                                              className="mr4"
                                               placeholder="Enter Option"
                                               style={{ width: '60%' }}
                                             />
@@ -251,7 +257,8 @@ const CustomFormField = props => {
                                       );
                                     })}
                                     <AntForm.Item>
-                                      <button className="plus-button" 
+                                      <button
+                                        className="plus-button"
                                         type="dashed"
                                         onClick={() => add()}
                                         // style={{ width: '60%' }}
@@ -266,14 +273,18 @@ const CustomFormField = props => {
                               }}
                             </AntForm.List>
                             <AntForm.Item>
-                              <Button className="view-button square-button" type="primary" htmlType="submit">
+                              <Button
+                                className="view-button square-button"
+                                type="primary"
+                                htmlType="submit"
+                              >
                                 Submit
                               </Button>
                             </AntForm.Item>
                           </AntForm>
                         </div>
 
-                        // ADD SECTION EDIT ENDS HERE
+                        //  SECTION EDIT ENDS HERE
                       )}
                     </Form>
                   )}
@@ -298,8 +309,9 @@ const CustomFormField = props => {
                   innerRef={innerForm}
                 >
                   {({ handleSubmit, touched, errors, isSubmitting }) => (
-                    <div style={{ marginTop: '30px' }}>
+                    <div  style={{ marginTop: '30px' }}>
                       <Form className="login__form" handleSubmit={handleSubmit}>
+<div className="add-field-box">
                         <Field
                           style={{ width: '50%' }}
                           component={TextField}
@@ -307,7 +319,7 @@ const CustomFormField = props => {
                           type="text"
                           name="Key_name"
                         />
-                        <span className="form-to">
+                        <span className="mt4 form-to">
                           <Switch
                             checkedChildren="Required"
                             unCheckedChildren="Not Required"
@@ -316,12 +328,9 @@ const CustomFormField = props => {
                           />
                         </span>
 
-
-                       
                         {item === 'checkbox' || item === 'drop-down' ? (
                           // ADD SECTION START HERE
                           <div className="addOption">
-                            
                             <AntForm
                               name="dynamic_form_item"
                               {...formItemLayoutWithOutLabel}
@@ -385,8 +394,8 @@ const CustomFormField = props => {
                               </AntForm.Item>
                             </AntForm>
                           </div>
-                          // ADD SECTION ENDS HERE
                         ) : (
+                          // ADD SECTION ENDS HERE
                           ''
                         )}
                         <Button
@@ -396,6 +405,7 @@ const CustomFormField = props => {
                         >
                           Submit
                         </Button>
+                        </div>
                       </Form>
                     </div>
                   )}
