@@ -37,7 +37,8 @@ export const ScheduleReducer = (state = ScheduleState, action) => {
         message: action.message,
         changed: false,
       };
-
+    case 'EMPTY_SCHEDULE':
+      return { ...state, payload: [] };
     default:
       return state;
   }

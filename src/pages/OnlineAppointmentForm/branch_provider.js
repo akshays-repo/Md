@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { actionCreator } from '../../reducers/actionCreator';
 import { Form, Input, Select } from 'formik-antd';
 import { connect } from 'react-redux';
@@ -16,39 +16,51 @@ const BranchProvider = props => {
   const [endDate, setEndDate] = useState(moment());
   const no_of_date = 365;
   const [next, setNext] = useState(no_of_date);
-
+  const scheduleRef = useRef([]);
+  const timeRef = useRef([]);
   useEffect(() => {
-    const providerList = props.provider;
+    let providerList = props.provider;
     console.log('***Providerlist', providerList);
 
-    const providerScheduleList = () => {
-      return Promise.all(
-        providerList.map(async (result, i) => {
-          await props.fetchSchedule({
-            provider_id: result.id,
-            branch_id: props.values.branch_id,
-            end_date: datelist.slice(-1)[0].date,
-            appointment_id: props.values.appointment_type_id,
-          });
-          console.log('Schedule', result);
-          return { ...result, ...props.schedule };
-        }),
-      );
+    const providerScheduleList = async () => {
+      if (providerList.length > 0) {
+        console.log('Fetch provider schedule');
+        await props.fetchSchedule({
+          branch_id: props.values.branch_id,
+          end_date: '2021-03-20',
+          appointment_id: props.values.appointment_type_id,
+        });
+      }
     };
-    if (providerList.length > 0) {
-      providerScheduleList().then(result => setProviderSchedule(result));
-    }
+
+    providerScheduleList().then(result => {
+      console.log(result);
+      setProviderSchedule(props.schedule);
+    });
   }, [props.provider]);
 
   useEffect(() => {
-    if (props.values.branch_id) {
-      props.fetchProvider(props.values.branch_id);
+    if (props.values.branch_id && props.values.appointment_type_id) {
+      props.fetchProvider({
+        type_id: props.values.appointment_type_id,
+        branch_id: props.values.branch_id,
+      });
     }
-  }, [props.values.branch_id]);
+  }, [props.values.branch_id, props.values.appointment_type_id]);
 
   const SampleNextArrow = prop => {
-    const { className, style, onClick } = prop;
+    const { className, style } = prop;
 
+    // scheduleRef.current
+    const onClick = () => {
+      timeRef.current.innerSlider.slickNext();
+      if (scheduleRef) {
+        if (scheduleRef.current.length > 0) {
+          console.log('Schedule Ref', scheduleRef.current);
+          scheduleRef.current.map((result, i) => (result ? result.innerSlider.slickNext() : ''));
+        }
+      }
+    };
     useEffect(() => {
       if (prop.currentSlide > 0 && prop.currentSlide % (no_of_date - 5) == 0) {
         setNext(prev => no_of_date * (Number(prop.currentSlide / (no_of_date - 5)) + 1));
@@ -63,7 +75,17 @@ const BranchProvider = props => {
   };
 
   const SamplePrevArrow = prop => {
-    const { className, style, onClick } = prop;
+    const { className, style } = prop;
+    const onClick = () => {
+      timeRef.current.innerSlider.slickPrev();
+      if (scheduleRef) {
+        if (scheduleRef.current.length > 0) {
+          console.log('Schedule Ref', scheduleRef.current);
+          scheduleRef.current.map((result, i) => (result ? result.innerSlider.slickPrev() : ''));
+        }
+      }
+    };
+
     if (prop.currentSlide == 0) {
       return (
         <div className={className} style={{ ...style, left: -60, display: 'block' }}>
@@ -106,7 +128,7 @@ const BranchProvider = props => {
     speed: 500,
     slidesToShow: 5,
     slidesToScroll: 5,
-    arrows: false,
+    arrows: true,
   };
 
   useEffect(() => {
@@ -222,7 +244,7 @@ const BranchProvider = props => {
           <Col span="10">AVAILABILITY</Col>
           <Col span="13">
             {' '}
-            <Carousel {...carousel_props}>
+            <Carousel ref={timeRef} {...carousel_props}>
               {datelist.map((result, i) => {
                 return (
                   <div key={i} style={{ textAlign: 'center', padding: 5 }}>
@@ -249,41 +271,76 @@ const BranchProvider = props => {
                         color: 'white',
                         backgroundColor: '#00CBE6',
                       }}
-                    >
-                      H
-                    </Avatar>
+                      src={
+                        result.provider?.image ||
+                        'https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png'
+                      }
+                    ></Avatar>
                   </Col>
                   <Col span="20">
                     <Row>
                       <Col style={{ fontSize: 12 }} span={24}>
-                        {result.provider.provider_type.name.toUpperCase()}
+                        {result.provider?.provider_type?.name?.toUpperCase() || ''}
                       </Col>
                     </Row>
                     <Col style={{ fontSize: 16 }} span={24}>
-                      <b>{result.provider.fullName.toUpperCase()}</b>
+                      <b>{result.provider?.fullName?.toUpperCase() || ''}</b>
                     </Col>
                   </Col>
                 </Row>
               </Col>
               <Col span="13">
-                <Carousel {...carousel_props1}>
+                <Carousel
+                  ref={el => {
+                    scheduleRef.current[i] = el;
+                  }}
+                  {...carousel_props1}
+                >
                   {datelist.map((result1, j) => {
-                    return result.date === result1.date ? (
-                      result.available_time.map((result2, k) => (
-                        <button
-                          onClick={() =>
-                            props.setFieldValue(
-                              'appointment_start',
-                              `${result.date} ${moment(result2, 'hh:mm A').format('HH:mm:ss')}`,
-                            )
-                          }
-                          style={{ margin: 5, padding: 5, backgroundColor: '#EDEEEE' }}
-                        >
-                          {result2}
-                        </button>
-                      ))
+                    return props.schedule.filter(
+                      res => res.provider_id === result.provider_id && res.date === result1.date,
+                    ).length > 0 ? (
+                      props.schedule
+                        .filter(
+                          res =>
+                            res.provider_id === result.provider_id && res.date === result1.date,
+                        )
+                        .map((result4, m) => {
+                          return (
+                            <div key={i} style={{ textAlign: 'center', padding: 5 }}>
+                              {result4.available_time.map((result2, k) => (
+                                <>
+                                  <button
+                                    type="button"
+                                    onClick={() => {
+                                      props.setFieldValue('provider_id', result.provider_id);
+                                      props.setFieldValue(
+                                        'appointment_start',
+                                        `${result1.date} ${moment(result2, 'hh:mm A').format(
+                                          'HH:mm:ss',
+                                        )}`,
+                                      );
+                                    }}
+                                    className="timing"
+                                    style={{
+                                      margin: 5,
+                                      border: 'none',
+                                      outline: 'none',
+                                      padding: 5,
+                                      cursor: 'pointer',
+                                      backgroundColor: '#EDEEEE',
+                                    }}
+                                  >
+                                    {result2}
+                                  </button>
+                                  <br />
+                                </>
+                              ))}
+                            </div>
+                          );
+                        })
                     ) : (
-                      <div>Shailesh</div>
+                      <div></div>
                     );
                   })}
                 </Carousel>
@@ -310,7 +367,6 @@ const mapStoreToProps = ({
     OnlineBookingFormError: OnlineBookingForm.error,
     OnlineBookingFormMessage: OnlineBookingForm.message,
     CustomForm: CustomForm.payload,
-
     provider: Provider.payload,
     schedule: Schedule.payload,
   };
@@ -332,8 +388,10 @@ const mapDispatchToProps = dispatch => ({
     dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_APPOINTMENT_TYPE', param })),
   fetchBranch: param =>
     dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_BRANCH', param })),
-  fetchProvider: id =>
-    dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_PROVIDER', id })),
+  fetchProvider: param =>
+    dispatch(
+      actionCreator({ method: 'GET', action_type: 'FETCH_BRANCH_APPOINTMENT_PROVIDER', param }),
+    ),
   fetchSchedule: param => {
     dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_PROVIDER_SCHEDULE', param }));
   },

@@ -38,6 +38,11 @@ export const ProviderReducer = (state = ProviderState, action) => {
       return { ...state, modal1: true };
     case 'CLOSE_PROVIDER_EDIT_MODAL':
       return { ...state, modal1: false };
+    case 'EMPTY_PROVIDER':
+      return { ...state, payload: [] };
+    case 'FETCH_BRANCH_APPOINTMENT_PROVIDER':
+      return { error: action.error, payload: action.payload, message: action.message };
+
     default:
       return state;
   }

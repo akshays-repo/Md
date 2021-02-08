@@ -13,6 +13,9 @@ export const AppointmentFor = props => {
           borderRadius: 5,
           cursor: 'pointer',
         }}
+        onClick={() => {
+          props.setFieldValue('appointment_for', 'me');
+        }}
       >
         Scheduling for me
       </p>
@@ -24,6 +27,9 @@ export const AppointmentFor = props => {
           padding: '7px 10px',
           borderRadius: 5,
           cursor: 'pointer',
+        }}
+        onClick={() => {
+          props.setFieldValue('appointment_type', 'other');
         }}
       >
         Scheduling for Someone Else

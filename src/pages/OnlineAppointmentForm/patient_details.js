@@ -19,9 +19,18 @@ import { actionCreator } from '../../reducers/actionCreator';
 import { generateForm } from '_utils/formgenerator';
 import TextField from '@material-ui/core/TextField';
 import moment from 'moment';
+import { store } from '../../reducers/configureStore';
+
 import { Link } from 'react-router-dom';
-export const PatientDetails = () => {
+
+export const PatientDetails = props => {
   const [customFormField, setCustomFormField] = useState([]);
+
+  const resetOnlinBooking = () => {
+    store.dispatch({ type: 'EMPTY_PROVIDER' });
+    store.dispatch({ type: 'EMPTY_SCHEDULE' });
+    props.resetForm();
+  };
 
   const formField = [
     {
@@ -71,15 +80,6 @@ export const PatientDetails = () => {
       ],
     },
     {
-      label: 'Appointment For *',
-      name: 'appointment_for',
-      type: 'select',
-      options: [
-        { value: 'me', name: 'Me' },
-        { value: 'other', name: 'Other' },
-      ],
-    },
-    {
       label: 'Comments or Special Request (Optional)',
       name: 'comment',
       type: 'text',
@@ -91,6 +91,8 @@ export const PatientDetails = () => {
     let item = items[index];
     item.answer = [e];
     items[index] = item;
+
+    props.setFieldValue(`response.${index}`, item);
   };
 
   const handleChangeText = (e, index) => {
@@ -98,11 +100,25 @@ export const PatientDetails = () => {
     let item = items[index];
     item.answer = [e.target.value];
     items[index] = item;
+    props.setFieldValue(`response.${index}`, item);
   };
+
+  useEffect(() => {
+    const fetchForm = async () => {
+      if (customFormField?.length === 0) {
+        await props.fetchCustomForm(props.id);
+        setCustomFormField(props.CustomForm.custom_form);
+      }
+    };
+    fetchForm();
+  }, []);
   return (
     <>
       {' '}
-      <span style={{ padding: 5, display: 'inline-block' }}>
+      <span
+        onClick={resetOnlinBooking}
+        style={{ padding: 5, cursor: 'pointer', display: 'inline-block' }}
+      >
         <i className="fa fa-arrow-left"></i>&nbsp;Change your appointment details
       </span>
       <h3>Please enter your exact information</h3> <Divider />
@@ -115,6 +131,18 @@ export const PatientDetails = () => {
             <div>
               {' '}
               <p></p>
+              {/* <Field name={response[index].answer}>
+                {({
+                  field, // { name, value, onChange, onBlur }
+                  form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
+                  meta,
+                }) => (
+                  <div>
+                    <TextField label={forms.Key_name} type="text" placeholder="Email" {...field} />
+                    {/* {meta.touched && meta.error && <div className="error">{meta.error}</div>} */}
+              {/* </div>
+                )} */}
+              {/* </Field> */}
               <TextField
                 onChange={e => handleChangeText(e, index)}
                 id="standard-basic"

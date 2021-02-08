@@ -87,6 +87,7 @@ const routes = [
     component: loadable(() => import('../pages/OnlineAppointmentForm')),
     exact: true,
     authorize: false,
+    header: false,
   },
 ];
 
@@ -115,6 +116,7 @@ const Router = props => {
               exact={route.exact}
               header={route.header}
               footer={route.footer}
+              header={route.header || true}
             />
           );
         }

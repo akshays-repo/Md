@@ -46,4 +46,7 @@ export const backend_api = {
 
   FETCH_PROVIDER_SCHEDULE: '/api/backend/v1/booking_schedule',
   FETCH_PROVIDER_HOSPITAL: '/api/backend/v1/providers/hospital',
+  FETCH_BRANCH_APPOINTMENT_PROVIDER: '/api/backend/v1/providers/type_id',
+  FETCH_HOSPITAL_APPOINTMENT_TYPE: '/api/backend/v1/appointment_types/hospital',
+  CHECK_HOSPITAL: '/api/backend/v1/users',
 };

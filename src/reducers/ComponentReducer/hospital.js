@@ -17,6 +17,8 @@ export const HospitalReducer = (state = HospitalState, action) => {
       return { error: action.error, payload: action.payload, message: action.message };
     case 'DELETE_HOSPITAL':
       return { error: action.error, payload: action.payload, message: action.message };
+    case 'CHECK_HOSPITAL':
+      return { error: action.error, payload: action.payload, message: action.message };
     default:
       return state;
   }
