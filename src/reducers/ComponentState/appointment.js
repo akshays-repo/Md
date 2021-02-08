@@ -7,6 +7,7 @@ export const AppointmentState = {
     message: '',
     modal: false,
     modal1: false,
+    modal2:false,
     changed: false,
   };
   

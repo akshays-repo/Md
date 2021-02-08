@@ -16,6 +16,11 @@ export const AppointmentReducer = (state = BranchState, action) => {
       return { ...state, modal1: true };
     case 'CLOSE_EDIT_APPOINTMENT_MODAL':
       return { ...state, modal1: false };
+      case 'OPEN_VIEW_APPOINTMENT_MODAL':
+        return { ...state, modal2: true };
+      case 'CLOSE_VIEW_APPOINTMENT_MODAL':
+        return { ...state, modal2: false };
+
     case 'CREATE_APPOINTMENT':
       message.success('APPOINTMENT CREATED SUCCESSFULLY');
       return { ...state, error: action.error, modal: false, message: action.message };

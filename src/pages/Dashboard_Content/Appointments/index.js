@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Space, Select, Row, Col, Table, Tag, DatePicker, Input } from 'antd';
+import { Space, Select, Row, Col, Table, Tag, DatePicker, Input, Modal } from 'antd';
 import Dashboard_Content from '..';
 import { actionCreator } from '../../../reducers/actionCreator';
 import { store } from '../../../reducers/configureStore';
 import { connect } from 'react-redux';
 import moment from 'moment';
+import AppointmentView from './appointmentView';
 const { Option } = Select;
 
 const columns = [
@@ -50,7 +51,10 @@ const columns = [
     key: 'status',
     render: record => (
       <Space size="middle">
-        <span className="edit-color icon-button">
+        <span
+          onClick={() => store.dispatch({ type: 'OPEN_VIEW_APPOINTMENT_MODAL' })}
+          className="edit-color icon-button"
+        >
           {' '}
           <i className="fa fa-eye"></i>{' '}
         </span>
@@ -80,43 +84,42 @@ const Dashboard_Appointments = props => {
 
     useEffect(() => {
       props.fetchAppointment();
-    },[]);
+    }, []);
 
     useEffect(() => {
       setAppointmentList(props.Appointment);
       props.fetchBranch({ hospitalId: localStorage.getItem('hospital_id'), page: 1, limit: 50 });
-      console.log("Babsass", props.branch)
+      console.log('Babsass', props.branch);
     }, []);
 
     const handleChangeSearch = e => {
       e.preventDefault();
       setSearchKey(e.target.value);
     };
-    
+
     const handleSearchSubmission = e => {
       e.preventDefault();
       let parms = {
-        fromDate:fromData,
-        toDate:toData,
-      }
-      if (searchKey) parms.search= searchKey;
-      if (branchId) parms.search= searchKey;  
-      if (paymentStatus) parms.status= paymentStatus;  
-      if (status) parms.payment_status= status;  
+        fromDate: fromData,
+        toDate: toData,
+      };
+      if (searchKey) parms.search = searchKey;
+      if (branchId) parms.search = searchKey;
+      if (paymentStatus) parms.status = paymentStatus;
+      if (status) parms.payment_status = status;
       props.filterAppointment(parms);
-
     };
 
-    const clearFilter =(e) =>{
-          setAppointmentList('')
-          setBranchId('')
-          setSearchKey('')
-          props.fetchAppointment();
-    }
+    const clearFilter = e => {
+      setAppointmentList('');
+      setBranchId('');
+      setSearchKey('');
+      props.fetchAppointment();
+    };
 
     return (
-      <div  className="appointment-section">
-        <div style={{marginBottom:"10px"}} className="search">
+      <div className="appointment-section">
+        <div style={{ marginBottom: '10px' }} className="search">
           <Space direction="horizontal">
             <Input type="text" placeholder=" Name Email or Phone" onChange={handleChangeSearch} />
 
@@ -153,17 +156,31 @@ const Dashboard_Appointments = props => {
             <button className="view-button button-square" onClick={handleSearchSubmission}>
               Filter
             </button>
-            <button className="view-button button-square" onClick ={clearFilter}>clear</button>
+            <button className="view-button button-square" onClick={clearFilter}>
+              clear
+            </button>
           </Space>
         </div>
         <Table dataSource={props.Appointment} columns={columns} />
       </div>
     );
   };
-  return <Dashboard_Content content={Appointments()} />;
+  return (
+    <div>
+      <Modal
+       
+        visible={props.modal2}
+        footer={false}
+        onCancel={() => store.dispatch({ type: 'CLOSE_VIEW_APPOINTMENT_MODAL' })}
+      >
+        <AppointmentView />
+      </Modal>
+      <Dashboard_Content content={Appointments()} />;
+    </div>
+  );
 };
 
-const mapStoreToProps = ({ Appointment , Branch}) => {
+const mapStoreToProps = ({ Appointment, Branch }) => {
   console.log('Store', Appointment);
   return {
     Appointment: Appointment.payload,
@@ -171,14 +188,14 @@ const mapStoreToProps = ({ Appointment , Branch}) => {
     message: Appointment.message,
     modal: Appointment.modal,
     modal1: Appointment.modal1,
+    modal2: Appointment.modal2,
     changed: Appointment.changed,
-    branch :Branch.payload,
+    branch: Branch.payload,
   };
 };
 const mapDispatchToProps = dispatch => ({
   fetchBranch: param =>
     dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_BRANCH', param })),
-
   fetchAppointment: () =>
     dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_APPOINTMENT' })),
   addAppointment: values =>
