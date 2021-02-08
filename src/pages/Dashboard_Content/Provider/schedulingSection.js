@@ -59,15 +59,15 @@ export const Scheduling = ({ values, setFieldValue, setValues, index, errors, to
     switch (to) {
       case 'hour':
         setFromHour(value);
-        setFieldValue(`formData[${index}].ToTime`, `${value}:${fromMinutes} ${fromType}`);
+        setFieldValue(`formData[${index}].ToTime`, `${value}:${toMinutes} ${toType}`);
         break;
       case 'minutes':
         setToMinutes(value);
-        setFieldValue(`formData[${index}].ToTime`, `${value}:${fromMinutes} ${fromType}`);
+        setFieldValue(`formData[${index}].ToTime`, `${toHour}:${value} ${toType}`);
         break;
       case 'type':
         setToType(value);
-        setFieldValue(`formData[${index}].ToTime`, `${value}:${fromMinutes} ${fromType}`);
+        setFieldValue(`formData[${index}].ToTime`, `${toHour}:${toMinutes} ${value}`);
 
         break;
     }
@@ -215,7 +215,7 @@ export const Scheduling = ({ values, setFieldValue, setValues, index, errors, to
         </Space>
         <br />
         <br />
-        <div className="switch-section" style={{ marginLeft:15 }}>
+        <div className="switch-section" style={{ marginLeft: 15 }}>
           <Space direction="vertical">
             <div>
               <Switch
@@ -232,54 +232,53 @@ export const Scheduling = ({ values, setFieldValue, setValues, index, errors, to
                 />
                 &nbsp; Custom repeat
               </div>
-             
             </div>
             {values[index].type === 'custom' && (
-                <div>
-                  <Space direction="vertical">
-                    <Select
-                      value={values[index]?.frequency || null}
-                      onChange={value => handleChange(value, 'frequency')}
-                      placeholder="Select number"
-                    >
-                      {new Array(29).fill(0).map((va, i) => (
-                        <Option key={i} value={i + 1}>
-                          {i + 1}
-                        </Option>
-                      ))}
-                    </Select>
-                    <div className="errormsg">
-                      {errors.formData
-                        ? errors.formData[index]
+              <div>
+                <Space direction="vertical">
+                  <Select
+                    value={values[index]?.frequency || null}
+                    onChange={value => handleChange(value, 'frequency')}
+                    placeholder="Select number"
+                  >
+                    {new Array(29).fill(0).map((va, i) => (
+                      <Option key={i} value={i + 1}>
+                        {i + 1}
+                      </Option>
+                    ))}
+                  </Select>
+                  <div className="errormsg">
+                    {errors.formData
+                      ? errors.formData[index]
+                        ? errors.formData[index].frequency
                           ? errors.formData[index].frequency
-                            ? errors.formData[index].frequency
-                            : ''
-                          : '' || ''
-                        : ''}
-                    </div>
-                  </Space>
-                  <Space direction="vertical" style={{ marginTop: 20 }}>
-                    <Select
-                      value={values[index]?.unit || null}
-                      onChange={value => handleChange(value, 'unit')}
-                      placeholder="Select unit"
-                    >
-                      <Option value={'daily'}>Day</Option>
-                      <Option value={'week'}>Week</Option>
-                      <Option value={'month'}>Month</Option>
-                    </Select>
-                    <div className="errormsg">
-                      {errors.formData
-                        ? errors.formData[index]
+                          : ''
+                        : '' || ''
+                      : ''}
+                  </div>
+                </Space>
+                <Space direction="vertical" style={{ marginTop: 20 }}>
+                  <Select
+                    value={values[index]?.unit || null}
+                    onChange={value => handleChange(value, 'unit')}
+                    placeholder="Select unit"
+                  >
+                    <Option value={'daily'}>Day</Option>
+                    <Option value={'week'}>Week</Option>
+                    <Option value={'month'}>Month</Option>
+                  </Select>
+                  <div className="errormsg">
+                    {errors.formData
+                      ? errors.formData[index]
+                        ? errors.formData[index].unit
                           ? errors.formData[index].unit
-                            ? errors.formData[index].unit
-                            : ''
-                          : '' || ''
-                        : ''}
-                    </div>
-                  </Space>
-                </div>
-              )}
+                          : ''
+                        : '' || ''
+                      : ''}
+                  </div>
+                </Space>
+              </div>
+            )}
           </Space>
         </div>
       </div>

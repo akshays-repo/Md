@@ -20,26 +20,30 @@ export const backend_api = {
   FETCH_APPOINTMENT_TYPE: '/api/backend/v1/appointment_type',
   EDIT_APPOINTMENT_TYPE: '/api/backend/v1/appointment_type',
   DELETE_APPOINTMENT_TYPE: '/api/backend/v1/appointment_type',
-  
+
   CREATE_PATIENT: '/api/backend/v1/users/patiant',
   FETCH_PATIENT: '/api/backend/v1/patiant',
   EDIT_PATIENT: '/api/backend/v1/users/patiant',
   DELETE_PATIENT: '/api/backend/v1/users/patiant',
-  
+
   USER_LOGIN: '/api/backend/v1/users/login',
-  
-  CREATE_PROVIDER:' /api/backend/v1/users/register',
-  FETCH_PROVIDER:'/api/backend/v1/providers/hospital',
-  EDIT_PROVIDER:'/api/backend/v1/users',
-  DELETE_PROVIDER:'/api/backend/v1/provider',
-  
-  CREATE_CUSTOMFORM:'/api/backend/v1/custom_form',
-  FETCH_CUSTOMFORM:'/api/backend/v1/custom_form',
-  
+
+  CREATE_PROVIDER: '/api/backend/v1/users/register',
+  FETCH_PROVIDER: '/api/backend/v1/providers',
+  EDIT_PROVIDER: '/api/backend/v1/users',
+  DELETE_PROVIDER: '/api/backend/v1/provider',
+  FETCH_BRANCH_PROVIDER: '/api/backend/v1/providers',
+
+  CREATE_CUSTOMFORM: '/api/backend/v1/custom_form',
+  FETCH_CUSTOMFORM: '/api/backend/v1/custom_form',
+
   FETCH_SCHEDULE: '/api/backend/v1/newshedule',
   CREATE_SCHEDULE: '/api/backend/v1/newshedule',
 
-  CREATE_ONLINE_APPOINTMENT:'/api/backend/v1/online_booking',
+  CREATE_ONLINE_APPOINTMENT: '/api/backend/v1/online_booking',
 
-  CREATE_PROVIDER_TYPE:'/api/backend/v1/provider_type'
+  CREATE_PROVIDER_TYPE: '/api/backend/v1/provider_type',
+
+  FETCH_PROVIDER_SCHEDULE: '/api/backend/v1/booking_schedule',
+  FETCH_PROVIDER_HOSPITAL: '/api/backend/v1/providers/hospital',
 };

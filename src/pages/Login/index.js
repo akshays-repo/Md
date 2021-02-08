@@ -11,9 +11,12 @@ import { connect } from 'react-redux';
 import { actionCreator } from '../../reducers/actionCreator';
 import { Redirect } from 'react-router';
 const FossilMdLoginPage = props => {
-  const handleFormSubmission = values => {
+  const handleFormSubmission = async (values, { setSubmitting }) => {
     //Handle submission goes here
-    props.userLogin(JSON.stringify(values));
+    setSubmitting(true);
+
+    await props.userLogin(JSON.stringify(values));
+    setSubmitting(false);
   };
   const [loadings, setLoadings] = useState(false);
   const innerForm = useRef();
@@ -34,31 +37,31 @@ const FossilMdLoginPage = props => {
             onSubmit={handleFormSubmission}
             innerRef={innerForm}
           >
-            {({ isSubmitting }) => (
-              <Form className="login__form" autoComplete={'off'}>
+            {({ isSubmitting, handleSubmit }) => (
+              <Form className="login__form" onSubmit={handleSubmit}>
                 <h1 className="text-center">Log in to continue..</h1>
                 <div className="loginInput">
                   <Field
                     label="Email"
+                    disabled={false}
                     component={TextField}
                     name="email"
                     placeholder=""
                     type="text"
                   ></Field>
                 </div>
-                <div className="loginInput">
-                  <Field
-                    label="Password"
-                    component={TextField}
-                    name="password"
-                    placeholder=""
-                    type="password"
-                  ></Field>
-                </div>
+
+                <Field
+                  label="Password"
+                  component={TextField}
+                  name="password"
+                  placeholder=""
+                  type="password"
+                  disabled={false}
+                ></Field>
+
                 <Button
                   htmlType="submit"
-                  // disabled={isSubmitting}
-                  // loading={loadings}
                   disabled={isSubmitting}
                   loading={loadings}
                   className="button-square edit-button"

@@ -8,18 +8,25 @@ import { actionCreator } from '../../reducers/actionCreator';
 import { generateForm } from '_utils/formgenerator';
 import TextField from '@material-ui/core/TextField';
 import moment from 'moment';
-import { Result,Modal  } from 'antd';
+import { Result, Modal } from 'antd';
+import { AppointmentType } from './appointment_type';
+import BranchProvider from './branch_provider';
+import { AppointmentFor } from './appointment_for';
+import { PatientDetails } from './patient_details';
 
 const OnllineAppointmentForm = props => {
   const [customFormField, setCustomFormField] = useState([]);
 
   const handleFormSubmission = async values => {
     let contentType = 'JSON';
-   const response =  await props.createOnlineForm(JSON.stringify({...values, response:customFormField}), contentType);
-    console.log("MessageResponse",response)
-    if(response.error === ''){
-       success()
-       innerForm.current.reset()
+    const response = await props.createOnlineForm(
+      JSON.stringify({ ...values, response: customFormField }),
+      contentType,
+    );
+    console.log('MessageResponse', response);
+    if (response.error === '') {
+      success();
+      innerForm.current.reset();
     }
   };
 
@@ -30,14 +37,12 @@ const OnllineAppointmentForm = props => {
     items[index] = item;
   };
 
-  const handleChangeText  = (e , index) =>{
-    let items = {...customFormField}
-    let item = items[index]
-    item.answer = [e.target.value]
-    items[index] = item
-
-
-  }
+  const handleChangeText = (e, index) => {
+    let items = { ...customFormField };
+    let item = items[index];
+    item.answer = [e.target.value];
+    items[index] = item;
+  };
   useEffect(() => {
     const fetchForm = async () => {
       if (customFormField?.length === 0) {
@@ -46,7 +51,18 @@ const OnllineAppointmentForm = props => {
       }
     };
     fetchForm();
-  });
+  }, []);
+
+  useEffect(() => {
+    props.fetchAppointmentType({ hospitalId: 1 });
+  }, []);
+  useEffect(() => {
+    props.fetchProvider({ id: 2 });
+  }, []);
+
+  useEffect(() => {
+    props.fetchBranch({ hospitalId: localStorage.getItem('hospital_id'), page: 1, limit: 50 });
+  }, []);
 
   const [loadings, setLoadings] = useState(false);
   const innerForm = useRef();
@@ -115,22 +131,21 @@ const OnllineAppointmentForm = props => {
     },
   ];
 
-  const resultSucess = <Result
-  status="success"
-  title="Successfully Booked the Appoinment"
-  subTitle="Thank you"/>
+  const resultSucess = (
+    <Result status="success" title="Successfully Booked the Appoinment" subTitle="Thank you" />
+  );
 
-    const onOkay =() => {
-      window.location.href = window.location.pathname
-    }
+  const onOkay = () => {
+    window.location.href = window.location.pathname;
+  };
 
-  const  success = () => {
+  const success = () => {
     Modal.success({
       content: resultSucess,
-      onOk :onOkay
+      onOk: onOkay,
     });
-  }
-  
+  };
+
   return (
     <div className="onlinebookWrapper">
       <div className="login-page">
@@ -138,12 +153,12 @@ const OnllineAppointmentForm = props => {
           enableReinitialize={true}
           initialValues={{
             hospital_id: id,
-            branch_id: 1,
-            provider_id: 1,
-            appointment_type_id: 1,
+            branch_id: '',
+            provider_id: '',
+            appointment_type_id: '',
             appointment_for: '',
-            appointment_start: '1998-09-10T09:12:31',
-            charge: 9,
+            appointment_start: '',
+            charge: 0,
             firstName: '',
             lastName: '',
             email: '',
@@ -160,99 +175,42 @@ const OnllineAppointmentForm = props => {
           innerRef={innerForm}
           validationSchema={OnlineBookingSchema}
         >
-          {({ handleSubmit, touched, errors, isSubmitting }) => (
+          {({ handleSubmit, values, setFieldValue, touched, errors, isSubmitting }) => (
             <Form className="" handleSubmit={handleSubmit}>
-              <h1 className="text-center">Fill the Form To Book A Appointment</h1>{' '}
-              <div className="">
-                <Row> {generateForm(formField)} </Row>
-              </div>{' '}
-              {customFormField?.map((forms, index) => (
-                <div>
-                  {forms.custom_types === 'text' || forms.custom_types === 'note' ? (
-                    <div>
-                      {' '}
-                      <p></p>
-                      <TextField
-                        onChange={e => handleChangeText(e, index)}
-                        id="standard-basic"
-                        label={forms.Key_name}
-                        required={forms.required}
-                      />
-                      <p></p>
-                    </div>
-                  ) : (
-                    ''
-                  )}
-                  {forms.custom_types === 'checkbox' ? (
-                    <div>
-                      {' '}
-                      <p>{forms.Key_name}{forms.required ? ' * (required) ':'' }</p>
-                      <Checkbox.Group
-                      required={forms.required}
-                        onChange={e => handleChange(e, index)}
-                        options={forms.values}
-                      />
-                      <p></p>
-                    </div>
-                  ) : (
-                    ''
-                  )}
-
-                  {forms.custom_types === 'drop-down' ? (
-                    <div>
-                      {' '}
-                      <p>{forms.Key_name}{forms.required ? ' * (required) ' :'' }</p>
-                      <Select required={forms.required} onChange={e => handleChange(e, index)} style={{ width: 120 }}>
-                        {forms.values.map(option => (
-                          <Select.Option value={option}>{option}</Select.Option>
-                        ))}
-                      </Select>
-                      <p></p>
-                    </div>
-                  ) : (
-                    ''
-                  )}
-
-                  {forms.custom_types === 'date' ? (
-                    <div>
-                      {' '}
-                      <p>{forms.Key_name}{forms.required ?' * (required) ' :'' }</p>
-                      <DatePicker
-                      required={forms.required}
-                        onChange={e => handleChange(e, index)}
-                        format={'YYYY/MM'}
-                      />
-                      <p></p>
-                    </div>
-                  ) : (
-                    ''
-                  )}
-
-                  {forms.custom_types === 'number' ? (
-                    <div>
-                      {' '}
-                      <p>{forms.Key_name}{forms.required ?' * (required) ' :'' }</p>
-                      <InputNumber
-                      required={forms.required}
-                        onChange={e => handleChange(e, index)}
-                        min={1}
-                        max={100}
-                      />
-                      <p></p>
-                    </div>
-                  ) : (
-                    ''
-                  )}
-                </div>
-              ))}
-              <Button
-                htmlType="submit"
-                disabled={isSubmitting}
-                loading={loadings}
-                className="button-square edit-button"
-              >
-                Book A Appointment
-              </Button>
+              {!values.appointment_type_id && (
+                <AppointmentType
+                  setFieldValue={setFieldValue}
+                  appointment_type={props.appointment_type}
+                />
+              )}
+              {values.appointment_type_id &&
+                (!values.branch_id || !values.provider_id || !values.appointment_start) && (
+                  <BranchProvider
+                    values={values}
+                    setFieldValue={setFieldValue}
+                    appointment_type={props.appointment_type}
+                    branch={props.branch}
+                  />
+                )}
+              {values.appointment_type_id &&
+                values.branch_id &&
+                values.provider_id &&
+                values.appointment_start &&
+                !values.appointment_for && <AppointmentFor />}
+              {values.appointment_type_id &&
+                values.branch_id &&
+                values.provider_id &&
+                values.appointment_start &&
+                values.appointment_for && <PatientDetails /> && (
+                  <Button
+                    htmlType="submit"
+                    disabled={isSubmitting}
+                    loading={loadings}
+                    className="button-square edit-button"
+                  >
+                    Book A Appointment
+                  </Button>
+                )}
             </Form>
           )}
         </Formik>
@@ -260,7 +218,7 @@ const OnllineAppointmentForm = props => {
     </div>
   );
 };
-const mapStoreToProps = ({ OnlineBookingForm, CustomForm }) => {
+const mapStoreToProps = ({ OnlineBookingForm, CustomForm, AppointmentType, Branch, Provider }) => {
   console.log('Store CustomForm', OnlineBookingForm);
   return {
     OnlineBookingFormPayload: OnlineBookingForm.payload,
@@ -268,6 +226,9 @@ const mapStoreToProps = ({ OnlineBookingForm, CustomForm }) => {
     OnlineBookingFormMessage: OnlineBookingForm.message,
 
     CustomForm: CustomForm.payload,
+    appointment_type: AppointmentType.payload,
+    branch: Branch.payload,
+    provider: Provider.payload,
   };
 };
 const mapDispatchToProps = dispatch => ({
@@ -283,6 +244,12 @@ const mapDispatchToProps = dispatch => ({
         contentType,
       }),
     ),
+  fetchAppointmentType: param =>
+    dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_APPOINTMENT_TYPE', param })),
+  fetchBranch: param =>
+    dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_BRANCH', param })),
+  fetchProvider: id =>
+    dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_PROVIDER', id })),
 });
 
 export default connect(mapStoreToProps, mapDispatchToProps)(OnllineAppointmentForm);

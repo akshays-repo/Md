@@ -10,10 +10,9 @@ import { store } from '../../../reducers/configureStore';
 import CustomFormField from './customFormField';
 import ProviderType from './providerType';
 const Dashboard_Provider = props => {
-
   useEffect(() => {
-    props.fetchProvider({ branchId: 3, page: 1, limit: 60 });
-    props.fetchBranch({ branchId: 3, page: 1, limit: 60 });
+    props.fetchProvider();
+    props.fetchBranch({ hospitalId: localStorage.getItem('hospital_id'), page: 1, limit: 60 });
     console.log('prooo', props);
   }, [props.changed]);
 
@@ -85,7 +84,6 @@ const Dashboard_Provider = props => {
         <Modal
           title="CUSTOM FORM FIELD"
           footer={false}
-         
           visible={props.CustomFormmodal}
           onCancel={() => store.dispatch({ type: 'CLOSE_CUSTOMFORM_CREATE_MODAL' })}
           destroyOnClose
@@ -105,7 +103,6 @@ const Dashboard_Provider = props => {
         <Modal
           title="PROVIDER"
           footer={false}
-          
           visible={props.modal}
           onCancel={() => store.dispatch({ type: 'CLOSE_PROVIDER_CREATE_MODAL' })}
           destroyOnClose
@@ -116,14 +113,12 @@ const Dashboard_Provider = props => {
         <Modal
           title=""
           footer={false}
-          
           visible={props.ProviderTypemodal}
           onCancel={() => store.dispatch({ type: 'CLOSE_PROVIDERTYPE_MODAL' })}
           destroyOnClose
         >
           <ProviderType {...props} />
         </Modal>
-
 
         <div>{HeaderSection()}</div>
         <div className="full-width-table">
@@ -138,7 +133,7 @@ const Dashboard_Provider = props => {
     </div>
   );
 };
-const mapStoreToProps = ({ Provider, CustomForm, AppointmentType ,ProviderType }) => {
+const mapStoreToProps = ({ Provider, CustomForm, AppointmentType, ProviderType }) => {
   console.log('Store', Provider);
   console.log('Store CustomForm', CustomForm);
   return {
@@ -172,8 +167,8 @@ const mapDispatchToProps = dispatch => ({
       actionCreator({ method: 'POST', action_type: 'CREATE_CUSTOMFORM', values, contentType }),
     ),
 
-  fetchProvider: param =>
-    dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_PROVIDER', param })),
+  fetchProvider: id =>
+    dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_PROVIDER_HOSPITAL', id })),
   addProvider: values =>
     dispatch(actionCreator({ method: 'POST', action_type: 'CREATE_PROVIDER', values })),
   editProvider: (id, values) =>
