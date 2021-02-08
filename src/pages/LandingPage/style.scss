@@ -19,8 +19,13 @@ h5 {
 h6 {
   font-size: 14px;
 }
-
+.w100 {
+  width: 100%;
+}
 .landing-page-main {
+  .text-center {
+    @include text-center;
+  }
   p {
     font-size: 16px;
   }
@@ -101,6 +106,34 @@ h6 {
   @include breakpoint(xl) {
     .container {
       max-width: 1140px;
+    }
+  }
+  .landing-banner {
+    background: url(../LandingPage/assets/images/banner.png) no-repeat top center;
+    background-size: cover;
+    .doctorPic {
+      padding-top: 50px;
+    }
+    .caption {
+      min-height: 500px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: center;
+      @include margin-padding(25px, 0px);
+      h1,
+      h2 {
+        color: $white;
+      }
+      h1 {
+        font-size: 60px;
+        font-weight: 600;
+        margin-bottom: 0;
+        line-height: 60px;
+      }
+      h2 {
+        font-weight: 300;
+      }
     }
   }
 
@@ -199,17 +232,43 @@ h6 {
       }
     }
   }
-.processWrapper {
+  .processWrapper {
     background-attachment: fixed;
     background: url(../LandingPage/assets/images/stepsBg.png) no-repeat top center;
     background-size: cover;
-    @include margin-padding(0 , 50px);
+    @include margin-padding(0, 50px);
+    .container {
+        flex-direction: column;
+    .heading {
+      text-align: center;
+      h1 {
+        color: $white;
+        margin-bottom: 0;
+      }
+      .lightFont {
+        font-weight: 200;
+      }
+    }
+    .stepsAppointment {
+      .whiteBox {
+        background: #fff;
+        @include margin-padding(0 , 20px);
+        border-right: 1px solid #e8e8e8;
+        .iconBox {
+            width: 125px;
+            height: 125px;
+            padding: 5px;
+            text-align: center;
+            margin: auto;
+        }
+        .footerCaption {
+            text-align: center;
+            @include margin-padding(0 , 30px);
+            padding-left: 0;
+            padding-right: 0;
+        }    
+      }
+    }
+  }
 }
-
-
-
-
-
-
-
 }

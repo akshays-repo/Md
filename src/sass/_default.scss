@@ -18,6 +18,7 @@
 .d-block {
   display: block;
 }
+
 body {
     font-family: 'Roboto', sans-serif;
     height: 100vh;
@@ -40,6 +41,7 @@ body {
     ::-webkit-scrollbar-thumb:hover {
       background: #555;
     }
+
   }
   
   body {
@@ -72,6 +74,9 @@ body {
     .d-flex {
       @include flex(space-between, center);
     }
+    .text-center {
+      @include text-center;
+    }
     .ant-table-thead .ant-table-cell {
         color: rgb(120, 129, 149);
         background-color: rgb(241, 243, 246);
@@ -86,9 +91,7 @@ body {
     .selectBox {
       @include selectBox;
     }
-    .text-center {
-      @include text-center;
-    }
+
     .fullwidth {
       width: $full-width; 
     }
