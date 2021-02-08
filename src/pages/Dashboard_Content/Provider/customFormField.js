@@ -131,11 +131,13 @@ const CustomFormField = props => {
 
   return (
     <div className="custom-field" style={{ minHeight: '500px' }}>
-      CUSTOM FORM FIELD{' '}
+      <div className="d-flex mb4">
+      <h3>CUSTOM FORM FIELD{' '}</h3>
       <Button className="edit-button" onClick={() => setIsModalVisible(true)}>
         {' '}
         PREVIEW{' '}
       </Button>
+      </div>
       <div className="inner-box">
         <div>
           <p>
@@ -193,7 +195,7 @@ const CustomFormField = props => {
                             onClick={() => setEditIndex(index)}
                             className="ml4 mt3 edit-color"
                             htmlType="submit"
-                            className="submitbutton"
+                            className="ml4 submitbutton"
                           >
                             <i className="fa fa-edit"></i>
                           </span>
@@ -226,7 +228,7 @@ const CustomFormField = props => {
                                           key={field.key}
                                         >
                                           <AntForm.Item
-                                            className="error-message"
+                                            className="error-message mb2"
                                             {...field}
                                             validateTrigger={['onChange', 'onBlur']}
                                             rules={[
@@ -234,7 +236,7 @@ const CustomFormField = props => {
                                                 required: true,
                                                 whitespace: true,
                                                 message:
-                                                  'Please input option or delete this field.',
+                                                  <span className="d-block mb3">Please input option or delete this field.</span>,
                                               },
                                             ]}
                                             noStyle
@@ -307,8 +309,9 @@ const CustomFormField = props => {
                   innerRef={innerForm}
                 >
                   {({ handleSubmit, touched, errors, isSubmitting }) => (
-                    <div style={{ marginTop: '30px' }}>
+                    <div  style={{ marginTop: '30px' }}>
                       <Form className="login__form" handleSubmit={handleSubmit}>
+<div className="add-field-box">
                         <Field
                           style={{ width: '50%' }}
                           component={TextField}
@@ -316,7 +319,7 @@ const CustomFormField = props => {
                           type="text"
                           name="Key_name"
                         />
-                        <span className="form-to">
+                        <span className="mt4 form-to">
                           <Switch
                             checkedChildren="Required"
                             unCheckedChildren="Not Required"
@@ -402,6 +405,7 @@ const CustomFormField = props => {
                         >
                           Submit
                         </Button>
+                        </div>
                       </Form>
                     </div>
                   )}

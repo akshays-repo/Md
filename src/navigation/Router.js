@@ -88,6 +88,12 @@ const routes = [
     exact: true,
     authorize: false,
   },
+  {
+    path: '/landing-page',
+    component: loadable(() => import('../pages/LandingPage/index')),
+    exact: true,
+    authorize: false,
+  },
 ];
 
 const Router = props => {

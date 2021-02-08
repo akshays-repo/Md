@@ -246,6 +246,7 @@ const OnllineAppointmentForm = props => {
                   )}
                 </div>
               ))}
+              <div>
               <Button
                 htmlType="submit"
                 disabled={isSubmitting}
@@ -254,6 +255,7 @@ const OnllineAppointmentForm = props => {
               >
                 Book A Appointment
               </Button>
+              </div>
             </Form>
           )}
         </Formik>
