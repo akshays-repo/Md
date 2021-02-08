@@ -49,8 +49,9 @@ $full-width:100%;
 
 /* Difference devices width */
 $device_width: (
-  xs: 600px,
-  sm: 600px,
+  // xs: 600px,
+  xs: 0,
+  sm: 576px,
   m: 768px,
   l: 992px,
   xl: 1200px,

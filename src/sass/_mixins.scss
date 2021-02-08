@@ -139,7 +139,11 @@
   display: inline;
   padding: 0 15px;
 }
-$sizes: 12;
+@mixin circular--square {
+  border-radius: 50%;
+}
+
+$sizes: 24;
 
 @mixin margin-classes {
   @for $i from 1 through $sizes {
@@ -155,3 +159,25 @@ $sizes: 12;
   }
 }
 @include margin-classes;
+
+$sizes: 24;
+
+@mixin padding-classes {
+  @for $i from 1 through $sizes {
+$padding: $i * 0.25rem;
+    .p#{$i}  {padding: $padding;}
+    .pl#{$i} {padding-left: $padding;}
+    .pr#{$i} {padding-right: $padding;}
+    .pt#{$i} {padding-top: $padding;}
+    .pb#{$i} {padding-bottom: $padding;}
+    .px#{$i} {padding-left: $padding; padding-right: $padding;}
+    .py#{$i} {padding-top: $padding; padding-bottom: $padding;}
+  }
+}
+@include padding-classes;
+
+@mixin transit {
+ transition: all .4s ease-in-out;
+ -moz-transition: all .4s ease-in-out;
+ -webkit-transition: all .4s ease-in-out;
+}

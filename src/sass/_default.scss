@@ -10,6 +10,12 @@
 .success {
   color: $success;
 }
+.circular-square {
+  @include circular--square;
+}
+.lead {
+  font-size: 1.2rem!important;
+}
 body {
     font-family: 'Roboto', sans-serif;
     height: 100vh;

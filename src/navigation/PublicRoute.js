@@ -18,7 +18,7 @@ export const PublicRoute = ({ component: Component, path, keys, exact }) => {
               overflowX: 'hidden',
             }}
           >
-            <Header />
+            {/* <Header /> */}
             <div>
               <Component {...props} />
             </div>
