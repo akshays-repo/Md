@@ -33,7 +33,7 @@ const columns = [
     title: 'Appointment Start',
     dataIndex: 'appointment_start',
     key: 'appointment_start',
-    render: record => <span> {moment(record.appointment_start).format('MMM DD h:mm A')} </span>,
+    render: record => <span> {moment(record.appointment_start).format('MMM Do YYYY')} </span>,
   },
   {
     title: 'Payment Status',
@@ -75,8 +75,8 @@ const Dashboard_Appointments = props => {
   const Appointments = () => {
     const [AppointmentList, setAppointmentList] = useState(store.getState().Appointment.payload);
     const [searchKey, setSearchKey] = useState('');
-    const [toData, setToDate] = useState(moment().format('YYYY-MM-DD'));
-    const [fromData, setFromDate] = useState('1900/02/05');
+    const [toData, setToDate] = useState('');
+    const [fromData, setFromDate] = useState('');
     const [branchList, setBranchList] = useState([]);
     const [branchId, setBranchId] = useState('');
     const [paymentStatus, setPaymentStatus] = useState('');
@@ -100,13 +100,14 @@ const Dashboard_Appointments = props => {
     const handleSearchSubmission = e => {
       e.preventDefault();
       let parms = {
-        fromDate: fromData,
-        toDate: toData,
       };
       if (searchKey) parms.search = searchKey;
       if (branchId) parms.search = searchKey;
       if (paymentStatus) parms.status = paymentStatus;
       if (status) parms.payment_status = status;
+      if (fromData) parms.fromDate = fromData;
+      if (toData) parms.toDate = toData;
+
       props.filterAppointment(parms);
     };
 

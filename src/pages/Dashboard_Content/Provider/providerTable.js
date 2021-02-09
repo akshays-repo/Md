@@ -4,6 +4,7 @@ import AddAppointmentTime from './addAppointmentTime';
 import { store } from '../../../reducers/configureStore';
 import ProviderCreationForm from './providerCreationForm';
 import { connect } from 'react-redux';
+import MultiSelect from "react-multi-select-component";
 import { getFormDataA, getFormData } from '_utils';
 import { map } from 'lodash';
 
@@ -127,20 +128,20 @@ const ProviderTable = props => {
               key={record?.provider_and_types?.map(type =>
                 type.appointment_type?.id !== null ? type.appointment_type?.id : null,
               )}
-              defaultValue={record?.provider_and_types?.map(type =>
-                type.appointment_type?.name !== null ? type.appointment_type?.name : null,
+              defaultValue={record?.provider_and_types?.map(type => type.appointment_type?.id
               )}
+
               onChange={e => handleApptChange(record, e)}
-              style={{ width: '200px' }}
             >
               {appointmentTypes.map(type => (
-                <Select.Option key={type.id}>{type.name}</Select.Option>
+                <Select.Option key={type.id} value={type.id}>{type.name}</Select.Option>
               ))}
             </Select>
           </Space>
         );
       },
     },
+
     {
       title: 'Status',
       key: 'status',

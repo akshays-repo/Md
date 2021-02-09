@@ -58,7 +58,7 @@ export const Scheduling = ({ values, setFieldValue, setValues, index, errors, to
   const handleTo = (value, to) => {
     switch (to) {
       case 'hour':
-        setFromHour(value);
+        setToHour(value);
         setFieldValue(`formData[${index}].ToTime`, `${value}:${toMinutes} ${toType}`);
         break;
       case 'minutes':

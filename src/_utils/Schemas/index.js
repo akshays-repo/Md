@@ -393,7 +393,7 @@ export const PatientCreationSchema = Yup.object().shape({
   address: Yup.string().required('Please enter address'),
   phone: Yup.string().required('Phone number is required'),
   dob: Yup.date().required('Please select DOB'),
-  zipcode: Yup.date().required('Please enter zipcode'),
+  zipcode: Yup.string().required('Please enter zipcode'),
 });
 
 export const ProviderCreationSchema = Yup.object().shape({
