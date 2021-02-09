@@ -157,6 +157,7 @@ const mapStoreToProps = ({ Provider, CustomForm, AppointmentType, ProviderType }
 
     AppointmentTypeModal2: AppointmentType.modal2,
 
+    ProviderTypePayload:ProviderType.payload,
     ProviderTypemodal: ProviderType.modal,
     ProviderTypeChanged: ProviderType.changed,
     ProviderDeleted:ProviderType.deleted
@@ -179,6 +180,8 @@ const mapDispatchToProps = dispatch => ({
     dispatch(actionCreator({ method: 'POST', action_type: 'CREATE_PROVIDER', values })),
   editProvider: (id, values) =>
     dispatch(actionCreator({ method: 'PUT', action_type: 'EDIT_PROVIDER', id, values })),
+    editProviderStatus: (id, param) =>
+    dispatch(actionCreator({ method: 'PUT', action_type: 'EDIT_PROVIDER', id, param })),
   deleteProvider: id =>
     dispatch(actionCreator({ method: 'DELETE', action_type: 'DELETE_PROVIDER', id })),
   filterProvider: param =>
