@@ -4,28 +4,26 @@ import AddAppointmentTime from './addAppointmentTime';
 import { store } from '../../../reducers/configureStore';
 import ProviderCreationForm from './providerCreationForm';
 import { connect } from 'react-redux';
-import { getFormDataA } from '_utils';
+import { getFormDataA, getFormData } from '_utils';
 import { map } from 'lodash';
 
 const ProviderTable = props => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [appointmentTypes, setAppointmentTypes] = useState([]);
   const [selectedItems, setSelectedItem] = useState([]);
-  const [providers , setProviders] = useState([])
+  const [providers, setProviders] = useState([]);
   const [editId, setEditId] = useState(null);
   const [editData, setEditData] = useState('');
 
   useEffect(() => {
-    setAppointmentTypes(props.appointment_type)
-    
-  
+    setAppointmentTypes(props.appointment_type);
   });
-  const getProvider = () =>{
-    console.log("props000", props.provider)
-    let newData = []
-    props.provider.map((data) => newData.push(data.provider))
-    return newData
-  }
+  const getProvider = () => {
+    console.log('props000', props.provider);
+    let newData = [];
+    props.provider.map(data => newData.push(data.provider));
+    return newData;
+  };
   const showModal = (id, data) => {
     setEditId(id);
     setEditData(data);
@@ -48,49 +46,41 @@ const ProviderTable = props => {
   };
 
   const handleApptChange = async (record, values) => {
-    let currentValue = []
-    record.provider_and_types.map((type) => currentValue.push(type.appointment_type.id))
-    let DeletedArray =  currentValue.filter(e => !values.includes(e));
+    console.log('appptypeeee', values);
+
+    let currentValue = [];
+    record.provider_and_types.map(type => currentValue.push(type.appointment_type.id));
+    let DeletedArray = currentValue.filter(e => !values.includes(e));
     let intValues = {
       userTypeId: 4,
       id: record.id,
       fullName: record.fullName,
       status: record.status,
-      branchId: record.branchId,
+      branchId: 1,
       provider_typeId: record.provider_typeId,
     };
-    console.log("ISARRAY",Array.isArray(intValues.appointment_type))
+    console.log('respomsee', intValues);
+    console.log('ISARRAY', Array.isArray(intValues.appointment_type));
+    console.log('respomsee');
+
+    let sentinData = getFormData({ ...intValues });
+    values.map((va, i) => sentinData.append('appointment_type[]', va));
+    let response = await props.editProvider(record.id, sentinData);
+  };
+
+  const handleStatus = async (record, status) => {
+    console.log('rorororror', record);
     try {
-      let sentinData = getFormDataA({...intValues})
-      values.map((va,i)=>sentinData.append('appointment_type[]',va))
-    await props.editProvider(record.id,sentinData);
+      await props.editProviderStatus(record.id, { status });
     } catch (err) {
-      console.log('edit error', err);
+      console.log('error', err);
     }
   };
 
-const handleStatus = async ( record , values) =>{
-  let intValues = {
-    appointment_type: record.appointment_type,
-    userTypeId: 4,
-    id: record.id,
-    fullName: record.fullName,
-    status: values,
-    branchId: record.branchId,
-    provider_typeId: record.provider_typeId,
+  const handleDelete = async id => {
+    console.log('deleter', props);
+    await props.deleteProvider(id);
   };
-
-  try {
-    await props.editProvider(record.id, getFormDataA({ ...intValues }));
-  } catch (err) {
-    console.log('error', err);
-  }
-}
-
-const handleDelete = async (id) =>{
-console.log("deleter",props)
-await props.deleteProvider(id)
-}
 
   const columns = [
     {
@@ -117,7 +107,7 @@ await props.deleteProvider(id)
       render: (text, record) => (
         <Space size="middle">
           <span onClick={() => showModal(record.id, record)} className="icon-button edit-color">
-          <i class="fa fa-edit"></i>
+            <i class="fa fa-edit"></i>
           </span>
         </Space>
       ),
@@ -127,21 +117,25 @@ await props.deleteProvider(id)
       dataIndex: 'appt',
       key: 'appt',
       render: (text, record) => {
-       
-
         return (
           <Space size="middle">
-            <Select className="appt-type-select"
-               mode="multiple"
+            <Select
+              className="appt-type-select"
+              mode="multiple"
               style={{ width: '100%' }}
               placeholder="Select the type"
-              defaultValue={record?.provider_and_types?.map((type) => type.appointment_type?.name !== null ? type.appointment_type?.name : null)}
-              onChange={(e) => handleApptChange(record, e)}
-              style={{width:"200px"}}
+              key={record?.provider_and_types?.map(type =>
+                type.appointment_type?.id !== null ? type.appointment_type?.id : null,
+              )}
+              defaultValue={record?.provider_and_types?.map(type =>
+                type.appointment_type?.name !== null ? type.appointment_type?.name : null,
+              )}
+              onChange={e => handleApptChange(record, e)}
+              style={{ width: '200px' }}
             >
-            {appointmentTypes.map((type) =>(
-              <Select.Option key={type.id}>{type.name}</Select.Option>
-            ))}
+              {appointmentTypes.map(type => (
+                <Select.Option key={type.id}>{type.name}</Select.Option>
+              ))}
             </Select>
           </Space>
         );
@@ -150,27 +144,34 @@ await props.deleteProvider(id)
     {
       title: 'Status',
       key: 'status',
-      render: (text, record) => 
-      <Space size="middle">
-      <Select 
-      style={record.status === 'active' ?{color:"green"} : {color:'red'}}
-       defaultValue={record.status}
-       onChange={(record,e) => handleStatus(e, record)}>
-      <Select.Option value="active">Active</Select.Option>
-      <Select.Option value="hold">Hold</Select.Option>
-    </Select>
-
-      </Space>,
+      render: (text, record) => (
+        <Space size="middle">
+          <Select
+            style={record.status === 'active' ? { color: 'green' } : { color: 'red' }}
+            defaultValue={record.status}
+            onChange={e => handleStatus(record, e)}
+          >
+            <Select.Option value="active">Active</Select.Option>
+            <Select.Option value="hold">Hold</Select.Option>
+          </Select>
+        </Space>
+      ),
     },
     {
       key: 'action',
       render: (text, record) => (
         <Space size="middle">
-          <span className="edit-color icon-button" onClick={() => handleEditModal(record.id, record)}>
+          <span
+            className="edit-color icon-button"
+            onClick={() => handleEditModal(record.id, record)}
+          >
             {' '}
             <i className="fa fa-edit"></i>{' '}
           </span>
-          <span className="delete-color" onClick={() => handleDelete(record.id)}> <i className="fa fa-trash"></i></span>
+          <span className="delete-color" onClick={() => handleDelete(record.id)}>
+            {' '}
+            <i className="fa fa-trash"></i>
+          </span>
         </Space>
       ),
     },

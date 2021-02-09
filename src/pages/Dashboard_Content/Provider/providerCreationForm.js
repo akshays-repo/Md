@@ -1,37 +1,43 @@
-import React, {  useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Formik, Form, Field } from 'formik';
 import { ProviderCreationSchema } from '_utils/Schemas';
 import { Button, Row, Select, Col } from 'antd';
 import { Select as matSeclect } from 'formik-material-ui';
 import MenuItem from '@material-ui/core/MenuItem';
 import { generateForm } from '../../../_utils/formgenerator';
-import {  getFormDataA } from '_utils';
+import { getFormDataA } from '_utils';
 import { store } from '../../../reducers/configureStore';
 
 const { Option } = Select;
-
+//deletedBranches
 const ProviderCreationForm = props => {
   const [loadings, setLoadings] = useState(false);
   const innerForm = useRef();
   const [branchList, setBranchList] = useState([]);
+  const [selectedBranch, setSelectedBranch] = useState([]);
 
   useEffect(() => {
     setBranchList(store.getState().Branch.payload);
+    console.log('asasasas use', props);
   });
 
   const handleFormSubmission = async values => {
-    let data = await getFormDataA({ ...values, userTypeId: 4 });
-    try {
-      if (props.id) {
-        await props.editProvider(props.id, data);
-        store.dispatch({ type: 'CLOSE_PROVIDER_EDIT_MODAL' });
-      } else {
-        await props.addProvider(data);
-        store.dispatch({ type: 'CLOSE_PROVIDER_CREATE_MODAL' });
-      }
-    } catch (err) {
-      console.log('edit error', err);
+    console.log('asasasas MAIN', props.id, values);
+    let data = await getFormDataA({ ...values, userTypeId: 4,   branchId: 5, });
+    selectedBranch.map((va, i) => data.append('arrBranches[]', va));
+
+    if (props.id) {
+      await props.editProvider(props.id, data);
+      store.dispatch({ type: 'CLOSE_PROVIDER_EDIT_MODAL' });
+    } else {
+      await props.addProvider(data);
+      store.dispatch({ type: 'CLOSE_PROVIDER_EDIT_MODAL' });
     }
+  };
+
+  const handleChange = value => {
+    console.log('Selected Branch', value);
+    setSelectedBranch(value);
   };
 
   const formField = [
@@ -62,29 +68,52 @@ const ProviderCreationForm = props => {
             email: '',
             status: 'active',
             userTypeId: 4,
-            branchId: '',
-            provider_typeId: 15,
+            provider_typeId: '',
             phone: '',
+            branchId: 5,
           }
         }
-        validationSchema={ProviderCreationSchema}
+        //  validationSchema={ProviderCreationSchema}
         onSubmit={handleFormSubmission}
         innerRef={innerForm}
       >
         {({ handleSubmit, touched, errors, isSubmitting }) => (
           <Form className="login__form" handleSubmit={handleSubmit}>
-            <Row>{generateForm(formField)}
-            <Col xs={24} xl={12}>
-            <Field as="select" name="branchId" style={{width:"80%"}} placeholder="Branch"  component={matSeclect}>
-              {branchList?.map(branch => {
-                return <MenuItem value={branch.id}>{branch.id}</MenuItem>;
-              })}
-            </Field>
-            </Col>
+            <Row>
+              {generateForm(formField)}
+              <Col xs={24} xl={12}>
+                <p>Please Select the Branch</p>
+                <Select
+                  mode="multiple"
+                  allowClear
+                  style={{ width: '100%' }}
+                  placeholder="Please select the Branch"
+                  onChange={handleChange}
+                >
+                  {branchList?.map(branch => {
+                    return <Option key={branch.id}>{branch.fullName}</Option>;
+                  })}
+                </Select>
+
+
+              </Col>
+
+              <Col xs={24} xl={12}>
+              <Field
+                  as="select"
+                  name="provider_typeId"
+                  style={{ width: '80%' }}
+                  placeholder="Provider type"
+                  component={matSeclect}
+                >
+                  {props.ProviderTypePayload?.map(branch => {
+                    return <MenuItem value={branch.id}>{branch.name}</MenuItem>;
+                  })}
+                </Field>
+                </Col>
             </Row>
 
             <Button
-
               htmlType="submit"
               disabled={isSubmitting}
               loading={loadings}

@@ -192,7 +192,7 @@ const CustomFormField = props => {
                             defaultChecked
                           />
                           <span
-                            onClick={() => setEditIndex(index)}
+                            onClick={(e) => setEditIndex(index)}
                             className="ml4 mt3 edit-color"
                             htmlType="submit"
                             className="ml4 submitbutton"
