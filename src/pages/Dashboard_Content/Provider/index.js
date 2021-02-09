@@ -10,12 +10,10 @@ import { store } from '../../../reducers/configureStore';
 import CustomFormField from './customFormField';
 import ProviderType from './providerType';
 const Dashboard_Provider = props => {
-
   useEffect(() => {
-    let branch_id = 15;
-    props.fetchProvider(branch_id);
-    let response = props.fetchBranch({ branchId: 5, page: 1, limit: 60 });
-    console.log('prooo', response);
+    props.fetchProvider();
+    props.fetchBranch({ hospitalId: localStorage.getItem('hospital_id'), page: 1, limit: 60 });
+    console.log('prooo', props);
   }, [props.changed]);
 
   useEffect(() => {
@@ -175,8 +173,8 @@ const mapDispatchToProps = dispatch => ({
       actionCreator({ method: 'POST', action_type: 'CREATE_CUSTOMFORM', values, contentType }),
     ),
 
-  fetchProvider: id =>
-    dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_PROVIDER', id })),
+  fetchProvider: () =>
+    dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_PROVIDER', })),
   addProvider: values =>
     dispatch(actionCreator({ method: 'POST', action_type: 'CREATE_PROVIDER', values })),
   editProvider: (id, values) =>

@@ -3,7 +3,7 @@ import { Route } from 'react-router-dom';
 import Footer from '../pages/Footer';
 import Header from '../pages/Header';
 
-export const PublicRoute = ({ component: Component, path, keys, exact }) => {
+export const PublicRoute = ({ component: Component, path, keys, exact, header }) => {
   return (
     <Route
       path={path}
@@ -18,7 +18,7 @@ export const PublicRoute = ({ component: Component, path, keys, exact }) => {
               overflowX: 'hidden',
             }}
           >
-            {/* <Header /> */}
+            {!header && <Header />}
             <div>
               <Component {...props} />
             </div>

@@ -29,7 +29,16 @@ export const ScheduleReducer = (state = ScheduleState, action) => {
         message: action.message,
         changed: false,
       };
-
+    case 'FETCH_PROVIDER_SCHEDULE':
+      return {
+        ...state,
+        error: action.error,
+        payload: action.payload,
+        message: action.message,
+        changed: false,
+      };
+    case 'EMPTY_SCHEDULE':
+      return { ...state, payload: [] };
     default:
       return state;
   }

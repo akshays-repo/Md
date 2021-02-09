@@ -56,6 +56,8 @@ export const BranchReducer = (state = BranchState, action) => {
     case 'FETCH_ERROR':
       message.error(action.message);
       return { ...state };
+    case 'EMPTY_BRANCH':
+      return { ...state, payload: [] };
     default:
       return state;
   }
