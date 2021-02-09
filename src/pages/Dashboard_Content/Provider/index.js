@@ -10,11 +10,10 @@ import { store } from '../../../reducers/configureStore';
 import CustomFormField from './customFormField';
 import ProviderType from './providerType';
 const Dashboard_Provider = props => {
-
   useEffect(() => {
     props.fetchProvider();
-    let response = props.fetchBranch({ branchId: 5, page: 1, limit: 60 });
-    console.log('prooo', response);
+    props.fetchBranch({ hospitalId: localStorage.getItem('hospital_id'), page: 1, limit: 60 });
+    console.log('prooo', props);
   }, [props.changed]);
 
   useEffect(() => {

@@ -20,7 +20,7 @@ export const backend_api = {
   FETCH_APPOINTMENT_TYPE: '/api/backend/v1/appointment_type',
   EDIT_APPOINTMENT_TYPE: '/api/backend/v1/appointment_type',
   DELETE_APPOINTMENT_TYPE: '/api/backend/v1/appointment_type',
-  
+
   CREATE_PATIENT: '/api/backend/v1/users/patiant',
   FETCH_PATIENT: '/api/backend/v1/patiant',
   EDIT_PATIENT: '/api/backend/v1/users/patiant',
@@ -33,7 +33,8 @@ export const backend_api = {
   FETCH_PROVIDER:'/api/backend/v1/providers',
   EDIT_PROVIDER:'/api/backend/v1/users',
   DELETE_PROVIDER:'/api/backend/v1/provider',
-  
+  FETCH_BRANCH_PROVIDER: '/api/backend/v1/providers',
+
   CREATE_CUSTOMFORM:'/api/backend/v1/custom_form',
   FETCH_CUSTOMFORM:'/api/backend/v1/custom_form',
   
@@ -48,4 +49,10 @@ export const backend_api = {
   FETCH_PROVIDER_TYPE:'/api/backend/v1/provider_types',
   EDIT_PROVIDER_TYPE:' /api/backend/v1/provider_type',
   DELETE_PROVIDER_TYPE:'/api/backend/v1/provider_type',
+
+  FETCH_PROVIDER_SCHEDULE: '/api/backend/v1/booking_schedule',
+  FETCH_PROVIDER_HOSPITAL: '/api/backend/v1/providers/hospital',
+  FETCH_BRANCH_APPOINTMENT_PROVIDER: '/api/backend/v1/providers/type_id',
+  FETCH_HOSPITAL_APPOINTMENT_TYPE: '/api/backend/v1/appointment_types/hospital',
+  CHECK_HOSPITAL: '/api/backend/v1/users',
 };

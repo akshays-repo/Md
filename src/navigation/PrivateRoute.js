@@ -38,10 +38,10 @@ export const PrivateRoute = ({ authorized, component: Component, path, keys, exa
             </div>
           );
         } else {
-          notification.error({
-            message: 'Unauthorized Access',
-            description: 'Please Login to Access the Page !',
-          });
+          // notification.error({
+          //   message: 'Unauthorized Access',
+          //   description: 'Please Login to Access the Page !',
+          // });
           history.push('/login');
           // window.location.href = '/';
         }
