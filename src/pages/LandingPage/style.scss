@@ -281,7 +281,7 @@ h6 {
 
 
   .landing_pricing {
-    background: #ebf7f6;
+    background: #f9f9f9;
     padding: 50px 0;
     .pricing_section {
       .pricing_head {
@@ -292,18 +292,31 @@ h6 {
           background: #fff;
           margin: 20px;
           padding: 35px 20px;
-          border-bottom: 10px solid #1a568b;
-          box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+          border-bottom: 5px solid #1a568b;
+          box-shadow: rgba(0, 0, 0, 0.10) 0px 1px 4px;
+          border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
           .header {
             text-align: center;
             h2 {
               margin-bottom: 0;
-              font-weight: 400;
+              font-weight: 600;
+              line-height: 1.2;
+              font-size: 20px;
+              text-transform: uppercase;
+              color: #333;
             }
             .price {
-              font-size: 36px;
+              font-size: 45px;
               font-weight: 600;
-              color: #5497d5;
+              color: #1a568b;
+              line-height: 1.3;
+              letter-spacing: -2px;
+            }
+            .sub {
+              padding-left: 5px;
+              text-transform: uppercase;
+              color: #808080;
             }
           }
           .priceBody {
@@ -371,8 +384,19 @@ h6 {
           @include margin-padding(0, 15px);
           color: #1a568b;
         }
+
       }
     }
+    .ant-carousel {
+      .slick-dots {
+        li {
+          button {
+            background-color: #1a568b;
+          }
+        }
+      }
+    }  
+    // .ant-carousel .slick-dots li.slick-active button
     .banner {
       position: relative;
       img {
@@ -478,6 +502,18 @@ h6 {
         } 
 
         }   
+        .borderOne {
+          border-top: 6px solid #bef4ff;
+        }
+        .borderTwo {
+          border-top: 6px solid #60a1ec;
+        }
+        .borderThree {
+          border-top: 6px solid #fc7489;
+        }
+        .borderFour {
+          border-top: 6px solid #ffa661;
+        }
         @include breakpoint(xs) {
         .whiteBox {
           margin-bottom: 10px;
