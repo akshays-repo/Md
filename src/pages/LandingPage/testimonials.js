@@ -16,7 +16,7 @@ const FossilMdTestimonial = () => {
 <div className="carouselSlider">
   
         <Row>
-        <Col xl={14}>
+        <Col xs={24} sm={12} lg={14}>
             <div className="testimonial_header mb10">
 <div className="titleCaption">
 What our <br/>
@@ -85,7 +85,7 @@ client’s say?
           </Carousel>
         </Col>
 
-        <Col xl={10}>
+        <Col xs={24} sm={12} lg={10}>
 
 <div className="banner">
   <img src={TestimonialBanner} />

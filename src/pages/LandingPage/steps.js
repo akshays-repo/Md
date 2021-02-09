@@ -23,8 +23,8 @@ const FossilMdSteps = () => {
           </Row>
           <div className="stepsAppointment mt6">
             <Row>
-              <Col span={6}>
-                <div className="whiteBox">
+              <Col xs={24} lg={6}>
+                <div className="whiteBox borderOne">
                   <div className="stepRound boxStart">1</div>
                   <div className="iconBox">
                     <img src={icon1} />
@@ -34,8 +34,8 @@ const FossilMdSteps = () => {
                   </div>
                 </div>
               </Col>
-              <Col span={6}>
-                <div className="whiteBox">
+              <Col xs={24} lg={6}>
+                <div className="whiteBox borderTwo">
                   <div className="stepRound boxStart">2</div>
                   <div className="iconBox">
                     <img src={icon2} />
@@ -45,8 +45,8 @@ const FossilMdSteps = () => {
                   </div>
                 </div>
               </Col>
-              <Col span={6}>
-                <div className="whiteBox">
+              <Col xs={24} lg={6}>
+                <div className="whiteBox borderThree">
                   <div className="stepRound boxStart">3</div>
                   <div className="iconBox">
                     <img src={icon3} />
@@ -56,8 +56,8 @@ const FossilMdSteps = () => {
                   </div>
                 </div>
               </Col>
-              <Col span={6}>
-                <div className="whiteBox">
+              <Col xs={24} lg={6}>
+                <div className="whiteBox borderFour">
                   <div className="stepRound boxStart">4</div>
                   <div className="iconBox">
                     <img src={icon4} />

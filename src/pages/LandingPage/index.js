@@ -5,11 +5,14 @@ import FossilMdPricing from './pricing';
 import FossilMdAdd from './add';
 import FossilMdTestimonial from './testimonials';
 import FossilMdSteps from './steps';
-
+import Header from './header';
+import FossilMdFooter from './footer';
 const FossilMdLandingPage = () => {
   return (
     <div className="landing-page-main">
-      <div className="landing-header"></div>
+      <div className="landing-header">
+        <Header/>
+      </div>
       <div>
         <FossilMdBanner />
       </div>
@@ -27,6 +30,9 @@ const FossilMdLandingPage = () => {
       </div>
       <div>
         <FossilMdAdd />
+      </div>
+      <div>
+<FossilMdFooter/>
       </div>
     </div>
   );

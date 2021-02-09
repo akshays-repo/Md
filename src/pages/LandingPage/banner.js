@@ -7,13 +7,13 @@ const FossilMdBanner = () =>{
         <div>
             <div className="landing-banner">
 <div className="container">
-    <Row>
-    <Col span={10}>
+    <Row className="mblReverse">
+    <Col xs={12} lg={10}>
         <div className="doctorPic">
             <img src={doctorImg}/>
         </div>
     </Col>
-    <Col span={14}>
+    <Col xs={24} lg={14}>
     <div className="caption">
         <h3 style={{color: '#69b9ff'}}>Amet consectetur adipisicing elit sed do eiusmod</h3>
         <h1>Search Doctor</h1>

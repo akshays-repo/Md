@@ -23,6 +23,115 @@ h6 {
   width: 100%;
 }
 .landing-page-main {
+
+// .Header{
+//   position: fixed;
+//     top: 0; 
+//     max-height: 70px;
+//     width: 100vw;
+  
+//     display: grid;
+//     grid-template-areas: "logo nav";
+//     background-color: #282c34;
+//     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+//     .Logo {
+//       grid-area: logo;
+//       height: 70px;
+//     }
+//     .Nav {
+//       display: grid;
+//       grid-area: nav;
+//       grid-template-columns: repeat(4, auto);
+//       align-items: center;
+//       justify-items: center;
+//       a {
+//         color: #fff;
+//         font-size: 20px;
+//         font-weight: 500;
+//         transition: 0.5s;
+//         text-decoration: none;
+//         &:hover {
+//           transform: scale(1.1);
+//         }
+//     }
+//     button {
+//       padding: 10px;
+//       outline: none;
+//       border: none;
+//       font-size: 20px;
+//       color: #fff;
+//       font-weight: 600;
+//       background-color: rgba(255, 0, 0, 0.5);
+//       box-shadow: 0px 5px 0px 0px rgba(255, 0, 0, 0.25);
+//       border-radius: 10px;
+//       cursor: pointer;
+//       transition: 70ms;
+//       &:active {
+//         transform: translateY(3px);
+//         box-shadow: 0px 2px 0px 0px rgba(255, 0, 0, 0.25);
+//       }
+// }
+//     }
+//     .Burger {
+//       display: none;
+//       grid-area: burger;
+//       margin: 0 20px 0 0;
+//       padding: 0;
+//       justify-self: end;
+//       font-size: 40px;
+//       border: none;
+//       background: none;
+//       outline: none;
+//       transition: 0.1s;
+//       &:active {
+//         transform: scale(1.2);
+//       }
+//     }
+//   }
+
+//   @media (max-width: 700px) {
+//     .Header {
+//       grid-template-areas: "logo burger" "nav nav";
+//     }
+//     .Nav {
+//       grid-template-rows: repeat(4, auto);
+//       grid-template-columns: none;
+//       grid-row-gap: 20px;
+  
+//       padding: 30px 0 30px;
+//       background: rgba(40, 44, 47, 0.95);
+//       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+//       border-bottom-left-radius: 10px;
+//       border-bottom-right-radius: 10px;
+//     }
+//     .Burger {
+//       display: inline;
+//     }
+//   }
+  
+//   .NavAnimation-enter {
+//     opacity: 0;
+//     transform: scale(0.5);
+//   }
+//   .NavAnimation-enter-active {
+//     opacity: 1;
+//     transform: translateX(0);
+//     transition: opacity 350ms, transform 350ms;
+//   }
+//   .NavAnimation-exit {
+//     opacity: 1;
+//   }
+//   .NavAnimation-exit-active {
+//     opacity: 0;
+//     transform: scale(0.5);
+//     transition: opacity 350ms, transform 350ms;
+//   }
+  
+
+
+
+
+
   .text-center {
     @include text-center;
   }
@@ -34,6 +143,8 @@ h6 {
     display: flex;
     align-self: center;
     margin: auto;
+    padding-left: 15px;
+    padding-right: 15px;
   }
   .theme_button {
     background-color: #05d6e7;
@@ -70,8 +181,10 @@ h6 {
       outline: none;
     }
     &:hover {
-      color: #333;
       text-decoration: none;
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+      background: #061138;
+      color: $white;
     }
     &:active {
       background-image: none;
@@ -113,6 +226,12 @@ h6 {
     background-size: cover;
     .doctorPic {
       padding-top: 50px;
+      @include breakpoint(xs) {
+        padding-top: 0;
+        img {
+          max-width: 100%;
+        }
+      }
     }
     .caption {
       min-height: 500px;
@@ -126,7 +245,7 @@ h6 {
         color: $white;
       }
       h1 {
-        font-size: 60px;
+        font-size: 70px;
         font-weight: 600;
         margin-bottom: 0;
         line-height: 60px;
@@ -134,8 +253,32 @@ h6 {
       h2 {
         font-weight: 300;
       }
+      h3 {
+        font-weight: 300;
+      }
     }
+    @include breakpoint(xs) {
+      .mblReverse {
+        flex-direction: column-reverse;
+        .caption {
+          min-height: auto;
+          margin: 0;
+          padding-top: 50px;
+          h1 {
+            font-size: 40px;
+          }
+          h2 {
+            font-size: 20px;
+          }
+          h3 {
+            font-size: 18px;
+          }
+        }
+      }
+    }
+
   }
+
 
   .landing_pricing {
     background: #ebf7f6;
@@ -202,6 +345,15 @@ h6 {
         }
       }
     }
+    @include breakpoint(xs) {
+      .addSection {
+        @include margin-padding(0, 0px);
+      .addCaption {
+        @include margin-padding(0 , 0);
+      }
+
+      }
+    }
   }
 
   .landing-testimonials {
@@ -227,11 +379,32 @@ h6 {
         width: 85%;
         max-width: 100%;
         position: absolute;
-        top: -55px;
+        top: -40px;
         right: 0;
       }
     }
+    @include breakpoint(xs) {
+      .banner {
+        display: none;
+      }
+    }
   }
+.landing-about {
+  @include breakpoint(xs) {
+    .about_left {
+      display: flex;
+    .circular-square {
+      width: 60%;
+      margin: auto;
+      margin-bottom: 15px;
+    }
+  }
+  }
+}
+
+
+
+
   .processWrapper {
     background-attachment: fixed;
     background: url(../LandingPage/assets/images/stepsBg.png) no-repeat top center;
@@ -255,6 +428,7 @@ h6 {
         @include margin-padding(0 , 20px);
         border-right: 1px solid #e8e8e8;
         position: relative;
+        @include transit;
         .stepRound {
           width:50px;
           height: 50px;
@@ -266,10 +440,6 @@ h6 {
           font-weight: 600;
           box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
           @include transit;
-          &:hover {
-            background: #061138;
-            color: $white;
-          }
         }
         .boxStart {
           position: absolute;
@@ -288,11 +458,110 @@ h6 {
         .footerCaption {
             text-align: center;
             @include margin-padding(0 , 30px);
+            @include transit;
             padding-left: 0;
             padding-right: 0;
-        }    
+            h5 {
+              color: #717171;
+            }
+            
+        }
+        &:hover {
+          box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
+          .stepRound {
+            background: #061138;
+            color: $white;
+          }
+          .footerCaption h5 {
+            color: #333;
+          }
+        } 
+
+        }   
+        @include breakpoint(xs) {
+        .whiteBox {
+          margin-bottom: 10px;
+        }
       }
+      }
+
+    }
+    @include breakpoint(xs) {
+      padding: 15px;
+    }
+
+  }
+
+
+
+  .footer {
+    background-color: #1a568b;
+    @include margin-padding(0 , 50px);
+    .contact {
+      h3 {
+        color: #fff;
+      }
+      color: $white;
+    }
+    .footerInfo {
+      display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+      .socilMenu {
+        color: #fff;
+        span {
+        @include margin-padding(2px , 5px);
+        }
+      }
+      .info {
+        margin-top: 2rem;
+      p {
+        color: $white;
+        margin-bottom: .5rem;
+      }
+    }
+    }
+
+    }
+    @include breakpoint(xs) {
+      .footer {
+        @include margin-padding(0 , 20px);
+      }
+    }
+@include breakpoint(xs) {
+  .titleCaption {
+    font-size: 35px;
+  }
+}
+
+// @include breakpoint(m) {
+  @media (max-width:991px) {
+    .landing-banner {
+  .mblReverse {
+    flex-direction: column-reverse;
+    .doctorPic {
+      padding-top: 0;
+    }
+    .caption {
+      min-height: auto;
+    }
+  }
+}
+  }
+  @media (min-width:768px) and (max-width:991px) {
+.landing-testimonials {
+  .banner {
+    img {
+      top: 205px;
     }
   }
 }
 }
+}
+
+
+
+
+
+
+

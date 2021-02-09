@@ -59,7 +59,7 @@ const FossilMdPricing = () => {
         <div className="container">
           <div className="pricing_section">
             <Row>
-              <Col span={24}>
+              <Col lg={24}>
                 <div className="pricing_head">
                   <h1>Pricing</h1>
                   <p>
@@ -73,7 +73,7 @@ const FossilMdPricing = () => {
             <div className="listedPrice mt10">
               <Row>
                 {PricingData.map(item => (
-                  <Col span={8}>
+                  <Col xs={24} lg={8}>
                     <div className="pricinBox">
                         <div className="header">
                       <h2>{item.title}</h2>
