@@ -114,7 +114,7 @@ const CustomFormField = props => {
 
   const onFinish = values => {
     setOptionValues(values);
-    console.log('fhdgfjgsdjfgsdg', optionValue);
+  
   };
 
   const showModal = () => {
@@ -157,7 +157,7 @@ const CustomFormField = props => {
           <HardCoreForm />
 
           {listCustomField?.map((type, index) => {
-            console.log('typeee', type);
+            
             let Values = type.values;
             return (
               // THIS EDIT SECTION OF CUSTOM FORM
@@ -214,7 +214,7 @@ const CustomFormField = props => {
                           >
                             <AntForm.List name="names" className="add-plus-form">
                               {(fields, { add, remove }, { errors }) => {
-                                console.log('888888888888888', Values);
+                             
                                 return (
                                   <>
                                     {fields.map((field, index) => {
@@ -294,7 +294,7 @@ const CustomFormField = props => {
           })}
           {/* // THIS ADD SECTION OF CUSTOM FORM */}
           {addNewField.map((item, index) => {
-            console.log('dssdfsdfdsf', item);
+            
             return (
               <div>
                 <Formik

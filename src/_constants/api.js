@@ -48,6 +48,8 @@ export const backend_api = {
   FILTER_APPOINTMENT:'/api/backend/v1/online_bookings/filter',
   VIEW_APPOINTMENT:'/api/backend/v1/online_booking',
   DELETE_APPOINTMENT:'/api/backend/v1/online_booking',
+  EDIT_APPOINTMENT:'/api/backend/v1/online_booking',
+  STATUS_CHANGE_APPOINTMENT:'/api/backend/v1/online_booking',
 
   CREATE_PROVIDER_TYPE:'/api/backend/v1/provider_type',
   FETCH_PROVIDER_TYPE:'/api/backend/v1/provider_types',

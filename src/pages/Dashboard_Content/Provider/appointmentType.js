@@ -15,7 +15,7 @@ const AppointmentTypes = props => {
     setEditId(id);
     setEditData(data);
     store.dispatch({ type: 'OPEN_APPOINTMENT_TYPE_MODAL' });
-    console.log("props",props)
+
   };
 
   const handleFormSubmission = async values => {
@@ -68,7 +68,7 @@ const AppointmentTypes = props => {
   ];
 
   useEffect(() => {
-    console.log('Loading');
+ 
     props.fetchAppointmentType({ branchId: 3 });
   }, [props.changed]);
   

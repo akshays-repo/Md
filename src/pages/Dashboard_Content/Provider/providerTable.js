@@ -21,7 +21,6 @@ const ProviderTable = props => {
   const [appointmentTypeId, setAppointmentTypeId] = useState('');
   const [status, setStatus] = useState('');
 
-
   useEffect(() => {
     setAppointmentTypes(props.appointment_type);
     setBranchList(store.getState().Branch.payload);
@@ -82,14 +81,12 @@ const ProviderTable = props => {
   };
 
   const handleDelete = async id => {
-    console.log('deleter', props);
     await props.deleteProvider(id);
   };
 
   const handleChangeSearch = e => {
     e.preventDefault();
     setSearchKey(e.target.value);
-    console.log('MASS DA', searchKey);
   };
   const handleSearchSubmission = e => {
     e.preventDefault();
@@ -210,20 +207,29 @@ const ProviderTable = props => {
     <div>
       <div style={{ marginBottom: '10px' }} className="search">
         <Space direction="horizontal">
-          <Input type="text"             value={searchKey} placeholder=" Name Email or Phone" onChange={handleChangeSearch} />
+          <Input
+            type="text"
+            value={searchKey}
+            placeholder=" Name Email or Phone"
+            onChange={handleChangeSearch}
+          />
 
           <Select
             placeholder="Appointment Type"
             onChange={e => setAppointmentTypeId(e)}
             style={{ width: 150 }}
-
           >
             {props.appointment_type?.map(type => (
               <Option value={type.id}>{type.name}</Option>
             ))}
           </Select>
 
-          <Select defaultValue={branchId} onChange={e => setBranchId(e)} placeholder="Branch" style={{ width: 120 }}>
+          <Select
+            defaultValue={branchId}
+            onChange={e => setBranchId(e)}
+            placeholder="Branch"
+            style={{ width: 120 }}
+          >
             {branchList?.map(branch => (
               <Option value={branch.id}>{branch.fullName}</Option>
             ))}
@@ -240,11 +246,9 @@ const ProviderTable = props => {
           </Select>
 
           <Select onChange={e => setStatus(e)} placeholder="status" style={{ width: 120 }}>
-              <Option value='active'>ACTIVE</Option>
-              <Option value='hold'>HOLD</Option>
-
+            <Option value="active">ACTIVE</Option>
+            <Option value="hold">HOLD</Option>
           </Select>
-
 
           <button className="view-button button-square" onClick={handleSearchSubmission}>
             Filter

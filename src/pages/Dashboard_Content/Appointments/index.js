@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { Space, Select, Row, Col, Table, Tag, DatePicker, Input, Modal ,Popconfirm } from 'antd';
+import { Space, Select, Row, Col, Table, Tag, DatePicker, Input, Modal, Popconfirm } from 'antd';
 import Dashboard_Content from '..';
 import { actionCreator } from '../../../reducers/actionCreator';
 import { store } from '../../../reducers/configureStore';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import AppointmentView from './appointmentView';
+import AppointmentEdit from './appointmentEdit';
+
 const { Option } = Select;
-
-
 
 const Dashboard_Appointments = props => {
   const Appointments = () => {
@@ -28,7 +28,6 @@ const Dashboard_Appointments = props => {
     useEffect(() => {
       setAppointmentList(props.Appointment);
       props.fetchBranch({ hospitalId: localStorage.getItem('hospital_id'), page: 1, limit: 50 });
-      console.log('Babsass', props.branch);
     }, []);
 
     const handleChangeSearch = e => {
@@ -53,16 +52,25 @@ const Dashboard_Appointments = props => {
       setAppointmentList('');
       setBranchId('');
       setSearchKey('');
+      setToDate('');
+      setFromDate('');
       props.fetchAppointment();
     };
 
-    const viewAppointmentDetails = async(id) =>{
-      await props.viewAppointment(id)
-      setViewId(id)
-      store.dispatch({ type: 'OPEN_VIEW_APPOINTMENT_MODAL' })
-    }
+    const viewAppointmentDetails = async id => {
+      await props.viewAppointment(id);
+      setViewId(id);
+      store.dispatch({ type: 'OPEN_VIEW_APPOINTMENT_MODAL' });
+    };
 
+    const handleChangePaymentStatus = async (id, payment_status) => {
+      props.editStatusAppointment(id, { payment_status });
+    };
 
+    const handleChangeStatus = async (id, status) => {
+      console.log('dlfhiudfuadfuo', id, status);
+      props.editStatusAppointment(id, { status });
+    };
 
     const columns = [
       {
@@ -93,13 +101,42 @@ const Dashboard_Appointments = props => {
       },
       {
         title: 'Payment Status',
-        dataIndex: 'payment_status',
-        key: 'payment_status',
-      },
+        dataIndex: '',
+        key: '',
+        render: record => (
+          <div>
+            <Select
+              defaultValue={record.payment_status}
+              style={{ width: 120 }}
+              onChange={e => handleChangePaymentStatus(record.id, e)}
+            >
+              <Option value="pending">Pending</Option>
+              <Option value="failed">Failed</Option>
+              <Option value="paid">Paid</Option>
+              <Option value="requested">Requested</Option>
+              <Option value="manually_paid">Manually Paid</Option>
+            </Select>
+          </div>
+        ),
+      }, //['pending', 'failed', 'paid', 'requested', 'manually_paid'
       {
         title: 'Status',
-        dataIndex: 'status',
-        key: 'status',
+        dataIndex: '',
+        key: '',
+        render: record => (
+          <div>
+            <Select
+              defaultValue={record.status}
+              style={{ width: 120 }}
+              onChange={e => handleChangeStatus(record.id, e)}
+            >
+              <Option value="pending">Pending</Option>
+              <Option value="confirmed">Confirmed</Option>
+              <Option value="cancelled">Cancelled</Option>
+              <Option value="completed">Completed</Option>
+            </Select>
+          </div>
+        ),
       },
       {
         title: '',
@@ -107,31 +144,33 @@ const Dashboard_Appointments = props => {
         render: record => (
           <Space size="middle">
             <span
-              onClick={() => viewAppointmentDetails(record.id) }
+              onClick={() => viewAppointmentDetails(record.id)}
               className="edit-color icon-button"
             >
               {' '}
               <i className="fa fa-eye"></i>{' '}
             </span>
-            <span className="edit-color icon-button">
+            <span
+              className="edit-color icon-button"
+              onClick={() => store.dispatch({ type: 'OPEN_EDIT_APPOINTMENT_MODAL' })}
+            >
               {' '}
               <i className="fa fa-edit"></i>{' '}
             </span>
             <Popconfirm
-            title="Are you sure？"
-            onConfirm={() => props.deleteAppointment(record.id)}
-            okText="Yes"
-            cancelText="No"
-          >
-            <span className="delete-color icon-button">
-              <i className="fa fa-trash"></i>
-            </span>
-          </Popconfirm>
+              title="Are you sure？"
+              onConfirm={() => props.deleteAppointment(record.id)}
+              okText="Yes"
+              cancelText="No"
+            >
+              <span className="delete-color icon-button">
+                <i className="fa fa-trash"></i>
+              </span>
+            </Popconfirm>
           </Space>
         ),
       },
     ];
-
 
     return (
       <div className="appointment-section">
@@ -188,7 +227,14 @@ const Dashboard_Appointments = props => {
         footer={false}
         onCancel={() => store.dispatch({ type: 'CLOSE_VIEW_APPOINTMENT_MODAL' })}
       >
-        <AppointmentView {...props}/>
+        <AppointmentView {...props} />
+      </Modal>
+      <Modal
+        visible={props.modal1}
+        footer={false}
+        onCancel={() => store.dispatch({ type: 'CLOSE_EDIT_APPOINTMENT_MODAL' })}
+      >
+        <AppointmentEdit {...props} />
       </Modal>
       <Dashboard_Content content={Appointments()} />;
     </div>
@@ -206,7 +252,7 @@ const mapStoreToProps = ({ Appointment, Branch }) => {
     modal2: Appointment.modal2,
     changed: Appointment.changed,
     branch: Branch.payload,
-    view:  Appointment.view,
+    view: Appointment.view,
   };
 };
 const mapDispatchToProps = dispatch => ({
@@ -219,6 +265,8 @@ const mapDispatchToProps = dispatch => ({
     dispatch(actionCreator({ method: 'POST', action_type: 'CREATE_BRANCH', values })),
   editAppointment: (id, values) =>
     dispatch(actionCreator({ method: 'PUT', action_type: 'EDIT_BRANCH', id, values })),
+  editStatusAppointment: (id, param) =>
+    dispatch(actionCreator({ method: 'PUT', action_type: 'STATUS_CHANGE_APPOINTMENT', id, param })),
   deleteAppointment: id =>
     dispatch(actionCreator({ method: 'DELETE', action_type: 'DELETE_APPOINTMENT', id })),
   viewAppointment: id =>

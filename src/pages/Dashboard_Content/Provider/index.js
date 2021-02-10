@@ -13,7 +13,7 @@ const Dashboard_Provider = props => {
   useEffect(() => {
     props.fetchProvider();
     props.fetchBranch({ hospitalId: localStorage.getItem('hospital_id'), page: 1, limit: 60 });
-    console.log('prooo', props);
+  
   }, [props.changed]);
 
   useEffect(() => {
@@ -22,10 +22,7 @@ const Dashboard_Provider = props => {
 
   useEffect(() => {
     props.fetchProviderType();
-  }, [props.ProviderTypeChanged , props.ProviderDeleted]);
-
-
-
+  }, [props.ProviderTypeChanged, props.ProviderDeleted]);
 
   useEffect(() => {
     props.fetchBranch({ hospitalId: localStorage.getItem('hospital_id'), page: 1, limit: 50 });
@@ -159,10 +156,10 @@ const mapStoreToProps = ({ Provider, CustomForm, AppointmentType, ProviderType }
 
     AppointmentTypeModal2: AppointmentType.modal2,
 
-    ProviderTypePayload:ProviderType.payload,
+    ProviderTypePayload: ProviderType.payload,
     ProviderTypemodal: ProviderType.modal,
     ProviderTypeChanged: ProviderType.changed,
-    ProviderDeleted:ProviderType.deleted
+    ProviderDeleted: ProviderType.deleted,
   };
 };
 
@@ -176,13 +173,12 @@ const mapDispatchToProps = dispatch => ({
       actionCreator({ method: 'POST', action_type: 'CREATE_CUSTOMFORM', values, contentType }),
     ),
 
-  fetchProvider: () =>
-    dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_PROVIDER', })),
+  fetchProvider: () => dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_PROVIDER' })),
   addProvider: values =>
     dispatch(actionCreator({ method: 'POST', action_type: 'CREATE_PROVIDER', values })),
   editProvider: (id, values) =>
     dispatch(actionCreator({ method: 'PUT', action_type: 'EDIT_PROVIDER', id, values })),
-    editProviderStatus: (id, param) =>
+  editProviderStatus: (id, param) =>
     dispatch(actionCreator({ method: 'PUT', action_type: 'EDIT_PROVIDER', id, param })),
   deleteProvider: id =>
     dispatch(actionCreator({ method: 'DELETE', action_type: 'DELETE_PROVIDER', id })),
@@ -196,9 +192,8 @@ const mapDispatchToProps = dispatch => ({
       }),
     ),
 
-    fetchProviderType: () =>
+  fetchProviderType: () =>
     dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_PROVIDER_TYPE' })),
-
 
   fetchAppointmentType: param =>
     dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_APPOINTMENT_TYPE', param })),

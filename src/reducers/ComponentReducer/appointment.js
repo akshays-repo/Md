@@ -62,6 +62,16 @@ export const AppointmentReducer = (state = BranchState, action) => {
         message: action.message,
         changed: true,
       };
+
+      case 'STATUS_CHANGE_APPOINTMENT':
+      message.success('STATUS CHANGED SUCCESSFULLY');
+      return {
+        ...state,
+        error: action.error,
+        message: action.message,
+        changed: true,
+      };
+
     case 'FETCH_ERROR':
       message.error(action.message);
       return { ...state };
