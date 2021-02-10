@@ -4,8 +4,10 @@ import { Row, Col } from 'antd';
 const FossilMdPricing = () => {
   const PricingData = [
     {
+      
+      price: '$249',
+      sub: 'Month',
       title: 'Standard',
-      price: '$249 / M',
       contents: [
         'Online booking',
         'Appointment reminders',
@@ -20,8 +22,10 @@ const FossilMdPricing = () => {
       ],
     },
     {
+     
+      price: '$249',
+      sub: 'Month',
       title: 'Advanced',
-      price: '$249 / M',
       contents: [
         'Online booking',
         'Appointment reminders',
@@ -36,8 +40,10 @@ const FossilMdPricing = () => {
       ],
     },
     {
+    
+      price: '$249',
+      sub: 'Month',
       title: 'Standard',
-      price: '$249 / M',
       contents: [
         'Online booking',
         'Appointment reminders',
@@ -76,8 +82,9 @@ const FossilMdPricing = () => {
                   <Col xs={24} lg={8}>
                     <div className="pricinBox">
                         <div className="header">
+                    
+                      <span className="price">{item.price}</span><span className="sub">{item.sub}</span>
                       <h2>{item.title}</h2>
-                      <span className="price">{item.price}</span>
                       </div>
                       <div className="priceBody mt6">
                       {item.contents.map(content => (
