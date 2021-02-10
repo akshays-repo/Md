@@ -466,8 +466,26 @@ export const OnlineBookingSchema = Yup.object().shape({
   phone: Yup.string().required('Phone number is required'),
   dob: Yup.date().required('Please select DOB'),
   zipcode: Yup.date().required('Please enter zipcode'),
-  gender:Yup.string().required('Please select the gender'),
-  comment:Yup.string(),
-  appointment_for:Yup.string().required('Please select the option')
+  gender: Yup.string().required('Please select the gender'),
+  comment: Yup.string(),
+  appointment_for: Yup.string().required('Please select the option'),
+});
 
+export const NewAppointmentSchema = Yup.object().shape({
+  provider_id: Yup.number().required('Please select provider'),
+  patient_id: Yup.number().required('Please select provider'),
+  appointment_start: Yup.date()
+    .required('Select start')
+    .nullable(),
+  appointment_end: Yup.date()
+    .required('Select end')
+    .nullable(),
+  comment: Yup.string(),
+});
+
+export const UnavailableSchema = Yup.object().shape({
+  provider_id: Yup.number().required('Please select provider'),
+  appointment_start: Yup.date().required('Please select provider'),
+  appointment_end: Yup.date().required('Please select provider'),
+  comment: Yup.string(),
 });
