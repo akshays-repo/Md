@@ -23,7 +23,7 @@ const ProviderTable = props => {
 
   useEffect(() => {
     setAppointmentTypes(props.appointment_type);
-    setBranchList(store.getState().Branch.payload);
+    //setBranchList(store.getState().Branch.payload);
   });
 
   const showModal = (id, data) => {

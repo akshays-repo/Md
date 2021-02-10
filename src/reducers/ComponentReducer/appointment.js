@@ -1,4 +1,4 @@
-import { BranchState } from '../ComponentState/branch';
+import { AppointmentState } from '../ComponentState/appointment';
 import { message } from 'antd';
 
 /**
@@ -6,7 +6,7 @@ import { message } from 'antd';
  * @param action
  */
 
-export const AppointmentReducer = (state = BranchState, action) => {
+export const AppointmentReducer = (state = AppointmentState, action) => {
   switch (action.type) {
     case 'OPEN_CREATE_APPOINTMENT_MODAL':
       return { ...state, modal: true };

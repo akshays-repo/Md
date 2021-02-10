@@ -28,7 +28,7 @@ const BranchListTable = props => {
   };
 
   useEffect(() => {
-    props.fetchBranch({ hospitalId: localStorage.getItem('hospital_id'), page: 1, limit: 20 });
+    props.fetchBranch();
   }, [props.Branch]);
 
   const handleCancel = () => {

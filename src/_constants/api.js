@@ -61,5 +61,8 @@ export const backend_api = {
   FETCH_BRANCH_APPOINTMENT_PROVIDER: '/api/backend/v1/providers/type_id',
   FETCH_HOSPITAL_APPOINTMENT_TYPE: '/api/backend/v1/appointment_types/hospital',
   CHECK_HOSPITAL: '/api/backend/v1/users',
+
+  FETCH_APPOINTMENT_HOME :'/api/backend/v1/online_bookings/filter',
+
 };
 

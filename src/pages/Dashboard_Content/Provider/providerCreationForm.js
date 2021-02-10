@@ -71,7 +71,7 @@ const ProviderCreationForm = props => {
            
           }
         }
-        validationSchema={ProviderCreationSchema}
+       // validationSchema={ProviderCreationSchema}
         onSubmit={handleFormSubmission}
         innerRef={innerForm}
       >
