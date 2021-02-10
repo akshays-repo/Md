@@ -57,3 +57,4 @@ export const backend_api = {
   FETCH_HOSPITAL_APPOINTMENT_TYPE: '/api/backend/v1/appointment_types/hospital',
   CHECK_HOSPITAL: '/api/backend/v1/users',
 };
+

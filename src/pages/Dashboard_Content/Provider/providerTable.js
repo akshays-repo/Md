@@ -47,11 +47,17 @@ const ProviderTable = props => {
   };
 
   const handleApptChange = async (record, values) => {
-    console.log('appptypeeee', values);
 
+    console.log("sjdhasjhdjkash", values);
+    // this will perform delete
     let currentValue = [];
-    record.provider_and_types.map(type => currentValue.push(type.appointment_type.id));
-    let DeletedArray = currentValue.filter(e => !values.includes(e));
+    record.provider_and_types.map(type => currentValue.push(type.appointment_type?.id));
+    let intersection = currentValue.filter(x => values.includes(x));
+    let DeletedArray = []
+    DeletedArray = currentValue
+                 .filter(x => !intersection.includes(x))
+                 .concat(intersection.filter(x => !currentValue.includes(x)));
+
     let intValues = {
       userTypeId: 4,
       id: record.id,
@@ -60,13 +66,10 @@ const ProviderTable = props => {
       branchId: 1,
       provider_typeId: record.provider_typeId,
     };
-    console.log('respomsee', intValues);
-    console.log('ISARRAY', Array.isArray(intValues.appointment_type));
-    console.log('respomsee');
-
     let sentinData = getFormData({ ...intValues });
     values.map((va, i) => sentinData.append('appointment_type[]', va));
-    let response = await props.editProvider(record.id, sentinData);
+    DeletedArray.map((va, i) => sentinData.append('deleted_type[]', va));
+    await props.editProvider(record.id, sentinData);
   };
 
   const handleStatus = async (record, status) => {
@@ -123,10 +126,10 @@ const ProviderTable = props => {
             <Select
               className="appt-type-select"
               mode="multiple"
-              style={{ width: '100%' }}
+              style={{ width: '150px',maxHeight:"150px" }}
               placeholder="Select the type"
               key={record?.provider_and_types?.map(type =>
-                type.appointment_type?.id !== null ? type.appointment_type?.id : null,
+                type.appointment_type === null ? null :type.appointment_type.id ,
               )}
               defaultValue={record?.provider_and_types?.map(type => type.appointment_type?.id
               )}

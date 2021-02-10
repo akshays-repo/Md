@@ -70,7 +70,7 @@ const ProviderCreationForm = props => {
             userTypeId: 4,
             provider_typeId: '',
             phone: '',
-            branchId: 5,
+           
           }
         }
         //  validationSchema={ProviderCreationSchema}
@@ -91,7 +91,7 @@ const ProviderCreationForm = props => {
                   onChange={handleChange}
                 >
                   {branchList?.map(branch => {
-                    return <Option key={branch.id}>{branch.fullName}</Option>;
+                    return <Option value={branch.id} key={branch.id}>{branch.fullName}</Option>;
                   })}
                 </Select>
 
