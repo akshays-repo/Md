@@ -18,11 +18,9 @@ const ProviderCreationForm = props => {
 
   useEffect(() => {
     setBranchList(store.getState().Branch.payload);
-    console.log('asasasas use', props);
   });
 
   const handleFormSubmission = async values => {
-    console.log('asasasas MAIN', props.id, values);
     let data = await getFormDataA({ ...values, userTypeId: 4,   branchId: 5, });
     selectedBranch.map((va, i) => data.append('arrBranches[]', va));
 
@@ -73,12 +71,12 @@ const ProviderCreationForm = props => {
            
           }
         }
-        //  validationSchema={ProviderCreationSchema}
+        validationSchema={ProviderCreationSchema}
         onSubmit={handleFormSubmission}
         innerRef={innerForm}
       >
         {({ handleSubmit, touched, errors, isSubmitting }) => (
-          <Form className="login__form" handleSubmit={handleSubmit}>
+          <Form  className="login__form" handleSubmit={handleSubmit}>
             <Row>
               {generateForm(formField)}
               <Col xs={24} xl={12}>
@@ -99,6 +97,7 @@ const ProviderCreationForm = props => {
               </Col>
 
               <Col xs={24} xl={12}>
+              <p>Please Select the Provider Type</p>
               <Field
                   as="select"
                   name="provider_typeId"

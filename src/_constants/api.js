@@ -35,6 +35,7 @@ export const backend_api = {
   DELETE_PROVIDER:'/api/backend/v1/provider',
   FETCH_BRANCH_PROVIDER: '/api/backend/v1/providers',
   EDIT_STATUS_PROVIDER:'/api/backend/v1/users/',
+  FILTER_PROVIDER:'/api/backend/v1/providers',
 
   CREATE_CUSTOMFORM:'/api/backend/v1/custom_form',
   FETCH_CUSTOMFORM:'/api/backend/v1/custom_form',
@@ -45,6 +46,8 @@ export const backend_api = {
   CREATE_ONLINE_APPOINTMENT:'/api/backend/v1/online_booking',
   FETCH_APPOINTMENT:'/api/backend/v1/online_booking',
   FILTER_APPOINTMENT:'/api/backend/v1/online_bookings/filter',
+  VIEW_APPOINTMENT:'/api/backend/v1/online_booking',
+  DELETE_APPOINTMENT:'/api/backend/v1/online_booking',
 
   CREATE_PROVIDER_TYPE:'/api/backend/v1/provider_type',
   FETCH_PROVIDER_TYPE:'/api/backend/v1/provider_types',

@@ -24,6 +24,11 @@ export const AppointmentReducer = (state = BranchState, action) => {
     case 'CREATE_APPOINTMENT':
       message.success('APPOINTMENT CREATED SUCCESSFULLY');
       return { ...state, error: action.error, modal: false, message: action.message };
+
+      case 'VIEW_APPOINTMENT':
+        return { ...state, error: action.error, modal: false, message: action.message ,view:action.payload,
+        };
+          
     case 'FETCH_APPOINTMENT':
       return {
         ...state,
@@ -54,7 +59,6 @@ export const AppointmentReducer = (state = BranchState, action) => {
       return {
         ...state,
         error: action.error,
-        payload: action.payload,
         message: action.message,
         changed: true,
       };

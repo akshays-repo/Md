@@ -103,7 +103,7 @@ const Dashboard_MyPatients = props => {
       e.preventDefault();
       let parms = {};
       if (search) parms.search = search;
-      if (status) parms.search = status;
+      if (status) parms.status = status;
       props.filterPatient(parms);
     };
 

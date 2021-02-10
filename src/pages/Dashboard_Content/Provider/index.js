@@ -25,6 +25,8 @@ const Dashboard_Provider = props => {
   }, [props.ProviderTypeChanged , props.ProviderDeleted]);
 
 
+
+
   useEffect(() => {
     props.fetchBranch({ hospitalId: localStorage.getItem('hospital_id'), page: 1, limit: 50 });
     props.fetchAppointmentType({ branchId: 3 });
@@ -184,6 +186,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(actionCreator({ method: 'PUT', action_type: 'EDIT_PROVIDER', id, param })),
   deleteProvider: id =>
     dispatch(actionCreator({ method: 'DELETE', action_type: 'DELETE_PROVIDER', id })),
+
   filterProvider: param =>
     dispatch(
       actionCreator({

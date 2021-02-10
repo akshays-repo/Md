@@ -4,27 +4,29 @@ import AddAppointmentTime from './addAppointmentTime';
 import { store } from '../../../reducers/configureStore';
 import ProviderCreationForm from './providerCreationForm';
 import { connect } from 'react-redux';
-import MultiSelect from "react-multi-select-component";
+import MultiSelect from 'react-multi-select-component';
 import { getFormDataA, getFormData } from '_utils';
 import { map } from 'lodash';
-
+const { Option } = Select;
 const ProviderTable = props => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [appointmentTypes, setAppointmentTypes] = useState([]);
-  const [selectedItems, setSelectedItem] = useState([]);
-  const [providers, setProviders] = useState([]);
   const [editId, setEditId] = useState(null);
   const [editData, setEditData] = useState('');
 
+  const [branchList, setBranchList] = useState([]);
+  const [branchId, setBranchId] = useState('');
+  const [providerTypeId, setProviderTypeId] = useState('');
+  const [searchKey, setSearchKey] = useState('');
+  const [appointmentTypeId, setAppointmentTypeId] = useState('');
+  const [status, setStatus] = useState('');
+
+
   useEffect(() => {
     setAppointmentTypes(props.appointment_type);
+    setBranchList(store.getState().Branch.payload);
   });
-  const getProvider = () => {
-    console.log('props000', props.provider);
-    let newData = [];
-    props.provider.map(data => newData.push(data.provider));
-    return newData;
-  };
+
   const showModal = (id, data) => {
     setEditId(id);
     setEditData(data);
@@ -47,16 +49,14 @@ const ProviderTable = props => {
   };
 
   const handleApptChange = async (record, values) => {
-
-    console.log("sjdhasjhdjkash", values);
     // this will perform delete
     let currentValue = [];
     record.provider_and_types.map(type => currentValue.push(type.appointment_type?.id));
     let intersection = currentValue.filter(x => values.includes(x));
-    let DeletedArray = []
+    let DeletedArray = [];
     DeletedArray = currentValue
-                 .filter(x => !intersection.includes(x))
-                 .concat(intersection.filter(x => !currentValue.includes(x)));
+      .filter(x => !intersection.includes(x))
+      .concat(intersection.filter(x => !currentValue.includes(x)));
 
     let intValues = {
       userTypeId: 4,
@@ -66,6 +66,7 @@ const ProviderTable = props => {
       branchId: 1,
       provider_typeId: record.provider_typeId,
     };
+
     let sentinData = getFormData({ ...intValues });
     values.map((va, i) => sentinData.append('appointment_type[]', va));
     DeletedArray.map((va, i) => sentinData.append('deleted_type[]', va));
@@ -73,7 +74,6 @@ const ProviderTable = props => {
   };
 
   const handleStatus = async (record, status) => {
-    console.log('rorororror', record);
     try {
       await props.editProviderStatus(record.id, { status });
     } catch (err) {
@@ -84,6 +84,31 @@ const ProviderTable = props => {
   const handleDelete = async id => {
     console.log('deleter', props);
     await props.deleteProvider(id);
+  };
+
+  const handleChangeSearch = e => {
+    e.preventDefault();
+    setSearchKey(e.target.value);
+    console.log('MASS DA', searchKey);
+  };
+  const handleSearchSubmission = e => {
+    e.preventDefault();
+    let parms = {};
+    if (searchKey) parms.search = searchKey;
+    if (branchId) parms.branchId = branchId;
+    if (providerTypeId) parms.provider_typeId = providerTypeId;
+    if (appointmentTypeId) parms.type_id = appointmentTypeId;
+    if (status) parms.status = status;
+
+    props.filterProvider(parms);
+  };
+  const clearFilter = e => {
+    e.preventDefault();
+    setBranchId('as');
+    setAppointmentTypeId('');
+    setSearchKey('');
+    setStatus('');
+    props.fetchProvider();
   };
 
   const columns = [
@@ -126,18 +151,18 @@ const ProviderTable = props => {
             <Select
               className="appt-type-select"
               mode="multiple"
-              style={{ width: '150px',maxHeight:"150px" }}
+              style={{ width: '150px', maxHeight: '150px' }}
               placeholder="Select the type"
               key={record?.provider_and_types?.map(type =>
-                type.appointment_type === null ? null :type.appointment_type.id ,
+                type.appointment_type === null ? null : type.appointment_type.id,
               )}
-              defaultValue={record?.provider_and_types?.map(type => type.appointment_type?.id
-              )}
-
+              defaultValue={record?.provider_and_types?.map(type => type.appointment_type?.id)}
               onChange={e => handleApptChange(record, e)}
             >
               {appointmentTypes.map(type => (
-                <Select.Option key={type.id} value={type.id}>{type.name}</Select.Option>
+                <Select.Option key={type.id} value={type.id}>
+                  {type.name}
+                </Select.Option>
               ))}
             </Select>
           </Space>
@@ -183,6 +208,53 @@ const ProviderTable = props => {
 
   return (
     <div>
+      <div style={{ marginBottom: '10px' }} className="search">
+        <Space direction="horizontal">
+          <Input type="text"             value={searchKey} placeholder=" Name Email or Phone" onChange={handleChangeSearch} />
+
+          <Select
+            placeholder="Appointment Type"
+            onChange={e => setAppointmentTypeId(e)}
+            style={{ width: 150 }}
+
+          >
+            {props.appointment_type?.map(type => (
+              <Option value={type.id}>{type.name}</Option>
+            ))}
+          </Select>
+
+          <Select defaultValue={branchId} onChange={e => setBranchId(e)} placeholder="Branch" style={{ width: 120 }}>
+            {branchList?.map(branch => (
+              <Option value={branch.id}>{branch.fullName}</Option>
+            ))}
+          </Select>
+
+          <Select
+            placeholder="provider type"
+            onChange={e => setProviderTypeId(e)}
+            style={{ width: 150 }}
+          >
+            {props.ProviderTypePayload?.map(type => (
+              <Option value={type.id}>{type.name}</Option>
+            ))}
+          </Select>
+
+          <Select onChange={e => setStatus(e)} placeholder="status" style={{ width: 120 }}>
+              <Option value='active'>ACTIVE</Option>
+              <Option value='hold'>HOLD</Option>
+
+          </Select>
+
+
+          <button className="view-button button-square" onClick={handleSearchSubmission}>
+            Filter
+          </button>
+          <button className="view-button button-square" onClick={clearFilter}>
+            clear
+          </button>
+        </Space>
+      </div>
+
       <Table columns={columns} dataSource={props.provider} />
       <Modal
         footer={false}
