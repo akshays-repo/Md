@@ -4,68 +4,23 @@ import MessageList from './MessageList';
 import socketIOClient from 'socket.io-client';
 import { Col, message, Row } from 'antd';
 import './style.scss';
+import { DeliveryStatus } from '_constants/message';
+import { connectToSocket, ENDPOINT, socket } from './connectToSocket';
 
 const MessageLayout = () => {
-  const [response, setResponse] = useState('');
-
-  const ENDPOINT = 'https://9294b94ca8db.ngrok.io';
-
   useEffect(() => {
     connectToSocket();
   });
 
-  const socket = socketIOClient(ENDPOINT);
+  const [messageDetails, setMessageDetails] = useState([]);
+  const [messageLists, setMessageLists] = useState([]);
 
-  const connectToSocket = async () => {
-    socket.on('FromAPI', data => {
-      setResponse(data);
-    });
+  const handleMessageDetails = (messageDetail) => {
 
-    console.log('message', response);
-    socket.on('connect', () => {
-      socket.emit('authenticate', { token: 'key' });
-    });
-
-    socket.on('disconnect', () => {
-      console.log('message disconnect');
-    });
-
-    socket.on('incoming_hospital', data => {
-      console.log('message incoming_hospital', data);
-    });
-
-    socket.on('authenticate_success', data => {
-      console.log('message authenticate_success', data);
-    });
-
-    socket.on('message_summary_success', data => {
-      console.log('message message_summary_sucess', data);
-    });
-
-    socket.on('send_message_success', data => {
-      console.log('message send_message_success', data);
-    });
-
-    socket.on('get_message_success', data => {
-      console.log('message get_message_success', data);
-    });
-
-    socket.on('message_delivery_status', data => {
-      console.log('message message_delivery_status', data);
-    });
-
-    socket.on('message_summary_error', data => {
-      console.log('message message_summary_error', data);
-    });
-
-    socket.on('get_message_error', data => {
-      console.log('message get_message_error', data);
-    });
-
-    socket.on('send_message_error', data => {
-      console.log('message send_message_error', data);
-    });
-  };
+    console.log("iiiiiiiiiiiiiiii")
+      setMessageDetails(messageDetail)
+      console.log("mass da",messageDetail)
+  }
 
   return (
     <div className="message">
@@ -97,10 +52,10 @@ const MessageLayout = () => {
 
         <Row>
           <Col xl={8}>
-            <MessageList />
+            <MessageList handleMessageDetails={handleMessageDetails} {...messageLists} />
           </Col>
           <Col xl={16}>
-            <MessageDetail />
+            <MessageDetail {...messageDetails} />
           </Col>
         </Row>
       </div>

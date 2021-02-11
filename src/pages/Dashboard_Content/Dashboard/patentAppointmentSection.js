@@ -21,6 +21,14 @@ import moment from 'moment';
 const { Option } = Select;
 //THIS IS ANT DESIGN TABLE : PLEASE REFER THIS IF YOU STUCKED : https://ant.design/components/table/
 const PatientAppointment = props => {
+
+
+  const [currentButton, setCurrentButton] = useState(1);
+  const handleChangePaymentStatus = () => {};
+  const viewAppointmentDetails = () => {};
+  const handleChangeStatus = () => {};
+
+
   const columns = [
     {
       title: 'Name',
@@ -121,11 +129,6 @@ const PatientAppointment = props => {
     },
   ];
 
-  const [currentButton, setCurrentButton] = useState(1);
-
-  const handleChangePaymentStatus = () => {};
-  const viewAppointmentDetails = () => {};
-  const handleChangeStatus = () => {};
   
   
   return (

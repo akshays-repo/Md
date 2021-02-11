@@ -3,7 +3,7 @@ import { GrAddCircle } from "react-icons/gr";
 import { chatList } from "./chatListDummyData";
 import MessageHead from "./messageHead";
 import "./style.scss";
-const MessageList = () => {
+const MessageList = (props) => {
   console.log(chatList);
   return (
     <div className="messagelist">
@@ -28,6 +28,9 @@ const MessageList = () => {
             lastAcive={data.lastMessageTime}
             totalUnread={data.messageUnRead}
             active={data.userActive}
+            handleMessageDetails={props.handleMessageDetails}
+            messages={data.messageList}
+            
           />
         ))}
       </div>

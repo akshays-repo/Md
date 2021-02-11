@@ -97,7 +97,7 @@ const Dashboard_Appointments = props => {
         title: 'Appointment Start',
         dataIndex: 'appointment_start',
         key: 'appointment_start',
-        render: record => <span> {moment(record.appointment_start).format('MMM Do YYYY')} </span>,
+       
       },
       {
         title: 'Payment Status',

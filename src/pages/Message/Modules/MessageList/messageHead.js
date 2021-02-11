@@ -9,10 +9,12 @@ const MessageHead = ({
   lastAcive,
   totalUnread,
   active,
+  handleMessageDetails,
+  messages
 }) => {
   console.log("avatar", avatar);
   return (
-    <div className="messagehead">
+    <div className="messagehead" onClick={() => handleMessageDetails('hai')}>
       <div className="left">
         <img className="useravatar" src={avatar} />
       </div>
