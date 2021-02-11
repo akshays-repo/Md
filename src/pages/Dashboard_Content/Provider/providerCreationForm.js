@@ -15,16 +15,20 @@ const ProviderCreationForm = props => {
   const innerForm = useRef();
   const [branchList, setBranchList] = useState([]);
   const [selectedBranch, setSelectedBranch] = useState([]);
-
+  
   useEffect(() => {
     setBranchList(store.getState().Branch.payload);
+    if(props.values){
+
+    }
   });
 
   const handleFormSubmission = async values => {
     let data = await getFormDataA({ ...values, userTypeId: 4,   branchId: 5, });
     selectedBranch.map((va, i) => data.append('arrBranches[]', va));
-
+  
     if (props.id) {
+     
       await props.editProvider(props.id, data);
       store.dispatch({ type: 'CLOSE_PROVIDER_EDIT_MODAL' });
     } else {
@@ -37,6 +41,10 @@ const ProviderCreationForm = props => {
     console.log('Selected Branch', value);
     setSelectedBranch(value);
   };
+
+  useEffect(() =>{
+    console.log("asdfklkjh",props.values)
+  })
 
   const formField = [
     {
@@ -71,7 +79,7 @@ const ProviderCreationForm = props => {
            
           }
         }
-       // validationSchema={ProviderCreationSchema}
+       //validationSchema={ProviderCreationSchema}
         onSubmit={handleFormSubmission}
         innerRef={innerForm}
       >

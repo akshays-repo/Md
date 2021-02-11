@@ -73,8 +73,13 @@ const ProviderTable = props => {
   };
 
   const handleStatus = async (record, status) => {
+
+    let intValues = {
+      userTypeId: 4,
+    };
+    let sentinData = getFormData({ ...intValues });
     try {
-      await props.editProviderStatus(record.id, { status });
+      await props.editProviderStatus(record.id, { status } , sentinData);
     } catch (err) {
       console.log('error', err);
     }
@@ -177,8 +182,8 @@ const ProviderTable = props => {
             defaultValue={record.status}
             onChange={e => handleStatus(record, e)}
           >
-            <Select.Option value="active">Active</Select.Option>
-            <Select.Option value="hold">Hold</Select.Option>
+            <Select.Option style={{color:"green"}} value="active">Active</Select.Option>
+            <Select.Option style={{color:"red"}} value="hold">Hold</Select.Option>
           </Select>
         </Space>
       ),
@@ -194,10 +199,10 @@ const ProviderTable = props => {
             {' '}
             <i className="fa fa-edit"></i>{' '}
           </span>
-          <span className="delete-color" onClick={() => handleDelete(record.id)}>
+          {/* <span className="delete-color" onClick={() => handleDelete(record.id)}>
             {' '}
             <i className="fa fa-trash"></i>
-          </span>
+          </span> */}
         </Space>
       ),
     },
@@ -246,7 +251,7 @@ const ProviderTable = props => {
           </Select>
 
           <Select onChange={e => setStatus(e)} placeholder="status" style={{ width: 120 }}>
-            <Option value="active">ACTIVE</Option>
+            <Option  value="active">ACTIVE</Option>
             <Option value="hold">HOLD</Option>
           </Select>
 
@@ -272,8 +277,8 @@ const ProviderTable = props => {
       </Modal>
       <Modal
         footer={false}
-        width={800}
-        title=""
+        title={ `EDIT ${editData.fullName}`}
+        
         visible={props.modal1}
         onOk={handleOk}
         onCancel={handleCancel}

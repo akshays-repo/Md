@@ -63,12 +63,12 @@ const AppointmentEdit = props => {
     //     enableReinitialize={true}
     //     initialValues={
     //       {
-    //         //appointment_end: '',
+    //         //appointment_end---: '',
     //         appointment_for: '',
-    //        //appointment_start: '',
-    //         branch_id:'' ,
-    //         charge: '',
-    //         comment: '',
+    //        //appointment_start---: '',
+    //         branch_id---:'' ,
+    //         charge---: '',
+    //         comment---: '',
     //         email: '',
     //         firstName: '',
     //         lastName: '',

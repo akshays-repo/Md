@@ -122,7 +122,7 @@ const Dashboard_Provider = props => {
         >
           <ProviderType />
         </Modal>
-
+        <h2>PROVIDER</h2>
         <div>{HeaderSection()}</div>
         <div className="full-width-table">
           <ProviderTable {...props} />
@@ -178,8 +178,8 @@ const mapDispatchToProps = dispatch => ({
     dispatch(actionCreator({ method: 'POST', action_type: 'CREATE_PROVIDER', values })),
   editProvider: (id, values) =>
     dispatch(actionCreator({ method: 'PUT', action_type: 'EDIT_PROVIDER', id, values })),
-  editProviderStatus: (id, param) =>
-    dispatch(actionCreator({ method: 'PUT', action_type: 'EDIT_PROVIDER', id, param })),
+  editProviderStatus: (id, param ,values) =>
+    dispatch(actionCreator({ method: 'PUT', action_type: 'EDIT_PROVIDER', id, param, values })),
   deleteProvider: id =>
     dispatch(actionCreator({ method: 'DELETE', action_type: 'DELETE_PROVIDER', id })),
 
