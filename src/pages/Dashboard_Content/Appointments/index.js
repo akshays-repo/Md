@@ -179,12 +179,12 @@ const Dashboard_Appointments = props => {
             <Input value={searchKey} type="text" placeholder=" Name Email or Phone" onChange={handleChangeSearch} />
 
             <DatePicker
-            value={fromData}
+              
               placeholder="From Date"
               onChange={e => setFromDate(moment(e).format('YYYY-MM-DD'))}
             />
             <DatePicker
-            value={toData}
+              defaultValue={toData}
               placeholder="To Date"
               onChange={e => setToDate(moment(e).format('YYYY-MM-DD'))}
             />
