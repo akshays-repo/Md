@@ -141,6 +141,7 @@ const OnllineAppointmentForm = props => {
                     appointment_type={props.appointment_type}
                   />
                 )}
+
                 {/* {JSON.stringify(values, null, 2)} */}
                 {values.appointment_type_id &&
                   (!values.branch_id || !values.provider_id || !values.appointment_start) && (

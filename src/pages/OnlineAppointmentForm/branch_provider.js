@@ -320,6 +320,12 @@ const BranchProvider = props => {
                                           'HH:mm:ss',
                                         )}`,
                                       );
+                                      props.setFieldValue(
+                                        'appointment_end',
+                                        `${result1.date} ${moment(result2, 'hh:mm A')
+                                          .add(result4.time_slot, 'minutes')
+                                          .format('HH:mm:ss')}`,
+                                      );
                                     }}
                                     className="timing"
                                     style={{
