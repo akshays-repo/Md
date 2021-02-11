@@ -53,6 +53,7 @@
   font-weight: $bold;
   cursor: pointer;
   color: $white;
+  @include transit;
 }
 @mixin plus-button {
   @include button;
@@ -92,13 +93,16 @@
 @mixin view-button {
   @include button;
   background-color: $view-button;
-  &:hover,
   &:active,
   &:focus  {
     background-color: $view-button;
     color: #fff;
   }
-}
+  &:hover {
+    background-color: #15558d;
+  }
+  }
+
 @mixin common-button {
   @include button;
   background-color: $view-button; 

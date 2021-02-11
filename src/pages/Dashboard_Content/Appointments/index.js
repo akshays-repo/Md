@@ -219,7 +219,7 @@ const Dashboard_Appointments = props => {
             <button className="view-button button-square" onClick={handleSearchSubmission}>
               Filter
             </button>
-            <button className="view-button button-square" onClick={clearFilter}>
+            <button className="edit-button button-square" onClick={clearFilter}>
               clear
             </button>
           </Space>
