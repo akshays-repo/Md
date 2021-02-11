@@ -86,27 +86,27 @@ const CustomFormField = props => {
 
   const menu = (
     <Menu onClick={handleMenuClick}>
-      <Menu.Item key="text" icon={<UserOutlined />}>
+      <Menu.Item key="text">
         Text
       </Menu.Item>
 
-      <Menu.Item key="note" icon={<UserOutlined />}>
+      <Menu.Item key="note">
         Note
       </Menu.Item>
 
-      <Menu.Item key="checkbox" icon={<UserOutlined />}>
+      <Menu.Item key="checkbox">
         Check box
       </Menu.Item>
 
-      <Menu.Item key="drop-down" icon={<UserOutlined />}>
+      <Menu.Item key="drop-down">
         Drop Down
       </Menu.Item>
 
-      <Menu.Item key="date" icon={<UserOutlined />}>
+      <Menu.Item key="date">
         Date
       </Menu.Item>
 
-      <Menu.Item key="number" icon={<UserOutlined />}>
+      <Menu.Item key="number">
         Number
       </Menu.Item>
     </Menu>
