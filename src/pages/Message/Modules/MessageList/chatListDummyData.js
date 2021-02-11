@@ -124,6 +124,81 @@ export const conversationData_PatientB = [
     conversationId:IDS.patient_B_MsgId,
     timestamp:"2016-01-12 15:12:34.524"
   },
+
+  {
+    message:"Hai Lorem ipsum dolor sit amet, consectetur adipiscing elit, ",
+    senderId:IDS.hospitalId,
+    reciverId:IDS.patientB,
+    conversationId:IDS.patient_B_MsgId,
+    timestamp:"2016-01-12 15:12:34.524"
+  },
+  {
+    message:"what Lorem ipsum dolor sit amet, consectetur adipiscing elit,",
+    senderId:IDS.patientB,
+    reciverId:IDS.hospitalId,
+    conversationId:IDS.patient_B_MsgId,
+    timestamp:"2016-01-12 15:12:34.524"
+  },  {
+    message:"how are you",
+    senderId:IDS.hospitalId,
+    reciverId:IDS.patientB,
+    conversationId:IDS.patient_B_MsgId,
+    timestamp:"2016-01-12 15:12:34.524"
+  },  {
+    message:"yup",
+    senderId:IDS.hospitalId,
+    reciverId:IDS.hospitalId,
+    conversationId:IDS.patient_B_MsgId,
+    timestamp:"2016-01-12 15:12:34.524"
+  },
+  {
+    message:"no Lorem ipsum dolor sit amet, consectetur adipiscing elit, Lorem ipsum dolor sit amet, consectetur adipiscing elit, consectetur adipiscing elit, Lorem ipsum dolor sit amet, consectetur adipiscing elit,consectetur adipiscing elit, Lorem ipsum dolor sit amet, consectetur adipiscing elit,consectetur adipiscing elit, Lorem ipsum dolor sit amet, consectetur adipiscing elit,consectetur adipiscing elit, Lorem ipsum dolor sit amet, consectetur adipiscing elit,consectetur adipiscing elit, Lorem ipsum dolor sit amet, consectetur adipiscing elit,consectetur adipiscing elit, Lorem ipsum dolor sit amet, consectetur adipiscing elit,consectetur adipiscing elit, Lorem ipsum dolor sit amet, consectetur adipiscing elit, no Lorem ipsum dolor sit amet, consectetur adipiscing elit, Lorem ipsum dolor sit amet, consectetur adipiscing elit, consectetur adipiscing elit, Lorem ipsum dolor sit amet, consectetur adipiscing elit,consectetur adipiscing elit, Lorem ipsum dolor sit amet, consectetur adipiscing elit,consectetur adipiscing elit, Lorem ipsum dolor sit amet, consectetur adipiscing elit,consectetur adipiscing elit, Lorem ipsum dolor sit amet, consectetur adipiscing elit,consectetur adipiscing elit, Lorem ipsum dolor sit amet, consectetur adipiscing elit,consectetur adipiscing elit, Lorem ipsum dolor sit amet, consectetur adipiscing elit,consectetur adipiscing elit, Lorem ipsum dolor sit amet, consectetur adipiscing elit,",
+    senderId:IDS.patientB,
+    reciverId:IDS.hospitalId,
+    conversationId:IDS.patient_B_MsgId,
+    timestamp:"2016-01-12 15:12:34.524"
+  },
+  {
+    message:"no yes ",
+    senderId:IDS.hospitalId,
+    reciverId:IDS.patientB,
+    conversationId:IDS.patient_B_MsgId,
+    timestamp:"2016-01-12 15:12:34.524"
+  },
+  {
+    message:"no what the hell ",
+    senderId:IDS.hospitalId,
+    reciverId:IDS.patientB,
+    conversationId:IDS.patient_B_MsgId,
+    timestamp:"2016-01-12 15:12:34.524"
+  },
+   {
+    message:"yes",
+    senderId:IDS.hospitalId,
+    reciverId:IDS.patientB,
+    conversationId:IDS.patient_B_MsgId,
+    timestamp:"2016-01-12 15:12:34.524"
+  },
+  {
+    message:"this is mass",
+    senderId:IDS.hospitalId,
+    reciverId:IDS.hospitalId,
+    conversationId:IDS.patient_B_MsgId,
+    timestamp:"2016-01-12 15:12:34.524"
+  },
+  {
+    message:"you can",
+    senderId:IDS.patientB,
+    reciverId:IDS.hospitalId,
+    conversationId:IDS.patient_B_MsgId,
+    timestamp:"2016-01-12 15:12:34.524"
+  }, {
+    message:"no we ",
+    senderId:IDS.hospitalId,
+    reciverId:IDS.patientB,
+    conversationId:IDS.patient_B_MsgId,
+    timestamp:"2016-01-12 15:12:34.524"
+  },
   
 
 ]

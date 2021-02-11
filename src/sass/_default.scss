@@ -1,28 +1,8 @@
-.delete-color {
-    color: #E43E42;
-}
-.edit-color {
-    color: #20c0f3;
-}
-.view-color {
-    color: #1a568b;
-}
-.success {
-  color: $success;
-}
-.circular-square {
-  @include circular--square;
-}
-.lead {
-  font-size: 1.2rem!important;
-.d-block {
-  display: block;
-}
 
-body {
+  body {
     font-family: 'Roboto', sans-serif;
-    height: 100vh;
-    /* width */
+    color: $textcolor;
+
     ::-webkit-scrollbar {
       width: 7px;
     }
@@ -41,12 +21,15 @@ body {
     ::-webkit-scrollbar-thumb:hover {
       background: #555;
     }
-
-  }
-  
-  body {
-    font-family: 'Roboto', sans-serif;
-    color: $textcolor;
+    .circular-square {
+      @include circular--square;
+    }
+    .lead {
+      font-size: 1.2rem!important;
+    }
+    .d-block {
+      display: block;
+    }  
     .icon-button {
         cursor: pointer;
     }
@@ -59,6 +42,18 @@ body {
       font-size: 13px;
       color: $textcolor;
     }
+    .delete-color {
+      color: #E43E42;
+  }
+  .edit-color {
+      color: #20c0f3;
+  }
+  .view-color {
+      color: #1a568b;
+  }
+  .success {
+    color: $success;
+  }
     .edit-button {
       @include edit-button;
     }
@@ -175,4 +170,4 @@ body {
       border: 1px solid #f0f0f0;
   }
 
-}}
+}

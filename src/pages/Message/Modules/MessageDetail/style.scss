@@ -5,7 +5,6 @@
     justify-content: flex-start;
     margin-right: auto;
     height: 55px;
-    border-bottom: 1px solid #b9b9b9;
     .useravatar {
       width: 50px;
       height: 50px;
@@ -24,9 +23,11 @@
     max-height: calc(100vh - 224px);
     overflow-y: scroll;
     overflow-x: hidden;
+    padding: 20px;
     p {
-      padding: 10px;
-      margin: 30px;
+      // padding: 10px;
+      // margin: 30px;
+      margin-bottom: 0;
     }
   }
   .message-sentbox {
@@ -34,12 +35,13 @@
     display: flex;
     justify-content: space-between;
       input[type="text"] {
-        background-color: rgb(165, 165, 165);
+        background-color:#ececec;
         border-radius: 15px;
         padding-left: 40px;
         height: 40px;
         width: 500px;
         border: #e2e2e2;
+        outline: none;
       }
       input[type=file] {
         display: none;
@@ -52,6 +54,7 @@
         min-width: 46px;
         min-height: 46px;
         border-radius: 50%;
+        outline: none;
     }
     .paper-clip{
         font-size: 34px;
@@ -60,25 +63,31 @@
   }
 }
 .leftside-chat {
+  width: auto;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
   .msgbox {
-    p{
-      float: right;
       max-width: 60%;
       background-color: #bdbdbd;
       padding: 10px;
-      border-radius: 15px 0px 15px 15px !important 
+      border-radius: 15px 0px 15px 15px !important; 
+      margin-bottom: 10px;
     }
   }
-}
+
 
 .rightside-chat {
+  width: auto;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
   .msgbox {
-    p {
-      float: left;
       max-width: 60%;
       border-radius: 0px 15px 15px 15px !important ;
       background-color: #ffffff;
       padding: 10px;
-    }
+      margin-bottom: 10px;
+
   }
 }

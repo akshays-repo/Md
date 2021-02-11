@@ -6,7 +6,7 @@ import LeftSideChat from './leftSideChat';
 import RightSideChat from './rightSideChat';
 import './style.scss';
 
-import { conversationData_PatientA , conversationData_PatientB} from '../MessageList/chatListDummyData';
+import { conversationData_PatientA ,conversationData_PatientB } from '../MessageList/chatListDummyData';
 
 const MessageDetail = props => {
   return (
