@@ -1,4 +1,4 @@
-import { AppointmentTypeState } from '../ComponentState/appointment_type';
+import { DashboardState } from '../ComponentState/dashboard';
 import { message } from 'antd';
 
 /**
@@ -6,7 +6,7 @@ import { message } from 'antd';
  * @param action
  */
 
-export const DashboardReducer = (state = AppointmentTypeState, action) => {
+export const DashboardReducer = (state = DashboardState, action) => {
   switch (action.type) {
     case 'FETCH_APPOINTMENT_HOME':
         return {

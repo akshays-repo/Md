@@ -23,7 +23,7 @@ const Dashboard_Appointments = props => {
 
     useEffect(() => {
       props.fetchAppointment();
-    }, [props.changed]);
+    }, []);
 
     useEffect(() => {
       setAppointmentList(props.Appointment);
@@ -40,8 +40,8 @@ const Dashboard_Appointments = props => {
       let parms = {};
       if (searchKey) parms.search = searchKey;
       if (branchId) parms.search = searchKey;
-      if (paymentStatus) parms.status = paymentStatus;
-      if (status) parms.payment_status = status;
+      if (paymentStatus) parms.payment_status = paymentStatus;
+      if (status) parms.status = status;
       if (fromData) parms.fromDate = fromData;
       if (toData) parms.toDate = toData;
 
@@ -192,21 +192,24 @@ const Dashboard_Appointments = props => {
               onChange={e => setPaymentStatus(e)}
               style={{ width: 120 }}
             >
-              <Option value="pending">Pending</Option>
-              <Option value="confirmed">Confirmed</Option>
-              <Option value="cancelled">Cancelled</Option>
-              <Option value="completed">Completed</Option>
+             <Option value="pending">Pending</Option>
+              <Option value="failed">Failed</Option>
+              <Option value="paid">Paid</Option>
+              <Option value="requested">Requested</Option>
+              <Option value="manually_paid">Manually Paid</Option>
             </Select>
 
             <Select onChange={e => setBranchId(e)} placeholder="Branch" style={{ width: 120 }}>
               {props.branch?.map(branch => (
-                <Option value={branch.id}>{branch.fullName}</Option>
+                <Option key={branch.id} value={branch.id}>{branch.fullName}</Option>
               ))}
             </Select>
 
             <Select placeholder="status" onChange={e => setStatus(e)} style={{ width: 120 }}>
-              <Option value="hold">Hold</Option>
-              <Option value="active">Active</Option>
+            <Option value="pending">Pending</Option>
+              <Option value="confirmed">Confirmed</Option>
+              <Option value="cancelled">Cancelled</Option>
+              <Option value="completed">Completed</Option>
             </Select>
             <button className="view-button button-square" onClick={handleSearchSubmission}>
               Filter

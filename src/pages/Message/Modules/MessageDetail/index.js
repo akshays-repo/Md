@@ -6,7 +6,7 @@ import LeftSideChat from './leftSideChat';
 import RightSideChat from './rightSideChat';
 import './style.scss';
 
-import { conversationData_PatientA } from '../MessageList/chatListDummyData';
+import { conversationData_PatientA , conversationData_PatientB} from '../MessageList/chatListDummyData';
 
 const MessageDetail = props => {
   return (
@@ -21,7 +21,7 @@ const MessageDetail = props => {
         </div>
       </div>
       <div className="chat">
-        {conversationData_PatientA.map(data => 
+        {conversationData_PatientB.map(data => 
           
 
 

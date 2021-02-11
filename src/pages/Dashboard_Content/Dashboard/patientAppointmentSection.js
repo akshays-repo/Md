@@ -1,15 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Space,
   Button,
   Select,
-  Row,
-  Col,
   Table,
-  Tag,
-  DatePicker,
-  Input,
-  Modal,
   Popconfirm,
 } from 'antd';
 import Dashboard_Content from '..';
@@ -21,12 +15,24 @@ import moment from 'moment';
 const { Option } = Select;
 //THIS IS ANT DESIGN TABLE : PLEASE REFER THIS IF YOU STUCKED : https://ant.design/components/table/
 const PatientAppointment = props => {
-
-
   const [currentButton, setCurrentButton] = useState(1);
   const handleChangePaymentStatus = () => {};
   const viewAppointmentDetails = () => {};
   const handleChangeStatus = () => {};
+
+  useEffect(() => {
+    props.fetchAppointmentHome({  toDate: moment().format('L') });
+  }, []);
+
+
+  const getUpComing = () =>{
+    setCurrentButton(2)
+    props.fetchAppointmentHome({  toDate: moment().format('L') })
+  }
+  const getToday =() =>{
+    setCurrentButton(1)
+    props.fetchAppointmentHome({ fromDate: moment().format('L'), toDate: moment().format('L')})
+  }
 
 
   const columns = [
@@ -129,34 +135,46 @@ const PatientAppointment = props => {
     },
   ];
 
-  
-  
   return (
     <div className="table-content">
       <div className="headerButton">
         <Space direction="horizontal">
           <Button
             className="view-button"
-            onClick={() => setCurrentButton(1)}
+            onClick={getToday}
             style={currentButton === 1 ? { backgroundColor: 'black' } : {}}
-            type="primary"
-          >
-            {' '}
-            upcoming
-          </Button>
-          <Button
-            className="edit-button"
-            onClick={() => setCurrentButton(2)}
-            style={currentButton === 2 ? { backgroundColor: 'black' } : {}}
             type="primary"
           >
             {' '}
             today
           </Button>
+          <Button
+            className="edit-button"
+            onClick={getUpComing}
+            style={currentButton === 2 ? { backgroundColor: 'black' } : {}}
+            type="primary"
+          >
+            {' '}
+            upcoming
+          </Button>
         </Space>
       </div>
-      <Table columns={columns} scroll={{}} />
+      <Table columns={columns} dataSource={props.payload} scroll={{}} />
     </div>
   );
 };
-export default PatientAppointment;
+
+const mapStoreToProps = ({ Dashboard }) => {
+  return {
+    payload: Dashboard.payload,
+    modal: Dashboard.modal,
+    changed: Dashboard.changed,
+  };
+};
+
+const mapDispatchToProps = dispatch => ({
+  fetchAppointmentHome: param =>
+    dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_APPOINTMENT_HOME', param })),
+});
+
+export default connect(mapStoreToProps, mapDispatchToProps)(PatientAppointment);

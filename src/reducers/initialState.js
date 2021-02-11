@@ -7,7 +7,7 @@ import { PatientState as Patient } from './ComponentState/patient';
 import { OnlineBookingState as OnlineBooking } from './ComponentState/online_booking';
 import {CustomFormState as CustomForm} from './ComponentState/customForm'
 import {AppointmentState as Appointment} from './ComponentState/customForm'
-
+import {DashboardState as Dashboard} from './ComponentState/dashboard'
 
 export const initialState = {
   Hospital,
@@ -18,5 +18,6 @@ export const initialState = {
   Patient,
   OnlineBooking,
   CustomForm,
-  Appointment
+  Appointment,
+  Dashboard
 };

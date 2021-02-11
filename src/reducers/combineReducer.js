@@ -10,7 +10,7 @@ import {CustomFormReducer as CustomForm} from './ComponentReducer/customForm'
 import { ScheduleReducer as Schedule } from './ComponentReducer/schedule';
 import { OnlineBookingFormReducer as OnlineBookingForm} from './ComponentReducer/onlineBookingForm';
 import { AppointmentReducer as Appointment} from './ComponentReducer/appointment';
-
+import {DashboardReducer as Dashboard} from './ComponentReducer/dashboard'
 
 export const reducers = {
   Hospital,
@@ -24,5 +24,6 @@ export const reducers = {
   CustomForm,
   Schedule,
   OnlineBookingForm,
-  Appointment
+  Appointment,
+  Dashboard
 };

@@ -1,7 +1,10 @@
 import React from 'react';
 import Dashboard_Content from '..';
 import CardsSection from './cardsSection';
-import PatientAppointment from './patentAppointmentSection';
+import PatientAppointment from './patientAppointmentSection';
+import { actionCreator } from '../../../reducers/actionCreator';
+import { store } from '../../../reducers/configureStore';
+import { connect } from 'react-redux';
 const Dashboard_Dashboard = () => {
 
     const Dashboard = () => {
