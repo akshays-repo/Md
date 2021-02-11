@@ -46,7 +46,10 @@ const ProviderTable = props => {
     setEditId(id);
     store.dispatch({ type: 'OPEN_PROVIDER_EDIT_MODAL' });
   };
+  useEffect(() =>{
+    console.log("props.provider",props)
 
+  })
 
   const handleApptChange = async (record, values) => {
     // this will perform delete
