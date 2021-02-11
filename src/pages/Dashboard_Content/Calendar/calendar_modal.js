@@ -17,10 +17,10 @@ export const CalendarModal = props => {
     >
       <Tabs className="calendar__modal__tabs" defaultActiveKey="1">
         <TabPane tab="NEW APPOINTMENT" key="1">
-          <NewAppointment />
+          <NewAppointment {...props} />
         </TabPane>
         <TabPane tab="ADD UNAVAILABLE SLOT" key="2">
-          <UnavailableSlot />
+          <UnavailableSlot {...props} />
         </TabPane>
       </Tabs>
     </Modal>

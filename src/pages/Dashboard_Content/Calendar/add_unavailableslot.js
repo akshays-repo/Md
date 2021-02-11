@@ -7,11 +7,12 @@ import moment from 'moment';
 import { UnavailableSchema } from '_utils/Schemas';
 
 export const UnavailableSlot = props => {
+  const { starttime, endtime } = props;
   const [initialValues, setinitialValues] = useState({
-    appointment_start: moment().format('YYYY-MM-DD hh:mm a'),
+    appointment_start: moment(starttime).format('YYYY-MM-DD hh:mm a'),
     provider_id: '',
-    appointment_end: moment().format('YYYY-MM-DD hh:mm a'),
-    comment: '',
+    appointment_end: moment(endtime).format('YYYY-MM-DD hh:mm a'),
+    response: '',
   });
   return (
     <Formik
@@ -38,7 +39,13 @@ export const UnavailableSlot = props => {
                       style={{ width: '90%' }}
                       bordered={false}
                       placeholder="Choose Provider"
-                    ></Select>
+                    >
+                      {props.provider.map((result, i) => (
+                        <Select.Option key={result.id} values={result.id}>
+                          {result.fullName}
+                        </Select.Option>
+                      ))}
+                    </Select>
                     <ErrorMessage
                       render={msg => <div style={{ color: 'red' }}>{msg}</div>}
                       name="provider_id"
@@ -87,7 +94,7 @@ export const UnavailableSlot = props => {
                   <p>NOTES</p>
                   <p>
                     <TextField
-                      name="custom"
+                      name="response"
                       placeholder="Enter a note or details about the appointment"
                       style={{ fontSize: 12 }}
                     ></TextField>
@@ -97,7 +104,11 @@ export const UnavailableSlot = props => {
             </Col>
             <Divider />
             <Col span={24} offset={20}>
-              <Button shape="round" style={{ backgroundColor: '#FF596F', color: 'white' }}>
+              <Button
+                htmlType="submit"
+                shape="round"
+                style={{ backgroundColor: '#FF596F', color: 'white' }}
+              >
                 Submit
               </Button>
             </Col>

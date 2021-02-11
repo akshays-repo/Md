@@ -1,30 +1,18 @@
 import React, { useState } from 'react';
 import { Popover, Row, Col, Button, Divider, Avatar } from 'antd';
 
-const provider_list = [
-  {
-    id: 1,
-    name: 'Shailesh Kandel',
-    image: 'https://storage.googleapis.com/nexassets/app/img/icon/avatar.svg',
-  },
-  {
-    id: 2,
-    name: 'Bikash Sapkota',
-    image: 'https://storage.googleapis.com/nexassets/app/img/icon/avatar.svg',
-  },
-  {
-    id: 3,
-    name: 'Sabitra Kandel',
-    image: 'https://storage.googleapis.com/nexassets/app/img/icon/avatar.svg',
-  },
-];
-export const FilterPopover = () => {
+export const FilterPopover = props => {
   const [cancelled, setcancelled] = useState(false);
   const [provider, setProvider] = useState([]);
+  const [visible, setVisible] = useState(false);
+  const handleVisibleChange = val => {
+    setVisible(val);
+  };
+
   const content = (
     <Row style={{ padding: 0, margin: 0 }}>
-      <Col span="24">
-        {provider_list.map((result, i) => {
+      <Col className="provider__filter" span="24" style={{ maxHeight: 400, overflowY: 'scroll' }}>
+        {props.provider.map((result, i) => {
           return (
             <Row
               className="cancelled_appointment"
@@ -39,10 +27,16 @@ export const FilterPopover = () => {
               }}
             >
               <Col span={3}>
-                <Avatar shape="circle" src={result.image}></Avatar>
+                <Avatar
+                  shape="circle"
+                  src={
+                    result.image ||
+                    'https://storage.googleapis.com/nexassets/app/img/icon/avatar.svg'
+                  }
+                ></Avatar>
               </Col>
               <Col span={20}>
-                <b>{result.name}</b>
+                <b>{result.fullName}</b>
               </Col>
               <Col span={1}>
                 {provider.includes(result.id) && (
@@ -71,7 +65,14 @@ export const FilterPopover = () => {
     </Row>
   );
   return (
-    <Popover content={content} title="SHOW APPOINTMENTS FOR">
+    <Popover
+      trigger={'click'}
+      visible={visible}
+      onVisibleChange={handleVisibleChange}
+      content={content}
+      title="SHOW APPOINTMENTS FOR"
+      placement="leftTop"
+    >
       <Button
         style={{ marginTop: 10, backgroundColor: '#edeeee', padding: '5px 30px' }}
         shape="round"

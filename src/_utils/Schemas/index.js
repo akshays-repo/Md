@@ -473,19 +473,19 @@ export const OnlineBookingSchema = Yup.object().shape({
 
 export const NewAppointmentSchema = Yup.object().shape({
   provider_id: Yup.number().required('Please select provider'),
-  patient_id: Yup.number().required('Please select provider'),
+  patient_id: Yup.number().required('Please select patient'),
   appointment_start: Yup.date()
     .required('Select start')
     .nullable(),
   appointment_end: Yup.date()
     .required('Select end')
     .nullable(),
-  comment: Yup.string(),
+  response: Yup.string(),
 });
 
 export const UnavailableSchema = Yup.object().shape({
   provider_id: Yup.number().required('Please select provider'),
-  appointment_start: Yup.date().required('Please select provider'),
-  appointment_end: Yup.date().required('Please select provider'),
-  comment: Yup.string(),
+  appointment_start: Yup.date().required('Select start'),
+  appointment_end: Yup.date().required('Select end'),
+  response: Yup.string(),
 });
