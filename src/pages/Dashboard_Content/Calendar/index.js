@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Dashboard_Content from '..';
 import FullCalendar, { formatDate, createPlugin } from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -9,18 +9,31 @@ import { CalendarModal } from './calendar_modal';
 import FilterPlugin from './filter_plugin';
 import { Row, Col } from 'antd';
 import { FilterPopover } from './filter_popover';
-
-const Dashboard_Calendar = () => {
+import { connect } from 'react-redux';
+import { actionCreator } from '../../../reducers/actionCreator';
+import { Booking } from './booking';
+import { Unavailable } from './unavailable';
+import { Cancelled } from './cancelled';
+import { BookingEdit } from './bookingedit_modal';
+import { UnavailableEdit } from './unavailablity_modal';
+import moment from 'moment';
+const Dashboard_Calendar = props => {
   const [weekendsVisible, setweekendsVisible] = useState(true);
   const [currentEvents, setcurrentEvents] = useState([]);
-  const [modal, setModal] = useState(false);
-
+  const [addmodal, setAddModal] = useState(false);
+  const [unavailableModal, setUnavailableModal] = useState(false);
+  const [bookingEditModal, setBookingEditModal] = useState(false);
+  const [starttime, setstarttime] = useState(moment());
+  const [endtime, setendtime] = useState(moment());
   const handleWeekendsToggle = () => {
     setweekendsVisible(!weekendsVisible);
   };
 
   const handleDateSelect = selectInfo => {
-    setModal(true);
+    console.log('Select info', selectInfo);
+    setstarttime(selectInfo.startStr);
+    setendtime(selectInfo.endStr);
+    setAddModal(true);
     // let title = prompt('Please enter a new title for your event');
     // let calendarApi = selectInfo.view.calendar;
 
@@ -38,14 +51,56 @@ const Dashboard_Calendar = () => {
   };
 
   const handleEventClick = clickInfo => {
-    if (window.confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
-      clickInfo.event.remove();
+    console.log('Event info', clickInfo);
+
+    switch (clickInfo.event.title) {
+      case 'Booking':
+        setBookingEditModal(true);
+        break;
+      case 'Unavailable':
+        setUnavailableModal(true);
+        break;
     }
+    // if (window.confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
+    //   clickInfo.event.remove();
+    // }
   };
 
   const handleEvents = events => {
     setcurrentEvents(events);
   };
+
+  useEffect(() => {
+    props.fetchProvider();
+    props.fetchPatient();
+  }, []);
+
+  function renderEventContent(eventInfo) {
+    console.log('Eventinfo', eventInfo);
+    switch (eventInfo.event.title) {
+      case 'Cancelled':
+        return <Cancelled eventInfo={eventInfo}></Cancelled>;
+      case 'Unavailable':
+        return (
+          <Unavailable
+            modal={unavailableModal}
+            setModal={setUnavailableModal}
+            eventInfo={eventInfo}
+          ></Unavailable>
+        );
+      case 'Booking':
+        return (
+          <Booking modal={bookingEditModal} setModal={setBookingEditModal} eventInfo={eventInfo} />
+        );
+    }
+
+    // return (
+    //   <>
+    //     <b>{eventInfo.timeText}</b>
+    //     <i>{eventInfo.event.title}</i>
+    //   </>
+    // );
+  }
 
   const Calendar = () => {
     return (
@@ -85,25 +140,28 @@ const Dashboard_Calendar = () => {
     eventRemove={function(){}}
     */
           />
-          <CalendarModal modal={modal} setModal={setModal} />
+          <CalendarModal
+            provider={props.provider}
+            patient={props.patient}
+            modal={addmodal}
+            setModal={setAddModal}
+            starttime={starttime}
+            endtime={endtime}
+          />
+          <BookingEdit modal={bookingEditModal} setModal={setBookingEditModal} />
+          <UnavailableEdit
+            modal={unavailableModal}
+            setModal={setUnavailableModal}
+          ></UnavailableEdit>
         </Col>
-        <Col span={2} style={{ marginLeft: -80 }}>
-          <FilterPopover />
+        <Col span={2} style={{ marginLeft: -80, height: 50 }}>
+          <FilterPopover provider={props.provider} />
         </Col>
       </Row>
     );
   };
   return <Dashboard_Content content={Calendar()} />;
 };
-
-function renderEventContent(eventInfo) {
-  return (
-    <>
-      <b>{eventInfo.timeText}</b>
-      <i>{eventInfo.event.title}</i>
-    </>
-  );
-}
 
 function renderSidebarEvent(event) {
   return (
@@ -114,4 +172,28 @@ function renderSidebarEvent(event) {
   );
 }
 
-export default Dashboard_Calendar;
+const mapStoreToProps = ({ Provider, Patient }) => {
+  console.log('Store CustomForm', Provider, Patient);
+  return {
+    provider: Provider.payload,
+    patient: Patient.payload,
+  };
+};
+
+const mapDispatchToProps = dispatch => ({
+  createOnlineForm: (values, contentType) =>
+    dispatch(
+      actionCreator({
+        method: 'POST',
+        action_type: 'CREATE_ONLINE_APPOINTMENT',
+        values,
+        contentType,
+      }),
+    ),
+  fetchProvider: param =>
+    dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_PROVIDER', param })),
+  fetchPatient: param =>
+    dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_PATIENT', param })),
+});
+
+export default connect(mapStoreToProps, mapDispatchToProps)(Dashboard_Calendar);

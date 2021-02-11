@@ -6,13 +6,14 @@ import { DatePicker } from 'formik-antd';
 import moment from 'moment';
 import { NewAppointmentSchema } from '_utils/Schemas';
 export const NewAppointment = props => {
-  const [initialValues, setinitialValues] = useState({
-    appointment_start: moment().format('YYYY-MM-DD hh:mm a'),
+  const { starttime, endtime } = props;
+  const initialValues = {
+    appointment_start: moment(starttime).format('YYYY-MM-DD hh:mm a'),
     provider_id: '',
-    appointment_end: moment().format('YYYY-MM-DD hh:mm a'),
-    comment: '',
+    appointment_end: moment(endtime).format('YYYY-MM-DD hh:mm a'),
+    response: '',
     patient_id: '',
-  });
+  };
   return (
     <Formik
       enableReinitialize={true}
@@ -22,7 +23,6 @@ export const NewAppointment = props => {
     >
       {({ isValid, handleSubmit, values, setFieldValue }) => (
         <Form onSubmit={handleSubmit}>
-          {/* {JSON.stringify(values, null, 2)} */}
           <Row className="calendar__newappointment">
             <Col span={24} style={{ height: 50 }}>
               <p className="newappointment__section1">New Appointment</p>
@@ -35,11 +35,19 @@ export const NewAppointment = props => {
                   <p>
                     <Select
                       showSearch
-                      onChange={val => val && setFieldValue('provider_id', val)}
+                      onChange={val => {
+                        setFieldValue('provider_id', val);
+                      }}
                       style={{ width: '90%' }}
                       bordered={false}
                       placeholder="Choose Provider"
-                    ></Select>
+                    >
+                      {props.provider.map((result, i) => (
+                        <Select.Option key={result.id} values={result.id}>
+                          {result.fullName}
+                        </Select.Option>
+                      ))}
+                    </Select>
                     <ErrorMessage
                       render={msg => <div style={{ color: 'red' }}>{msg}</div>}
                       name="provider_id"
@@ -88,7 +96,7 @@ export const NewAppointment = props => {
                   <p>NOTES</p>
                   <p>
                     <TextField
-                      name="custom"
+                      name="response"
                       placeholder="Enter a note or details about the appointment"
                       style={{ fontSize: 12 }}
                     ></TextField>
@@ -110,7 +118,13 @@ export const NewAppointment = props => {
                         showSearch
                         showArrow={false}
                         onChange={val => val && setFieldValue('patient_id', val)}
-                      ></Select>
+                      >
+                        {props.patient.map((result, i) => (
+                          <Select.Option key={result.id} values={result.id}>
+                            {result.firstName + ' ' + result.lastName}
+                          </Select.Option>
+                        ))}
+                      </Select>
                     </p>
                     <ErrorMessage
                       render={msg => <div style={{ color: 'red' }}>{msg}</div>}

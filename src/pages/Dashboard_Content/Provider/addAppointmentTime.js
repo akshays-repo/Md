@@ -63,7 +63,9 @@ const AddAppointmentTime = props => {
   return (
     <div className="appointment-time">
       <div className="header">
-        <button className="button-square" onClick={addAppointment}>Add New</button>
+        <button className="button-square" onClick={addAppointment}>
+          Add New
+        </button>
       </div>
       <Formik
         innerRef={innerForm}
@@ -82,6 +84,7 @@ const AddAppointmentTime = props => {
             <Form onSubmit={handleSubmit}>
               {values.formData?.map((value, index) => (
                 <Space>
+                  {JSON.stringify(values, null, 2)}
                   <Scheduling
                     values={values.formData}
                     setFieldValue={setFieldValue}
@@ -90,7 +93,8 @@ const AddAppointmentTime = props => {
                     errors={errors}
                     touched={touched}
                   />
-                  <span className="delete-color icon-button"
+                  <span
+                    className="delete-color icon-button"
                     onClick={() => deleteAppointment(index)}
                     // style={{
                     //   cursor: 'pointer',
@@ -105,8 +109,12 @@ const AddAppointmentTime = props => {
               ))}
               <div style={{ textAlign: 'center', marginTop: 20 }}>
                 <Space>
-                  <Button className="edit-button button-square" htmlType="submit">Save</Button>
-                  <Button className="delete-button button-square" type="default">Cancel</Button>
+                  <Button className="edit-button button-square" htmlType="submit">
+                    Save
+                  </Button>
+                  <Button className="delete-button button-square" type="default">
+                    Cancel
+                  </Button>
                 </Space>
               </div>
             </Form>
