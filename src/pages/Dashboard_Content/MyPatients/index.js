@@ -91,8 +91,8 @@ const Dashboard_MyPatients = props => {
   ];
 
   const MyPatients = () => {
-    const [status, setStatus] = useState('');
-    const [search, setSearch] = useState('');
+    const [status, setStatus] = useState(null);
+    const [search, setSearch] = useState(null);
 
     const handleChangeSearch = e => {
       e.preventDefault();
@@ -109,8 +109,8 @@ const Dashboard_MyPatients = props => {
 
     const clearFilter = e => {
       e.preventDefault();
-      setStatus('')
-      setSearch('')
+      setStatus(null)
+      setSearch(null)
       props.fetchPatient({ branchId: 3 })
     };
 
@@ -126,7 +126,7 @@ const Dashboard_MyPatients = props => {
                   onChange={handleChangeSearch}
                   value={search}
                 />
-                <Select placeholder="status" onChange={e => setStatus(e)} style={{ width: 120 }}>
+                <Select placeholder="status" value={status} onChange={e => setStatus(e)} style={{ width: 120 }}>
                   <Option value="hold">Hold</Option>
                   <Option value="active">Active</Option>
                 </Select>

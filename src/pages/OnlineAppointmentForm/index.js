@@ -119,7 +119,7 @@ const OnllineAppointmentForm = props => {
               userTypeId: 5,
               address: '',
               comment: '',
-              response: props.CustomForm.custom_form.length > 0 ? props.CustomForm.custom_form : [],
+              response: props.CustomForm.custom_form?.length > 0 ? props.CustomForm.custom_form : [],
             }}
             onSubmit={handleFormSubmission}
             innerRef={innerForm}
@@ -141,6 +141,7 @@ const OnllineAppointmentForm = props => {
                     appointment_type={props.appointment_type}
                   />
                 )}
+
                 {/* {JSON.stringify(values, null, 2)} */}
                 {values.appointment_type_id &&
                   (!values.branch_id || !values.provider_id || !values.appointment_start) && (

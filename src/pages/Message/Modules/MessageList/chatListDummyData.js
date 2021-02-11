@@ -58,67 +58,67 @@ export const conversationData_PatientB = [
     timestamp:"2016-01-12 15:12:34.524"
   },
   {
-    message:"what",
+    message:"eget tincidunt nibh pulvinar adipiscing elit.",
     senderId:IDS.patientB,
     reciverId:IDS.hospitalId,
     conversationId:IDS.patient_B_MsgId,
     timestamp:"2016-01-12 15:12:34.524"
   },  {
-    message:"how are you",
+    message:" Sed porttitor lectus nibh. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Proin eget tortor risus.",
     senderId:IDS.hospitalId,
     reciverId:IDS.patientB,
     conversationId:IDS.patient_B_MsgId,
     timestamp:"2016-01-12 15:12:34.524"
   },  {
-    message:"yup",
+    message:"Quisque velit nisi, pretium ut lacinia in",
     senderId:IDS.hospitalId,
     reciverId:IDS.hospitalId,
     conversationId:IDS.patient_B_MsgId,
     timestamp:"2016-01-12 15:12:34.524"
   },
   {
-    message:"no",
+    message:"Cras ultricies ligula sed magna dictum porta. Donec sollicitudin molestie malesuada. Quisque velit nisi,",
     senderId:IDS.patientB,
     reciverId:IDS.hospitalId,
     conversationId:IDS.patient_B_MsgId,
     timestamp:"2016-01-12 15:12:34.524"
   },
   {
-    message:"no yes ",
+    message:" Cras ultricies ligula sed magna dictum porta. Donec sollicitudin molestie malesuada. Quisque velit nisi,",
     senderId:IDS.hospitalId,
     reciverId:IDS.patientB,
     conversationId:IDS.patient_B_MsgId,
     timestamp:"2016-01-12 15:12:34.524"
   },
   {
-    message:"no what the hell ",
+    message:"vel, ullamcorper sit amet ligula. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula",
     senderId:IDS.hospitalId,
     reciverId:IDS.patientB,
     conversationId:IDS.patient_B_MsgId,
     timestamp:"2016-01-12 15:12:34.524"
   },
    {
-    message:"yes",
+    message:"cubilia Curae; Donec velit neque",
     senderId:IDS.hospitalId,
     reciverId:IDS.patientB,
     conversationId:IDS.patient_B_MsgId,
     timestamp:"2016-01-12 15:12:34.524"
   },
   {
-    message:"this is mass",
+    message:"aucibus orci luctus et",
     senderId:IDS.hospitalId,
     reciverId:IDS.hospitalId,
     conversationId:IDS.patient_B_MsgId,
     timestamp:"2016-01-12 15:12:34.524"
   },
   {
-    message:"you can",
+    message:"Praesent sapien massa",
     senderId:IDS.patientB,
     reciverId:IDS.hospitalId,
     conversationId:IDS.patient_B_MsgId,
     timestamp:"2016-01-12 15:12:34.524"
   }, {
-    message:"no we ",
+    message:"pretium ut lacinia in, elementum id enim.",
     senderId:IDS.hospitalId,
     reciverId:IDS.patientB,
     conversationId:IDS.patient_B_MsgId,

@@ -25,7 +25,7 @@ const MessageLayout = () => {
   return (
     <div className="message">
       <div className="messagelist">
-        <button
+        {/* <button
           onClick={() =>
             socket.emit('send_message', {
               userUUID: 'c0f636bc-43d2-4b9c-9efb-530426729be5',
@@ -48,7 +48,7 @@ const MessageLayout = () => {
 
         <button onClick={() => socket.emit('message_summary', 'Hai hai')}>MESSAGE SUMMARY</button>
 
-        <button onClick={() => socket.emit('test', 'Hai')}>TEST</button>
+        <button onClick={() => socket.emit('test', 'Hai')}>TEST</button> */}
 
         <Row>
           <Col xl={8}>

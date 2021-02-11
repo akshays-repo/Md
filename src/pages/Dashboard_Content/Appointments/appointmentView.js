@@ -20,7 +20,7 @@ const AppointmentView = props => {
       <p>LAST NAME : {details.lastName}</p>
       <p>EMAIL : {details.email}</p>
       <p>PHONE : {details.phone}</p>
-      <p>ADDRESS : {patientDetails.address}</p>
+      {/* <p>ADDRESS : {patientDetails.address}</p> */}
       <p>COMMENT : {details.comment}</p>
       <p>APPOINTMENT FOR : {details.appointment_for}</p>
       <p>APPOINTMENT TYPE : {appointmentType.name}</p>
