@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import MultiSelect from 'react-multi-select-component';
 import { getFormDataA, getFormData } from '_utils';
 import { map } from 'lodash';
+import { set } from 'store';
 const { Option } = Select;
 const ProviderTable = props => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -14,12 +15,11 @@ const ProviderTable = props => {
   const [editId, setEditId] = useState(null);
   const [editData, setEditData] = useState('');
 
-  const [branchList, setBranchList] = useState([]);
-  const [branchId, setBranchId] = useState('');
-  const [providerTypeId, setProviderTypeId] = useState('');
-  const [searchKey, setSearchKey] = useState('');
-  const [appointmentTypeId, setAppointmentTypeId] = useState('');
-  const [status, setStatus] = useState('');
+  const [branchId, setBranchId] = useState(null);
+  const [providerTypeId, setProviderTypeId] = useState(null);
+  const [searchKey, setSearchKey] = useState(null);
+  const [appointmentTypeId, setAppointmentTypeId] = useState(null);
+  const [status, setStatus] = useState(null);
 
   useEffect(() => {
     setAppointmentTypes(props.appointment_type);
@@ -46,6 +46,7 @@ const ProviderTable = props => {
     setEditId(id);
     store.dispatch({ type: 'OPEN_PROVIDER_EDIT_MODAL' });
   };
+
 
   const handleApptChange = async (record, values) => {
     // this will perform delete
@@ -106,10 +107,12 @@ const ProviderTable = props => {
   };
   const clearFilter = e => {
     e.preventDefault();
-    setBranchId('as');
-    setAppointmentTypeId('');
-    setSearchKey('');
-    setStatus('');
+    setBranchId(null);
+    setAppointmentTypeId(null);
+    setSearchKey(null);
+    setStatus(null);
+    setProviderTypeId(null);
+    setStatus(null);
     props.fetchProvider();
   };
 
@@ -219,7 +222,7 @@ const ProviderTable = props => {
             onChange={handleChangeSearch}
           />
 
-          <Select
+          {/* <Select
             placeholder="Appointment Type"
             onChange={e => setAppointmentTypeId(e)}
             style={{ width: 150 }}
@@ -227,15 +230,15 @@ const ProviderTable = props => {
             {props.appointment_type?.map(type => (
               <Option value={type.id}>{type.name}</Option>
             ))}
-          </Select>
+          </Select> */}
 
           <Select
-            defaultValue={branchId}
             onChange={e => setBranchId(e)}
             placeholder="Branch"
             style={{ width: 120 }}
+            value={branchId}
           >
-            {branchList?.map(branch => (
+            {props.branch_payload?.map(branch => (
               <Option value={branch.id}>{branch.fullName}</Option>
             ))}
           </Select>
@@ -244,13 +247,14 @@ const ProviderTable = props => {
             placeholder="provider type"
             onChange={e => setProviderTypeId(e)}
             style={{ width: 150 }}
+            value={providerTypeId}
           >
             {props.ProviderTypePayload?.map(type => (
               <Option value={type.id}>{type.name}</Option>
             ))}
           </Select>
 
-          <Select onChange={e => setStatus(e)} placeholder="status" style={{ width: 120 }}>
+          <Select onChange={e => setStatus(e)} placeholder="status" value={status} style={{ width: 120 }}>
             <Option  value="active">ACTIVE</Option>
             <Option value="hold">HOLD</Option>
           </Select>
@@ -272,16 +276,17 @@ const ProviderTable = props => {
         visible={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
+        destroyOnClose
       >
         <AddAppointmentTime id={editId} {...props} />
       </Modal>
       <Modal
         footer={false}
         title={ `EDIT ${editData.fullName}`}
-        
         visible={props.modal1}
         onOk={handleOk}
         onCancel={handleCancel}
+        destroyOnClose
       >
         <ProviderCreationForm id={editId} values={editData} {...props} />
       </Modal>
@@ -289,11 +294,12 @@ const ProviderTable = props => {
   );
 };
 
-const mapStoreToProps = ({ AppointmentType }) => {
+const mapStoreToProps = ({ AppointmentType , Branch }) => {
   return {
     appointment_type: AppointmentType.payload,
     modal: AppointmentType.modal,
     changed: AppointmentType.changed,
+    branch_payload:Branch.payload,
   };
 };
 export default connect(mapStoreToProps)(ProviderTable);

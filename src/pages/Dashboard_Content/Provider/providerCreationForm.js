@@ -15,17 +15,17 @@ const ProviderCreationForm = props => {
   const innerForm = useRef();
   const [branchList, setBranchList] = useState([]);
   const [selectedBranch, setSelectedBranch] = useState([]);
-  
+  const [deletedBranch , setDeletedBranch] = useState([])
   useEffect(() => {
     setBranchList(store.getState().Branch.payload);
     if(props.values){
-
     }
   });
 
   const handleFormSubmission = async values => {
     let data = await getFormDataA({ ...values, userTypeId: 4,   branchId: 5, });
     selectedBranch.map((va, i) => data.append('arrBranches[]', va));
+    deletedBranch.map((va, i) => data.append('deletedBranches[]', va));
   
     if (props.id) {
      
@@ -37,15 +37,31 @@ const ProviderCreationForm = props => {
     }
   };
 
-  const handleChange = value => {
-    console.log('Selected Branch', value);
-    setSelectedBranch(value);
-  };
+
 
   useEffect(() =>{
-    console.log("asdfklkjh",props.values)
+    console.log("asdfklkjh",props.values?.branch)
   })
 
+  const handleBranchChange = (values) =>{
+    let currentValue = [];
+    if(props.values?.branch) {
+      let branch = props.values.branch
+      branch.map(type => currentValue.push(type.id))
+    }
+    let intersection = currentValue.filter(x => values.includes(x));
+    let DeletedArray = [];
+    DeletedArray = currentValue
+      .filter(x => !intersection.includes(x))
+      .concat(intersection.filter(x => !currentValue.includes(x)));
+      console.log("sdjsdsbdh", DeletedArray , values)
+      setSelectedBranch(values);
+      setDeletedBranch(DeletedArray)
+
+
+  }
+
+  console.log("asdfklkjh",props.values)
   const formField = [
     {
       label: 'Full Name',
@@ -94,7 +110,8 @@ const ProviderCreationForm = props => {
                   allowClear
                   style={{ width: '100%' }}
                   placeholder="Please select the Branch"
-                  onChange={handleChange}
+                  defaultValue={props.values?.branch.map(type => type.id)}
+                  onChange={handleBranchChange}
                 >
                   {branchList?.map(branch => {
                     return <Option value={branch.id} key={branch.id}>{branch.fullName}</Option>;

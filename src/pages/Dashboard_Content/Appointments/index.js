@@ -17,9 +17,9 @@ const Dashboard_Appointments = props => {
     const [toData, setToDate] = useState('');
     const [fromData, setFromDate] = useState('');
     const [viewId, setViewId] = useState([]);
-    const [branchId, setBranchId] = useState('');
-    const [paymentStatus, setPaymentStatus] = useState('');
-    const [status, setStatus] = useState('');
+    const [branchId, setBranchId] = useState(null);
+    const [paymentStatus, setPaymentStatus] = useState(null);
+    const [status, setStatus] = useState(null);
 
     useEffect(() => {
       props.fetchAppointment();
@@ -49,11 +49,13 @@ const Dashboard_Appointments = props => {
     };
 
     const clearFilter = e => {
-      setAppointmentList('');
-      setBranchId('');
-      setSearchKey('');
-      setToDate('');
-      setFromDate('');
+      setAppointmentList(null);
+      setBranchId(null);
+      setSearchKey(null);
+      setToDate(null);
+      setFromDate(null);
+      setPaymentStatus(null);
+      setStatus(null);
       props.fetchAppointment();
     };
 
@@ -68,7 +70,6 @@ const Dashboard_Appointments = props => {
     };
 
     const handleChangeStatus = async (id, status) => {
-      console.log('dlfhiudfuadfuo', id, status);
       props.editStatusAppointment(id, { status });
     };
 
@@ -97,7 +98,6 @@ const Dashboard_Appointments = props => {
         title: 'Appointment Start',
         dataIndex: 'appointment_start',
         key: 'appointment_start',
-       
       },
       {
         title: 'Payment Status',
@@ -176,37 +176,42 @@ const Dashboard_Appointments = props => {
       <div className="appointment-section">
         <div style={{ marginBottom: '10px' }} className="search">
           <Space direction="horizontal">
-            <Input type="text" placeholder=" Name Email or Phone" onChange={handleChangeSearch} />
+            <Input value={searchKey} type="text" placeholder=" Name Email or Phone" onChange={handleChangeSearch} />
 
             <DatePicker
+            value={fromData}
               placeholder="From Date"
               onChange={e => setFromDate(moment(e).format('YYYY-MM-DD'))}
             />
             <DatePicker
+            value={toData}
               placeholder="To Date"
               onChange={e => setToDate(moment(e).format('YYYY-MM-DD'))}
             />
 
             <Select
+            value={paymentStatus}
               placeholder="Payment"
               onChange={e => setPaymentStatus(e)}
               style={{ width: 120 }}
             >
-             <Option value="pending">Pending</Option>
+              <Option value="pending">Pending</Option>
               <Option value="failed">Failed</Option>
               <Option value="paid">Paid</Option>
               <Option value="requested">Requested</Option>
               <Option value="manually_paid">Manually Paid</Option>
             </Select>
 
-            <Select onChange={e => setBranchId(e)} placeholder="Branch" style={{ width: 120 }}>
+            <Select value={branchId} onChange={e => setBranchId(e)} placeholder="Branch" style={{ width: 120 }}>
               {props.branch?.map(branch => (
-                <Option key={branch.id} value={branch.id}>{branch.fullName}</Option>
+                <Option key={branch.id} value={branch.id}>
+                  {branch.fullName}
+                </Option>
               ))}
             </Select>
 
-            <Select placeholder="status" onChange={e => setStatus(e)} style={{ width: 120 }}>
-            <Option value="pending">Pending</Option>
+            <Select value={status} placeholder="status" onChange={e => setStatus(e)} style={{ width: 120 }}>
+              <Option value="pending">Pending</Option>
               <Option value="confirmed">Confirmed</Option>
               <Option value="cancelled">Cancelled</Option>
               <Option value="completed">Completed</Option>

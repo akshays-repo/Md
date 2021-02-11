@@ -119,7 +119,7 @@ const OnllineAppointmentForm = props => {
               userTypeId: 5,
               address: '',
               comment: '',
-              response: props.CustomForm.custom_form.length > 0 ? props.CustomForm.custom_form : [],
+              response: props.CustomForm.custom_form?.length > 0 ? props.CustomForm.custom_form : [],
             }}
             onSubmit={handleFormSubmission}
             innerRef={innerForm}
