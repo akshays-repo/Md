@@ -1,4 +1,4 @@
-import { MessageState } from '../ComponentState/message';
+import { SummaryMessageState } from '../ComponentState/summary_message';
 import { message } from 'antd';
 
 /**
@@ -6,9 +6,11 @@ import { message } from 'antd';
  * @param action
  */
 
-export const MesssageReducer = (state = MessageState, action) => {
+export const SummaryMesssageReducer = (state = SummaryMessageState, action) => {
   switch (action.type) {
-    case 'SET_MESSAGE':
+    case 'SET_MESSAGE_SUMMARY':
+      console.log('MEssage summary', action);
+
       return {
         ...state,
         error: action.error,

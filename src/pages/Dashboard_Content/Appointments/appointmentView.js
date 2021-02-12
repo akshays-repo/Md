@@ -17,60 +17,60 @@ const AppointmentView = props => {
   });
   return (
     <div className="appointment-view">
-       <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }} className="mt6"> 
-       <Col xs={24} xl={12}>
-      <p>First name</p> <p className="title"> {details.firstName}</p>
-      </Col>
-      <Col xs={24} xl={12}>
-      <p>Last name </p> <p className="title">{details.lastName}</p>
-      </Col>
-      <Col xs={24} xl={12}>
-      <p>Email </p><p className="title">{details.email}</p>
-      </Col>
-      <Col xs={24} xl={12}>
-      <p>Phone  </p> <p className="title"> {details.phone}</p>
-      </Col>
-      {/* <p>ADDRESS : {patientDetails.address}</p> */}
-   
-      <Col xs={24} xl={12}>
-      <p>Appointment for </p> <p className="title"> {details.appointment_for}</p>
-      </Col>
-      <Col xs={24} xl={12}>
-      <p>Appointment Type </p> <p className="title">{appointmentType.name}</p>
-      </Col>
-      <Col xs={24} xl={12}>
-      <p>Appointment Created</p> <p className="title">{details.appointment_created}</p>
-      </Col>
-      <Col xs={24} xl={12}>
-      <p>Appointment Start </p> <p className="title"> {details.appointment_start}</p>
-      </Col>
-      <Col xs={24} xl={12}>
-      <p>Appointment Time slot </p><p className="title"> {appointmentType.time_slot} </p>
-      </Col>
-      <Col xs={24} xl={12}>
-      <p>Payment Status  </p> <p className="title">{details.payment_status}</p>
-      </Col>
-      <Col xs={24} xl={12}>
-      <p>Status  </p> <p className="title"> {details.status}</p>
-      </Col>
-      <Col xs={24} xl={12}>
-      <p>Branch  </p> <p className="title">{branchDetails.fullName}</p>
-      </Col>
-      <Col xs={24} xl={12}>
-      <p>Branch Email </p> <p className="title"> {branchDetails.email}</p>
-      </Col>
-      <Col xs={24} xl={12}>
-      <p>Branch Address </p> <p className="title"> {branchDetails.address}</p>
-      </Col>
-      <Col xs={24} xl={24}>
-      <p>Comment  </p> <p className="title">{details.comment}</p>
-      </Col>
+      <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }} className="mt6">
+        <Col xs={24} xl={12}>
+          <p>First name</p> <p className="title"> {details.firstName}</p>
+        </Col>
+        <Col xs={24} xl={12}>
+          <p>Last name </p> <p className="title">{details.lastName}</p>
+        </Col>
+        <Col xs={24} xl={12}>
+          <p>Email </p>
+          <p className="title">{details.email}</p>
+        </Col>
+        <Col xs={24} xl={12}>
+          <p>Phone </p> <p className="title"> {details.phone}</p>
+        </Col>
+        {/* <p>ADDRESS : {patientDetails.address}</p> */}
+
+        <Col xs={24} xl={12}>
+          <p>Appointment for </p> <p className="title"> {details.appointment_for}</p>
+        </Col>
+        <Col xs={24} xl={12}>
+          <p>Appointment Type </p> <p className="title">{appointmentType.name}</p>
+        </Col>
+        <Col xs={24} xl={12}>
+          <p>Appointment Created</p> <p className="title">{details.appointment_created}</p>
+        </Col>
+        <Col xs={24} xl={12}>
+          <p>Appointment Start </p> <p className="title"> {details.appointment_start}</p>
+        </Col>
+        <Col xs={24} xl={12}>
+          <p>Appointment Time slot </p>
+          <p className="title"> {appointmentType.time_slot} </p>
+        </Col>
+        <Col xs={24} xl={12}>
+          <p>Payment Status </p> <p className="title">{details.payment_status}</p>
+        </Col>
+        <Col xs={24} xl={12}>
+          <p>Status </p> <p className="title"> {details.status}</p>
+        </Col>
+        <Col xs={24} xl={12}>
+          <p>Branch </p> <p className="title">{branchDetails.fullName}</p>
+        </Col>
+        <Col xs={24} xl={12}>
+          <p>Branch Email </p> <p className="title"> {branchDetails.email}</p>
+        </Col>
+        <Col xs={24} xl={12}>
+          <p>Branch Address </p> <p className="title"> {branchDetails.address}</p>
+        </Col>
+        <Col xs={24} xl={24}>
+          <p>Comment </p> <p className="title">{details.comment}</p>
+        </Col>
       </Row>
 
-      
       <div className="responseBox">
-        <h5>    Response
-</h5>
+        <h5> Response</h5>
         {response.map(res => (
           <div className="responseBg">
             <p className="question">{res.Key_name}</p>
@@ -87,4 +87,3 @@ const AppointmentView = props => {
 };
 
 export default AppointmentView;
-

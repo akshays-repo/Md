@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { Space, Select, Row, Col, Table, Tag, DatePicker, Input, Modal, Popconfirm } from 'antd';
+import { Space, Select, Row, Col, Table, Tag, DatePicker, Input, Modal, Popconfirm , } from 'antd';
 import Dashboard_Content from '..';
 import { actionCreator } from '../../../reducers/actionCreator';
 import { store } from '../../../reducers/configureStore';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import AppointmentView from './appointmentView';
-import AppointmentEdit from './appointmentEdit';
+import AppointmentEdit from './appointmentView';
+
+
 
 const { Option } = Select;
 
@@ -91,7 +93,7 @@ const Dashboard_Appointments = props => {
         key: 'phone',
       },
       {
-        title: 'Appointment Start',
+        title: 'Appointment Date',
         dataIndex: 'appointment_start',
         key: 'appointment_start',
       },
@@ -288,6 +290,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(actionCreator({ method: 'PUT', action_type: 'STATUS_CHANGE_APPOINTMENT', id, param })),
   deleteAppointment: id =>
     dispatch(actionCreator({ method: 'DELETE', action_type: 'DELETE_APPOINTMENT', id })),
+    
   viewAppointment: id =>
     dispatch(actionCreator({ method: 'GET', action_type: 'VIEW_APPOINTMENT', id })),
 

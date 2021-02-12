@@ -55,13 +55,13 @@ const PatientCreationForm = props => {
         values = await getFormDataA({
           ...rest,
           image,
-          branchId: 3,
+        
           hospitalId: localStorage.getItem('hospital_id'),
         });
       } else {
         values = await getFormDataA({
           ...rest,
-          branchId: 3,
+         
           hospitalId: localStorage.getItem('hospital_id'),
         });
       }
@@ -165,7 +165,7 @@ const PatientCreationForm = props => {
             className="login__form"
             handleSubmit={handleSubmit}
           >
-            <Row>
+          <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }} className="mt6"> 
               {generateForm(formField)}
 
               <p>

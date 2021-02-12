@@ -4,25 +4,30 @@ import {
   Button,
   Select,
   Table,
-  Popconfirm,
+  Popconfirm,Modal
 } from 'antd';
 import Dashboard_Content from '..';
 import { actionCreator } from '../../../reducers/actionCreator';
 import { store } from '../../../reducers/configureStore';
 import { connect } from 'react-redux';
 import moment from 'moment';
+import AppointmentView from '../Appointments/appointmentView';
+import AppointmentEdit from '../Appointments/appointmentView';
+
 
 const { Option } = Select;
 //THIS IS ANT DESIGN TABLE : PLEASE REFER THIS IF YOU STUCKED : https://ant.design/components/table/
 const PatientAppointment = props => {
   const [currentButton, setCurrentButton] = useState(1);
   const handleChangePaymentStatus = () => {};
-  const viewAppointmentDetails = () => {};
-  const handleChangeStatus = () => {};
+  
+  const handleChangeStatus = async (id, status) => {
+    props.editStatusAppointment(id, { status });
+  };
 
   useEffect(() => {
     props.fetchAppointmentHome({  toDate: moment().format('L') });
-  }, []);
+  }, [props.changed]);
 
 
   const getUpComing = () =>{
@@ -33,6 +38,12 @@ const PatientAppointment = props => {
     setCurrentButton(1)
     props.fetchAppointmentHome({ fromDate: moment().format('L'), toDate: moment().format('L')})
   }
+
+
+  const viewAppointmentDetails = async id => {
+    await props.viewAppointment(id);
+    store.dispatch({ type: 'OPEN_VIEW_APPOINTMENT_MODAL' });
+  };
 
 
   const columns = [
@@ -57,7 +68,7 @@ const PatientAppointment = props => {
       key: 'phone',
     },
     {
-      title: 'Appointment Start',
+      title: 'Appointment Date',
       dataIndex: 'appointment_start',
       key: 'appointment_start',
       render: record => <span> {moment(record.appointment_start).format('MMM Do YYYY')} </span>,
@@ -162,21 +173,53 @@ const PatientAppointment = props => {
         </Space>
       </div>
       <Table columns={columns} dataSource={props.payload} scroll={{}} />
+      <Modal
+        visible={props.modal2}
+        footer={false}
+        onCancel={() => store.dispatch({ type: 'CLOSE_VIEW_APPOINTMENT_MODAL' })}
+      >
+        <AppointmentView {...props} />
+      </Modal>
+      <Modal
+        visible={props.modal1}
+        footer={false}
+        onCancel={() => store.dispatch({ type: 'CLOSE_EDIT_APPOINTMENT_MODAL' })}
+      >
+        <AppointmentEdit {...props} />
+      </Modal>
     </div>
   );
 };
 
-const mapStoreToProps = ({ Dashboard }) => {
+const mapStoreToProps = ({ Dashboard , Appointment , Branch }) => {
   return {
     payload: Dashboard.payload,
     modal: Dashboard.modal,
-    changed: Dashboard.changed,
+
+    Appointment: Appointment.payload,
+    error: Appointment.error,
+    message: Appointment.message,
+    modal: Appointment.modal,
+    modal1: Appointment.modal1,
+    modal2: Appointment.modal2,
+    changed: Appointment.changed,
+    branch: Branch.payload,
+    view: Appointment.view,
   };
 };
 
 const mapDispatchToProps = dispatch => ({
   fetchAppointmentHome: param =>
     dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_APPOINTMENT_HOME', param })),
+
+    viewAppointment: id =>
+    dispatch(actionCreator({ method: 'GET', action_type: 'VIEW_APPOINTMENT', id })),
+
+    editStatusAppointment: (id, param) =>
+    dispatch(actionCreator({ method: 'PUT', action_type: 'STATUS_CHANGE_APPOINTMENT', id, param })),
+
+    deleteAppointment: id =>
+    dispatch(actionCreator({ method: 'DELETE', action_type: 'DELETE_APPOINTMENT', id })),
 });
 
 export default connect(mapStoreToProps, mapDispatchToProps)(PatientAppointment);

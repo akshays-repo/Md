@@ -30,7 +30,7 @@ const CustomFormReview = props => {
             <div>
               {' '}
               <p>{forms.Key_name}</p>
-              <Checkbox.Group options={forms.values} />
+              <Checkbox.Group options={forms.values !== null ? forms.values: '' } />
               <p></p>
             </div>
           ) : (

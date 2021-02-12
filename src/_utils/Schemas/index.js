@@ -375,7 +375,9 @@ export const BranchSchema = Yup.object().shape({
     .email('Please enter valid email'),
   phone: Yup.string().required('Please enter phone no '),
   hospitalId: Yup.number(),
-  address: Yup.string().required('Please enter address'),
+  address: Yup.string()
+    .required('Please enter address')
+    .nullable(),
 });
 
 export const AppointmentTypeSchema = Yup.object().shape({
@@ -391,7 +393,7 @@ export const PatientCreationSchema = Yup.object().shape({
     .required('Please enter email address')
     .email('Please enter valid email'),
   address: Yup.string().required('Please enter address'),
-  phone: Yup.string().required('Phone number is required').min(8),
+  phone: Yup.string().required('Phone number is required').min(8).phone('Phone number is not valid'),
   dob: Yup.date().required('Please select DOB'),
   zipcode: Yup.string().required('Please enter zipcode'),
 });
