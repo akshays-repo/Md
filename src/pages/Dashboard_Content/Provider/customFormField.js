@@ -9,22 +9,16 @@ import HardCoreForm from './customFormhardCore';
 import TextField from '@material-ui/core/TextField';
 
 const CustomFormField = props => {
-  const [field, setField] = useState();
-  const [addNewField, setAddNewField] = useState([]);
-  const [loadings, setLoadings] = useState(false);
-  const innerForm = useRef();
+
+
   const [listCustomField, setListCustomField] = useState([]);
   const [editIndex, setEditIndex] = useState('');
-  const [optionValue, setOptionValues] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   //THIS WILL ADD NEW OBJECT TO ARRAY
   const handleMenuClick = e => {
     let text = e.key;
     let values = [];
-    // if(listCustomField.length === 0){
-    //     listCustomField.push(null)
-    // }
     if (text === 'checkbox' || text === 'drop-down') {
       values = [null];
     }
@@ -36,10 +30,6 @@ const CustomFormField = props => {
 
   useEffect(() => {
     setListCustomField(props.CustomForm.custom_form);
-    console.log("smaasdmmdsadsd llop out", props.CustomForm.custom_form);
-    // if(listCustomField.length === 0){
-    //   console.log("smaasdmmdsadsd llooopppz");
-    //   setListCustomField([{ custom_types: 'text', required: true, Key_name: '',}])}
   }, []);
 
   useEffect(() => {
@@ -49,10 +39,6 @@ const CustomFormField = props => {
   const handleFormSubmission = async values => {
     let contentType = 'JSON';
     let data = listCustomField;
-    // if (values.custom_types === 'checkbox' || values.custom_types === 'drop-down') {
-    //   values.values = optionValue.names;
-    // }
-    // data.push(values);
     let sendingData = {
       hospital_id: parseInt(localStorage.getItem('hospital_id')),
       formData: data,
@@ -225,6 +211,7 @@ const CustomFormField = props => {
                 );
               })}
               {listCustomField?.length > 0 && <Button className="blueDark-button mt8" onClick={handleFormSubmission}>SAVE</Button>}
+              <Button className="blueDark-button mt8" onClick={handleFormSubmission}>SAVE</Button>
           
           </form>
           <Dropdown trigger={['click']} overlay={menu}>
