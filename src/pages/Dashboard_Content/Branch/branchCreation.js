@@ -74,6 +74,15 @@ const BranchCreationForm = props => {
       name: 'phone',
       type: 'text',
     },
+    {
+      label: 'Status',
+      name: 'status',
+      type: 'select',
+      options: [
+        { value: 'active', name: 'Active' },
+        { value: 'hold', name: 'Hold' },
+      ],
+    },
     // {
     //   label: 'Address',
     //   name: 'address',
@@ -98,7 +107,7 @@ const BranchCreationForm = props => {
             address: '',
             hospitalId: 3,
             userTypeId: 3,
-            status: 'active',
+            status: '',
           }
         }
         validationSchema={BranchSchema}
@@ -143,7 +152,8 @@ const BranchCreationForm = props => {
                     defaultValue={values.address}
                     value={search}
                     className="branch_address"
-                    // placeholder="Start typing and find your place in google map"
+                    status=""
+                    //placeholder="Start typing and find your place in google map"
                     style={{
                       width: '90%',
                       backgroundColor: 'var(--primarys) !important',

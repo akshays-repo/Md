@@ -54,10 +54,16 @@ const BranchListTable = props => {
       key: 'phone',
     },
     {
+      title: 'Emaill',
+      dataIndex: 'email',
+      key: 'email',
+    },
+    {
       title: 'Address',
       dataIndex: 'address',
       key: 'address',
     },
+    
     {
       title: 'Status',
       key: 'status',

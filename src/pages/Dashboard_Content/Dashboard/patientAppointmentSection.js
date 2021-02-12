@@ -26,13 +26,14 @@ const PatientAppointment = props => {
   };
 
   useEffect(() => {
-    props.fetchAppointmentHome({  toDate: moment().format('L') });
+    props.fetchAppointmentHome({ fromDate: moment().format('L'), toDate: moment().format('L')})
+    setCurrentButton(1)
   }, [props.changed]);
 
 
   const getUpComing = () =>{
     setCurrentButton(2)
-    props.fetchAppointmentHome({  toDate: moment().format('L') })
+    props.fetchAppointmentHome({  fromDate: moment().format('L') })
   }
   const getToday =() =>{
     setCurrentButton(1)
@@ -71,7 +72,6 @@ const PatientAppointment = props => {
       title: 'Appointment Date',
       dataIndex: 'appointment_start',
       key: 'appointment_start',
-      render: record => <span> {moment(record.appointment_start).format('MMM Do YYYY')} </span>,
     },
     {
       title: 'Payment Status',
@@ -153,18 +153,18 @@ const PatientAppointment = props => {
       <div className="headerButton">
         <Space direction="horizontal">
           <Button
-            className="view-button"
+            className="inactive-button "
             onClick={getToday}
-            style={currentButton === 1 ? { backgroundColor: 'black' } : {}}
+            style={currentButton === 1 ? { backgroundColor: '#42a5f6' } : {}}
             type="primary"
           >
             {' '}
             today
           </Button>
           <Button
-            className="edit-button"
+            className="inactive-button "
             onClick={getUpComing}
-            style={currentButton === 2 ? { backgroundColor: 'black' } : {}}
+            style={currentButton === 2 ? { backgroundColor: '#42a5f6' } : {}}
             type="primary"
           >
             {' '}

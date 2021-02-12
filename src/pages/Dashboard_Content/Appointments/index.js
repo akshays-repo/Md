@@ -8,8 +8,6 @@ import moment from 'moment';
 import AppointmentView from './appointmentView';
 import AppointmentEdit from './appointmentView';
 
-
-
 const { Option } = Select;
 
 const Dashboard_Appointments = props => {
@@ -290,7 +288,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(actionCreator({ method: 'PUT', action_type: 'STATUS_CHANGE_APPOINTMENT', id, param })),
   deleteAppointment: id =>
     dispatch(actionCreator({ method: 'DELETE', action_type: 'DELETE_APPOINTMENT', id })),
-    
+
   viewAppointment: id =>
     dispatch(actionCreator({ method: 'GET', action_type: 'VIEW_APPOINTMENT', id })),
 
