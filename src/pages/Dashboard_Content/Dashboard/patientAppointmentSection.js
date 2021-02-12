@@ -4,7 +4,7 @@ import {
   Button,
   Select,
   Table,
-  Popconfirm,
+  Popconfirm,Modal
 } from 'antd';
 import Dashboard_Content from '..';
 import { actionCreator } from '../../../reducers/actionCreator';
@@ -20,7 +20,7 @@ const { Option } = Select;
 const PatientAppointment = props => {
   const [currentButton, setCurrentButton] = useState(1);
   const handleChangePaymentStatus = () => {};
-  const viewAppointmentDetails = () => {};
+  
   const handleChangeStatus = () => {};
 
   useEffect(() => {
@@ -36,6 +36,12 @@ const PatientAppointment = props => {
     setCurrentButton(1)
     props.fetchAppointmentHome({ fromDate: moment().format('L'), toDate: moment().format('L')})
   }
+
+
+  const viewAppointmentDetails = async id => {
+    await props.viewAppointment(id);
+    store.dispatch({ type: 'OPEN_VIEW_APPOINTMENT_MODAL' });
+  };
 
 
   const columns = [
@@ -183,7 +189,7 @@ const PatientAppointment = props => {
   );
 };
 
-const mapStoreToProps = ({ Dashboard , Appointment }) => {
+const mapStoreToProps = ({ Dashboard , Appointment , Branch }) => {
   return {
     payload: Dashboard.payload,
     modal: Dashboard.modal,
@@ -203,6 +209,9 @@ const mapStoreToProps = ({ Dashboard , Appointment }) => {
 const mapDispatchToProps = dispatch => ({
   fetchAppointmentHome: param =>
     dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_APPOINTMENT_HOME', param })),
+
+    viewAppointment: id =>
+    dispatch(actionCreator({ method: 'GET', action_type: 'VIEW_APPOINTMENT', id })),
 });
 
 export default connect(mapStoreToProps, mapDispatchToProps)(PatientAppointment);

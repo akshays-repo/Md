@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Space, Select, Row, Col, Table, Tag, DatePicker, Input, Modal, Popconfirm } from 'antd';
+import { Space, Select, Row, Col, Table, Tag, DatePicker, Input, Modal, Popconfirm , } from 'antd';
 import Dashboard_Content from '..';
 import { actionCreator } from '../../../reducers/actionCreator';
 import { store } from '../../../reducers/configureStore';
@@ -290,6 +290,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(actionCreator({ method: 'PUT', action_type: 'STATUS_CHANGE_APPOINTMENT', id, param })),
   deleteAppointment: id =>
     dispatch(actionCreator({ method: 'DELETE', action_type: 'DELETE_APPOINTMENT', id })),
+    
   viewAppointment: id =>
     dispatch(actionCreator({ method: 'GET', action_type: 'VIEW_APPOINTMENT', id })),
 
