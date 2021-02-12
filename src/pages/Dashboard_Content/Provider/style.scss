@@ -93,6 +93,10 @@
     } 
     .rightButtons {
       @include flex(flex-end, flex-end);
+      .req {
+        color: #c53639;
+    font-size: 13px;
+      }
     }
   }
 }
