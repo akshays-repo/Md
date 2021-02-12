@@ -122,7 +122,9 @@ const Dashboard_Provider = props => {
         >
           <ProviderType />
         </Modal>
-        <h2>PROVIDER</h2>
+        <div className="pageTitle">
+        <h4>PROVIDER</h4>
+        </div>
         <div>{HeaderSection()}</div>
         <div className="full-width-table">
           <ProviderTable {...props} />

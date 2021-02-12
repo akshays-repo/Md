@@ -52,8 +52,8 @@ const Dashboard_Appointments = props => {
       setAppointmentList(null);
       setBranchId(null);
       setSearchKey(null);
-      setToDate(null);
-      setFromDate(null);
+      // setToDate('');
+      // setFromDate('');
       setPaymentStatus(null);
       setStatus(null);
       props.fetchAppointment();
@@ -179,12 +179,10 @@ const Dashboard_Appointments = props => {
             <Input value={searchKey} type="text" placeholder=" Name Email or Phone" onChange={handleChangeSearch} />
 
             <DatePicker
-              
               placeholder="From Date"
               onChange={e => setFromDate(moment(e).format('YYYY-MM-DD'))}
             />
             <DatePicker
-              defaultValue={toData}
               placeholder="To Date"
               onChange={e => setToDate(moment(e).format('YYYY-MM-DD'))}
             />

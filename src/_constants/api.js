@@ -30,7 +30,7 @@ export const backend_api = {
   USER_LOGIN: '/api/backend/v1/users/login',
   
   CREATE_PROVIDER:'/api/backend/v1/users/register',
-  FETCH_PROVIDER:'/api/backend/v1/providers',
+  FETCH_PROVIDER:'/api/backend/v1/providers/list',
   EDIT_PROVIDER:'/api/backend/v1/users',
   DELETE_PROVIDER:'/api/backend/v1/provider',
   FETCH_BRANCH_PROVIDER: '/api/backend/v1/providers',

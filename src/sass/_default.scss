@@ -92,6 +92,13 @@
     .fullwidth-right {
       @include flex(flex-end, flex-end);
     }
+    .pageTitle {
+      background: #fff;
+      padding: 20px;
+      h4 {
+        margin-bottom: 0;
+      }
+    }
     .ant-modal-content {
         .ant-modal-header {
             padding: 13px 16px;
