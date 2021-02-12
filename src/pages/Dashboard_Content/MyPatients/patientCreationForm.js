@@ -55,13 +55,13 @@ const PatientCreationForm = props => {
         values = await getFormDataA({
           ...rest,
           image,
-          branchId: 3,
+        
           hospitalId: localStorage.getItem('hospital_id'),
         });
       } else {
         values = await getFormDataA({
           ...rest,
-          branchId: 3,
+         
           hospitalId: localStorage.getItem('hospital_id'),
         });
       }

@@ -11,6 +11,9 @@ import { actionCreator } from '../../../reducers/actionCreator';
 import { store } from '../../../reducers/configureStore';
 import { connect } from 'react-redux';
 import moment from 'moment';
+import AppointmentView from '../Appointments/appointmentView';
+import AppointmentEdit from '../Appointments/appointmentView';
+
 
 const { Option } = Select;
 //THIS IS ANT DESIGN TABLE : PLEASE REFER THIS IF YOU STUCKED : https://ant.design/components/table/
@@ -57,7 +60,7 @@ const PatientAppointment = props => {
       key: 'phone',
     },
     {
-      title: 'Appointment Start',
+      title: 'Appointment Date',
       dataIndex: 'appointment_start',
       key: 'appointment_start',
       render: record => <span> {moment(record.appointment_start).format('MMM Do YYYY')} </span>,
@@ -162,15 +165,38 @@ const PatientAppointment = props => {
         </Space>
       </div>
       <Table columns={columns} dataSource={props.payload} scroll={{}} />
+      <Modal
+        visible={props.modal2}
+        footer={false}
+        onCancel={() => store.dispatch({ type: 'CLOSE_VIEW_APPOINTMENT_MODAL' })}
+      >
+        <AppointmentView {...props} />
+      </Modal>
+      <Modal
+        visible={props.modal1}
+        footer={false}
+        onCancel={() => store.dispatch({ type: 'CLOSE_EDIT_APPOINTMENT_MODAL' })}
+      >
+        <AppointmentEdit {...props} />
+      </Modal>
     </div>
   );
 };
 
-const mapStoreToProps = ({ Dashboard }) => {
+const mapStoreToProps = ({ Dashboard , Appointment }) => {
   return {
     payload: Dashboard.payload,
     modal: Dashboard.modal,
-    changed: Dashboard.changed,
+
+    Appointment: Appointment.payload,
+    error: Appointment.error,
+    message: Appointment.message,
+    modal: Appointment.modal,
+    modal1: Appointment.modal1,
+    modal2: Appointment.modal2,
+    changed: Appointment.changed,
+    branch: Branch.payload,
+    view: Appointment.view,
   };
 };
 
