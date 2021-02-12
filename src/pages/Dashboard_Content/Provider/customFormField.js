@@ -6,6 +6,7 @@ import { actionCreator } from '../../../reducers/actionCreator';
 import { customFormSchema } from '_utils/Schemas';
 import CustomFormReview from './customFormPreview';
 import HardCoreForm from './customFormhardCore';
+import TextField from '@material-ui/core/TextField';
 
 const CustomFormField = props => {
   const [field, setField] = useState();
@@ -17,11 +18,12 @@ const CustomFormField = props => {
   const [optionValue, setOptionValues] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
+  //THIS WILL ADD NEW OBJECT TO ARRAY
   const handleMenuClick = e => {
     let text = e.key;
-    let values = []
-    if (text === 'checkbox' || text ==='drop-down') {
-      values = ['Please enter Option'];
+    let values = [];
+    if (text === 'checkbox' || text === 'drop-down') {
+      values = [null];
     }
     setListCustomField([
       ...listCustomField,
@@ -34,39 +36,21 @@ const CustomFormField = props => {
   }, []);
 
   useEffect(() => {
-    console.log('shhdashgd', listCustomField);
+    console.log('****!!*** state', listCustomField);
   }, [listCustomField]);
 
   const handleFormSubmission = async values => {
     let contentType = 'JSON';
     let data = listCustomField;
-    if (values.custom_types === 'checkbox' || values.custom_types === 'drop-down') {
-      values.values = optionValue.names;
-    }
-    data.push(values);
+    // if (values.custom_types === 'checkbox' || values.custom_types === 'drop-down') {
+    //   values.values = optionValue.names;
+    // }
+    // data.push(values);
     let sendingData = {
       hospital_id: parseInt(localStorage.getItem('hospital_id')),
       formData: data,
     };
     await props.addCustomForm(JSON.stringify(sendingData), contentType);
-  };
-
-  const deleteItem = async index => {
-     
-     
-      let items = [...listCustomField];
-      items.splice(index, 1);
-      setListCustomField(items);
-      console.log('shhdashgd delete', index);
-
-
-
-    // let contentType = 'JSON';
-    // let sendingData = {
-    //   hospital_id: parseInt(localStorage.getItem('hospital_id')),
-    //   formData: data,
-    // };
-    // await props.addCustomForm(JSON.stringify(sendingData), contentType);
   };
 
   const handleEditItem = async values => {
@@ -82,6 +66,7 @@ const CustomFormField = props => {
     await props.addCustomForm(JSON.stringify(sendingData), contentType);
   };
 
+  // THIS IS THE MENU OF DROPDOWN
   const menu = (
     <Menu onClick={handleMenuClick}>
       <Menu.Item key="text">Text</Menu.Item>
@@ -98,30 +83,24 @@ const CustomFormField = props => {
     </Menu>
   );
 
-  const onFinish = values => {
-    setOptionValues(values);
-  };
-
-  const showModal = () => {
-    setIsModalVisible(true);
-  };
-
-    const editOrAddKeyName = (e, index) =>{
-      console.log('shhdashgd', index);
-      let items = [...listCustomField];
-      let item = {...items[index]};
-      item.Key_name = e.target.value;
-      items[index] = item;
-      setListCustomField(items);
-    }
-
-
-  const insertValue = index => {
+  //THIS WILL EDIT OR ADD Key_Name
+  const editOrAddKeyName = (e, index) => {
     console.log('shhdashgd', index);
     let items = [...listCustomField];
     let item = { ...items[index] };
-    item.values.push('Enter option');
+    item.Key_name = e.target.value;
     items[index] = item;
+    setListCustomField(items);
+  };
+
+  // THIS WILL INSERT VALLUE
+  const insertValue = (indexParent, indexChild) => {
+    let items = [...listCustomField];
+    let item = { ...items[indexParent] };
+    let values = item.values;
+    values.push(null);
+    item.values = values;
+    items[indexParent] = item;
     setListCustomField(items);
   };
 
@@ -129,25 +108,49 @@ const CustomFormField = props => {
     setIsModalVisible(false);
   };
 
-  const requiredOrNot = (e, index) =>{
+  // THIS WILL HANDLE REQUIRED BUTTON
+  const requiredOrNot = (e, index) => {
     let items = [...listCustomField];
-    let item = {...items[index]};
+    let item = { ...items[index] };
     item.required = e;
     items[index] = item;
     setListCustomField(items);
-  }
+  };
 
-  const editValue = (indexParent , indexChild , e) =>{
-          console.log("shhdashgd value" , indexParent , indexChild , e.target.value)
-          let items = [...listCustomField];
-          let item = {...items[indexParent]};
-          let values = item.values
-          values[indexChild] = e.target.value
-          item.values=values
-          items[indexParent] = item;
-          setListCustomField(items);
-  }
-  
+  // THIS WILL HANDLE EDIT VALUE
+  const editValue = (indexParent, indexChild, e) => {
+    let items = [...listCustomField];
+    let item = { ...items[indexParent] };
+    let values = item.values;
+    values[indexChild] = e.target.value;
+    item.values = values;
+    items[indexParent] = item;
+    setListCustomField(items);
+  };
+
+  //THIS WILL DELETE THE VALUE ARRAYS
+  const deleteValue = (indexParent, indexChild) => {
+    let items = [...listCustomField];
+    let item = { ...items[indexParent] };
+    let values = item.values;
+
+    values = values.filter((item, i) => i !== indexChild);
+    console.log('****!!***', values);
+    item.values = values;
+    console.log('****!!***', item);
+    items[indexParent] = item;
+    console.log('****!!***', items);
+    setListCustomField(items);
+    console.log('****!!***', listCustomField);
+  };
+
+  //THIS WILL DELETE FORM
+  const deleteItem = async index => {
+    let items = [...listCustomField];
+    items.splice(index, 1);
+    setListCustomField(items);
+  };
+
   return (
     <div className="custom-field" style={{ minHeight: '500px' }}>
       <div className="d-flex mb4">
@@ -174,34 +177,45 @@ const CustomFormField = props => {
           </Modal>
 
           {/* <HardCoreForm /> */}
-          {listCustomField?.map((type, index) => {
-            return (
-              <div style={{ marginTop: '30px' }}>
-                <Form name="basic">
-                  <Form.Item rules={[{ required: true, message: 'Please input your username!' }]}>
-
-                    <Input value={type.Key_name} onChange={(e) => editOrAddKeyName(e,index)} />
-                    
-                    required <Switch checked={type.required} onChange={(e) => requiredOrNot(e, index)} size="small" />
-                    
+          <form>
+           
+              {listCustomField?.map((type, index) => {
+                return (
+                  <div style={{ marginTop: '30px'}} >
+                    <TextField
+                      required={true}
+                      label="Please enter this field is required"
+                      value={type.Key_name}
+                      onChange={e => editOrAddKeyName(e, index)}
+                    />
+                    required{' '}
+                    <Switch
+                      checked={type.required}
+                      onChange={e => requiredOrNot(e, index)}
+                      size="small"
+                    />
                     <Button onClick={() => deleteItem(index)}>Delete</Button>
                     {type.values?.map((value, i) => (
-                    
-                    <div>
-                        <Input defaultValue={value}  onChange={(e) =>editValue(index , i , e) }/>
-                        <Button>Delete</Button>
-                    </div>
-
+                      <div>
+                        <Input
+                          required={true}
+                          placeholder="Options "
+                          style={{ width: '60%' }}
+                          defaultValue={value}
+                          onChange={e => editValue(index, i, e)}
+                        />
+                        <Button onClick={e => deleteValue(index, i)}>Delete</Button>
+                      </div>
                     ))}
                     {type.values?.length > 0 && (
-                      <Button onClick={() => insertValue(index)}> Add New Field</Button>
+                      <Button onClick={() => insertValue(index)}> Add New Option</Button>
                     )}
-                  
-                  </Form.Item>
-                </Form>
-              </div>
-            );
-          })}
+                  </div>
+                );
+              })}
+              {listCustomField.length > 0 && <Button onClick={handleFormSubmission}>SAVE</Button>}
+          
+          </form>
           <Dropdown trigger={['click']} overlay={menu}>
             <Button className="mt-5 button-square edit-button" onClick={e => e.preventDefault()}>
               Add New Field <PlusOutlined />
