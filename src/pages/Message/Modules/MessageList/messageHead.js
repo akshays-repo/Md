@@ -9,10 +9,12 @@ const MessageHead = ({
   lastAcive,
   totalUnread,
   active,
+  handleMessageDetails,
+  messages
 }) => {
   console.log("avatar", avatar);
   return (
-    <div className="messagehead">
+    <div className="messagehead" onClick={() => handleMessageDetails('hai')}>
       <div className="left">
         <img className="useravatar" src={avatar} />
       </div>
@@ -21,9 +23,9 @@ const MessageHead = ({
         <p>{lastMessage}</p>
       </div>
       <div className="right">
-        <span>{lastAcive}</span>
-        <br />
-        {totalUnread && <span className="unreadbadge">{totalUnread}</span>}
+        <div className="lastActive">{lastAcive}</div>
+
+        {totalUnread && <div className="unreadbadge">{totalUnread}</div>}
       </div>
     </div>
   );

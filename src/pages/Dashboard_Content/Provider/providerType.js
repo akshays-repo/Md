@@ -17,6 +17,8 @@ const ProviderType = props => {
   const closeEditModal = () => {
     setEditModal(false);
   };
+
+ 
   const columns = [
     {
       title: 'TYPE',

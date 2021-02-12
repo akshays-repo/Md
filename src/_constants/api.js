@@ -30,11 +30,12 @@ export const backend_api = {
   USER_LOGIN: '/api/backend/v1/users/login',
   
   CREATE_PROVIDER:'/api/backend/v1/users/register',
-  FETCH_PROVIDER:'/api/backend/v1/providers',
+  FETCH_PROVIDER:'/api/backend/v1/providers/list',
   EDIT_PROVIDER:'/api/backend/v1/users',
   DELETE_PROVIDER:'/api/backend/v1/provider',
   FETCH_BRANCH_PROVIDER: '/api/backend/v1/providers',
   EDIT_STATUS_PROVIDER:'/api/backend/v1/users/',
+  FILTER_PROVIDER:'/api/backend/v1/providers',
 
   CREATE_CUSTOMFORM:'/api/backend/v1/custom_form',
   FETCH_CUSTOMFORM:'/api/backend/v1/custom_form',
@@ -45,6 +46,10 @@ export const backend_api = {
   CREATE_ONLINE_APPOINTMENT:'/api/backend/v1/online_booking',
   FETCH_APPOINTMENT:'/api/backend/v1/online_booking',
   FILTER_APPOINTMENT:'/api/backend/v1/online_bookings/filter',
+  VIEW_APPOINTMENT:'/api/backend/v1/online_booking',
+  DELETE_APPOINTMENT:'/api/backend/v1/online_booking',
+  EDIT_APPOINTMENT:'/api/backend/v1/online_booking',
+  STATUS_CHANGE_APPOINTMENT:'/api/backend/v1/online_booking',
 
   CREATE_PROVIDER_TYPE:'/api/backend/v1/provider_type',
   FETCH_PROVIDER_TYPE:'/api/backend/v1/provider_types',
@@ -56,4 +61,8 @@ export const backend_api = {
   FETCH_BRANCH_APPOINTMENT_PROVIDER: '/api/backend/v1/providers/type_id',
   FETCH_HOSPITAL_APPOINTMENT_TYPE: '/api/backend/v1/appointment_types/hospital',
   CHECK_HOSPITAL: '/api/backend/v1/users',
+
+  FETCH_APPOINTMENT_HOME :'/api/backend/v1/online_bookings/filter',
+
 };
+

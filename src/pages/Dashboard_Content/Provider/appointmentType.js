@@ -15,12 +15,12 @@ const AppointmentTypes = props => {
     setEditId(id);
     setEditData(data);
     store.dispatch({ type: 'OPEN_APPOINTMENT_TYPE_MODAL' });
-    console.log("props",props)
+
   };
 
   const handleFormSubmission = async values => {
     try {
-      values = JSON.stringify({ ...values, branchId: 3, hospitalId: 3 });
+      values = JSON.stringify({ ...values, branchId: 3 });
       if (editId) {
         props.editAppointmentType(editId, values);
       } else {
@@ -68,8 +68,8 @@ const AppointmentTypes = props => {
   ];
 
   useEffect(() => {
-    console.log('Loading');
-    props.fetchAppointmentType({ branchId: 3 });
+ 
+    props.fetchAppointmentType({ branchId: 3 ,page:1 ,limit:100 });
   }, [props.changed]);
   
   return (

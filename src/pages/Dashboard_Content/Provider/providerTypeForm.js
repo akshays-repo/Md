@@ -49,7 +49,6 @@ const ProviderTypeForm = props => {
           props.values || {
             name: '',
             status: 'active',
-            hospitalId: parseInt(localStorage.getItem('hospital_id')),
           }
         }
         // validationSchema={ProviderCreationSchema}

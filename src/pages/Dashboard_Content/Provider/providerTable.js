@@ -4,27 +4,28 @@ import AddAppointmentTime from './addAppointmentTime';
 import { store } from '../../../reducers/configureStore';
 import ProviderCreationForm from './providerCreationForm';
 import { connect } from 'react-redux';
-import MultiSelect from "react-multi-select-component";
+import MultiSelect from 'react-multi-select-component';
 import { getFormDataA, getFormData } from '_utils';
 import { map } from 'lodash';
-
+import { set } from 'store';
+const { Option } = Select;
 const ProviderTable = props => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [appointmentTypes, setAppointmentTypes] = useState([]);
-  const [selectedItems, setSelectedItem] = useState([]);
-  const [providers, setProviders] = useState([]);
   const [editId, setEditId] = useState(null);
   const [editData, setEditData] = useState('');
 
+  const [branchId, setBranchId] = useState(null);
+  const [providerTypeId, setProviderTypeId] = useState(null);
+  const [searchKey, setSearchKey] = useState(null);
+  const [appointmentTypeId, setAppointmentTypeId] = useState(null);
+  const [status, setStatus] = useState(null);
+
   useEffect(() => {
     setAppointmentTypes(props.appointment_type);
+    //setBranchList(store.getState().Branch.payload);
   });
-  const getProvider = () => {
-    console.log('props000', props.provider);
-    let newData = [];
-    props.provider.map(data => newData.push(data.provider));
-    return newData;
-  };
+
   const showModal = (id, data) => {
     setEditId(id);
     setEditData(data);
@@ -45,13 +46,21 @@ const ProviderTable = props => {
     setEditId(id);
     store.dispatch({ type: 'OPEN_PROVIDER_EDIT_MODAL' });
   };
+  useEffect(() =>{
+    console.log("props.provider",props)
+
+  })
 
   const handleApptChange = async (record, values) => {
-    console.log('appptypeeee', values);
-
+    // this will perform delete
     let currentValue = [];
-    record.provider_and_types.map(type => currentValue.push(type.appointment_type.id));
-    let DeletedArray = currentValue.filter(e => !values.includes(e));
+    record.provider_and_types.map(type => currentValue.push(type.appointment_type?.id));
+    let intersection = currentValue.filter(x => values.includes(x));
+    let DeletedArray = [];
+    DeletedArray = currentValue
+      .filter(x => !intersection.includes(x))
+      .concat(intersection.filter(x => !currentValue.includes(x)));
+
     let intValues = {
       userTypeId: 4,
       id: record.id,
@@ -60,27 +69,54 @@ const ProviderTable = props => {
       branchId: 1,
       provider_typeId: record.provider_typeId,
     };
-    console.log('respomsee', intValues);
-    console.log('ISARRAY', Array.isArray(intValues.appointment_type));
-    console.log('respomsee');
 
     let sentinData = getFormData({ ...intValues });
     values.map((va, i) => sentinData.append('appointment_type[]', va));
-    let response = await props.editProvider(record.id, sentinData);
+    DeletedArray.map((va, i) => sentinData.append('deleted_type[]', va));
+    await props.editProvider(record.id, sentinData);
   };
 
   const handleStatus = async (record, status) => {
-    console.log('rorororror', record);
+
+    let intValues = {
+      userTypeId: 4,
+    };
+    let sentinData = getFormData({ ...intValues });
     try {
-      await props.editProviderStatus(record.id, { status });
+      await props.editProviderStatus(record.id, { status } , sentinData);
     } catch (err) {
       console.log('error', err);
     }
   };
 
   const handleDelete = async id => {
-    console.log('deleter', props);
     await props.deleteProvider(id);
+  };
+
+  const handleChangeSearch = e => {
+    e.preventDefault();
+    setSearchKey(e.target.value);
+  };
+  const handleSearchSubmission = e => {
+    e.preventDefault();
+    let parms = {};
+    if (searchKey) parms.search = searchKey;
+    if (branchId) parms.branchId = branchId;
+    if (providerTypeId) parms.provider_typeId = providerTypeId;
+    if (appointmentTypeId) parms.type_id = appointmentTypeId;
+    if (status) parms.status = status;
+
+    props.filterProvider(parms);
+  };
+  const clearFilter = e => {
+    e.preventDefault();
+    setBranchId(null);
+    setAppointmentTypeId(null);
+    setSearchKey(null);
+    setStatus(null);
+    setProviderTypeId(null);
+    setStatus(null);
+    props.fetchProvider();
   };
 
   const columns = [
@@ -123,18 +159,18 @@ const ProviderTable = props => {
             <Select
               className="appt-type-select"
               mode="multiple"
-              style={{ width: '100%' }}
+              style={{ width: '150px', maxHeight: '150px' }}
               placeholder="Select the type"
               key={record?.provider_and_types?.map(type =>
-                type.appointment_type?.id !== null ? type.appointment_type?.id : null,
+                type.appointment_type === null ? null : type.appointment_type.id,
               )}
-              defaultValue={record?.provider_and_types?.map(type => type.appointment_type?.id
-              )}
-
+              defaultValue={record?.provider_and_types?.map(type => type.appointment_type?.id)}
               onChange={e => handleApptChange(record, e)}
             >
               {appointmentTypes.map(type => (
-                <Select.Option key={type.id} value={type.id}>{type.name}</Select.Option>
+                <Select.Option key={type.id} value={type.id}>
+                  {type.name}
+                </Select.Option>
               ))}
             </Select>
           </Space>
@@ -152,8 +188,8 @@ const ProviderTable = props => {
             defaultValue={record.status}
             onChange={e => handleStatus(record, e)}
           >
-            <Select.Option value="active">Active</Select.Option>
-            <Select.Option value="hold">Hold</Select.Option>
+            <Select.Option style={{color:"green"}} value="active">Active</Select.Option>
+            <Select.Option style={{color:"red"}} value="hold">Hold</Select.Option>
           </Select>
         </Space>
       ),
@@ -169,10 +205,10 @@ const ProviderTable = props => {
             {' '}
             <i className="fa fa-edit"></i>{' '}
           </span>
-          <span className="delete-color" onClick={() => handleDelete(record.id)}>
+          {/* <span className="delete-color" onClick={() => handleDelete(record.id)}>
             {' '}
             <i className="fa fa-trash"></i>
-          </span>
+          </span> */}
         </Space>
       ),
     },
@@ -180,6 +216,61 @@ const ProviderTable = props => {
 
   return (
     <div>
+      <div style={{ marginBottom: '10px' }} className="search">
+        <Space direction="horizontal">
+          <Input
+            type="text"
+            value={searchKey}
+            placeholder=" Name Email or Phone"
+            onChange={handleChangeSearch}
+          />
+
+          {/* <Select
+            placeholder="Appointment Type"
+            onChange={e => setAppointmentTypeId(e)}
+            style={{ width: 150 }}
+          >
+            {props.appointment_type?.map(type => (
+              <Option value={type.id}>{type.name}</Option>
+            ))}
+          </Select> */}
+
+          <Select
+            onChange={e => setBranchId(e)}
+            placeholder="Branch"
+            style={{ width: 120 }}
+            value={branchId}
+          >
+            {props.branch_payload?.map(branch => (
+              <Option value={branch.id}>{branch.fullName}</Option>
+            ))}
+          </Select>
+
+          <Select
+            placeholder="provider type"
+            onChange={e => setProviderTypeId(e)}
+            style={{ width: 150 }}
+            value={providerTypeId}
+          >
+            {props.ProviderTypePayload?.map(type => (
+              <Option value={type.id}>{type.name}</Option>
+            ))}
+          </Select>
+
+          <Select onChange={e => setStatus(e)} placeholder="status" value={status} style={{ width: 120 }}>
+            <Option  value="active">ACTIVE</Option>
+            <Option value="hold">HOLD</Option>
+          </Select>
+
+          <button className="view-button button-square" onClick={handleSearchSubmission}>
+            Filter
+          </button>
+          <button className="view-button button-square" onClick={clearFilter}>
+            clear
+          </button>
+        </Space>
+      </div>
+
       <Table columns={columns} dataSource={props.provider} />
       <Modal
         footer={false}
@@ -188,16 +279,17 @@ const ProviderTable = props => {
         visible={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
+        destroyOnClose
       >
         <AddAppointmentTime id={editId} {...props} />
       </Modal>
       <Modal
         footer={false}
-        width={800}
-        title=""
+        title={ `EDIT ${editData.fullName}`}
         visible={props.modal1}
         onOk={handleOk}
         onCancel={handleCancel}
+        destroyOnClose
       >
         <ProviderCreationForm id={editId} values={editData} {...props} />
       </Modal>
@@ -205,11 +297,12 @@ const ProviderTable = props => {
   );
 };
 
-const mapStoreToProps = ({ AppointmentType }) => {
+const mapStoreToProps = ({ AppointmentType , Branch }) => {
   return {
     appointment_type: AppointmentType.payload,
     modal: AppointmentType.modal,
     changed: AppointmentType.changed,
+    branch_payload:Branch.payload,
   };
 };
 export default connect(mapStoreToProps)(ProviderTable);

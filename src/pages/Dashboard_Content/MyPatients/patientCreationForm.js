@@ -22,10 +22,10 @@ const PatientCreationForm = props => {
           }),
         ),
       );
-      console.log(files);
+ 
       innerForm.current.setFieldValue('image', acceptedFiles);
 
-      console.log('****', innerForm.current.values);
+    
     },
   });
   const uploadButton = (
@@ -51,7 +51,7 @@ const PatientCreationForm = props => {
     );
   };
   const handleFormSubmission = async values => {
-    console.log('Edit values', values);
+    
     const { avatarLocation, avatarType, deletedAt, image, ...rest } = values;
     try {
       if (Array.isArray(image)) {
@@ -142,7 +142,7 @@ const PatientCreationForm = props => {
             avatarlocation: '',
             phone: '',
             image: '',
-            userTypeId: 3,
+            userTypeId: 5,
             gender: 'male',
             status: 'active',
             patient_status: 'new',

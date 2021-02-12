@@ -58,7 +58,7 @@ const BranchCreationForm = props => {
             email: '',
             phone: '',
             address: '',
-            hospitalId: localStorage.getItem('hospital_id'),
+            hospitalId: 3,
             userTypeId: 3,
             status: 'active',
           }

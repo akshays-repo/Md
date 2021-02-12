@@ -17,7 +17,7 @@ const FossilMdAbout =() =>{
       </Col>
       <Col xs={24} lg={12}>
           <div className="aboutText">
-              <h4 style={{color: '#05d6e7'}}>ABOUT FOSSILMD</h4>
+              <h5 style={{color: '#05d6e7'}}>ABOUT FOSSILMD</h5>
               <div className="titleCaption">
               Bring care to your home with one click
               </div>

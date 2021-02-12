@@ -1,4 +1,4 @@
-import { BranchState } from '../ComponentState/branch';
+import { AppointmentState } from '../ComponentState/appointment';
 import { message } from 'antd';
 
 /**
@@ -6,7 +6,7 @@ import { message } from 'antd';
  * @param action
  */
 
-export const AppointmentReducer = (state = BranchState, action) => {
+export const AppointmentReducer = (state = AppointmentState, action) => {
   switch (action.type) {
     case 'OPEN_CREATE_APPOINTMENT_MODAL':
       return { ...state, modal: true };
@@ -24,6 +24,11 @@ export const AppointmentReducer = (state = BranchState, action) => {
     case 'CREATE_APPOINTMENT':
       message.success('APPOINTMENT CREATED SUCCESSFULLY');
       return { ...state, error: action.error, modal: false, message: action.message };
+
+      case 'VIEW_APPOINTMENT':
+        return { ...state, error: action.error, modal: false, message: action.message ,view:action.payload,
+        };
+          
     case 'FETCH_APPOINTMENT':
       return {
         ...state,
@@ -54,10 +59,19 @@ export const AppointmentReducer = (state = BranchState, action) => {
       return {
         ...state,
         error: action.error,
-        payload: action.payload,
         message: action.message,
         changed: true,
       };
+
+      case 'STATUS_CHANGE_APPOINTMENT':
+      message.success('STATUS CHANGED SUCCESSFULLY');
+      return {
+        ...state,
+        error: action.error,
+        message: action.message,
+        changed: true,
+      };
+
     case 'FETCH_ERROR':
       message.error(action.message);
       return { ...state };

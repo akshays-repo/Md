@@ -25,7 +25,7 @@ export const ProviderTypeReducer = (state = ProviderTypeState, action) => {
         error: action.error,
         payload: action.payload,
         message: action.message,
-        changed: true,
+        changed: false,
       };
     case 'EDIT_PROVIDER_TYPE':
       message.success('PROVIDER EDITED SUCCESSFULLY');

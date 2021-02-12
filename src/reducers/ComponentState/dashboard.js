@@ -1,7 +1,7 @@
 /**
  * Initital state for list of branch
  */
-export const AppointmentState = {
+export const DashboardState = {
     error: false,
     payload: [],
     view:[],
