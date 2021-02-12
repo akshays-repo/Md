@@ -217,7 +217,7 @@ const CustomFormField = props => {
                   </div>
                 );
               })}
-              {listCustomField.length > 0 && <Button className="blueDark-button mt8" onClick={handleFormSubmission}>SAVE</Button>}
+              {listCustomField?.length > 0 && <Button className="blueDark-button mt8" onClick={handleFormSubmission}>SAVE</Button>}
           
           </form>
           <Dropdown trigger={['click']} overlay={menu}>
