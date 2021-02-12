@@ -37,7 +37,6 @@ const Dashboard_MyPatients = props => {
   }, [props.changed, props.deleted]);
 
   const handleStatus = (id , status) =>{
-    console.log("******!!!!!!!******",id , status)
         props.editStatusPatient(id , {status})
   }
 
