@@ -174,7 +174,7 @@ const Dashboard_Appointments = props => {
 
     return (
       <div className="appointment-section">
-        <div style={{ marginBottom: '10px' }} className="search">
+        <div className="search">
           <Space direction="horizontal">
             <Input value={searchKey} type="text" placeholder=" Name Email or Phone" onChange={handleChangeSearch} />
 

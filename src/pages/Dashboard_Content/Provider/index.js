@@ -32,7 +32,7 @@ const Dashboard_Provider = props => {
   const HeaderSection = () => {
     return (
       <div className="provider">
-        <div className="header mb10">
+        <div className="header">
           <div className="provider-head mr2">
             <Button
               type="primary"

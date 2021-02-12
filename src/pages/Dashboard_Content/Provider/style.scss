@@ -1,6 +1,7 @@
 .provider{
     .header{
-        @include flex(flex-end , center)
+        @include flex(flex-end , center);
+        margin-bottom: 15px;
     }
 }
 .appointment-time{
@@ -58,6 +59,13 @@
         }
       }
 
+    }
+  }
+  .providerFilter {
+    .search {
+      margin-bottom: 15px;
+      display: flex;
+      justify-content: flex-end;
     }
   }
 }

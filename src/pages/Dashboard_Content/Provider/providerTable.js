@@ -215,8 +215,8 @@ const ProviderTable = props => {
   ];
 
   return (
-    <div>
-      <div style={{ marginBottom: '10px' }} className="search">
+    <div className="providerFilter">
+      <div className="search">
         <Space direction="horizontal">
           <Input
             type="text"
