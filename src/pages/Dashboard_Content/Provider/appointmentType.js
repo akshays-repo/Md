@@ -75,7 +75,7 @@ const AppointmentTypes = props => {
   return (
     <div className="appointment-type">
       <div className="header">
-        <h2>Appointment types</h2>
+        <h4>Appointment types</h4>
         <button
           className="plus-button"
           onClick={() => {

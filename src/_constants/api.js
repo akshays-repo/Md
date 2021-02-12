@@ -26,6 +26,7 @@ export const backend_api = {
   EDIT_PATIENT: '/api/backend/v1/users/patiant',
   DELETE_PATIENT: '/api/backend/v1/users/patiant',
   FILTER_PATIENT:'/api/backend/v1/patiant/filter',
+  EDIT_PATIENT_STATUS:'/api/backend/v1/users/patiant',
   
   USER_LOGIN: '/api/backend/v1/users/login',
   

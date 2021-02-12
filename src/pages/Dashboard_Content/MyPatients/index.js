@@ -12,6 +12,7 @@ const { Option } = Select;
 const Dashboard_MyPatients = props => {
   const [editId, setEditId] = useState(null);
   const [editData, setEditData] = useState('');
+
   const openEditModal = (id, data) => {
     setEditId(id);
     setEditData({ ...data, dob: data.dob.split('T')[0] });
@@ -32,8 +33,12 @@ const Dashboard_MyPatients = props => {
   };
 
   useEffect(() => {
-    if (!props.modal) props.fetchPatient({ branchId: 3 });
+    props.fetchPatient({page:1 , limit:10000});
   }, [props.changed, props.deleted]);
+
+  const handleStatus = (id , status) =>{
+        props.editStatusPatient(id , {status})
+  }
 
   const columns = [
     {
@@ -64,8 +69,20 @@ const Dashboard_MyPatients = props => {
 
     {
       title: 'Status',
-      dataIndex: 'status',
-      key: 'status',
+      dataIndex: '',
+      key: '',
+      render: (text, record) => (
+        <Space size="middle">
+          <Select
+            style={record.status === 'active' ? { color: 'green' } : { color: 'red' }}
+            defaultValue={record.status}
+            onChange={e => handleStatus(record.id, e)}
+          >
+            <Select.Option style={{color:"green"}} value="active">Active</Select.Option>
+            <Select.Option style={{color:"red"}} value="hold">Hold</Select.Option>
+          </Select>
+        </Space>
+      )
     },
     {
       title: '',
@@ -133,7 +150,7 @@ const Dashboard_MyPatients = props => {
                 <button className="view-button button-square" onClick={handleSearchSubmission}>
                   Filter
                 </button>
-                <button className="view-button button-square" onClick={clearFilter}>
+                <button className="edit-button button-square" onClick={clearFilter}>
                   clear
                 </button>
               </Space>
@@ -193,8 +210,21 @@ const mapDispatchToProps = dispatch => ({
         values,
       }),
     ),
+
+    editStatusPatient: (id, param) =>
+    dispatch(
+      actionCreator({
+        method: 'PUT',
+        action_type: 'EDIT_PATIENT_STATUS',
+        id,
+        param,
+      }),
+    ),
+
+
   deletePatient: id =>
     dispatch(actionCreator({ method: 'DELETE', action_type: 'DELETE_PATIENT', id })),
+    
   filterPatient: param =>
     dispatch(
       actionCreator({

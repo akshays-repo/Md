@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { Space, Select, Row, Col, Table, Tag, DatePicker, Input, Modal, Popconfirm } from 'antd';
+import { Space, Select, Row, Col, Table, Tag, DatePicker, Input, Modal, Popconfirm , } from 'antd';
 import Dashboard_Content from '..';
 import { actionCreator } from '../../../reducers/actionCreator';
 import { store } from '../../../reducers/configureStore';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import AppointmentView from './appointmentView';
-import AppointmentEdit from './appointmentEdit';
+import AppointmentEdit from './appointmentView';
 
 const { Option } = Select;
 
 const Dashboard_Appointments = props => {
   const Appointments = () => {
-    const [AppointmentList, setAppointmentList] = useState(store.getState().Appointment.payload);
     const [searchKey, setSearchKey] = useState('');
     const [toData, setToDate] = useState('');
     const [fromData, setFromDate] = useState('');
@@ -23,10 +22,9 @@ const Dashboard_Appointments = props => {
 
     useEffect(() => {
       props.fetchAppointment();
-    }, []);
+    }, [props.changed]);
 
     useEffect(() => {
-      setAppointmentList(props.Appointment);
       props.fetchBranch({ hospitalId: localStorage.getItem('hospital_id'), page: 1, limit: 50 });
     }, []);
 
@@ -44,12 +42,10 @@ const Dashboard_Appointments = props => {
       if (status) parms.status = status;
       if (fromData) parms.fromDate = fromData;
       if (toData) parms.toDate = toData;
-
       props.filterAppointment(parms);
     };
 
-    const clearFilter = e => {
-      setAppointmentList(null);
+    const clearFilter = () => {
       setBranchId(null);
       setSearchKey(null);
       // setToDate('');
@@ -95,7 +91,7 @@ const Dashboard_Appointments = props => {
         key: 'phone',
       },
       {
-        title: 'Appointment Start',
+        title: 'Appointment Date',
         dataIndex: 'appointment_start',
         key: 'appointment_start',
       },
@@ -109,12 +105,13 @@ const Dashboard_Appointments = props => {
               defaultValue={record.payment_status}
               style={{ width: 120 }}
               onChange={e => handleChangePaymentStatus(record.id, e)}
+              className={record.payment_status}
             >
-              <Option value="pending">Pending</Option>
-              <Option value="failed">Failed</Option>
-              <Option value="paid">Paid</Option>
-              <Option value="requested">Requested</Option>
-              <Option value="manually_paid">Manually Paid</Option>
+              <Option className={"pending"}  value="pending">Pending</Option>
+              <Option className={"failed"}  value="failed">Failed</Option>
+              <Option className={"paid"}  value="paid">Paid</Option>
+              <Option className={"requested"}  value="requested">Requested</Option>
+              <Option className={"manually_paid"}  value="manually_paid">Manually Paid</Option>
             </Select>
           </div>
         ),
@@ -128,12 +125,13 @@ const Dashboard_Appointments = props => {
             <Select
               defaultValue={record.status}
               style={{ width: 120 }}
+              className={record.status}
               onChange={e => handleChangeStatus(record.id, e)}
             >
-              <Option value="pending">Pending</Option>
-              <Option value="confirmed">Confirmed</Option>
-              <Option value="cancelled">Cancelled</Option>
-              <Option value="completed">Completed</Option>
+              <Option   className={"pending"}  value="pending">Pending</Option>
+              <Option   className={"confirmed"}  value="confirmed">Confirmed</Option>
+              <Option   className={"cancelled"}  value="cancelled">Cancelled</Option>
+              <Option   className={"completed"} value="completed">Completed</Option>
             </Select>
           </div>
         ),
@@ -174,9 +172,14 @@ const Dashboard_Appointments = props => {
 
     return (
       <div className="appointment-section">
-        <div style={{ marginBottom: '10px' }} className="search">
+        <div className="search">
           <Space direction="horizontal">
-            <Input value={searchKey} type="text" placeholder=" Name Email or Phone" onChange={handleChangeSearch} />
+            <Input
+              value={searchKey}
+              type="text"
+              placeholder=" Name Email or Phone"
+              onChange={handleChangeSearch}
+            />
 
             <DatePicker
               placeholder="From Date"
@@ -188,7 +191,7 @@ const Dashboard_Appointments = props => {
             />
 
             <Select
-            value={paymentStatus}
+              value={paymentStatus}
               placeholder="Payment"
               onChange={e => setPaymentStatus(e)}
               style={{ width: 120 }}
@@ -200,7 +203,12 @@ const Dashboard_Appointments = props => {
               <Option value="manually_paid">Manually Paid</Option>
             </Select>
 
-            <Select value={branchId} onChange={e => setBranchId(e)} placeholder="Branch" style={{ width: 120 }}>
+            <Select
+              value={branchId}
+              onChange={e => setBranchId(e)}
+              placeholder="Branch"
+              style={{ width: 120 }}
+            >
               {props.branch?.map(branch => (
                 <Option key={branch.id} value={branch.id}>
                   {branch.fullName}
@@ -208,7 +216,12 @@ const Dashboard_Appointments = props => {
               ))}
             </Select>
 
-            <Select value={status} placeholder="status" onChange={e => setStatus(e)} style={{ width: 120 }}>
+            <Select
+              value={status}
+              placeholder="status"
+              onChange={e => setStatus(e)}
+              style={{ width: 120 }}
+            >
               <Option value="pending">Pending</Option>
               <Option value="confirmed">Confirmed</Option>
               <Option value="cancelled">Cancelled</Option>
@@ -217,7 +230,7 @@ const Dashboard_Appointments = props => {
             <button className="view-button button-square" onClick={handleSearchSubmission}>
               Filter
             </button>
-            <button className="view-button button-square" onClick={clearFilter}>
+            <button className="edit-button button-square" onClick={clearFilter}>
               clear
             </button>
           </Space>
@@ -275,6 +288,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(actionCreator({ method: 'PUT', action_type: 'STATUS_CHANGE_APPOINTMENT', id, param })),
   deleteAppointment: id =>
     dispatch(actionCreator({ method: 'DELETE', action_type: 'DELETE_APPOINTMENT', id })),
+
   viewAppointment: id =>
     dispatch(actionCreator({ method: 'GET', action_type: 'VIEW_APPOINTMENT', id })),
 

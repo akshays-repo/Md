@@ -10,6 +10,9 @@ import { store } from '../../../reducers/configureStore';
 import CustomFormField from './customFormField';
 import ProviderType from './providerType';
 const Dashboard_Provider = props => {
+
+  const [providerTypeState , setProviderTypeState] =useState([])
+
   useEffect(() => {
     props.fetchProvider();
     props.fetchBranch({ hospitalId: localStorage.getItem('hospital_id'), page: 1, limit: 60 });
@@ -22,8 +25,9 @@ const Dashboard_Provider = props => {
 
   useEffect(() => {
     props.fetchProviderType();
+    setProviderTypeState(props.ProviderTypePayload)
   }, [props.ProviderTypeChanged, props.ProviderDeleted]);
-
+  
   useEffect(() => {
     props.fetchBranch({ hospitalId: localStorage.getItem('hospital_id'), page: 1, limit: 50 });
     props.fetchAppointmentType({ branchId: 3 });
@@ -32,7 +36,7 @@ const Dashboard_Provider = props => {
   const HeaderSection = () => {
     return (
       <div className="provider">
-        <div className="header mb10">
+        <div className="header">
           <div className="provider-head mr2">
             <Button
               type="primary"
@@ -89,6 +93,7 @@ const Dashboard_Provider = props => {
           title="CUSTOM FORM FIELD"
           footer={false}
           visible={props.CustomFormmodal}
+          width={650}
           onCancel={() => store.dispatch({ type: 'CLOSE_CUSTOMFORM_CREATE_MODAL' })}
           destroyOnClose
         >
@@ -120,9 +125,11 @@ const Dashboard_Provider = props => {
           visible={props.ProviderTypemodal}
           onCancel={() => store.dispatch({ type: 'CLOSE_PROVIDERTYPE_MODAL' })}
         >
-          <ProviderType />
+          <ProviderType providerTypeState={providerTypeState} {...props} />
         </Modal>
-        <h2>PROVIDER</h2>
+        <div className="pageTitle">
+        <h4>PROVIDER</h4>
+        </div>
         <div>{HeaderSection()}</div>
         <div className="full-width-table">
           <ProviderTable {...props} />
