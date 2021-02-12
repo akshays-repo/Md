@@ -69,16 +69,17 @@ const PatientAppointment = props => {
       render: record => (
         <div>
           <Select
-            defaultValue={record.payment_status}
-            style={{ width: 120 }}
-            onChange={e => handleChangePaymentStatus(record.id, e)}
-          >
-            <Option value="pending">Pending</Option>
-            <Option value="failed">Failed</Option>
-            <Option value="paid">Paid</Option>
-            <Option value="requested">Requested</Option>
-            <Option value="manually_paid">Manually Paid</Option>
-          </Select>
+              defaultValue={record.payment_status}
+              style={{ width: 120 }}
+              onChange={e => handleChangePaymentStatus(record.id, e)}
+              className={record.payment_status}
+            >
+              <Option className={"pending"}  value="pending">Pending</Option>
+              <Option className={"failed"}  value="failed">Failed</Option>
+              <Option className={"paid"}  value="paid">Paid</Option>
+              <Option className={"requested"}  value="requested">Requested</Option>
+              <Option className={"manually_paid"}  value="manually_paid">Manually Paid</Option>
+            </Select>
         </div>
       ),
     }, //['pending', 'failed', 'paid', 'requested', 'manually_paid'
@@ -88,16 +89,17 @@ const PatientAppointment = props => {
       key: '',
       render: record => (
         <div>
-          <Select
-            defaultValue={record.status}
-            style={{ width: 120 }}
-            onChange={e => handleChangeStatus(record.id, e)}
-          >
-            <Option value="pending">Pending</Option>
-            <Option value="confirmed">Confirmed</Option>
-            <Option value="cancelled">Cancelled</Option>
-            <Option value="completed">Completed</Option>
-          </Select>
+         <Select
+              defaultValue={record.status}
+              style={{ width: 120 }}
+              className={record.status}
+              onChange={e => handleChangeStatus(record.id, e)}
+            >
+              <Option   className={"pending"}  value="pending">Pending</Option>
+              <Option   className={"confirmed"}  value="confirmed">Confirmed</Option>
+              <Option   className={"cancelled"}  value="cancelled">Cancelled</Option>
+              <Option   className={"completed"} value="completed">Completed</Option>
+            </Select>
         </div>
       ),
     },
@@ -178,3 +180,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(mapStoreToProps, mapDispatchToProps)(PatientAppointment);
+
+
+
+
