@@ -193,7 +193,7 @@ const CustomFormField = props => {
                     />
                     </div>
                     <div className="rightButtons  mt3">
-                    required{' '}
+                    <span className="req">required</span>{' '}
                     <Switch className="ml4"
                       checked={type.required}
                       onChange={e => requiredOrNot(e, index)}
