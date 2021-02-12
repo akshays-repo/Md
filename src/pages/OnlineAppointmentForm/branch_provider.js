@@ -167,23 +167,18 @@ const BranchProvider = props => {
     <Row>
       <Col span={24}>
         <Row>
-          <Col span={20}>
+          <Col span={21}>
             <h5>Our Offices</h5>
           </Col>
-          <Col span={4}>
+          <Col span={3}>
             <Dropdown
               overlay={menu}
               // ref={this.clickId}
 
               trigger={['click']}
             >
-              <p
-                style={{
-                  backgroundColor: '#EDEEEE',
-                  textAlign: 'center',
-                  borderRadius: 15,
-                  padding: 5,
-                }}
+              <p className="dropselectBox"
+               
               >
                 <span>
                   {props.values.appointment_type} &nbsp;
@@ -238,16 +233,16 @@ const BranchProvider = props => {
           </div>
         ))}
       </Col>
-      <Col span={24}>
+      <Col span={24} className="pt2 pb2">
         <Row align="middle">
         <Col span="1"></Col>
-          <Col span="10"><span className="smallText">Availability</span></Col>
-          <Col span="13">
+          <Col span="11"><span className="smallText">Availability</span></Col>
+          <Col span="12" className="availDate">
             {' '}
             <Carousel ref={timeRef} {...carousel_props}>
               {datelist.map((result, i) => {
                 return (
-                  <div key={i} style={{ textAlign: 'center', padding: 5 }}>
+                  <div className="dateSlide" key={i} style={{ textAlign: 'center', padding: 5 }}>
                     <label style={{ margin: '0px 8px' }}>{result.day}</label>
                     <br />
                     <label className="datebold">{result.dm}</label>
