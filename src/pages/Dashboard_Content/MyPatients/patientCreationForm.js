@@ -1,11 +1,11 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { Formik, Form,  } from 'formik';
+import { Formik, Form } from 'formik';
 import { PatientCreationSchema } from '_utils/Schemas';
-import {  Button, Row,} from 'antd';
+import { Button, Row } from 'antd';
 import { generateForm } from '../../../_utils/formgenerator';
 import { useDropzone } from 'react-dropzone';
 import { Thumb } from './thumb';
-import {  getFormDataA } from '../../../_utils';
+import { getFormDataA } from '../../../_utils';
 
 const PatientCreationForm = props => {
   const [loadings, setLoadings] = useState(false);
@@ -22,10 +22,8 @@ const PatientCreationForm = props => {
           }),
         ),
       );
- 
-      innerForm.current.setFieldValue('image', acceptedFiles);
 
-    
+      innerForm.current.setFieldValue('image', acceptedFiles);
     },
   });
   const uploadButton = (
@@ -51,7 +49,6 @@ const PatientCreationForm = props => {
     );
   };
   const handleFormSubmission = async values => {
-    
     const { avatarLocation, avatarType, deletedAt, image, ...rest } = values;
     try {
       if (Array.isArray(image)) {
@@ -181,50 +178,55 @@ const PatientCreationForm = props => {
                   {...getRootProps({ className: 'dropzone' })}
                 >
                   <div className="title">
-                  <div
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    flexWrap: 'wrap',
-                  }}
-                >
-                  {Array.isArray(values.image) ? (
-                    values.image.map((result, i) => (
-                      <Thumb onImageDelete={onImageDelete} file={result}></Thumb>
-                    ))
-                  ) : (
-                    <img
-                      style={{ width: 90, height: 90, borderRadius: 100, marginRight:10, objectFit: "cover"}}
-                      src={
-                        values.image ||
-                        'https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png'
-                      }
-                    />
-                  )}
-                </div>
-                  <input {...getInputProps()} multiple={false} />
-<div className="upload-btn-wrapper">
-  <button type="button" className="view-button button-square font-size-md px-5">
-    Browse Image
-  </button>
-</div>
-                    <span>Upload Patient Image</span>
+                    <div
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        flexWrap: 'wrap',
+                      }}
+                    >
+                      {Array.isArray(values.image) ? (
+                        values.image.map((result, i) => (
+                          <Thumb onImageDelete={onImageDelete} file={result}></Thumb>
+                        ))
+                      ) : (
+                        <img
+                          style={{
+                            width: 90,
+                            height: 90,
+                            borderRadius: 100,
+                            marginRight: 10,
+                            objectFit: 'cover',
+                          }}
+                          src={
+                            values.image ||
+                            'https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png'
+                          }
+                        />
+                      )}
+                    </div>
+                    <input {...getInputProps()} multiple={false} />
+                    <div className="upload-btn-wrapper">
+                      <button type="button" className="view-button button-square font-size-md px-5">
+                        Browse Image
+                      </button>
+                    </div>
+                    {/* <span>Upload Patient Image</span> */}
                   </div>
-                 
                 </div>
-                
+
                 {errors.image && <div className="errormsg">{errors.image}</div>}
               </p>
             </Row>
-<div className="fullwidth-right">
-            <Button
-              htmlType="submit"
-              disabled={isSubmitting}
-              loading={loadings}
-              className="submitbutton edit-button button-square"
-            >
-              {props.id ? 'EDIT' : 'ADD'}
-            </Button>
+            <div className="fullwidth-right">
+              <Button
+                htmlType="submit"
+                disabled={isSubmitting}
+                loading={loadings}
+                className="submitbutton edit-button button-square"
+              >
+                {props.id ? 'EDIT' : 'ADD'}
+              </Button>
             </div>
           </Form>
         )}

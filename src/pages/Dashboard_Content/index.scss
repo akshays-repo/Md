@@ -15,9 +15,9 @@
 }
 
 .dashboard__sidebar {
-  ::-webkit-scrollbar { 
-    display: none; /* Chrome Safari */
-}
+//   ::-webkit-scrollbar { 
+//     display: none; /* Chrome Safari */
+// }
   background-color: $white;
   border: 1px solid $gray-light;
   .sidebar_header {
@@ -47,7 +47,7 @@
     justify-content: center;
     align-items: center;
     min-height: 300px;
-    max-height: calc(100vh - 274px);
+    max-height: calc(100vh - 174px);
     overflow-y: auto;
     .ant-list-item {
       padding: $padd-0;

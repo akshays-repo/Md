@@ -9,11 +9,6 @@ const ProviderTypeForm = props => {
   const [branchList, setBranchList] = useState([]);
   const innerForm = useRef();
 
-  useEffect(() => {
-    setBranchList(store.getState().Branch.payload);
-    console.log('editeditedit', props.editId);
-  });
-
   const handleFormSubmission = async values => {
     let contentType = 'JSON';
     if (props.id) {
@@ -23,6 +18,7 @@ const ProviderTypeForm = props => {
     } else {
       await props.addProviderType(JSON.stringify(values), contentType);
     }
+   
   };
 
   const formField = [

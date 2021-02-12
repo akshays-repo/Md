@@ -19,7 +19,7 @@ export const ProviderTypeReducer = (state = ProviderTypeState, action) => {
     case 'CREATE_PROVIDER_TYPE':
       message.success('PROVIDER TYPE CREATED SUCCESSFULLY');
 
-      return { ...state, error: action.error, message: action.message };
+      return { ...state, error: action.error, message: action.message,  changed: true };
     case 'FETCH_PROVIDER_TYPE':
       return {
         error: action.error,
@@ -49,7 +49,6 @@ export const ProviderTypeReducer = (state = ProviderTypeState, action) => {
         ...state,
         error: action.error,
         message: action.message,
-        changed: true,
         deleted:true
       };
     default:

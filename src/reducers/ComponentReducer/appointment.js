@@ -52,7 +52,6 @@ export const AppointmentReducer = (state = AppointmentState, action) => {
         error: action.error,
         payload: action.payload,
         message: action.message,
-        changed: true,
       };
     case 'DELETE_APPOINTMENT':
       message.success('APPOINTMENT DELETED SUCCESSFULLY');

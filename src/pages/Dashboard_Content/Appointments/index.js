@@ -12,7 +12,6 @@ const { Option } = Select;
 
 const Dashboard_Appointments = props => {
   const Appointments = () => {
-    const [AppointmentList, setAppointmentList] = useState(store.getState().Appointment.payload);
     const [searchKey, setSearchKey] = useState('');
     const [toData, setToDate] = useState('');
     const [fromData, setFromDate] = useState('');
@@ -23,10 +22,9 @@ const Dashboard_Appointments = props => {
 
     useEffect(() => {
       props.fetchAppointment();
-    }, []);
+    }, [props.changed]);
 
     useEffect(() => {
-      setAppointmentList(props.Appointment);
       props.fetchBranch({ hospitalId: localStorage.getItem('hospital_id'), page: 1, limit: 50 });
     }, []);
 
@@ -44,12 +42,10 @@ const Dashboard_Appointments = props => {
       if (status) parms.status = status;
       if (fromData) parms.fromDate = fromData;
       if (toData) parms.toDate = toData;
-
       props.filterAppointment(parms);
     };
 
-    const clearFilter = e => {
-      setAppointmentList(null);
+    const clearFilter = () => {
       setBranchId(null);
       setSearchKey(null);
       // setToDate('');

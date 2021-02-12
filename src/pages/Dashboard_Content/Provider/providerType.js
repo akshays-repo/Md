@@ -8,7 +8,9 @@ const ProviderType = props => {
   const [visibleEditModal, setEditModal] = useState(false);
   const [editId, setEditId] = useState('');
   const [itemRecord, setRecord] = useState('');
+  const [payload , setPayload] = useState([])
 
+  
   const openEditModal = (id, record) => {
     setEditId(id);
     setRecord(record);
@@ -17,6 +19,7 @@ const ProviderType = props => {
   const closeEditModal = () => {
     setEditModal(false);
   };
+
 
  
   const columns = [
@@ -68,7 +71,7 @@ const ProviderType = props => {
           </button>
         </div>
         <div className="defined -field">
-          <Table dataSource={props.ProviderTypePayload} columns={columns}></Table>
+          <Table dataSource={props.providerTypeState} columns={columns}></Table>
         </div>
       </div>
       <Modal
@@ -98,9 +101,7 @@ const ProviderType = props => {
 const mapStoreToProps = ({ ProviderType }) => {
   console.log('Store ProviderType', ProviderType);
   return {
-    ProviderTypePayload: ProviderType.payload,
-    ProviderTypeerror: ProviderType.error,
-    ProviderTypemessage: ProviderType.message,
+
     ProviderTypemodal: ProviderType.modal,
     ProviderTypemodal1: ProviderType.modal1,
     ProviderTypechanged: ProviderType.changed,

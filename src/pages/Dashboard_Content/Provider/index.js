@@ -10,6 +10,9 @@ import { store } from '../../../reducers/configureStore';
 import CustomFormField from './customFormField';
 import ProviderType from './providerType';
 const Dashboard_Provider = props => {
+
+  const [providerTypeState , setProviderTypeState] =useState([])
+
   useEffect(() => {
     props.fetchProvider();
     props.fetchBranch({ hospitalId: localStorage.getItem('hospital_id'), page: 1, limit: 60 });
@@ -22,6 +25,7 @@ const Dashboard_Provider = props => {
 
   useEffect(() => {
     props.fetchProviderType();
+    setProviderTypeState(props.ProviderTypePayload)
   }, [props.ProviderTypeChanged, props.ProviderDeleted]);
 
   useEffect(() => {
@@ -120,7 +124,7 @@ const Dashboard_Provider = props => {
           visible={props.ProviderTypemodal}
           onCancel={() => store.dispatch({ type: 'CLOSE_PROVIDERTYPE_MODAL' })}
         >
-          <ProviderType />
+          <ProviderType providerTypeState={providerTypeState} {...props} />
         </Modal>
         <div className="pageTitle">
         <h4>PROVIDER</h4>

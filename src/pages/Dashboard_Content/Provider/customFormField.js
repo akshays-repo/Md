@@ -176,7 +176,7 @@ const CustomFormField = props => {
             <CustomFormReview {...props} />
           </Modal>
 
-          {/* <HardCoreForm /> */}
+          <HardCoreForm />
           <form>
            
               {listCustomField?.map((type, index) => {
@@ -213,7 +213,7 @@ const CustomFormField = props => {
                   </div>
                 );
               })}
-              {listCustomField.length > 0 && <Button onClick={handleFormSubmission}>SAVE</Button>}
+              {listCustomField?.length > 0 && <Button onClick={handleFormSubmission}>SAVE</Button>}
           
           </form>
           <Dropdown trigger={['click']} overlay={menu}>
