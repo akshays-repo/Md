@@ -14,14 +14,18 @@ import { socket } from '../connectToSocket';
 
 const MessageDetail = props => {
   const [message, setMessage] = useState('');
+
   const send = () => {
     if (message) {
-      console.log(message);
       setMessage('');
       socket.emit('send_message', {
         userUUID: 'a2ed9b2e-1ede-4a25-960e-481d53068c66',
         message: message,
       });
+      // socket.emit('get_messages', {
+      //   conversationId: conversationId,
+      //   lastMessageId: lastMessageId,
+      // });
     }
   };
 

@@ -8,11 +8,13 @@ import { message } from 'antd';
 
 export const MesssageReducer = (state = MessageState, action) => {
   switch (action.type) {
+    case 'CLEAR_MESSAGE':
+      return { ...state, payload: [] };
     case 'SET_MESSAGE':
       return {
         ...state,
         error: action.error,
-        payload: action.payload,
+        payload: state.payload.length > 0 ? [...state.payload, action.payload] : action.payload,
         message: action.message,
         changed: true,
       };

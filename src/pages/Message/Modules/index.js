@@ -12,7 +12,7 @@ import { actionCreator } from '../../../reducers/actionCreator';
 const MessageLayout = props => {
   useEffect(() => {
     connectToSocket();
-  });
+  }, []);
 
   const [messageDetails, setMessageDetails] = useState([]);
   const [messageLists, setMessageLists] = useState([]);
@@ -63,8 +63,8 @@ const MessageLayout = props => {
 
 const mapStoreToProps = ({ SummaryMessage, Message }) => {
   return {
-    summary_message: SummaryMessage.payload.length > 0 ? SummaryMessage.payload.reverse() : [],
-    message: Message.payload.length > 0 ? Message.payload.reverse() : [],
+    summary_message: SummaryMessage.payload.length > 0 ? SummaryMessage.payload : [],
+    message: Message.payload.length > 0 ? Message.payload : [],
   };
 };
 const mapDispatchToProps = dispatch => ({
