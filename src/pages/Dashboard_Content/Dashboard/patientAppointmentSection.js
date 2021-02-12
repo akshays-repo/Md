@@ -21,11 +21,13 @@ const PatientAppointment = props => {
   const [currentButton, setCurrentButton] = useState(1);
   const handleChangePaymentStatus = () => {};
   
-  const handleChangeStatus = () => {};
+  const handleChangeStatus = async (id, status) => {
+    props.editStatusAppointment(id, { status });
+  };
 
   useEffect(() => {
     props.fetchAppointmentHome({  toDate: moment().format('L') });
-  }, []);
+  }, [props.changed]);
 
 
   const getUpComing = () =>{
@@ -212,6 +214,12 @@ const mapDispatchToProps = dispatch => ({
 
     viewAppointment: id =>
     dispatch(actionCreator({ method: 'GET', action_type: 'VIEW_APPOINTMENT', id })),
+
+    editStatusAppointment: (id, param) =>
+    dispatch(actionCreator({ method: 'PUT', action_type: 'STATUS_CHANGE_APPOINTMENT', id, param })),
+
+    deleteAppointment: id =>
+    dispatch(actionCreator({ method: 'DELETE', action_type: 'DELETE_APPOINTMENT', id })),
 });
 
 export default connect(mapStoreToProps, mapDispatchToProps)(PatientAppointment);
