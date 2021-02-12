@@ -72,6 +72,9 @@
     .text-center {
       @include text-center;
     }
+    .blueDark-button {
+      @include blueDark-button;
+    }
     .ant-table-thead .ant-table-cell {
         color: rgb(120, 129, 149);
         background-color: rgb(241, 243, 246);
@@ -95,11 +98,13 @@
     .pageTitle {
       background: #fff;
       padding: 20px;
+      margin-bottom: 1rem;
       h4 {
         margin-bottom: 0;
       }
     }
     .ant-modal-content {
+      @include border-radius(10px);
         .ant-modal-header {
             padding: 13px 16px;
     background: rgb(250, 250, 250);
@@ -141,14 +146,6 @@
           background-color: #dedede;
         }
       }
-  //   .ant-pagination-item-active a {
-  //     color: #fff;
-  //     background: #15558d;
-  //     &:hover {
-  //       background-color: #20c0f3;
-  //       color: #fff;
-  // }
-  // }
   
   .ant-pagination-item-active {
     background: #15558d;
@@ -166,15 +163,18 @@
     color: #9a9a9a;
   }
 }
-  }
+}
+
   .MuiInputBase-input {
-    font-size: 15px;
+    font-size: 14px;
     color: #7d7d7d;
-  }
   }
   .ant-select:not(.ant-select-customize-input) {
     .ant-select-selector {
-      border: 1px solid #f0f0f0;
-  }
-
+      border: 1px solid #d9d9d9;
+}
+}
+.MuiInput-root {
+  width: 100%;
+}
 }

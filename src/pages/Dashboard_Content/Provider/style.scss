@@ -1,6 +1,7 @@
 .provider{
     .header{
-        @include flex(flex-end , center)
+        @include flex(flex-end , center);
+        margin-bottom: 15px;
     }
 }
 .appointment-time{
@@ -60,10 +61,22 @@
 
     }
   }
+  .providerFilter {
+    .search {
+      margin-bottom: 15px;
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
 }
 
 .custom-field{
-  .inner-box{
+  .inner-box {
+    .bookAppointment {
+      background: #f5f5f5;
+      @include border-radius(10px);
+      padding: 15px;
+    }
     .form-to {
       @include formTo
     }
@@ -77,8 +90,10 @@
     }
     .appointment-time .item .switch-section {
       margin-top: 20px;
+    } 
+    .rightButtons {
+      @include flex(flex-end, flex-end);
     }
-
   }
 }
 .ant-table-pagination.ant-pagination {
@@ -87,7 +102,6 @@
 .appointment-time .item .switch-section {
   margin-top: 20px;
 }
-
 .login__form {
   .add-field-box {
     display: flex;
@@ -130,4 +144,13 @@
 //     }
 //   }
 // }
-
+.ant-modal-content {
+  .MuiFormControl-root {
+    width: 100%;
+  }
+  .ant-btn {
+    &:hover {
+      color: #fff;
+    }
+  }
+  }

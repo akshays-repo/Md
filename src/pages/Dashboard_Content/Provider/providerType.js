@@ -60,7 +60,7 @@ const ProviderType = props => {
     <div>
       <div className="appointment-type">
         <div className="header">
-          <h2>Provider types</h2>
+          <h4>Provider Types</h4>
           <button
             className="plus-button"
             onClick={() => {

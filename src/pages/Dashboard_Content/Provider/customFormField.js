@@ -154,7 +154,7 @@ const CustomFormField = props => {
   return (
     <div className="custom-field" style={{ minHeight: '500px' }}>
       <div className="d-flex mb4">
-        <h3>CUSTOM FORM FIELD </h3>
+        {/* <h4>CUSTOM FORM FIELD </h4> */}
         <Button className="edit-button" onClick={() => setIsModalVisible(true)}>
           {' '}
           PREVIEW{' '}
@@ -181,22 +181,26 @@ const CustomFormField = props => {
            
               {listCustomField?.map((type, index) => {
                 return (
-                  <div style={{ marginTop: '30px'}} >
+                  <div className="mt8" >
+                    <div className="formGroup">
                     <TextField
                       required={true}
                       label="Please enter this field is required"
                       value={type.Key_name}
                       onChange={e => editOrAddKeyName(e, index)}
                     />
+                    </div>
+                    <div className="rightButtons  mt3">
                     required{' '}
-                    <Switch
+                    <Switch className="ml4"
                       checked={type.required}
                       onChange={e => requiredOrNot(e, index)}
                       size="small"
                     />
-                    <Button onClick={() => deleteItem(index)}>Delete</Button>
+                    <span  class="delete-color icon-button pl3" onClick={() => deleteItem(index)}><i class="fa fa-trash"></i></span>
+                 </div>
                     {type.values?.map((value, i) => (
-                      <div>
+                      <div className="mt4 tableBox">
                         <Input
                           required={true}
                           placeholder="Options "
@@ -204,16 +208,16 @@ const CustomFormField = props => {
                           defaultValue={value}
                           onChange={e => editValue(index, i, e)}
                         />
-                        <Button onClick={e => deleteValue(index, i)}>Delete</Button>
+                        <span  class="delete-color icon-button pl3" onClick={e => deleteValue(index, i)}><i class="fa fa-trash"></i></span>
                       </div>
                     ))}
                     {type.values?.length > 0 && (
-                      <Button onClick={() => insertValue(index)}> Add New Option</Button>
+                      <Button className="mt6 view-button" onClick={() => insertValue(index)}> Add New Option</Button>
                     )}
                   </div>
                 );
               })}
-              {listCustomField?.length > 0 && <Button onClick={handleFormSubmission}>SAVE</Button>}
+              {listCustomField.length > 0 && <Button className="blueDark-button mt8" onClick={handleFormSubmission}>SAVE</Button>}
           
           </form>
           <Dropdown trigger={['click']} overlay={menu}>

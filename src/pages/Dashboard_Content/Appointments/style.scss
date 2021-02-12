@@ -1,4 +1,8 @@
 .appointment-section{
+    .search {
+        @include flex(flex-end , flex-end);
+        margin-bottom: 15px;
+    }
     .title-name {
         font-weight: 600;
         font-size: 14px;

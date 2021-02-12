@@ -29,6 +29,7 @@
       // padding: 10px;
       // margin: 30px;
       margin-bottom: 0;
+      color: #333;
     }
   }
   .message-sentbox {
@@ -43,6 +44,7 @@
         width: 500px;
         border: #e2e2e2;
         outline: none;
+        color: #333;
       }
       input[type=file] {
         display: none;
@@ -51,11 +53,14 @@
         justify-content: space-between;
         border: none;
         color: #ffffff;
-        background-color:#ff5a5f;
+        background-color:#15558d;
         min-width: 46px;
         min-height: 46px;
         border-radius: 50%;
         outline: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     .paper-clip{
         font-size: 34px;
@@ -70,7 +75,7 @@
   justify-content: flex-end;
   .msgbox {
       max-width: 60%;
-      background-color: #bdbdbd;
+      background-color: #dcdcdc;
       padding: 10px;
       border-radius: 15px 0px 15px 15px !important; 
       margin-bottom: 10px;
