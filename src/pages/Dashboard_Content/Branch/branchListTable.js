@@ -32,6 +32,7 @@ const BranchListTable = props => {
   }, [props.Branch]);
 
   const handleCancel = () => {
+    setEditId(null);
     store.dispatch({ type: 'CLOSE_EDIT_BRANCH_MODAL' });
   };
 
@@ -110,14 +111,16 @@ const BranchListTable = props => {
 
   return (
     <div>
-      <Modal
-        title="Edit branch details"
-        onCancel={handleCancel}
-        visible={props.modal1}
-        footer={false}
-      >
-        <BranchCreationForm id={editId} values={editData} {...props} />
-      </Modal>
+      {editId && (
+        <Modal
+          title="Edit branch details"
+          onCancel={handleCancel}
+          visible={props.modal1}
+          footer={false}
+        >
+          <BranchCreationForm id={editId} values={editData} {...props} />
+        </Modal>
+      )}
       {/* <div>
         <Space direction="horizontal">
           <button>Filter</button>

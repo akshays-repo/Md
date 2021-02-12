@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Popover, Row, Col, Button, Divider, Avatar } from 'antd';
 
 export const FilterPopover = props => {
@@ -8,6 +8,19 @@ export const FilterPopover = props => {
   const handleVisibleChange = val => {
     setVisible(val);
   };
+
+  useEffect(() => {
+    if (cancelled) {
+      props.fetchAppointment({
+        provider_id: provider.length > 0 ? [...provider] : [],
+        status: 'cancelled',
+      });
+    } else if (provider.length > 0) {
+      props.fetchAppointment({
+        provider_id: provider.length > 0 ? [...provider] : [],
+      });
+    }
+  }, [provider, cancelled]);
 
   const content = (
     <Row style={{ padding: 0, margin: 0 }}>

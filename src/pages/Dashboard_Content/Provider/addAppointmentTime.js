@@ -84,7 +84,6 @@ const AddAppointmentTime = props => {
             <Form onSubmit={handleSubmit}>
               {values.formData?.map((value, index) => (
                 <Space>
-                  {JSON.stringify(values, null, 2)}
                   <Scheduling
                     values={values.formData}
                     setFieldValue={setFieldValue}

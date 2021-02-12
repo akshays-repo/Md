@@ -4,6 +4,7 @@ const apiKey = 'AIzaSyAqu6fqJ9JMsC83CNtkOje2X-KylbDnoss';
 const language = 'en';
 
 const cors = 'https://cors-anywhere.herokuapp.com/';
+const foodcan = 'https://www.backend.foodcan.org';
 
 export const getPlaceList = async param => {
   return new Promise((resolve, reject) => {
@@ -63,7 +64,7 @@ export const getCurrentLocation = () => {
     navigator.geolocation.getCurrentPosition(
       location => {
         var obj = 'latlng=' + location.coords.latitude + ',' + location.coords.longitude;
-        let _fire = fetch(`/api/backend/v1/coordinates?${obj}`);
+        let _fire = fetch(`${foodcan}/api/backend/v1/coordinates?${obj}`);
         return _fire
           .then(resp => {
             return resp.json().then(res => {

@@ -19,7 +19,8 @@
   }
   .chat {
     background-color: #ececec;
-    min-height: 300px;
+    // min-height: 300px;
+    min-height: calc(100vh - 224px);
     max-height: calc(100vh - 224px);
     overflow-y: scroll;
     overflow-x: hidden;
@@ -31,34 +32,34 @@
     }
   }
   .message-sentbox {
-      margin-top:10px ;
+    margin-top: 10px;
     display: flex;
     justify-content: space-between;
-      input[type="text"] {
-        background-color:#ececec;
-        border-radius: 15px;
-        padding-left: 40px;
-        height: 40px;
-        width: 500px;
-        border: #e2e2e2;
-        outline: none;
-      }
-      input[type=file] {
-        display: none;
+    input[type='text'] {
+      background-color: #ececec;
+      border-radius: 15px;
+      padding-left: 40px;
+      height: 40px;
+      width: 500px;
+      border: #e2e2e2;
+      outline: none;
     }
-    .sent-button{
-        justify-content: space-between;
-        border: none;
-        color: #ffffff;
-        background-color:#ff5a5f;
-        min-width: 46px;
-        min-height: 46px;
-        border-radius: 50%;
-        outline: none;
+    input[type='file'] {
+      display: none;
     }
-    .paper-clip{
-        font-size: 34px;
-        margin-left: 30px;
+    .sent-button {
+      justify-content: space-between;
+      border: none;
+      color: #ffffff;
+      background-color: #ff5a5f;
+      min-width: 46px;
+      min-height: 46px;
+      border-radius: 50%;
+      outline: none;
+    }
+    .paper-clip {
+      font-size: 34px;
+      margin-left: 30px;
     }
   }
 }
@@ -68,14 +69,13 @@
   align-items: flex-end;
   justify-content: flex-end;
   .msgbox {
-      max-width: 60%;
-      background-color: #bdbdbd;
-      padding: 10px;
-      border-radius: 15px 0px 15px 15px !important; 
-      margin-bottom: 10px;
-    }
+    max-width: 60%;
+    background-color: #bdbdbd;
+    padding: 10px;
+    border-radius: 15px 0px 15px 15px !important;
+    margin-bottom: 10px;
   }
-
+}
 
 .rightside-chat {
   width: auto;
@@ -83,11 +83,10 @@
   justify-content: flex-start;
   align-items: flex-start;
   .msgbox {
-      max-width: 60%;
-      border-radius: 0px 15px 15px 15px !important ;
-      background-color: #ffffff;
-      padding: 10px;
-      margin-bottom: 10px;
-
+    max-width: 60%;
+    border-radius: 0px 15px 15px 15px !important ;
+    background-color: #ffffff;
+    padding: 10px;
+    margin-bottom: 10px;
   }
 }
