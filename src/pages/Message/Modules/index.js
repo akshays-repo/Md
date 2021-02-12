@@ -6,8 +6,10 @@ import { Col, message, Row } from 'antd';
 import './style.scss';
 import { DeliveryStatus } from '_constants/message';
 import { connectToSocket, ENDPOINT, socket } from './connectToSocket';
+import { connect } from 'react-redux';
+import { actionCreator } from '../../../reducers/actionCreator';
 
-const MessageLayout = () => {
+const MessageLayout = props => {
   useEffect(() => {
     connectToSocket();
   });
@@ -15,17 +17,19 @@ const MessageLayout = () => {
   const [messageDetails, setMessageDetails] = useState([]);
   const [messageLists, setMessageLists] = useState([]);
 
-  const handleMessageDetails = (messageDetail) => {
-
-    console.log("iiiiiiiiiiiiiiii")
-      setMessageDetails(messageDetail)
-      console.log("mass da",messageDetail)
-  }
+  const handleMessageDetails = (conversationId, lastMessageId = '') => {
+    console.log('Conversation ID', conversationId);
+    console.log('iiiiiiiiiiiiiiii');
+    socket.emit('get_messages', {
+      conversationId: conversationId,
+      lastMessageId: lastMessageId,
+    });
+  };
 
   return (
     <div className="message">
       <div className="messagelist">
-        {/* <button
+        <button
           onClick={() =>
             socket.emit('send_message', {
               userUUID: 'c0f636bc-43d2-4b9c-9efb-530426729be5',
@@ -33,33 +37,39 @@ const MessageLayout = () => {
             })
           }
         >
-          {' '}
-          SEND{' '}
+          SEND
         </button>
-
         <button
           onClick={() =>
             socket.emit('get_message', { convId: 'ae774049-ad14-4192-bf87-1a23f54dfc82' })
           }
         >
-          {' '}
-          GET{' '}
+          GET
         </button>
-
         <button onClick={() => socket.emit('message_summary', 'Hai hai')}>MESSAGE SUMMARY</button>
-
-        <button onClick={() => socket.emit('test', 'Hai')}>TEST</button> */}
-
+        <button onClick={() => socket.emit('test', 'Hai')}>TEST</button>
         <Row>
           <Col xl={8}>
-            <MessageList handleMessageDetails={handleMessageDetails} {...messageLists} />
+            <MessageList {...props} handleMessageDetails={handleMessageDetails} {...messageLists} />
           </Col>
           <Col xl={16}>
-            <MessageDetail {...messageDetails} />
+            <MessageDetail {...messageDetails} {...props} />
           </Col>
         </Row>
       </div>
     </div>
   );
 };
-export default MessageLayout;
+
+const mapStoreToProps = ({ SummaryMessage, Message }) => {
+  return {
+    summary_message: SummaryMessage.payload.length > 0 ? SummaryMessage.payload.reverse() : [],
+    message: Message.payload.length > 0 ? Message.payload.reverse() : [],
+  };
+};
+const mapDispatchToProps = dispatch => ({
+  fetchSummary: id =>
+    dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_SCHEDULE', ...id })),
+});
+
+export default connect(mapStoreToProps, mapDispatchToProps)(MessageLayout);

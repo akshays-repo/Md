@@ -155,7 +155,7 @@ const Dashboard_Calendar = props => {
           ></UnavailableEdit>
         </Col>
         <Col span={2} style={{ marginLeft: -80, height: 50 }}>
-          <FilterPopover provider={props.provider} />
+          <FilterPopover {...props} provider={props.provider} />
         </Col>
       </Row>
     );
@@ -172,11 +172,12 @@ function renderSidebarEvent(event) {
   );
 }
 
-const mapStoreToProps = ({ Provider, Patient }) => {
+const mapStoreToProps = ({ Provider, Patient, Appointment }) => {
   console.log('Store CustomForm', Provider, Patient);
   return {
     provider: Provider.payload,
     patient: Patient.payload,
+    appointment: Appointment.payload,
   };
 };
 
@@ -194,6 +195,8 @@ const mapDispatchToProps = dispatch => ({
     dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_PROVIDER', param })),
   fetchPatient: param =>
     dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_PATIENT', param })),
+  fetchAppointment: param =>
+    dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_APPOINTMENT_HOME', param })),
 });
 
 export default connect(mapStoreToProps, mapDispatchToProps)(Dashboard_Calendar);

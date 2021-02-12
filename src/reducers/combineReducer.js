@@ -6,11 +6,13 @@ import { ProviderReducer as Provider } from './ComponentReducer/provider';
 import { PatientReducer as Patient } from './ComponentReducer/patient';
 import { OnlineBookingReducer as OnlineBooking } from './ComponentReducer/online_booking';
 import { LoginReducer as Login } from './ComponentReducer/login';
-import {CustomFormReducer as CustomForm} from './ComponentReducer/customForm'
+import { CustomFormReducer as CustomForm } from './ComponentReducer/customForm';
 import { ScheduleReducer as Schedule } from './ComponentReducer/schedule';
-import { OnlineBookingFormReducer as OnlineBookingForm} from './ComponentReducer/onlineBookingForm';
-import { AppointmentReducer as Appointment} from './ComponentReducer/appointment';
-import {DashboardReducer as Dashboard} from './ComponentReducer/dashboard'
+import { OnlineBookingFormReducer as OnlineBookingForm } from './ComponentReducer/onlineBookingForm';
+import { AppointmentReducer as Appointment } from './ComponentReducer/appointment';
+import { DashboardReducer as Dashboard } from './ComponentReducer/dashboard';
+import { MesssageReducer as Message } from './ComponentReducer/message';
+import { SummaryMesssageReducer as SummaryMessage } from './ComponentReducer/summary_message';
 
 export const reducers = {
   Hospital,
@@ -25,5 +27,7 @@ export const reducers = {
   Schedule,
   OnlineBookingForm,
   Appointment,
-  Dashboard
+  Dashboard,
+  Message,
+  SummaryMessage,
 };
