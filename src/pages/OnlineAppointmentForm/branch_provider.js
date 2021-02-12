@@ -167,8 +167,8 @@ const BranchProvider = props => {
     <Row>
       <Col span={24}>
         <Row>
-          <Col style={{ fontSize: 16, color: 'black' }} span={20}>
-            Our Offices
+          <Col span={20}>
+            <h5>Our Offices</h5>
           </Col>
           <Col span={4}>
             <Dropdown
@@ -198,32 +198,31 @@ const BranchProvider = props => {
       <Col span={24}>
         {props.branch.map((result, i) => (
           <div key={result.id}>
-            <Row
+            <Row className="officesList"
               onClick={() => {
                 console.log('Clicked', result.id);
                 props.setFieldValue('branch_id', result.id);
               }}
               style={{
-                margin: 5,
-                padding: 20,
+                
                 cursor: 'pointer',
                 backgroundColor: props.values.branch_id === result.id ? '#EDEEEE' : 'white',
               }}
             >
-              <Col span="2">
+              <Col span="1">
                 <Avatar
                   style={{
                     color: 'white',
-                    backgroundColor: '#00CBE6',
+                    backgroundColor: '#15558d',
                   }}
                 >
                   {i + 1}
                 </Avatar>
               </Col>
-              <Col span="20">
+              <Col span="21">
                 <Row>
-                  <Col style={{ fontSize: 12 }} span={24}>
-                    Location
+                  <Col style={{ fontSize: 14 }} span={24}>
+                    <span className="smallText">Location</span>
                   </Col>
 
                   <Col style={{ fontSize: 16 }} span={24}>
@@ -241,7 +240,8 @@ const BranchProvider = props => {
       </Col>
       <Col span={24}>
         <Row align="middle">
-          <Col span="10">AVAILABILITY</Col>
+        <Col span="1"></Col>
+          <Col span="10"><span className="smallText">Availability</span></Col>
           <Col span="13">
             {' '}
             <Carousel ref={timeRef} {...carousel_props}>
@@ -250,7 +250,7 @@ const BranchProvider = props => {
                   <div key={i} style={{ textAlign: 'center', padding: 5 }}>
                     <label style={{ margin: '0px 8px' }}>{result.day}</label>
                     <br />
-                    <label style={{ fontSize: '18px' }}>{result.dm}</label>
+                    <label className="datebold">{result.dm}</label>
                   </div>
                 );
               })}
