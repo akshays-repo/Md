@@ -102,7 +102,20 @@
     background-color: #15558d;
   }
   }
+@mixin blueDark-button {
+  @include button;
+  background-color: $blueDark;
+  color: $white;
+  &:active,
+  &:focus {
+    background-color: $blueDark;
+  color: $white;
+  }
+  &:hover {
+    background-color: #095191;
+  }
 
+}
 @mixin common-button {
   @include button;
   background-color: $view-button; 

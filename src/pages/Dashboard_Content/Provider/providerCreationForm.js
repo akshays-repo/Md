@@ -101,7 +101,7 @@ const ProviderCreationForm = props => {
       >
         {({ handleSubmit, touched, errors, isSubmitting }) => (
           <Form  className="login__form" handleSubmit={handleSubmit}>
-            <Row>
+            <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
               {generateForm(formField)}
               <Col xs={24} xl={12}>
                 <p>Please Select the Branch</p>
@@ -126,7 +126,6 @@ const ProviderCreationForm = props => {
               <Field
                   as="select"
                   name="provider_typeId"
-                  style={{ width: '80%' }}
                   placeholder="Provider type"
                   component={matSeclect}
                 >

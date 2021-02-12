@@ -13,7 +13,8 @@ export const generateForm = formField => {
           <Col key={index} xs={24} xl={12}>
             <label>{values.label}</label>
             <p>
-              <Field  style={{ width: '90%' }} component={TextField} name={values.name} placeholder="" type="text"></Field>
+            {/* <Field  style={{ width: '90%' }} component={TextField} name={values.name} placeholder="" type="text"></Field> */}
+              <Field  component={TextField} name={values.name} placeholder="" type="text"></Field>
             </p>
           </Col>
         );
@@ -23,7 +24,7 @@ export const generateForm = formField => {
             <label>{values.label}</label>
             <p>
               <Field
-                style={{ width: '90%' }}
+                // style={{ width: '90%' }}
                 component={MatSelect}
                 name={values.name}
                 placeholder=""
@@ -46,7 +47,7 @@ export const generateForm = formField => {
             <label>{values.label}</label>
             <p>
               <Field
-                style={{ width: '90%' }}
+                // style={{ width: '90%' }}
                 component={TextField}
                 name={values.name}
                 placeholder=""

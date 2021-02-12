@@ -89,6 +89,7 @@ const Dashboard_Provider = props => {
           title="CUSTOM FORM FIELD"
           footer={false}
           visible={props.CustomFormmodal}
+          width={650}
           onCancel={() => store.dispatch({ type: 'CLOSE_CUSTOMFORM_CREATE_MODAL' })}
           destroyOnClose
         >
