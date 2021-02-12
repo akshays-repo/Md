@@ -22,6 +22,9 @@ const CustomFormField = props => {
   const handleMenuClick = e => {
     let text = e.key;
     let values = [];
+    // if(listCustomField.length === 0){
+    //     listCustomField.push(null)
+    // }
     if (text === 'checkbox' || text === 'drop-down') {
       values = [null];
     }
@@ -33,10 +36,14 @@ const CustomFormField = props => {
 
   useEffect(() => {
     setListCustomField(props.CustomForm.custom_form);
+    console.log("smaasdmmdsadsd llop out", props.CustomForm.custom_form);
+    // if(listCustomField.length === 0){
+    //   console.log("smaasdmmdsadsd llooopppz");
+    //   setListCustomField([{ custom_types: 'text', required: true, Key_name: '',}])}
   }, []);
 
   useEffect(() => {
-    console.log('****!!*** state', listCustomField);
+    console.log('smaasdmmdsadsd', listCustomField);
   }, [listCustomField]);
 
   const handleFormSubmission = async values => {
@@ -85,7 +92,6 @@ const CustomFormField = props => {
 
   //THIS WILL EDIT OR ADD Key_Name
   const editOrAddKeyName = (e, index) => {
-    console.log('shhdashgd', index);
     let items = [...listCustomField];
     let item = { ...items[index] };
     item.Key_name = e.target.value;
@@ -135,13 +141,9 @@ const CustomFormField = props => {
     let values = item.values;
 
     values = values.filter((item, i) => i !== indexChild);
-    console.log('****!!***', values);
     item.values = values;
-    console.log('****!!***', item);
     items[indexParent] = item;
-    console.log('****!!***', items);
     setListCustomField(items);
-    console.log('****!!***', listCustomField);
   };
 
   //THIS WILL DELETE FORM
@@ -208,7 +210,12 @@ const CustomFormField = props => {
                           defaultValue={value}
                           onChange={e => editValue(index, i, e)}
                         />
-                        <span  class="delete-color icon-button pl3" onClick={e => deleteValue(index, i)}><i class="fa fa-trash"></i></span>
+                        {}
+                        {
+                        type.values?.length > 1 &&  <span  class="delete-color icon-button pl3" onClick={e => deleteValue(index, i)}><i class="fa fa-trash"></i></span>
+                         
+                        }
+                        {/* <span  class="delete-color icon-button pl3" onClick={e => deleteValue(index, i)}><i class="fa fa-trash"></i></span> */}
                       </div>
                     ))}
                     {type.values?.length > 0 && (

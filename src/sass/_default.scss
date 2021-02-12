@@ -1,169 +1,203 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  color: $textcolor;
 
-  body {
-    font-family: 'Roboto', sans-serif;
+  ::-webkit-scrollbar {
+    width: 7px;
+  }
+
+  .pending {
+    color: #d83810;
+  }
+
+  .failed {
+    color:#fc3503
+  }
+
+  .paid {
+    color: #26ad00
+  }
+
+  .requested {
+    color: #032cfc
+  }
+
+  .manually_paid {
+    color: #26ad00
+  }
+
+
+  .pending{color: #d83810;} 
+  .confirmed{ color: #26ad00}
+   .cancelled{color: #d83810;} 
+   .completed{ color: #26ad00}
+
+
+
+
+
+
+
+
+
+
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+  .circular-square {
+    @include circular--square;
+  }
+  .lead {
+    font-size: 1.2rem !important;
+  }
+  .d-block {
+    display: block;
+  }
+  .icon-button {
+    cursor: pointer;
+  }
+  .plus-button {
+    @include plus-button;
+  }
+  a,
+  p,
+  td {
+    font-size: 13px;
     color: $textcolor;
-
-    ::-webkit-scrollbar {
-      width: 7px;
-    }
-  
-    /* Track */
-    ::-webkit-scrollbar-track {
-      background: #f1f1f1;
-    }
-  
-    /* Handle */
-    ::-webkit-scrollbar-thumb {
-      background: #888;
-    }
-  
-    /* Handle on hover */
-    ::-webkit-scrollbar-thumb:hover {
-      background: #555;
-    }
-    .circular-square {
-      @include circular--square;
-    }
-    .lead {
-      font-size: 1.2rem!important;
-    }
-    .d-block {
-      display: block;
-    }  
-    .icon-button {
-        cursor: pointer;
-    }
-    .plus-button {
-        @include plus-button;
-    }
-    a,
-    p,
-    td {
-      font-size: 13px;
-      color: $textcolor;
-    }
-    .delete-color {
-      color: #E43E42;
+  }
+  .delete-color {
+    color: #e43e42;
   }
   .edit-color {
-      color: #20c0f3;
+    color: #20c0f3;
   }
   .view-color {
-      color: #1a568b;
+    color: #1a568b;
   }
   .success {
     color: $success;
   }
-    .edit-button {
-      @include edit-button;
-    }
-    .delete-button {
-      @include delete-button;
-    }
-    .view-button {
-      @include view-button;
-    }
-    .accept-button {
-      @include accept-button;
-    }
-    .d-flex {
-      @include flex(space-between, center);
-    }
-    .text-center {
-      @include text-center;
-    }
-    .blueDark-button {
-      @include blueDark-button;
-    }
-    .ant-table-thead .ant-table-cell {
-        color: rgb(120, 129, 149);
-        background-color: rgb(241, 243, 246);
-        border-bottom: 0px;
-        border-top: 1px solid #ececec;
-        border-bottom: 1px solid #ececec;
-    }
-    .form-control {
-      @include formInput;
-    }
-    .selectBox {
-      @include selectBox;
-    }
+  .edit-button {
+    @include edit-button;
+  }
+  .delete-button {
+    @include delete-button;
+  }
+  .view-button {
+    @include view-button;
+  }
+  .accept-button {
+    @include accept-button;
+  }
+  .d-flex {
+    @include flex(space-between, center);
+  }
+  .text-center {
+    @include text-center;
+  }
+  .blueDark-button {
+    @include blueDark-button;
+  }
+  .ant-table-thead .ant-table-cell {
+    color: rgb(120, 129, 149);
+    background-color: rgb(241, 243, 246);
+    border-bottom: 0px;
+    border-top: 1px solid #ececec;
+    border-bottom: 1px solid #ececec;
+  }
+  .form-control {
+    @include formInput;
+  }
+  .selectBox {
+    @include selectBox;
+  }
 
-    .fullwidth {
-      width: $full-width; 
+  .fullwidth {
+    width: $full-width;
+  }
+  .fullwidth-right {
+    @include flex(flex-end, flex-end);
+  }
+  .pageTitle {
+    background: #fff;
+    padding: 20px;
+    margin-bottom: 1rem;
+    h4 {
+      margin-bottom: 0;
     }
-    .fullwidth-right {
-      @include flex(flex-end, flex-end);
-    }
-    .pageTitle {
-      background: #fff;
-      padding: 20px;
-      margin-bottom: 1rem;
-      h4 {
-        margin-bottom: 0;
-      }
-    }
-    .ant-modal-content {
-      @include border-radius(10px);
-        .ant-modal-header {
-            padding: 13px 16px;
-    background: rgb(250, 250, 250);
-    color: rgb(50, 51, 50);
-    border-bottom: 1px solid rgb(233, 233, 233);
-    border-radius: 4px 4px 0px 0px;
+  }
+  .ant-modal-content {
+    @include border-radius(10px);
+    .ant-modal-header {
+      padding: 13px 16px;
+      background: rgb(250, 250, 250);
+      color: rgb(50, 51, 50);
+      border-bottom: 1px solid rgb(233, 233, 233);
+      border-radius: 4px 4px 0px 0px;
       .ant-modal-title {
         font-weight: 600;
         font-size: 20px;
         line-height: 30px;
       }
-
     }
 
     .ant-modal-body {
       form {
-        background:transparent!important;
+        background: transparent !important;
         .title {
-           @include flex(start, center);
-           margin-top: 30px;
-           input:focus {
+          @include flex(start, center);
+          margin-top: 30px;
+          input:focus {
             outline: none;
-           }
-           span {
-             display: inline-block;
-             margin-left: 15px;
-           }
+          }
+          span {
+            display: inline-block;
+            margin-left: 15px;
+          }
         }
       }
     }
     .mt-5 {
       margin-top: 30px;
     }
-    }
-    .ant-pagination {
-      .ant-pagination-disabled {
-        .ant-pagination-item-link {
-          color: #333;
-          background-color: #dedede;
-        }
+  }
+  .ant-pagination {
+    .ant-pagination-disabled {
+      .ant-pagination-item-link {
+        color: #333;
+        background-color: #dedede;
       }
-  
-  .ant-pagination-item-active {
-    background: #15558d;
-    border-color: #15558d;
-    &:hover {
-      background-color: #20c0f3;
-      border-color: #20c0f3;
     }
-    a {
-    color: #fff!important;
+
+    .ant-pagination-item-active {
+      background: #15558d;
+      border-color: #15558d;
+      &:hover {
+        background-color: #20c0f3;
+        border-color: #20c0f3;
+      }
+      a {
+        color: #fff !important;
+      }
+    }
+    .ant-pagination-item {
+      a {
+        color: #9a9a9a;
+      }
     }
   }
-  .ant-pagination-item  {
-  a {
-    color: #9a9a9a;
-  }
-}
-}
 
   .MuiInputBase-input {
     font-size: 14px;
@@ -172,9 +206,9 @@
   .ant-select:not(.ant-select-customize-input) {
     .ant-select-selector {
       border: 1px solid #d9d9d9;
-}
-}
-.MuiInput-root {
-  width: 100%;
-}
+    }
+  }
+  .MuiInput-root {
+    width: 100%;
+  }
 }

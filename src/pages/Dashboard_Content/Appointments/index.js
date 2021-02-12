@@ -105,12 +105,13 @@ const Dashboard_Appointments = props => {
               defaultValue={record.payment_status}
               style={{ width: 120 }}
               onChange={e => handleChangePaymentStatus(record.id, e)}
+              className={record.payment_status}
             >
-              <Option value="pending">Pending</Option>
-              <Option value="failed">Failed</Option>
-              <Option value="paid">Paid</Option>
-              <Option value="requested">Requested</Option>
-              <Option value="manually_paid">Manually Paid</Option>
+              <Option className={"pending"}  value="pending">Pending</Option>
+              <Option className={"failed"}  value="failed">Failed</Option>
+              <Option className={"paid"}  value="paid">Paid</Option>
+              <Option className={"requested"}  value="requested">Requested</Option>
+              <Option className={"manually_paid"}  value="manually_paid">Manually Paid</Option>
             </Select>
           </div>
         ),
@@ -124,12 +125,13 @@ const Dashboard_Appointments = props => {
             <Select
               defaultValue={record.status}
               style={{ width: 120 }}
+              className={record.status}
               onChange={e => handleChangeStatus(record.id, e)}
             >
-              <Option value="pending">Pending</Option>
-              <Option value="confirmed">Confirmed</Option>
-              <Option value="cancelled">Cancelled</Option>
-              <Option value="completed">Completed</Option>
+              <Option   className={"pending"}  value="pending">Pending</Option>
+              <Option   className={"confirmed"}  value="confirmed">Confirmed</Option>
+              <Option   className={"cancelled"}  value="cancelled">Cancelled</Option>
+              <Option   className={"completed"} value="completed">Completed</Option>
             </Select>
           </div>
         ),
@@ -172,7 +174,12 @@ const Dashboard_Appointments = props => {
       <div className="appointment-section">
         <div className="search">
           <Space direction="horizontal">
-            <Input value={searchKey} type="text" placeholder=" Name Email or Phone" onChange={handleChangeSearch} />
+            <Input
+              value={searchKey}
+              type="text"
+              placeholder=" Name Email or Phone"
+              onChange={handleChangeSearch}
+            />
 
             <DatePicker
               placeholder="From Date"
@@ -184,7 +191,7 @@ const Dashboard_Appointments = props => {
             />
 
             <Select
-            value={paymentStatus}
+              value={paymentStatus}
               placeholder="Payment"
               onChange={e => setPaymentStatus(e)}
               style={{ width: 120 }}
@@ -196,7 +203,12 @@ const Dashboard_Appointments = props => {
               <Option value="manually_paid">Manually Paid</Option>
             </Select>
 
-            <Select value={branchId} onChange={e => setBranchId(e)} placeholder="Branch" style={{ width: 120 }}>
+            <Select
+              value={branchId}
+              onChange={e => setBranchId(e)}
+              placeholder="Branch"
+              style={{ width: 120 }}
+            >
               {props.branch?.map(branch => (
                 <Option key={branch.id} value={branch.id}>
                   {branch.fullName}
@@ -204,7 +216,12 @@ const Dashboard_Appointments = props => {
               ))}
             </Select>
 
-            <Select value={status} placeholder="status" onChange={e => setStatus(e)} style={{ width: 120 }}>
+            <Select
+              value={status}
+              placeholder="status"
+              onChange={e => setStatus(e)}
+              style={{ width: 120 }}
+            >
               <Option value="pending">Pending</Option>
               <Option value="confirmed">Confirmed</Option>
               <Option value="cancelled">Cancelled</Option>
