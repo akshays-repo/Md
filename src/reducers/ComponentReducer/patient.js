@@ -41,7 +41,7 @@ export const PatientReducer = (state = PatientState, action) => {
         message: action.message,
       };
     case 'FILTER_PATIENT':
-      return { error: action.error, payload: action.payload.rows, message: action.message };
+      return { error: action.error, payload: action.payload.rows, message: action.message , changed: false};
     case 'DELETE_PATIENT':
       message.success('PATIENT DELETED SUCCESSFULLY');
       return { ...state, error: action.error, changed: true, message: action.message };
