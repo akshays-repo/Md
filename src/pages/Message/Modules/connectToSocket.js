@@ -23,6 +23,9 @@ export const connectToSocket = async () => {
   });
 
   socket.on('incoming', data => {
+    store.dispatch({ type: 'SET_LATEST_INCOMING_MESSAGE_SUMMARY', payload: data.message });
+    store.dispatch({ type: 'SET_INCOMING_MESSAGE', payload: data.message });
+
     console.log('message incoming', data);
   });
 
@@ -31,16 +34,13 @@ export const connectToSocket = async () => {
   });
 
   socket.on('message_summary_success', data => {
-    console.log('Checking');
     store.dispatch({ type: 'SET_MESSAGE_SUMMARY', payload: data });
     console.log('message message_summary_sucess', data);
   });
 
   socket.on('send_message_success', data => {
-    // store.dispatch({ type: 'SET_MESSAGE', payload: data });
     store.dispatch({ type: 'SET_MESSAGE', payload: data.message });
     store.dispatch({ type: 'SET_LATEST_MESSAGE_SUMMARY', payload: data.message });
-
     console.log('message send_message_success', data);
   });
 

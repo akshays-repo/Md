@@ -19,11 +19,7 @@ const MessageLayout = props => {
   const [messageLists, setMessageLists] = useState([]);
   const [receiverId, setReceiverId] = useState();
   const handleMessageDetails = (conversationId, lastMessageId = '', receiverID) => {
-    console.log('Conversation ID', conversationId);
-    console.log('Conversation ID', receiverID);
     store.dispatch({ type: 'CLEAR_MESSAGE' });
-
-    console.log('iiiiiiiiiiiiiiii');
     setReceiverId(receiverID);
     socket.emit('get_messages', {
       conversationId: conversationId,

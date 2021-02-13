@@ -40,6 +40,39 @@ export const SummaryMesssageReducer = (state = SummaryMessageState, action) => {
         message: action.message,
         changed: true,
       };
+    case 'SET_LATEST_INCOMING_MESSAGE_SUMMARY':
+      let message;
+      let checkConversation = state.payload.filter(
+        (result, i) => result.conversationId === action.payload.conversationId,
+      ).length;
+      if (check.length > 0) {
+        message = state.payload.map((result, i) => {
+          if (result.conversationId === action.payload.conversationId) {
+            return action.payload;
+          } else {
+            return result;
+          }
+        });
+      } else {
+        state.payload = [...state.payload, action.payload];
+        message = state.payload.map((result, i) => {
+          if (result.conversationId === action.payload.conversationId) {
+            return action.payload;
+          } else {
+            return result;
+          }
+        });
+      }
+
+      message.sort((a, b) => b.id - a.id);
+
+      return {
+        ...state,
+        error: action.error,
+        payload: message,
+        message: action.message,
+        changed: true,
+      };
     default:
       return state;
   }
