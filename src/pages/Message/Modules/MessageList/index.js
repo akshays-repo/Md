@@ -36,7 +36,7 @@ const MessageList = props => {
                 handleMessageDetails={() =>
                   props.handleMessageDetails(
                     data.conversationId,
-                    data.id,
+                    '',
                     data.senderId === '4c763a46-5490-47d1-b32f-ab66c5edd494'
                       ? data.recieverId
                       : data.senderId,
