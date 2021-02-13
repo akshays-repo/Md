@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Tag, Space, Modal, Button, Popconfirm, Dropdown } from 'antd';
+import { Table, Tag, Space, Modal, Button, Popconfirm, Dropdown, Select } from 'antd';
 import { store } from '../../../reducers/configureStore';
 import Menu from 'components/Menu';
 
@@ -36,9 +36,9 @@ const BranchListTable = props => {
     store.dispatch({ type: 'CLOSE_EDIT_BRANCH_MODAL' });
   };
 
-  const handleMenuClick = async e => {
-    const values = await getFormData({ ...editData, userTypeId: 3, status: e.key });
-    props.editBranch(editId, values);
+  const handleMenuClick = async( e , id , data) => {
+    const values = await getFormData({ ...data, userTypeId: 3, status: e });
+    props.editBranch(id, values);
   };
   const menu = <Menu items={menuItems} onClick={handleMenuClick} />;
 
@@ -63,33 +63,32 @@ const BranchListTable = props => {
       dataIndex: 'address',
       key: 'address',
     },
-    
+
     {
       title: 'Status',
       key: 'status',
       dataIndex: 'status',
 
       render: (text, record) => {
-        console.log('Record', record);
-        let badge = 'badge-success';
-        if (record.status === 'hold') badge = 'badge-danger';
         return (
-          <Dropdown
-            overlay={menu}
-            // ref={this.clickId}
-            id={record.id}
-            onClick={() => {
-              setEditId(record.id);
-              setEditData(record);
-            }}
-            trigger={['click']}
-          >
-            <span className={`font-size-12 badge ${badge} 'badgeText'`}>
-              {text == 'active' ? 'Active' : 'Hold'} &nbsp;
-              <DownOutlined />
-              {/* <Icon type="down" /> */}
-            </span>
-          </Dropdown>
+          <Space size="middle">
+            <Select
+              style={record.status === 'active' ? { color: 'green' } : { color: 'red' }}
+              defaultValue={record.status}
+              onChange={e => {
+                setEditId(record.id);
+                setEditData(record);
+                handleMenuClick(e , record.id , record);
+              }}
+            >
+              <Select.Option style={{ color: 'green' }} value="active">
+                Active
+              </Select.Option>
+              <Select.Option style={{ color: 'red' }} value="hold">
+                Hold
+              </Select.Option>
+            </Select>
+          </Space>
         );
       },
     },

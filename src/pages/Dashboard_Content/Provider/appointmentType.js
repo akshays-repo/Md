@@ -20,7 +20,7 @@ const AppointmentTypes = props => {
 
   const handleFormSubmission = async values => {
     try {
-      values = JSON.stringify({ ...values, branchId: 3 });
+      values = JSON.stringify({ ...values});
       if (editId) {
         props.editAppointmentType(editId, values);
       } else {
@@ -69,7 +69,7 @@ const AppointmentTypes = props => {
 
   useEffect(() => {
  
-    props.fetchAppointmentType({ branchId: 3 ,page:1 ,limit:100 });
+    props.fetchAppointmentType({ page:1 ,limit:100 });
   }, [props.changed]);
   
   return (

@@ -21,27 +21,33 @@
 }
 
 .card-section {
+    
     .ant-list {
         .ant-list-item {
           margin-bottom: 25px;
+         
           .ant-card{
-            
+            padding: 0px  !important;
+           
           .ant-card-body {
               @include flex(center, center);
+            
             flex: 1;
             box-shadow: 0 8px 15px #dcdfe6;
-            padding: 15px !important;
-            min-height: 90px;
+            padding: 0px  !important;
+            min-height: 50px;
             .inline-card-item{
                 flex: 1;
-                @include flex(space-between, center);
-    .count-round-bg {
-        width: 55px;
+                @include flex(flex-start, center);
+    .count-square-bg {
+        @include border-radius(5px);
+        width: 60px;
         height: 55px;
-        @include border-radius(100px);
+       // @include border-radius(100px);
         background-color: rgb(66, 165, 246);
         @include flex(center, center);
         color: $white;
+        margin-right: 10px;
         font: 600;
 }
 }

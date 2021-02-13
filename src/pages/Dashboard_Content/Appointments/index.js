@@ -6,7 +6,7 @@ import { store } from '../../../reducers/configureStore';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import AppointmentView from './appointmentView';
-import AppointmentEdit from './appointmentView';
+import AppointmentEdit from './appointmentEdit';
 
 const { Option } = Select;
 
@@ -68,6 +68,12 @@ const Dashboard_Appointments = props => {
     const handleChangeStatus = async (id, status) => {
       props.editStatusAppointment(id, { status });
     };
+
+    const handleAppointmentEdit = async (id) =>{
+      await props.viewAppointment(id);
+      setViewId(id);
+      store.dispatch({ type: 'OPEN_EDIT_APPOINTMENT_MODAL' });
+    }
 
     const columns = [
       {
@@ -150,7 +156,7 @@ const Dashboard_Appointments = props => {
             </span>
             <span
               className="edit-color icon-button"
-              onClick={() => store.dispatch({ type: 'OPEN_EDIT_APPOINTMENT_MODAL' })}
+              onClick={() => handleAppointmentEdit(record.id)}
             >
               {' '}
               <i className="fa fa-edit"></i>{' '}

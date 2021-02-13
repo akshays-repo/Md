@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Formik, Form, Field } from 'formik';
 import { ProviderCreationSchema } from '_utils/Schemas';
-import { Button, Row, Select, Col } from 'antd';
+import { Button, Row, Select, Col, DatePicker } from 'antd';
 import { Select as matSeclect } from 'formik-material-ui';
 import MenuItem from '@material-ui/core/MenuItem';
 import { generateForm } from '../../../_utils/formgenerator';
@@ -11,7 +11,14 @@ import { store } from '../../../reducers/configureStore';
 const { Option } = Select;
 
 const AppointmentEdit = props => {
-  const handleFormSubmission = () => {};
+  useEffect(() => {
+    console.log('jcxcxkcxcj', props.view);
+  });
+
+  const handleFormSubmission = async (values) => {
+
+    console.log("asdkjhf",values)
+  };
 
   const formField = [
     {
@@ -58,73 +65,55 @@ const AppointmentEdit = props => {
   ];
 
   return (
-    // <div>
-    //   <Formik
-    //     enableReinitialize={true}
-    //     initialValues={
-    //       {
-    //         //appointment_end---: '',
-    //         appointment_for: '',
-    //        //appointment_start---: '',
-    //         branch_id---:'' ,
-    //         charge---: '',
-    //         comment---: '',
-    //         email: '',
-    //         firstName: '',
-    //         lastName: '',
-    //         patiant_id: '',
-    //         payment_status: '',
-    //         //phone: '',
-    //         status: '',
-    //       }
-    //     }
-    //     validationSchema={ProviderCreationSchema}
-    //     onSubmit={handleFormSubmission}
-    //   >
-    //     {({ handleSubmit, touched, errors, isSubmitting }) => (
-    //       <Form className="login__form" handleSubmit={handleSubmit}>
-    //         <Row>
-    //           {/* {generateForm(formField)} */}
-    //           <Col xs={24} xl={12}>
-    //             <p>Please Select the Branch</p>
-    //             <Select
-    //               mode="multiple"
-    //               allowClear
-    //               style={{ width: '100%' }}
-    //               placeholder="Please select the Branch"
-    //               // onChange={handleChange}
-    //             ></Select>
-    //           </Col>
+    <div>
+      <Formik
+        enableReinitialize={true}
+        initialValues={
+          props.values || {
+            appointment_end: '',
+            appointment_for: '',
+            appointment_start: '',
+            charge: '',
+            comment: '',
+            payment_status: '',
+            status: '',
+          }
+        }
+        //validationSchema={ProviderCreationSchema}
+        onSubmit={handleFormSubmission}
+      >
+        {({ handleSubmit, touched, errors, isSubmitting }) => (
+          <Form className="login__form" handleSubmit={handleSubmit}>
+            <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+              <DatePicker
+                showTime
+                //onChange={onChange}
+                //onOk={onOk}
+                name="appointment_start"
+                placeholder="Start Date"
+              />
+              <DatePicker
+                showTime
+                //onChange={onChange}
+                //onOk={onOk}
+                name="appointment_end"
+                placeholder="End Date"
+              />
+            </Row>
 
-    //           <Col xs={24} xl={12}>
-    //             <p>Please Select the Provider Type</p>
-    //             <Field
-    //               as="select"
-    //               name="provider_typeId"
-    //               style={{ width: '80%' }}
-    //               placeholder="Provider type"
-    //               component={matSeclect}
-    //             >
-    //               {props.ProviderTypePayload?.map(branch => {
-    //                 return <MenuItem value={branch.id}>{branch.name}</MenuItem>;
-    //               })}
-    //             </Field>
-    //           </Col>
-    //         </Row>
+            <Button
+              htmlType="submit"
+              disabled={isSubmitting}
+              className="view-button button-square mt-5"
+            >
+              {' Edit a Appointment'}
+            </Button>
+          </Form>
+        )}
+      </Formik>
+    </div>
 
-    //         <Button
-    //           htmlType="submit"
-    //           disabled={isSubmitting}
-    //           className="view-button button-square mt-5"
-    //         >
-    //           {props.id ? ' Edit a Provider' : ' Create a New Provider'}
-    //         </Button>
-    //       </Form>
-    //     )}
-    //   </Formik>
-    // </div>
-
-    <div> <span style={{color:"red"}}> Sorry! </span> Currently, this feature is not available</div>
+    // <div> <span style={{color:"red"}}> Sorry! </span> Currently, this feature is not available</div>
   );
 };
 

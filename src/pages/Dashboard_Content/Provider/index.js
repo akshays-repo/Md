@@ -30,7 +30,7 @@ const Dashboard_Provider = props => {
   
   useEffect(() => {
     props.fetchBranch({ hospitalId: localStorage.getItem('hospital_id'), page: 1, limit: 50 });
-    props.fetchAppointmentType({ branchId: 3 });
+    props.fetchAppointmentType({page:1 , limit:100  });
   });
 
   const HeaderSection = () => {

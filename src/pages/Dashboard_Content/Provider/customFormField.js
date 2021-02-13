@@ -171,10 +171,11 @@ const CustomFormField = props => {
                 return (
                   <div className="mt8" >
                     <div className="formGroup">
+                      <p>Type :{type.custom_types}</p>
                     <TextField
-                      required={true}
+                      required
                       label="Please enter this field is required"
-                      value={type.Key_name}
+                      value={type.Key_name !== '' ? type.Key_name :null}
                       onChange={e => editOrAddKeyName(e, index)}
                     />
                     </div>
@@ -189,7 +190,7 @@ const CustomFormField = props => {
                  </div>
                     {type.values?.map((value, i) => (
                       <div className="mt4 tableBox">
-                        <Input
+                        <TextField
                           required={true}
                           placeholder="Options "
                           style={{ width: '60%' }}
@@ -210,7 +211,7 @@ const CustomFormField = props => {
                   </div>
                 );
               })}
-              {listCustomField?.length > 0 && <Button className="blueDark-button mt8" onClick={handleFormSubmission}>SAVE</Button>}
+              {/* {listCustomField?.length > 0 && <Button className="blueDark-button mt8" onClick={handleFormSubmission}>SAVE</Button>} */}
               <Button className="blueDark-button mt8" onClick={handleFormSubmission}>SAVE</Button>
           
           </form>
