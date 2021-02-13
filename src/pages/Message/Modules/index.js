@@ -8,6 +8,7 @@ import { DeliveryStatus } from '_constants/message';
 import { connectToSocket, ENDPOINT, socket } from './connectToSocket';
 import { connect } from 'react-redux';
 import { actionCreator } from '../../../reducers/actionCreator';
+import { store } from '../../../reducers/configureStore';
 
 const MessageLayout = props => {
   useEffect(() => {
@@ -16,10 +17,14 @@ const MessageLayout = props => {
 
   const [messageDetails, setMessageDetails] = useState([]);
   const [messageLists, setMessageLists] = useState([]);
-
-  const handleMessageDetails = (conversationId, lastMessageId = '') => {
+  const [receiverId, setReceiverId] = useState();
+  const handleMessageDetails = (conversationId, lastMessageId = '', receiverID) => {
     console.log('Conversation ID', conversationId);
+    console.log('Conversation ID', receiverID);
+    store.dispatch({ type: 'CLEAR_MESSAGE' });
+
     console.log('iiiiiiiiiiiiiiii');
+    setReceiverId(receiverID);
     socket.emit('get_messages', {
       conversationId: conversationId,
       lastMessageId: lastMessageId,
@@ -29,7 +34,7 @@ const MessageLayout = props => {
   return (
     <div className="message">
       <div className="messagelist">
-        <button
+        {/* <button
           onClick={() =>
             socket.emit('send_message', {
               userUUID: 'c0f636bc-43d2-4b9c-9efb-530426729be5',
@@ -47,13 +52,13 @@ const MessageLayout = props => {
           GET
         </button>
         <button onClick={() => socket.emit('message_summary', 'Hai hai')}>MESSAGE SUMMARY</button>
-        <button onClick={() => socket.emit('test', 'Hai')}>TEST</button>
+        <button onClick={() => socket.emit('test', 'Hai')}>TEST</button> */}
         <Row>
           <Col xl={8}>
             <MessageList {...props} handleMessageDetails={handleMessageDetails} {...messageLists} />
           </Col>
           <Col xl={16}>
-            <MessageDetail {...messageDetails} {...props} />
+            <MessageDetail {...messageDetails} {...props} receiverID={receiverId} />
           </Col>
         </Row>
       </div>

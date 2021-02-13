@@ -2,7 +2,7 @@ import socketIOClient from 'socket.io-client';
 import { DeliveryStatus } from '_constants/message';
 import { store } from '../../../reducers/configureStore';
 
-export const ENDPOINT = 'https://fe413a80a044.ngrok.io';
+export const ENDPOINT = 'http://localhost:3020';
 export const socket = socketIOClient(ENDPOINT);
 
 export const connectToSocket = async () => {

@@ -1,5 +1,4 @@
 import { MessageState } from '../ComponentState/message';
-import { message } from 'antd';
 
 /**
  * @param state
@@ -11,10 +10,13 @@ export const MesssageReducer = (state = MessageState, action) => {
     case 'CLEAR_MESSAGE':
       return { ...state, payload: [] };
     case 'SET_MESSAGE':
+      const message =
+        state.payload.length > 0 ? [...state.payload, action.payload] : action.payload;
+      message.sort((a, b) => a.id - b.id);
       return {
         ...state,
         error: action.error,
-        payload: state.payload.length > 0 ? [...state.payload, action.payload] : action.payload,
+        payload: message,
         message: action.message,
         changed: true,
       };
