@@ -259,7 +259,7 @@ const Dashboard_Appointments = props => {
         footer={false}
         onCancel={() => store.dispatch({ type: 'CLOSE_EDIT_APPOINTMENT_MODAL' })}
       >
-        <AppointmentEdit {...props} />
+        {/* <AppointmentEdit {...props} /> */}
       </Modal>
       <Dashboard_Content content={Appointments()} />;
     </div>

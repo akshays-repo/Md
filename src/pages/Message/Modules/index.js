@@ -18,6 +18,7 @@ const MessageLayout = props => {
   const [messageDetails, setMessageDetails] = useState([]);
   const [messageLists, setMessageLists] = useState([]);
   const [receiverId, setReceiverId] = useState();
+  
   const handleMessageDetails = (conversationId, lastMessageId = '', receiverID) => {
     store.dispatch({ type: 'CLEAR_MESSAGE' });
     setReceiverId(receiverID);
