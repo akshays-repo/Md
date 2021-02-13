@@ -41,11 +41,10 @@ export const SummaryMesssageReducer = (state = SummaryMessageState, action) => {
         changed: true,
       };
     case 'SET_LATEST_INCOMING_MESSAGE_SUMMARY':
-      let message;
       let checkConversation = state.payload.filter(
         (result, i) => result.conversationId === action.payload.conversationId,
       ).length;
-      if (check.length > 0) {
+      if (checkConversation.length > 0) {
         message = state.payload.map((result, i) => {
           if (result.conversationId === action.payload.conversationId) {
             return action.payload;

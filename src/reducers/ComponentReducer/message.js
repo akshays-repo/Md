@@ -6,13 +6,11 @@ import { MessageState } from '../ComponentState/message';
  */
 
 export const MesssageReducer = (state = MessageState, action) => {
+  let checkConversationID;
   switch (action.type) {
     case 'CLEAR_MESSAGE':
       return { ...state, payload: [] };
     case 'SET_MESSAGE':
-      const checkConversationID = state.payload.filter(
-        result => result.conversationId === action.payload.conversationId,
-      );
       const message =
         state.payload.length > 0 ? [...state.payload, action.payload] : action.payload;
       message.sort((a, b) => a.id - b.id);
@@ -24,7 +22,7 @@ export const MesssageReducer = (state = MessageState, action) => {
         changed: true,
       };
     case 'SET_INCOMING_MESSAGE':
-      const checkConversationID = state.payload.filter(
+      checkConversationID = state.payload.filter(
         result => result.conversationId === action.payload.conversationId,
       ).length;
       if (checkConversationID > 0) {
