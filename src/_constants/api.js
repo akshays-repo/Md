@@ -22,7 +22,7 @@ export const backend_api = {
   EDIT_APPOINTMENT_TYPE: '/api/backend/v1/appointment_type',
   DELETE_APPOINTMENT_TYPE: '/api/backend/v1/appointment_type',
 
-  CREATE_PATIENT: '/api/backend/v1/users/patiant',
+  CREATE_PATIENT: '/api/backend/v1/users/filter',
   FETCH_PATIENT: '/api/backend/v1/patiant',
   EDIT_PATIENT: '/api/backend/v1/users/patiant',
   DELETE_PATIENT: '/api/backend/v1/users/patiant',

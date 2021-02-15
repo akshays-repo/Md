@@ -1,6 +1,6 @@
 import { ProviderState } from '../ComponentState/provider';
 import { message } from 'antd';
-
+import { store } from 'reducers/configureStore';
 /**
  * @param state
  * @param action
@@ -10,12 +10,14 @@ export const ProviderReducer = (state = ProviderState, action) => {
   switch (action.type) {
     case 'CREATE_PROVIDER':
       message.success('PROVIDER CREATED SUCCESSFULLY');
+     
       return { error: action.error, message: action.message ,changed: true };
     case 'FETCH_PROVIDER':
       return { error: action.error, payload: action.payload.users , message: action.message };
     case 'EDIT_PROVIDER':
       message.success('PROVIDER EDITED SUCCESSFULLY');
-      return { error: action.error, message: action.message, changed: true };
+     
+      return { error: action.error, message: action.message, changed: true ,modal1:false };
     case 'FILTER_PROVIDER':
       return { error: action.error, payload: action.payload.users, message: action.message };
     case 'DELETE_PROVIDER':
