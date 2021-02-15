@@ -100,10 +100,10 @@ const Dashboard_Provider = props => {
     return (
       <div className="schedule-time">
         <Modal
-          title="CUSTOM FORM FIELD"
+          title="WIDGETS"
           footer={false}
           visible={props.modal2}
-          width={650}
+          width={900}
           onCancel={() => store.dispatch({ type: 'CLOSE_PROVIDER_WIDGET_MODAL' })}
         >
           <CustomWidget />

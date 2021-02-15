@@ -77,7 +77,9 @@ const CustomWidget = () => {
           <List.Item>
             <Card>
               <img src={item.button} style={{ width: '100px', height: 'auto' }} />
-              {/* <p> '{item.url}'</p> */}
+              <p> {"<a href = www.site.com/apptYpe> <img alt='Book now Curabitur aliquet quam id dui posuere blandit.."}
+              </p>
+              <button>Copy to ClipBorad</button>
             </Card>
           </List.Item>
         )}
