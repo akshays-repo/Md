@@ -8,14 +8,14 @@
   outline: none !important;
   padding: 5px 30px !important;
   margin: 5px !important;
-  border-radius: 20px !important;
+  border-radius: 5px !important;
   box-shadow: none !important;
   text-transform: capitalize !important;
 }
 
 .fc-button-active {
   color: white !important;
-  background-color: #00cbe6 !important;
+  background-color: #038FDF !important;
   border: none !important;
 }
 
@@ -37,7 +37,7 @@
 .fc-today-button {
   padding: 5px 30px !important;
   background-color: #edeeee !important;
-  border-radius: 20px !important;
+  border-radius: 5px !important;
 }
 .calendar__modal {
   .ant-modal-body {

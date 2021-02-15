@@ -42,7 +42,7 @@ const routes = [
   },
   {
     path: '/message',
-    component: loadable(() => import('../pages/Dashboard_Content/Message')),
+    component: loadable(() => import('../pages/Message/index')),
     exact: true,
     authorize: true,
   },

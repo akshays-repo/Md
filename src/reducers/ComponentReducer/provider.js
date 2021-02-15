@@ -12,7 +12,7 @@ export const ProviderReducer = (state = ProviderState, action) => {
       message.success('PROVIDER CREATED SUCCESSFULLY');
       return { error: action.error, message: action.message ,changed: true };
     case 'FETCH_PROVIDER':
-      return { error: action.error, payload: action.payload.rows , message: action.message };
+      return { error: action.error, payload: action.payload.users , message: action.message };
     case 'EDIT_PROVIDER':
       message.success('PROVIDER EDITED SUCCESSFULLY');
       return { error: action.error, message: action.message, changed: true };
@@ -28,6 +28,10 @@ export const ProviderReducer = (state = ProviderState, action) => {
       return { ...state, modal1: true };
     case 'CLOSE_PROVIDER_EDIT_MODAL':
       return { ...state, modal1: false };
+      case 'OPEN_PROVIDER_WIDGET_MODAL':
+        return { ...state, modal2: true };
+      case 'CLOSE_PROVIDER_WIDGET_MODAL':
+        return { ...state, modal2: false };
     case 'EMPTY_PROVIDER':
       return { ...state, payload: [] };
     case 'FETCH_BRANCH_APPOINTMENT_PROVIDER':

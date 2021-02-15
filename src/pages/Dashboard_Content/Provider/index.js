@@ -9,14 +9,14 @@ import { actionCreator } from '../../../reducers/actionCreator';
 import { store } from '../../../reducers/configureStore';
 import CustomFormField from './customFormField';
 import ProviderType from './providerType';
-const Dashboard_Provider = props => {
+import CustomWidget from './customWidget';
 
-  const [providerTypeState , setProviderTypeState] =useState([])
+const Dashboard_Provider = props => {
+  const [providerTypeState, setProviderTypeState] = useState([]);
 
   useEffect(() => {
     props.fetchProvider();
     props.fetchBranch({ hospitalId: localStorage.getItem('hospital_id'), page: 1, limit: 60 });
-  
   }, [props.changed]);
 
   useEffect(() => {
@@ -25,18 +25,28 @@ const Dashboard_Provider = props => {
 
   useEffect(() => {
     props.fetchProviderType();
-    setProviderTypeState(props.ProviderTypePayload)
+    setProviderTypeState(props.ProviderTypePayload);
   }, [props.ProviderTypeChanged, props.ProviderDeleted]);
-  
+
   useEffect(() => {
     props.fetchBranch({ hospitalId: localStorage.getItem('hospital_id'), page: 1, limit: 50 });
-    props.fetchAppointmentType({page:1 , limit:100  });
+    props.fetchAppointmentType({ page: 1, limit: 100 });
   });
 
   const HeaderSection = () => {
     return (
       <div className="provider">
         <div className="header">
+          <div className="provider-head mr2">
+
+            <Button
+              type="primary"
+              onClick={() => store.dispatch({ type: 'OPEN_PROVIDER_WIDGET_MODAL' })}
+              className="button-square"
+            >
+              Online Booking Widget
+            </Button>
+          </div>
           <div className="provider-head mr2">
             <Button
               type="primary"
@@ -92,6 +102,16 @@ const Dashboard_Provider = props => {
         <Modal
           title="CUSTOM FORM FIELD"
           footer={false}
+          visible={props.modal2}
+          width={650}
+          onCancel={() => store.dispatch({ type: 'CLOSE_PROVIDER_WIDGET_MODAL' })}
+        >
+          <CustomWidget />
+        </Modal>
+
+        <Modal
+          title="CUSTOM FORM FIELD"
+          footer={false}
           visible={props.CustomFormmodal}
           width={650}
           onCancel={() => store.dispatch({ type: 'CLOSE_CUSTOMFORM_CREATE_MODAL' })}
@@ -128,7 +148,7 @@ const Dashboard_Provider = props => {
           <ProviderType providerTypeState={providerTypeState} {...props} />
         </Modal>
         <div className="pageTitle">
-        <h4>PROVIDER</h4>
+          <h4>PROVIDER</h4>
         </div>
         <div>{HeaderSection()}</div>
         <div className="full-width-table">
@@ -152,6 +172,7 @@ const mapStoreToProps = ({ Provider, CustomForm, AppointmentType, ProviderType }
     message: Provider.message,
     modal: Provider.modal,
     modal1: Provider.modal1,
+    modal2: Provider.modal2,
     changed: Provider.changed,
 
     CustomForm: CustomForm.payload,
@@ -185,7 +206,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(actionCreator({ method: 'POST', action_type: 'CREATE_PROVIDER', values })),
   editProvider: (id, values) =>
     dispatch(actionCreator({ method: 'PUT', action_type: 'EDIT_PROVIDER', id, values })),
-  editProviderStatus: (id, param ,values) =>
+  editProviderStatus: (id, param, values) =>
     dispatch(actionCreator({ method: 'PUT', action_type: 'EDIT_PROVIDER', id, param, values })),
   deleteProvider: id =>
     dispatch(actionCreator({ method: 'DELETE', action_type: 'DELETE_PROVIDER', id })),

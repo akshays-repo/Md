@@ -288,9 +288,9 @@ const mapDispatchToProps = dispatch => ({
     dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_APPOINTMENT' })),
   addAppointment: values =>
     dispatch(actionCreator({ method: 'POST', action_type: 'CREATE_BRANCH', values })),
-  editAppointment: (id, values) =>
-    dispatch(actionCreator({ method: 'PUT', action_type: 'EDIT_BRANCH', id, values })),
-  editStatusAppointment: (id, param) =>
+  editAppointment: (id, values ,contentType) =>
+    dispatch(actionCreator({ method: 'PUT', action_type: 'EDIT_APPOINTMENT', id, values ,contentType })),
+  editStatusAppointment: (id, param ) =>
     dispatch(actionCreator({ method: 'PUT', action_type: 'STATUS_CHANGE_APPOINTMENT', id, param })),
   deleteAppointment: id =>
     dispatch(actionCreator({ method: 'DELETE', action_type: 'DELETE_APPOINTMENT', id })),
