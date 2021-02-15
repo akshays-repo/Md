@@ -14,12 +14,12 @@ import { socket } from '../connectToSocket';
 
 const MessageDetail = props => {
   const [message, setMessage] = useState('');
+  console.log(props);
   const send = () => {
     if (message) {
-      console.log(message);
       setMessage('');
       socket.emit('send_message', {
-        userUUID: 'a2ed9b2e-1ede-4a25-960e-481d53068c66',
+        userUUID: props.receiverID,
         message: message,
       });
     }
@@ -28,6 +28,13 @@ const MessageDetail = props => {
   const onChange = e => {
     setMessage(e.target.value);
   };
+
+  const handleKeyDown = e => {
+    if (e.keyCode === 13) {
+      send();
+    }
+  };
+
   return (
     <div className="chatmain">
       <div className="messagedetail">
@@ -60,7 +67,13 @@ const MessageDetail = props => {
         </div>
 
         <div>
-          <input value={message} onChange={onChange} type="text" placeholder="Type something" />{' '}
+          <input
+            value={message}
+            onKeyDown={handleKeyDown}
+            onChange={onChange}
+            type="text"
+            placeholder="Type something"
+          />{' '}
         </div>
 
         <div>

@@ -18,7 +18,7 @@ export const BranchReducer = (state = BranchState, action) => {
       return { ...state, modal1: false };
     case 'CREATE_BRANCH':
       message.success('BRANCH CREATED SUCCESSFULLY');
-      return { ...state, error: action.error, modal: false, message: action.message };
+      return { ...state, error: action.error, modal: false, message: action.message , changed: true,};
     case 'FETCH_BRANCH':
       return {
         ...state,

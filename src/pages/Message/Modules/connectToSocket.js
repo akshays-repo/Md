@@ -2,7 +2,7 @@ import socketIOClient from 'socket.io-client';
 import { DeliveryStatus } from '_constants/message';
 import { store } from '../../../reducers/configureStore';
 
-export const ENDPOINT = 'https://a3e91c71e2e5.ngrok.io';
+export const ENDPOINT = 'http://41c6770c332c.ngrok.io/';
 export const socket = socketIOClient(ENDPOINT);
 
 export const connectToSocket = async () => {
@@ -22,6 +22,13 @@ export const connectToSocket = async () => {
     console.log('message incoming_hospital', data);
   });
 
+  socket.on('incoming', data => {
+    store.dispatch({ type: 'SET_LATEST_INCOMING_MESSAGE_SUMMARY', payload: data.message });
+    store.dispatch({ type: 'SET_INCOMING_MESSAGE', payload: data.message });
+
+    console.log('message incoming', data);
+  });
+
   socket.on('authenticate_success', data => {
     console.log('message authenticate_success', data);
   });
@@ -32,12 +39,13 @@ export const connectToSocket = async () => {
   });
 
   socket.on('send_message_success', data => {
-    // socket.emit('message_summary_success');
-    // socket.emit('get_message_success');
+    store.dispatch({ type: 'SET_MESSAGE', payload: data.message });
+    store.dispatch({ type: 'SET_LATEST_MESSAGE_SUMMARY', payload: data.message });
     console.log('message send_message_success', data);
   });
 
   socket.on('get_message_success', data => {
+    store.dispatch({ type: 'CLEAR_MESSAGE' });
     store.dispatch({ type: 'SET_MESSAGE', payload: data });
     console.log('message get_message_success', data);
   });

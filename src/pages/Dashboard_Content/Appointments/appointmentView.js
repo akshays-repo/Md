@@ -37,7 +37,7 @@ const AppointmentView = props => {
           <p>Appointment for </p> <p className="title"> {details.appointment_for}</p>
         </Col>
         <Col xs={24} xl={12}>
-          <p>Appointment Type </p> <p className="title">{appointmentType.name}</p>
+          <p>Appointment Type </p> <p className="title">{appointmentType?.name}</p>
         </Col>
         <Col xs={24} xl={12}>
           <p>Appointment Created</p> <p className="title">{details.appointment_created}</p>
@@ -47,7 +47,7 @@ const AppointmentView = props => {
         </Col>
         <Col xs={24} xl={12}>
           <p>Appointment Time slot </p>
-          <p className="title"> {appointmentType.time_slot} </p>
+          <p className="title"> {appointmentType?.time_slot} </p>
         </Col>
         <Col xs={24} xl={12}>
           <p>Payment Status </p> <p className="title">{details.payment_status}</p>

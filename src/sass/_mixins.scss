@@ -49,6 +49,7 @@
   box-shadow: none;
   padding: 5px 20px;
   outline: none;
+  text-transform: capitalize;
   @include border-radius(4px);
   font-weight: $bold;
   cursor: pointer;

@@ -3,51 +3,59 @@ import { List, Card } from 'antd';
 
 const data = [
   {
-    title: 'Booked Via health Nex dashboard',
+    title: 'Booked ',
     number: '100',
+    hex:"#71bd1d"
   },
   {
-    title: 'Title 2',
+    title: 'Appointments',
     number: '50',
+    hex:'#00767C'
   },
   {
-    title: 'Booked Via health Nex dashboard',
+    title: 'Appointments Confirmed',
     number: '0',
+    hex:'#00387C'
   },
   {
-    title: 'Titfgfgfgle 4',
+    title: 'Recalls',
     number: '10',
+    hex:'#de5474',
   },
   {
-    title: 'Booked Via health Nex dashboard ',
+    title: 'No Show follow Ups  ',
     number: '100',
+    hex:'#1abb9c'
   },
   {
-    title: 'Booked Via health Nex dashboard ',
+    title: 'Cancellation  ',
     number: '0',
+    hex:'#eb5424'
   },
-  // {
-  //   title: 'Booked Via health Nex dashboard ',
-  //   number: '40',
-  // },
-  // {
-  //   title: 'Booked Via health Nex dashboard ',
-  //   number: '670',
-  // },
+  {
+    title: 'Pateint Satisfication  ',
+    number: '40',
+    hex:'#3b94dd'
+  },
+  {
+    title: 'Payments  ',
+    number: '670',
+    hex:'#15558d'
+  },
 ];
 const CardsSection = () => {
   return (
     <div className="card-section"> 
       <List
-        grid={{ gutter: 16, column: 3 }}
+        grid={{ gutter: 16, column: 2 }}
         dataSource={data}
         renderItem={item => (
-          <List.Item >
+          <List.Item>
             <Card>
               <div className="inline-card-item">
-            <span className="count-round-bg">{item.number}</span>
+            <span className="count-square-bg" style={{backgroundColor:item.hex}}>{item.number}</span>
             <span>{item.title}</span>
-            <span><i className="fas fa-chevron-right"/></span>
+       
             </div>
             </Card>
           </List.Item>

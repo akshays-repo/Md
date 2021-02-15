@@ -33,7 +33,15 @@ const MessageList = props => {
                 lastAcive={data.lastMessageTime}
                 totalUnread={data.messageUnRead}
                 active={data.userActive}
-                handleMessageDetails={() => props.handleMessageDetails(data.conversationId)}
+                handleMessageDetails={() =>
+                  props.handleMessageDetails(
+                    data.conversationId,
+                    '',
+                    data.senderId === '4c763a46-5490-47d1-b32f-ab66c5edd494'
+                      ? data.recieverId
+                      : data.senderId,
+                  )
+                }
                 messages={data.messageList}
               />
             ))

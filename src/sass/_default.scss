@@ -92,6 +92,12 @@ body {
   .edit-button {
     @include edit-button;
   }
+
+  .inactive-button {
+    background-color: #a8a8a8;
+    border: none
+  }
+
   .delete-button {
     @include delete-button;
   }

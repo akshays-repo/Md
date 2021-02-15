@@ -20,7 +20,7 @@ const ProviderCreationForm = props => {
     setBranchList(store.getState().Branch.payload);
     if(props.values){
     }
-  });
+  }, []);
 
   const handleFormSubmission = async values => {
     let data = await getFormDataA({ ...values, userTypeId: 4,   branchId: 5, });
@@ -39,9 +39,6 @@ const ProviderCreationForm = props => {
 
 
 
-  useEffect(() =>{
-    console.log("asdfklkjh",props.values?.branch)
-  })
 
   const handleBranchChange = (values) =>{
     let currentValue = [];
