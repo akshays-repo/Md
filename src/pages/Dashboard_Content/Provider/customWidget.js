@@ -91,11 +91,8 @@ const CustomWidget = () => {
             <Card>
               <img src={item.button} style={{ width: '100px', height: 'auto' }} />
 
-              <textarea
-                style={{ height: '50px' }}
-                ref={textarea => setTextArea(textarea)}
-                value="<a href = www.site.com/apptYpe> <img alt='Book now Curabitur aliquet quam id dui posuere blandit.."
-              />
+             <p>{"<a href = www.site.com/apptYpe> <img alt='Book now Curabitur aliquet quam id dui posuere blandit..'/> </a>"}
+             </p>
               <button onClick={() => copyCodeToClipboard(item.id)}>Copy to ClipBorad</button>
             </Card>
           </List.Item>
