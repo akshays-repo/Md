@@ -16,6 +16,7 @@ export const backend_api = {
   EDIT_BRANCH: '/api/backend/v1/users',
   DELETE_BRANCH: '/api/backend/v1/users',
 
+
   CREATE_APPOINTMENT_TYPE: '/api/backend/v1/appointment_type',
   FETCH_APPOINTMENT_TYPE: '/api/backend/v1/appointment_type',
   EDIT_APPOINTMENT_TYPE: '/api/backend/v1/appointment_type',
@@ -31,7 +32,7 @@ export const backend_api = {
   USER_LOGIN: '/api/backend/v1/users/login',
   
   CREATE_PROVIDER:'/api/backend/v1/users/register',
-  FETCH_PROVIDER:'/api/backend/v1/providers/list',
+  FETCH_PROVIDER:'/api/backend/v1/providers',
   EDIT_PROVIDER:'/api/backend/v1/users',
   DELETE_PROVIDER:'/api/backend/v1/provider',
   FETCH_BRANCH_PROVIDER: '/api/backend/v1/providers',

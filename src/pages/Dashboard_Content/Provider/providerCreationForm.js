@@ -8,6 +8,7 @@ import { generateForm } from '../../../_utils/formgenerator';
 import { getFormDataA } from '_utils';
 import { store } from '../../../reducers/configureStore';
 
+
 const { Option } = Select;
 //deletedBranches
 const ProviderCreationForm = props => {
@@ -23,7 +24,7 @@ const ProviderCreationForm = props => {
   }, []);
 
   const handleFormSubmission = async values => {
-    let data = await getFormDataA({ ...values, userTypeId: 4,   branchId: 5, });
+    let data = await getFormDataA({ ...values, userTypeId: 4,    });
     selectedBranch.map((va, i) => data.append('arrBranches[]', va));
     deletedBranch.map((va, i) => data.append('deletedBranches[]', va));
   

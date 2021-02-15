@@ -30,7 +30,10 @@ const AppointmentEdit = props => {
 
   const handleFormSubmission = async values => {
     console.log('asdkjhf', values);
-    props.editAppointment(props.view.id , )
+     let contentType = 'JSON';
+    await props.editAppointment(props.view.id , JSON.stringify({ ...values , payment_status:paymentStatus ,status:paymentStatus , userTypeId:2 }))
+    const response = await props.createOnlineForm(JSON.stringify({ ...values }), contentType);
+
   };
 
   return (
@@ -55,12 +58,11 @@ const AppointmentEdit = props => {
         enableReinitialize={true}
         initialValues={{
           appointment_end: moment(props.view.appointment_end).format('YYYY-MM-DD hh:mm a'),
-          appointment_for: '',
+          appointment_for: props.view.appointment_for,
           appointment_start:moment(props.view.appointment_start).format('YYYY-MM-DD hh:mm a'),
-          charge: '',
+          charge: props.view.charge,
           comment: props.view.comment,
-          payment_status: '',
-          status: '',
+
         }}
         //validationSchema={ProviderCreationSchema}
         onSubmit={handleFormSubmission}
@@ -73,7 +75,6 @@ const AppointmentEdit = props => {
                 <Select
                   defaultValue={props.view.payment_status}
                   style={{ width: 120 }}
-                  // name="payment_status"
                   onChange={e => setPaymentStatus(e)}
                   className={props.view.payment_status}
                 >
@@ -140,6 +141,13 @@ const AppointmentEdit = props => {
                   name="appointment_end"
                   placeholder="End Date"
                 />
+              </Col>
+              <Col xs={24} xl={12}>
+                <p>Charge</p>
+               <Field
+               component={TextField}
+               name='charge'
+               />
               </Col>
               <Col xs={24} xl={12}>
                 <p>Comment</p>
