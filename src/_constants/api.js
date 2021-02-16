@@ -63,9 +63,12 @@ export const backend_api = {
   FETCH_HOSPITAL_APPOINTMENT_TYPE: '/api/backend/v1/appointment_types/hospital',
   CHECK_HOSPITAL: '/api/backend/v1/users',
 
-
-
   CREATE_USER:'/api/backend/v1/users/user',
+  FETCH_USER:'/api/backend/v1/users/user',
+  DELETE_USER:'/api/backend/v1/users/user',
+  EDIT_USER:'/api/backend/v1/users/user',
+
+
   FETCH_APPOINTMENT_HOME: '/api/backend/v1/online_bookings/filter',
   FETCH_UNAVAILABLE_PROVIDER: '/api/backend/v1/appointments/unavailable',
   CREATE_PROVIDER_UNAVAILABLE: '/api/backend/v1/appointments/unavailable',

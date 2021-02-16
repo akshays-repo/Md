@@ -16,15 +16,11 @@ import {
 import { Formik, Form, Field } from 'formik';
 import { generateForm } from '../../../_utils/formgenerator';
 import { TextField, Select as MatSelect } from 'formik-material-ui';
-import { hospitalUser } from '_utils/Schemas';
+import { hospitalUser ,hospitaEditlUser } from '_utils/Schemas';
 
 const UserCreationForm = props => {
   const formField = [
-    {
-      label: 'Fullname',
-      name: 'fullName',
-      type: 'text',
-    },
+
     {
       label: 'Email',
       name: 'email',
@@ -58,16 +54,24 @@ const UserCreationForm = props => {
 
   const handleFormSubmission = async(values) => {
     let data = await getFormDataA({ ...values});
-    props.addUser(data)
+    console.log("ssahdhkzchbcxzBM<",props.editId )
+    if(props.editId){
+        props.editUser(props.editId, data)
+    }else{
+        props.addUser(data)
+
+    }
+
 
   };
+
+  console.log(" props.editData ", props.editData )
   return (
     <div>
       <Formik
         enableReinitialize={true}
         initialValues={
-          props.values || {
-            fullName: '',
+          props.editData || {
             email: '',
             status: 'active',
             provider_typeId: '',
@@ -76,19 +80,18 @@ const UserCreationForm = props => {
             c_password: '',
           }
         }
-        validationSchema={hospitalUser}
+        validationSchema={props.editId ? hospitaEditlUser : hospitalUser}
         onSubmit={handleFormSubmission}
       >
         {({ handleSubmit, touched, errors, isSubmitting }) => (
           <Form className="login__form" handleSubmit={handleSubmit}>
             <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>{generateForm(formField)}</Row>
-
             <Button
               htmlType="submit"
               disabled={isSubmitting}
               className="view-button button-square mt-5"
             >
-              {props.id ? ' Edit a Provider' : ' Create a New Provider'}
+              {props.editId ? ' Edit a User' : ' Create a New User'}
             </Button>
           </Form>
         )}

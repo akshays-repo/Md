@@ -19,13 +19,16 @@ const MessageDetail = props => {
         userUUID: props.receiverID,
         message: message,
       });
+      scrollToBottom();
+      scrollToBottom();  
+      scrollToBottom();  
+      scrollToBottom();  
+      scrollToBottom();  
      
     }
     scrollToBottom();
   };
-  useEffect(() => {
-    scrollToBottom();
-  } )
+
   const onChange = e => {
     setMessage(e.target.value);
   };
@@ -57,6 +60,7 @@ const MessageDetail = props => {
       });
       console.log('Scroll work props', lastMessage);
     }
+    handleScroll()
   };
   return (
     <div className="chatmain">
@@ -79,10 +83,10 @@ const MessageDetail = props => {
               ),
             )
           : ''}
-        <div ref={messagesEndRef} />
+        <div />
       </div>
 
-      <div className="message-sentbox">
+      <div className="message-sentbox" ref={messagesEndRef} >
         <div>
           <label className="paper-clip">
             <AiOutlinePaperClip />

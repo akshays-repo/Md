@@ -3,6 +3,7 @@ export const UsersState = {
     payload: [],
     message: '',
     modal:false,
-    modal1:false
+    modal1:false,
+    changed:false
   };
   

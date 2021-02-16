@@ -9,15 +9,16 @@ export const UsersReducer = (state = UsersState, action) => {
   switch (action.type) {
     case 'CREATE_USER':
         message.success('BRANCH CREATED SUCCESSFULLY');
-      return { error: action.error, message: action.message ,modal:false };
+      return { error: action.error, message: action.message ,modal:false , changed:true};
     case 'FETCH_USER':
-      return { error: action.error, payload: action.payload, message: action.message };
+      return { error: action.error, payload: action.payload, message: action.message , changed:false};
     case 'EDIT_USER':
-      return { error: action.error, payload: action.payload, message: action.message };
+      return { error: action.error, payload: action.payload, message: action.message, changed:true };
     case 'FILTER_USER':
-      return { error: action.error, payload: action.payload, message: action.message };
+      return { error: action.error, payload: action.payload, message: action.message , };
     case 'DELETE_USER':
-      return { error: action.error, payload: action.payload, message: action.message };
+        message.success('BRANCH DELETED SUCCESSFULLY');
+      return { error: action.error, message: action.message ,changed:true };
       case 'OPEN_CREATE_USER_MODAL':
         return { ...state, modal: true };
       case 'CLOSE_CREATE_USER_MODAL':
