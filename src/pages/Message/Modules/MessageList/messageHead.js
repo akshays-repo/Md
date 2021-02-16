@@ -1,5 +1,5 @@
-import React from "react";
-import "./style.scss";
+import React from 'react';
+import './style.scss';
 
 const MessageHead = ({
   userId,
@@ -10,11 +10,11 @@ const MessageHead = ({
   totalUnread,
   active,
   handleMessageDetails,
-  messages
+  messages,
 }) => {
-  console.log("avatar", avatar);
+  console.log('avatar', avatar);
   return (
-    <div className="messagehead" onClick={() => handleMessageDetails('hai')}>
+    <div className="messagehead" onClick={() => handleMessageDetails}>
       <div className="left">
         <img className="useravatar" src={avatar} />
       </div>

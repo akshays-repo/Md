@@ -108,7 +108,7 @@ const Dashboard_Appointments = props => {
         render: record => (
           <div>
             <Select
-              defaultValue={record.payment_status}
+              value={record.payment_status}
               style={{ width: 120 }}
               onChange={e => handleChangePaymentStatus(record.id, e)}
               className={record.payment_status}
@@ -129,7 +129,7 @@ const Dashboard_Appointments = props => {
         render: record => (
           <div>
             <Select
-              defaultValue={record.status}
+              value={record.status}
               style={{ width: 120 }}
               className={record.status}
               onChange={e => handleChangeStatus(record.id, e)}

@@ -2,60 +2,39 @@ body {
   font-family: 'Roboto', sans-serif;
   color: $textcolor;
 
-  ::-webkit-scrollbar {
-    width: 7px;
-  }
-
   .pending {
     color: #d83810;
   }
 
   .failed {
-    color:#fc3503
+    color: #fc3503;
   }
 
   .paid {
-    color: #26ad00
+    color: #26ad00;
   }
 
   .requested {
-    color: #032cfc
+    color: #032cfc;
   }
 
   .manually_paid {
-    color: #26ad00
+    color: #26ad00;
   }
 
-
-  .pending{color: #d83810;} 
-  .confirmed{ color: #26ad00}
-   .cancelled{color: #d83810;} 
-   .completed{ color: #26ad00}
-
-
-
-
-
-
-
-
-
-
-
-  /* Track */
-  ::-webkit-scrollbar-track {
-    background: #f1f1f1;
+  .pending {
+    color: #d83810;
+  }
+  .confirmed {
+    color: #26ad00;
+  }
+  .cancelled {
+    color: #d83810;
+  }
+  .completed {
+    color: #26ad00;
   }
 
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: #888;
-  }
-
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: #555;
-  }
   .circular-square {
     @include circular--square;
   }
@@ -95,7 +74,7 @@ body {
 
   .inactive-button {
     background-color: #a8a8a8;
-    border: none
+    border: none;
   }
 
   .delete-button {

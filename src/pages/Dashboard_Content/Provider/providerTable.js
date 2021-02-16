@@ -52,6 +52,10 @@ const ProviderTable = props => {
   })
 
   const handleApptChange = async (record, values) => {
+
+    console.log("asd;kjasd", record)
+
+
     // this will perform delete
     let currentValue = [];
     record.provider_and_types.map(type => currentValue.push(type.appointment_type?.id));
@@ -66,13 +70,16 @@ const ProviderTable = props => {
       id: record.id,
       fullName: record.fullName,
       status: record.status,
-      branchId: 1,
       provider_typeId: record.provider_typeId,
     };
+
+
 
     let sentinData = getFormData({ ...intValues });
     values.map((va, i) => sentinData.append('appointment_type[]', va));
     DeletedArray.map((va, i) => sentinData.append('deleted_type[]', va));
+    record.provider_and_branches.map((va, i) => sentinData.append('arrBranches[]', va.branch_id))
+
     await props.editProvider(record.id, sentinData);
   };
 
@@ -185,7 +192,7 @@ const ProviderTable = props => {
         <Space size="middle">
           <Select
             style={record.status === 'active' ? { color: 'green' } : { color: 'red' }}
-            defaultValue={record.status}
+            value={record.status}
             onChange={e => handleStatus(record, e)}
           >
             <Select.Option style={{color:"green"}} value="active">Active</Select.Option>
