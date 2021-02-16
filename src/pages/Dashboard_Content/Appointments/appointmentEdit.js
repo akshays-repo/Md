@@ -74,9 +74,9 @@ const AppointmentEdit = props => {
                 <p>Payment Status</p>
                 <Select
                   defaultValue={props.view.payment_status}
-                  style={{ width: 120 }}
+                  style={{ width: '100%' }}
                   onChange={e => setPaymentStatus(e)}
-                  className={props.view.payment_status}
+                  className='matBorder select-underline' 
                 >
                   <Select.Option className={'pending'} value="pending">
                     Pending
@@ -98,10 +98,10 @@ const AppointmentEdit = props => {
 
               <Col xs={24} xl={12}>
                 <p>Status</p>
-                <Select
-                  defaultValue={props.view.status}
-                  style={{ width: 120 }}
-                  className={props.view.status}
+                <Select 
+                  value={props.view.status}
+                  style={{ width: '100%' }}
+                  className='matBorder select-underline' 
                   onChange={e => setStatus(e)}
                 >
                   <Select.Option className={'pending'} value="pending">
@@ -122,6 +122,7 @@ const AppointmentEdit = props => {
               <Col xs={24} xl={12}>
                 <p>Appoinment Start</p>
                 <DatePicker
+                  style={{ width: '100%' }}
                   showTime
                   //onChange={onChange}
                   //onOk={onOk}
@@ -134,6 +135,7 @@ const AppointmentEdit = props => {
               <Col xs={24} xl={12}>
                 <p>Appoinment End</p>
                 <DatePicker
+                  style={{ width: '100%' }}
                   showTime
                   //onChange={onChange}
                   //onOk={onOk}
