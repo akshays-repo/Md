@@ -1,27 +1,53 @@
 import React, { useState } from 'react';
-import { Row, Col, Divider, Select, DatePicker as D, Button } from 'antd';
-import { TextField } from '@material-ui/core';
+import { Row, Col, Divider, Select, DatePicker as D, Button, message } from 'antd';
+// import { TextField } from '@material-ui/core';
 import { Field, Form, Formik, ErrorMessage } from 'formik';
 import { DatePicker } from 'formik-antd';
+import { TextField } from 'formik-material-ui';
+
 import moment from 'moment';
 import { NewAppointmentSchema } from '_utils/Schemas';
 export const NewAppointment = props => {
   const { starttime, endtime } = props;
   const initialValues = {
-    appointment_start: moment(starttime).format('YYYY-MM-DD hh:mm a'),
-    provider_id: '',
-    appointment_end: moment(endtime).format('YYYY-MM-DD hh:mm a'),
-    response: '',
-    patient_id: '',
+    appointment_start: moment(starttime).format('YYYY-MM-DD hh:mm:ss'),
+    appointment_type_id: null,
+    provider_id: null,
+    appointment_end: moment(endtime).format('YYYY-MM-DD hh:mm:ss'),
+    comment: null,
+    patiant_id: null,
+    branch_id: null,
+    hospital_id: Number(localStorage.getItem('hospital_id')),
+    appointment_start_dummy: moment(starttime).format('YYYY-MM-DD hh:mm a'),
+    appointment_end_dummy: moment(endtime).format('YYYY-MM-DD hh:mm a'),
+    appointment_for: 'me',
+    charge: 0,
+    response: [],
+    patiantStatus: 'active',
+  };
+
+  const handleSubmit = async (values, { resetForm, setSubmitting }) => {
+    setSubmitting(true);
+    const getPatientDetails = props.patient.filter(result => result.id == values.patiant_id);
+    const { id, createdAt, updatedAt, deletedAt, ...rest } = getPatientDetails[0];
+    const response = await props.createAppointment(JSON.stringify({ ...values, ...rest }));
+    if (response.type === 'FETCH_ERROR') {
+      setSubmitting(false);
+    } else {
+      setSubmitting(false);
+      message.success('Appointment created successfully');
+      resetForm();
+      props.setModal(false);
+    }
   };
   return (
     <Formik
       enableReinitialize={true}
       initialValues={initialValues}
-      onSubmit={values => console.log('Form submission', JSON.stringify(values, null, 2))}
+      onSubmit={handleSubmit}
       validationSchema={NewAppointmentSchema}
     >
-      {({ isValid, handleSubmit, values, setFieldValue }) => (
+      {({ isValid, handleSubmit, values, setFieldValue, isSubmitting }) => (
         <Form onSubmit={handleSubmit}>
           <Row className="calendar__newappointment">
             <Col span={24} style={{ height: 50 }}>
@@ -31,16 +57,64 @@ export const NewAppointment = props => {
             <Col span={24}>
               <div className="newappointment__section2">
                 <div>
+                  <p>APPOINTMENT TYPE</p>
+                  <p>
+                    <Select
+                      showSearch
+                      value={values.appointment_type_id}
+                      onChange={val => val && setFieldValue('appointment_type_id', val)}
+                      style={{ width: '90%' }}
+                      bordered={false}
+                      placeholder="Please select appointment type"
+                    >
+                      {props.appointment_type.map((result, i) => (
+                        <Select.Option key={result.id} values={result.id}>
+                          {result.name}
+                        </Select.Option>
+                      ))}
+                    </Select>
+                    <ErrorMessage
+                      render={msg => <div style={{ color: 'red' }}>{msg}</div>}
+                      name="appointment_type_id"
+                    />
+                  </p>
+                </div>
+                <div>
+                  <p>BRANCH</p>
+                  <p>
+                    <Select
+                      showSearch
+                      value={values.branch_id}
+                      onChange={val => val && setFieldValue('branch_id', val)}
+                      style={{ width: '90%' }}
+                      bordered={false}
+                      placeholder="Please select branch"
+                    >
+                      {props.branch.map((result, i) => (
+                        <Select.Option key={result.id} values={result.id}>
+                          {result.fullName}
+                        </Select.Option>
+                      ))}
+                    </Select>
+                    <ErrorMessage
+                      render={msg => <div style={{ color: 'red' }}>{msg}</div>}
+                      name="branch_id"
+                    />
+                  </p>
+                </div>
+
+                <div>
                   <p>PROVIDER</p>
                   <p>
                     <Select
+                      value={values.provider_id}
                       showSearch
                       onChange={val => {
                         setFieldValue('provider_id', val);
                       }}
                       style={{ width: '90%' }}
                       bordered={false}
-                      placeholder="Choose Provider"
+                      placeholder="Please select provider"
                     >
                       {props.provider.map((result, i) => (
                         <Select.Option key={result.id} values={result.id}>
@@ -59,10 +133,14 @@ export const NewAppointment = props => {
                   <p>
                     <DatePicker
                       onChange={val =>
-                        val &&
-                        setFieldValue('appointment_start', moment(val).format('YYYY-MM-DD hh:mm a'))
+                        val
+                          ? setFieldValue(
+                              'appointment_start',
+                              moment(val).format('YYYY-MM-DD hh:mm:ss'),
+                            )
+                          : setFieldValue('appointment_start', '')
                       }
-                      name="appointment_start"
+                      name="appointment_start_dummy"
                       format="YYYY-MM-DD hh:mm a"
                       style={{ width: '50%' }}
                       showTime
@@ -78,11 +156,15 @@ export const NewAppointment = props => {
                   <p>
                     <DatePicker
                       onChange={val =>
-                        val &&
-                        setFieldValue('appointment_end', moment(val).format('YYYY-MM-DD hh:mm a'))
+                        val
+                          ? setFieldValue(
+                              'appointment_end',
+                              moment(val).format('YYYY-MM-DD hh:mm:ss'),
+                            )
+                          : setFieldValue('appointment_end', '')
                       }
                       style={{ width: '50%' }}
-                      name="appointment_end"
+                      name="appointment_end_dummy"
                       format="YYYY-MM-DD hh:mm a"
                       showTime
                     />
@@ -95,11 +177,14 @@ export const NewAppointment = props => {
                 <div>
                   <p>NOTES</p>
                   <p>
-                    <TextField
-                      name="response"
+                    <Field
+                      disabled={false}
+                      component={TextField}
+                      name="comment"
                       placeholder="Enter a note or details about the appointment"
+                      type="text"
                       style={{ fontSize: 12 }}
-                    ></TextField>
+                    ></Field>
                   </p>
                 </div>
               </div>
@@ -116,8 +201,11 @@ export const NewAppointment = props => {
                         style={{ width: '100%' }}
                         placeholder="Type Patient name"
                         showSearch
+                        value={values.patiant_id}
                         showArrow={false}
-                        onChange={val => val && setFieldValue('patient_id', val)}
+                        onChange={val => {
+                          setFieldValue('patiant_id', val);
+                        }}
                       >
                         {props.patient.map((result, i) => (
                           <Select.Option key={result.id} values={result.id}>
@@ -128,7 +216,7 @@ export const NewAppointment = props => {
                     </p>
                     <ErrorMessage
                       render={msg => <div style={{ color: 'red' }}>{msg}</div>}
-                      name="patient_id"
+                      name="patiant_id"
                     />
                   </p>
                 </div>
@@ -137,7 +225,7 @@ export const NewAppointment = props => {
             <Col span={24} offset={20}>
               <Button
                 htmlType="submit"
-                disabled={!isValid}
+                disabled={isSubmitting}
                 shape="round"
                 style={{ backgroundColor: '#FF596F', color: 'white' }}
               >
