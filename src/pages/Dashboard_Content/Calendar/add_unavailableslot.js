@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Row, Col, Divider, Select, Button } from 'antd';
-import { TextField } from '@material-ui/core';
+// import { TextField } from '@material-ui/core';
+import { TextField } from 'formik-material-ui';
+
 import { Field, Form, Formik, ErrorMessage } from 'formik';
 import { DatePicker } from 'formik-antd';
 import moment from 'moment';
@@ -9,19 +11,36 @@ import { UnavailableSchema } from '_utils/Schemas';
 export const UnavailableSlot = props => {
   const { starttime, endtime } = props;
   const [initialValues, setinitialValues] = useState({
-    appointment_start: moment(starttime).format('YYYY-MM-DD hh:mm a'),
-    provider_id: '',
-    appointment_end: moment(endtime).format('YYYY-MM-DD hh:mm a'),
-    response: '',
+    appointment_start: moment(starttime).format('YYYY-MM-DD hh:mm:ss'),
+    provider_id: null,
+    appointment_end: moment(endtime).format('YYYY-MM-DD hh:mm:ss'),
+    response: null,
+    arrBranchId: [],
+    appointment_start_dummy: moment(starttime).format('YYYY-MM-DD hh:mm a'),
+    appointment_end_dummy: moment(endtime).format('YYYY-MM-DD hh:mm a'),
   });
+  const innerForm = useRef(null);
+
+  const handleSubmit = async (values, { resetForm, setSubmitting }) => {
+    setSubmitting(true);
+    const response = await props.createUnavailable(JSON.stringify(values));
+    if (response.type === 'FETCH_ERROR') {
+      setSubmitting(false);
+      console.log('Error occured');
+    } else {
+      setSubmitting(false);
+      resetForm();
+      props.setModal(false);
+    }
+  };
   return (
     <Formik
       enableReinitialize={true}
       initialValues={initialValues}
-      onSubmit={values => console.log('Form submission', JSON.stringify(values, null, 2))}
+      onSubmit={handleSubmit}
       validationSchema={UnavailableSchema}
     >
-      {({ isValid, handleSubmit, values, setFieldValue }) => (
+      {({ isValid, handleSubmit, values, isSubmitting, setFieldValue }) => (
         <Form onSubmit={handleSubmit}>
           <Row className="calendar__newappointment">
             <Col span={24} style={{ height: 50 }}>
@@ -31,11 +50,37 @@ export const UnavailableSlot = props => {
             <Col span={24}>
               <div className="newappointment__section2">
                 <div>
+                  <p>BRANCH</p>
+                  <p>
+                    <Select
+                      mode="multiple"
+                      showSearch
+                      value={values.arrBranchId}
+                      onChange={val => val && setFieldValue('arrBranchId', val)}
+                      style={{ width: '90%' }}
+                      bordered={false}
+                      placeholder="Choose Branch"
+                    >
+                      {props.branch.map((result, i) => (
+                        <Select.Option key={result.id} values={result.id}>
+                          {result.fullName}
+                        </Select.Option>
+                      ))}
+                    </Select>
+                    <ErrorMessage
+                      render={msg => <div style={{ color: 'red' }}>{msg}</div>}
+                      name="arrBranchId"
+                    />
+                  </p>
+                </div>
+
+                <div>
                   <p>PROVIDER</p>
                   <p>
                     <Select
                       showSearch
-                      onChange={val => val && setFieldValue('provider_id', val)}
+                      value={values.provider_id ? String(values.provider_id) : values.provider_id}
+                      onChange={val => val && setFieldValue('provider_id', Number(val))}
                       style={{ width: '90%' }}
                       bordered={false}
                       placeholder="Choose Provider"
@@ -56,11 +101,16 @@ export const UnavailableSlot = props => {
                   <p>STARTS</p>
                   <p>
                     <DatePicker
-                      onChange={val =>
-                        val &&
-                        setFieldValue('appointment_start', moment(val).format('YYYY-MM-DD hh:mm a'))
-                      }
-                      name="appointment_start"
+                      onChange={val => {
+                        console.log('Start date', val);
+                        val
+                          ? setFieldValue(
+                              'appointment_start',
+                              moment(val).format('YYYY-MM-DD hh:mm:ss'),
+                            )
+                          : setFieldValue('appointment_start', '');
+                      }}
+                      name="appointment_start_dummy"
                       format="YYYY-MM-DD hh:mm a"
                       style={{ width: '50%' }}
                       showTime
@@ -76,11 +126,15 @@ export const UnavailableSlot = props => {
                   <p>
                     <DatePicker
                       onChange={val =>
-                        val &&
-                        setFieldValue('appointment_end', moment(val).format('YYYY-MM-DD hh:mm a'))
+                        val
+                          ? setFieldValue(
+                              'appointment_end',
+                              moment(val).format('YYYY-MM-DD hh:mm:ss'),
+                            )
+                          : setFieldValue('appointment_end', '')
                       }
                       style={{ width: '50%' }}
-                      name="appointment_end"
+                      name="appointment_end_dummy"
                       format="YYYY-MM-DD hh:mm a"
                       showTime
                     />
@@ -93,11 +147,14 @@ export const UnavailableSlot = props => {
                 <div>
                   <p>NOTES</p>
                   <p>
-                    <TextField
+                    <Field
+                      disabled={false}
+                      component={TextField}
                       name="response"
                       placeholder="Enter a note or details about the appointment"
+                      type="text"
                       style={{ fontSize: 12 }}
-                    ></TextField>
+                    ></Field>
                   </p>
                 </div>
               </div>
@@ -107,6 +164,7 @@ export const UnavailableSlot = props => {
               <Button
                 htmlType="submit"
                 shape="round"
+                disabled={isSubmitting}
                 style={{ backgroundColor: '#FF596F', color: 'white' }}
               >
                 Submit

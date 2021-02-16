@@ -72,7 +72,9 @@ const Dashboard_Calendar = props => {
 
   useEffect(() => {
     props.fetchProvider();
+    props.fetchBranch();
     props.fetchPatient();
+    props.fetchAppointmentType({ hospitalId: localStorage.getItem('hospital_id') });
   }, []);
 
   function renderEventContent(eventInfo) {
@@ -109,14 +111,14 @@ const Dashboard_Calendar = props => {
         <Col span={22}>
           <FullCalendar
             plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-            customButtons={{
-              calendarFilter: {
-                text: `FILTER`,
-                click: function() {
-                  alert('clicked the custom button!');
-                },
-              },
-            }}
+            // customButtons={{
+            //   calendarFilter: {
+            //     text: `FILTER`,
+            //     click: function() {
+            //       alert('clicked the custom button!');
+            //     },
+            //   },
+            // }}
             titleFormat={{ year: 'numeric', month: 'short', day: 'numeric' }}
             headerToolbar={{
               center: 'prev,today,next',
@@ -141,6 +143,7 @@ const Dashboard_Calendar = props => {
     */
           />
           <CalendarModal
+            {...props}
             provider={props.provider}
             patient={props.patient}
             modal={addmodal}
@@ -148,10 +151,11 @@ const Dashboard_Calendar = props => {
             starttime={starttime}
             endtime={endtime}
           />
-          <BookingEdit modal={bookingEditModal} setModal={setBookingEditModal} />
+          <BookingEdit {...props} modal={bookingEditModal} setModal={setBookingEditModal} />
           <UnavailableEdit
             modal={unavailableModal}
             setModal={setUnavailableModal}
+            {...props}
           ></UnavailableEdit>
         </Col>
         <Col span={2} style={{ marginLeft: -80, height: 50 }}>
@@ -172,31 +176,57 @@ function renderSidebarEvent(event) {
   );
 }
 
-const mapStoreToProps = ({ Provider, Patient, Appointment }) => {
+const mapStoreToProps = ({ Provider, Patient, AppointmentType, Branch }) => {
   console.log('Store CustomForm', Provider, Patient);
   return {
     provider: Provider.payload,
     patient: Patient.payload,
-    appointment: Appointment.payload,
+    appointment_type: AppointmentType.payload,
+    branch: Branch.payload,
   };
 };
 
 const mapDispatchToProps = dispatch => ({
-  createOnlineForm: (values, contentType) =>
+  createAppointment: values =>
     dispatch(
       actionCreator({
         method: 'POST',
         action_type: 'CREATE_ONLINE_APPOINTMENT',
+        contentType: 'JSON',
         values,
-        contentType,
+      }),
+    ),
+  editAppointment: (id, values) =>
+    dispatch(
+      actionCreator({
+        method: 'PUT',
+        action_type: 'EDIT_APPOINTMENT',
+        contentType: 'JSON',
+        id,
+        values,
       }),
     ),
   fetchProvider: param =>
     dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_PROVIDER', param })),
+  fetchBranch: param =>
+    dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_BRANCH', param })),
   fetchPatient: param =>
     dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_PATIENT', param })),
-  fetchAppointment: param =>
-    dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_APPOINTMENT_HOME', param })),
+  fetchAppointmentType: param =>
+    dispatch(
+      actionCreator({ method: 'GET', action_type: 'FETCH_HOSPITAL_APPOINTMENT_TYPE', param }),
+    ),
+  fetchUnavailable: param =>
+    dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_PROVIDER_UNAVAILABLE', param })),
+  createUnavailable: values =>
+    dispatch(
+      actionCreator({
+        method: 'POST',
+        contentType: 'JSON',
+        action_type: 'CREATE_PROVIDER_UNAVAILABLE',
+        values,
+      }),
+    ),
 });
 
 export default connect(mapStoreToProps, mapDispatchToProps)(Dashboard_Calendar);

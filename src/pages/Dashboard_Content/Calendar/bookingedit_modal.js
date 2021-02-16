@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Row, Col, Divider, Select, DatePicker as D, Button, Modal } from 'antd';
+import { Row, Col, Divider, Select, DatePicker as D, Button, Modal, message } from 'antd';
 import { TextField } from '@material-ui/core';
 import { Field, Form, Formik, ErrorMessage } from 'formik';
 import { DatePicker } from 'formik-antd';
@@ -17,12 +17,28 @@ export const BookingEdit = props => {
     { label: 'Paid', icon: 'fa fa-credit-card', value: 'paid', backgroundColor: '#00CBE6' },
   ];
 
+  const handleSubmit = async (values, { resetForm, setSubmitting }) => {
+    setSubmitting(true);
+    const getPatientDetails = props.patient.filter(result => result.id == values.patiant_id);
+    const { id, createdAt, updatedAt, deletedAt, ...rest } = getPatientDetails[0];
+    const response = await props.editAppointment(JSON.stringify({ ...values, ...rest }));
+    if (response.type === 'FETCH_ERROR') {
+      setSubmitting(false);
+    } else {
+      setSubmitting(false);
+      message.success('Appointment created successfully');
+      resetForm();
+      props.setModal(false);
+    }
+  };
+
   const [initialValues, setinitialValues] = useState({
     appointment_start: moment().format('YYYY-MM-DD hh:mm a'),
-    provider_id: '',
+    provider_id: null,
     appointment_end: moment().format('YYYY-MM-DD hh:mm a'),
     comment: '',
     patient_id: '',
+    response: [],
   });
   return (
     <Modal
@@ -35,10 +51,10 @@ export const BookingEdit = props => {
       <Formik
         enableReinitialize={true}
         initialValues={initialValues}
-        onSubmit={values => console.log('Form submission', JSON.stringify(values, null, 2))}
+        onSubmit={handleSubmit}
         validationSchema={NewAppointmentSchema}
       >
-        {({ isValid, handleSubmit, values, setFieldValue }) => (
+        {({ isValid, handleSubmit, values, setFieldValue, isSubmitting }) => (
           <Form onSubmit={handleSubmit}>
             {/* {JSON.stringify(values, null, 2)} */}
             <Row className="calendar__newappointment">
@@ -80,7 +96,7 @@ export const BookingEdit = props => {
               </Col>
               <Divider style={{ margin: 10 }} />
 
-              <Col span={24}>
+              {/* <Col span={24}>
                 <div className="newappointment__section2">
                   <div>
                     <p>STATUS</p>
@@ -90,6 +106,9 @@ export const BookingEdit = props => {
                           return (
                             <Col>
                               <p
+                                onClick={() => {
+                                  setActiveStatus(result.value);
+                                }}
                                 style={{
                                   width: 70,
                                   height: 70,
@@ -101,7 +120,7 @@ export const BookingEdit = props => {
                                     result.value === activeStatus
                                       ? result.backgroundColor
                                       : '#e0e2e2',
-                                  color: '#858A8E',
+                                  color: 'white',
                                   cursor: 'pointer',
                                 }}
                               >
@@ -123,13 +142,81 @@ export const BookingEdit = props => {
                     </p>
                   </div>
                 </div>
-              </Col>
+              </Col> */}
               <Divider style={{ margin: 10 }} />
               <Col span={24}>
                 <div className="newappointment__section2">
                   <div>
+                    <p>APPOINTMENT TYPE</p>
+                    <p>
+                      <Select
+                        showSearch
+                        value={values.appointment_type_id}
+                        onChange={val => val && setFieldValue('appointment_type_id', val)}
+                        style={{ width: '90%' }}
+                        bordered={false}
+                        placeholder="Please select appointment type"
+                      >
+                        {props.appointment_type.map((result, i) => (
+                          <Select.Option key={result.id} values={result.id}>
+                            {result.name}
+                          </Select.Option>
+                        ))}
+                      </Select>
+                      <ErrorMessage
+                        render={msg => <div style={{ color: 'red' }}>{msg}</div>}
+                        name="appointment_type_id"
+                      />
+                    </p>
+                  </div>
+                  <div>
+                    <p>BRANCH</p>
+                    <p>
+                      <Select
+                        mode="multiple"
+                        showSearch
+                        value={values.arrBranchId}
+                        onChange={val => val && setFieldValue('arrBranchId', val)}
+                        style={{ width: '90%' }}
+                        bordered={false}
+                        placeholder="Please select branch"
+                      >
+                        {props.branch.map((result, i) => (
+                          <Select.Option key={result.id} values={result.id}>
+                            {result.fullName}
+                          </Select.Option>
+                        ))}
+                      </Select>
+                      <ErrorMessage
+                        render={msg => <div style={{ color: 'red' }}>{msg}</div>}
+                        name="arrBranchId"
+                      />
+                    </p>
+                  </div>
+                  <div>
                     <p>PROVIDER</p>
-                    <p>Shailesh Kandel</p>
+                    <p>
+                      <Select
+                        value={values.provider_id}
+                        showSearch
+                        onChange={val => {
+                          setFieldValue('provider_id', val);
+                        }}
+                        style={{ width: '90%' }}
+                        bordered={false}
+                        placeholder="Please select provider"
+                      >
+                        {props.provider.map((result, i) => (
+                          <Select.Option key={result.id} values={result.id}>
+                            {result.fullName}
+                          </Select.Option>
+                        ))}
+                      </Select>
+                      <ErrorMessage
+                        render={msg => <div style={{ color: 'red' }}>{msg}</div>}
+                        name="provider_id"
+                      />
+                    </p>
                   </div>
                   <div>
                     <p>STARTS</p>
@@ -175,16 +262,46 @@ export const BookingEdit = props => {
                   <div>
                     <p>NOTES</p>
                     <p>
-                      <TextField
-                        name="custom"
+                      <Field
+                        disabled={false}
+                        component={TextField}
+                        name="comment"
                         placeholder="Enter a note or details about the appointment"
+                        type="text"
                         style={{ fontSize: 12 }}
-                      ></TextField>
+                      ></Field>
                     </p>
                   </div>
                   <div>
-                    <p>LOCATION</p>
-                    <p>BRANCH NAME</p>
+                    <p>Payment Status</p>
+                    <p>
+                      <Select
+                        placeholder="Please select payment status"
+                        bordered={false}
+                        style={{ width: '90%' }}
+                      >
+                        <Select.Option value="pending">Pending</Select.Option>
+                        <Select.Option value="failed">Failed</Select.Option>
+                        <Select.Option value="paid">Paid</Select.Option>
+                        <Select.Option value="requested">Requested</Select.Option>
+                        <Select.Option value="manually_paid">Manually Paid</Select.Option>
+                      </Select>
+                    </p>
+                  </div>
+                  <div>
+                    <p>Status</p>
+                    <p>
+                      <Select
+                        bordered={false}
+                        style={{ width: '90%' }}
+                        placeholder="Please select status"
+                      >
+                        <Select.Option value="pending">Pending</Select.Option>
+                        <Select.Option value="confirmed">Confirmed</Select.Option>
+                        <Select.Option value="cancelled">Cancelled</Select.Option>
+                        <Select.Option value="completed">Completed</Select.Option>
+                      </Select>
+                    </p>
                   </div>
                 </div>
               </Col>
@@ -192,7 +309,7 @@ export const BookingEdit = props => {
               <Col span={24} offset={16}>
                 <Button
                   htmlType="submit"
-                  disabled={!isValid}
+                  disabled={isSubmitting}
                   shape="round"
                   style={{ backgroundColor: '#FF596F', color: 'white' }}
                 >
