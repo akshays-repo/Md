@@ -95,7 +95,8 @@ body {
 
   .inactive-button {
     background-color: #a8a8a8;
-    border: none
+    border: none;
+    @include button;
   }
 
   .delete-button {

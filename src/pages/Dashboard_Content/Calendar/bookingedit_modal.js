@@ -91,8 +91,8 @@ export const BookingEdit = props => {
                             <Col>
                               <p
                                 style={{
-                                  width: 70,
-                                  height: 70,
+                                  width: 50,
+                                  height: 50,
                                   borderRadius: 35,
                                   display: 'flex',
                                   alignItems: 'center',
