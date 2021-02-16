@@ -491,3 +491,11 @@ export const UnavailableSchema = Yup.object().shape({
   appointment_end: Yup.date().required('Select end'),
   response: Yup.string(),
 });
+
+
+
+export const hospitalUser = Yup.object().shape({
+  password : Yup.string().password().required('Please enter new password'),
+c_password: Yup.string().oneOf([Yup.ref('password'), 'null'], 'Password must match'),
+});
+

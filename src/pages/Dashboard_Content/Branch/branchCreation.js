@@ -83,6 +83,7 @@ const BranchCreationForm = props => {
         { value: 'hold', name: 'Hold' },
       ],
     },
+
   ];
 
   return (
@@ -145,7 +146,7 @@ const BranchCreationForm = props => {
                     status=""
                     //placeholder="Start typing and find your place in google map"
                     style={{
-                      width: '90%',
+                      width: '450px',
                       backgroundColor: 'var(--primarys) !important',
                       // borderBottom: '2px solid #3f51b5',
                       borderBottom: errors.address

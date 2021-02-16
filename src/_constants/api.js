@@ -66,5 +66,7 @@ export const backend_api = {
 
   FETCH_APPOINTMENT_HOME :'/api/backend/v1/online_bookings/filter',
 
+
+  CREATE_USER:'/api/backend/v1/users/user'
 };
 

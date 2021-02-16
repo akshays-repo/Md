@@ -5,7 +5,7 @@ const sideMenuList = [
   {
     title: 'Dashboard',
     icon: 'fas fa-columns',
-    path: '/',
+    path: '/dashboard',
     wologin: true,
     wlogin: true,
   },
@@ -48,6 +48,13 @@ const sideMenuList = [
     title: 'Message',
     icon: 'fas fa-comments',
     path: '/message',
+    wologin: true,
+    wlogin: true,
+  },
+  {
+    title: 'Add Users',
+    icon: 'fas fa-users',
+    path: '/add-users',
     wologin: true,
     wlogin: true,
   },

@@ -18,6 +18,7 @@
       align-items: center;
     }
   }
+
   .chat {
     background-color: #ececec;
     // min-height: 300px;
@@ -25,6 +26,7 @@
     max-height: calc(100vh - 224px);
     overflow-y: scroll;
     padding: 20px;
+
     p {
       // padding: 10px;
       // margin: 30px;

@@ -22,7 +22,7 @@ const FossilMdLoginPage = props => {
   const innerForm = useRef();
 
   if (props.isLogin) {
-    return <Redirect to="/"></Redirect>;
+    return <Redirect to="/dashboard"></Redirect>;
   } else {
     return (
       <div className="loginWrapper">
