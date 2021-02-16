@@ -19,12 +19,6 @@ const MessageDetail = props => {
         userUUID: props.receiverID,
         message: message,
       });
-      scrollToBottom();
-      scrollToBottom();  
-      scrollToBottom();  
-      scrollToBottom();  
-      scrollToBottom();  
-     
     }
     scrollToBottom();
   };
@@ -33,19 +27,18 @@ const MessageDetail = props => {
     setMessage(e.target.value);
   };
 
-
-
   const handleKeyDown = e => {
     if (e.keyCode === 13) {
       send();
     }
   };
-
+useEffect(() => {
+  scrollToBottom();
+}, [])
   const scrollToBottom = () => {
+    console.log("i maamam")
     messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
   };
-
-
 
   console.log('props.message', props.message);
 
@@ -60,7 +53,6 @@ const MessageDetail = props => {
       });
       console.log('Scroll work props', lastMessage);
     }
-    handleScroll()
   };
   return (
     <div className="chatmain">
@@ -73,7 +65,7 @@ const MessageDetail = props => {
           <p>online</p>
         </div>
       </div>
-      <div className="chat" onScroll={handleScroll}>
+      <div className="chat" onScroll={handleScroll}  >
         {props.message.length > 0
           ? props.message.map(data =>
               data.senderId === '4c763a46-5490-47d1-b32f-ab66c5edd494' ? (
@@ -84,9 +76,12 @@ const MessageDetail = props => {
             )
           : ''}
         <div />
+        <div ref={messagesEndRef}/>
+
       </div>
 
-      <div className="message-sentbox" ref={messagesEndRef} >
+      <div className="message-sentbox" >
+
         <div>
           <label className="paper-clip">
             <AiOutlinePaperClip />

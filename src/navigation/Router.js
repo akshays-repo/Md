@@ -101,6 +101,12 @@ const routes = [
     exact: true,
     authorize: false,
   },
+  {
+    path: '/logout',
+    component: loadable(() => import('../pages/Dashboard_Content/Logout')),
+    exact: true,
+    authorize: false,
+  },
 ];
 
 const Router = props => {

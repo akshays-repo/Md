@@ -89,7 +89,7 @@ const sideMenuList = [
   {
     title: 'Log Out',
     icon: 'fas fa-sign-out-alt',
-    path: '/analytics',
+    path: '/logout',
     wologin: true,
     wlogin: true,
   }
