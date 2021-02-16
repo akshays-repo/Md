@@ -83,16 +83,6 @@ const BranchCreationForm = props => {
         { value: 'hold', name: 'Hold' },
       ],
     },
-    // {
-    //   label: 'Address',
-    //   name: 'address',
-    //   type: 'text',
-    // },
-    // {
-    //   label: 'Latoti',
-    //   name: 'address',
-    //   type: 'text',
-    // },
   ];
 
   return (
