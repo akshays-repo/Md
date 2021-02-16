@@ -2,12 +2,17 @@
     background-color: #f4f6f7;
     height: 100vh;
     width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
     @include flex(center, center);
     .login-page {
 width: 30%;
 padding:50px;
 background-color: $bg-white;
 @include border-radius(3px);
+@include breakpoint(xs) {
+    width: 100%;
+}
 h1 {
     margin-bottom: 35px;
 }

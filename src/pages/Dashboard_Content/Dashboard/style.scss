@@ -36,7 +36,8 @@
             box-shadow: 0 8px 15px #dcdfe6;
             padding: 0px  !important;
             min-height: 50px;
-            .inline-card-item{
+            .inline-card-item {
+                width: 100%;
                 flex: 1;
                 @include flex(flex-start, center);
     .count-square-bg {

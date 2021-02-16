@@ -20,7 +20,7 @@ const Dashboard_Dashboard = () => {
           </Col>
 
           <Col xl={12}>
-            <div className="counBlock">
+            <div className="countBlock">
           <CardsSection />
           </div>
           </Col>
