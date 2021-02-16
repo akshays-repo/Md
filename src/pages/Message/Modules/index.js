@@ -59,7 +59,6 @@ const MessageLayout = props => {
         </button>
         <button onClick={() => socket.emit('message_summary', 'Hai hai')}>MESSAGE SUMMARY</button>
         <button onClick={() => socket.emit('test', 'Hai')}>TEST</button> */}
-        <button onClick={handleMessageDetails}> </button>
         <Row>
           <Col xl={8} className="col-border">
             <MessageList {...props} handleMessageDetails={handleMessageDetails} {...messageLists} />

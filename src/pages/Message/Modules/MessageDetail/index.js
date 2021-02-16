@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { FaTelegramPlane } from 'react-icons/fa';
 import { AiOutlinePaperClip } from 'react-icons/ai';
-
+import Avatar from '../../assets/icons/noimage.png'
 import LeftSideChat from './leftSideChat';
 import RightSideChat from './rightSideChat';
 import './style.scss';
@@ -14,7 +14,7 @@ import { socket } from '../connectToSocket';
 
 const MessageDetail = props => {
   const [message, setMessage] = useState('');
-  console.log(props);
+  console.log("asdlldhf",props);
   const send = () => {
     if (message) {
       setMessage('');
@@ -39,7 +39,7 @@ const MessageDetail = props => {
     <div className="chatmain">
       <div className="messagedetail">
         <div className="left">
-          <img className="useravatar" src="https://i.pravatar.cc/300" />
+          <img className="useravatar" src={Avatar} />
         </div>
         <div className="right">
           <span>User Name</span>

@@ -8,7 +8,7 @@ const MessageList = props => {
   return (
     <div className="messagelist">
       <div className="detail-header">
-        <h5>Messaage</h5>
+        <h5>Messages</h5>
         {/* <button className="chatadd-button">
           <GrAddCircle />
         </button> */}
