@@ -10,6 +10,8 @@ export const FilterPopover = props => {
   };
 
   useEffect(() => {
+    console.log('Provider list', provider);
+
     if (cancelled) {
       props.fetchAppointment({
         provider_id: provider.length > 0 ? [...provider] : [],
@@ -87,7 +89,13 @@ export const FilterPopover = props => {
       placement="leftTop"
     >
       <Button
-        style={{ marginTop: 10, backgroundColor: '#e6f1fb', padding: '5px 30px', borderRadius: '5px', border: '1px solid #daebf9'}}
+        style={{
+          marginTop: 10,
+          backgroundColor: '#e6f1fb',
+          padding: '5px 30px',
+          borderRadius: '5px',
+          border: '1px solid #daebf9',
+        }}
         shape="round"
       >
         FILTER &nbsp; <i className="fa fa-chevron-down"></i>

@@ -35,6 +35,7 @@
     min-height: 300px;
     max-height: calc(100vh - 224px);
     overflow-y: auto;
+   border: 1px solid #f5e8ff;
   }
 }
 .messagehead {
@@ -67,7 +68,7 @@
     .unreadbadge {
       color: #ffffff;
       font-weight: 600;
-      background-color: #ff5a5f;
+      background-color: #15558d;
       border-radius: 10rem;
       padding: 4px 6px;
       font-size: 11px;

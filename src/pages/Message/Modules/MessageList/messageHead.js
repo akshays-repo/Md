@@ -1,6 +1,6 @@
-import React from "react";
-import "./style.scss";
-
+import React from 'react';
+import './style.scss';
+import Avatar from '../../assets/icons/noimage.png'
 const MessageHead = ({
   userId,
   avatar,
@@ -10,13 +10,13 @@ const MessageHead = ({
   totalUnread,
   active,
   handleMessageDetails,
-  messages
+  messages,
 }) => {
-  console.log("avatar", avatar);
+  console.log('avatar', avatar);
   return (
-    <div className="messagehead" onClick={() => handleMessageDetails('hai')}>
+    <div className="messagehead" onClick={() => handleMessageDetails()}>
       <div className="left">
-        <img className="useravatar" src={avatar} />
+        <img className="useravatar" src={avatar ? avatar : Avatar} />
       </div>
       <div className="middle">
         <span>{userName}</span>

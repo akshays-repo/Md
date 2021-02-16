@@ -38,6 +38,30 @@ export const UnavailableEdit = props => {
               <Col span={24}>
                 <div className="newappointment__section2">
                   <div>
+                    <p>BRANCH</p>
+                    <p>
+                      <Select
+                        mode="multiple"
+                        showSearch
+                        value={values.arrBranchId}
+                        onChange={val => val && setFieldValue('arrBranchId', val)}
+                        style={{ width: '90%' }}
+                        bordered={false}
+                        placeholder="Choose Branch"
+                      >
+                        {props.branch.map((result, i) => (
+                          <Select.Option key={result.id} values={result.id}>
+                            {result.fullName}
+                          </Select.Option>
+                        ))}
+                      </Select>
+                      <ErrorMessage
+                        render={msg => <div style={{ color: 'red' }}>{msg}</div>}
+                        name="arrBranchId"
+                      />
+                    </p>
+                  </div>
+                  <div>
                     <p>PROVIDER</p>
                     <p>
                       <Select
@@ -46,7 +70,13 @@ export const UnavailableEdit = props => {
                         style={{ width: '90%' }}
                         bordered={false}
                         placeholder="Choose Provider"
-                      ></Select>
+                      >
+                        {props.provider.map((result, i) => (
+                          <Select.Option key={result.id} values={result.id}>
+                            {result.fullName}
+                          </Select.Option>
+                        ))}
+                      </Select>
                       <ErrorMessage
                         render={msg => <div style={{ color: 'red' }}>{msg}</div>}
                         name="provider_id"

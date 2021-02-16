@@ -18,6 +18,26 @@ export const generateForm = formField => {
             </p>
           </Col>
         );
+        case 'email':
+          return (
+            <Col key={index} xs={24} xl={12}>
+              <label>{values.label}</label>
+              <p>
+              {/* <Field  style={{ width: '90%' }} component={TextField} name={values.name} placeholder="" type="text"></Field> */}
+                <Field  component={TextField} name={values.name} placeholder="" type="email"></Field>
+              </p>
+            </Col>
+          );
+        case 'password':
+          return (
+            <Col key={index} xs={24} xl={12}>
+              <label>{values.label}</label>
+              <p>
+              {/* <Field  style={{ width: '90%' }} component={TextField} name={values.name} placeholder="" type="text"></Field> */}
+                <Field  component={TextField} name={values.name} placeholder="" type="password"></Field>
+              </p>
+            </Col>
+          );
       case 'select':
         return (
           <Col key={index} xs={24} xl={12}>

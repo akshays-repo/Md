@@ -48,8 +48,8 @@ const Dashboard_Appointments = props => {
     const clearFilter = () => {
       setBranchId(null);
       setSearchKey(null);
-      // setToDate('');
-      // setFromDate('');
+      setToDate('');
+      setFromDate('');
       setPaymentStatus(null);
       setStatus(null);
       props.fetchAppointment();
@@ -108,7 +108,7 @@ const Dashboard_Appointments = props => {
         render: record => (
           <div>
             <Select
-              defaultValue={record.payment_status}
+              value={record.payment_status}
               style={{ width: 120 }}
               onChange={e => handleChangePaymentStatus(record.id, e)}
               className={record.payment_status}
@@ -129,7 +129,7 @@ const Dashboard_Appointments = props => {
         render: record => (
           <div>
             <Select
-              defaultValue={record.status}
+              value={record.status}
               style={{ width: 120 }}
               className={record.status}
               onChange={e => handleChangeStatus(record.id, e)}
@@ -190,10 +190,12 @@ const Dashboard_Appointments = props => {
             <DatePicker
               placeholder="From Date"
               onChange={e => setFromDate(moment(e).format('YYYY-MM-DD'))}
+              value={fromData !== "" ? moment(fromData) : ""}
             />
             <DatePicker
               placeholder="To Date"
               onChange={e => setToDate(moment(e).format('YYYY-MM-DD'))}
+              value={toData !== "" ? moment(toData) : ""}
             />
 
             <Select

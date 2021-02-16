@@ -1,20 +1,17 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { FaTelegramPlane } from 'react-icons/fa';
 import { AiOutlinePaperClip } from 'react-icons/ai';
-
+import Avatar from '../../assets/icons/noimage.png';
 import LeftSideChat from './leftSideChat';
 import RightSideChat from './rightSideChat';
 import './style.scss';
-
-import {
-  conversationData_PatientA,
-  conversationData_PatientB,
-} from '../MessageList/chatListDummyData';
+import _ from 'lodash';
 import { socket } from '../connectToSocket';
 
 const MessageDetail = props => {
   const [message, setMessage] = useState('');
-  console.log(props);
+  const messagesEndRef = useRef(null);
+
   const send = () => {
     if (message) {
       setMessage('');
@@ -23,6 +20,7 @@ const MessageDetail = props => {
         message: message,
       });
     }
+    scrollToBottom();
   };
 
   const onChange = e => {
@@ -34,19 +32,40 @@ const MessageDetail = props => {
       send();
     }
   };
+useEffect(() => {
+  scrollToBottom();
+}, [])
+  const scrollToBottom = () => {
+    console.log("i maamam")
+    messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+  };
 
+  console.log('props.message', props.message);
+
+  const handleScroll = e => {
+    let element = e.target;
+    if (element.scrollTop === 0) {
+      console.log('Scroll work');
+      let lastMessage = _.last(props.message);
+      socket.emit('get_messages', {
+        conversationId: lastMessage.conversationId,
+        lastMessageId: lastMessage.id,
+      });
+      console.log('Scroll work props', lastMessage);
+    }
+  };
   return (
     <div className="chatmain">
       <div className="messagedetail">
         <div className="left">
-          <img className="useravatar" src="https://i.pravatar.cc/300" />
+          <img className="useravatar" src={Avatar} />
         </div>
         <div className="right">
           <span>User Name</span>
           <p>online</p>
         </div>
       </div>
-      <div className="chat">
+      <div className="chat" onScroll={handleScroll}  >
         {props.message.length > 0
           ? props.message.map(data =>
               data.senderId === '4c763a46-5490-47d1-b32f-ab66c5edd494' ? (
@@ -56,9 +75,13 @@ const MessageDetail = props => {
               ),
             )
           : ''}
+        <div />
+        <div ref={messagesEndRef}/>
+
       </div>
 
-      <div className="message-sentbox">
+      <div className="message-sentbox" >
+
         <div>
           <label className="paper-clip">
             <AiOutlinePaperClip />

@@ -9,8 +9,6 @@ import HardCoreForm from './customFormhardCore';
 import TextField from '@material-ui/core/TextField';
 
 const CustomFormField = props => {
-
-
   const [listCustomField, setListCustomField] = useState([]);
   const [editIndex, setEditIndex] = useState('');
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -36,22 +34,10 @@ const CustomFormField = props => {
     console.log('smaasdmmdsadsd', listCustomField);
   }, [listCustomField]);
 
-  const handleFormSubmission = async values => {
+  const handleFormSubmission = async e => {
+    e.preventDefault();
     let contentType = 'JSON';
     let data = listCustomField;
-    let sendingData = {
-      hospital_id: parseInt(localStorage.getItem('hospital_id')),
-      formData: data,
-    };
-    await props.addCustomForm(JSON.stringify(sendingData), contentType);
-  };
-
-  const handleEditItem = async values => {
-    let data = listCustomField;
-    if (editIndex !== -1) {
-      data[editIndex] = values;
-    }
-    let contentType = 'JSON';
     let sendingData = {
       hospital_id: parseInt(localStorage.getItem('hospital_id')),
       formData: data,
@@ -166,54 +152,64 @@ const CustomFormField = props => {
 
           <HardCoreForm />
           <form>
-           
-              {listCustomField?.map((type, index) => {
-                return (
-                  <div className="mt8" >
-                    <div className="formGroup">
-                      <p>Type :{type.custom_types}</p>
+            {listCustomField?.map((type, index) => {
+              return (
+                <div className="mt8">
+                  <div className="formGroup">
+                    <p>Type :{type.custom_types}</p>
                     <TextField
                       required
                       label="Please enter this field is required"
-                      value={type.Key_name !== '' ? type.Key_name :null}
+                      value={type.Key_name !== '' ? type.Key_name : null}
                       onChange={e => editOrAddKeyName(e, index)}
                     />
-                    </div>
-                    <div className="rightButtons  mt3">
+                  </div>
+                  <div className="rightButtons  mt3">
                     <span className="req">required</span>{' '}
-                    <Switch className="ml4"
+                    <Switch
+                      className="ml4"
                       checked={type.required}
                       onChange={e => requiredOrNot(e, index)}
                       size="small"
                     />
-                    <span  class="delete-color icon-button pl3" onClick={() => deleteItem(index)}><i class="fa fa-trash"></i></span>
-                 </div>
-                    {type.values?.map((value, i) => (
-                      <div className="mt4 tableBox">
-                        <TextField
-                          required={true}
-                          placeholder="Options "
-                          style={{ width: '60%' }}
-                          defaultValue={value}
-                          onChange={e => editValue(index, i, e)}
-                        />
-                        {}
-                        {
-                        type.values?.length > 1 &&  <span  class="delete-color icon-button pl3" onClick={e => deleteValue(index, i)}><i class="fa fa-trash"></i></span>
-                         
-                        }
-                        {/* <span  class="delete-color icon-button pl3" onClick={e => deleteValue(index, i)}><i class="fa fa-trash"></i></span> */}
-                      </div>
-                    ))}
-                    {type.values?.length > 0 && (
-                      <Button className="mt6 view-button" onClick={() => insertValue(index)}> Add New Option</Button>
-                    )}
+                    <span class="delete-color icon-button pl3" onClick={() => deleteItem(index)}>
+                      <i class="fa fa-trash"></i>
+                    </span>
                   </div>
-                );
-              })}
-              {/* {listCustomField?.length > 0 && <Button className="blueDark-button mt8" onClick={handleFormSubmission}>SAVE</Button>} */}
-              <Button className="blueDark-button mt8" onClick={handleFormSubmission}>SAVE</Button>
-          
+                  {type.values?.map((value, i) => (
+                    <div className="mt4 tableBox">
+                      <TextField
+                        required
+                        placeholder="Options "
+                        style={{ width: '60%' }}
+                        defaultValue={value}
+                        onChange={e => editValue(index, i, e)}
+                      />
+                      {}
+                      {type.values?.length > 1 && (
+                        <span
+                          class="delete-color icon-button pl3"
+                          onClick={e => deleteValue(index, i)}
+                        >
+                          <i class="fa fa-trash"></i>
+                        </span>
+                      )}
+                      {/* <span  class="delete-color icon-button pl3" onClick={e => deleteValue(index, i)}><i class="fa fa-trash"></i></span> */}
+                    </div>
+                  ))}
+                  {type.values?.length > 0 && (
+                    <Button className="mt6 view-button" onClick={() => insertValue(index)}>
+                      {' '}
+                      Add New Option
+                    </Button>
+                  )}
+                </div>
+              );
+            })}
+            {/* {listCustomField?.length > 0 && <Button className="blueDark-button mt8" onClick={handleFormSubmission}>SAVE</Button>} */}
+            <button type="submit" className="blueDark-button mt8" onClick={handleFormSubmission}>
+              SAVE
+            </button>
           </form>
           <Dropdown trigger={['click']} overlay={menu}>
             <Button className="mt-5 button-square edit-button" onClick={e => e.preventDefault()}>

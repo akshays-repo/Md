@@ -6,12 +6,12 @@ const Dashboard_Content = ({ content }) => {
   return (
     <div className="dashboard__content">
       <Row>
-        <Col xs={24} xl={6}>
+        <Col xs={24} xl={6} md={6}>
           <div className="leftblock-sidenav">
             <Sidebar />
           </div>
         </Col>
-        <Col xs={24} xl={18}>
+        <Col xs={24} xl={18} md={18}>
           <div className="rightblock-content">{content}</div>
         </Col>
       </Row>

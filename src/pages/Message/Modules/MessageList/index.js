@@ -8,8 +8,8 @@ const MessageList = props => {
   return (
     <div className="messagelist">
       <div className="detail-header">
-        {/* <span>chat</span>
-        <button className="chatadd-button">
+        <h5>Messages</h5>
+        {/* <button className="chatadd-button">
           <GrAddCircle />
         </button> */}
       </div>
@@ -45,7 +45,7 @@ const MessageList = props => {
                 messages={data.messageList}
               />
             ))
-          : ''}
+          : 'Please Start to Message'}
       </div>
       <div></div>
     </div>

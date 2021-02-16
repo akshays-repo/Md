@@ -8,6 +8,7 @@ import { OnlineBookingState as OnlineBooking } from './ComponentState/online_boo
 import {CustomFormState as CustomForm} from './ComponentState/customForm'
 import {AppointmentState as Appointment} from './ComponentState/customForm'
 import {DashboardState as Dashboard} from './ComponentState/dashboard'
+import { UsersState as Users } from './ComponentState/users';
 
 export const initialState = {
   Hospital,
@@ -19,5 +20,6 @@ export const initialState = {
   OnlineBooking,
   CustomForm,
   Appointment,
-  Dashboard
+  Dashboard,
+  Users
 };

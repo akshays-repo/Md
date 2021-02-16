@@ -18,14 +18,15 @@
       align-items: center;
     }
   }
+
   .chat {
     background-color: #ececec;
     // min-height: 300px;
     min-height: calc(100vh - 224px);
     max-height: calc(100vh - 224px);
     overflow-y: scroll;
-    overflow-x: hidden;
     padding: 20px;
+
     p {
       // padding: 10px;
       // margin: 30px;
@@ -64,10 +65,10 @@
       justify-content: center;
     }
     .sent-button {
-      justify-content: space-between;
+      justify-content: center;
       border: none;
       color: #ffffff;
-      background-color: #ff5a5f;
+      background-color: #15558d;
       min-width: 46px;
       min-height: 46px;
       border-radius: 50%;

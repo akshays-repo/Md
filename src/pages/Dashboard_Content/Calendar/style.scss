@@ -15,7 +15,7 @@
 
 .fc-button-active {
   color: white !important;
-  background-color: #038FDF !important;
+  background-color: #038fdf !important;
   border: none !important;
 }
 
@@ -92,6 +92,7 @@
         font-size: 13 px;
         color: #333;
         font-weight: 500;
+        text-align: right;
       }
       p:nth-child(2) {
         margin-left: 20px;
@@ -149,9 +150,6 @@
   }
 }
 
-
-
-
 .provider__filter {
   &::-webkit-scrollbar {
     width: 10px;
@@ -171,17 +169,17 @@
 }
 .calendarSection {
   padding: 15px;
-    background-color: #fff;
-    border: 1px solid #f0f0f0;
-    .fc td {
-      font-size: 0.875rem;
-      line-height: 3rem;
-      padding: 0;
-      text-transform: uppercase;
-.fc-day-today {
-  background: #f8f9fa;
-}
-}
+  background-color: #fff;
+  border: 1px solid #f0f0f0;
+  .fc td {
+    font-size: 0.875rem;
+    line-height: 3rem;
+    padding: 0;
+    text-transform: uppercase;
+    .fc-day-today {
+      background: #f8f9fa;
+    }
+  }
 }
 .ant-popover-title {
   min-height: 35px;
@@ -192,30 +190,23 @@
 .calendar__newappointment {
   .ant-btn-round {
     border-radius: 5px;
-    background: #038FDF!important;
+    background: #038fdf !important;
   }
 }
 
-  .ant-tabs {
+.ant-tabs {
+  .ant-tabs-tab-btn {
+    color: #878b8e !important;
+  }
+}
+
+.ant-tabs-tab {
+  &.ant-tabs-tab-active {
     .ant-tabs-tab-btn {
-      color: #878b8e!important;
+      color: #15558d !important;
     }
   }
-
-  .ant-tabs-tab {
-    &.ant-tabs-tab-active {
-      .ant-tabs-tab-btn {
-        color: #15558d!important;
-      }
-    }
-
-  }
-  .ant-tabs-ink-bar {
-    background: #15558d;
-  }
-
-
-
-
-  
-
+}
+.ant-tabs-ink-bar {
+  background: #15558d;
+}

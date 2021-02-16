@@ -31,10 +31,10 @@ const ProviderCreationForm = props => {
     if (props.id) {
      
       await props.editProvider(props.id, data);
-      store.dispatch({ type: 'CLOSE_PROVIDER_EDIT_MODAL' });
+     
     } else {
       await props.addProvider(data);
-      store.dispatch({ type: 'CLOSE_PROVIDER_EDIT_MODAL' });
+     
     }
   };
 

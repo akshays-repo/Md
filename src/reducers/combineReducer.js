@@ -13,7 +13,9 @@ import { AppointmentReducer as Appointment } from './ComponentReducer/appointmen
 import { DashboardReducer as Dashboard } from './ComponentReducer/dashboard';
 import { MesssageReducer as Message } from './ComponentReducer/message';
 import { SummaryMesssageReducer as SummaryMessage } from './ComponentReducer/summary_message';
+import { UsersReducer as Users } from './ComponentReducer/users';
 
+import { UnavailableReducer as Unavailable } from './ComponentReducer/unavailable';
 export const reducers = {
   Hospital,
   Branch,
@@ -30,4 +32,6 @@ export const reducers = {
   Dashboard,
   Message,
   SummaryMessage,
+  Users,
+  Unavailable,
 };

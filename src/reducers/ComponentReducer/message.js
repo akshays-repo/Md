@@ -10,6 +10,9 @@ export const MesssageReducer = (state = MessageState, action) => {
   switch (action.type) {
     case 'CLEAR_MESSAGE':
       return { ...state, payload: [] };
+
+      case 'INITIAL_MESSAGE_LOADED':
+        return { ...state, initalLoading: false };
     case 'SET_MESSAGE':
       const message =
         state.payload.length > 0 ? [...state.payload, action.payload] : action.payload;
