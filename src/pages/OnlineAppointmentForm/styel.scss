@@ -35,6 +35,25 @@
     font-size: 15px;
     font-weight: 600;
   }
+  .availDate {
+    .slick-slide {
+      width: 125px;
+  }
+  }
+  .typeAppointment {
+    background-color: rgb(237, 238, 238);
+    font-weight: 500;
+    color: black;
+    padding:10px;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  .dropselectBox {
+    background-color: #EDEEEE;
+    text-align: center;
+    border-radius: 5px;
+    padding: 7px 5px;
+  }
 }
 
 .timing:hover {

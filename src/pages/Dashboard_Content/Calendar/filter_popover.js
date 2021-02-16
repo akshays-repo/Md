@@ -87,7 +87,7 @@ export const FilterPopover = props => {
       placement="leftTop"
     >
       <Button
-        style={{ marginTop: 10, backgroundColor: '#edeeee', padding: '5px 30px' }}
+        style={{ marginTop: 10, backgroundColor: '#e6f1fb', padding: '5px 30px', borderRadius: '5px', border: '1px solid #daebf9'}}
         shape="round"
       >
         FILTER &nbsp; <i className="fa fa-chevron-down"></i>

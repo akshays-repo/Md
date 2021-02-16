@@ -5,7 +5,7 @@ const data = [
   {
     title: 'Booked ',
     number: '100',
-    hex:"#007C44"
+    hex:"#71bd1d"
   },
   {
     title: 'Appointments',
@@ -20,27 +20,27 @@ const data = [
   {
     title: 'Recalls',
     number: '10',
-    hex:'#06007C',
+    hex:'#de5474',
   },
   {
     title: 'No Show follow Ups  ',
     number: '100',
-    hex:'#007C00'
+    hex:'#1abb9c'
   },
   {
     title: 'Cancellation  ',
     number: '0',
-    hex:'#33FFBD'
+    hex:'#eb5424'
   },
   {
     title: 'Pateint Satisfication  ',
     number: '40',
-    hex:'#337FFF'
+    hex:'#3b94dd'
   },
   {
     title: 'Payments  ',
     number: '670',
-    hex:'#7C1500'
+    hex:'#15558d'
   },
 ];
 const CardsSection = () => {
