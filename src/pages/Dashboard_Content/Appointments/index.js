@@ -243,7 +243,8 @@ const Dashboard_Appointments = props => {
             </button>
           </Space>
         </div>
-        <Table dataSource={props.Appointment} columns={columns} />
+        <Table     scroll={{  x: 240 }}
+ dataSource={props.Appointment} columns={columns} />
       </div>
     );
   };

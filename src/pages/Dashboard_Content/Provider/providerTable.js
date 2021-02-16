@@ -278,7 +278,7 @@ const ProviderTable = props => {
         </Space>
       </div>
 
-      <Table columns={columns} dataSource={props.provider} />
+      <Table  scroll={{  x: 240 }} columns={columns} dataSource={props.provider} />
       <Modal
         footer={false}
         width={800}
