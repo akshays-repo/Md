@@ -59,16 +59,16 @@ const CustomWidget = () => {
       button: Button8,
       url: `<a href = ${window.location.protocol}//${window.location.hostname}.com/online-appointment/${hospitalId}> <img alt='Book now' src=${Button8}/> </a>`,
     },
-    {
-        id:9 ,
-      button: Button9,
-      url: `<a href = ${window.location.protocol}//${window.location.hostname}.com/online-appointment/${hospitalId}> <img alt='Book now' src=${Button9}/> </a>`,
-    },
-    {
-        id:10 ,
-      button: Button10,
-      url: `<a href = ${window.location.protocol}//${window.location.hostname}.com/online-appointment/${hospitalId}> <img alt='Book now' src=${Button10}/> </a>`,
-    },
+    // {
+    //     id:9 ,
+    //   button: Button9,
+    //   url: `<a href = ${window.location.protocol}//${window.location.hostname}.com/online-appointment/${hospitalId}> <img alt='Book now' src=${Button9}/> </a>`,
+    // },
+    // {
+    //     id:10 ,
+    //   button: Button10,
+    //   url: `<a href = ${window.location.protocol}//${window.location.hostname}.com/online-appointment/${hospitalId}> <img alt='Book now' src=${Button10}/> </a>`,
+    // },
   ];
 
   const copyCodeToClipboard = (id) => {
@@ -84,16 +84,16 @@ const CustomWidget = () => {
   return (
     <div>
       <List
-        grid={{ gutter: 20, column: 5 }}
+        grid={{ gutter: 16, column: 4 }}
         dataSource={data}
         renderItem={item => (
           <List.Item>
-            <Card>
-              <img src={item.button} style={{ width: '100px', height: 'auto' }} />
+            <Card className="widget_body">
+              <img src={item.button} />
 
              <p>{"<a href = www.site.com/apptYpe> <img alt='Book now Curabitur aliquet quam id dui posuere blandit..'/> </a>"}
              </p>
-              <button onClick={() => copyCodeToClipboard(item.id)}>Copy to ClipBorad</button>
+              <button className="button-square" onClick={() => copyCodeToClipboard(item.id)} style={{border: 'border: 1px solid #e4eaec;'}}>Copy to ClipBorad</button>
             </Card>
           </List.Item>
         )}

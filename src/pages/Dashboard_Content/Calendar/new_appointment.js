@@ -223,7 +223,7 @@ export const NewAppointment = props => {
               </div>
             </Col>
             <Col span={24} offset={20}>
-              <Button
+              <Button className="view-button"
                 htmlType="submit"
                 disabled={isSubmitting}
                 shape="round"

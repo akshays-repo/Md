@@ -158,3 +158,16 @@
     }
   }
   }
+
+  .widget_body {
+.ant-card-body {
+  padding: 10px;
+  text-align: center;
+  p {
+    padding-top: 8px;
+  }
+}
+button {
+  border: 1px solid #e4eaec;
+}
+  }

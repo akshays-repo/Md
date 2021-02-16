@@ -7,6 +7,9 @@
   padding: 30px 0 0;
   .leftblock-sidenav {
     padding-left: 30px;
+    @include breakpoint(xs) {
+      padding-left: 0;
+    }
   }
   .rightblock-content {
     padding: 0 30px;
