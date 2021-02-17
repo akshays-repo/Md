@@ -53,7 +53,7 @@ const routes = [
     authorize: true,
   },
   {
-    path: '/froms',
+    path: '/forms',
     component: loadable(() => import('../pages/Dashboard_Content/Forms')),
     exact: true,
     authorize: true,

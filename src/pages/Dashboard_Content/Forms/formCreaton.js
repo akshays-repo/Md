@@ -1,18 +1,21 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Menu, Dropdown, Button, Input, Form, Space, Modal, Switch } from 'antd';
+import { Menu, Dropdown, Button, Input, Form, Space, Modal, Switch, message } from 'antd';
 import { DownOutlined, UserOutlined, MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
-import { message } from 'antd';
-import { connect } from 'react-redux';
-import { actionCreator } from '../../../reducers/actionCreator';
-import { customFormSchema } from '_utils/Schemas';
-import CustomFormReview from './customFormPreview';
-import HardCoreForm from './customFormhardCore';
 import TextField from '@material-ui/core/TextField';
 import _ from 'lodash';
-const CustomFormField = props => {
+const FormCreation = props => {
   const [listCustomField, setListCustomField] = useState([]);
   const [editIndex, setEditIndex] = useState('');
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [tittle, setTitle] = useState('');
+
+  useEffect(() => {
+    if (props.editId !== undefined) {
+      setListCustomField(props.editData.custom_form);
+      setTitle(props.editData.name);
+      console.log('true true true', props.editId);
+    }
+  }, []);
 
   //THIS WILL ADD NEW OBJECT TO ARRAY
   const handleMenuClick = e => {
@@ -27,23 +30,16 @@ const CustomFormField = props => {
     ]);
   };
 
-  useEffect(() => {
-    setListCustomField(props.CustomForm.custom_form);
-  }, []);
-
-  useEffect(() => {
-    console.log('smaasdmmdsadsd', listCustomField);
-  }, [listCustomField]);
-
   const handleFormSubmission = async e => {
     e.preventDefault();
     let contentType = 'JSON';
     let data = listCustomField;
     let sendingData = {
-      hospital_id: parseInt(localStorage.getItem('hospital_id')),
+      name: tittle,
       formData: data,
     };
-
+    console.log('datata', tittle);
+    //THIS IS FOR NULL AND EMPTY VALIDATION
     let isHaveNull = _.some(
       data,
       item =>
@@ -52,10 +48,14 @@ const CustomFormField = props => {
         _.some(item.values, value => _.isNull(value) || _.isEmpty(value)),
     );
     console.log('isHaveNull', isHaveNull);
-    if (!isHaveNull) {
-      await props.addCustomForm(JSON.stringify(sendingData), contentType);
+    if (!isHaveNull && tittle !== '') {
+      if (props.editId) {
+        await props.editForms(props.editId, JSON.stringify(sendingData), contentType);
+      } else {
+        await props.addForms(JSON.stringify(sendingData), contentType);
+      }
     } else {
-      message.error('Please Check All the Field is Filled');
+      message.error('Please Check All the Field is Filled or Not ');
     }
   };
 
@@ -138,15 +138,14 @@ const CustomFormField = props => {
     items.splice(index, 1);
     setListCustomField(items);
   };
-
   return (
     <div className="custom-field" style={{ minHeight: '500px' }}>
       <div className="d-flex mb4">
         {/* <h4>CUSTOM FORM FIELD </h4> */}
-        <Button className="edit-button" onClick={() => setIsModalVisible(true)}>
+        {/* <Button className="edit-button" onClick={() => setIsModalVisible(true)}>
           {' '}
           PREVIEW{' '}
-        </Button>
+        </Button> */}
       </div>
       <div className="inner-box">
         <div>
@@ -155,17 +154,14 @@ const CustomFormField = props => {
             and fields by clicking on the plus sign below.
           </p>
 
-          <Modal
-            title="PREVIEW CUTOM FORM"
-            visible={isModalVisible}
-            footer={false}
-            onCancel={handleCancel}
-          >
-            <CustomFormReview {...props} />
-          </Modal>
-
-          <HardCoreForm />
           <form>
+            <TextField
+              required
+              label="TITLE OF THE FORM"
+              value={tittle !== '' ? tittle : null}
+              onChange={e => setTitle(e.target.value)}
+              type="text"
+            />
             {listCustomField?.map((type, index) => {
               return (
                 <div className="mt8">
@@ -235,37 +231,4 @@ const CustomFormField = props => {
     </div>
   );
 };
-
-const mapStoreToProps = ({ CustomForm }) => {
-  console.log('Store CustomForm', CustomForm);
-  return {
-    CustomForm: CustomForm.payload,
-    CustomFormerror: CustomForm.error,
-    CustomFormmessage: CustomForm.message,
-    CustomFormmodal: CustomForm.modal,
-    CustomFormmodal1: CustomForm.modal1,
-    CustomFormchanged: CustomForm.changed,
-  };
-};
-
-const mapDispatchToProps = dispatch => ({
-  fetchCustomForm: id =>
-    dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_CUSTOMFORM', id })),
-  addCustomForm: (values, contentType) =>
-    dispatch(
-      actionCreator({ method: 'POST', action_type: 'CREATE_CUSTOMFORM', values, contentType }),
-    ),
-  editCustomForm: (id, values) =>
-    dispatch(actionCreator({ method: 'PUT', action_type: 'EDIT_PROVIDER', id, values })),
-  deleteCustomForm: id =>
-    dispatch(actionCreator({ method: 'DELETE', action_type: 'DELETE_PROVIDER', id })),
-  filterCustomForm: param =>
-    dispatch(
-      actionCreator({
-        method: 'GET',
-        action_type: 'FILTER_PROVIDER',
-        param,
-      }),
-    ),
-});
-export default connect(mapStoreToProps, mapDispatchToProps)(CustomFormField);
+export default FormCreation;

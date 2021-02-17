@@ -75,7 +75,7 @@ const sideMenuList = [
   {
     title: 'Forms',
     icon: 'fab fa-wpforms',
-    path: '/froms',
+    path: '/forms',
     wologin: true,
     wlogin: true,
   },

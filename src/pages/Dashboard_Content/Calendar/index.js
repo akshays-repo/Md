@@ -25,6 +25,11 @@ const Dashboard_Calendar = props => {
   const [bookingEditModal, setBookingEditModal] = useState(false);
   const [starttime, setstarttime] = useState(moment());
   const [endtime, setendtime] = useState(moment());
+  const [from, setFrom] = useState(null);
+  const [to, setTo] = useState(null);
+  const [bookingDetails, setBookingDetails] = useState({});
+  const [unavailableDetails, setUnavailableDetails] = useState({});
+
   const handleWeekendsToggle = () => {
     setweekendsVisible(!weekendsVisible);
   };
@@ -55,19 +60,22 @@ const Dashboard_Calendar = props => {
 
     switch (clickInfo.event.title) {
       case 'Booking':
+        setBookingDetails({ ...clickInfo.event._def.extendedProps, id: clickInfo.event.id });
         setBookingEditModal(true);
         break;
       case 'Unavailable':
+        setUnavailableDetails({ ...clickInfo.event._def.extendedProps, id: clickInfo.event.id });
         setUnavailableModal(true);
         break;
+      default:
+        setBookingDetails({ ...clickInfo.event._def.extendedProps, id: clickInfo.event.id });
+        setBookingEditModal(true);
     }
-    // if (window.confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
-    //   clickInfo.event.remove();
-    // }
   };
 
   const handleEvents = events => {
-    setcurrentEvents(events);
+    console.log('Events', events);
+    // setcurrentEvents(events);
   };
 
   useEffect(() => {
@@ -91,6 +99,10 @@ const Dashboard_Calendar = props => {
           ></Unavailable>
         );
       case 'Booking':
+        return (
+          <Booking modal={bookingEditModal} setModal={setBookingEditModal} eventInfo={eventInfo} />
+        );
+      default:
         return (
           <Booking modal={bookingEditModal} setModal={setBookingEditModal} eventInfo={eventInfo} />
         );
@@ -131,7 +143,15 @@ const Dashboard_Calendar = props => {
             selectMirror={true}
             dayMaxEvents={true}
             weekends={weekendsVisible}
-            initialEvents={INITIAL_EVENTS} // alternatively, use the `events` setting to fetch from a feed
+            // initialEvents={INITIAL_EVENTS} // alternatively, use the `events` setting to fetch from a feed
+            // initialEvents={props.appointment} // alternatively, use the `events` setting to fetch from a feed
+            initialEvents={(fetchInfo, successCallback, failureCallback) => {
+              setFrom(moment(fetchInfo.start).format('YYYY-MM-DD'));
+              setTo(moment(fetchInfo.end).format('YYYY-MM-DD'));
+              return [...props.appointment, ...props.unavailable];
+            }}
+            events={[...props.appointment, ...props.unavailable]}
+            // eventSources={props.appointment}
             select={handleDateSelect}
             eventContent={renderEventContent} // custom render function
             eventClick={handleEventClick}
@@ -151,15 +171,23 @@ const Dashboard_Calendar = props => {
             starttime={starttime}
             endtime={endtime}
           />
-          <BookingEdit {...props} modal={bookingEditModal} setModal={setBookingEditModal} />
+          <BookingEdit
+            {...props}
+            modal={bookingEditModal}
+            bookingDetails={bookingDetails}
+            setBookingDetails={setBookingDetails}
+            setModal={setBookingEditModal}
+          />
           <UnavailableEdit
             modal={unavailableModal}
             setModal={setUnavailableModal}
+            unavailableDetails={unavailableDetails}
+            setUnavailableDetails={setUnavailableDetails}
             {...props}
           ></UnavailableEdit>
         </Col>
-        <Col lg={2} xs={24} style={{ height: 50 }} className="pl2">
-          <FilterPopover {...props} provider={props.provider} />
+        <Col span={2} style={{ height: 50 }}>
+          <FilterPopover from={from} to={to} {...props} provider={props.provider} />
         </Col>
       </Row>
     );
@@ -176,13 +204,24 @@ function renderSidebarEvent(event) {
   );
 }
 
-const mapStoreToProps = ({ Provider, Patient, AppointmentType, Branch }) => {
-  console.log('Store CustomForm', Provider, Patient);
+const mapStoreToProps = ({
+  Provider,
+  Patient,
+  AppointmentType,
+  Appointment,
+  Branch,
+  Unavailable,
+}) => {
+  console.log('Store CustomForm', Appointment);
   return {
     provider: Provider.payload,
     patient: Patient.payload,
     appointment_type: AppointmentType.payload,
     branch: Branch.payload,
+    appointment: Appointment.payload,
+    appointment_changed: Appointment.changed,
+    unavailable_changed: Unavailable.changed,
+    unavailable: Unavailable.payload,
   };
 };
 
@@ -216,8 +255,18 @@ const mapDispatchToProps = dispatch => ({
     dispatch(
       actionCreator({ method: 'GET', action_type: 'FETCH_HOSPITAL_APPOINTMENT_TYPE', param }),
     ),
+  fetchAppointment: param =>
+    dispatch(actionCreator({ method: 'GET', action_type: 'FILTER_APPOINTMENT_CALENDAR', param })),
+  fetchAppointmentWithCancelled: param =>
+    dispatch(
+      actionCreator({
+        method: 'GET',
+        action_type: 'FILTER_APPOINTMENT_CALENDAR_WITH_CANCELLED',
+        param,
+      }),
+    ),
   fetchUnavailable: param =>
-    dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_PROVIDER_UNAVAILABLE', param })),
+    dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_UNAVAILABLE_PROVIDER', param })),
   createUnavailable: values =>
     dispatch(
       actionCreator({
@@ -225,6 +274,25 @@ const mapDispatchToProps = dispatch => ({
         contentType: 'JSON',
         action_type: 'CREATE_PROVIDER_UNAVAILABLE',
         values,
+      }),
+    ),
+  editUnavailable: (id, values) =>
+    dispatch(
+      actionCreator({
+        method: 'PUT',
+        contentType: 'JSON',
+        action_type: 'EDIT_PROVIDER_UNAVAILABLE',
+        id,
+        values,
+      }),
+    ),
+  deleteUnavailable: id =>
+    dispatch(
+      actionCreator({
+        method: 'DELETE',
+        contentType: 'JSON',
+        action_type: 'DELETE_PROVIDER_UNAVAILABLE',
+        id,
       }),
     ),
 });

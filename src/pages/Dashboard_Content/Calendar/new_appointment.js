@@ -68,7 +68,7 @@ export const NewAppointment = props => {
                       placeholder="Please select appointment type"
                     >
                       {props.appointment_type.map((result, i) => (
-                        <Select.Option key={result.id} values={result.id}>
+                        <Select.Option key={result.id} value={result.id}>
                           {result.name}
                         </Select.Option>
                       ))}
@@ -91,7 +91,7 @@ export const NewAppointment = props => {
                       placeholder="Please select branch"
                     >
                       {props.branch.map((result, i) => (
-                        <Select.Option key={result.id} values={result.id}>
+                        <Select.Option key={result.id} value={result.id}>
                           {result.fullName}
                         </Select.Option>
                       ))}
@@ -117,7 +117,7 @@ export const NewAppointment = props => {
                       placeholder="Please select provider"
                     >
                       {props.provider.map((result, i) => (
-                        <Select.Option key={result.id} values={result.id}>
+                        <Select.Option key={result.id} value={result.id}>
                           {result.fullName}
                         </Select.Option>
                       ))}
@@ -208,7 +208,7 @@ export const NewAppointment = props => {
                         }}
                       >
                         {props.patient.map((result, i) => (
-                          <Select.Option key={result.id} values={result.id}>
+                          <Select.Option key={result.id} value={result.id}>
                             {result.firstName + ' ' + result.lastName}
                           </Select.Option>
                         ))}
