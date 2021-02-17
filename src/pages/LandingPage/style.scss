@@ -133,6 +133,13 @@ h6 {
     justify-content: space-between;
     align-items: center;
     flex: 1 100%;
+    .logo {
+      img {
+      @include breakpoint(xs) {
+        width: 75%;
+      }
+    }
+    }
     }
   }
 }
@@ -213,15 +220,21 @@ h6 {
     font-weight: 600;
     line-height: 1.2;
   }
-
+  @include breakpoint(xs) {
+    .container {
+      flex-direction: column;
+    }
+  }
   @include breakpoint(sm) {
     .container {
       max-width: 540px;
+      // flex-direction: column;
     }
   }
   @include breakpoint(m) {
     .container {
       max-width: 720px;
+
     }
   }
 
@@ -366,7 +379,13 @@ h6 {
       .addCaption {
         @include margin-padding(20px, 50px);
         @include text-center;
-        h1,
+        h1 {
+          color: $white;
+          @include breakpoint(xs) {
+            font-size: 28px;
+            padding-top: 30px;
+          }
+        }
         p {
           color: $white;
         }
@@ -431,10 +450,11 @@ h6 {
   @include breakpoint(xs) {
     .about_left {
       display: flex;
+      margin-bottom: 20px;
     .circular-square {
-      width: 60%;
-      margin: auto;
-      margin-bottom: 15px;
+      height: 150px;
+      margin: 0 auto;
+      width: 150px;
     }
   }
   }
@@ -455,6 +475,9 @@ h6 {
       h1 {
         color: $white;
         margin-bottom: 0;
+        @include breakpoint(xs) {
+          font-size: 28px;
+        }
       }
       .lightFont {
         font-weight: 200;

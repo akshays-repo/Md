@@ -13,6 +13,10 @@
   }
   .rightblock-content {
     padding: 0 30px;
+    @include breakpoint(xs) 
+    {
+      padding:20px 15px;
+    }
 
   }
 }
