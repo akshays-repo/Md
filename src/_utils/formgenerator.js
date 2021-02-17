@@ -2,7 +2,7 @@ import React from 'react';
 import { Col } from 'antd';
 
 import { Field } from 'formik';
-
+import { DatePicker} from 'formik-antd'
 import { TextField, Select as MatSelect } from 'formik-material-ui';
 import MenuItem from '@material-ui/core/MenuItem';
 export const generateForm = formField => {
@@ -52,7 +52,7 @@ export const generateForm = formField => {
               >
                 {values.options.map((result, i) => {
                   return (
-                    <MenuItem key={i} value={result.value}>
+                    <MenuItem  key={i} value={result.value}>
                       {result.name}
                     </MenuItem>
                   );
@@ -66,7 +66,7 @@ export const generateForm = formField => {
           <Col key={index} xs={24} xl={12}>
             <label>{values.label}</label>
             <p>
-              <Field
+            <Field
                 // style={{ width: '90%' }}
                 component={TextField}
                 name={values.name}
