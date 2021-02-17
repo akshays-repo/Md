@@ -12,11 +12,24 @@ export const actionCreator = result => {
     if (result.id) {
       url = `${url}/${result.id}`;
     }
-    let query;
+    let query = '';
     if (result.param) {
-      query = Object.keys(result.param)
-        .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(result.param[k]))
-        .join('&');
+      if (Array.isArray(result.param.provider_id)) {
+        const { provider_id, ...rest } = result.param;
+        const checkParam = Object.keys(provider_id).map(
+          k => encodeURIComponent('provider_id') + '=' + encodeURIComponent(provider_id[k]),
+        );
+        if (checkParam.length > 0) {
+          query += checkParam.join('&') + '&';
+        }
+        query += Object.keys(rest)
+          .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(result.param[k]))
+          .join('&');
+      } else {
+        query += Object.keys(result.param)
+          .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(result.param[k]))
+          .join('&');
+      }
     }
     console.log('Query', result);
     if (query) {

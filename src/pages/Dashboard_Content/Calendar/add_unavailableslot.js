@@ -14,12 +14,11 @@ export const UnavailableSlot = props => {
     appointment_start: moment(starttime).format('YYYY-MM-DD hh:mm:ss'),
     provider_id: null,
     appointment_end: moment(endtime).format('YYYY-MM-DD hh:mm:ss'),
-    response: null,
+    note: null,
     arrBranchId: [],
     appointment_start_dummy: moment(starttime).format('YYYY-MM-DD hh:mm a'),
     appointment_end_dummy: moment(endtime).format('YYYY-MM-DD hh:mm a'),
   });
-  const innerForm = useRef(null);
 
   const handleSubmit = async (values, { resetForm, setSubmitting }) => {
     setSubmitting(true);
@@ -62,7 +61,7 @@ export const UnavailableSlot = props => {
                       placeholder="Choose Branch"
                     >
                       {props.branch.map((result, i) => (
-                        <Select.Option key={result.id} values={result.id}>
+                        <Select.Option key={result.id} value={result.id}>
                           {result.fullName}
                         </Select.Option>
                       ))}
@@ -79,14 +78,14 @@ export const UnavailableSlot = props => {
                   <p>
                     <Select
                       showSearch
-                      value={values.provider_id ? String(values.provider_id) : values.provider_id}
-                      onChange={val => val && setFieldValue('provider_id', Number(val))}
+                      value={values.provider_id ? values.provider_id : ''}
+                      onChange={val => val && setFieldValue('provider_id', val)}
                       style={{ width: '90%' }}
                       bordered={false}
                       placeholder="Choose Provider"
                     >
                       {props.provider.map((result, i) => (
-                        <Select.Option key={result.id} values={result.id}>
+                        <Select.Option key={result.id} value={result.id}>
                           {result.fullName}
                         </Select.Option>
                       ))}
@@ -150,7 +149,7 @@ export const UnavailableSlot = props => {
                     <Field
                       disabled={false}
                       component={TextField}
-                      name="response"
+                      name="note"
                       placeholder="Enter a note or details about the appointment"
                       type="text"
                       style={{ fontSize: 12 }}

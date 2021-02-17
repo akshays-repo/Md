@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Popover, Row, Col, Button, Divider, Avatar } from 'antd';
+import { store } from '../../../reducers/configureStore';
 
 export const FilterPopover = props => {
   const [cancelled, setcancelled] = useState(false);
@@ -11,18 +12,38 @@ export const FilterPopover = props => {
 
   useEffect(() => {
     console.log('Provider list', provider);
-
+    console.log('Date changed');
     if (cancelled) {
-      props.fetchAppointment({
+      props.fetchAppointmentWithCancelled({
         provider_id: provider.length > 0 ? [...provider] : [],
-        status: 'cancelled',
+        fromDate: props.from,
+        toDate: props.to,
       });
-    } else if (provider.length > 0) {
+      props.fetchUnavailable({
+        provider_id: provider.length > 0 ? [...provider] : [],
+        fromDate: props.from,
+        toDate: props.to,
+      });
+    } else {
       props.fetchAppointment({
         provider_id: provider.length > 0 ? [...provider] : [],
+        fromDate: props.from,
+        toDate: props.to,
+      });
+      props.fetchUnavailable({
+        provider_id: provider.length > 0 ? [...provider] : [],
+        fromDate: props.from,
+        toDate: props.to,
       });
     }
-  }, [provider, cancelled]);
+  }, [
+    provider,
+    cancelled,
+    props.from,
+    props.to,
+    props.appointment_changed,
+    props.unavailable_changed,
+  ]);
 
   const content = (
     <Row style={{ padding: 0, margin: 0 }}>
