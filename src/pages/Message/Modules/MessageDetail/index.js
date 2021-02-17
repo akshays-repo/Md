@@ -46,8 +46,7 @@ const MessageDetail = props => {
     let element = e.target;
     if (element.scrollTop === 0) {
       console.log('Scroll work');
-      let lastMessage = _.last(props.message);
-
+      let lastMessage = _.first(props.message);
       socket.emit('get_messages', {
         conversationId: lastMessage.conversationId,
         lastMessageId: lastMessage.id,

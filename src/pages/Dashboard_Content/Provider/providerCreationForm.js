@@ -8,7 +8,6 @@ import { generateForm } from '../../../_utils/formgenerator';
 import { getFormDataA } from '_utils';
 import { store } from '../../../reducers/configureStore';
 
-
 const { Option } = Select;
 //deletedBranches
 const ProviderCreationForm = props => {
@@ -16,50 +15,46 @@ const ProviderCreationForm = props => {
   const innerForm = useRef();
   const [branchList, setBranchList] = useState([]);
   const [selectedBranch, setSelectedBranch] = useState([]);
-  const [deletedBranch , setDeletedBranch] = useState([])
+  const [deletedBranch, setDeletedBranch] = useState([]);
   useEffect(() => {
     setBranchList(store.getState().Branch.payload);
-    if(props.values){
+    if (props.values) {
     }
   }, []);
 
   const handleFormSubmission = async values => {
-    let data = await getFormDataA({ ...values, userTypeId: 4,    });
+    let data = await getFormDataA({ ...values, userTypeId: 4 });
     selectedBranch.map((va, i) => data.append('arrBranches[]', va));
     deletedBranch.map((va, i) => data.append('deletedBranches[]', va));
-  
+
     if (props.id) {
-     
+
+      if (selectedBranch.length === 0) {
+        //this is for sent the arrBranches if branches is not edited 
+        values.provider_and_branches.map((va, i) => data.append('arrBranches[]', va.branch_id));
+      }
       await props.editProvider(props.id, data);
-     
     } else {
       await props.addProvider(data);
-     
     }
   };
 
-
-
-
-  const handleBranchChange = (values) =>{
+  const handleBranchChange = values => {
     let currentValue = [];
-    if(props.values?.branch) {
-      let branch = props.values.branch
-      branch.map(type => currentValue.push(type.id))
+    if (props.values?.branch) {
+      let branch = props.values.branch;
+      branch.map(type => currentValue.push(type.id));
     }
     let intersection = currentValue.filter(x => values.includes(x));
     let DeletedArray = [];
     DeletedArray = currentValue
       .filter(x => !intersection.includes(x))
       .concat(intersection.filter(x => !currentValue.includes(x)));
-      console.log("sdjsdsbdh", DeletedArray , values)
-      setSelectedBranch(values);
-      setDeletedBranch(DeletedArray)
+    console.log('sdjsdsbdh', DeletedArray, values);
+    setSelectedBranch(values);
+    setDeletedBranch(DeletedArray);
+  };
 
-
-  }
-
-  console.log("asdfklkjh",props.values)
   const formField = [
     {
       label: 'Full Name',
@@ -90,15 +85,14 @@ const ProviderCreationForm = props => {
             userTypeId: 4,
             provider_typeId: '',
             phone: '',
-           
           }
         }
-       //validationSchema={ProviderCreationSchema}
+        validationSchema={ProviderCreationSchema}
         onSubmit={handleFormSubmission}
         innerRef={innerForm}
       >
         {({ handleSubmit, touched, errors, isSubmitting }) => (
-          <Form  className="login__form" handleSubmit={handleSubmit}>
+          <Form className="login__form" handleSubmit={handleSubmit}>
             <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
               {generateForm(formField)}
               <Col xs={24} xl={12}>
@@ -112,16 +106,18 @@ const ProviderCreationForm = props => {
                   onChange={handleBranchChange}
                 >
                   {branchList?.map(branch => {
-                    return <Option value={branch.id} key={branch.id}>{branch.fullName}</Option>;
+                    return (
+                      <Option value={branch.id} key={branch.id}>
+                        {branch.fullName}
+                      </Option>
+                    );
                   })}
                 </Select>
-
-
               </Col>
 
               <Col xs={24} xl={12}>
-              <p>Please Select the Provider Type</p>
-              <Field
+                <p>Please Select the Provider Type</p>
+                <Field
                   as="select"
                   name="provider_typeId"
                   placeholder="Provider type"
@@ -131,7 +127,7 @@ const ProviderCreationForm = props => {
                     return <MenuItem value={branch.id}>{branch.name}</MenuItem>;
                   })}
                 </Field>
-                </Col>
+              </Col>
             </Row>
 
             <Button

@@ -1,7 +1,7 @@
 import socketIOClient from 'socket.io-client';
 import { DeliveryStatus } from '_constants/message';
 import { store } from '../../../reducers/configureStore';
-
+import _ from 'lodash'
 export const ENDPOINT = 'http://159.65.159.105';
 export const socket = socketIOClient(ENDPOINT);
 
@@ -45,9 +45,10 @@ export const connectToSocket = async () => {
   });
 
   socket.on('get_message_success', data => {
+    let oldMessage = store.getState().Message.payload
     store.dispatch({ type: 'CLEAR_MESSAGE' });
-    store.dispatch({ type: 'SET_MESSAGE', payload: data });
-    console.log('message get_message_success', data);
+    store.dispatch({ type: 'SET_MESSAGE', payload: _.unionBy(oldMessage, data) });
+    console.log('message get_message_success', data , "old Message" , oldMessage , "Merge" , _.unionBy(oldMessage, data) ) ;
   });
 
   socket.on('message_delivery_status', data => {
