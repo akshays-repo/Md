@@ -134,9 +134,11 @@ h6 {
     align-items: center;
     flex: 1 100%;
     .logo {
+      img {
       @include breakpoint(xs) {
         width: 75%;
       }
+    }
     }
     }
   }

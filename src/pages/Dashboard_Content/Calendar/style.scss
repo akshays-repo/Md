@@ -55,7 +55,7 @@
 }
 
 .fc-header-toolbar {
-  width: 90%;
+  width: 100%;
 }
 
 .cancelled_appointment {
@@ -168,18 +168,38 @@
   }
 }
 .calendarSection {
+  .calenderBlock {
   padding: 15px;
   background-color: #fff;
   border: 1px solid #f0f0f0;
-  .fc td {
+  .fc {
+    .fc-toolbar {
+      @include breakpoint(xs){
+      flex-direction: column;
+      }
+    }
+  td {
     font-size: 0.875rem;
     line-height: 3rem;
     padding: 0;
     text-transform: uppercase;
+    @include breakpoint(xs) {
+      line-height: 1.2rem;
+    }
     .fc-day-today {
       background: #f8f9fa;
+      .fc-event-main {
+        p {
+          @include breakpoint(xs) {
+            font-size:13px!important;
+          }
+        }
+      }
     }
   }
+  }
+  }
+
 }
 .ant-popover-title {
   min-height: 35px;
