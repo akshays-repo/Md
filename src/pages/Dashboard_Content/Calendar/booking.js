@@ -9,8 +9,7 @@ export const Booking = ({ eventInfo }) => {
         height: '100%',
         fontSize: 16,
         padding: 8,
-        background:
-          'rgb(230, 241, 251)',
+        background: 'rgb(230, 241, 251)',
         margin: 0,
       }}
     >

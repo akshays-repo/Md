@@ -1,6 +1,6 @@
 import { UnavailableState } from '../ComponentState/unavailable';
 import { message } from 'antd';
-
+import moment from 'moment';
 /**
  * @param state
  * @param action
@@ -17,11 +17,19 @@ export const UnavailableReducer = (state = UnavailableState, action) => {
         message: action.message,
         changed: true,
       };
-    case 'FETCH_BRANCH':
+    case 'FETCH_UNAVAILABLE_PROVIDER':
+      action.payload = action.payload.map((result, i) => ({
+        ...result,
+        title: 'Unavailable',
+        start: moment(result.appointment_start).format('YYYY-MM-DD HH:mm:ss'),
+        end: moment(result.appointment_end).format('YYYY-MM-DD HH:mm:ss'),
+        name: result.provider?.fullName || '',
+        arrBranchId: result.unavailable_and_branches.map(re => re.branch_id),
+      }));
       return {
         ...state,
         error: action.error,
-        payload: action.payload.users,
+        payload: action.payload,
         message: action.message,
         changed: false,
       };
@@ -40,13 +48,10 @@ export const UnavailableReducer = (state = UnavailableState, action) => {
       return {
         ...state,
         error: action.error,
-        payload: action.payload,
+        payload: [],
         message: action.message,
         changed: true,
       };
-
-    case 'EMPTY_BRANCH':
-      return { ...state, payload: [] };
     default:
       return state;
   }

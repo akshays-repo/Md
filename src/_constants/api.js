@@ -64,6 +64,10 @@ export const backend_api = {
   CHECK_HOSPITAL: '/api/backend/v1/users',
 
   FETCH_APPOINTMENT_HOME: '/api/backend/v1/online_bookings/filter',
-  FETCH_UNAVAILABLE_PROVIDER: '/api/backend/v1/appointments/unavailable',
+  FETCH_UNAVAILABLE_PROVIDER: '/api/backend/v1/unavailable/hospital',
   CREATE_PROVIDER_UNAVAILABLE: '/api/backend/v1/appointments/unavailable',
+  EDIT_PROVIDER_UNAVAILABLE: '/api/backend/v1/appointments/unavailable',
+  DELETE_PROVIDER_UNAVAILABLE: '/api/backend/v1/appointments/unavailable',
+  FILTER_APPOINTMENT_CALENDAR: '/api/backend/v1/online_bookings/filter',
+  FILTER_APPOINTMENT_CALENDAR_WITH_CANCELLED: '/api/backend/v1/online_bookings/filter',
 };
