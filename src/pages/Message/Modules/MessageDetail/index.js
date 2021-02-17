@@ -32,14 +32,14 @@ const MessageDetail = props => {
       send();
     }
   };
-useEffect(() => {
-  scrollToBottom();
-}, [])
   const scrollToBottom = () => {
-    console.log("i maamam")
-    messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    messagesEndRef.current.scrollIntoView({    behavior: 'smooth',
+    block: 'end',
+    inline: 'nearest' });
   };
 
+  useEffect(() => {
+  })
   console.log('props.message', props.message);
 
   const handleScroll = e => {
@@ -47,10 +47,12 @@ useEffect(() => {
     if (element.scrollTop === 0) {
       console.log('Scroll work');
       let lastMessage = _.last(props.message);
+
       socket.emit('get_messages', {
         conversationId: lastMessage.conversationId,
         lastMessageId: lastMessage.id,
       });
+
       console.log('Scroll work props', lastMessage);
     }
   };
@@ -65,7 +67,7 @@ useEffect(() => {
           <p>online</p>
         </div>
       </div>
-      <div className="chat" onScroll={handleScroll}  >
+      <div className="chat"  onScroll={handleScroll}  >
         {props.message.length > 0
           ? props.message.map(data =>
               data.senderId === '4c763a46-5490-47d1-b32f-ab66c5edd494' ? (
@@ -75,9 +77,7 @@ useEffect(() => {
               ),
             )
           : ''}
-        <div />
-        <div ref={messagesEndRef}/>
-
+        <div ref={messagesEndRef} />
       </div>
 
       <div className="message-sentbox" >

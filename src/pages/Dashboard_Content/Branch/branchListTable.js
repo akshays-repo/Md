@@ -132,7 +132,7 @@ const BranchListTable = props => {
         </Space>
       </div> */}
       <div>
-        <Table columns={columns} dataSource={props.data} />
+        <Table  scroll={{  x: 240 }} columns={columns} dataSource={props.data} />
       </div>
     </div>
   );

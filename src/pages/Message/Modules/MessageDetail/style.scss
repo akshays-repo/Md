@@ -22,10 +22,10 @@
   .chat {
     background-color: #ececec;
     // min-height: 300px;
-    min-height: calc(100vh - 224px);
-    max-height: calc(100vh - 224px);
+    min-height: calc(100vh - 200px);
+    max-height: calc(100vh - 200px);
     overflow-y: scroll;
-    padding: 20px;
+    padding: 0px 0px 50px 0px;
 
     p {
       // padding: 10px;
