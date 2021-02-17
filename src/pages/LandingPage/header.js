@@ -51,6 +51,7 @@ export default function Header() {
           <a href="/">Doctors</a>
           <a href="/">Developers</a>
           <a href="/">Pricing</a>
+          <a href="/login">Login</a>
 
         </nav>
       </CSSTransition>

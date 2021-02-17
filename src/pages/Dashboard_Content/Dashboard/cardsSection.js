@@ -47,7 +47,7 @@ const CardsSection = () => {
   return (
     <div className="card-section"> 
       <List
-        grid={{ gutter: 16, column: 2 }}
+        grid={{ gutter: 16, column: 1 }}
         dataSource={data}
         renderItem={item => (
           <List.Item>

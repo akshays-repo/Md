@@ -133,6 +133,11 @@ h6 {
     justify-content: space-between;
     align-items: center;
     flex: 1 100%;
+    .logo {
+      @include breakpoint(xs) {
+        width: 75%;
+      }
+    }
     }
   }
 }

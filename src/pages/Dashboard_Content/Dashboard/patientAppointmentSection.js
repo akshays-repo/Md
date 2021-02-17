@@ -172,7 +172,7 @@ const PatientAppointment = props => {
           </Button>
         </Space>
       </div>
-      <Table columns={columns} dataSource={props.payload} scroll={{}} />
+      <Table columns={columns} dataSource={props.payload}  scroll={{  x: 240 }}/>
       <Modal
         visible={props.modal2}
         footer={false}
