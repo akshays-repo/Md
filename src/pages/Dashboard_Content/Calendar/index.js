@@ -79,7 +79,7 @@ const Dashboard_Calendar = props => {
   };
 
   useEffect(() => {
-    props.fetchProvider();
+    props.fetchHospitalProvider();
     props.fetchBranch();
     props.fetchPatient();
     props.fetchAppointmentType({ hospitalId: localStorage.getItem('hospital_id') });
@@ -246,8 +246,15 @@ const mapDispatchToProps = dispatch => ({
         values,
       }),
     ),
-  fetchProvider: param =>
-    dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_PROVIDER', param })),
+  fetchProvider: () => dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_PROVIDER' })),
+  fetchBranchProvider: id =>
+    dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_BRANCH_PROVIDER', id })),
+  fetchAppointmentBranchProvider: param =>
+    dispatch(
+      actionCreator({ method: 'GET', action_type: 'FETCH_BRANCH_APPOINTMENT_PROVIDER', param }),
+    ),
+  fetchHospitalProvider: () =>
+    dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_PROVIDER' })),
   fetchBranch: param =>
     dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_BRANCH', param })),
   fetchPatient: param =>
