@@ -1,5 +1,5 @@
 import { SummaryMessageState } from '../ComponentState/summary_message';
-
+import _ from 'lodash';
 /**
  * @param state
  * @param action
@@ -12,7 +12,7 @@ export const SummaryMesssageReducer = (state = SummaryMessageState, action) => {
       //   const message = state.payload.find(
       //     (result, i) => result.conversationId === action.payload.conversationId,
       //   );
-      console.log('State payload', state.payload);
+      console.log('message summary payload', state.payload);
       message = state.payload.map((result, i) => {
         if (result.conversationId === action.payload.conversationId) {
           return action.payload;
@@ -41,9 +41,10 @@ export const SummaryMesssageReducer = (state = SummaryMessageState, action) => {
         changed: true,
       };
     case 'SET_LATEST_INCOMING_MESSAGE_SUMMARY':
+      console.log('message summary payload', state.payload);
+
       let checkConversation = state.payload.filter(
-        (result, i) => result.conversationId === action.payload.conversationId,
-      ).length;
+        (result, i) => result.conversationId === action.payload.conversationId,).length;
       if (checkConversation.length > 0) {
         message = state.payload.map((result, i) => {
           if (result.conversationId === action.payload.conversationId) {

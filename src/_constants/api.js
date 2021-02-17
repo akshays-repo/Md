@@ -72,4 +72,10 @@ export const backend_api = {
   FETCH_APPOINTMENT_HOME: '/api/backend/v1/online_bookings/filter',
   FETCH_UNAVAILABLE_PROVIDER: '/api/backend/v1/appointments/unavailable',
   CREATE_PROVIDER_UNAVAILABLE: '/api/backend/v1/appointments/unavailable',
+
+
+  CREATE_FORM: '/api/backend/v1/forms',
+  EDIT_FORM:'/api/backend/v1/forms',
+  FETCH_FORM:'/api/backend/v1/forms',
+  DELETE_FORM:'/api/backend/v1/form',
 };

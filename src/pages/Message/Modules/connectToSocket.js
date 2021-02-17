@@ -2,6 +2,7 @@ import socketIOClient from 'socket.io-client';
 import { DeliveryStatus } from '_constants/message';
 import { store } from '../../../reducers/configureStore';
 import _ from 'lodash'
+import LogOut from 'pages/Dashboard_Content/Logout';
 export const ENDPOINT = 'http://159.65.159.105';
 export const socket = socketIOClient(ENDPOINT);
 
@@ -23,10 +24,12 @@ export const connectToSocket = async () => {
   });
 
   socket.on('incoming', data => {
+    let oldSummary = store.getState().SummaryMessage.payload
+    
     store.dispatch({ type: 'SET_LATEST_INCOMING_MESSAGE_SUMMARY', payload: data.message });
     store.dispatch({ type: 'SET_INCOMING_MESSAGE', payload: data.message });
-
-    console.log('message incoming', data);
+    console.log("message incoming' ",store.getState().SummaryMessage.payload);
+    console.log('message incoming', data , 'old' , oldSummary , 'union' ,  _.unionBy(oldSummary, data),);
   });
 
   socket.on('authenticate_success', data => {
