@@ -62,7 +62,12 @@ export const NewAppointment = props => {
                     <Select
                       showSearch
                       value={values.appointment_type_id}
-                      onChange={val => val && setFieldValue('appointment_type_id', val)}
+                      onChange={val => {
+                        setFieldValue('branch_id', null);
+                        setFieldValue('provider_id', null);
+                        props.fetchBranch();
+                        val && setFieldValue('appointment_type_id', val);
+                      }}
                       style={{ width: '90%' }}
                       bordered={false}
                       placeholder="Please select appointment type"
@@ -85,7 +90,14 @@ export const NewAppointment = props => {
                     <Select
                       showSearch
                       value={values.branch_id}
-                      onChange={val => val && setFieldValue('branch_id', val)}
+                      onChange={val => {
+                        setFieldValue('provider_id', null);
+                        props.fetchAppointmentBranchProvider({
+                          type_id: values.appointment_type_id,
+                          branch_id: val,
+                        });
+                        val && setFieldValue('branch_id', val);
+                      }}
                       style={{ width: '90%' }}
                       bordered={false}
                       placeholder="Please select branch"
@@ -118,7 +130,7 @@ export const NewAppointment = props => {
                     >
                       {props.provider.map((result, i) => (
                         <Select.Option key={result.id} value={result.id}>
-                          {result.fullName}
+                          {result.fullName || result.provider?.fullName || 'Name not found'}
                         </Select.Option>
                       ))}
                     </Select>
