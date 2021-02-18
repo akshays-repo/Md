@@ -82,7 +82,7 @@ const Dashboard_Forms = props => {
               type="primary"
               onClick={() => store.dispatch({ type: 'OPEN_EDIT_FORM_MODAL' })}
             >
-              List or Edit Forms
+              View,  Edit, Share Forms
             </Button>
           </Space>
         </div>

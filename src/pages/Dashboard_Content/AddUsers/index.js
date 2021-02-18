@@ -132,8 +132,8 @@ const mapDispatchToProps = dispatch => ({
   fetchUser: () => dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_USER' })),
   addUser: values =>
     dispatch(actionCreator({ method: 'POST', action_type: 'CREATE_USER', values })),
-  editUser: (id, values) =>
-    dispatch(actionCreator({ method: 'PUT', action_type: 'EDIT_USER', id, values, })),
+  editUser: (param, values) =>
+    dispatch(actionCreator({ method: 'POST', action_type: 'EDIT_USER', param, values, })),
   deleteUser: id => dispatch(actionCreator({ method: 'DELETE', action_type: 'DELETE_USER', id })),
   filterUser: param =>
     dispatch(

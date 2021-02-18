@@ -41,6 +41,10 @@ const ViewCreatedForms = props => {
               <i className="fa fa-trash"></i>
             </span>
           </Popconfirm>
+          <span className="edit-color icon-button" >
+          <i class="fas fa-share-alt"></i>
+          </span>
+          
         </Space>
       ),
     },

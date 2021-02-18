@@ -56,7 +56,10 @@ const UserCreationForm = props => {
     let data = await getFormDataA({ ...values});
     console.log("ssahdhkzchbcxzBM<",props.editId )
     if(props.editId){
-        props.editUser(props.editId, data)
+     const {userTypeId , isAdmin , ...rest} = values
+     let editData = await getFormDataA({...rest})
+        console.log("kalsdfjh", rest)
+        props.editUser({id:props.editId}, editData)
     }else{
         props.addUser(data)
 

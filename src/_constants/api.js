@@ -77,7 +77,7 @@ export const backend_api = {
   CREATE_FORM: '/api/backend/v1/forms',
   EDIT_FORM:'/api/backend/v1/forms',
   FETCH_FORM:'/api/backend/v1/forms',
-  DELETE_FORM:'/api/backend/v1/form',
+  DELETE_FORM:'/api/backend/v1/forms',
   
   EDIT_PROVIDER_UNAVAILABLE: '/api/backend/v1/appointments/unavailable',
   DELETE_PROVIDER_UNAVAILABLE: '/api/backend/v1/appointments/unavailable',

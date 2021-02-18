@@ -1,8 +1,7 @@
-import React , {useState} from 'react';
+import React, { useState } from 'react';
 import { Row, Col } from 'antd';
 import Sidebar from './sidebar';
-import Sider from './sidemenu';
-import {isMobile} from 'react-device-detect';
+import { isMobile } from 'react-device-detect';
 import { Drawer, Button, Radio, Space } from 'antd';
 
 const Dashboard_Content = ({ content }) => {
@@ -18,23 +17,25 @@ const Dashboard_Content = ({ content }) => {
       <Row>
         <Col xs={24} xl={6} md={6}>
           <div className="leftblock-sidenav">
-            {isMobile ?  
-            <div>
-              <Button type="primary" onClick={showDrawer}>
-        MENU
-      </Button>
-      <Drawer
-        title="Menu"
-        width={320}
-        placement="left"
-        closable={true}
-        onClose={onClose}
-        visible={visible}
-      >
-      <Sidebar />
-      </Drawer>
-     </div>
-             : <Sidebar /> }
+            {isMobile ? (
+              <div>
+                <Button type="primary" onClick={showDrawer}>
+                <i class="fas fa-bars"></i>
+                </Button>
+                <Drawer
+                  title="Menu"
+                  width={320}
+                  placement="left"
+                  closable={true}
+                  onClose={onClose}
+                  visible={visible}
+                >
+                  <Sidebar />
+                </Drawer>
+              </div>
+            ) : (
+              <Sidebar />
+            )}
           </div>
         </Col>
         <Col xs={24} xl={18} md={18}>

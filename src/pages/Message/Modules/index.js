@@ -9,6 +9,7 @@ import { connectToSocket, ENDPOINT, socket } from './connectToSocket';
 import { connect } from 'react-redux';
 import { actionCreator } from '../../../reducers/actionCreator';
 import { store } from '../../../reducers/configureStore';
+import { isMobile } from 'react-device-detect';
 
 const MessageLayout = props => {
   useEffect(() => {
@@ -22,6 +23,7 @@ const MessageLayout = props => {
   const handleMessageDetails = (conversationId, lastMessageId = '', receiverID) => {
     store.dispatch({ type: 'CLEAR_MESSAGE' });
     store.dispatch({ type: 'INITIAL_MESSAGE_LOADED' });
+    store.dispatch({ type: 'GOTO_DETAIL_PAGE' });
     setReceiverId(receiverID);
     socket.emit('get_messages', {
       conversationId: conversationId,
@@ -40,37 +42,51 @@ const MessageLayout = props => {
   return (
     <div className="message">
       <div className="">
-        {/* <button
-          onClick={() =>
-            socket.emit('send_message', {
-              userUUID: 'c0f636bc-43d2-4b9c-9efb-530426729be5',
-              message: 'Hai',
-            })
-          }
-        >
-          SEND
-        </button>
-        <button
-          onClick={() =>
-            socket.emit('get_message', { convId: 'ae774049-ad14-4192-bf87-1a23f54dfc82' })
-          }
-        >
-          GET
-        </button>
-        <button onClick={() => socket.emit('message_summary', 'Hai hai')}>MESSAGE SUMMARY</button>
-        <button onClick={() => socket.emit('test', 'Hai')}>TEST</button> */}
-        <Row>
-          <Col xl={8} className="col-border">
-            <MessageList {...props} handleMessageDetails={handleMessageDetails} {...messageLists} />
-          </Col>
-          <Col xl={16}>
-            {props.initialLoading ? (
-              intialLoading
-            ) : (
-              <MessageDetail {...messageDetails} {...props} receiverID={receiverId} />
-            )}
-          </Col>
-        </Row>
+        {/* THIS IS FOR THE DESKTOP SECTION   */}
+        {/* PLEASE NOTE IF YOU MADE ANY CHANGES FOR THE DESKTOP COMPONENTS DO SAME FOR THE MOBILE ALSO */}
+        {!isMobile && (
+          <Row>
+            <Col xl={8} xs={24} className="col-border">
+              <MessageList
+                {...props}
+                handleMessageDetails={handleMessageDetails}
+                {...messageLists}
+              />
+            </Col>
+            <Col xl={16} xs={24}>
+              {props.initialLoading ? (
+                intialLoading
+              ) : (
+                <MessageDetail {...messageDetails} {...props} receiverID={receiverId} />
+              )}
+            </Col>
+          </Row>
+        )}
+
+        {/* THIS IS FOR THE MOBILE SECTION */}
+        {/* PLEASE NOTE IF YOU MADE ANY CHANGES FOR THE MOBILE COMPONENTS DO SAME FOR THE DESKTOP ALSO */}
+        {isMobile && (
+          <Row>
+            <Col xs={24} className="col-border">
+              {props.mobileListScreen === true && (
+                <MessageList
+                  {...props}
+                  handleMessageDetails={handleMessageDetails}
+                  {...messageLists}
+                />
+              )}
+              {props.mobileListScreen === false && (
+                <div>
+                  {props.initialLoading ? (
+                    intialLoading
+                  ) : (
+                    <MessageDetail {...messageDetails} {...props} receiverID={receiverId} />
+                  )}
+                </div>
+              )}
+            </Col>
+          </Row>
+        )}
       </div>
     </div>
   );
@@ -81,6 +97,7 @@ const mapStoreToProps = ({ SummaryMessage, Message }) => {
     summary_message: SummaryMessage.payload.length > 0 ? SummaryMessage.payload : [],
     message: Message.payload.length > 0 ? Message.payload : [],
     initialLoading: Message.initalLoading,
+    mobileListScreen: Message.mobileListScreen,
   };
 };
 const mapDispatchToProps = dispatch => ({
