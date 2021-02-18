@@ -16,6 +16,7 @@ import { SummaryMesssageReducer as SummaryMessage } from './ComponentReducer/sum
 import { UsersReducer as Users } from './ComponentReducer/users';
 import { UnavailableReducer as Unavailable } from './ComponentReducer/unavailable';
 import { FormsReducer as Forms } from './ComponentReducer/forms';
+import { TemplateReducer  as Template} from './ComponentReducer/template';
 export const reducers = {
   Hospital,
   Branch,
@@ -34,5 +35,6 @@ export const reducers = {
   SummaryMessage,
   Users,
   Unavailable,
-  Forms
+  Forms,
+  Template
 };

@@ -10,6 +10,7 @@ import {AppointmentState as Appointment} from './ComponentState/customForm'
 import {DashboardState as Dashboard} from './ComponentState/dashboard'
 import { UsersState as Users } from './ComponentState/users';
 import { FormsState as Forms} from './ComponentState/forms';
+import { TemplateState as Template } from './ComponentState/template';
 export const initialState = {
   Hospital,
   Branch,
@@ -22,5 +23,6 @@ export const initialState = {
   Appointment,
   Dashboard,
   Users,
-   Forms
+   Forms,
+   Template
 };
