@@ -179,7 +179,7 @@ const Dashboard_Appointments = props => {
     return (
       <div className="appointment-section">
         <div className="search">
-          <Space direction="horizontal">
+          <Space direction="vertical">
             <Input
               value={searchKey}
               type="text"
