@@ -30,10 +30,10 @@ const AddAppointmentTime = props => {
       });
       if (values.arrDelete.length > 0) {
         const arrDelete = values.arrDelete;
-        values = JSON.stringify({ formData: formData, provider_id, arrDelete });
+        values = JSON.stringify({ formData: formData, provider_id, branch_id: 4, arrDelete });
         props.addSchedule(values);
       } else {
-        values = JSON.stringify({ formData: formData, provider_id });
+        values = JSON.stringify({ formData: formData, provider_id, branch_id: 4 });
         props.addSchedule(values);
       }
     } catch (err) {
@@ -74,6 +74,7 @@ const AddAppointmentTime = props => {
         onSubmit={handleFormSubmission}
         initialValues={{
           provider_id: props.id,
+          branch_id: 4,
           arrDelete: [],
           formData: props.schedule ? props.schedule : [],
         }}
@@ -125,6 +126,7 @@ const AddAppointmentTime = props => {
 };
 
 const mapStoreToProps = ({ Schedule }) => {
+  console.log('Schedule', Schedule);
   return {
     schedule: Schedule.payload,
     modal: Schedule.modal,
