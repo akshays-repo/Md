@@ -190,11 +190,12 @@ export const BookingEdit = props => {
                         bordered={false}
                         placeholder="Please select branch"
                       >
-                        {props.branch.map((result, i) => (
-                          <Select.Option key={result.id} value={result.id}>
-                            {result.fullName}
-                          </Select.Option>
-                        ))}
+                        {values.appointment_type_id &&
+                          props.branch.map((result, i) => (
+                            <Select.Option key={result.id} value={result.id}>
+                              {result.fullName}
+                            </Select.Option>
+                          ))}
                       </Select>
                       <ErrorMessage
                         render={msg => <div style={{ color: 'red' }}>{msg}</div>}
@@ -215,11 +216,13 @@ export const BookingEdit = props => {
                         bordered={false}
                         placeholder="Please select provider"
                       >
-                        {props.provider.map((result, i) => (
-                          <Select.Option key={result.id} value={result.id}>
-                            {result.fullName || result.provider?.fullName || 'Name not found'}
-                          </Select.Option>
-                        ))}
+                        {values.appointment_type_id &&
+                          values.branch_id &&
+                          props.provider.map((result, i) => (
+                            <Select.Option key={result.id} value={result.id}>
+                              {result.fullName || result.provider?.fullName || 'Name not found'}
+                            </Select.Option>
+                          ))}
                       </Select>
                       <ErrorMessage
                         render={msg => <div style={{ color: 'red' }}>{msg}</div>}

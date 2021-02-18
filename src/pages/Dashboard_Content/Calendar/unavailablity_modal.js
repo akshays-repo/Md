@@ -108,15 +108,16 @@ export const UnavailableEdit = props => {
                         bordered={false}
                         placeholder="Choose Branch"
                       >
-                        {props.provider
-                          .filter(re => re.id === values.provider_id)
-                          .map(re =>
-                            re.provider_and_branches.map((result, i) => (
-                              <Select.Option key={result.id} value={result.id}>
-                                {result.branch.fullName}
-                              </Select.Option>
-                            )),
-                          )}
+                        {values.provider_id &&
+                          props.provider
+                            .filter(re => re.id === values.provider_id)
+                            .map(re =>
+                              re.provider_and_branches.map((result, i) => (
+                                <Select.Option key={result.id} value={result.id}>
+                                  {result.branch.fullName}
+                                </Select.Option>
+                              )),
+                            )}
                       </Select>
                       <ErrorMessage
                         render={msg => <div style={{ color: 'red' }}>{msg}</div>}
