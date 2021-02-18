@@ -4,6 +4,8 @@ import Sidebar from './sidebar';
 import { isMobile } from 'react-device-detect';
 import { Drawer, Button, Radio, Space } from 'antd';
 
+
+
 const Dashboard_Content = ({ content }) => {
   const [visible, setVisible] = useState(false);
   const showDrawer = () => {
@@ -47,3 +49,4 @@ const Dashboard_Content = ({ content }) => {
 };
 
 export default Dashboard_Content;
+
