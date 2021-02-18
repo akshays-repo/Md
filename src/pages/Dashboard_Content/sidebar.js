@@ -5,7 +5,7 @@ const sideMenuList = [
   {
     title: 'Dashboard',
     icon: 'fas fa-columns',
-    path: '/',
+    path: '/dashboard',
     wologin: true,
     wlogin: true,
   },
@@ -52,6 +52,13 @@ const sideMenuList = [
     wlogin: true,
   },
   {
+    title: 'Add Users',
+    icon: 'fas fa-users',
+    path: '/add-users',
+    wologin: true,
+    wlogin: true,
+  },
+  {
     title: 'Templates',
     icon: 'fas fa-stream',
     path: '/templates',
@@ -68,7 +75,7 @@ const sideMenuList = [
   {
     title: 'Forms',
     icon: 'fab fa-wpforms',
-    path: '/froms',
+    path: '/forms',
     wologin: true,
     wlogin: true,
   },
@@ -82,7 +89,7 @@ const sideMenuList = [
   {
     title: 'Log Out',
     icon: 'fas fa-sign-out-alt',
-    path: '/analytics',
+    path: '/logout',
     wologin: true,
     wlogin: true,
   }

@@ -510,3 +510,24 @@ export const UnavailableSchema = Yup.object().shape({
   appointment_end: Yup.date().required('Select end'),
   response: Yup.string().nullable(),
 });
+
+
+
+export const hospitalUser = Yup.object().shape({
+  email: Yup.string()
+  .required('Please enter email address')
+  .email('Please enter valid email'),
+phone: Yup.string().required('Phone number is required'),
+  password : Yup.string().password().required('Please enter  password'),
+c_password: Yup.string().oneOf([Yup.ref('password'), 'null'], 'Password must match'),
+});
+
+export const hospitaEditlUser = Yup.object().shape({
+  email: Yup.string()
+  .required('Please enter email address')
+  .email('Please enter valid email'),
+phone: Yup.string().required('Phone number is required'),
+  
+});
+
+

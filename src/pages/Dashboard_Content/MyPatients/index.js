@@ -175,7 +175,7 @@ const Dashboard_MyPatients = props => {
           </Modal>
         </div>
         <div className="patient_name"></div>
-        <Table columns={columns} dataSource={props.patient} />,
+        <Table  scroll={{  x: 240 }} columns={columns} dataSource={props.patient} />,
       </div>
     );
   };

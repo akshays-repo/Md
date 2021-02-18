@@ -14,7 +14,6 @@ const ProviderTable = props => {
   const [appointmentTypes, setAppointmentTypes] = useState([]);
   const [editId, setEditId] = useState(null);
   const [editData, setEditData] = useState('');
-
   const [branchId, setBranchId] = useState(null);
   const [providerTypeId, setProviderTypeId] = useState(null);
   const [searchKey, setSearchKey] = useState(null);
@@ -278,7 +277,7 @@ const ProviderTable = props => {
         </Space>
       </div>
 
-      <Table columns={columns} dataSource={props.provider} />
+      <Table  scroll={{  x: 240 }} columns={columns} dataSource={props.provider} />
       <Modal
         footer={false}
         width={800}

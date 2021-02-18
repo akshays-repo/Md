@@ -120,8 +120,7 @@ const Dashboard_Calendar = props => {
     return (
       <Row className="calendarSection">
         {' '}
-        {/* {JSON.stringify(props.appointment, null, 2)} */}
-        <Col span={22}>
+        <Col lg={22} xs={24} className="calenderBlock">
           <FullCalendar
             plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
             // customButtons={{

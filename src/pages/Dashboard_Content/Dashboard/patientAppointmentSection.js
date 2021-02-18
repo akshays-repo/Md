@@ -153,26 +153,26 @@ const PatientAppointment = props => {
       <div className="headerButton">
         <Space direction="horizontal">
           <Button
-            className="inactive-button "
+            className="inactive-button  button-square"
             onClick={getToday}
-            style={currentButton === 1 ? { backgroundColor: '#42a5f6' } : {}}
+            style={currentButton === 1 ? { backgroundColor: '#42a5f6!important' } : {}}
             type="primary"
           >
             {' '}
-            today
+            Today
           </Button>
           <Button
-            className="inactive-button "
+            className="inactive-button   button-square"
             onClick={getUpComing}
             style={currentButton === 2 ? { backgroundColor: '#42a5f6' } : {}}
             type="primary"
           >
             {' '}
-            upcoming
+            Upcoming
           </Button>
         </Space>
       </div>
-      <Table columns={columns} dataSource={props.payload} scroll={{}} />
+      <Table columns={columns} dataSource={props.payload}  scroll={{  x: 240 }}/>
       <Modal
         visible={props.modal2}
         footer={false}

@@ -12,7 +12,7 @@ const Dashboard_Dashboard = () => {
     return (
       <div className="dashboard">
          <div>
-           <h5> STATS  {' '} <i class="fas fa-chart-bar"/> </h5> 
+           <h5> STATS  {' '} <i class="fas fa-chart-bar pl2"/> </h5> 
           </div>
         <Row>
  
@@ -20,7 +20,9 @@ const Dashboard_Dashboard = () => {
           </Col>
 
           <Col xl={12}>
+            <div className="countBlock">
           <CardsSection />
+          </div>
           </Col>
 
         </Row>

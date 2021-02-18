@@ -173,7 +173,7 @@ export const UnavailableSlot = props => {
             </Col>
             <Divider />
             <Col span={24} offset={20}>
-              <Button
+              <Button className="view-button"
                 htmlType="submit"
                 shape="round"
                 disabled={isSubmitting}

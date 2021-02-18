@@ -22,7 +22,7 @@ const FossilMdLoginPage = props => {
   const innerForm = useRef();
 
   if (props.isLogin) {
-    return <Redirect to="/"></Redirect>;
+    return <Redirect to="/dashboard"></Redirect>;
   } else {
     return (
       <div className="loginWrapper">
@@ -39,7 +39,7 @@ const FossilMdLoginPage = props => {
           >
             {({ isSubmitting, handleSubmit }) => (
               <Form className="login__form" onSubmit={handleSubmit}>
-                <h1 className="text-center">Log in to continue..</h1>
+                <h2 className="text-center">Log in to continue..</h2>
                 <div className="loginInput">
                   <Field
                     label="Email"
@@ -51,7 +51,7 @@ const FossilMdLoginPage = props => {
                   ></Field>
                 </div>
 
-                <Field
+                <Field style={{width: '100%'}}
                   label="Password"
                   component={TextField}
                   name="password"
@@ -59,15 +59,16 @@ const FossilMdLoginPage = props => {
                   type="password"
                   disabled={false}
                 ></Field>
-
-                <Button
+<div className="text-center">
+                <button
                   htmlType="submit"
                   disabled={isSubmitting}
                   loading={loadings}
-                  className="button-square edit-button"
+                  className="view-button button-square mt8"
                 >
                   Login
-                </Button>
+                </button>
+                </div>
               </Form>
             )}
           </Formik>

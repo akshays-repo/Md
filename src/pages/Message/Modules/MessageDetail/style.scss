@@ -18,13 +18,15 @@
       align-items: center;
     }
   }
+
   .chat {
     background-color: #ececec;
     // min-height: 300px;
-    min-height: calc(100vh - 224px);
-    max-height: calc(100vh - 224px);
+    min-height: calc(100vh - 200px);
+    max-height: calc(100vh - 200px);
     overflow-y: scroll;
-    padding: 20px;
+    padding: 30px;
+
     p {
       // padding: 10px;
       // margin: 30px;
@@ -41,10 +43,11 @@
       border-radius: 15px;
       padding-left: 40px;
       height: 40px;
-      width: 500px;
+      width: auto;
       border: #e2e2e2;
       outline: none;
       color: #333;
+
     }
     input[type='file'] {
       display: none;

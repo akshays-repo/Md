@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect , useState} from 'react';
 import { List, Card } from 'antd';
+import {isMobile} from 'react-device-detect';
 
 const data = [
   {
@@ -44,10 +45,18 @@ const data = [
   },
 ];
 const CardsSection = () => {
+
+
+const [columnSize , setColumnSize]  = useState('')
+
+let columnValue = isMobile ? 1 : 2;
+useEffect(() =>{
+  setColumnSize(columnValue)
+}, [])
   return (
     <div className="card-section"> 
       <List
-        grid={{ gutter: 16, column: 2 }}
+        grid={{ gutter: 16, column: columnSize }}
         dataSource={data}
         renderItem={item => (
           <List.Item>

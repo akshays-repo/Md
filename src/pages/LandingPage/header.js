@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./header.css";
 import { CSSTransition } from "react-transition-group";
+import LogoImg from './assets/images/fossilmd.jpg'
 
 export default function Header() {
   const [isNavVisible, setNavVisibility] = useState(false);
@@ -31,10 +32,15 @@ export default function Header() {
   return (
     <header className="Header">
         <div className="container">
-      {/* <img src={require("../assets/logo.png")} className="Logo" alt="logo" /> */}
+          <div className="topHeader">
+          <div className="logo">
+      {/* <img src={require("../assets/fossilmd.jpg")} className="Logo" alt="logo" /> */}
+      <img src={LogoImg} />
+      </div>
       <button onClick={toggleNav} className="smallMenu">
         <span><i class="fas fa-bars"></i></span>
       </button>
+      </div>
       <CSSTransition
         in={!isSmallScreen || isNavVisible}
         timeout={350}
@@ -45,9 +51,11 @@ export default function Header() {
           <a href="/">Doctors</a>
           <a href="/">Developers</a>
           <a href="/">Pricing</a>
+          <a href="/login">Login</a>
 
         </nav>
       </CSSTransition>
+  
     
       </div>
     </header>

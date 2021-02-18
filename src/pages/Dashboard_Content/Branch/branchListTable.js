@@ -74,7 +74,7 @@ const BranchListTable = props => {
           <Space size="middle">
             <Select
               style={record.status === 'active' ? { color: 'green' } : { color: 'red' }}
-              defaultValue={record.status}
+              value={record.status}
               onChange={e => {
                 setEditId(record.id);
                 setEditData(record);
@@ -132,7 +132,7 @@ const BranchListTable = props => {
         </Space>
       </div> */}
       <div>
-        <Table columns={columns} dataSource={props.data} />
+        <Table  scroll={{  x: 240 }} columns={columns} dataSource={props.data} />
       </div>
     </div>
   );

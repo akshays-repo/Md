@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Formik, Form, Field } from 'formik';
-import { Button, Row, Select, Col,} from 'antd';
+import { Button, Row, Col,} from 'antd';
 import { DatePicker } from 'formik-antd';
-
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 import moment from 'moment';
 import { TextField } from 'formik-material-ui';
 const { Option } = Select;
@@ -74,54 +77,55 @@ const AppointmentEdit = props => {
                 <p>Payment Status</p>
                 <Select
                   defaultValue={props.view.payment_status}
-                  style={{ width: 120 }}
+                  style={{ width: '100%' }}
                   onChange={e => setPaymentStatus(e)}
-                  className={props.view.payment_status}
+                  className='matBorder select-underline' 
                 >
-                  <Select.Option className={'pending'} value="pending">
+                  <MenuItem className={'pending'} value="pending">
                     Pending
-                  </Select.Option>
-                  <Select.Option className={'failed'} value="failed">
+                  </MenuItem>
+                  <MenuItem className={'failed'} value="failed">
                     Failed
-                  </Select.Option>
-                  <Select.Option className={'paid'} value="paid">
+                  </MenuItem>
+                  <MenuItem className={'paid'} value="paid">
                     Paid
-                  </Select.Option>
-                  <Select.Option className={'requested'} value="requested">
+                  </MenuItem>
+                  <MenuItem className={'requested'} value="requested">
                     Requested
-                  </Select.Option>
-                  <Select.Option className={'manually_paid'} value="manually_paid">
+                  </MenuItem>
+                  <MenuItem className={'manually_paid'} value="manually_paid">
                     Manually Paid
-                  </Select.Option>
+                  </MenuItem>
                 </Select>
               </Col>
 
               <Col xs={24} xl={12}>
                 <p>Status</p>
-                <Select
+                <Select 
                   defaultValue={props.view.status}
-                  style={{ width: 120 }}
-                  className={props.view.status}
+                  style={{ width: '100%' }}
+                  className='matBorder select-underline' 
                   onChange={e => setStatus(e)}
                 >
-                  <Select.Option className={'pending'} value="pending">
+                  <MenuItem className={'pending'} value="pending">
                     Pending
-                  </Select.Option>
-                  <Select.Option className={'confirmed'} value="confirmed">
+                  </MenuItem>
+                  <MenuItem className={'confirmed'} value="confirmed">
                     Confirmed
-                  </Select.Option>
-                  <Select.Option className={'cancelled'} value="cancelled">
+                  </MenuItem>
+                  <MenuItem className={'cancelled'} value="cancelled">
                     Cancelled
-                  </Select.Option>
-                  <Select.Option className={'completed'} value="completed">
+                  </MenuItem>
+                  <MenuItem className={'completed'} value="completed">
                     Completed
-                  </Select.Option>
+                  </MenuItem>
                 </Select>
               </Col>
 
               <Col xs={24} xl={12}>
                 <p>Appoinment Start</p>
                 <DatePicker
+                  style={{ width: '100%' }}
                   showTime
                   //onChange={onChange}
                   //onOk={onOk}
@@ -134,6 +138,7 @@ const AppointmentEdit = props => {
               <Col xs={24} xl={12}>
                 <p>Appoinment End</p>
                 <DatePicker
+                  style={{ width: '100%' }}
                   showTime
                   //onChange={onChange}
                   //onOk={onOk}
