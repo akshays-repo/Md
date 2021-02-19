@@ -11,6 +11,7 @@ const Dashboard_Content = ({ content }) => {
   const showDrawer = () => {
     setVisible(true);
   };
+  
   const onClose = () => {
     setVisible(false);
   };
