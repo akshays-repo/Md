@@ -76,7 +76,7 @@ const SmsEdit = (props) => {
                 <p>PATIENT DUMMYY</p>
               </Panel>
             </Collapse>
-            ,
+            
           </div>
         </Col>
       </Row>

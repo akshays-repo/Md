@@ -91,11 +91,11 @@ const TemplateActions = props => {
     //This Color is for toggle the BACKGROUND
     let color = true
     return (
-      <div className="card-main">
+      <div className="template-action">
         {props.templateActions?.map(action => {
           color = !color
           return (
-            <div>
+            <div className="template-card">
               <Space
                 style={
                   color === true ? { backgroundColor: '#f505b0' } : { backgroundColor: 'red' }
