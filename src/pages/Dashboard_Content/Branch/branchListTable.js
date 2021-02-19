@@ -72,7 +72,7 @@ const BranchListTable = props => {
       render: (text, record) => {
         return (
           <Space size="middle">
-            <Select
+            <Select className="holdActive"
               style={record.status === 'active' ? { color: 'green' } : { color: 'red' }}
               value={record.status}
               onChange={e => {

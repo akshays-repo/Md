@@ -186,7 +186,7 @@ const Dashboard_Calendar = props => {
             {...props}
           ></UnavailableEdit>
         </Col>
-        <Col span={2} style={{ marginLeft: -80, height: 50 }}>
+        <Col span={2} style={{ height: 50 }}>
           <FilterPopover from={from} to={to} {...props} provider={props.provider} />
         </Col>
       </Row>

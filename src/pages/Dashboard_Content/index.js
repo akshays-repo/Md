@@ -21,7 +21,7 @@ const Dashboard_Content = ({ content }) => {
         <Col xs={24} xl={6} md={6}>
           <div className="leftblock-sidenav">
             {isMobile ? (
-              <div>
+              <div className="mbl-button pl4"> 
                 <Button type="primary" onClick={showDrawer}>
                 <i class="fas fa-bars"></i>
                 </Button>

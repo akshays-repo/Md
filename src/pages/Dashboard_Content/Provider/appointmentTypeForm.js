@@ -24,7 +24,7 @@ export const AppointmentTypeForm = props => {
   ];
   return (
     <Form>
-      <Row>
+        <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
         {formField.map((values, index) => {
           return values.type === 'text' ? (
             <Col key={index} xs={24} xl={12}>

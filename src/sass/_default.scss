@@ -197,6 +197,9 @@ body {
   .MuiInput-root {
     width: 100%;
   }
+  .holdActive {
+    min-width:5.5rem;
+  }
 }
 .matBorder {
   color: rgba(0, 0, 0, 0.87);

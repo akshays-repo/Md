@@ -73,7 +73,7 @@ const Dashboard_MyPatients = props => {
       key: '',
       render: (text, record) => (
         <Space size="middle">
-          <Select
+          <Select className="holdActive"
             style={record.status === 'active' ? { color: 'green' } : { color: 'red' }}
             defaultValue={record.status}
             onChange={e => handleStatus(record.id, e)}
@@ -143,7 +143,7 @@ const Dashboard_MyPatients = props => {
                   onChange={handleChangeSearch}
                   value={search}
                 />
-                <Select placeholder="status" value={status} onChange={e => setStatus(e)} style={{ width: 120 }}>
+                <Select className="holdActive" placeholder="status" value={status} onChange={e => setStatus(e)} style={{ width: 120 }}>
                   <Option value="hold">Hold</Option>
                   <Option value="active">Active</Option>
                 </Select>
