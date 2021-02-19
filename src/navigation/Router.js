@@ -111,7 +111,7 @@ const routes = [
     path: '/templates/:id/actions',
     component: loadable(() => import('../pages/Dashboard_Content/Templates/templateActions')),
     exact: true,
-    authorize: false,
+    authorize: true,
   },
 ];
 

@@ -128,7 +128,7 @@ const Dashboard_MyPatients = props => {
       e.preventDefault();
       setStatus(null)
       setSearch(null)
-      props.fetchPatient({ branchId: 3 })
+      props.fetchPatient()
     };
 
     return (

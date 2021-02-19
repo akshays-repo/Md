@@ -30,6 +30,10 @@ export const TemplateReducer = (state = TemplateState, action) => {
         return { ...state, modal1: true };
       case 'CLOSE_SMS_EDIT_TEMPLATE_MODAL':
         return { ...state, modal1: false };
+        case 'OPEN_ADD_ACTION_TEMPLATE_MODAL':
+          return { ...state, modal2: true };
+        case 'CLOSE_ADD_ACTION_TEMPLATE_MODAL':
+          return { ...state, modal2: false };
     default:
       return state;
   }
