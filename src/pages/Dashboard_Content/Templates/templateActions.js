@@ -9,6 +9,7 @@ import { TextField } from '@material-ui/core';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import TemplateEmailEdit from './emailEdit'
+import SmsEdit from './smsEdit';
 
 const TemplateActions = props => {
   const { id } = useParams();
@@ -45,7 +46,9 @@ const TemplateActions = props => {
 setActionEmailEdit({...actionEdit,   template_id:id , email_content:action.email_content ,  email_sub:action.email_content , id: action.id})
 store.dispatch({ type: 'OPEN_CREATE_TEMPLATE_MODAL' })
   }
-
+const invokeSmsEdit = action =>{
+store.dispatch({ type: 'CLOSE_SMS_EDIT_TEMPLATE_MODAL' })
+}
 
   useEffect(() =>{
     console.log('asjdsdn' , actionEmailEdit )
@@ -76,7 +79,8 @@ store.dispatch({ type: 'OPEN_CREATE_TEMPLATE_MODAL' })
                 <button onClick={() => invokeEmailEdit(action)} >Edit</button>
               </Card>
               <Card bordered={false} style={{ width: 200 }}>
-                Reminders Email
+                Reminders Sms
+                <button onClick = {() => invokeSmsEdit(action)}>Edit</button>
               </Card>
             </Space>
             <br />
@@ -146,7 +150,15 @@ store.dispatch({ type: 'OPEN_CREATE_TEMPLATE_MODAL' })
         <TemplateEmailEdit {...actionEmailEdit} {...props} />
       </Modal>
 
-      
+      <Modal
+        title="Sms Remainder Edit"
+        onCancel={() => store.dispatch({ type: 'CLOSE_SMS_EDIT_TEMPLATE_MODAL' })}
+        visible={props.modal1}
+        footer={false}
+        width={700}
+      >
+        <SmsEdit {...actionEmailEdit} {...props} />
+      </Modal>
     </div>
   );
 };

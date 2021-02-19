@@ -55,20 +55,6 @@ const Dashboard_Templates = props => {
     },
   ];
 
-  const data = [
-    {
-      key: '1',
-      name: 'John Brown',
-    },
-    {
-      key: '2',
-      name: 'Jim Green',
-    },
-    {
-      key: '3',
-      name: 'Joe Black',
-    },
-  ];
   const Templates = () => {
     return (
       <div>
@@ -93,22 +79,22 @@ const mapStoreToProps = ({ Template }) => {
 };
 const mapDispatchToProps = dispatch => ({
   fetchTemplate: () => dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_TEMPLATE' })),
-  // addTemplate: values =>
-  //   dispatch(actionCreator({ method: 'POST', action_type: 'CREATE_USER', values })),
+  addTemplate: values =>
+    dispatch(actionCreator({ method: 'POST', action_type: 'CREATE_USER', values })),
   editTemplate: ( id ,values , contentType) =>
     dispatch(actionCreator({ method: 'PUT', action_type: 'EDIT_TEMPLATE', id , values ,contentType })),
     fetchTemplateAction: id =>
     dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_HOSPITAL_ACTION', id })),
-  // deleteTemplate: id =>
-  //   dispatch(actionCreator({ method: 'DELETE', action_type: 'DELETE_USER', id })),
-  // filterTemplate: param =>
-  //   dispatch(
-  //     actionCreator({
-  //       method: 'GET',
-  //       action_type: 'FILTER_APPOINTMENT',
-  //       param,
-  //     }),
-  //   ),
+  deleteTemplate: id =>
+    dispatch(actionCreator({ method: 'DELETE', action_type: 'DELETE_USER', id })),
+  filterTemplate: param =>
+    dispatch(
+      actionCreator({
+        method: 'GET',
+        action_type: 'FILTER_APPOINTMENT',
+        param,
+      }),
+    ),
 });
 
 export default connect(mapStoreToProps, mapDispatchToProps)(Dashboard_Templates);

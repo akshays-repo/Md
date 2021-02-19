@@ -52,7 +52,7 @@ const sideMenuList = [
     wlogin: true,
   },
   {
-    title: 'Add Users',
+    title: 'New Users',
     icon: 'fas fa-users',
     path: '/add-users',
     wologin: true,

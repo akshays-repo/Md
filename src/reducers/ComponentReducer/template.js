@@ -26,9 +26,9 @@ export const TemplateReducer = (state = TemplateState, action) => {
         return { ...state, modal: true };
       case 'CLOSE_CREATE_TEMPLATE_MODAL':
         return { ...state, modal: false };
-      case 'OPEN_EDIT_TEMPLATE_MODAL':
+      case 'OPEN_SMS_EDIT_TEMPLATE_MODAL':
         return { ...state, modal1: true };
-      case 'CLOSE_EDIT_TEMPLATE_MODAL':
+      case 'CLOSE_SMS_EDIT_TEMPLATE_MODAL':
         return { ...state, modal1: false };
     default:
       return state;
