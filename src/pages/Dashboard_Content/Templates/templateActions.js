@@ -166,7 +166,7 @@ const TemplateActions = props => {
       <Dashboard_Content content={templateContent()} />
       {/* THIS DRAWER IS FOR EDIT THE ACTION */}
       <Drawer
-        title="Edit the TIme"
+        title="Edit the Time"
         placement="right"
         closable={false}
         onClose={() => setVisible(false)}
