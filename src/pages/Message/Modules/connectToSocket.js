@@ -12,7 +12,7 @@ export const connectToSocket = async () => {
   });
 
   socket.on('connect', () => {
-    socket.emit('authenticate', { token: 'key' });
+    socket.emit('authenticate', { token:localStorage.getItem('token')});
   });
 
   socket.on('disconnect', () => {
@@ -22,14 +22,17 @@ export const connectToSocket = async () => {
   socket.on('incoming_hospital', data => {
     console.log('message incoming_hospital', data);
   });
+  socket.on('uuid', data => {
+    console.log('message uuid', data);
+    store.dispatch({ type: 'SET_MESSAGE_UUID', payload: data.uuid });
 
+  });
   socket.on('incoming', data => {
     let oldSummary = store.getState().SummaryMessage.payload
-    
+    console.log("incoming" ,data)
     store.dispatch({ type: 'SET_LATEST_INCOMING_MESSAGE_SUMMARY', payload: data.message });
     store.dispatch({ type: 'SET_INCOMING_MESSAGE', payload: data.message });
-    console.log("message incoming' ",store.getState().SummaryMessage.payload);
-    console.log('message incoming', data , 'old' , oldSummary , 'union' ,  _.unionBy(oldSummary, data),);
+    
   });
 
   socket.on('authenticate_success', data => {
@@ -51,7 +54,7 @@ export const connectToSocket = async () => {
     let oldMessage = store.getState().Message.payload
     store.dispatch({ type: 'CLEAR_MESSAGE' });
     store.dispatch({ type: 'SET_MESSAGE', payload: _.unionBy(oldMessage, data) });
-    console.log('message get_message_success', data , "old Message" , oldMessage , "Merge" , _.unionBy(oldMessage, data) ) ;
+   
   });
 
   socket.on('message_delivery_status', data => {

@@ -10,13 +10,16 @@ export const MesssageReducer = (state = MessageState, action) => {
   switch (action.type) {
     case 'CLEAR_MESSAGE':
       return { ...state, payload: [] };
-
       case 'INITIAL_MESSAGE_LOADED':
         return { ...state, initalLoading: false };
       case 'GOTO_DETAIL_PAGE':
         return {...state , mobileListScreen : false};
         case 'GOTO_LIST_PAGE':
           return {...state , mobileListScreen : true};
+          case 'SET_MESSAGE_UUID':
+          return {...state , uuid : action.payload};
+
+
     case 'SET_MESSAGE':
       const message =
         state.payload.length > 0 ? [...state.payload, action.payload] : action.payload;

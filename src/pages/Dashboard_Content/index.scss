@@ -6,6 +6,9 @@
   // @include padding-padding(30px 0 0 0);
   padding: 30px 0 0;
   .leftblock-sidenav {
+    overflow :auto;
+        height: 100vh;
+        position: fixed;
     padding-left: 30px;
     @include breakpoint(xs) {
       padding-left: 0;
@@ -25,6 +28,9 @@
 //   ::-webkit-scrollbar { 
 //     display: none; /* Chrome Safari */
 // }
+.content{
+  width: 350px;
+}
   background-color: $white;
   border: 1px solid $gray-light;
   .sidebar_header {
@@ -54,7 +60,7 @@
     justify-content: center;
     align-items: center;
     min-height: 300px;
-    max-height: calc(100vh - 274px);
+    max-height: calc(100vh);
     overflow-y: auto;
     .ant-list-item {
       padding: $padd-0;

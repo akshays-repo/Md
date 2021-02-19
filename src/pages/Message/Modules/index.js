@@ -53,7 +53,7 @@ const MessageLayout = props => {
                 {...messageLists}
               />
             </Col>
-            <Col xl={16} xs={24}>
+            <Col xl={16} xs={24} style={{minHeight:"100vh"}}>
               {props.initialLoading ? (
                 intialLoading
               ) : (
@@ -67,7 +67,7 @@ const MessageLayout = props => {
         {/* PLEASE NOTE IF YOU MADE ANY CHANGES FOR THE MOBILE COMPONENTS DO SAME FOR THE DESKTOP ALSO */}
         {isMobile && (
           <Row>
-            <Col xs={24} className="col-border">
+            <Col xs={24} className="col-border" >
               {props.mobileListScreen === true && (
                 <MessageList
                   {...props}
@@ -98,6 +98,7 @@ const mapStoreToProps = ({ SummaryMessage, Message }) => {
     message: Message.payload.length > 0 ? Message.payload : [],
     initialLoading: Message.initalLoading,
     mobileListScreen: Message.mobileListScreen,
+    uuid:Message.uuid
   };
 };
 const mapDispatchToProps = dispatch => ({

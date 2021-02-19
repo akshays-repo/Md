@@ -103,17 +103,17 @@ const Sidebar = () => {
 
   const [hospitalData, setHospitalData] = useState('');
   const [logo, setLogo] = useState('');
-  useEffect(() => {
-    let data = JSON.parse(localStorage.getItem('user_data'));
-    setLogo(data.hospital.logo.path);
-    setHospitalData(data);
-  }, []);
-  console.log('sdfsdfsds', logo);
+  // useEffect(() => {
+  //   let data = JSON.parse(localStorage.getItem('user_data'));
+  //   setLogo(data.hospital.logo.path);
+  //   setHospitalData(data);
+  // }, []);
+  // console.log('sdfsdfsds', logo);
 
   return (
     <div className="dashboard__sidebar">
       <div className="content">
-        <div className="sidebar_header">
+        <div className="sidebar_header" >
           <div className="profileDashboard">
             {logo ? (
               <img src={`/${logo}`} />

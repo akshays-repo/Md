@@ -19,10 +19,13 @@ const Dashboard_Content = ({ content }) => {
     <div className="dashboard__content">
       <Row>
         <Col xs={24} xl={6} md={6}>
-          <div className="leftblock-sidenav">
+          <div className="leftblock-sidenav" 
+          style={{  overflow: 'auto',
+        height: '100vh',
+        position: 'fixed',}}>
             {isMobile ? (
               <div className="mbl-button pl4"> 
-                <Button type="primary" onClick={showDrawer}>
+                <Button type="primary"  onClick={showDrawer}>
                 <i class="fas fa-bars"></i>
                 </Button>
                 <Drawer

@@ -15,6 +15,8 @@ const MessageDetail = props => {
   const messagesEndRef = useRef(null);
 
   const send = () => {
+    console.log("props.uuid" , props.uuid ,props.receiverID)
+  
     if (message) {
       setMessage('');
       socket.emit('send_message', {
@@ -77,7 +79,7 @@ const MessageDetail = props => {
       <div className="chat" onScroll={handleScroll}>
         {props.message.length > 0
           ? props.message.map(data =>
-              data.senderId === '4c763a46-5490-47d1-b32f-ab66c5edd494' ? (
+              data.senderId === props.uuid ? (
                 <LeftSideChat message={data.message} />
               ) : (
                 <RightSideChat message={data.message} />
