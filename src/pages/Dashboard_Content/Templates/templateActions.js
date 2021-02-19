@@ -92,35 +92,71 @@ const TemplateActions = props => {
     let color = true
     return (
       <div className="template-action">
+        <Row>
+        <Col xs={24} lg={12} offset={6}>
+          <div className="templateBox">
+            <div className="header">
+              <h5>Reminders</h5>
+            </div>
         {props.templateActions?.map(action => {
           color = !color
           return (
             <div className="template-card">
-              <Space
+              <Space className="sectionBox"
                 style={
-                  color === true ? { backgroundColor: '#f505b0' } : { backgroundColor: 'red' }
+                  color === true ? { backgroundColor: '#e6edf3' } : { backgroundColor: '#eff5fa' }
                 }
                 direction="vertical"
               >
-                <Card bordered={false} style={{ width: 200 }}>
-                  {action.number}
+                <Card className="topCard" bordered={false} style={{ width: 350, boxShadow: "5px 8px 24px 5px rgba(208, 216, 243, 0.6)"  }}> 
+                  <div className="content">
+                    <div className="iconBox">
+                      <span><i class="far fa-stopwatch"></i></span>
+                    </div>
+                    <p className="title">Next Action</p>
+                    <p>{action.number}
                   {action.unit} Remainder
-                  <button onClick={() => invokeActionType(action)}>Edit</button>
+                  </p>
+                  </div>
+                  <div className="cardFooter">
+                  <span onClick={() => invokeActionType(action)}><i class="far fa-edit"></i></span>
+                  <span><i class="far fa-trash-alt"></i></span>
+                  </div>
                 </Card>
-                <Card bordered={false} style={{ width: 200 }}>
-                  Reminders Email
-                  <button onClick={() => invokeEmailEdit(action)}>Edit</button>
+                <Card className="subCard" bordered={false} style={{ width: 250,  boxShadow: "5px 8px 24px 5px rgba(208, 216, 243, 0.6)" }}>
+                <div className="content">
+                <div className="iconBox">
+                      <span><i class="fal fa-envelope-square"></i></span>
+                    </div>
+                <p className="title">Reminders Email
+                </p>
+                </div>
+                <div className="cardFooter">
+                  <span onClick={() => invokeEmailEdit(action)}><i class="far fa-edit"></i></span>
+                  <span><i class="far fa-trash-alt"></i></span>
+                  </div>
                 </Card>
-                <Card bordered={false} style={{ width: 200 }}>
-                  Reminders Sms
-                  <button onClick={() => invokeSmsEdit(action)}>Edit</button>
+                <Card className="subCard" bordered={false} style={{ width: 250,  boxShadow: "5px 8px 24px 5px rgba(208, 216, 243, 0.6)" }}>
+                <div className="content">
+                <div className="iconBox">
+                      <span><i class="fas fa-mobile-android-alt"></i></span>
+                    </div>
+                <p className="title">Reminders Sms</p>
+                  </div>
+                  <div className="cardFooter">
+                  <span onClick={() => invokeSmsEdit(action)}><i class="far fa-edit"></i></span>
+                  <span><i class="far fa-trash-alt"></i></span>
+                  </div>
                 </Card>
-                <button>Add</button>
+                {/* <button>Add</button> */}
               </Space>
               <br />
             </div>
           );
         })}
+        </div>
+ </Col>
+</Row>
       </div>
     );
   };
@@ -172,8 +208,10 @@ const TemplateActions = props => {
             </Select>
           </Col>
         </Row>
-        <button onClick={e => handleActionEdit(e)}>Save</button>{' '}
-        <button onClick={() => setVisible(false)}>Cancel</button>
+        <div className="mt7">
+        <button className="view-button" onClick={e => handleActionEdit(e)}>Save</button>{' '}
+        <button className="edit-button" onClick={() => setVisible(false)}>Cancel</button>
+        </div>
       </Drawer>
 
       {/* THIS DRAWER FOR THE  CREATE NEW ACTION*/}
@@ -201,7 +239,7 @@ const TemplateActions = props => {
       </Modal>
 
       <Modal
-        title="Sms Remainder Edit"
+        title="SMS Remainder Edit"
         onCancel={() => store.dispatch({ type: 'CLOSE_SMS_EDIT_TEMPLATE_MODAL' })}
         visible={props.modal1}
         footer={false}

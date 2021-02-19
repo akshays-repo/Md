@@ -1,0 +1,76 @@
+.template-action {
+  .templateBox {
+    background: #fff;
+    @include border-radius(4px);
+    border: 1px solid #efefef;
+    .header {
+    padding: 7px 15px;
+    background: #eff5fa;
+    border-bottom: 1px solid #e5e5e5;
+      h5 {
+        margin-bottom: 0;
+      }
+    }
+    .template-card {
+      .sectionBox {
+        width: 100%;
+        padding: 30px;
+        .topCard,
+        .subCard {
+          margin: 0 auto;
+          @include border-radius(5px);
+          position:relative;
+          margin-bottom: 40px;
+          &:after {
+            content: '';
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 20px solid white;
+            position: absolute;
+            left: 0;
+    right: 0;
+    margin: 0 auto;
+          }
+          .ant-card-body {
+            padding: 15px 25px;
+            .content {
+              text-align: center;
+              .iconBox {
+                background-color: #038fdf;
+                width: 50px;
+                height: 50px;
+                @include border-radius(100px);
+                @include flex(center, center);
+                font-size: 20px;
+                color: $white;
+                margin: auto;
+                margin-bottom: 5px;
+              }
+              .title {
+                font-size: 16px;
+                font-weight: 600;
+                color: #15558d;
+                margin-bottom: 0.3rem;
+              }
+            }
+            .cardFooter {
+              border-top: 1px solid #f5f5f5;
+              @include flex(flex-end, center);
+              span {
+                margin: 3px 0px 0px 7px;
+                color: $gray;
+                @include transit;
+                cursor: pointer;
+                &:hover {
+                    color: #e01235;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

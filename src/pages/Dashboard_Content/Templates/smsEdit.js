@@ -40,10 +40,10 @@ const SmsEdit = (props) => {
 
               onChange={(e) =>handleMessageText(e) }/>
           </div>
-          <span>{messageLength}/300</span>
+          <p>{messageLength}/300</p>
 
-          <button onClick={handleSmsEditSave}>Save</button>
-          <button>Cancel</button>
+          <button className="view-button mr3" onClick={handleSmsEditSave}>Save</button>
+          <button className="edit-button">Cancel</button>
         </Col>
         <Col xl={12}>
           <div>
