@@ -1,6 +1,8 @@
-import React from 'react';
-import { List, Avatar } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { List } from 'antd';
 import { Link } from 'react-router-dom';
+import Avatar from 'react-avatar';
+
 const sideMenuList = [
   {
     title: 'Dashboard',
@@ -92,23 +94,39 @@ const sideMenuList = [
     path: '/logout',
     wologin: true,
     wlogin: true,
-  }
+  },
 ];
 const Sidebar = () => {
   // const {
   //   avatarlocation = 'https://images.livemint.com/img/2020/07/06/600x338/apollo_1594043446600_1594043458520.jpg',
   // } = JSON.parse(localStorage.getItem('user_data'));
 
+  const [hospitalData, setHospitalData] = useState('');
+  const [logo, setLogo] = useState('');
+  useEffect(() => {
+    let data = JSON.parse(localStorage.getItem('user_data'));
+    setLogo(data.hospital.logo.path);
+    setHospitalData(data);
+  }, []);
+  console.log('sdfsdfsds', logo);
+
   return (
     <div className="dashboard__sidebar">
       <div className="content">
         <div className="sidebar_header">
           <div className="profileDashboard">
-            {/* <img src="https://images.livemint.com/img/2020/07/06/600x338/apollo_1594043446600_1594043458520.jpg" /> */}
-            <img src={'https://images.livemint.com/img/2020/07/06/600x338/apollo_1594043446600_1594043458520.jpg'} />
+            {logo ? (
+              <img src={`/${logo}`} />
+            ) : (
+              <Avatar
+                round
+                color={Avatar.getRandomColor('sitebase', ['red', 'green', 'blue'])}
+                name={localStorage.getItem('name')}
+              />
+            )}
           </div>
           <h4 style={{ textTransform: 'uppercase' }}>{localStorage.getItem('name')}</h4>
-          <p className="hospital_address">Curabitur aliquet quam id dui posuere blandit.</p>
+          {/* <p className="hospital_address">Curabitur aliquet quam id dui posuere blandit.</p> */}
         </div>
         <div className="sidebar_list">
           <List
