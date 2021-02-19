@@ -11,7 +11,7 @@ export const LoginReducer = (state = LoginState, action) => {
     case 'USER_LOGIN':
       const user_data = action.payload.user;
       localStorage.setItem('token', action.payload.token);
-      localStorage.setItem('name', action.payload.user.user_type.name);
+      localStorage.setItem('name', action.payload.user.hospital.fullName);
       localStorage.setItem('user_data', JSON.stringify(user_data));
       localStorage.setItem('hospital_id', action.payload.user.hospitalId);
 
