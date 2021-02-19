@@ -53,7 +53,7 @@ const ProviderTypeForm = props => {
       >
         {({ handleSubmit, touched, errors, isSubmitting }) => (
           <Form className="login__form" handleSubmit={handleSubmit}>
-            <Row>{generateForm(formField)}</Row>
+              <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>{generateForm(formField)}</Row>
 
             <Button
               htmlType="submit"

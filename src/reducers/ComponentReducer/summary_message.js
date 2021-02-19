@@ -44,8 +44,11 @@ export const SummaryMesssageReducer = (state = SummaryMessageState, action) => {
       console.log('message summary payload', state.payload);
 
       let checkConversation = state.payload.filter(
-        (result, i) => result.conversationId === action.payload.conversationId,).length;
-      if (checkConversation.length > 0) {
+        (result, i) => result.conversationId === action.payload.conversationId,
+      ).length;
+
+      console.log('Incoming length', checkConversation);
+      if (checkConversation > 0) {
         message = state.payload.map((result, i) => {
           if (result.conversationId === action.payload.conversationId) {
             return action.payload;

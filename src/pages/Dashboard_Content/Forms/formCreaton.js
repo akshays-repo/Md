@@ -38,7 +38,6 @@ const FormCreation = props => {
       name: tittle,
       formData: data,
     };
-    console.log('datata', tittle);
     //THIS IS FOR NULL AND EMPTY VALIDATION
     let isHaveNull = _.some(
       data,

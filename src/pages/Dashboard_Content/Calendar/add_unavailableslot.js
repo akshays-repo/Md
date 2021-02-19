@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Row, Col, Divider, Select, Button } from 'antd';
 // import { TextField } from '@material-ui/core';
 import { TextField } from 'formik-material-ui';
@@ -32,6 +32,10 @@ export const UnavailableSlot = props => {
       props.setModal(false);
     }
   };
+
+  useEffect(() => {
+    props.fetchProvider();
+  }, []);
   return (
     <Formik
       enableReinitialize={true}
@@ -49,50 +53,59 @@ export const UnavailableSlot = props => {
             <Col span={24}>
               <div className="newappointment__section2">
                 <div>
-                  <p>BRANCH</p>
-                  <p>
-                    <Select
-                      mode="multiple"
-                      showSearch
-                      value={values.arrBranchId}
-                      onChange={val => val && setFieldValue('arrBranchId', val)}
-                      style={{ width: '90%' }}
-                      bordered={false}
-                      placeholder="Choose Branch"
-                    >
-                      {props.branch.map((result, i) => (
-                        <Select.Option key={result.id} value={result.id}>
-                          {result.fullName}
-                        </Select.Option>
-                      ))}
-                    </Select>
-                    <ErrorMessage
-                      render={msg => <div style={{ color: 'red' }}>{msg}</div>}
-                      name="arrBranchId"
-                    />
-                  </p>
-                </div>
-
-                <div>
                   <p>PROVIDER</p>
                   <p>
                     <Select
                       showSearch
-                      value={values.provider_id ? values.provider_id : ''}
-                      onChange={val => val && setFieldValue('provider_id', val)}
+                      value={values.provider_id ? values.provider_id : null}
+                      onChange={val => {
+                        setFieldValue('arrBranchId', []);
+                        val && setFieldValue('provider_id', val);
+                      }}
                       style={{ width: '90%' }}
                       bordered={false}
                       placeholder="Choose Provider"
                     >
                       {props.provider.map((result, i) => (
                         <Select.Option key={result.id} value={result.id}>
-                          {result.fullName}
+                          {result.fullName || result.provider?.fullName || 'Name not found'}
                         </Select.Option>
                       ))}
                     </Select>
                     <ErrorMessage
                       render={msg => <div style={{ color: 'red' }}>{msg}</div>}
                       name="provider_id"
+                    />
+                  </p>
+                </div>
+                <div>
+                  <p>BRANCH</p>
+                  <p>
+                    <Select
+                      mode="multiple"
+                      showSearch
+                      value={values.arrBranchId}
+                      onChange={val => {
+                        val && setFieldValue('arrBranchId', val);
+                      }}
+                      style={{ width: '90%' }}
+                      bordered={false}
+                      placeholder="Choose Branch"
+                    >
+                      {values.provider_id &&
+                        props.provider
+                          .filter(re => re.id === values.provider_id)
+                          .map(re =>
+                            re.provider_and_branches.map((result, i) => (
+                              <Select.Option key={result.id} value={result.id}>
+                                {result.branch.fullName}
+                              </Select.Option>
+                            )),
+                          )}
+                    </Select>
+                    <ErrorMessage
+                      render={msg => <div style={{ color: 'red' }}>{msg}</div>}
+                      name="arrBranchId"
                     />
                   </p>
                 </div>

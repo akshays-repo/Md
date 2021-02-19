@@ -114,7 +114,9 @@ const BranchCreationForm = props => {
           >
             <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
             {generateForm(formField)}
-              <Col xs={24} xl={12}>
+             
+            </Row>
+            <Col xs={24} xl={24}>
                 <label>Address</label>
                 <p>
                   <Select
@@ -132,7 +134,7 @@ const BranchCreationForm = props => {
                     status=""
                     //placeholder="Start typing and find your place in google map"
                     style={{
-                      width: '450px',
+                      width: '100%',
                       backgroundColor: 'var(--primarys) !important',
                       // borderBottom: '2px solid #3f51b5',
                       borderBottom: errors.address
@@ -154,7 +156,6 @@ const BranchCreationForm = props => {
                   ></ErrorMessage> */}
                 </p>
               </Col>
-            </Row>
 
             <Button
               className="mt-5 edit-button button-square"

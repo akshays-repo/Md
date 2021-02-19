@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Row, Col, Divider, Select, DatePicker as D, Button, Modal, message } from 'antd';
 import { TextField } from '@material-ui/core';
 import { Field, Form, Formik, ErrorMessage } from 'formik';
@@ -36,6 +36,13 @@ export const BookingEdit = props => {
     appointment_start_dummy: moment(bookingDetails.appointment_start).format('YYYY-MM-DD hh:mm a'),
     appointment_end_dummy: moment(bookingDetails.appointment_end).format('YYYY-MM-DD hh:mm a'),
   };
+
+  useEffect(() => {
+    bookingDetails.branch_id
+      ? props.fetchProvider(bookingDetails.branch_id)
+      : props.fetchHospitalProvider();
+  }, [bookingDetails]);
+
   return (
     <Modal
       className="calendar__modal"
@@ -143,7 +150,11 @@ export const BookingEdit = props => {
                       <Select
                         showSearch
                         value={values.appointment_type_id}
-                        onChange={val => val && setFieldValue('appointment_type_id', val)}
+                        onChange={val => {
+                          setFieldValue('branch_id', null);
+                          setFieldValue('provider_id', null);
+                          val && setFieldValue('appointment_type_id', val);
+                        }}
                         style={{ width: '90%' }}
                         bordered={false}
                         placeholder="Please select appointment type"
@@ -166,16 +177,25 @@ export const BookingEdit = props => {
                       <Select
                         showSearch
                         value={values.branch_id}
-                        onChange={val => val && setFieldValue('branch_id', val)}
+                        onChange={val => {
+                          props.fetchProvider(val);
+                          setFieldValue('provider_id', null);
+                          props.fetchAppointmentBranchProvider({
+                            type_id: values.appointment_type_id,
+                            branch_id: val,
+                          });
+                          val && setFieldValue('branch_id', val);
+                        }}
                         style={{ width: '90%' }}
                         bordered={false}
                         placeholder="Please select branch"
                       >
-                        {props.branch.map((result, i) => (
-                          <Select.Option key={result.id} value={result.id}>
-                            {result.fullName}
-                          </Select.Option>
-                        ))}
+                        {values.appointment_type_id &&
+                          props.branch.map((result, i) => (
+                            <Select.Option key={result.id} value={result.id}>
+                              {result.fullName}
+                            </Select.Option>
+                          ))}
                       </Select>
                       <ErrorMessage
                         render={msg => <div style={{ color: 'red' }}>{msg}</div>}
@@ -196,11 +216,13 @@ export const BookingEdit = props => {
                         bordered={false}
                         placeholder="Please select provider"
                       >
-                        {props.provider.map((result, i) => (
-                          <Select.Option key={result.id} value={result.id}>
-                            {result.fullName}
-                          </Select.Option>
-                        ))}
+                        {values.appointment_type_id &&
+                          values.branch_id &&
+                          props.provider.map((result, i) => (
+                            <Select.Option key={result.id} value={result.id}>
+                              {result.fullName || result.provider?.fullName || 'Name not found'}
+                            </Select.Option>
+                          ))}
                       </Select>
                       <ErrorMessage
                         render={msg => <div style={{ color: 'red' }}>{msg}</div>}

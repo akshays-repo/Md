@@ -189,7 +189,7 @@ const ProviderTable = props => {
       key: 'status',
       render: (text, record) => (
         <Space size="middle">
-          <Select
+          <Select className="holdActive"
             style={record.status === 'active' ? { color: 'green' } : { color: 'red' }}
             value={record.status}
             onChange={e => handleStatus(record, e)}

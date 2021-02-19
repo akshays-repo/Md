@@ -77,10 +77,14 @@ export const backend_api = {
   CREATE_FORM: '/api/backend/v1/forms',
   EDIT_FORM:'/api/backend/v1/forms',
   FETCH_FORM:'/api/backend/v1/forms',
-  DELETE_FORM:'/api/backend/v1/form',
+  DELETE_FORM:'/api/backend/v1/forms',
   
   EDIT_PROVIDER_UNAVAILABLE: '/api/backend/v1/appointments/unavailable',
   DELETE_PROVIDER_UNAVAILABLE: '/api/backend/v1/appointments/unavailable',
   FILTER_APPOINTMENT_CALENDAR: '/api/backend/v1/online_bookings/filter',
   FILTER_APPOINTMENT_CALENDAR_WITH_CANCELLED: '/api/backend/v1/online_bookings/filter',
+
+  FETCH_TEMPLATE:'/api/backend/v1/hospital/template',
+  EDIT_TEMPLATE:'/api/backend/v1/hospital/action',
+  FETCH_HOSPITAL_ACTION:'/api/backend/v1/hospital/action',
 };

@@ -7,6 +7,8 @@ import RightSideChat from './rightSideChat';
 import './style.scss';
 import _ from 'lodash';
 import { socket } from '../connectToSocket';
+import { store } from '../../../../reducers/configureStore';
+import { isMobile } from 'react-device-detect';
 
 const MessageDetail = props => {
   const [message, setMessage] = useState('');
@@ -33,13 +35,10 @@ const MessageDetail = props => {
     }
   };
   const scrollToBottom = () => {
-    messagesEndRef.current.scrollIntoView({    behavior: 'smooth',
-    block: 'end',
-    inline: 'nearest' });
+    messagesEndRef.current.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
   };
 
-  useEffect(() => {
-  })
+  useEffect(() => {});
   console.log('props.message', props.message);
 
   const handleScroll = e => {
@@ -59,6 +58,15 @@ const MessageDetail = props => {
     <div className="chatmain">
       <div className="messagedetail">
         <div className="left">
+          {isMobile && (
+            <span
+              onClick={() => {
+                store.dispatch({ type: 'GOTO_LIST_PAGE' });
+              }}
+            >
+              <i class="fas fa-arrow-left"></i>
+            </span>
+          )}
           <img className="useravatar" src={Avatar} />
         </div>
         <div className="right">
@@ -66,7 +74,7 @@ const MessageDetail = props => {
           <p>online</p>
         </div>
       </div>
-      <div className="chat"  onScroll={handleScroll}  >
+      <div className="chat" onScroll={handleScroll}>
         {props.message.length > 0
           ? props.message.map(data =>
               data.senderId === '4c763a46-5490-47d1-b32f-ab66c5edd494' ? (
@@ -79,8 +87,7 @@ const MessageDetail = props => {
         <div ref={messagesEndRef} />
       </div>
 
-      <div className="message-sentbox" >
-
+      <div className="message-sentbox">
         <div>
           <label className="paper-clip">
             <AiOutlinePaperClip />
