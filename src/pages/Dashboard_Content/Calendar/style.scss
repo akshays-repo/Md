@@ -93,6 +93,10 @@
         color: #333;
         font-weight: 500;
         text-align: right;
+        min-width: 135px;
+        @include breakpoint(xs){
+          min-width: 100px;
+        }
       }
       p:nth-child(2) {
         margin-left: 20px;
@@ -196,8 +200,14 @@
         }
       }
     }
+
   }
   }
+  .fc .fc-daygrid-event p,
+  .fc-event .fc-event-main p {
+    font-size: 13px!important;
+  }
+  
   }
 
 }

@@ -93,14 +93,14 @@ const MessageDetail = props => {
       </div>
 
       <div className="message-sentbox">
-        <div>
+        <div className="attachment">
           <label className="paper-clip">
             <AiOutlinePaperClip />
             <input type="file" />
           </label>
         </div>
 
-        <div>
+        <div className="typefield">
           <input
             value={message}
             onKeyDown={handleKeyDown}

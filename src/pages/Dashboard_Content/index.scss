@@ -1,15 +1,23 @@
 .dashboard__content {
   // height: 100vh;
+  margin-top: 75px;
   background-color: $container-background;
 
   // @include margin-padding(0px, 15px);
   // @include padding-padding(30px 0 0 0);
   padding: 30px 0 0;
+  .mblButton {
+    position: fixed;
+    z-index: 100;
+    top: 25px;
+  }
   .leftblock-sidenav {
     overflow :auto;
         height: 100vh;
         position: fixed;
     padding-left: 30px;
+    width: inherit;
+    min-width: 25%;
     @include breakpoint(xs) {
       padding-left: 0;
     }
@@ -25,11 +33,16 @@
 }
 
 .dashboard__sidebar {
-//   ::-webkit-scrollbar { 
-//     display: none; /* Chrome Safari */
-// }
+  @include breakpoint(l) {
+  height: calc(100% - 100px);
+    overflow: auto;
+  }
+  @include breakpoint(xs) {
+    margin: -24px!important;
+  }
 .content{
-  width: 350px;
+  width: 100%;
+  position: relative;
 }
   background-color: $white;
   border: 1px solid $gray-light;
@@ -40,12 +53,18 @@
     border-bottom: 1px solid $gray-light;
     .profileDashboard {
       // @include margin-padding(10px, 8px);
+      .sb-avatar,
+      .sb-avatar__text {
+        width: 85px!important;
+        height: 85px!important;
+      }
       img {
         width: 85px;
         height: 85px;
         border-radius: 50%;
         margin-bottom: 15px;  
       }
+      margin-bottom: 15px;
     }
     .hospital_address {
       margin-bottom: 0;
@@ -53,6 +72,9 @@
     .hospital_name {
       @include font-size(l);
       color: $gray;
+    }
+    h5 {
+      margin-bottom: 0;
     }
   }
   .sidebar_list {

@@ -120,12 +120,12 @@ const Sidebar = () => {
             ) : (
               <Avatar
                 round
-                color={Avatar.getRandomColor('sitebase', ['red', 'green', 'blue'])}
+                color={Avatar.getRandomColor('sitebase', ['#0bb2d4', '#11c26d', '#3e8ef7'])}
                 name={localStorage.getItem('name')}
               />
             )}
           </div>
-          <h4 style={{ textTransform: 'uppercase' }}>{localStorage.getItem('name')}</h4>
+          <h5 style={{ textTransform: 'uppercase' }}>{localStorage.getItem('name')}</h5>
           {/* <p className="hospital_address">Curabitur aliquet quam id dui posuere blandit.</p> */}
         </div>
         <div className="sidebar_list">

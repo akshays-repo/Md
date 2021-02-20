@@ -56,12 +56,19 @@ const MessageLayout = props => {
                 {...messageLists}
               />
             </Col>
-            <Col xl={16} xs={24} style={{minHeight:"100vh"}}>
+            <Col xl={16} xs={24} 
+            // style={{minHeight:"100vh"}}
+            >
+              <div className="messagehome">
               {props.initialLoading ? (
-                intialLoading
+                <div className="messageFirstbox"> 
+{intialLoading}
+                </div>
+                
               ) : (
                 <MessageDetail {...messageDetails} {...props} receiverID={receiverId} />
               )}
+              </div>
             </Col>
           </Row>
         )}

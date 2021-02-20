@@ -193,7 +193,7 @@ export const UnavailableEdit = props => {
               </Col>
               <Divider />
               <Col span={14}>
-                <Button
+                <button className="view-button"
                   onClick={() => deleteUnavailable(unavailableDetails.id)}
                   htmlType="button"
                   shape="round"
@@ -201,26 +201,24 @@ export const UnavailableEdit = props => {
                     backgroundColor: '#D7D9DC',
                     color: 'black',
                     padding: '10px 20px',
-                    height: 40,
                   }}
                 >
                   CANCEL UNAVAILABILITY
-                </Button>
+                </button>
               </Col>
               <Col span={10}>
-                <Button
+                <button  className="edit-button"
                   htmlType="submit"
                   shape="round"
                   disabled={isSubmitting}
                   style={{
                     backgroundColor: '#FF596F',
-                    height: 40,
                     padding: '10px 20px',
                     color: 'white',
                   }}
                 >
                   UPDATE UNAVAILABILITY
-                </Button>
+                </button>
               </Col>
             </Row>
           </Form>

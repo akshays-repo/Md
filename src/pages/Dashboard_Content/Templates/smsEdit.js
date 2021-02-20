@@ -31,7 +31,7 @@ const SmsEdit = (props) => {
     <div>
       <Row>
         <Col xl={12}>
-          <div className="mobile-backgrounf">
+          <div className="mobile-background">
             <TextareaAutosize
               rowsMin={17}
               placeholder="Sms Content"

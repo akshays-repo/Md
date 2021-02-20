@@ -1,3 +1,4 @@
+
 .chatmain {
   .messagedetail {
     display: flex;
@@ -10,6 +11,9 @@
       width: 50px;
       height: 50px;
       border-radius: 50%;
+      @media (max-width:768px) {
+        margin-left: 10px;
+      }
     }
     .right {
       padding-left: 10px;
@@ -38,15 +42,31 @@
     margin-top: 10px;
     display: flex;
     justify-content: space-between;
+    .attachment {
+      width: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      
+    }
+    .typefield {
+      width: 60%;
+@media (max-width:768px) {
+  width:100%;
+  margin-right: 6px;
+}
     input[type='text'] {
       background-color: #ececec;
       border-radius: 15px;
-      padding-left: 40px;
+      padding-left: 30px;
+      padding-right: 30px;
       height: 40px;
-      width: auto;
+      width: 100%;
+      font-size: 14px;
       border: #e2e2e2;
       outline: none;
       color: #333;
+    }
 
     }
     input[type='file'] {
@@ -77,7 +97,6 @@
     }
     .paper-clip {
       font-size: 34px;
-      margin-left: 30px;
     }
   }
 }
