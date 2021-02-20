@@ -2,12 +2,20 @@ import React from 'react'
 import { Table, Tag, Space, Modal, Popconfirm } from 'antd';
 import { PropertySafetyFilled } from '@ant-design/icons';
 import { connectToSocket, socket } from '../connectToSocket';
+import { store } from '../../../../reducers/configureStore';
 
 const MessageUserList = (props) =>{
 
     console.log("asbdhbf",props.userList )
     const createNewConversation = (uuid) => {
-    socket.emit('create_conversation',{userId: uuid});
+    store.dispatch({ type: 'CLOSE_CONVERSATION_LIST_MODAL' })
+    store.dispatch({ type: 'INITIAL_MESSAGE_LOADED' });
+    store.dispatch({ type: 'CLEAR_MESSAGE' });
+    store.dispatch({ type: 'GOTO_DETAIL_PAGE' });
+    socket.emit('get_messages', {
+        conversationId: uuid,
+        lastMessageId: 5
+      })
 }
 
     const columns = [

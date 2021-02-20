@@ -16,7 +16,7 @@ import {
     Divider,
   } from 'antd';
 import TextField from '@material-ui/core/TextField';
-import { Formik , Form } from 'formik';
+import { Formik , Form, Field } from 'formik';
 const FormsFillingSection = (props) => {
 
 
@@ -63,7 +63,7 @@ const handleFormSubmission = () =>{
   initialValues={{  }}
   onSubmit={handleFormSubmission}
  // innerRef={innerForm}
-  //validationSchema={OnlineBookingSchema}
+//validationSchema={OnlineBookingSchema}
 >
   {({
     handleSubmit,
@@ -73,26 +73,24 @@ const handleFormSubmission = () =>{
     isSubmitting,
   }) => (
     <Form className="" handleSubmit={handleSubmit}>
-     {formToFill?.map((forms, index) => (
-        <div>
-                      <TextField
-                onChange={e => handleChangeText(e, index)}
+                  <Field
                 id="standard-basic"
                 label={'Full Name'}
                 required={true}
               />          
-              <TextField
-              onChange={e => handleChangeText(e, index)}
+              <Field
               id="standard-basic"
               label={"Email"}
               required={true}
             />        
-              <TextField
-            onChange={e => handleChangeText(e, index)}
+              <Field
             id="standard-basic"
             label={"Phone "}
            // required={forms.required}
           />
+     {formToFill?.map((forms, index) => (
+        <div>
+            
           {forms.custom_types === 'text' || forms.custom_types === 'note' ? (
             <div>
               {' '}

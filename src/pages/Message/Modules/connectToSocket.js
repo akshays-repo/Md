@@ -3,7 +3,7 @@ import { DeliveryStatus } from '_constants/message';
 import { store } from '../../../reducers/configureStore';
 import _ from 'lodash'
 import LogOut from 'pages/Dashboard_Content/Logout';
-export const ENDPOINT = 'https://f19f54f46d0f.ngrok.io';
+export const ENDPOINT = 'https://0626f3b384f4.ngrok.io';
 export const socket = socketIOClient(ENDPOINT);
 
 export const connectToSocket = async () => {
