@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { actionCreator } from '../../reducers/actionCreator';
 import { Form, Input, Select } from 'formik-antd';
 import { connect } from 'react-redux';
-import { Row, List, Col, Avatar, Divider, Dropdown, Carousel, Radio } from 'antd';
+import { Row, List, Col, Avatar, Divider, Dropdown, Carousel, Radio, Spin, Space } from 'antd';
 import { MenuO } from './menu';
 import { DownOutlined } from '@ant-design/icons';
 import moment from 'moment';
@@ -14,30 +14,40 @@ const BranchProvider = props => {
   const [providerSchedule, setProviderSchedule] = useState([]);
   const [datelist, setDatelist] = useState([]);
   const [endDate, setEndDate] = useState(moment());
-  const no_of_date = 365;
+  const no_of_date = 90;
   const [next, setNext] = useState(no_of_date);
   const scheduleRef = useRef([]);
   const timeRef = useRef([]);
+  const [loading, setLoading] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  useEffect(() => {
+    setLoading(false);
+  }, [props.schedule]);
   useEffect(() => {
     let providerList = props.provider;
     console.log('***Providerlist', providerList);
 
     const providerScheduleList = async () => {
+      // if (next > 40) {
+      //   setLoading(false);
+      // }
       if (providerList.length > 0) {
+        setLoading(true);
         console.log('Fetch provider schedule');
         await props.fetchSchedule({
           branch_id: props.values.branch_id,
-          end_date: '2021-03-20',
+          end_date: endDate,
           appointment_id: props.values.appointment_type_id,
         });
       }
     };
-
+    // providerScheduleList();
     providerScheduleList().then(result => {
       console.log(result);
       setProviderSchedule(props.schedule);
     });
-  }, [props.provider]);
+  }, [props.provider, endDate]);
 
   useEffect(() => {
     if (props.values.branch_id && props.values.appointment_type_id) {
@@ -64,6 +74,7 @@ const BranchProvider = props => {
     useEffect(() => {
       if (prop.currentSlide > 0 && prop.currentSlide % (no_of_date - 5) == 0) {
         setNext(prev => no_of_date * (Number(prop.currentSlide / (no_of_date - 5)) + 1));
+        setCurrentSlide(props.currentSlide);
       }
     }, [prop.currentSlide]);
 
@@ -132,18 +143,22 @@ const BranchProvider = props => {
   };
 
   useEffect(() => {
-    const generate_date = moment(endDate)
+    const generate_date = moment()
       .recur()
       .every(1)
       .days();
 
     const generateDateList = generate_date.next(next);
+
+    console.log('end date', generateDateList.splice(-1)[0].format('YYYY-MM-DD'));
+    setEndDate(generateDateList.splice(-1)[0].format('YYYY-MM-DD'));
     setDatelist(prev => [
       {
         date: moment().format('YYYY-MM-DD'),
         day: moment().format('ddd'),
         dm: moment().format('MMM D'),
       },
+      // ...prev,
       ...generateDateList.map(re => {
         return {
           date: re.format('YYYY-MM-DD'),
@@ -177,9 +192,7 @@ const BranchProvider = props => {
 
               trigger={['click']}
             >
-              <p className="dropselectBox"
-               
-              >
+              <p className="dropselectBox">
                 <span>
                   {props.values.appointment_type} &nbsp;
                   <DownOutlined />
@@ -193,13 +206,14 @@ const BranchProvider = props => {
       <Col span={24}>
         {props.branch.map((result, i) => (
           <div key={result.id}>
-            <Row className="officesList"
+            <Row
+              className="officesList"
               onClick={() => {
                 console.log('Clicked', result.id);
                 props.setFieldValue('branch_id', result.id);
+                setLoading(true);
               }}
               style={{
-                
                 cursor: 'pointer',
                 backgroundColor: props.values.branch_id === result.id ? '#EDEEEE' : 'white',
               }}
@@ -235,8 +249,10 @@ const BranchProvider = props => {
       </Col>
       <Col span={24} className="pt2 pb2">
         <Row align="middle">
-        <Col span="1"></Col>
-          <Col span="11"><span className="smallText">Availability</span></Col>
+          <Col span="1"></Col>
+          <Col span="11">
+            <span className="smallText">Availability</span>
+          </Col>
           <Col span="12" className="availDate">
             {' '}
             <Carousel ref={timeRef} {...carousel_props}>
@@ -255,101 +271,107 @@ const BranchProvider = props => {
       </Col>
       <Divider />
       <Col span={24}>
-        {props.provider.map((result, i) => {
-          return (
-            <Row align="middle" key={result.id}>
-              <Col span="10">
-                <Row style={{ margin: 10, padding: 0 }}>
-                  <Col span="4">
-                    <Avatar
-                      style={{
-                        color: 'white',
-                        backgroundColor: '#00CBE6',
-                      }}
-                      src={
-                        result.provider?.image ||
-                        'https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png'
-                      }
-                    ></Avatar>
-                  </Col>
-                  <Col span="20">
-                    <Row>
-                      <Col style={{ fontSize: 12 }} span={24}>
-                        {result.provider?.provider_type?.name?.toUpperCase() || ''}
-                      </Col>
-                    </Row>
-                    <Col style={{ fontSize: 16 }} span={24}>
-                      <b>{result.provider?.fullName?.toUpperCase() || ''}</b>
+        {!loading ? (
+          props.provider.map((result, i) => {
+            return (
+              <Row align="middle" key={result.id}>
+                <Col span="10">
+                  <Row style={{ margin: 10, padding: 0 }}>
+                    <Col span="4">
+                      <Avatar
+                        style={{
+                          color: 'white',
+                          backgroundColor: '#00CBE6',
+                        }}
+                        src={
+                          result.provider?.image ||
+                          'https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png'
+                        }
+                      ></Avatar>
                     </Col>
-                  </Col>
-                </Row>
-              </Col>
-              <Col span="13">
-                <Carousel
-                  ref={el => {
-                    scheduleRef.current[i] = el;
-                  }}
-                  {...carousel_props1}
-                >
-                  {datelist.map((result1, j) => {
-                    return props.schedule.filter(
-                      res => res.provider_id === result.provider_id && res.date === result1.date,
-                    ).length > 0 ? (
-                      props.schedule
-                        .filter(
-                          res =>
-                            res.provider_id === result.provider_id && res.date === result1.date,
-                        )
-                        .map((result4, m) => {
-                          return (
-                            <div key={i} style={{ textAlign: 'center', padding: 5 }}>
-                              {result4.available_time.map((result2, k) => (
-                                <>
-                                  <button
-                                    type="button"
-                                    onClick={() => {
-                                      props.setFieldValue('provider_id', result.provider_id);
-                                      props.setFieldValue(
-                                        'appointment_start',
-                                        `${result1.date} ${moment(result2, 'hh:mm A').format(
-                                          'HH:mm:ss',
-                                        )}`,
-                                      );
-                                      props.setFieldValue(
-                                        'appointment_end',
-                                        `${result1.date} ${moment(result2, 'hh:mm A')
-                                          .add(result4.time_slot, 'minutes')
-                                          .format('HH:mm:ss')}`,
-                                      );
-                                    }}
-                                    className="timing"
-                                    style={{
-                                      margin: 5,
-                                      border: 'none',
-                                      outline: 'none',
-                                      padding: 5,
-                                      cursor: 'pointer',
-                                      backgroundColor: '#EDEEEE',
-                                    }}
-                                  >
-                                    {result2}
-                                  </button>
-                                  <br />
-                                </>
-                              ))}
-                            </div>
-                          );
-                        })
-                    ) : (
-                      <div></div>
-                    );
-                  })}
-                </Carousel>
-              </Col>
-              <Divider />
-            </Row>
-          );
-        })}
+                    <Col span="20">
+                      <Row>
+                        <Col style={{ fontSize: 12 }} span={24}>
+                          {result.provider?.provider_type?.name?.toUpperCase() || ''}
+                        </Col>
+                      </Row>
+                      <Col style={{ fontSize: 16 }} span={24}>
+                        <b>{result.provider?.fullName?.toUpperCase() || ''}</b>
+                      </Col>
+                    </Col>
+                  </Row>
+                </Col>
+                <Col span="13">
+                  <Carousel
+                    ref={el => {
+                      scheduleRef.current[i] = el;
+                    }}
+                    {...carousel_props1}
+                  >
+                    {datelist.map((result1, j) => {
+                      return props.schedule.filter(
+                        res => res.provider_id === result.provider_id && res.date === result1.date,
+                      ).length > 0 ? (
+                        props.schedule
+                          .filter(
+                            res =>
+                              res.provider_id === result.provider_id && res.date === result1.date,
+                          )
+                          .map((result4, m) => {
+                            return (
+                              <div key={i} style={{ textAlign: 'center', padding: 5 }}>
+                                {result4.available_time.map((result2, k) => (
+                                  <>
+                                    <button
+                                      type="button"
+                                      onClick={() => {
+                                        props.setFieldValue('provider_id', result.provider_id);
+                                        props.setFieldValue(
+                                          'appointment_start',
+                                          `${result1.date} ${moment(result2, 'hh:mm A').format(
+                                            'HH:mm:ss',
+                                          )}`,
+                                        );
+                                        props.setFieldValue(
+                                          'appointment_end',
+                                          `${result1.date} ${moment(result2, 'hh:mm A')
+                                            .add(result4.time_slot, 'minutes')
+                                            .format('HH:mm:ss')}`,
+                                        );
+                                      }}
+                                      className="timing"
+                                      style={{
+                                        margin: 5,
+                                        border: 'none',
+                                        outline: 'none',
+                                        padding: 5,
+                                        cursor: 'pointer',
+                                        backgroundColor: '#EDEEEE',
+                                      }}
+                                    >
+                                      {result2}
+                                    </button>
+                                    <br />
+                                  </>
+                                ))}
+                              </div>
+                            );
+                          })
+                      ) : (
+                        <div></div>
+                      );
+                    })}
+                  </Carousel>
+                </Col>
+                <Divider />
+              </Row>
+            );
+          })
+        ) : (
+          <Row justify="center" style={{ marginTop: 20 }} align="middle">
+            <Spin />
+          </Row>
+        )}
       </Col>
     </Row>
   );
