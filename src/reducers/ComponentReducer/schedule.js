@@ -39,6 +39,14 @@ export const ScheduleReducer = (state = ScheduleState, action) => {
       };
     case 'EMPTY_SCHEDULE':
       return { ...state, payload: [] };
+    case 'FILTER_SCHEDULE':
+      return {
+        ...state,
+        error: action.error,
+        payload: action.payload.users,
+        message: action.message,
+        changed: false,
+      };
     default:
       return state;
   }
