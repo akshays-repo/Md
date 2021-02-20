@@ -68,7 +68,7 @@ const Dashboard_Forms = props => {
   const Forms = () => {
     return (
       <div>
-        <div>
+        <div className="mb4"> 
           <Space direction="horizontal">
             <Button
               className="view-button button-square"

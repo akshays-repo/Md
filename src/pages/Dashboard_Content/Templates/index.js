@@ -25,7 +25,7 @@ const Dashboard_Templates = props => {
       render: (record, text) => {
         return (
           <Link to={`/templates/${text.id}/actions`}>
-            <img style={{width:"20px", height:"20px"}} src={text.icon}/>{text.name}
+            <img className="pr2" style={{width:"35px", height:"35px"}} src={text.icon}/>{text.name}
           </Link>
         );
       },

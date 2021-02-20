@@ -77,7 +77,7 @@ const AddUsers = props => {
     return (
       <div>
         <div>
-          <div className="provider-head mr2">
+          <div className="provider-head mr2 mb4">
             <Button
               type="primary"
               onClick={() => store.dispatch({ type: 'OPEN_CREATE_USER_MODAL' })}
