@@ -63,16 +63,14 @@ export const backend_api = {
   FETCH_HOSPITAL_APPOINTMENT_TYPE: '/api/backend/v1/appointment_types/hospital',
   CHECK_HOSPITAL: '/api/backend/v1/users',
 
-  CREATE_USER:'/api/backend/v1/users/user',
-  FETCH_USER:'/api/backend/v1/users/user',
-  DELETE_USER:'/api/backend/v1/users/user',
-  EDIT_USER:'/api/backend/v1/users/user',
-
+  CREATE_USER: '/api/backend/v1/users/user',
+  FETCH_USER: '/api/backend/v1/users/user',
+  DELETE_USER: '/api/backend/v1/users/user',
+  EDIT_USER: '/api/backend/v1/users/user',
 
   FETCH_APPOINTMENT_HOME: '/api/backend/v1/online_bookings/filter',
   FETCH_UNAVAILABLE_PROVIDER: '/api/backend/v1/unavailable/hospital',
   CREATE_PROVIDER_UNAVAILABLE: '/api/backend/v1/appointments/unavailable',
-
 
   CREATE_FORM: '/api/backend/v1/forms',
   EDIT_FORM:'/api/backend/v1/forms',
@@ -81,6 +79,10 @@ export const backend_api = {
   FILL_FORM:'/api/backend/v1/response/form',
   FETCH_FORM_FOR_FILLING:'/api/backend/v1/forms',
   
+  EDIT_FORM: '/api/backend/v1/forms',
+  FETCH_FORM: '/api/backend/v1/forms',
+  DELETE_FORM: '/api/backend/v1/forms',
+
   EDIT_PROVIDER_UNAVAILABLE: '/api/backend/v1/appointments/unavailable',
   DELETE_PROVIDER_UNAVAILABLE: '/api/backend/v1/appointments/unavailable',
   FILTER_APPOINTMENT_CALENDAR: '/api/backend/v1/online_bookings/filter',

@@ -9,15 +9,32 @@ import { store } from '../../../reducers/configureStore';
 import { actionCreator } from '../../../reducers/actionCreator';
 
 const AddAppointmentTime = props => {
+  console.log('Scheduling props', props);
+  const { branch } = props.provider_data;
   const innerForm = useRef(null);
 
   useEffect(() => {
-    props.fetchSchedule({ id: props.id });
+    if (props.id && innerForm.current.values.branch_id) {
+      props.fetchProviderBranchSchedule({
+        provider_id: props.id,
+        branch_id: innerForm.current.values.branch_id,
+      });
+    }
+    // props.fetchSchedule({ id: props.id, branch_id: 5 });
   }, [props.changed]);
 
+  const handleBranchChange = (val, setFieldValue) => {
+    console.log('Branch id', val);
+    setFieldValue('branch_id', val);
+    props.fetchProviderBranchSchedule({
+      provider_id: props.id,
+      branch_id: val,
+    });
+  };
   const handleFormSubmission = async values => {
     try {
       const provider_id = values.provider_id;
+      const branch_id = values.branch_id;
       const formData = values.formData.map((result, i) => {
         if (result.type !== 'custom') {
           delete result.unit;
@@ -30,10 +47,10 @@ const AddAppointmentTime = props => {
       });
       if (values.arrDelete.length > 0) {
         const arrDelete = values.arrDelete;
-        values = JSON.stringify({ formData: formData, provider_id, branch_id: 33, arrDelete });
+        values = JSON.stringify({ formData: formData, provider_id, branch_id, arrDelete });
         props.addSchedule(values);
       } else {
-        values = JSON.stringify({ formData: formData, provider_id, branch_id: 33 });
+        values = JSON.stringify({ formData: formData, provider_id, branch_id });
         props.addSchedule(values);
       }
     } catch (err) {
@@ -61,28 +78,55 @@ const AddAppointmentTime = props => {
   };
 
   return (
-    <div className="appointment-time">
-      <div className="header">
-        <button className="button-square" onClick={addAppointment}>
-          Add New
-        </button>
-      </div>
-      <Formik
-        innerRef={innerForm}
-        enableReinitialize={true}
-        // onSubmit={values => alert(JSON.stringify(values, null, 2))}
-        onSubmit={handleFormSubmission}
-        initialValues={{
-          provider_id: props.id,
-          branch_id: 4,
-          arrDelete: [],
-          formData: props.schedule ? props.schedule : [],
-        }}
-        validationSchema={SchedulingSchema}
-      >
-        {({ values, handleSubmit, setValues, errors, touched, setFieldValue }) => {
-          return (
-            <Form onSubmit={handleSubmit}>
+    <Formik
+      innerRef={innerForm}
+      enableReinitialize={true}
+      // onSubmit={values => alert(JSON.stringify(values, null, 2))}
+      onSubmit={handleFormSubmission}
+      initialValues={{
+        provider_id: props.id,
+        arrDelete: [],
+        branch_id: innerForm.current?.values?.branch_id
+          ? innerForm.current.values.branch_id
+          : branch.length > 0
+          ? branch[0].id
+          : '',
+        formData: props.schedule ? props.schedule : [],
+      }}
+      validationSchema={SchedulingSchema}
+    >
+      {({ values, handleSubmit, setValues, errors, touched, setFieldValue }) => {
+        return (
+          <Form onSubmit={handleSubmit}>
+            <div>
+              <label>Select branch</label>&nbsp;
+              <Select
+                placeholder="Select branch"
+                style={{ width: '30%' }}
+                value={values.branch_id}
+                onChange={val => handleBranchChange(val, setFieldValue)}
+              >
+                {branch.map((re, i) => (
+                  <Select.Option key={re.id} value={re.id}>
+                    {re.fullName}
+                  </Select.Option>
+                ))}
+              </Select>
+            </div>
+            <div className="appointment-time">
+              <div className="header">
+                {values.branch_id && (
+                  <button
+                    disabled={values.branch_id ? false : true}
+                    className="button-square"
+                    onClick={addAppointment}
+                    type="button"
+                  >
+                    Add New
+                  </button>
+                )}
+              </div>
+
               {values.formData?.map((value, index) => (
                 <Space>
                   <Scheduling
@@ -117,11 +161,11 @@ const AddAppointmentTime = props => {
                   </Button>
                 </Space>
               </div>
-            </Form>
-          );
-        }}
-      </Formik>
-    </div>
+            </div>
+          </Form>
+        );
+      }}
+    </Formik>
   );
 };
 
@@ -145,6 +189,9 @@ const mapDispatchToProps = dispatch => ({
         values,
       }),
     ),
+  fetchProviderBranchSchedule: param => {
+    dispatch(actionCreator({ method: 'GET', action_type: 'FILTER_SCHEDULE', param }));
+  },
 });
 
 export default connect(mapStoreToProps, mapDispatchToProps)(AddAppointmentTime);

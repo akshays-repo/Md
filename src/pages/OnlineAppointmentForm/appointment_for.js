@@ -29,7 +29,7 @@ export const AppointmentFor = props => {
           cursor: 'pointer',
         }}
         onClick={() => {
-          props.setFieldValue('appointment_type', 'other');
+          props.setFieldValue('appointment_for', 'other');
         }}
       >
         Scheduling for Someone Else

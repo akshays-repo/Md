@@ -26,6 +26,7 @@ const ProviderTable = props => {
   });
 
   const showModal = (id, data) => {
+    console.log('Provider data', data);
     setEditId(id);
     setEditData(data);
     setIsModalVisible(true);
@@ -45,15 +46,12 @@ const ProviderTable = props => {
     setEditId(id);
     store.dispatch({ type: 'OPEN_PROVIDER_EDIT_MODAL' });
   };
-  useEffect(() =>{
-    console.log("props.provider",props)
-
-  })
+  useEffect(() => {
+    console.log('props.provider', props);
+  });
 
   const handleApptChange = async (record, values) => {
-
-    console.log("asd;kjasd", record)
-
+    console.log('asd;kjasd', record);
 
     // this will perform delete
     let currentValue = [];
@@ -72,24 +70,21 @@ const ProviderTable = props => {
       provider_typeId: record.provider_typeId,
     };
 
-
-
     let sentinData = getFormData({ ...intValues });
     values.map((va, i) => sentinData.append('appointment_type[]', va));
     DeletedArray.map((va, i) => sentinData.append('deleted_type[]', va));
-    record.provider_and_branches.map((va, i) => sentinData.append('arrBranches[]', va.branch_id))
+    record.provider_and_branches.map((va, i) => sentinData.append('arrBranches[]', va.branch_id));
 
     await props.editProvider(record.id, sentinData);
   };
 
   const handleStatus = async (record, status) => {
-
     let intValues = {
       userTypeId: 4,
     };
     let sentinData = getFormData({ ...intValues });
     try {
-      await props.editProviderStatus(record.id, { status } , sentinData);
+      await props.editProviderStatus(record.id, { status }, sentinData);
     } catch (err) {
       console.log('error', err);
     }
@@ -194,8 +189,12 @@ const ProviderTable = props => {
             value={record.status}
             onChange={e => handleStatus(record, e)}
           >
-            <Select.Option style={{color:"green"}} value="active">Active</Select.Option>
-            <Select.Option style={{color:"red"}} value="hold">Hold</Select.Option>
+            <Select.Option style={{ color: 'green' }} value="active">
+              Active
+            </Select.Option>
+            <Select.Option style={{ color: 'red' }} value="hold">
+              Hold
+            </Select.Option>
           </Select>
         </Space>
       ),
@@ -263,8 +262,13 @@ const ProviderTable = props => {
             ))}
           </Select>
 
-          <Select onChange={e => setStatus(e)} placeholder="status" value={status} style={{ width: 120 }}>
-            <Option  value="active">ACTIVE</Option>
+          <Select
+            onChange={e => setStatus(e)}
+            placeholder="status"
+            value={status}
+            style={{ width: 120 }}
+          >
+            <Option value="active">ACTIVE</Option>
             <Option value="hold">HOLD</Option>
           </Select>
 
@@ -277,7 +281,7 @@ const ProviderTable = props => {
         </Space>
       </div>
 
-      <Table  scroll={{  x: 240 }} columns={columns} dataSource={props.provider} />
+      <Table scroll={{ x: 240 }} columns={columns} dataSource={props.provider} />
       <Modal
         footer={false}
         width={800}
@@ -287,11 +291,11 @@ const ProviderTable = props => {
         onCancel={handleCancel}
         destroyOnClose
       >
-        <AddAppointmentTime id={editId} {...props} />
+        <AddAppointmentTime id={editId} provider_data={editData} {...props} />
       </Modal>
       <Modal
         footer={false}
-        title={ `EDIT ${editData.fullName}`}
+        title={`EDIT ${editData.fullName}`}
         visible={props.modal1}
         onOk={handleOk}
         onCancel={handleCancel}
@@ -303,12 +307,12 @@ const ProviderTable = props => {
   );
 };
 
-const mapStoreToProps = ({ AppointmentType , Branch }) => {
+const mapStoreToProps = ({ AppointmentType, Branch }) => {
   return {
     appointment_type: AppointmentType.payload,
     modal: AppointmentType.modal,
     changed: AppointmentType.changed,
-    branch_payload:Branch.payload,
+    branch_payload: Branch.payload,
   };
 };
 export default connect(mapStoreToProps)(ProviderTable);
