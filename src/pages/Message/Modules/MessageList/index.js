@@ -2,6 +2,9 @@ import React from 'react';
 import { GrAddCircle } from 'react-icons/gr';
 import { chatList } from './chatListDummyData';
 import MessageHead from './messageHead';
+import { store } from '../../../../reducers/configureStore';
+import MessageUserList from '../MessageUserList';
+import Modal from 'antd/lib/modal/Modal';
 import './style.scss';
 const MessageList = props => {
   console.log('Props', props);
@@ -9,26 +12,23 @@ const MessageList = props => {
     <div className="messagelist">
       <div className="detail-header">
         <h5>Messages</h5>
-        {/* <button className="chatadd-button">
+        <button className="chatadd-button" onClick={()=>store.dispatch({ type: 'OPEN_CONVERSATION_LIST_MODAL' })}>
           <GrAddCircle />
-        </button> */}
+        </button>
       </div>
       <div className="search-chat">
         <form>
           <input type="text" placeholder={'search..'} className="" />
         </form>
       </div>
-      {/* conversationId: "ac78b49e-a9c6-46ee-aa57-61d47b5af756" createdAt: "2021-02-06T16:55:13.000Z"
-      id: 20 message: "Sure dispatching to your location." recieverId:
-      "a2ed9b2e-1ede-4a25-960e-481d53068c66" senderId: "4c763a46-5490-47d1-b32f-ab66c5edd494"
-      status: "sent" */}
+
       <div className="chatlist">
         {props.summary_message.length > 0
           ? props.summary_message.map(data => (
               <MessageHead
                 userId={data.userId}
-                avatar={data.userAvatar}
-                userName={data.receiverId}
+              avatar={ data.senderId === props.uuid ? data.receiverAvatar : data.senderAvatar}
+              userName={ data.senderId === props.uuid ? data.receiverDisplayName : data.senderDisplayName}
                 lastMessage={data.message}
                 lastAcive={data.lastMessageTime}
                 totalUnread={data.messageUnRead}
@@ -48,6 +48,18 @@ const MessageList = props => {
           : 'Please Start to Message'}
       </div>
       <div></div>
+
+
+
+      <Modal
+        title="USERS LIST"
+        footer={false}
+        visible={props.userListModal}
+        onCancel={()=>store.dispatch({ type: 'CLOSE_CONVERSATION_LIST_MODAL' })}
+        destroyOnClose
+      >
+        <MessageUserList {...props} />
+      </Modal>
     </div>
   );
 };

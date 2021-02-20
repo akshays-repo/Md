@@ -13,6 +13,12 @@ const ViewCreatedForms = props => {
     //
   };
 
+  const createShareLink =(id) => {
+    console.log("share Link",`${window.location.protocol}//${window.location.hostname}/forms/${id}`)
+    console.log("share Link", id)
+
+  }
+
   const openEditModal = (id , data) => {
       setEditData(data)
       setEditId(id)
@@ -41,7 +47,7 @@ const ViewCreatedForms = props => {
               <i className="fa fa-trash"></i>
             </span>
           </Popconfirm>
-          <span className="edit-color icon-button" >
+          <span onClick={() => createShareLink(record.id)} className="edit-color icon-button" >
           <i class="fas fa-share-alt"></i>
           </span>
           

@@ -47,12 +47,12 @@ const Dashboard_Templates = props => {
       render:text => moment(text.updatedAt).format('MMMM Do YYYY, h:mm:ss a')
 
     },
-    {
-      title: 'Status',
-      dataIndex: 'status',
-      key: 'status',
-      render: text => <a>{text}</a>,
-    },
+    // {
+    //   title: 'Status',
+    //   dataIndex: 'status',
+    //   key: 'status',
+    //   render: text => <a>{text}</a>,
+    // },
   ];
 
   const Templates = () => {

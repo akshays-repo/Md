@@ -45,11 +45,11 @@ const AddUsers = props => {
       dataIndex: 'phone',
       key: 'phone',
     },
-    {
-        title: 'Status',
-        dataIndex: 'status',
-        key: 'status',
-      },
+    // {
+    //     title: 'Status',
+    //     dataIndex: 'status',
+    //     key: 'status',
+    //   },
     {
       title: '',
       key: 'action',

@@ -25,11 +25,11 @@ const Dashboard_Content = ({ content }) => {
         position: 'fixed',}}>
             {isMobile ? (
               <div className="mbl-button pl4"> 
-                <Button type="primary"  onClick={showDrawer}>
+                <Button type="primary" onClick={showDrawer}>
                 <i class="fas fa-bars"></i>
                 </Button>
                 <Drawer
-                  title="Menu"
+                  title=""
                   width={320}
                   placement="left"
                   closable={true}

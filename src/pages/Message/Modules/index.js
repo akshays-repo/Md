@@ -20,14 +20,17 @@ const MessageLayout = props => {
   const [messageLists, setMessageLists] = useState([]);
   const [receiverId, setReceiverId] = useState();
 
-  const handleMessageDetails = (conversationId, lastMessageId = '', receiverID) => {
+  const handleMessageDetails = (conversationId, lastMessageId = '', receiverID , userAvatar , userName) => {
     store.dispatch({ type: 'CLEAR_MESSAGE' });
-    store.dispatch({ type: 'INITIAL_MESSAGE_LOADED' });
     store.dispatch({ type: 'GOTO_DETAIL_PAGE' });
+
+    store.dispatch({ type: 'SET_USERNAME' ,  payload: userName});
+    store.dispatch({ type: 'SET_AVATAR',  payload: userAvatar});
+
     setReceiverId(receiverID);
     socket.emit('get_messages', {
       conversationId: conversationId,
-      lastMessageId: lastMessageId,
+      lastMessageId: parseInt(lastMessageId),
     });
   };
 
@@ -98,7 +101,15 @@ const mapStoreToProps = ({ SummaryMessage, Message }) => {
     message: Message.payload.length > 0 ? Message.payload : [],
     initialLoading: Message.initalLoading,
     mobileListScreen: Message.mobileListScreen,
-    uuid:Message.uuid
+    uuid:Message.uuid,
+    receiverAvatar:Message.receiverAvatar,
+    receiverDisplayName:Message.receiverDisplayName,
+    userList:Message.userList,
+    userListModal:Message.userListModal
+
+
+
+
   };
 };
 const mapDispatchToProps = dispatch => ({

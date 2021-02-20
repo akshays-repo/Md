@@ -113,6 +113,14 @@ const routes = [
     exact: true,
     authorize: true,
   },
+  {
+    path: '/forms/:id',
+    component: loadable(() => import('../pages/FormsFilling/')),
+    exact: true,
+    authorize: false,
+    header: false,
+
+  },
 ];
 
 const Router = props => {

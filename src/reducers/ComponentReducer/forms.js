@@ -31,7 +31,9 @@ export const FormsReducer = (state = FormsState, action) => {
             return { ...state, modal2: true };
           case 'CLOSE_EDIT1_FORM_MODAL':
             return { ...state, modal2: false };
-    default:
+            case 'FETCH_FORM_FOR_FILLING':
+              return { ...state, formToFill: action.payload };
+              default:
       return state;
   }
 };

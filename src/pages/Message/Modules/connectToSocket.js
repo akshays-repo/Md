@@ -3,7 +3,7 @@ import { DeliveryStatus } from '_constants/message';
 import { store } from '../../../reducers/configureStore';
 import _ from 'lodash'
 import LogOut from 'pages/Dashboard_Content/Logout';
-export const ENDPOINT = 'http://159.65.159.105';
+export const ENDPOINT = 'https://f19f54f46d0f.ngrok.io';
 export const socket = socketIOClient(ENDPOINT);
 
 export const connectToSocket = async () => {
@@ -12,7 +12,9 @@ export const connectToSocket = async () => {
   });
 
   socket.on('connect', () => {
-    socket.emit('authenticate', { token:localStorage.getItem('token')});
+    let token = localStorage.getItem('token')
+    let tokensplit = token.split(' ')
+    socket.emit('authenticate', { token:tokensplit[1]});
   });
 
   socket.on('disconnect', () => {
@@ -22,10 +24,33 @@ export const connectToSocket = async () => {
   socket.on('incoming_hospital', data => {
     console.log('message incoming_hospital', data);
   });
+
+  socket.on('create_conversation_success', data => {
+    console.log('message conversation_success', data);
+  });
+
+  socket.on('create_conversation_error', data => {
+    console.log('message conversation_error', data);
+  });
+
   socket.on('uuid', data => {
     console.log('message uuid', data);
     store.dispatch({ type: 'SET_MESSAGE_UUID', payload: data.uuid });
 
+  });
+
+  socket.emit('get_users', data => {
+    console.log('message get_users', data);
+  });
+  
+  socket.on('get_users_success', data => {
+    console.log('message get_users_success', data);
+    store.dispatch({ type: 'SET_USER_LIST', payload: data.usersList });
+
+  }); 
+  
+  socket.on('get_users_error', data => {
+    console.log('message get_users_error', data);
   });
   socket.on('incoming', data => {
     let oldSummary = store.getState().SummaryMessage.payload
@@ -37,6 +62,10 @@ export const connectToSocket = async () => {
 
   socket.on('authenticate_success', data => {
     console.log('message authenticate_success', data);
+  });
+
+  socket.on('authenticate_error', data => {
+    console.log('message authenticate_error', data);
   });
 
   socket.on('message_summary_success', data => {
@@ -73,6 +102,8 @@ export const connectToSocket = async () => {
     console.log('message send_message_error', data);
   });
 
+
+  
   socket.on(DeliveryStatus.ACCEPTED, data => {
     console.log('message ACCEPTED', data);
   });

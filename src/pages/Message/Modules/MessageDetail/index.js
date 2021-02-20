@@ -15,7 +15,7 @@ const MessageDetail = props => {
   const messagesEndRef = useRef(null);
 
   const send = () => {
-    console.log("props.uuid" , props.uuid ,props.receiverID)
+    console.log("*!#@#!@" , message)
   
     if (message) {
       setMessage('');
@@ -41,17 +41,19 @@ const MessageDetail = props => {
   };
 
   useEffect(() => {});
-  console.log('props.message', props.message);
 
   const handleScroll = e => {
     let element = e.target;
     if (element.scrollTop === 0) {
       console.log('Scroll work');
       let lastMessage = _.first(props.message);
-      socket.emit('get_messages', {
-        conversationId: lastMessage.conversationId,
-        lastMessageId: lastMessage.id,
-      });
+      if(props.message.length > 0) {
+        socket.emit('get_messages', {
+          conversationId: lastMessage.conversationId,
+          lastMessageId: lastMessage.id,
+        });
+      }
+
 
       console.log('Scroll work props', lastMessage);
     }
@@ -69,11 +71,12 @@ const MessageDetail = props => {
               <i class="fas fa-arrow-left"></i>
             </span>
           )}
-          <img className="useravatar" src={Avatar} />
+          {/* TODO : display name and Avatar variables are changed */}
+          <img className="useravatar" src={props.receiverDisplayName} />
         </div>
         <div className="right">
-          <span>User Name</span>
-          <p>online</p>
+          <span>{props.receiverAvatar}</span>
+          {/* <p>online</p> */}
         </div>
       </div>
       <div className="chat" onScroll={handleScroll}>

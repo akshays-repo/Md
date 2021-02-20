@@ -78,6 +78,8 @@ export const backend_api = {
   EDIT_FORM:'/api/backend/v1/forms',
   FETCH_FORM:'/api/backend/v1/forms',
   DELETE_FORM:'/api/backend/v1/forms',
+  FILL_FORM:'/api/backend/v1/response/form',
+  FETCH_FORM_FOR_FILLING:'/api/backend/v1/forms',
   
   EDIT_PROVIDER_UNAVAILABLE: '/api/backend/v1/appointments/unavailable',
   DELETE_PROVIDER_UNAVAILABLE: '/api/backend/v1/appointments/unavailable',
@@ -87,4 +89,6 @@ export const backend_api = {
   FETCH_TEMPLATE:'/api/backend/v1/hospital/template',
   EDIT_TEMPLATE:'/api/backend/v1/hospital/action',
   FETCH_HOSPITAL_ACTION:'/api/backend/v1/hospital/action',
+
+  LANDING_PAGE_PACKAGES:'/packages/public'
 };

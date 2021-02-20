@@ -4,5 +4,9 @@ export const MessageState = {
   error: false,
   payload: [],
   message: '',
-  uuid:''
+  uuid:'',
+  receiverAvatar:'',
+  receiverDisplayName:'',
+  userList:'',
+  userListModal:false
 };

@@ -30,10 +30,10 @@ const AddAppointmentTime = props => {
       });
       if (values.arrDelete.length > 0) {
         const arrDelete = values.arrDelete;
-        values = JSON.stringify({ formData: formData, provider_id, branch_id: 4, arrDelete });
+        values = JSON.stringify({ formData: formData, provider_id, branch_id: 33, arrDelete });
         props.addSchedule(values);
       } else {
-        values = JSON.stringify({ formData: formData, provider_id, branch_id: 4 });
+        values = JSON.stringify({ formData: formData, provider_id, branch_id: 33 });
         props.addSchedule(values);
       }
     } catch (err) {

@@ -18,6 +18,18 @@ export const MesssageReducer = (state = MessageState, action) => {
           return {...state , mobileListScreen : true};
           case 'SET_MESSAGE_UUID':
           return {...state , uuid : action.payload};
+          case 'SET_USERNAME':
+          return{...state , receiverDisplayName : action.payload}
+          case 'SET_AVATAR':
+            console.log("avataravatar",action.payload )
+            return{...state , receiverAvatar : action.payload}
+            case 'SET_USER_LIST':
+              console.log("get_users", action.payload)
+          return{...state , userList : action.payload}
+          case'OPEN_CONVERSATION_LIST_MODAL':
+          return{...state , userListModal : true}
+          case'CLOSE_CONVERSATION_LIST_MODAL':
+          return{...state , userListModal : false}
 
 
     case 'SET_MESSAGE':
