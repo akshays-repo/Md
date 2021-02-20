@@ -8,14 +8,12 @@ const MessageUserList = (props) =>{
 
     console.log("asbdhbf",props.userList )
     const createNewConversation = (uuid) => {
+        console.log("asldj", uuid)
     store.dispatch({ type: 'CLOSE_CONVERSATION_LIST_MODAL' })
     store.dispatch({ type: 'INITIAL_MESSAGE_LOADED' });
     store.dispatch({ type: 'CLEAR_MESSAGE' });
     store.dispatch({ type: 'GOTO_DETAIL_PAGE' });
-    socket.emit('get_messages', {
-        conversationId: uuid,
-        lastMessageId: 5
-      })
+    socket.emit('create_conversation',{userId:uuid})
 }
 
     const columns = [

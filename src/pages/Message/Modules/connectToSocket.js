@@ -3,7 +3,7 @@ import { DeliveryStatus } from '_constants/message';
 import { store } from '../../../reducers/configureStore';
 import _ from 'lodash'
 import LogOut from 'pages/Dashboard_Content/Logout';
-export const ENDPOINT = 'https://0626f3b384f4.ngrok.io';
+export const ENDPOINT = 'https://123c4c7accde.ngrok.io';
 export const socket = socketIOClient(ENDPOINT);
 
 export const connectToSocket = async () => {
@@ -26,11 +26,15 @@ export const connectToSocket = async () => {
   });
 
   socket.on('create_conversation_success', data => {
-    console.log('message conversation_success', data);
+    console.log('message create_conversation_success', data);
+
+    socket.emit('get_messages', {
+      conversationId: data.conversationId,
+    });
   });
 
   socket.on('create_conversation_error', data => {
-    console.log('message conversation_error', data);
+    console.log('message create_conversation_error', data);
   });
 
   socket.on('uuid', data => {
@@ -81,6 +85,8 @@ export const connectToSocket = async () => {
 
   socket.on('get_message_success', data => {
     let oldMessage = store.getState().Message.payload
+    console.log("message get_message_success", data)
+
     store.dispatch({ type: 'CLEAR_MESSAGE' });
     store.dispatch({ type: 'SET_MESSAGE', payload: _.unionBy(oldMessage, data) });
    

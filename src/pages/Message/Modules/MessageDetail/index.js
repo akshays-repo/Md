@@ -20,7 +20,7 @@ const MessageDetail = props => {
     if (message) {
       setMessage('');
       socket.emit('send_message', {
-        userUUID: props.receiverID,
+        userUUID: "2d5624e6-39c3-4bb0-8438-208484684d6e",
         message: message,
       });
     }

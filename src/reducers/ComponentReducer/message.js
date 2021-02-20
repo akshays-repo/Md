@@ -34,7 +34,8 @@ export const MesssageReducer = (state = MessageState, action) => {
 
     case 'SET_MESSAGE':
       const message =
-        state.payload.length > 0 ? [...state.payload, action.payload] : action.payload;
+        state.payload.length > 0 ? [...state.payload, action.payload] : [action.payload];
+        console.log("message sort", message , typeof message)
       message.sort((a, b) => a.id - b.id);
       return {
         ...state,

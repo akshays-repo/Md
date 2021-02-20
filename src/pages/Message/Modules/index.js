@@ -27,7 +27,7 @@ const MessageLayout = props => {
     store.dispatch({ type: 'SET_USERNAME' ,  payload: userName});
     store.dispatch({ type: 'SET_AVATAR',  payload: userAvatar});
 
-    setReceiverId(receiverID);
+    setReceiverId("6b8d45f-3020-437d-a45e-dbd4214d2ea1f6b8d45f-3020-437d-a45e-dbd4214d2ea1");
     socket.emit('get_messages', {
       conversationId: conversationId,
       lastMessageId: parseInt(lastMessageId),
