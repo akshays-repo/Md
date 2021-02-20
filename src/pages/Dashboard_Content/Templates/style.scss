@@ -69,8 +69,23 @@
               }
             }
           }
-        }
+        
       }
+
+
+
     }
   }
 }
+
+
+  @include breakpoint(xs) {
+    .subCard {
+    width: 85%!important;
+  }
+  .topCard {
+    width: 100%!important;
+  }
+}
+}
+

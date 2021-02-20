@@ -5,12 +5,16 @@
   .detail-header {
     font-size: 18px;
     height: 55px;
-
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   background: #fff;
+   padding: 10px;
 
     .chatadd-button {
-      border: none;
+     outline: none;
+     border: none;
       background-color: #ffffff;
-      float: right;
     }
   }
 
@@ -36,6 +40,8 @@
     max-height: calc(100vh - 244px);
     overflow-y: auto;
    border: 1px solid #f5e8ff;
+   padding: 15px;
+    font-size: 14px;
   }
 }
 .messagehead {
