@@ -148,10 +148,6 @@ const FormCreation = props => {
       </div>
       <div className="inner-box">
         <div>
-          <p>
-            This is what FossilMd asks your patients by default. You can create additional questions
-            and fields by clicking on the plus sign below.
-          </p>
 
           <form>
             <TextField

@@ -20,7 +20,11 @@ import { hospitalUser ,hospitaEditlUser } from '_utils/Schemas';
 
 const UserCreationForm = props => {
   const formField = [
-
+    // {
+    //   label: 'Full Name',
+    //   name: 'fullName',
+    //   type: 'text',
+    // },
     {
       label: 'Email',
       name: 'email',
@@ -34,12 +38,12 @@ const UserCreationForm = props => {
     {
       label: 'Password',
       name: 'password',
-      type: 'text',
+      type: 'password',
     },
     {
       label: 'Confirm Password',
       name: 'c_password',
-      type: 'text',
+      type: 'password',
     },
     {
       label: 'Status',
@@ -58,7 +62,6 @@ const UserCreationForm = props => {
     if(props.editId){
      const {userTypeId , isAdmin , ...rest} = values
      let editData = await getFormDataA({...rest})
-        console.log("kalsdfjh", rest)
         props.editUser({id:props.editId}, editData)
     }else{
         props.addUser(data)
@@ -68,13 +71,13 @@ const UserCreationForm = props => {
 
   };
 
-  console.log(" props.editData ", props.editData )
   return (
     <div>
       <Formik
         enableReinitialize={true}
         initialValues={
           props.editData || {
+            // fullName:'',
             email: '',
             status: 'active',
             provider_typeId: '',

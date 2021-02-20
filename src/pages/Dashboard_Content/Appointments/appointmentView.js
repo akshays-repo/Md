@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Row, Col } from 'antd';
+import moment from 'moment'
 
 const AppointmentView = props => {
   const [details, setDetails] = useState('');
@@ -40,7 +41,8 @@ const AppointmentView = props => {
           <p>Appointment Type </p> <p className="title">{appointmentType?.name}</p>
         </Col>
         <Col xs={24} xl={12}>
-          <p>Appointment Created</p> <p className="title">{details.appointment_created}</p>
+          <p>Appointment Created</p> <p className="title">
+         { moment(details.appointment_created).format('MMM Do YY, h:mm a')}</p>
         </Col>
         <Col xs={24} xl={12}>
           <p>Appointment Start </p> <p className="title"> {details.appointment_start}</p>

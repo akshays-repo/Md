@@ -3,4 +3,13 @@
     .col-border{
         border: solid 1px rgb(255, 245, 245);
     }
+    .messagehome {
+        height: 100%;
+    .messageFirstbox {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+    }
+}
 }

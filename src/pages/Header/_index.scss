@@ -6,8 +6,14 @@
   text-transform: capitalize;
   font-size: 20px;
   padding: 15px 30px;
+  height: 75px;
+  @include fixed;
   h3 {
     color: $white;
+    margin-bottom: 0;
+    @include breakpoint(xs) {
+      margin-left:40px;
+    }
     a{
       color: $white;
       text-decoration: none;

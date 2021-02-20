@@ -34,6 +34,9 @@ body {
   .completed {
     color: #26ad00;
   }
+  .textRight {
+    text-align: right
+  }
 
   .circular-square {
     @include circular--square;

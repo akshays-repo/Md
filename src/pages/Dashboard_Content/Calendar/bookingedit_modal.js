@@ -62,7 +62,7 @@ export const BookingEdit = props => {
             <Row className="calendar__newappointment">
               <Col span={24} style={{ height: 100 }}>
                 <Row align={'middle'}>
-                  <Col span={5} offset={2}>
+                  <Col xs={8} lg={5}>
                     <Avatar
                       style={{ width: 80, height: 80 }}
                       shape="circle"
@@ -141,7 +141,7 @@ export const BookingEdit = props => {
                   </div>
                 </div>
               </Col> */}
-              <Divider style={{ margin: 10 }} />
+              {/* <Divider style={{ margin: 10 }} /> */}
               <Col span={24}>
                 <div className="newappointment__section2">
                   <div>
@@ -331,15 +331,15 @@ export const BookingEdit = props => {
                 </div>
               </Col>
               <Divider />
-              <Col span={24} offset={16}>
-                <Button
+              <Col span={24} className="textRight">
+                <button
                   htmlType="submit"
                   disabled={isSubmitting}
                   shape="round"
-                  style={{ backgroundColor: '#FF596F', color: 'white' }}
+                className="view-button"
                 >
                   UPDATE APPOINTMENT
-                </Button>
+                </button>
               </Col>
             </Row>
           </Form>

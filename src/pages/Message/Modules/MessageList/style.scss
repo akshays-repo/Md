@@ -32,8 +32,8 @@
     }
   }
   .chatlist {
-    min-height: 300px;
-    max-height: calc(100vh - 224px);
+    min-height: calc(100vh - 244px);
+    max-height: calc(100vh - 244px);
     overflow-y: auto;
    border: 1px solid #f5e8ff;
   }

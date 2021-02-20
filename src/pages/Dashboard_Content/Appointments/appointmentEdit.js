@@ -34,8 +34,8 @@ const AppointmentEdit = props => {
   const handleFormSubmission = async values => {
     console.log('asdkjhf', values);
      let contentType = 'JSON';
-    await props.editAppointment(props.view.id , JSON.stringify({ ...values , payment_status:paymentStatus ,status:paymentStatus , userTypeId:2 }))
-    const response = await props.createOnlineForm(JSON.stringify({ ...values }), contentType);
+    await props.editAppointment(props.view.id , JSON.stringify(values),contentType)
+    // const response = await props.createOnlineForm(JSON.stringify({ ...values }), contentType);
 
   };
 
@@ -60,11 +60,14 @@ const AppointmentEdit = props => {
       <Formik
         enableReinitialize={true}
         initialValues={{
-          appointment_end: moment(props.view.appointment_end).format('YYYY-MM-DD hh:mm a'),
+          appointment_end: moment(props.view.appointment_end).format(),
           appointment_for: props.view.appointment_for,
-          appointment_start:moment(props.view.appointment_start).format('YYYY-MM-DD hh:mm a'),
+          appointment_start:moment(props.view.appointment_start).format(),
           charge: props.view.charge,
           comment: props.view.comment,
+          payment_status:paymentStatus,
+          status:status,
+          userTypeId:2,
 
         }}
         //validationSchema={ProviderCreationSchema}
@@ -78,7 +81,7 @@ const AppointmentEdit = props => {
                 <Select
                   defaultValue={props.view.payment_status}
                   style={{ width: '100%' }}
-                  onChange={e => setPaymentStatus(e)}
+                  onChange={e => setPaymentStatus(e.target.value)}
                   className='matBorder select-underline' 
                 >
                   <MenuItem className={'pending'} value="pending">
@@ -105,7 +108,7 @@ const AppointmentEdit = props => {
                   defaultValue={props.view.status}
                   style={{ width: '100%' }}
                   className='matBorder select-underline' 
-                  onChange={e => setStatus(e)}
+                  onChange={e => setStatus(e.target.value)}
                 >
                   <MenuItem className={'pending'} value="pending">
                     Pending

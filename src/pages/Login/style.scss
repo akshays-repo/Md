@@ -9,7 +9,10 @@
 width: 30%;
 padding:50px;
 background-color: $bg-white;
-@include border-radius(3px);
+border-radius: 10px;
+box-shadow: 0 0 20px 0 #f2f2f2;
+border: 1px solid #efefef;
+@include border-radius(10px);
 @include breakpoint(xs) {
     width: 100%;
 }
