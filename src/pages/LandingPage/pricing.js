@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Row, Col } from 'antd';
 
-const FossilMdPricing = () => {
+const FossilMdPricing = (props) => {
   const PricingData = [
     {
       
@@ -59,6 +59,11 @@ const FossilMdPricing = () => {
     },
   ];
 
+
+
+useEffect(() =>{
+console.log("!2323", props)
+})
   return (
     <div>
       <div className="landing_pricing">

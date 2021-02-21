@@ -17,6 +17,10 @@ import { UsersReducer as Users } from './ComponentReducer/users';
 import { UnavailableReducer as Unavailable } from './ComponentReducer/unavailable';
 import { FormsReducer as Forms } from './ComponentReducer/forms';
 import { TemplateReducer  as Template} from './ComponentReducer/template';
+import { LandingPageReducer  as LandingPage} from './ComponentReducer/landingPage';
+
+
+
 export const reducers = {
   Hospital,
   Branch,
@@ -36,5 +40,7 @@ export const reducers = {
   Users,
   Unavailable,
   Forms,
-  Template
+  Template,
+  LandingPage
+  
 };

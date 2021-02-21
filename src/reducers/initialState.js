@@ -11,6 +11,7 @@ import {DashboardState as Dashboard} from './ComponentState/dashboard'
 import { UsersState as Users } from './ComponentState/users';
 import { FormsState as Forms} from './ComponentState/forms';
 import { TemplateState as Template } from './ComponentState/template';
+import { LandingPageState as LandingPage } from './ComponentState/landingPage';
 export const initialState = {
   Hospital,
   Branch,
@@ -24,5 +25,6 @@ export const initialState = {
   Dashboard,
   Users,
    Forms,
-   Template
+   Template,
+   LandingPage
 };

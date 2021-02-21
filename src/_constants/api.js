@@ -92,5 +92,5 @@ export const backend_api = {
   EDIT_TEMPLATE:'/api/backend/v1/hospital/action',
   FETCH_HOSPITAL_ACTION:'/api/backend/v1/hospital/action',
 
-  LANDING_PAGE_PACKAGES:'/packages/public'
+  LANDING_PAGE_PACKAGES:'/api/backend/v1/packages/public'
 };
