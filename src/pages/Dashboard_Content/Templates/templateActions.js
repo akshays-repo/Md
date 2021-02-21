@@ -8,10 +8,11 @@ import Dashboard_Content from '..';
 import { TextField } from '@material-ui/core';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import { isMobile } from 'react-device-detect';
 import TemplateEmailEdit from './emailEdit';
 import SmsEdit from './smsEdit';
 import AddNewAction from './addNewActions';
-import { set } from 'store';
+
 
 const TemplateActions = props => {
   const { id } = useParams();
@@ -93,7 +94,7 @@ const TemplateActions = props => {
     return (
       <div className="template-action">
         <Row>
-        <Col xs={24} lg={12} offset={6}>
+        <Col xs={24} lg={12} offset={isMobile ? '' : 6}>
           <div className="templateBox">
             <div className="header">
               <h5>Reminders</h5>

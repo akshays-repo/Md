@@ -6,6 +6,7 @@ import { actionCreator } from '../../../reducers/actionCreator';
 import { store } from '../../../reducers/configureStore';
 import { connect } from 'react-redux';
 import { Col, Row } from 'antd';
+import Graphs from './chart';
 const Dashboard_Dashboard = () => {
 
     const Dashboard = () => {
@@ -17,6 +18,11 @@ const Dashboard_Dashboard = () => {
         <Row>
  
           <Col xl={12}>
+          <div style={{padding:" 30px 0px 30px  0px"}}>
+
+          <Graphs/>
+          </div>
+
           </Col>
 
           <Col xl={12}>

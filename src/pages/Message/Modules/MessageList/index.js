@@ -1,6 +1,5 @@
 import React from 'react';
 import { GrAddCircle } from 'react-icons/gr';
-import { chatList } from './chatListDummyData';
 import MessageHead from './messageHead';
 import { store } from '../../../../reducers/configureStore';
 import MessageUserList from '../MessageUserList';
@@ -12,7 +11,7 @@ const MessageList = props => {
     <div className="messagelist">
       <div className="detail-header">
         <h5>Messages</h5>
-        <button className="chatadd-button" onClick={()=>store.dispatch({ type: 'OPEN_CONVERSATION_LIST_MODAL' })}>
+        <button style={{cursor:"pointer"}} className="chatadd-button" onClick={()=>store.dispatch({ type: 'OPEN_CONVERSATION_LIST_MODAL' })}>
           <GrAddCircle />
         </button>
       </div>

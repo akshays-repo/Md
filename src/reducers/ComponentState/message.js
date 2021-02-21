@@ -8,5 +8,6 @@ export const MessageState = {
   receiverAvatar:'',
   receiverDisplayName:'',
   userList:'',
-  userListModal:false
+  userListModal:false,
+  setRecevierUUID:''
 };

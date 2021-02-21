@@ -16,11 +16,11 @@ const MessageDetail = props => {
 
   const send = () => {
     console.log("*!#@#!@" , message)
-  
+  console.log("!*****$", props.setRecevierUUID)
     if (message) {
       setMessage('');
       socket.emit('send_message', {
-        userUUID: "2d5624e6-39c3-4bb0-8438-208484684d6e",
+        userUUID:  props.setRecevierUUID,
         message: message,
       });
     }
@@ -55,9 +55,10 @@ const MessageDetail = props => {
       }
 
 
-      console.log('Scroll work props', lastMessage);
     }
   };
+  console.log('messsage to load', props.message);
+
   return (
     <div className="chatmain">
       <div className="messagedetail">
@@ -80,7 +81,7 @@ const MessageDetail = props => {
         </div>
       </div>
       <div className="chat" onScroll={handleScroll}>
-        {props.message.length > 0
+        {props.message.length >= 0
           ? props.message.map(data =>
               data.senderId === props.uuid ? (
                 <LeftSideChat message={data.message} />

@@ -23,11 +23,11 @@ const MessageLayout = props => {
   const handleMessageDetails = (conversationId, lastMessageId = '', receiverID , userAvatar , userName) => {
     store.dispatch({ type: 'CLEAR_MESSAGE' });
     store.dispatch({ type: 'GOTO_DETAIL_PAGE' });
-
+    store.dispatch({ type: 'SET_RECEIVER_UUID', payload:receiverID });
     store.dispatch({ type: 'SET_USERNAME' ,  payload: userName});
     store.dispatch({ type: 'SET_AVATAR',  payload: userAvatar});
 
-    setReceiverId("6b8d45f-3020-437d-a45e-dbd4214d2ea1f6b8d45f-3020-437d-a45e-dbd4214d2ea1");
+    setReceiverId(props.setRecevierUUID);
     socket.emit('get_messages', {
       conversationId: conversationId,
       lastMessageId: parseInt(lastMessageId),
@@ -66,7 +66,7 @@ const MessageLayout = props => {
                 </div>
                 
               ) : (
-                <MessageDetail {...messageDetails} {...props} receiverID={receiverId} />
+                <MessageDetail {...messageDetails} {...props} receiverID={props.setRecevierUUID} />
               )}
               </div>
             </Col>
@@ -90,7 +90,7 @@ const MessageLayout = props => {
                   {props.initialLoading ? (
                     intialLoading
                   ) : (
-                    <MessageDetail {...messageDetails} {...props} receiverID={receiverId} />
+                    <MessageDetail {...messageDetails} {...props} receiverID={props.setRecevierUUID} />
                   )}
                 </div>
               )}
@@ -112,7 +112,9 @@ const mapStoreToProps = ({ SummaryMessage, Message }) => {
     receiverAvatar:Message.receiverAvatar,
     receiverDisplayName:Message.receiverDisplayName,
     userList:Message.userList,
-    userListModal:Message.userListModal
+    userListModal:Message.userListModal,
+    setRecevierUUID:Message.setRecevierUUID
+
 
 
 

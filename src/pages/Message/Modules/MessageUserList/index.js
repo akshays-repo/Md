@@ -7,13 +7,18 @@ import { store } from '../../../../reducers/configureStore';
 const MessageUserList = (props) =>{
 
     console.log("asbdhbf",props.userList )
-    const createNewConversation = (uuid) => {
-        console.log("asldj", uuid)
+    const createNewConversation = (uuid , userName , userAvatar) => {
+        console.log("asldj",  userName , userAvatar)
     store.dispatch({ type: 'CLOSE_CONVERSATION_LIST_MODAL' })
     store.dispatch({ type: 'INITIAL_MESSAGE_LOADED' });
     store.dispatch({ type: 'CLEAR_MESSAGE' });
     store.dispatch({ type: 'GOTO_DETAIL_PAGE' });
     socket.emit('create_conversation',{userId:uuid})
+//TODO:Please note that redux name are changed
+    store.dispatch({ type: 'SET_USERNAME' ,  payload: userAvatar});
+    store.dispatch({ type: 'SET_AVATAR',  payload: userName});
+    store.dispatch({ type: 'SET_RECEIVER_UUID', payload: uuid });
+
 }
 
     const columns = [
@@ -28,7 +33,7 @@ const MessageUserList = (props) =>{
           render: record => (
             <Space size="middle">
               <span className="edit-color icon-button" 
-             onClick={() => createNewConversation(record.uuid)}
+             onClick={() => createNewConversation(record.uuid , record.displayName, record.avatarlocation)}
               >
             <i class="fas fa-comment-dots"></i>
               </span>

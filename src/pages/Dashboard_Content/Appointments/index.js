@@ -7,10 +7,13 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import AppointmentView from './appointmentView';
 import AppointmentEdit from './appointmentEdit';
+import { isMobile } from 'react-device-detect';
 
 const { Option } = Select;
 
 const Dashboard_Appointments = props => {
+  const [mobileFilter , setMobileFilter] = useState(false)
+
   const Appointments = () => {
     const [searchKey, setSearchKey] = useState('');
     const [toData, setToDate] = useState('');
@@ -43,6 +46,7 @@ const Dashboard_Appointments = props => {
       if (fromData) parms.fromDate = fromData;
       if (toData) parms.toDate = toData;
       props.filterAppointment(parms);
+      setMobileFilter(false)
     };
 
     const clearFilter = () => {
@@ -53,6 +57,8 @@ const Dashboard_Appointments = props => {
       setPaymentStatus(null);
       setStatus(null);
       props.fetchAppointment();
+      setMobileFilter(false)
+
     };
 
     const viewAppointmentDetails = async id => {
@@ -176,10 +182,9 @@ const Dashboard_Appointments = props => {
       },
     ];
 
-    return (
-      <div className="appointment-section">
-        <div className="search">
-          <Space direction="horizontal">
+    const filterSection = () =>{
+      return (
+      <Space direction={isMobile ? 'vertical' : "horizontal"}>
             <Input
               value={searchKey}
               type="text"
@@ -242,9 +247,25 @@ const Dashboard_Appointments = props => {
               clear
             </button>
           </Space>
+    )}
+
+
+    return (
+      <div className="appointment-section">
+        <div className="search">
+          {isMobile ? <button className="view-button button-square" onClick={() => setMobileFilter(true)}><i class="fas fa-filter"/>Filter</button> : filterSection() }
+         
         </div>
         <Table     scroll={{  x: 240 }}
  dataSource={props.Appointment} columns={columns} />
+
+<Modal
+        visible={mobileFilter}
+        footer={false}
+        onCancel={() => setMobileFilter(false)}
+      >
+     {filterSection()}
+      </Modal>
       </div>
     );
   };
@@ -264,6 +285,7 @@ const Dashboard_Appointments = props => {
       >
         <AppointmentEdit {...props} />
       </Modal>
+
       <Dashboard_Content content={Appointments()} />;
     </div>
   );

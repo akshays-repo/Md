@@ -10,32 +10,34 @@ export const MesssageReducer = (state = MessageState, action) => {
   switch (action.type) {
     case 'CLEAR_MESSAGE':
       return { ...state, payload: [] };
-      case 'INITIAL_MESSAGE_LOADED':
-        return { ...state, initalLoading: false };
-      case 'GOTO_DETAIL_PAGE':
-        return {...state , mobileListScreen : false};
-        case 'GOTO_LIST_PAGE':
-          return {...state , mobileListScreen : true};
-          case 'SET_MESSAGE_UUID':
-          return {...state , uuid : action.payload};
-          case 'SET_USERNAME':
-          return{...state , receiverDisplayName : action.payload}
-          case 'SET_AVATAR':
-            console.log("avataravatar",action.payload )
-            return{...state , receiverAvatar : action.payload}
-            case 'SET_USER_LIST':
-              console.log("get_users", action.payload)
-          return{...state , userList : action.payload}
-          case'OPEN_CONVERSATION_LIST_MODAL':
-          return{...state , userListModal : true}
-          case'CLOSE_CONVERSATION_LIST_MODAL':
-          return{...state , userListModal : false}
+    case 'INITIAL_MESSAGE_LOADED':
+      return { ...state, initalLoading: false };
+    case 'GOTO_DETAIL_PAGE':
+      return { ...state, mobileListScreen: false };
+    case 'GOTO_LIST_PAGE':
+      return { ...state, mobileListScreen: true };
+    case 'SET_MESSAGE_UUID':
+      return { ...state, uuid: action.payload };
+    case 'SET_USERNAME':
+      return { ...state, receiverDisplayName: action.payload };
+    case 'SET_AVATAR':
+      console.log('avataravatar', action.payload);
+      return { ...state, receiverAvatar: action.payload };
+    case 'SET_USER_LIST':
+      console.log('get_users', action.payload);
+      return { ...state, userList: action.payload };
+    case 'OPEN_CONVERSATION_LIST_MODAL':
+      return { ...state, userListModal: true };
+    case 'CLOSE_CONVERSATION_LIST_MODAL':
+      return { ...state, userListModal: false };
 
+      case'SET_RECEIVER_UUID':
+          return{...state, setRecevierUUID:action.payload}
 
     case 'SET_MESSAGE':
       const message =
-        state.payload.length > 0 ? [...state.payload, action.payload] : [action.payload];
-        console.log("message sort", message , typeof message)
+        state.payload.length > 0 ? [...state.payload, action.payload] :  action.payload;
+      console.log('message sort', message, typeof message);
       message.sort((a, b) => a.id - b.id);
       return {
         ...state,

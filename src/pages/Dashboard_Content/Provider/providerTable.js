@@ -4,10 +4,9 @@ import AddAppointmentTime from './addAppointmentTime';
 import { store } from '../../../reducers/configureStore';
 import ProviderCreationForm from './providerCreationForm';
 import { connect } from 'react-redux';
-import MultiSelect from 'react-multi-select-component';
 import { getFormDataA, getFormData } from '_utils';
-import { map } from 'lodash';
-import { set } from 'store';
+import { isMobile } from 'react-device-detect';
+
 const { Option } = Select;
 const ProviderTable = props => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -19,6 +18,7 @@ const ProviderTable = props => {
   const [searchKey, setSearchKey] = useState(null);
   const [appointmentTypeId, setAppointmentTypeId] = useState(null);
   const [status, setStatus] = useState(null);
+  const [mobileFilter , setMobileFilter] = useState(false)
 
   useEffect(() => {
     setAppointmentTypes(props.appointment_type);
@@ -108,6 +108,7 @@ const ProviderTable = props => {
     if (status) parms.status = status;
 
     props.filterProvider(parms);
+    setMobileFilter(false)
   };
   const clearFilter = e => {
     e.preventDefault();
@@ -118,6 +119,8 @@ const ProviderTable = props => {
     setProviderTypeId(null);
     setStatus(null);
     props.fetchProvider();
+    setMobileFilter(false)
+
   };
 
   const columns = [
@@ -219,66 +222,74 @@ const ProviderTable = props => {
     },
   ];
 
+const filterSection = () =>{
+  return(
+    <Space direction={isMobile ? "vertical" :"horizontal"}>
+  <Input
+    type="text"
+    value={searchKey}
+    placeholder=" Name Email or Phone"
+    onChange={handleChangeSearch}
+  />
+
+  {/* <Select
+    placeholder="Appointment Type"
+    onChange={e => setAppointmentTypeId(e)}
+    style={{ width: 150 }}
+  >
+    {props.appointment_type?.map(type => (
+      <Option value={type.id}>{type.name}</Option>
+    ))}
+  </Select> */}
+
+  <Select
+    onChange={e => setBranchId(e)}
+    placeholder="Branch"
+    style={{ width: 120 }}
+    value={branchId}
+  >
+    {props.branch_payload?.map(branch => (
+      <Option value={branch.id}>{branch.fullName}</Option>
+    ))}
+  </Select>
+
+  <Select
+    placeholder="provider type"
+    onChange={e => setProviderTypeId(e)}
+    style={{ width: 150 }}
+    value={providerTypeId}
+  >
+    {props.ProviderTypePayload?.map(type => (
+      <Option value={type.id}>{type.name}</Option>
+    ))}
+  </Select>
+
+  <Select
+    onChange={e => setStatus(e)}
+    placeholder="status"
+    value={status}
+    style={{ width: 120 }}
+  >
+    <Option value="active">ACTIVE</Option>
+    <Option value="hold">HOLD</Option>
+  </Select>
+
+  <button className="view-button button-square" onClick={handleSearchSubmission}>
+    Filter
+  </button>
+  <button className="edit-button button-square" onClick={clearFilter}>
+    clear
+  </button>
+</Space>
+  )
+  
+}
+
+
   return (
     <div className="providerFilter">
       <div className="search">
-        <Space direction="horizontal">
-          <Input
-            type="text"
-            value={searchKey}
-            placeholder=" Name Email or Phone"
-            onChange={handleChangeSearch}
-          />
-
-          {/* <Select
-            placeholder="Appointment Type"
-            onChange={e => setAppointmentTypeId(e)}
-            style={{ width: 150 }}
-          >
-            {props.appointment_type?.map(type => (
-              <Option value={type.id}>{type.name}</Option>
-            ))}
-          </Select> */}
-
-          <Select
-            onChange={e => setBranchId(e)}
-            placeholder="Branch"
-            style={{ width: 120 }}
-            value={branchId}
-          >
-            {props.branch_payload?.map(branch => (
-              <Option value={branch.id}>{branch.fullName}</Option>
-            ))}
-          </Select>
-
-          <Select
-            placeholder="provider type"
-            onChange={e => setProviderTypeId(e)}
-            style={{ width: 150 }}
-            value={providerTypeId}
-          >
-            {props.ProviderTypePayload?.map(type => (
-              <Option value={type.id}>{type.name}</Option>
-            ))}
-          </Select>
-
-          <Select
-            onChange={e => setStatus(e)}
-            placeholder="status"
-            value={status}
-            style={{ width: 120 }}
-          >
-            <Option value="active">ACTIVE</Option>
-            <Option value="hold">HOLD</Option>
-          </Select>
-
-          <button className="view-button button-square" onClick={handleSearchSubmission}>
-            Filter
-          </button>
-          <button className="edit-button button-square" onClick={clearFilter}>
-            clear
-          </button>
-        </Space>
+      <div>{ isMobile ?<button button className="view-button button-square" onClick={() => setMobileFilter(true)}>Filter</button>  : filterSection()}</div>
       </div>
 
       <Table scroll={{ x: 240 }} columns={columns} dataSource={props.provider} />
@@ -302,6 +313,14 @@ const ProviderTable = props => {
         destroyOnClose
       >
         <ProviderCreationForm id={editId} values={editData} {...props} />
+      </Modal>
+
+      <Modal
+        visible={mobileFilter}
+        footer={false}
+        onCancel={() => setMobileFilter(false)}
+      >
+     {filterSection()}
       </Modal>
     </div>
   );

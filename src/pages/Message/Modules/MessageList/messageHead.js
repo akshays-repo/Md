@@ -15,10 +15,8 @@ const MessageHead = ({
   handleMessageDetails,
   messages,
 }) => {
-  console.log('avatar', avatar);
 
   const handleMessagehead = (avatar , userName) =>{
-    console.log("asdakbf",avatar , userName)
  handleMessageDetails();
     store.dispatch({ type: 'INITIAL_MESSAGE_LOADED' });
     store.dispatch({ type: 'SET_USERNAME', payload: avatar });

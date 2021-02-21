@@ -2,8 +2,7 @@ import socketIOClient from 'socket.io-client';
 import { DeliveryStatus } from '_constants/message';
 import { store } from '../../../reducers/configureStore';
 import _ from 'lodash'
-import LogOut from 'pages/Dashboard_Content/Logout';
-export const ENDPOINT = 'https://123c4c7accde.ngrok.io';
+export const ENDPOINT = 'http://159.65.159.105:3090';
 export const socket = socketIOClient(ENDPOINT);
 
 export const connectToSocket = async () => {
@@ -27,10 +26,11 @@ export const connectToSocket = async () => {
 
   socket.on('create_conversation_success', data => {
     console.log('message create_conversation_success', data);
-
+    
     socket.emit('get_messages', {
       conversationId: data.conversationId,
     });
+
   });
 
   socket.on('create_conversation_error', data => {
@@ -57,7 +57,6 @@ export const connectToSocket = async () => {
     console.log('message get_users_error', data);
   });
   socket.on('incoming', data => {
-    let oldSummary = store.getState().SummaryMessage.payload
     console.log("incoming" ,data)
     store.dispatch({ type: 'SET_LATEST_INCOMING_MESSAGE_SUMMARY', payload: data.message });
     store.dispatch({ type: 'SET_INCOMING_MESSAGE', payload: data.message });

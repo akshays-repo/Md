@@ -10,9 +10,12 @@ import { store } from '../../../reducers/configureStore';
 import CustomFormField from './customFormField';
 import ProviderType from './providerType';
 import CustomWidget from './customWidget';
+import { isMobile } from 'react-device-detect';
+
 
 const Dashboard_Provider = props => {
   const [providerTypeState, setProviderTypeState] = useState([]);
+  const [mobileAction , setMobileAction] = useState(false)
 
   useEffect(() => {
     props.fetchProvider();
@@ -150,7 +153,14 @@ const Dashboard_Provider = props => {
         <div className="pageTitle">
           <h4>PROVIDER</h4>
         </div>
-        <div>{HeaderSection()}</div>
+        <div>{ isMobile ?<button button className="view-button button-square" onClick={() => setMobileAction(true)}>Actions</button>  : HeaderSection()}</div>
+        <Modal
+        visible={mobileAction}
+        footer={false}
+        onCancel={() => setMobileAction(false)}
+      >
+     {HeaderSection()}
+      </Modal>
         <div className="full-width-table">
           <ProviderTable {...props} />
         </div>

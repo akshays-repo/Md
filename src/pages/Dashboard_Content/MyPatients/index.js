@@ -6,12 +6,14 @@ import { Modal } from 'antd';
 import { store } from '../../../reducers/configureStore';
 import { actionCreator } from '../../../reducers/actionCreator';
 import { connect } from 'react-redux';
+import { isMobile } from 'react-device-detect';
 
 const { Option } = Select;
 
 const Dashboard_MyPatients = props => {
   const [editId, setEditId] = useState(null);
   const [editData, setEditData] = useState('');
+  const [mobileFilter , setMobileFilter] = useState(false)
 
   const openEditModal = (id, data) => {
     setEditId(id);
@@ -122,6 +124,8 @@ const Dashboard_MyPatients = props => {
       if (search) parms.search = search;
       if (status) parms.status = status;
       props.filterPatient(parms);
+      setMobileFilter(false)
+
     };
 
     const clearFilter = e => {
@@ -129,11 +133,12 @@ const Dashboard_MyPatients = props => {
       setStatus(null)
       setSearch(null)
       props.fetchPatient()
-    };
+      setMobileFilter(false)
 
-    return (
-      <div className="mypatient">
-        <div className="search">
+    };
+    const filterSection = () =>{
+      return(
+        <div>
           <form className="search-area">
             <div style={{ marginBottom: '10px' }} className="search">
               <Space direction="horizontal">
@@ -156,7 +161,16 @@ const Dashboard_MyPatients = props => {
               </Space>
             </div>
           </form>
+        </div>
+      )
+    }
 
+
+    return (
+      <div className="mypatient">
+        <div className="search">
+
+{isMobile ? <button className="view-button button-square" onClick={() => setMobileFilter(true)} ><i class="fas fa-filter"/>Filter</button> : filterSection()}
           <Button className="view-button button-square" type="primary" onClick={showModal}>
             Create a New Patient
           </Button>
@@ -176,6 +190,15 @@ const Dashboard_MyPatients = props => {
         </div>
         <div className="patient_name"></div>
         <Table  scroll={{  x: 240 }} columns={columns} dataSource={props.patient} />,
+
+
+<Modal
+        visible={mobileFilter}
+        footer={false}
+        onCancel={() => setMobileFilter(false)}
+      >
+     {filterSection()}
+      </Modal>
       </div>
     );
   };
