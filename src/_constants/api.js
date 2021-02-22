@@ -88,7 +88,9 @@ export const backend_api = {
 
   FETCH_TEMPLATE: '/api/backend/v1/hospital/template',
   EDIT_TEMPLATE: '/api/backend/v1/hospital/action',
+
   FETCH_HOSPITAL_ACTION: '/api/backend/v1/hospital/action',
+  FILTER_SCHEDULE: '/api/backend/v1/allshedules',
   CHECK_HOSPITAL_ONLINE: '/api/backend/v1/users/hospital',
   FETCH_BRANCH_ONLINE: '/api/backend/v1/branches/public',
 };
