@@ -410,7 +410,7 @@ const mapDispatchToProps = dispatch => ({
   fetchAppointmentType: param =>
     dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_APPOINTMENT_TYPE', param })),
   fetchBranch: param =>
-    dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_BRANCH', param })),
+    dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_BRANCH_ONLINE', param })),
   fetchProvider: param =>
     dispatch(
       actionCreator({ method: 'GET', action_type: 'FETCH_BRANCH_APPOINTMENT_PROVIDER', param }),

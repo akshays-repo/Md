@@ -73,12 +73,6 @@ export const backend_api = {
   CREATE_PROVIDER_UNAVAILABLE: '/api/backend/v1/appointments/unavailable',
 
   CREATE_FORM: '/api/backend/v1/forms',
-  EDIT_FORM:'/api/backend/v1/forms',
-  FETCH_FORM:'/api/backend/v1/forms',
-  DELETE_FORM:'/api/backend/v1/forms',
-  FILL_FORM:'/api/backend/v1/response/form',
-  FETCH_FORM_FOR_FILLING:'/api/backend/v1/forms',
-  
   EDIT_FORM: '/api/backend/v1/forms',
   FETCH_FORM: '/api/backend/v1/forms',
   DELETE_FORM: '/api/backend/v1/forms',
@@ -88,9 +82,9 @@ export const backend_api = {
   FILTER_APPOINTMENT_CALENDAR: '/api/backend/v1/online_bookings/filter',
   FILTER_APPOINTMENT_CALENDAR_WITH_CANCELLED: '/api/backend/v1/online_bookings/filter',
 
-  FETCH_TEMPLATE:'/api/backend/v1/hospital/template',
-  EDIT_TEMPLATE:'/api/backend/v1/hospital/action',
-  FETCH_HOSPITAL_ACTION:'/api/backend/v1/hospital/action',
-
-  LANDING_PAGE_PACKAGES:'/api/backend/v1/packages/public'
+  FETCH_TEMPLATE: '/api/backend/v1/hospital/template',
+  EDIT_TEMPLATE: '/api/backend/v1/hospital/action',
+  FETCH_HOSPITAL_ACTION: '/api/backend/v1/hospital/action',
+  CHECK_HOSPITAL_ONLINE: '/api/backend/v1/users/hospital',
+  FETCH_BRANCH_ONLINE: '/api/backend/v1/branches/public',
 };
