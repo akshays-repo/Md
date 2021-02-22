@@ -18,7 +18,7 @@ const Dashboard_Dashboard = () => {
         <Row>
  
           <Col xl={12}>
-          <div style={{padding:" 30px 0px 30px  0px"}}>
+          <div className="chartBlock">
 
           <Graphs/>
           </div>
