@@ -5,6 +5,10 @@ import { Result, Modal } from 'antd';
 import { store } from '../../reducers/configureStore';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router';
+import { isMobile } from 'react-device-detect';
+
+// import { Row, Col } from 'antd';
+
 import {
   message,
   Button,
@@ -94,16 +98,21 @@ const FormsFillingSection = props => {
     });
   };
   return (
-    <div>
-      <div>
-        <span>
-          <img src={`/${hospitalDetails?.logo.path}`} />
-        </span>
-        <h2> {hospitalDetails?.fullName}</h2>
-      </div>
+    <div className="container direction">
+  <Row className="header">
+  <Col xs={12} xl={4}>
+    <div className="logo"><img src = {`/${hospitalDetails?.logo.path}` }/></div>
+    </Col>
+    <Col xs={12} xl={20}>
+      <h3> {hospitalDetails?.fullName}</h3>
+      </Col>
+      </Row>
 
-      <h1>{props.formToFill.name}</h1>
+      <h4 className="text-center">{props.formToFill.name}</h4>
 
+<Row>
+<Col xs={24} xl={12} offset={isMobile ? "": 6}>
+    <div className="formBook">
       <Formik
         enableReinitialize={true}
         initialValues={{
@@ -120,20 +129,15 @@ const FormsFillingSection = props => {
       >
         {({ handleSubmit, values, touched, errors, isSubmitting }) => (
           <Form className="" handleSubmit={handleSubmit}>
-            <Field
-              id="standard-basic"
-              name="name"
-              label={'Full Name'}
-              required={true}
-              component={MatText}
-            />
-            <Field
-              id="standard-basic"
-              name="email"
-              label={'Email'}
-              component={MatText}
-              required={true}
-            />
+           
+
+            <Field id="standard-basic" name="name"  label={'Full Name'} 
+            required={true} component={MatText} />
+
+            <Field id="standard-basic"name="email"  label={'Email'} 
+            component={MatText} 
+             required={true} />
+
             <Field
               id="standard-basic"
               label={'Phone '}
@@ -141,24 +145,14 @@ const FormsFillingSection = props => {
               component={MatText}
               // required={forms.required}
             />
+
+
             {formToFill?.map((forms, index) => (
               <div>
                 {forms.custom_types === 'text' || forms.custom_types === 'note' ? (
                   <div>
                     {' '}
                     <p></p>
-                    {/* <Field name={response[index].answer}>
-                {({
-                  field, // { name, value, onChange, onBlur }
-                  form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
-                  meta,
-                }) => (
-                  <div>
-                    <TextField label={forms.Key_name} type="text" placeholder="Email" {...field} />
-                    {/* {meta.touched && meta.error && <div className="error">{meta.error}</div>} */}
-                    {/* </div>
-                )} */}
-                    {/* </Field> */}
                     <TextField
                       onChange={e => handleChangeText(e, index)}
                       id="standard-basic"
@@ -170,6 +164,8 @@ const FormsFillingSection = props => {
                 ) : (
                   ''
                 )}
+            
+            
                 {forms.custom_types === 'checkbox' ? (
                   <div>
                     {' '}
@@ -188,8 +184,10 @@ const FormsFillingSection = props => {
                   ''
                 )}
 
+                
+                
                 {forms.custom_types === 'drop-down' ? (
-                  <div>
+                  <div className="formChecklist">
                     {' '}
                     <p>
                       {forms.Key_name}
@@ -198,7 +196,7 @@ const FormsFillingSection = props => {
                     <Select
                       required={forms.required}
                       onChange={e => handleChange(e, index)}
-                      style={{ width: 120 }}
+                      style={{ width: 250 }}
                     >
                       {forms.values.map(option => (
                         <Select.Option value={option}>{option}</Select.Option>
@@ -210,6 +208,8 @@ const FormsFillingSection = props => {
                   ''
                 )}
 
+             
+             
                 {forms.custom_types === 'date' ? (
                   <div>
                     {' '}
@@ -221,6 +221,8 @@ const FormsFillingSection = props => {
                       required={forms.required}
                       onChange={e => handleChangeDatePicker(e, index)}
                       format={'YYYY-MM-DD HH:mm'}
+                      style={{ width: 250 }}
+                      
                     />
                     <p></p>
                   </div>
@@ -228,6 +230,8 @@ const FormsFillingSection = props => {
                   ''
                 )}
 
+         
+         
                 {forms.custom_types === 'number' ? (
                   <div>
                     {' '}
@@ -240,27 +244,38 @@ const FormsFillingSection = props => {
                       onChange={e => handleChange(e, index)}
                       min={1}
                       max={100}
+                      style={{ width: 250 }}
                     />
                     <p></p>
                   </div>
                 ) : (
                   ''
                 )}
-              </div>
-            ))}
 
-            <Button
+
+
+              </div>
+              
+            ))}
+            
+<div className="w-100 footerButton">
+            <button
               htmlType="submit"
               //  disabled={isSubmitting}
               //loading={loadings}
-              className="button-square edit-button"
+              className="button-square view-button mt5 text-center"
             >
-              Book A Appointment
-            </Button>
+              Submit
+            </button>
+            </div>
           </Form>
         )}
       </Formik>
+      </div>
+      </Col>
+      </Row>
     </div>
+
   );
 };
 
