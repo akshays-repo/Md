@@ -43,6 +43,7 @@ export const MesssageReducer = (state = MessageState, action) => {
           : Array.isArray(action.payload)
           ? action.payload
           : [action.payload];
+          message.sort((a, b) => a.id - b.id);
       console.log('message sort', message, typeof message);
 
       return {

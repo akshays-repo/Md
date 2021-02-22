@@ -6,7 +6,7 @@ import { generateForm } from '../../../_utils/formgenerator';
 import { useDropzone } from 'react-dropzone';
 import { Thumb } from './thumb';
 import { getFormDataA } from '../../../_utils';
-
+import _ from 'lodash'
 const PatientCreationForm = props => {
   const [loadings, setLoadings] = useState(false);
   const innerForm = useRef();
@@ -56,13 +56,13 @@ const PatientCreationForm = props => {
           ...rest,
           image,
         
-          hospitalId: localStorage.getItem('hospital_id'),
+       //   hospitalId: localStorage.getItem('hospital_id'),
         });
       } else {
         values = await getFormDataA({
           ...rest,
          
-          hospitalId: localStorage.getItem('hospital_id'),
+         // hospitalId: localStorage.getItem('hospital_id'),
         });
       }
 
@@ -139,7 +139,6 @@ const PatientCreationForm = props => {
             avatarlocation: '',
             phone: '',
             image: '',
-            userTypeId: 5,
             gender: 'male',
             status: 'active',
             patient_status: 'new',

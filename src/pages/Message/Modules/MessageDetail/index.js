@@ -9,6 +9,7 @@ import _ from 'lodash';
 import { socket } from '../connectToSocket';
 import { store } from '../../../../reducers/configureStore';
 import { isMobile } from 'react-device-detect';
+//import Avatar from '../../assets/icons/noimage.png'
 
 const MessageDetail = props => {
   const [message, setMessage] = useState('');
@@ -73,7 +74,7 @@ const MessageDetail = props => {
             </span>
           )}
           {/* TODO : display name and Avatar variables are changed */}
-          <img className="useravatar" src={props.receiverDisplayName} />
+          <img className="useravatar" src={props.receiverDisplayName ? props.receiverDisplayName:Avatar} />
         </div>
         <div className="right">
           <span>{props.receiverAvatar}</span>

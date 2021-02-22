@@ -10,8 +10,12 @@ export const FormsReducer = (state = FormsState, action) => {
     case 'CREATE_FORM':
         message.success('FORM CREATED SUCCESSFULLY');
       return { error: action.error, message: action.message ,modal:false , changed:true};
-    case 'FETCH_FORM':
-      return { error: action.error, payload: action.payload.rows, message: action.message , changed:false};
+      case 'FETCH_FORM':
+      return { error: action.error, payload: action.payload, message: action.message , changed:false};
+
+
+    case 'FETCH_FORM_RESPONSE':
+      return { error: action.error, formResponse: action.payload.rows, message: action.message , changed:false};
     case 'EDIT_FORM':
       return { error: action.error, payload: action.payload, message: action.message, changed:true };
    
@@ -32,6 +36,13 @@ export const FormsReducer = (state = FormsState, action) => {
             return { ...state, modal2: true };
           case 'CLOSE_EDIT1_FORM_MODAL':
             return { ...state, modal2: false };
+
+            case 'OPEN_VIEW_RESPONSE_MODAL':
+              return { ...state, modal3: true };
+              case 'CLOSE_VIEW_RESPONSE_MODAL':
+
+              return { ...state, modal3: false };
+
             case 'FETCH_FORM_FOR_FILLING':
               return { ...state, formToFill: action.payload };
               default:

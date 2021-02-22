@@ -13,9 +13,7 @@ const Dashboard_Templates = props => {
     props.fetchTemplate();
   }, []);
 
-  useEffect(() => {
-    console.log('porpojfijdjf', props.payload);
-  });
+
   const columns = [
     
     {

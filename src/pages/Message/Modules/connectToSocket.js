@@ -2,7 +2,7 @@ import socketIOClient from 'socket.io-client';
 import { DeliveryStatus } from '_constants/message';
 import { store } from '../../../reducers/configureStore';
 import _ from 'lodash'
-export const ENDPOINT = 'http://159.65.159.105:3090';
+export const ENDPOINT = 'http://fossilmdbackend.riolabz.com';
 export const socket = socketIOClient(ENDPOINT);
 
 export const connectToSocket = async () => {

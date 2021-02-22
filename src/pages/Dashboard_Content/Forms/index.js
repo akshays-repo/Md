@@ -1,4 +1,4 @@
-import React, { useEffect , useState} from 'react';
+import React, { useEffect , useState } from 'react';
 import { Table, Tag, Space, Button, Modal } from 'antd';
 import { actionCreator } from '../../../reducers/actionCreator';
 import { store } from '../../../reducers/configureStore';
@@ -6,59 +6,27 @@ import { connect } from 'react-redux';
 import Dashboard_Content from '..';
 import FormCreation from './formCreaton';
 import ViewCreatedForms from './viewCreatedForms';
-import { jsPDF } from "jspdf";
-
-import moment from 'moment'
+import ViewResponse from './viewResponse'
 const Dashboard_Forms = props => {
 
   const [viewId , setViewId] =useState('')
   const [viewDetails , setViewDetails] =useState('')
 
 
-  useEffect(() => {
-    props.fetchForms();
-  }, [props.changed]);
-  
-
-  const downloadPdf =(e) =>{
-    e.preventDefault();
-    var doc = new jsPDF();
-
-// I know the proper spelling is colour ;)
-doc.setTextColor(100);
-doc.text("This is gray.", 20, 20);
-
-doc.setTextColor(150);
-doc.text("This is light gray.", 20, 30);
-
-doc.setTextColor(255, 0, 0);
-doc.text("This is red.", 20, 40);
-
-doc.setTextColor(0, 255, 0);
-doc.text("This is green.", 20, 50);
-
-doc.setTextColor(0, 0, 255);
-doc.text("This is blue.", 20, 60);
-
-doc.setTextColor("red");
-doc.text("This is red.", 60, 40);
-
-doc.setTextColor("green");
-doc.text("This is green.", 60, 50);
-
-doc.setTextColor("blue");
-doc.text("This is blue.", 60, 60);
+useEffect(() => {
+  props.fetchForms();
+  props.fetchFormsResponse();
+}, [])
 
 
-  }
-
+console.log("sdsd", props.payload)
   const viewFormDetails =(e, record) => {
     e.preventDefault();
     setViewDetails(record.response)
     setViewId(record.id)
     console.log("data",record)
 
-    store.dispatch({ type: 'OPEN_EDIT_FORM_MODAL' })
+    store.dispatch({ type: 'OPEN_VIEW_RESPONSE_MODAL' })
 
   }
 
@@ -89,7 +57,7 @@ doc.text("This is blue.", 60, 60);
       dataIndex: 'submission',
       key: 'submission',
       render: text => <button  className="view-button button-square"
-      type="primary" onClick= {downloadPdf}>{'Download File'}</button>,
+      type="primary" >{'Download File'}</button>,
     },
     {
       title: 'Action',
@@ -107,7 +75,7 @@ doc.text("This is blue.", 60, 60);
   const Forms = () => {
     return (
       <div>
-        <div className="mb4"> 
+        <div>
           <Space direction="horizontal">
             <Button
               className="view-button button-square"
@@ -125,7 +93,7 @@ doc.text("This is blue.", 60, 60);
             </Button>
           </Space>
         </div>
-        <Table columns={columns} dataSource={props.payload} />
+        <Table columns={columns} dataSource={props.formResponse} />
       </div>
     );
   };
@@ -147,7 +115,17 @@ doc.text("This is blue.", 60, 60);
         onCancel={() => store.dispatch({ type: 'CLOSE_EDIT_FORM_MODAL' })}
         destroyOnClose
       >
-        <ViewCreatedForms viewDetails={viewDetails} viewId={viewId} {...props} />
+        <ViewCreatedForms {...props} />
+      </Modal>
+
+      <Modal
+        title="Forms"
+        visible={props.modal3}
+        footer={false}
+        onCancel={() => store.dispatch({ type: 'CLOSE_VIEW_RESPONSE_MODAL' })}
+        destroyOnClose
+      >
+        <ViewResponse viewDetails={viewDetails} viewId={viewId} {...props} />
       </Modal>
 
       <Dashboard_Content content={Forms()} />
@@ -165,10 +143,13 @@ const mapStoreToProps = ({ Forms }) => {
     modal1: Forms.modal1,
     modal2: Forms.modal2,
     changed: Forms.changed,
+    formResponse:Forms.formResponse,
   };
 };
 const mapDispatchToProps = dispatch => ({
   fetchForms: () => dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_FORM' })),
+  fetchFormsResponse: () => dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_FORM_RESPONSE' })),
+
   addForms: (values, contentType) =>
     dispatch(actionCreator({ method: 'POST', action_type: 'CREATE_FORM', values, contentType })),
   editForms: (id, values ,contentType) =>

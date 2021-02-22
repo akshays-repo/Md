@@ -6,6 +6,8 @@ export const FormsState = {
     modal1:false,
     modal2:false,
     changed:false,
-    formToFill:[]
+    formToFill:[],
+    formResponse:[],
+    modal3:false
   };
   
