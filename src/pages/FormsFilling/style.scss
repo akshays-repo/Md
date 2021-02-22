@@ -1,11 +1,28 @@
 
 .direction {
     @include direction(column);
-}
-.formFilling {
-    .logo {
-        img {
-            max-width: 100%;
+    .header {
+@include flex(center, center);
+    .formFilling {
+        .logo {
+            img {
+                max-width: 100%;
+            }
         }
     }
+}
+.footerButton {
+   @include flex(center, center);
+}
+.formBook {
+    padding: 35px;
+    border: 1px solid #e0e0e0;
+    @include border-radius(5px);
+    margin-top: 2rem;
+    background: #f9f9f9;
+    margin-bottom: 50px;
+}
+.MuiFormControl-root {
+    width: 100%;
+}
 }

@@ -5,7 +5,15 @@ body {
   .pending {
     color: #d83810;
   }
-
+  img {
+    max-width: 100%;
+  }
+ .w-100 {
+    width: 100%;
+  }
+  .m-auto {
+    margin:0 auto;
+  }
   .failed {
     color: #fc3503;
   }
