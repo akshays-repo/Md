@@ -31,7 +31,7 @@ const MessageUserList = (props) =>{
           title: '',
           key: 'action',
           render: record => (
-            <Space size="middle">
+            <Space size="middle" className="msgIcon">
               <span className="edit-color icon-button" 
              onClick={() => createNewConversation(record.uuid , record.displayName, record.avatarlocation)}
               >

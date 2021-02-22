@@ -120,7 +120,12 @@ const Dashboard_Calendar = props => {
     return (
       <Row className="calendarSection">
         {' '}
-        <Col lg={22} xs={24} className="calenderBlock">
+        <Col lg={24} style={{ height: 50 }}>
+          <div className="filterButton">
+          <FilterPopover from={from} to={to} {...props} provider={props.provider} />
+          </div>
+        </Col>
+        <Col lg={24} xs={24} className="calenderBlock">
           <FullCalendar
             plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
             // customButtons={{
@@ -186,9 +191,7 @@ const Dashboard_Calendar = props => {
             {...props}
           ></UnavailableEdit>
         </Col>
-        <Col span={2} style={{ height: 50 }}>
-          <FilterPopover from={from} to={to} {...props} provider={props.provider} />
-        </Col>
+
       </Row>
     );
   };
