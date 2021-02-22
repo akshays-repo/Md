@@ -31,22 +31,20 @@ export const MesssageReducer = (state = MessageState, action) => {
     case 'CLOSE_CONVERSATION_LIST_MODAL':
       return { ...state, userListModal: false };
 
-      case'SET_RECEIVER_UUID':
-          return{...state, setRecevierUUID:action.payload}
+    case 'SET_RECEIVER_UUID':
+      return { ...state, setRecevierUUID: action.payload };
 
     case 'SET_MESSAGE':
-      console.log("action.payload",   action.payload)
-      let message 
+      console.log('action.payload', action.payload);
 
-      if (state.payload.length === 0 ){
-         message =[action.payload];
-        message = message[0]
-      }else{
-       message = [...state.payload, action.payload];
-      }
-    //  const message = state.payload.length > 0 ? [...state.payload, action.payload] :  action.payload;
-      console.log('message sort',  action.payload, message);
-      message.sort((a, b) => a.id - b.id);
+      const message =
+        state.payload.length > 0
+          ? [...state.payload, action.payload]
+          : Array.isArray(action.payload)
+          ? action.payload
+          : [action.payload];
+      console.log('message sort', message, typeof message);
+
       return {
         ...state,
         error: action.error,

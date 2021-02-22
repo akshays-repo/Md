@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { actionCreator } from '../../reducers/actionCreator';
+import { Result, Modal } from 'antd';
+
 import { store } from '../../reducers/configureStore';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router';
@@ -17,7 +19,7 @@ import {
 } from 'antd';
 import TextField from '@material-ui/core/TextField';
 import { TextField as MatText, Select as MatSelect } from 'formik-material-ui';
-import moment from 'moment'
+import moment from 'moment';
 import { Formik, Form, Field } from 'formik';
 const FormsFillingSection = props => {
   const [formToFill, setFormToFill] = useState(props.formToFill.custom_form);
@@ -27,22 +29,29 @@ const FormsFillingSection = props => {
   useEffect(() => {
     props.fetchFormToFill(id);
   }, []);
+  const innerForm = useRef();
 
-  const handleFormSubmission = (values) => {
-    console.log("response" , formToFill)
+  const handleFormSubmission = async values => {
+    console.log('response', formToFill);
     let data = {
-      response:formToFill,
-      name:values.name,
-      form_id:parseInt(values.form_id),
-      form_name:values.form_name,
-      email:values.email,
-      phone:values.phone,
-      name:values.name,
-      hospital_id:values.hospital_id
+      response: formToFill,
+      name: values.name,
+      form_id: parseInt(values.form_id),
+      form_name: values.form_name,
+      email: values.email,
+      phone: values.phone,
+      name: values.name,
+      hospital_id: values.hospital_id,
+    };
+    let respone = await props.postForm(JSON.stringify(data));
+    console.log('response', respone);
 
+    if (respone.error === '') {
+      success();
+      innerForm.current.reset();
+    } else {
+      console.log('Error');
     }
-   props.postForm(JSON.stringify(data) )
-console.log("response", data ,values)
   };
 
   const handleChange = (e, index) => {
@@ -66,49 +75,70 @@ console.log("response", data ,values)
 
   useEffect(() => {
     setFormToFill(props.formToFill.custom_form);
-    setHospitalDetails( props.formToFill.hospital);
-    console.log('sjlhdasjdjkac b', hospitalDetails , props.formToFill.hospital);
+    setHospitalDetails(props.formToFill.hospital);
+    console.log('sjlhdasjdjkac b', hospitalDetails, props.formToFill.hospital);
   });
 
-//   hospital:
-// fullName: "Govind Hospital"
-// logo: {name: "25.jpg", path: "uploads/users/1613645520687_25.jpg"}
+  const resultSucess = (
+    <Result status="success" title="Successfully Booked the Appoinment" subTitle="Thank you" />
+  );
+
+  const onOkay = () => {
+    window.location.href = window.location.pathname;
+  };
+
+  const success = () => {
+    Modal.success({
+      content: resultSucess,
+      onOk: onOkay,
+    });
+  };
   return (
     <div>
-  <div>
-    <span><img src = {`/${hospitalDetails?.logo.path}` }/></span>
-      <h2> {hospitalDetails?.fullName}</h2>  
+      <div>
+        <span>
+          <img src={`/${hospitalDetails?.logo.path}`} />
+        </span>
+        <h2> {hospitalDetails?.fullName}</h2>
       </div>
 
       <h1>{props.formToFill.name}</h1>
-    
+
       <Formik
         enableReinitialize={true}
         initialValues={{
-          name:"",
-          email:"",
-          phone:"",
+          name: '',
+          email: '',
+          phone: '',
           hospital_id: props.formToFill.hospital_id,
-          form_id:id,
-          form_name:props.formToFill.name
-
+          form_id: id,
+          form_name: props.formToFill.name,
         }}
         onSubmit={handleFormSubmission}
-        // innerRef={innerForm}
+        innerRef={innerForm}
         //validationSchema={OnlineBookingSchema}
       >
         {({ handleSubmit, values, touched, errors, isSubmitting }) => (
           <Form className="" handleSubmit={handleSubmit}>
-            <Field id="standard-basic" name="name"  label={'Full Name'} 
-            required={true} component={MatText} />
-            <Field id="standard-basic"name="email"  label={'Email'} 
-            component={MatText} 
-             required={true} />
+            <Field
+              id="standard-basic"
+              name="name"
+              label={'Full Name'}
+              required={true}
+              component={MatText}
+            />
+            <Field
+              id="standard-basic"
+              name="email"
+              label={'Email'}
+              component={MatText}
+              required={true}
+            />
             <Field
               id="standard-basic"
               label={'Phone '}
               name="phone"
-              component={MatText} 
+              component={MatText}
               // required={forms.required}
             />
             {formToFill?.map((forms, index) => (
@@ -191,7 +221,6 @@ console.log("response", data ,values)
                       required={forms.required}
                       onChange={e => handleChangeDatePicker(e, index)}
                       format={'YYYY-MM-DD HH:mm'}
-                      
                     />
                     <p></p>
                   </div>
@@ -222,7 +251,7 @@ console.log("response", data ,values)
 
             <Button
               htmlType="submit"
-            //  disabled={isSubmitting}
+              //  disabled={isSubmitting}
               //loading={loadings}
               className="button-square edit-button"
             >
@@ -247,7 +276,7 @@ const mapDispatchToProps = dispatch => ({
   fetchFormToFill: id =>
     dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_FORM_FOR_FILLING', id })),
 
-  postForm: (values, contentType ='JSON') =>
+  postForm: (values, contentType = 'JSON') =>
     dispatch(actionCreator({ method: 'POST', action_type: 'FILL_FORM', values, contentType })),
 });
 

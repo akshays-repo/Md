@@ -12,16 +12,22 @@ export const SummaryMesssageReducer = (state = SummaryMessageState, action) => {
       //   const message = state.payload.find(
       //     (result, i) => result.conversationId === action.payload.conversationId,
       //   );
+      let i=0;
       console.log('message summary payload', state.payload);
       message = state.payload.map((result, i) => {
         if (result.conversationId === action.payload.conversationId) {
           action.payload.receiverAvatar =result.receiverAvatar
           action.payload.receiverDisplayName =result.receiverDisplayName
+          i=i+1;
           return action.payload;
         } else {
           return result;
         }
       });
+      if(i===0)
+      {
+        message=[...message,action.payload]
+      }
       message.sort((a, b) => b.id - a.id);
       console.log('MEssage summary', message);
       return {
