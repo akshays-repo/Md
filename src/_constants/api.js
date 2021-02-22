@@ -86,9 +86,9 @@ export const backend_api = {
   FILTER_APPOINTMENT_CALENDAR: '/api/backend/v1/online_bookings/filter',
   FILTER_APPOINTMENT_CALENDAR_WITH_CANCELLED: '/api/backend/v1/online_bookings/filter',
 
-  FETCH_TEMPLATE:'/api/backend/v1/hospital/template',
-  EDIT_TEMPLATE:'/api/backend/v1/hospital/action',
-  FETCH_HOSPITAL_ACTION:'/api/backend/v1/hospital/action',
-
-  LANDING_PAGE_PACKAGES:'/api/backend/v1/packages/public'
+  FETCH_TEMPLATE: '/api/backend/v1/hospital/template',
+  EDIT_TEMPLATE: '/api/backend/v1/hospital/action',
+  FETCH_HOSPITAL_ACTION: '/api/backend/v1/hospital/action',
+  CHECK_HOSPITAL_ONLINE: '/api/backend/v1/users/hospital',
+  FETCH_BRANCH_ONLINE: '/api/backend/v1/branches/public',
 };

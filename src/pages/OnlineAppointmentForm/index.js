@@ -17,7 +17,7 @@ import { PatientDetails } from './patient_details';
 const OnllineAppointmentForm = props => {
   const [customFormField, setCustomFormField] = useState([]);
   const [hospitalExist, setHospitalExist] = useState(false);
-  const [loading, setloading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   console.log('Props', props);
   const handleFormSubmission = async values => {
@@ -47,29 +47,40 @@ const OnllineAppointmentForm = props => {
   }, []);
 
   useEffect(() => {
-    props.fetchHospital({ userTypeId: 2, page: 1, limit: 200 });
+    const check = async () => {
+      const response = await props.checkHospital(props.match.params.id);
+      console.log('Hospital response', response);
+      if (response.error) {
+        setHospitalExist(false);
+        setLoading(false);
+      } else {
+        setHospitalExist(true);
+        setLoading(false);
+      }
+    };
+    check();
   }, []);
 
   useEffect(() => {
     props.fetchBranch({ hospitalId: props.match.params.id, page: 1, limit: 50 });
   }, []);
 
-  useEffect(() => {
-    console.log('HS', props.hospital);
-    if (props.hospital.count > 0) {
-      if (
-        props.hospital.users.filter(result => result.hospitalId == props.match.params.id).length > 0
-      ) {
-        console.log('Exist');
-        setloading(false);
-        setHospitalExist(true);
-      } else {
-        console.log('Doesnot Exist');
-        setloading(false);
-        setHospitalExist(false);
-      }
-    }
-  }, [props.hospital]);
+  // useEffect(() => {
+  //   console.log('HS', props.hospital);
+  //   if (props.hospital.count > 0) {
+  //     if (
+  //       props.hospital.users.filter(result => result.hospitalId == props.match.params.id).length > 0
+  //     ) {
+  //       console.log('Exist');
+  //       setloading(false);
+  //       setHospitalExist(true);
+  //     } else {
+  //       console.log('Doesnot Exist');
+  //       setloading(false);
+  //       setHospitalExist(false);
+  //     }
+  //   }
+  // }, [props.hospital]);
   const [loadings, setLoadings] = useState(false);
   const innerForm = useRef();
   const { id } = useParams();
@@ -119,7 +130,8 @@ const OnllineAppointmentForm = props => {
               userTypeId: 5,
               address: '',
               comment: '',
-              response: props.CustomForm.custom_form?.length > 0 ? props.CustomForm.custom_form : [],
+              response:
+                props.CustomForm.custom_form?.length > 0 ? props.CustomForm.custom_form : [],
             }}
             onSubmit={handleFormSubmission}
             innerRef={innerForm}
@@ -232,13 +244,13 @@ const mapDispatchToProps = dispatch => ({
       actionCreator({ method: 'GET', action_type: 'FETCH_HOSPITAL_APPOINTMENT_TYPE', param }),
     ),
   fetchBranch: param =>
-    dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_BRANCH', param })),
+    dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_BRANCH_ONLINE', param })),
   fetchProvider: param =>
     dispatch(
       actionCreator({ method: 'GET', action_type: 'FETCH_BRANCH_APPOINTMENT_PROVIDER', param }),
     ),
-  fetchHospital: param =>
-    dispatch(actionCreator({ method: 'GET', action_type: 'CHECK_HOSPITAL', param })),
+  checkHospital: id =>
+    dispatch(actionCreator({ method: 'GET', action_type: 'CHECK_HOSPITAL_ONLINE', id })),
 });
 
 export default connect(mapStoreToProps, mapDispatchToProps)(OnllineAppointmentForm);
