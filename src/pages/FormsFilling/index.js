@@ -17,7 +17,7 @@ import {
 } from 'antd';
 import TextField from '@material-ui/core/TextField';
 import { TextField as MatText, Select as MatSelect } from 'formik-material-ui';
-
+import moment from 'moment'
 import { Formik, Form, Field } from 'formik';
 const FormsFillingSection = props => {
   const [formToFill, setFormToFill] = useState(props.formToFill.custom_form);
@@ -32,8 +32,16 @@ const FormsFillingSection = props => {
     console.log("response" , formToFill)
     let data = {
       response:formToFill,
-      values
+      name:values.name,
+      form_id:parseInt(values.form_id),
+      form_name:values.form_name,
+      email:values.email,
+      phone:values.phone,
+      name:values.name,
+      hospital_id:values.hospital_id
+
     }
+   props.postForm(JSON.stringify(data) )
 console.log("response", data ,values)
   };
 
@@ -43,7 +51,12 @@ console.log("response", data ,values)
     item.answer = [e];
     items[index] = item;
   };
-
+  const handleChangeDatePicker = (e, index) => {
+    let items = { ...formToFill };
+    let item = items[index];
+    item.answer = [moment(e).format('MMM Do YY')];
+    items[index] = item;
+  };
   const handleChangeText = (e, index) => {
     let items = { ...formToFill };
     let item = items[index];
@@ -176,8 +189,9 @@ console.log("response", data ,values)
                     </p>
                     <DatePicker
                       required={forms.required}
-                      onChange={e => handleChange(e, index)}
-                      format={'YYYY/MM'}
+                      onChange={e => handleChangeDatePicker(e, index)}
+                      format={'YYYY-MM-DD HH:mm'}
+                      
                     />
                     <p></p>
                   </div>
@@ -232,19 +246,9 @@ const mapStoreToProps = ({ Forms }) => {
 const mapDispatchToProps = dispatch => ({
   fetchFormToFill: id =>
     dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_FORM_FOR_FILLING', id })),
-  addForms: (values, contentType) =>
-    dispatch(actionCreator({ method: 'POST', action_type: 'CREATE_FORM', values, contentType })),
-  editForms: (id, values, contentType) =>
-    dispatch(actionCreator({ method: 'PUT', action_type: 'EDIT_FORM', id, values, contentType })),
-  deleteForms: id => dispatch(actionCreator({ method: 'DELETE', action_type: 'DELETE_FORM', id })),
-  filterForms: param =>
-    dispatch(
-      actionCreator({
-        method: 'GET',
-        action_type: 'FILTER_APPOINTMENT',
-        param,
-      }),
-    ),
+
+  postForm: (values, contentType ='JSON') =>
+    dispatch(actionCreator({ method: 'POST', action_type: 'FILL_FORM', values, contentType })),
 });
 
 export default connect(mapStoreToProps, mapDispatchToProps)(FormsFillingSection);

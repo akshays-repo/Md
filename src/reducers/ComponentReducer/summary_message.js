@@ -15,6 +15,8 @@ export const SummaryMesssageReducer = (state = SummaryMessageState, action) => {
       console.log('message summary payload', state.payload);
       message = state.payload.map((result, i) => {
         if (result.conversationId === action.payload.conversationId) {
+          action.payload.receiverAvatar =result.receiverAvatar
+          action.payload.receiverDisplayName =result.receiverDisplayName
           return action.payload;
         } else {
           return result;

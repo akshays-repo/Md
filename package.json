@@ -37,6 +37,7 @@
     "moment-recur": "^1.0.7",
     "node-sass": "^4.12.0",
     "object-to-formdata": "^4.1.0",
+    "pdf-lib": "^1.16.0",
     "popper.js": "^1.16.1",
     "prettier": "^1.18.2",
     "prop-types": "^15.7.2",

@@ -35,9 +35,17 @@ export const MesssageReducer = (state = MessageState, action) => {
           return{...state, setRecevierUUID:action.payload}
 
     case 'SET_MESSAGE':
-      const message =
-        state.payload.length > 0 ? [...state.payload, action.payload] :  action.payload;
-      console.log('message sort', message, typeof message);
+      console.log("action.payload",   action.payload)
+      let message 
+
+      if (state.payload.length === 0 ){
+         message =[action.payload];
+        message = message[0]
+      }else{
+       message = [...state.payload, action.payload];
+      }
+    //  const message = state.payload.length > 0 ? [...state.payload, action.payload] :  action.payload;
+      console.log('message sort',  action.payload, message);
       message.sort((a, b) => a.id - b.id);
       return {
         ...state,
