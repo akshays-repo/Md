@@ -29,6 +29,7 @@
     "history": "^4.9.0",
     "http-proxy-middleware": "^0.20.0",
     "isomorphic-unfetch": "^3.0.0",
+    "jspdf": "^2.3.0",
     "jwt-decode": "^2.2.0",
     "list-to-tree": "^2.2.3",
     "lodash": "^4.17.15",
