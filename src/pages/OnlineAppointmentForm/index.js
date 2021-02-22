@@ -97,7 +97,7 @@ const OnllineAppointmentForm = props => {
   return (
     hospitalExist && (
       <div className="onlinebookWrapper">
-        <div className="login-page container">
+        <div className="login-page">
           <Formik
             enableReinitialize={true}
             initialValues={{
