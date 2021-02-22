@@ -2,6 +2,13 @@
     .header{
         @include flex(flex-end , center);
         margin-bottom: 15px;
+        @include breakpoint(xs) {
+          @include direction(column);
+          .provider-head {
+            margin-bottom: 10px;
+            align-items: flex-start;
+          }
+        }
     }
 }
 .appointment-time{
@@ -36,7 +43,7 @@
   }
 }
 .schedule-time {
-  padding: 0px 30px 0;
+  // padding: 0px 30px 0;
   .breadcrumb {
     margin: 0;
     .breadcrumb-nav {

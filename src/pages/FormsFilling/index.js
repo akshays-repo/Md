@@ -92,7 +92,7 @@ console.log("response", data ,values)
 
 <Row>
 <Col xs={24} xl={12} offset={isMobile ? "": 6}>
-    <div className="formBook">
+    <div className="formBook" style={{boxShadow: "0 0 10px rgb(0 0 0 / 10%)"}}>
       <Formik
         enableReinitialize={true}
         initialValues={{
