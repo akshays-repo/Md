@@ -61,7 +61,7 @@ const AppointmentView = props => {
           <p>Branch </p> <p className="title">{branchDetails.fullName}</p>
         </Col>
         <Col xs={24} xl={12}>
-          <p>Branch Email </p> <p className="title"> {branchDetails.email}</p>
+          <p>Branch Email </p> <p className="title"> {branchDetails.email?.toLowerCase()}</p>
         </Col>
         <Col xs={24} xl={12}>
           <p>Branch Address </p> <p className="title"> {branchDetails.address}</p>

@@ -248,6 +248,8 @@ const filterSection = () =>{
     style={{ width: 120 }}
     value={branchId}
   >
+              <Option value="">All</Option>
+
     {props.branch_payload?.map(branch => (
       <Option value={branch.id}>{branch.fullName}</Option>
     ))}
@@ -259,6 +261,8 @@ const filterSection = () =>{
     style={{ width: 150 }}
     value={providerTypeId}
   >
+              <Option value="">All</Option>
+
     {props.ProviderTypePayload?.map(type => (
       <Option value={type.id}>{type.name}</Option>
     ))}
@@ -270,6 +274,8 @@ const filterSection = () =>{
     value={status}
     style={{ width: 120 }}
   >
+              <Option value="">All</Option>
+
     <Option value="active">ACTIVE</Option>
     <Option value="hold">HOLD</Option>
   </Select>

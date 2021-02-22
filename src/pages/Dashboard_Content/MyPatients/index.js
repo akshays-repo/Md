@@ -110,6 +110,7 @@ const Dashboard_MyPatients = props => {
   ];
 
   const MyPatients = () => {
+    
     const [status, setStatus] = useState(null);
     const [search, setSearch] = useState(null);
 
@@ -149,6 +150,7 @@ const Dashboard_MyPatients = props => {
                   value={search}
                 />
                 <Select className="holdActive" placeholder="status" value={status} onChange={e => setStatus(e)} style={{ width: 120 }}>
+              <Option value="">All</Option>
                   <Option value="hold">Hold</Option>
                   <Option value="active">Active</Option>
                 </Select>

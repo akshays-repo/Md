@@ -209,6 +209,8 @@ const Dashboard_Appointments = props => {
               onChange={e => setPaymentStatus(e)}
               style={{ width: 120 }}
             >
+              <Option value="">All</Option>
+
               <Option value="pending">Pending</Option>
               <Option value="failed">Failed</Option>
               <Option value="paid">Paid</Option>
@@ -222,6 +224,8 @@ const Dashboard_Appointments = props => {
               placeholder="Branch"
               style={{ width: 120 }}
             >
+              <Option value="">All</Option>
+
               {props.branch?.map(branch => (
                 <Option key={branch.id} value={branch.id}>
                   {branch.fullName}
@@ -235,6 +239,7 @@ const Dashboard_Appointments = props => {
               onChange={e => setStatus(e)}
               style={{ width: 120 }}
             >
+              <Option value="">All</Option>
               <Option value="pending">Pending</Option>
               <Option value="confirmed">Confirmed</Option>
               <Option value="cancelled">Cancelled</Option>
