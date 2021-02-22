@@ -88,7 +88,8 @@ doc.text("This is blue.", 60, 60);
       title: 'Submission',
       dataIndex: 'submission',
       key: 'submission',
-      render: text => <button className="button-square" onClick= {downloadPdf}>{'Download File'}</button>,
+      render: text => <button  className="view-button button-square"
+      type="primary" onClick= {downloadPdf}>{'Download File'}</button>,
     },
     {
       title: 'Action',
