@@ -22,6 +22,7 @@ const MessageList = props => {
       </div>
 
       <div className="chatlist">
+
         {props.summary_message.length > 0
           ? props.summary_message.map(data => (
               <MessageHead

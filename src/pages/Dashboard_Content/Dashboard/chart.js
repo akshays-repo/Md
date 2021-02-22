@@ -14,7 +14,7 @@ const data = {
   datasets: [
     {
         label: 'No of Patients',
-        data: [12, 14, 5, 6, 3, ,8 ],
+        data: [12, 14, 5, 6, 10, ,8 , 10],
         fill: false,
         backgroundColor: 'rgb(95, 213, 237)',
         borderColor: 'rgba(95, 213, 237, 0.2)',

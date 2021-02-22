@@ -11,7 +11,7 @@ export const FormsReducer = (state = FormsState, action) => {
         message.success('FORM CREATED SUCCESSFULLY');
       return { error: action.error, message: action.message ,modal:false , changed:true};
     case 'FETCH_FORM':
-      return { error: action.error, payload: action.payload, message: action.message , changed:false};
+      return { error: action.error, payload: action.payload.rows, message: action.message , changed:false};
     case 'EDIT_FORM':
       return { error: action.error, payload: action.payload, message: action.message, changed:true };
     case 'FILTER_FORM':

@@ -74,14 +74,12 @@ export const backend_api = {
 
   CREATE_FORM: '/api/backend/v1/forms',
   EDIT_FORM:'/api/backend/v1/forms',
-  FETCH_FORM:'/api/backend/v1/forms',
+  FETCH_FORM:'/api/backend/v1/hospital/response',
+  FETCH_FROM_BY_ID:'/api/backend/v1/hospital/response',
   DELETE_FORM:'/api/backend/v1/forms',
   FILL_FORM:'/api/backend/v1/response/form',
   FETCH_FORM_FOR_FILLING:'/api/backend/v1/forms',
   
-  EDIT_FORM: '/api/backend/v1/forms',
-  FETCH_FORM: '/api/backend/v1/forms',
-  DELETE_FORM: '/api/backend/v1/forms',
 
   EDIT_PROVIDER_UNAVAILABLE: '/api/backend/v1/appointments/unavailable',
   DELETE_PROVIDER_UNAVAILABLE: '/api/backend/v1/appointments/unavailable',
