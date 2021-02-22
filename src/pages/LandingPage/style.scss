@@ -220,6 +220,9 @@ h6 {
     font-weight: 600;
     line-height: 1.2;
   }
+  // .direction {
+  //   @include direction;
+  // }
   @include breakpoint(xs) {
     .container {
       flex-direction: column;

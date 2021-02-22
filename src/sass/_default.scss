@@ -203,6 +203,43 @@ body {
   .holdActive {
     min-width:5.5rem;
   }
+
+  .container {
+    width: 100%;
+    display: flex;
+    align-self: center;
+    margin: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  @include breakpoint(xs) {
+    .container {
+      flex-direction: column;
+    }
+  }
+  @include breakpoint(sm) {
+    .container {
+      max-width: 540px;
+      // flex-direction: column;
+    }
+  }
+  @include breakpoint(m) {
+    .container {
+      max-width: 720px;
+
+    }
+  }
+
+  @include breakpoint(l) {
+    .container {
+      max-width: 960px;
+    }
+  }
+  @include breakpoint(xl) {
+    .container {
+      max-width: 1140px;
+    }
+  }
 }
 .matBorder {
   color: rgba(0, 0, 0, 0.87);

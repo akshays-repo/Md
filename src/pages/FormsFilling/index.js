@@ -53,19 +53,19 @@ console.log("response", data ,values)
 
   useEffect(() => {
     setFormToFill(props.formToFill.custom_form);
-    setHospitalDetails(props.hospital);
-    console.log('sjlhdasjdjkac b', formToFill , props.formToFill);
+    setHospitalDetails( props.formToFill.hospital);
+    console.log('sjlhdasjdjkac b', hospitalDetails , props.formToFill.hospital);
   });
 
 //   hospital:
 // fullName: "Govind Hospital"
 // logo: {name: "25.jpg", path: "uploads/users/1613645520687_25.jpg"}
   return (
-    <div>
-  {/* <div>
-    <span><img src = {props.formToFill.hospital.logo.path}/></span>
-      <h2> {props.formToFill.hospital.fullName}</h2>  
-      </div> */}
+    <div className="container direction">
+  <div>
+    <span><img src = {`/${hospitalDetails?.logo.path}` }/></span>
+      <h2> {hospitalDetails?.fullName}</h2>  
+      </div>
 
       <h1>{props.formToFill.name}</h1>
     

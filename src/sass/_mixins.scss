@@ -34,6 +34,9 @@
   right: 0;
   z-index: 100;
 }
+@mixin direction ($direction){
+  flex-direction: $direction;
+}
 
 @mixin margin-padding($margin, $padding) {
   margin: $margin;
