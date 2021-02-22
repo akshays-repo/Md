@@ -1,3 +1,11 @@
+
 .direction {
     @include direction(column);
+}
+.formFilling {
+    .logo {
+        img {
+            max-width: 100%;
+        }
+    }
 }

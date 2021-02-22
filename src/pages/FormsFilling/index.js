@@ -3,6 +3,8 @@ import { actionCreator } from '../../reducers/actionCreator';
 import { store } from '../../reducers/configureStore';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router';
+// import { Row, Col } from 'antd';
+
 import {
   message,
   Button,
@@ -62,10 +64,14 @@ console.log("response", data ,values)
 // logo: {name: "25.jpg", path: "uploads/users/1613645520687_25.jpg"}
   return (
     <div className="container direction">
-  <div>
-    <span><img src = {`/${hospitalDetails?.logo.path}` }/></span>
-      <h2> {hospitalDetails?.fullName}</h2>  
-      </div>
+  <Row className="header">
+  <Col xs={12} xl={4}>
+    <div className="logo"><img src = {`/${hospitalDetails?.logo.path}` }/></div>
+    </Col>
+    <Col xs={12} xl={20}>
+      <h2> {hospitalDetails?.fullName}</h2>
+      </Col>
+      </Row>
 
       <h1>{props.formToFill.name}</h1>
     
