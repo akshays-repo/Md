@@ -50,6 +50,8 @@
     flex-direction: column;
     @include flex(center, center);
     @include margin-padding(0px, 20px);
+    min-width: 300px;
+    max-width: 320px;
     border-bottom: 1px solid $gray-light;
     .profileDashboard {
       // @include margin-padding(10px, 8px);
@@ -75,6 +77,7 @@
     }
     h5 {
       margin-bottom: 0;
+      text-align: center;
     }
   }
   .sidebar_list {
