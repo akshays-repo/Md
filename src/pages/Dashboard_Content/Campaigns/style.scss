@@ -49,6 +49,10 @@
           background: #e0e0e0;
           margin: auto;
           margin-bottom: 25px;
+          @include flex(center, center);
+          i {
+            font-size: 25px;
+          }
 
         }
       }

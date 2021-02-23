@@ -142,7 +142,7 @@ if (toggleState.allpatients) {
             </span>
             <div className="text-center">
               <div className="iconRound">
-
+<span><i class="fas fa-user-injured"></i></span>
               </div>
             <p>
             All active patient</p>
@@ -165,7 +165,7 @@ if (toggleState.allpatients) {
             </span>
             <div className="text-center">
             <div className="iconRound">
-                
+                <span><i class="far fa-user-friends"></i></span>
                 </div>
             <p className="bold">Age</p>
 
@@ -192,7 +192,7 @@ if (toggleState.allpatients) {
             </span>
             <div className="text-center">
             <div className="iconRound">
-                
+                <span><i class="far fa-eye"></i></span>
                 </div>
             <p className="bold">Last seen</p>
 
@@ -244,7 +244,7 @@ if (toggleState.allpatients) {
             </span>
             <div className="text-center">
             <div className="iconRound">
-                
+                <span><i class="far fa-calendar-check"></i></span>
                 </div>
             <p className="bold">Appoinment</p>
 
@@ -298,7 +298,7 @@ if (toggleState.allpatients) {
             </span>
             <div className="text-center">
             <div className="iconRound">
-                
+                <span><i class="far fa-list-alt"></i></span>
                 </div>
             <p className="bold">Provider{' '}</p>
 
