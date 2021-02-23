@@ -299,7 +299,7 @@ const filterSection = () =>{
       </div>
 
       <Table scroll={{ x: 240 }} columns={columns} dataSource={props.provider} />
-      <Modal
+      <Modal className="profilter"
         footer={false}
         width={800}
         title={`Add time for ${editData.fullName}`}
@@ -326,7 +326,9 @@ const filterSection = () =>{
         footer={false}
         onCancel={() => setMobileFilter(false)}
       >
+        <div className="proSearchmbl">
      {filterSection()}
+     </div>
       </Modal>
     </div>
   );

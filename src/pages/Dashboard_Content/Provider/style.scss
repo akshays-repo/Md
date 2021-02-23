@@ -4,9 +4,13 @@
         margin-bottom: 15px;
         @include breakpoint(xs) {
           @include direction(column);
+          align-items: flex-start;
           .provider-head {
             margin-bottom: 10px;
             align-items: flex-start;
+            button {
+width: 175px;
+            }
           }
         }
     }
@@ -189,4 +193,9 @@
 button {
   border: 1px solid #e4eaec;
 }
+  }
+  .proSearchmbl {
+   .ant-space-item {
+      min-width: 100px;
+    }
   }
