@@ -75,7 +75,7 @@ const responseFt = async() => {
       key: 'action',
       render: (record) => (
         <Space size="middle">
-          <button className="delete-button icon-button button-square" onClick={(e) => viewFormDetails(e, record)}>
+          <button className="view-button icon-button button-square" onClick={(e) => viewFormDetails(e, record)}>
             <i class="fa fa-eye"></i>{' View File '}
           </button>
         </Space>
@@ -96,7 +96,7 @@ const responseFt = async() => {
               Create a New From
             </Button>
             <Button
-              className="view-button button-square"
+              className="edit-button button-square"
               type="primary"
               onClick={() => store.dispatch({ type: 'OPEN_EDIT_FORM_MODAL' })}
             >

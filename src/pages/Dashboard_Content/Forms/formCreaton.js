@@ -214,11 +214,11 @@ const FormCreation = props => {
             {/* {listCustomField?.length > 0 && <Button className="blueDark-button mt8" onClick={handleFormSubmission}>SAVE</Button>} */}
             <div className="custButtons">
             <Dropdown trigger={['click']} overlay={menu}>
-            <button className="mt-5 button-square edit-button" onClick={e => e.preventDefault()}>
-              Add New Field <PlusOutlined />
+            <button className="mt-5 btnTransparent" onClick={e => e.preventDefault()}>
+              Add New Field<span className="edit-button"><PlusOutlined /></span>
             </button>
           </Dropdown>
-            <button type="submit" className="view-button mt8" onClick={handleFormSubmission}>
+            <button type="submit" className="saveButton mt8" onClick={handleFormSubmission}>
               SAVE
             </button>
             </div>

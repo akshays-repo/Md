@@ -196,18 +196,20 @@ const Dashboard_Appointments = props => {
               placeholder="From Date"
               onChange={e => setFromDate(moment(e).format('YYYY-MM-DD'))}
               value={fromData !== "" ? moment(fromData) : ""}
+              // style={{ width: 200 }}
             />
             <DatePicker
               placeholder="To Date"
               onChange={e => setToDate(moment(e).format('YYYY-MM-DD'))}
               value={toData !== "" ? moment(toData) : ""}
+              // style={{ width: 200 }}
             />
 
             <Select
               value={paymentStatus}
               placeholder="Payment"
               onChange={e => setPaymentStatus(e)}
-              style={{ width: 120 }}
+              // style={{ width: 200 }}
             >
               <Option value="">All</Option>
 
@@ -222,7 +224,7 @@ const Dashboard_Appointments = props => {
               value={branchId}
               onChange={e => setBranchId(e)}
               placeholder="Branch"
-              style={{ width: 120 }}
+              // style={{ width: 200 }}
             >
               <Option value="">All</Option>
 
@@ -237,7 +239,7 @@ const Dashboard_Appointments = props => {
               value={status}
               placeholder="status"
               onChange={e => setStatus(e)}
-              style={{ width: 120 }}
+              // style={{ width: 200 }}
             >
               <Option value="">All</Option>
               <Option value="pending">Pending</Option>
@@ -245,12 +247,14 @@ const Dashboard_Appointments = props => {
               <Option value="cancelled">Cancelled</Option>
               <Option value="completed">Completed</Option>
             </Select>
-            <button className="view-button button-square" onClick={handleSearchSubmission}>
+            <div className="buttonInline ">
+            <button className="view-button button-square mr2" onClick={handleSearchSubmission}>
               Filter
             </button>
             <button className="edit-button button-square" onClick={clearFilter}>
               clear
             </button>
+            </div>
           </Space>
     )}
 
@@ -269,7 +273,9 @@ const Dashboard_Appointments = props => {
         footer={false}
         onCancel={() => setMobileFilter(false)}
       >
+        <div className="proSearchmbl">
      {filterSection()}
+     </div>
       </Modal>
       </div>
     );

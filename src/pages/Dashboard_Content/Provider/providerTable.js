@@ -279,8 +279,8 @@ const filterSection = () =>{
     <Option value="active">ACTIVE</Option>
     <Option value="hold">HOLD</Option>
   </Select>
-<div className="boyttonInline">
-  <button className="view-button button-square" onClick={handleSearchSubmission}>
+<div className="buttonInline">
+  <button className="view-button mr2 button-square" onClick={handleSearchSubmission}>
     Filter
   </button>
   <button className="edit-button button-square" onClick={clearFilter}>

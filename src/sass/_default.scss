@@ -93,6 +93,16 @@ body {
   .delete-button {
     @include delete-button;
   }
+  .saveButton {
+    @include saveButton;
+  }
+  .btnTransparent {
+    @include btnTransparent;
+    .edit-button {
+      padding: 5px;
+      margin-left: 5px!important;
+    }
+  }
   .view-button {
     @include view-button;
   }
@@ -301,6 +311,11 @@ body {
   border: 1px solid transparent!important;
     border-bottom: 1px solid #d9d9d9!important;
     border-radius: 0!important;
+  }
+}
+@include breakpoint(xs) {
+  .buttonInline {
+    margin-top: 30px;
   }
 }
 

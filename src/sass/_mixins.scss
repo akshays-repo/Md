@@ -88,6 +88,36 @@
    color: #fff;
   }
 }
+@mixin saveButton {
+  @include button;
+  background-color: $blueDark;
+  color: $white;
+  &:active,
+  &:focus {
+    background-color: $blueDark;
+  color: $white;
+  }
+  &:hover {
+    background-color: #095191;
+  }
+  width: 30%;
+  font-size: 18px;
+  margin: 35px auto;
+}
+@mixin btnTransparent {
+  background: #fff;
+  border: none;
+  outline: none;
+  font-weight: 500;
+  color: #808080;
+ margin-left: auto;
+ cursor: pointer;
+ @include transit;
+ &:hover {
+   color: #178fb5;
+ }
+}
+
 @mixin delete-button {
   @include button;
   background-color: $red-button;
