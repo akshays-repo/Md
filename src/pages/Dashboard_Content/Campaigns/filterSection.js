@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Space, Slider } from 'antd';
 import TextField from '@material-ui/core/TextField';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
-import { set } from 'store';
-
+import { store } from 'reducers/configureStore';
+import { Result, Modal } from 'antd';
+import _ from 'lodash'
 const FilterSection = props => {
   const [ageRangeFrom, setAgeRangeFrom] = useState(20);
   const [ageRangeTo, setAgeRangeTo] = useState(80);
@@ -15,6 +16,9 @@ const FilterSection = props => {
 
   const [appointmentStart, setAppointmentStart] = useState('');
   const [appointmentEnd, setAppointmentEnd] = useState('');
+
+  const [provider, setProvider] = useState('');
+  const [providerList, setProviderList] = useState([]);
 
   const [toggleState, setToggleState] = useState({
     allpatients: false,
@@ -27,16 +31,57 @@ const FilterSection = props => {
   const onChangeAge = ageRange => {
     setAgeRangeFrom(ageRange[0]);
     setAgeRangeTo(ageRange[1]);
+    setToggleState({ ...toggleState, age: true, allpatients: false });
   };
 
+  useEffect(() => {
+    setProviderList(store.getState().Provider.payload);
+    console.log('storestore', store.getState().Provider.payload);
+  }, []);
+
   const onClickAllPatients = () => {
-    setToggleState({ ...toggleState, allpatients: !toggleState.allpatients , age:false , lastseen:false , appointment:false , provider:false });
+    setToggleState({
+      ...toggleState,
+      allpatients: !toggleState.allpatients,
+      age: false,
+      lastseen: false,
+      appointment: false,
+      provider: false,
+    });
   };
 
   const onClickDivs = item => {
-    console.log('item', item);
-
     setToggleState({ ...toggleState, [item]: !toggleState[item], allpatients: false });
+  };
+
+  const filterSubmission = e => {
+    e.preventDefault();
+    let notSelected = _.every(_.values(toggleState), function(v) {return !v;});
+
+if (notSelected) {
+    warning();
+}
+
+    if(toggleState.allpatients){
+        props.fetchPatients()
+    }
+
+  };
+  const resultSucess = (
+    <Result status="warning" title="Please select at least one option before proceeding" 
+   // subTitle="Please Check"
+     />
+  );
+
+  const onOkay = () => {
+    // window.location.href = window.location.pathname;
+  };
+
+  const warning = () => {
+    Modal.warning({
+      content: resultSucess,
+      onOk: onOkay,
+    });
   };
 
   return (
@@ -53,12 +98,18 @@ const FilterSection = props => {
             }}
           >
             All active patient
+            <button onClick={() => onClickAllPatients()}>
+              {toggleState.allpatients ? (
+                <i class="far fa-check-circle" />
+              ) : (
+                <i class="far fa-times-circle" />
+              )}
+            </button>
           </div>
         </div>
 
         <div>
           <div
-            onClick={() => onClickDivs('age')}
             style={{
               width: '130px',
               height: '200px',
@@ -66,6 +117,13 @@ const FilterSection = props => {
             }}
           >
             Age
+            <button onClick={() => onClickDivs('age')}>
+              {toggleState.age ? (
+                <i class="far fa-check-circle" />
+              ) : (
+                <i class="far fa-times-circle" />
+              )}
+            </button>
             <p>
               Age range b/w {ageRangeFrom} and {ageRangeTo}
             </p>
@@ -75,7 +133,6 @@ const FilterSection = props => {
 
         <div>
           <div
-            onClick={() => onClickDivs('lastseen')}
             style={{
               width: '130px',
               height: '200px',
@@ -83,6 +140,13 @@ const FilterSection = props => {
             }}
           >
             Last seen
+            <button onClick={() => onClickDivs('lastseen')}>
+              {toggleState.lastseen ? (
+                <i class="far fa-check-circle" />
+              ) : (
+                <i class="far fa-times-circle" />
+              )}
+            </button>
             <TextField
               id="date"
               label="Last seen after date"
@@ -91,6 +155,8 @@ const FilterSection = props => {
               className={''}
               onChange={e => {
                 setLastSeenAfter(e);
+
+                setToggleState({ ...toggleState, lastseen: true, allpatients: false });
               }}
               InputLabelProps={{
                 shrink: true,
@@ -104,6 +170,7 @@ const FilterSection = props => {
               className={''}
               onChange={e => {
                 setLastSeenBefore(e);
+                setToggleState({ ...toggleState, lastseen: true, allpatients: false });
               }}
               InputLabelProps={{
                 shrink: true,
@@ -114,7 +181,6 @@ const FilterSection = props => {
 
         <div>
           <div
-            onClick={() => onClickDivs('appointment')}
             style={{
               width: '130px',
               height: '200px',
@@ -122,13 +188,23 @@ const FilterSection = props => {
             }}
           >
             Appoinment
+            <button onClick={() => onClickDivs('appointment')}>
+              {toggleState.appointment ? (
+                <i class="far fa-check-circle" />
+              ) : (
+                <i class="far fa-times-circle" />
+              )}
+            </button>
             <TextField
               id="date"
               label="Appointment Start Date"
               type="date"
               defaultValue="2017-05-24"
               className={''}
-              onChange={e => setAppointmentStart(e)}
+              onChange={e => {
+                setAppointmentStart(e);
+                setToggleState({ ...toggleState, appointment: true, allpatients: false });
+              }}
               InputLabelProps={{
                 shrink: true,
               }}
@@ -139,7 +215,10 @@ const FilterSection = props => {
               type="date"
               defaultValue="2017-05-24"
               className={''}
-              onChange={e => setAppointmentEnd(e)}
+              onChange={e => {
+                setAppointmentEnd(e);
+                setToggleState({ ...toggleState, appointment: true, allpatients: false });
+              }}
               InputLabelProps={{
                 shrink: true,
               }}
@@ -150,30 +229,39 @@ const FilterSection = props => {
         <div>
           {' '}
           <div
-            onClick={() => onClickDivs('provider')}
             style={{
               width: '130px',
               height: '200px',
               background: toggleState.provider === true ? '#f2f7f7' : '#c9c9c9',
             }}
           >
-            Provider
+            Provider{' '}
+            <button onClick={() => onClickDivs('provider')}>
+              {toggleState.provider ? (
+                <i class="far fa-check-circle" />
+              ) : (
+                <i class="far fa-times-circle" />
+              )}
+            </button>
             <InputLabel id="demo-simple-select-label">Provider</InputLabel>
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
               value={''}
-              // onChange={handleChange}
+              onChange={e => {
+                setProvider(e);
+                setToggleState({ ...toggleState, provider: true, allpatients: false });
+              }}
             >
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
+              {providerList.map(provider => (
+                <MenuItem value={provider.id}>{provider.fullName}</MenuItem>
+              ))}
             </Select>
           </div>
         </div>
       </Space>
       <div>
-        <button>NEXT</button>
+        <button onClick={e => filterSubmission(e)}>NEXT</button>
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Dashboard_Content from '..';
 import { actionCreator } from '../../../reducers/actionCreator';
 import { store } from '../../../reducers/configureStore';
@@ -25,7 +25,9 @@ const Dashboard_Campaigns = (props) => {
   function callback(key) {
     console.log(key);
   }
-
+useEffect(() => {
+props.fetchProvider()
+}, [])
   const columns = [
     {
       title: 'Name',
@@ -154,7 +156,10 @@ const mapStoreToProps = ({ Campaign }) => {
   };
 };
 const mapDispatchToProps = dispatch => ({
+
+  fetchProvider: () => dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_PROVIDER' })),
   fetchPatients: (param) => dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_CAMPAIGN_PATIENTS'  , param})),
+
   addUser: values =>
     dispatch(actionCreator({ method: 'POST', action_type: 'CREATE_USER', values })),
   editUser: (param, values) =>
