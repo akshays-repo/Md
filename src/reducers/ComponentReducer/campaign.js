@@ -13,9 +13,10 @@ export const CampaignReducer = (state = CampaignState, action) => {
     case 'FETCH_CAMPAIGN_PATIENTS':
       return {
         error: action.error,
-        payload: action.payload,
+        payload: action.payload.rows,
         message: action.message,
         changed: false,
+        modal:true
       };
     case 'EDIT_CAMPAIGN':
       return {

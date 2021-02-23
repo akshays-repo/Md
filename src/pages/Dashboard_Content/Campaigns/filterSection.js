@@ -6,8 +6,10 @@ import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import { store } from 'reducers/configureStore';
 import { Result, Modal } from 'antd';
+import moment from 'moment';
 import _ from 'lodash';
-import Provider from '../Provider';
+import PatientAdd from './patientAdd';
+
 const FilterSection = props => {
   const [ageRangeFrom, setAgeRangeFrom] = useState(20);
   const [ageRangeTo, setAgeRangeTo] = useState(80);
@@ -21,6 +23,9 @@ const FilterSection = props => {
   const [providerId, setProvider] = useState('');
   const [providerList, setProviderList] = useState([]);
 
+  const [patientAddVisible , setPatientAddVisible] =useState(false)
+
+  const [patientList , setPatientList] = useState([])
   const [toggleState, setToggleState] = useState({
     allpatients: false,
     age: false,
@@ -55,11 +60,8 @@ const FilterSection = props => {
     setToggleState({ ...toggleState, [item]: !toggleState[item], allpatients: false });
   };
 
+  //THIS WILL VAILADATE THE WHOLE FILTER SECTION
   const checkValidation = e => {
-
-
-
-
     e.preventDefault();
     let notSelected = _.every(_.values(toggleState), function(v) {
       return !v;
@@ -91,28 +93,42 @@ const FilterSection = props => {
         ),
         onOk: onOkay,
       });
-    }else{
-        filterSubmission()
+    } else {
+      filterSubmission();
     }
   };
-
-  const filterSubmission = () => {
-if (toggleState.allpatients) {
-      props.fetchPatients();
+  const filterSubmission = async() => {
+    if (toggleState.allpatients) {
+    let response=  await props.fetchPatients();
+    console.log("prprprprp", props.payload , response)
+    if(response.error === '') {
+        setPatientList(response.payload)
+        handlePatientEditOpen()
+    }
+    } else {
+        let response=  await props.fetchPatients({ fromAge: ageRangeFrom, appointment_startDate: appointmentStart });
+        if(response.error === '') {
+            setPatientList(response.payload)
+            handlePatientEditOpen()
+        }
     }
   };
-
 
   const resultSucess = (
-    <Result
-      status="warning"
-      title="Please select at least one option before proceeding"
-    />
+    <Result status="warning" title="Please select at least one option before proceeding" />
   );
 
   const onOkay = () => {
     // window.location.href = window.location.pathname;
   };
+
+  const handlePatientEditClose = () =>{
+      setPatientAddVisible(false)
+  }
+
+  const handlePatientEditOpen= () =>{
+    setPatientAddVisible(true)
+}
 
   const warning = () => {
     Modal.warning({
@@ -203,7 +219,7 @@ if (toggleState.allpatients) {
               //   defaultValue="2017-05-24"
               className={''}
               onChange={e => {
-                setLastSeenAfter(e);
+                setLastSeenAfter(moment(e).format('YYYY-MM-DD'));
 
                 setToggleState({ ...toggleState, lastseen: true, allpatients: false });
               }}
@@ -218,7 +234,7 @@ if (toggleState.allpatients) {
               //defaultValue="2017-05-24"
               className={''}
               onChange={e => {
-                setLastSeenBefore(e);
+                setLastSeenBefore(moment(e).format('YYYY-MM-DD'));
                 setToggleState({ ...toggleState, lastseen: true, allpatients: false });
               }}
               InputLabelProps={{
@@ -252,10 +268,10 @@ if (toggleState.allpatients) {
               id="date"
               label="Appointment Start Date"
               type="date"
-              //    defaultValue="2017-05-24"
+              //   defaultValue="2017-05-24"
               className={''}
               onChange={e => {
-                setAppointmentStart(e);
+                setAppointmentStart(moment(e).format('YYYY-MM-DD'));
                 setToggleState({ ...toggleState, appointment: true, allpatients: false });
               }}
               InputLabelProps={{
@@ -269,7 +285,7 @@ if (toggleState.allpatients) {
               //     defaultValue="2017-05-24"
               className={''}
               onChange={e => {
-                setAppointmentEnd(e);
+                setAppointmentEnd(moment(e).format('YYYY-MM-DD'));
                 setToggleState({ ...toggleState, appointment: true, allpatients: false });
               }}
               InputLabelProps={{
@@ -324,6 +340,18 @@ if (toggleState.allpatients) {
       <div className="text-center">
         <button className="view-button mt8" onClick={e => checkValidation(e)}>NEXT</button>
       </div>
+
+
+
+      <Modal
+        title="CREATE A NEW  CAMPAIGN"
+        onCancel={handlePatientEditClose}
+        visible={patientAddVisible}
+        footer={false}
+        width={800}
+      >
+        <PatientAdd handlePatientEditClose={handlePatientEditClose} handlePatientEditOpen={handlePatientEditOpen} patientList={patientList} {...props} />
+      </Modal>
     </div>
   );
 };
