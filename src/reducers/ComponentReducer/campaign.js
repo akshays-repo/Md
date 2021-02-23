@@ -10,7 +10,7 @@ export const CampaignReducer = (state = CampaignState, action) => {
     case 'CREATE_CAMPAIGN':
       message.success('CAMPAIGN CREATED SUCCESSFULLY');
       return { error: action.error, message: action.message, modal: false, changed: true };
-    case 'FETCH_CAMPAIGN':
+    case 'FETCH_CAMPAIGN_PATIENTS':
       return {
         error: action.error,
         payload: action.payload,

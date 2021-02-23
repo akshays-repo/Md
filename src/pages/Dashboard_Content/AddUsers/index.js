@@ -19,7 +19,6 @@ import { connect } from 'react-redux';
 
 import UserCreationForm from './userCreationFrom';
 import { UserDeleteOutlined } from '@ant-design/icons';
-//TODO:This code nee
 const AddUsers = props => {
   useEffect(() => {
     props.fetchUser();
