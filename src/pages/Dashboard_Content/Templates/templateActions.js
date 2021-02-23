@@ -13,6 +13,7 @@ import TemplateEmailEdit from './emailEdit';
 import SmsEdit from './smsEdit';
 import AddNewAction from './addNewActions';
 
+import InputLabel from '@material-ui/core/InputLabel';
 
 const TemplateActions = props => {
   const { id } = useParams();
@@ -177,6 +178,8 @@ const TemplateActions = props => {
       >
         <Row>
           <Col xl={12}>
+          <InputLabel id="demo-simple-select-label">Enter the Unit</InputLabel>
+
             <TextField
               type="number"
               InputProps={{
@@ -187,17 +190,21 @@ const TemplateActions = props => {
               }}
               required
               value={actionEdit.number}
-              label="Enter the Unit"
+             // label="Enter the Unit"
               onChange={e => setActionEdit({ ...actionEdit, number: e.target.value })}
             />
           </Col>
 
           <Col xl={12}>
+          <InputLabel id="demo-simple-select-label">Age</InputLabel>
+
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
               defaultValue={actionEdit.unit}
               required
+              placeholder="Enter the Unit"
+
               onChange={e => setActionEdit({ ...actionEdit, unit: e.target.value })}
 
               //onChange={handleChange}
