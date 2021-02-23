@@ -133,7 +133,7 @@ props.fetchProvider()
         onCancel={() => store.dispatch({ type: 'CLOSE_CREATE_CAMPAIGN_MODAL' })}
         visible={props.modal}
         footer={false}
-        width={900}
+        width={930}
       >
         <FilterSection {...props} />
       </Modal>

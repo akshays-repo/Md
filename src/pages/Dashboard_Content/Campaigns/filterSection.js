@@ -122,68 +122,80 @@ if (toggleState.allpatients) {
   };
 
   return (
-    <div>
-      Please choose who you'd like to send this to
+    <div className="newCampaign">
+      <p className="lead text-center"> Please choose who you'd like to send this to</p>
       <Space direction="horizontal">
-        <div>
-          <div
+        <div className="boxWrapper">
+        <div className="box">
+          <div className="boxInner"
             onClick={onClickAllPatients}
             style={{
-              width: '130px',
-              height: '200px',
-              background: toggleState.allpatients === true ? '#f2f7f7' : '#c9c9c9',
+              background: toggleState.allpatients === true ? '#f2f7f7' : 'rgb(181 181 181)',
             }}
           >
-            All active patient
-            <button onClick={() => onClickAllPatients()}>
+                         <span className="tickIcon" onClick={() => onClickAllPatients()}>
               {toggleState.allpatients ? (
-                <i class="far fa-check-circle" />
+                <i class="far fa-check-circle fa-lg activeClr" />
               ) : (
-                <i class="far fa-times-circle" />
+                <i class="far fa-times-circle fa-lg white" />
               )}
-            </button>
+            </span>
+            <div className="text-center">
+              <div className="iconRound">
+
+              </div>
+            <p>
+            All active patient</p>
+            </div>
           </div>
         </div>
 
-        <div>
-          <div
+        <div className="box">
+        <div className="boxInner"
             style={{
-              width: '130px',
-              height: '200px',
-              background: toggleState.age === true ? '#f2f7f7' : '#c9c9c9',
+              background: toggleState.age === true ? '#f2f7f7' : 'rgb(181 181 181)',
             }}
           >
-            Age
-            <button onClick={() => onClickDivs('age')}>
+                        <span className="tickIcon" onClick={() => onClickDivs('age')}>
               {toggleState.age ? (
-                <i class="far fa-check-circle" />
+                <i class="far fa-check-circle fa-lg activeClr" />
               ) : (
-                <i class="far fa-times-circle" />
+                <i class="far fa-times-circle fa-lg white" />
               )}
-            </button>
-            <p>
+            </span>
+            <div className="text-center">
+            <div className="iconRound">
+                
+                </div>
+            <p className="bold">Age</p>
+
+            <p style={{fontSize: '12px', height: '50px'}}>
               Age range b/w {ageRangeFrom} and {ageRangeTo}
             </p>
             <Slider range step={1} defaultValue={[20, 50]} onChange={onChangeAge} />
+            </div>
           </div>
         </div>
 
-        <div>
-          <div
+        <div className="box">
+        <div className="boxInner"
             style={{
-              width: '130px',
-              height: '200px',
-              background: toggleState.lastseen === true ? '#f2f7f7' : '#c9c9c9',
+              background: toggleState.lastseen === true ? '#f2f7f7' : 'rgb(181 181 181)',
             }}
           >
-            Last seen
-            <button onClick={() => onClickDivs('lastseen')}>
+                         <span className="tickIcon" onClick={() => onClickDivs('lastseen')}>
               {toggleState.lastseen ? (
-                <i class="far fa-check-circle" />
+                <i class="far fa-check-circle fa-lg activeClr" />
               ) : (
-                <i class="far fa-times-circle" />
+                <i class="far fa-times-circle fa-lg white" />
               )}
-            </button>
+            </span>
+            <div className="text-center">
+            <div className="iconRound">
+                
+                </div>
+            <p className="bold">Last seen</p>
+
             <TextField
               id="date"
               label="Last seen after date"
@@ -214,24 +226,28 @@ if (toggleState.allpatients) {
               }}
             />
           </div>
+          </div>
         </div>
 
-        <div>
-          <div
+        <div className="box">
+        <div className="boxInner"
             style={{
-              width: '130px',
-              height: '200px',
-              background: toggleState.appointment === true ? '#f2f7f7' : '#c9c9c9',
+              background: toggleState.appointment === true ? '#f2f7f7' : 'rgb(181 181 181)',
             }}
           >
-            Appoinment
-            <button onClick={() => onClickDivs('appointment')}>
+                        <span className="tickIcon" onClick={() => onClickDivs('appointment')}>
               {toggleState.appointment ? (
-                <i class="far fa-check-circle" />
+                <i class="far fa-check-circle fa-lg activeClr" />
               ) : (
-                <i class="far fa-times-circle" />
+                <i class="far fa-times-circle fa-lg white" />
               )}
-            </button>
+            </span>
+            <div className="text-center">
+            <div className="iconRound">
+                
+                </div>
+            <p className="bold">Appoinment</p>
+
             <TextField
               id="date"
               label="Appointment Start Date"
@@ -261,25 +277,31 @@ if (toggleState.allpatients) {
               }}
             />
           </div>
+          </div>
         </div>
 
-        <div>
+        <div className="box">
           {' '}
-          <div
+          <div className="boxInner"
             style={{
-              width: '130px',
-              height: '200px',
-              background: toggleState.provider === true ? '#f2f7f7' : '#c9c9c9',
+              // width: '130px',
+              // height: '200px',
+              background: toggleState.provider === true ? '#f2f7f7' : 'rgb(181 181 181)',
             }}
           >
-            Provider{' '}
-            <button onClick={() => onClickDivs('provider')}>
+                        <span className="tickIcon" onClick={() => onClickDivs('provider')}>
               {toggleState.provider ? (
-                <i class="far fa-check-circle" />
+                <i class="far fa-check-circle fa-lg activeClr" />
               ) : (
-                <i class="far fa-times-circle" />
+                <i class="far fa-times-circle fa-lg white" />
               )}
-            </button>
+            </span>
+            <div className="text-center">
+            <div className="iconRound">
+                
+                </div>
+            <p className="bold">Provider{' '}</p>
+
             <InputLabel id="demo-simple-select-label">Provider</InputLabel>
             <Select
               labelId="demo-simple-select-label"
@@ -295,10 +317,12 @@ if (toggleState.allpatients) {
               ))}
             </Select>
           </div>
+          </div>
+        </div>
         </div>
       </Space>
-      <div>
-        <button onClick={e => checkValidation(e)}>NEXT</button>
+      <div className="text-center">
+        <button className="view-button mt8" onClick={e => checkValidation(e)}>NEXT</button>
       </div>
     </div>
   );

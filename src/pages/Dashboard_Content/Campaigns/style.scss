@@ -11,3 +11,53 @@
       padding: 0 30px;
 }
 }
+.newCampaign {
+  .boxWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 900px;
+  .box {
+    border: 1px solid #fafafa;
+    margin: 5px;
+    width: 20%;
+    flex-basis: 150px;
+    flex-grow: 1;
+    .boxInner {
+      height: 100%;
+      padding: 10px;
+      @include border-radius(5px);
+      .tickIcon {
+        display: flex;
+        justify-content: flex-end;
+        height: 40px;
+        font-size: 20px;
+        .activeClr {
+          color: #109400;
+        }
+      }
+      .text-center {
+        .MuiInputLabel-animated {
+          font-size: 14px;
+        }
+        .MuiInputBase-input {
+          font-size: 13px;
+        }
+        .iconRound {
+          width: 50px;
+          height: 50px;
+          @include border-radius(50%);
+          background: #e0e0e0;
+          margin: auto;
+          margin-bottom: 25px;
+
+        }
+      }
+    }
+  }
+}
+.view-button {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  height: 40px;
+}
+}
