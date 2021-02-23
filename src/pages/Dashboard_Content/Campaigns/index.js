@@ -1,13 +1,33 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Dashboard_Content from '..';
-import { Tabs, Table, Tag, Space } from 'antd';
+import { actionCreator } from '../../../reducers/actionCreator';
+import { store } from '../../../reducers/configureStore';
+import { connect } from 'react-redux';
+import FilterSection from './filterSection';
+import {
+  Tabs,
+  Space,
+  Select,
+  Row,
+  Col,
+  Table,
+  Tag,
+  DatePicker,
+  Input,
+  Modal,
+  Popconfirm,
+  Button,
+} from 'antd';
+
 const { TabPane } = Tabs;
 
-const Dashboard_Campaigns = () => {
+const Dashboard_Campaigns = (props) => {
   function callback(key) {
     console.log(key);
   }
-
+useEffect(() => {
+props.fetchProvider()
+}, [])
   const columns = [
     {
       title: 'Name',
@@ -84,8 +104,12 @@ const Dashboard_Campaigns = () => {
 
   const Campaigns = () => {
     return (
-      <div>
-
+      <div className="mb5">
+        <button className="view-button button-square" type="primary"
+         onClick={() => store.dispatch({ type: 'OPEN_CREATE_CAMPAIGN_MODAL' })}
+         >
+         NEW CAMPAIGN
+          </button>
 
         <div>
         <Tabs defaultActiveKey="1" onChange={callback}>
@@ -102,10 +126,55 @@ const Dashboard_Campaigns = () => {
         <div>
           <Table columns={columns} dataSource={data} />
         </div>
+
+
+      <Modal
+        title="CREATE A NEW  CAMPAIGN"
+        onCancel={() => store.dispatch({ type: 'CLOSE_CREATE_CAMPAIGN_MODAL' })}
+        visible={props.modal}
+        footer={false}
+        width={900}
+      >
+        <FilterSection {...props} />
+      </Modal>
       </div>
     );
   };
   return <Dashboard_Content content={Campaigns()} />;
 };
 
-export default Dashboard_Campaigns;
+
+const mapStoreToProps = ({ Campaign }) => {
+  console.log('state', Campaign);
+  return {
+    payload: Campaign.payload,
+    error: Campaign.error,
+    message: Campaign.message,
+    modal: Campaign.modal,
+    modal1: Campaign.modal1,
+    changed:Campaign.changed
+  };
+};
+const mapDispatchToProps = dispatch => ({
+
+  fetchProvider: () => dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_PROVIDER' })),
+  fetchPatients: (param) => dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_CAMPAIGN_PATIENTS'  , param})),
+
+  addUser: values =>
+    dispatch(actionCreator({ method: 'POST', action_type: 'CREATE_USER', values })),
+  editUser: (param, values) =>
+    dispatch(actionCreator({ method: 'POST', action_type: 'EDIT_USER', param, values, })),
+  deleteUser: id => dispatch(actionCreator({ method: 'DELETE', action_type: 'DELETE_USER', id })),
+  filterUser: param =>
+    dispatch(
+      actionCreator({
+        method: 'GET',
+        action_type: 'FILTER_APPOINTMENT',
+        param,
+      }),
+    ),
+});
+
+export default connect(mapStoreToProps, mapDispatchToProps)(Dashboard_Campaigns);
+
+

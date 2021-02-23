@@ -96,6 +96,10 @@ export const backend_api = {
   CHECK_HOSPITAL_ONLINE: '/api/backend/v1/users/hospital',
   FETCH_BRANCH_ONLINE: '/api/backend/v1/branches/public',
 
+  FETCH_CAMPAIGN_PATIENTS:'/api/backend/v1/campaign/patients',
+  CREATE_CAMPAIGN:'/api/backend/v1/campaign',
+  GET_ALL_PATIENTS:"/api/backend/v1/getpatients",
+
 
   LANDING_PAGE_PACKAGES:'/api/backend/v1/packages/public',
 };

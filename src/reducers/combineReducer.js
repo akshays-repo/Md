@@ -18,7 +18,7 @@ import { UnavailableReducer as Unavailable } from './ComponentReducer/unavailabl
 import { FormsReducer as Forms } from './ComponentReducer/forms';
 import { TemplateReducer  as Template} from './ComponentReducer/template';
 import { LandingPageReducer  as LandingPage} from './ComponentReducer/landingPage';
-
+import {CampaignReducer as Campaign} from './ComponentReducer/campaign'
 
 
 export const reducers = {
@@ -41,6 +41,7 @@ export const reducers = {
   Unavailable,
   Forms,
   Template,
-  LandingPage
+  LandingPage,
+  Campaign
   
 };
