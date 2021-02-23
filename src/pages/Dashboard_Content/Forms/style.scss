@@ -10,3 +10,7 @@
         }
     }
 }
+.formtableIcons {
+    width: 100%;
+    @include flex(flex-end, center);
+}

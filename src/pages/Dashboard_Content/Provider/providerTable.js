@@ -245,7 +245,7 @@ const filterSection = () =>{
   <Select
     onChange={e => setBranchId(e)}
     placeholder="Branch"
-    style={{ width: 120 }}
+    style={{ width: 200 }}
     value={branchId}
   >
               <Option value="">All</Option>
@@ -258,7 +258,7 @@ const filterSection = () =>{
   <Select
     placeholder="provider type"
     onChange={e => setProviderTypeId(e)}
-    style={{ width: 150 }}
+    style={{ width: 200 }}
     value={providerTypeId}
   >
               <Option value="">All</Option>
@@ -272,20 +272,21 @@ const filterSection = () =>{
     onChange={e => setStatus(e)}
     placeholder="status"
     value={status}
-    style={{ width: 120 }}
+    style={{ width: 200 }}
   >
               <Option value="">All</Option>
 
     <Option value="active">ACTIVE</Option>
     <Option value="hold">HOLD</Option>
   </Select>
-
+<div className="boyttonInline">
   <button className="view-button button-square" onClick={handleSearchSubmission}>
     Filter
   </button>
   <button className="edit-button button-square" onClick={clearFilter}>
     clear
   </button>
+  </div>
 </Space>
   )
   

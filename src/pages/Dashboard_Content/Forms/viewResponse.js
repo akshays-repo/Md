@@ -22,7 +22,7 @@ const ViewResponse = props => {
       <Pdf targetRef={ref} filename="response.pdf">
         {({ toPdf }) => (
           <button className="view-button button-square" onClick={toPdf}>
-            Generate Pdf
+            <span><i class="far fa-download pr2"></i></span>Generate Pdf
           </button>
         )}
       </Pdf>
