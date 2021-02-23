@@ -12,6 +12,8 @@ import { UsersState as Users } from './ComponentState/users';
 import { FormsState as Forms} from './ComponentState/forms';
 import { TemplateState as Template } from './ComponentState/template';
 import { LandingPageState as LandingPage } from './ComponentState/landingPage';
+import { CampaignState as Campaign } from './ComponentState/campaign';
+
 export const initialState = {
   Hospital,
   Branch,
@@ -26,5 +28,6 @@ export const initialState = {
   Users,
    Forms,
    Template,
-   LandingPage
+   LandingPage,
+   Campaign
 };

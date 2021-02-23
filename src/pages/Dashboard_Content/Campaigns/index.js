@@ -84,8 +84,12 @@ const Dashboard_Campaigns = () => {
 
   const Campaigns = () => {
     return (
-      <div>
-
+      <div className="mb5">
+        <button className="view-button button-square" type="primary"
+         //onClick={showModal}
+         >
+         NEW CAMPAIGN
+          </button>
 
         <div>
         <Tabs defaultActiveKey="1" onChange={callback}>
