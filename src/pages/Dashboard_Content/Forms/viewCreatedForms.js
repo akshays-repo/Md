@@ -32,7 +32,7 @@ const ViewCreatedForms = props => {
     {
       key: 'action',
       render: record => (
-        <Space size="middle">
+        <Space className="formtableIcons" size="middle">
           <span className="edit-color icon-button" onClick={() => openEditModal(record.id, record)}>
             <i className="fa fa-edit"></i>
           </span>

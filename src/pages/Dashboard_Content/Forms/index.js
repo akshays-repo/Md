@@ -75,8 +75,8 @@ const responseFt = async() => {
       key: 'action',
       render: (record) => (
         <Space size="middle">
-          <button className="view-button button-square" onClick={(e) => viewFormDetails(e, record)}  className="view-color icon-button">
-            <i class="fa fa-eye"></i>{' Download File '}
+          <button className="delete-button icon-button button-square" onClick={(e) => viewFormDetails(e, record)}>
+            <i class="fa fa-eye"></i>{' View File '}
           </button>
         </Space>
       ),
