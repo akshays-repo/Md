@@ -6,7 +6,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import { store } from 'reducers/configureStore';
 import { Result, Modal } from 'antd';
-import _ from 'lodash'
+import _ from 'lodash';
+import Provider from '../Provider';
 const FilterSection = props => {
   const [ageRangeFrom, setAgeRangeFrom] = useState(20);
   const [ageRangeTo, setAgeRangeTo] = useState(80);
@@ -17,7 +18,7 @@ const FilterSection = props => {
   const [appointmentStart, setAppointmentStart] = useState('');
   const [appointmentEnd, setAppointmentEnd] = useState('');
 
-  const [provider, setProvider] = useState('');
+  const [providerId, setProvider] = useState('');
   const [providerList, setProviderList] = useState([]);
 
   const [toggleState, setToggleState] = useState({
@@ -54,23 +55,59 @@ const FilterSection = props => {
     setToggleState({ ...toggleState, [item]: !toggleState[item], allpatients: false });
   };
 
-  const filterSubmission = e => {
+  const checkValidation = e => {
+
+
+
+
     e.preventDefault();
-    let notSelected = _.every(_.values(toggleState), function(v) {return !v;});
+    let notSelected = _.every(_.values(toggleState), function(v) {
+      return !v;
+    });
 
-if (notSelected) {
-    warning();
-}
-
-    if(toggleState.allpatients){
-        props.fetchPatients()
+    if (notSelected) {
+      warning();
+    } else if (toggleState.provider && providerId === '') {
+      Modal.warning({
+        content: <Result status="warning" title="Please Select the Provider " />,
+        onOk: onOkay,
+      });
+    } else if (toggleState.lastseen && (lastSeenBefore === '' || lastSeenAfter === '')) {
+      Modal.warning({
+        content: <Result status="warning" title="Please Select the Last seen before and after  " />,
+        onOk: onOkay,
+      });
+    } else if (toggleState.appointment && (appointmentEnd === '' || appointmentStart === '')) {
+      Modal.warning({
+        content: (
+          <Result status="warning" title="Please Select the Appointment start and end date " />
+        ),
+        onOk: onOkay,
+      });
+    } else if (toggleState.age && ageRangeFrom === '' && ageRangeTo === '') {
+      Modal.warning({
+        content: (
+          <Result status="warning" title="Please Select the Appointment start and end date " />
+        ),
+        onOk: onOkay,
+      });
+    }else{
+        filterSubmission()
     }
-
   };
+
+  const filterSubmission = () => {
+if (toggleState.allpatients) {
+      props.fetchPatients();
+    }
+  };
+
+
   const resultSucess = (
-    <Result status="warning" title="Please select at least one option before proceeding" 
-   // subTitle="Please Check"
-     />
+    <Result
+      status="warning"
+      title="Please select at least one option before proceeding"
+    />
   );
 
   const onOkay = () => {
@@ -151,7 +188,7 @@ if (notSelected) {
               id="date"
               label="Last seen after date"
               type="date"
-              defaultValue="2017-05-24"
+              //   defaultValue="2017-05-24"
               className={''}
               onChange={e => {
                 setLastSeenAfter(e);
@@ -166,7 +203,7 @@ if (notSelected) {
               id="date"
               label="Last seen before date"
               type="date"
-              defaultValue="2017-05-24"
+              //defaultValue="2017-05-24"
               className={''}
               onChange={e => {
                 setLastSeenBefore(e);
@@ -199,7 +236,7 @@ if (notSelected) {
               id="date"
               label="Appointment Start Date"
               type="date"
-              defaultValue="2017-05-24"
+              //    defaultValue="2017-05-24"
               className={''}
               onChange={e => {
                 setAppointmentStart(e);
@@ -213,7 +250,7 @@ if (notSelected) {
               id="date"
               label="Appointment Start End"
               type="date"
-              defaultValue="2017-05-24"
+              //     defaultValue="2017-05-24"
               className={''}
               onChange={e => {
                 setAppointmentEnd(e);
@@ -261,7 +298,7 @@ if (notSelected) {
         </div>
       </Space>
       <div>
-        <button onClick={e => filterSubmission(e)}>NEXT</button>
+        <button onClick={e => checkValidation(e)}>NEXT</button>
       </div>
     </div>
   );
