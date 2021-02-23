@@ -18,56 +18,58 @@ const CustomWidget = () => {
   const hospitalId = localStorage.getItem('hospital_id');
 
   const [textArea, setTextArea] = useState('');
+
+  const currentUrl = window.location.origin
   const data = [
     {  
       id:1 ,  
       button: Button1,
-      url: `<a href = ${window.location.protocol}//${window.location.hostname}.com/online-appointment/${hospitalId}> <img alt='Book now' src=${Button1}/> </a>`,
+      url: `<a href = ${currentUrl}/online-appointment/${hospitalId}> <img alt='Book now' src=${"imagelocation"}/> </a>`,
     },
     {
         id:2 ,
       button: Button2,
-      url: `<a href = ${window.location.protocol}//${window.location.hostname}.com/online-appointment/${hospitalId}> <img alt='Book now' src=${Button2}/> </a>`,
+      url: `<a href = ${currentUrl}/online-appointment/${hospitalId}> <img alt='Book now' src=${"imagelocation"}/> </a>`,
     },
     {
         id:3 ,
       button: Button3,
-      url: `<a href = ${window.location.protocol}//${window.location.hostname}.com/online-appointment/${hospitalId}> <img alt='Book now' src=${Button3}/> </a>`,
+      url: `<a href = ${currentUrl}/online-appointment/${hospitalId}> <img alt='Book now' src=${"imagelocation"}/> </a>`,
     },
     {
         id:4 ,
       button: Button4,
-      url: `<a href = ${window.location.protocol}//${window.location.hostname}.com/online-appointment/${hospitalId}> <img alt='Book now' src=${Button4}/> </a>`,
+      url: `<a href = ${currentUrl}/online-appointment/${hospitalId}> <img alt='Book now' src=${"imagelocation"}/> </a>`,
     },
     {
         id:5 ,
       button: Button5,
-      url: `<a href = ${window.location.protocol}//${window.location.hostname}.com/online-appointment/${hospitalId}> <img alt='Book now' src=${Button5}/> </a>`,
+      url: `<a href = ${currentUrl}/online-appointment/${hospitalId}> <img alt='Book now' src=${"imagelocation"}/> </a>`,
     },
     {
         id:6 ,
       button: Button6,
-      url: `<a href = ${window.location.protocol}//${window.location.hostname}.com/online-appointment/${hospitalId}> <img alt='Book now' src=${Button6}/> </a>`,
+      url: `<a href = ${currentUrl}/online-appointment/${hospitalId}> <img alt='Book now' src=${"imagelocation"}/> </a>`,
     },
     {
         id:7 ,
       button: Button7,
-      url: `<a href = ${window.location.protocol}//${window.location.hostname}.com/online-appointment/${hospitalId}> <img alt='Book now' src=${Button7}/> </a>`,
+      url: `<a href = ${currentUrl}/online-appointment/${hospitalId}> <img alt='Book now' src=${"imagelocation"}/> </a>`,
     },
     {
         id:8 ,
       button: Button8,
-      url: `<a href = ${window.location.protocol}//${window.location.hostname}.com/online-appointment/${hospitalId}> <img alt='Book now' src=${Button8}/> </a>`,
+      url: `<a href = ${currentUrl}/online-appointment/${hospitalId}> <img alt='Book now' src=${"imagelocation"}/> </a>`,
     },
     // {
     //     id:9 ,
     //   button: Button9,
-    //   url: `<a href = ${window.location.protocol}//${window.location.hostname}.com/online-appointment/${hospitalId}> <img alt='Book now' src=${Button9}/> </a>`,
+    //   url: `<a href = ${currentUrl}/online-appointment/${hospitalId}> <img alt='Book now' src=${Button9}/> </a>`,
     // },
     // {
     //     id:10 ,
     //   button: Button10,
-    //   url: `<a href = ${window.location.protocol}//${window.location.hostname}.com/online-appointment/${hospitalId}> <img alt='Book now' src=${Button10}/> </a>`,
+    //   url: `<a href = ${currentUrl}/online-appointment/${hospitalId}> <img alt='Book now' src=${Button10}/> </a>`,
     // },
   ];
 
@@ -87,8 +89,8 @@ const CustomWidget = () => {
           <List.Item>
             <Card className="widget_body">
               <img src={item.button} />
-
-             <p>{"<a href = www.site.com/apptYpe> <img alt='Book now Curabitur aliquet quam id dui posuere blandit..'/> </a>"}
+              
+             <p>{item.url}
              </p>
               <button className="button-square" onClick={() => copyCodeToClipboard(item.id)} style={{border: 'border: 1px solid #e4eaec;'}}>Copy to ClipBorad</button>
             </Card>

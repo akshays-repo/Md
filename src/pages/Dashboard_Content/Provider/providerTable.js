@@ -309,7 +309,7 @@ const filterSection = () =>{
         onCancel={handleCancel}
         destroyOnClose
       >
-        <AddAppointmentTime id={editId} provider_data={editData} {...props} />
+        <AddAppointmentTime handleCancel={handleCancel} id={editId} provider_data={editData} {...props} />
       </Modal>
       <Modal
         footer={false}

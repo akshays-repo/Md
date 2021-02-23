@@ -91,3 +91,63 @@
 .ant-drawer {
   z-index: 1100;
 }
+.smsEditmodal {
+  .mobileBg {
+    height: 450px;
+  .mobile-background {
+    background-repeat: no-repeat;
+    height: 100%;
+    background-position: center center;
+    position: relative;
+    .textareaHight {
+      display: block;
+    min-height: 360px;
+    textarea {
+      position: absolute;
+      right: 0px;
+    top: 70px;
+    left: 59px;
+    width: 63%;
+    resize: none;
+    border: none;
+    outline: none;
+    }
+  }
+  .msgLength {
+    position: absolute;
+    right: 60px;
+  }
+  }
+}
+.modalRight {
+  height: 100%;
+  .collapseContent {
+    min-height: 60%;
+  }
+  .mbltextBtn {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+  .ant-collapse {
+    background-color: transparent;
+    border: none;
+    .ant-collapse-item {
+
+      .ant-collapse-content-box {
+        background: #fafafa;
+      }
+    }
+    .ant-collapse-item-active {
+      background: #048fdf;
+      .ant-collapse-header {
+        color: $white;
+        .ant-collapse-arrow {
+          svg {
+            color: $white;
+          }
+        }
+      }
+    }
+  }
+}

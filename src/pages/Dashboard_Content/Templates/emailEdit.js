@@ -20,8 +20,10 @@ const TemplateEmailEdit = (props) => {
 //     setContent(props.email_content)
 // }, [])
 return(
-    <div>
 
+    <div className="remindersEmail">
+ <Row gutter={[16, 16]}>
+    <Col xs={24} lg={12}>
         <div>
         <TextField
               type="text"
@@ -31,39 +33,42 @@ return(
             //  onChange={(e) => setActionEdit({...actionEdit ,number:e.target.value})}
             />
         </div>
-        <div>
+
   <Editor editorState={content} 
   //onChange={setEditorState}
    />
+</Col>
 
-
-
-
+<Col xs={24} lg={12}>
 <div>
 <Collapse accordion>
               <Panel header="Comapny" key="1">
-                <p>ADDRESS DUMMYY</p>
-                <p>ADDRESS DUMMYY</p>
-                <p>ADDRESS DUMMYY</p>
-                <p>ADDRESS DUMMYY</p>
-                <p>ADDRESS DUMMYY</p>
+               <p>
+               Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+                <p>
+                when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,
+                 but also the leap into electronic typesetting</p>
+              
+
               </Panel>
               <Panel header="Location" key="2">
-                <p>LOCATION DUMMYY</p>
-                <p>LOCATION DUMMYY</p>
-                <p>LOCATION DUMMYY</p>
-                <p>LOCATION DUMMYY</p>
+              <p>remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages</p>
               </Panel>
               <Panel header="Patient" key="3">
-                <p>PATIENT DUMMYY</p>
-                <p>PATIENT DUMMYY</p>
-                <p>PATIENT DUMMYY</p>
-                <p>PATIENT DUMMYY</p>
+              <p>
+               Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+                
               </Panel>
             </Collapse>
 </div>
-        </div>
+        
+        </Col>
+        </Row>
     </div>
+
+
 )
 
 

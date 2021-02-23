@@ -9,13 +9,17 @@ export const SummaryMesssageReducer = (state = SummaryMessageState, action) => {
   let message;
   switch (action.type) {
     case 'SET_LATEST_MESSAGE_SUMMARY':
-      //   const message = state.payload.find(
-      //     (result, i) => result.conversationId === action.payload.conversationId,
-      //   );
-      let i=0;
+        const check = state.payload.filter(
+          (result, i) => result.conversationId === action.payload.conversationId,
+        ).length;
+     if(check===0)
+     {
+         state.payload=[...state.payload,action.payload]
+     }
       console.log('message summary payload', state.payload);
       message = state.payload.map((result, i) => {
         if (result.conversationId === action.payload.conversationId) {
+          console.log("wewewewe")
           action.payload.receiverAvatar =result.receiverAvatar
           action.payload.receiverDisplayName =result.receiverDisplayName
           i=i+1;
@@ -24,10 +28,7 @@ export const SummaryMesssageReducer = (state = SummaryMessageState, action) => {
           return result;
         }
       });
-      if(i===0)
-      {
-        message=[...message,action.payload]
-      }
+   
       message.sort((a, b) => b.id - a.id);
       console.log('MEssage summary', message);
       return {

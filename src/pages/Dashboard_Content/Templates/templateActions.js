@@ -13,6 +13,7 @@ import TemplateEmailEdit from './emailEdit';
 import SmsEdit from './smsEdit';
 import AddNewAction from './addNewActions';
 
+import InputLabel from '@material-ui/core/InputLabel';
 
 const TemplateActions = props => {
   const { id } = useParams();
@@ -177,6 +178,8 @@ const TemplateActions = props => {
       >
         <Row>
           <Col xl={12}>
+          <InputLabel id="demo-simple-select-label">Enter the Unit</InputLabel>
+
             <TextField
               type="number"
               InputProps={{
@@ -187,17 +190,21 @@ const TemplateActions = props => {
               }}
               required
               value={actionEdit.number}
-              label="Enter the Unit"
+             // label="Enter the Unit"
               onChange={e => setActionEdit({ ...actionEdit, number: e.target.value })}
             />
           </Col>
 
           <Col xl={12}>
+          <InputLabel id="demo-simple-select-label">Age</InputLabel>
+
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
               defaultValue={actionEdit.unit}
               required
+              placeholder="Enter the Unit"
+
               onChange={e => setActionEdit({ ...actionEdit, unit: e.target.value })}
 
               //onChange={handleChange}
@@ -210,7 +217,7 @@ const TemplateActions = props => {
           </Col>
         </Row>
         <div className="mt7">
-        <button className="view-button" onClick={e => handleActionEdit(e)}>Save</button>{' '}
+        <button className="view-button mr3" onClick={e => handleActionEdit(e)}>Save</button>{' '}
         <button className="edit-button" onClick={() => setVisible(false)}>Cancel</button>
         </div>
       </Drawer>
@@ -229,7 +236,7 @@ const TemplateActions = props => {
         <AddNewAction />
         OPEN_ADD_ACTION_TEMPLATE_MODAL
       </Drawer>
-      <Modal
+      <Modal className="smsEditmodal"
         title="Email Remainder Edit"
         onCancel={() => store.dispatch({ type: 'CLOSE_CREATE_TEMPLATE_MODAL' })}
         visible={props.modal}
@@ -239,12 +246,12 @@ const TemplateActions = props => {
         <TemplateEmailEdit {...actionEmailEdit} {...props} />
       </Modal>
 
-      <Modal
+      <Modal className="smsEditmodal"
         title="SMS Remainder Edit"
         onCancel={() => store.dispatch({ type: 'CLOSE_SMS_EDIT_TEMPLATE_MODAL' })}
         visible={props.modal1}
         footer={false}
-        width={700}
+        width={800}
         destroyOnClose
       >
         <SmsEdit actionSmsEdit={actionSmsEdit} {...props} />

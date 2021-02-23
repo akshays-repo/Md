@@ -30,6 +30,14 @@ const ViewCreatedForms = props => {
       key: 'name',
     },
     {
+      title: 'Form Link',
+      dataIndex: 'id',
+      key: 'id',
+      render:Text =>(
+        <a href={`${window.location.origin}/forms/${Text}`}>{`${window.location.origin}/forms/${Text}`}</a>
+      )
+    },
+    {
       key: 'action',
       render: record => (
         <Space className="formtableIcons" size="middle">

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Col, Row, Collapse } from 'antd';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
+import mblSvg from './assets/smartphone-call.svg'
 
 const { Panel } = Collapse;
 
@@ -29,23 +30,28 @@ const SmsEdit = (props) => {
     }
   return (
     <div>
-      <Row>
-        <Col xl={12}>
-          <div className="mobile-background">
+      <Row className="fullviewModal">
+        <Col xl={10}>
+          <div className="mobileBg">
+          <div className="mobile-background" style={{ backgroundImage: `url(${mblSvg})` }}>
+            <div className="textareaHight">
+
             <TextareaAutosize
-              rowsMin={17}
+              rowsMin={13}
               placeholder="Sms Content"
               defaultValue={actionSmsEdit.sms_content}
               maxLength={300}
-
               onChange={(e) =>handleMessageText(e) }/>
+              </div>
+                <p className="msgLength">{messageLength}/300</p>
           </div>
-          <p>{messageLength}/300</p>
+          </div>
+        
 
-          <button className="view-button mr3" onClick={handleSmsEditSave}>Save</button>
-          <button className="edit-button">Cancel</button>
+
         </Col>
-        <Col xl={12}>
+        <Col xl={14}>
+          <div className="modalRight">
           <div>
             <h5>Pro Tips</h5>
             <p>
@@ -54,29 +60,30 @@ const SmsEdit = (props) => {
               information
             </p>
           </div>
-          <div>
+          <div className="collapseContent">
             <Collapse accordion>
               <Panel header="Comapny" key="1">
-                <p>ADDRESS DUMMYY</p>
-                <p>ADDRESS DUMMYY</p>
-                <p>ADDRESS DUMMYY</p>
-                <p>ADDRESS DUMMYY</p>
-                <p>ADDRESS DUMMYY</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend faucibus nisi, non lacinia elit pharetra ut. 
+              </p>
+                <p>Integer iaculis interdum enim, sit amet egestas massa accumsan vitae.</p>
               </Panel>
               <Panel header="Location" key="2">
-                <p>LOCATION DUMMYY</p>
-                <p>LOCATION DUMMYY</p>
-                <p>LOCATION DUMMYY</p>
-                <p>LOCATION DUMMYY</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend faucibus nisi, non lacinia elit pharetra ut. 
+              </p>
+                <p>Integer iaculis interdum enim, sit amet egestas massa accumsan vitae.</p>
               </Panel>
               <Panel header="Patient" key="3">
-                <p>PATIENT DUMMYY</p>
-                <p>PATIENT DUMMYY</p>
-                <p>PATIENT DUMMYY</p>
-                <p>PATIENT DUMMYY</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend faucibus nisi, non lacinia elit pharetra ut. 
+              </p>
+                <p>Integer iaculis interdum enim, sit amet egestas massa accumsan vitae.</p>
               </Panel>
             </Collapse>
             
+          </div>
+          <div className="mbltextBtn mt6">
+            <button className="view-button mr3" onClick={handleSmsEditSave}>Save</button>
+          <button className="edit-button">Cancel</button>
+          </div>
           </div>
         </Col>
       </Row>
