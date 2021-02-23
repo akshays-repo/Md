@@ -146,7 +146,7 @@ const FilterSection = props => {
           <div className="boxInner"
             onClick={onClickAllPatients}
             style={{
-              background: toggleState.allpatients === true ? '#f2f7f7' : 'rgb(181 181 181)',
+              background: toggleState.allpatients === true ? '#f2f7f7' : 'rgb(214 214 214)',
             }}
           >
                          <span className="tickIcon" onClick={() => onClickAllPatients()}>
@@ -169,7 +169,7 @@ const FilterSection = props => {
         <div className="box">
         <div className="boxInner"
             style={{
-              background: toggleState.age === true ? '#f2f7f7' : 'rgb(181 181 181)',
+              background: toggleState.age === true ? '#f2f7f7' : 'rgb(214 214 214)',
             }}
           >
                         <span className="tickIcon" onClick={() => onClickDivs('age')}>
@@ -196,7 +196,7 @@ const FilterSection = props => {
         <div className="box">
         <div className="boxInner"
             style={{
-              background: toggleState.lastseen === true ? '#f2f7f7' : 'rgb(181 181 181)',
+              background: toggleState.lastseen === true ? '#f2f7f7' : 'rgb(214 214 214)',
             }}
           >
                          <span className="tickIcon" onClick={() => onClickDivs('lastseen')}>
@@ -248,7 +248,7 @@ const FilterSection = props => {
         <div className="box">
         <div className="boxInner"
             style={{
-              background: toggleState.appointment === true ? '#f2f7f7' : 'rgb(181 181 181)',
+              background: toggleState.appointment === true ? '#f2f7f7' : 'rgb(214 214 214)',
             }}
           >
                         <span className="tickIcon" onClick={() => onClickDivs('appointment')}>
@@ -302,7 +302,8 @@ const FilterSection = props => {
             style={{
               // width: '130px',
               // height: '200px',
-              background: toggleState.provider === true ? '#f2f7f7' : 'rgb(181 181 181)',
+              background: toggleState.provider === true ? '#f2f7f7' : 'rgb(214 214 214)', 
+              // rgb(181 181 181)
             }}
           >
                         <span className="tickIcon" onClick={() => onClickDivs('provider')}>
