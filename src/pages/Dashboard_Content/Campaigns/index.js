@@ -19,6 +19,8 @@ import {
   Button,
 } from 'antd';
 
+
+
 const { TabPane } = Tabs;
 
 const Dashboard_Campaigns = (props) => {
@@ -124,7 +126,10 @@ props.fetchProvider()
         </div>
        
         <div>
-          <Table columns={columns} dataSource={data} />
+          <Table columns={columns} 
+    //      dataSource={props.patientList?.rows} 
+          
+          />
         </div>
 
 
@@ -158,6 +163,7 @@ const mapStoreToProps = ({ Campaign }) => {
 const mapDispatchToProps = dispatch => ({
 
   fetchProvider: () => dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_PROVIDER' })),
+
   fetchPatients: (param) => dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_CAMPAIGN_PATIENTS'  , param})),
 
   addUser: values =>
