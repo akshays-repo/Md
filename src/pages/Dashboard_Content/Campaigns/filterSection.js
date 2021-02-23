@@ -55,11 +55,9 @@ const FilterSection = props => {
     setToggleState({ ...toggleState, [item]: !toggleState[item], allpatients: false });
   };
 
+
+  //THIS WILL VAILADATE THE WHOLE FILTER SECTION
   const checkValidation = e => {
-
-
-
-
     e.preventDefault();
     let notSelected = _.every(_.values(toggleState), function(v) {
       return !v;
@@ -91,23 +89,19 @@ const FilterSection = props => {
         ),
         onOk: onOkay,
       });
-    }else{
-        filterSubmission()
+    } else {
+      filterSubmission();
     }
   };
 
   const filterSubmission = () => {
-if (toggleState.allpatients) {
+    if (toggleState.allpatients) {
       props.fetchPatients();
     }
   };
 
-
   const resultSucess = (
-    <Result
-      status="warning"
-      title="Please select at least one option before proceeding"
-    />
+    <Result status="warning" title="Please select at least one option before proceeding" />
   );
 
   const onOkay = () => {
