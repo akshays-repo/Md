@@ -85,6 +85,9 @@ const Dashboard_Campaigns = () => {
   const Campaigns = () => {
     return (
       <div>
+
+
+        <div>
         <Tabs defaultActiveKey="1" onChange={callback}>
           <TabPane tab="All" key="1" />
           <TabPane tab="Sent" key="2" />
@@ -94,6 +97,8 @@ const Dashboard_Campaigns = () => {
           <TabPane tab="Reuse" key="6" />
         </Tabs>
 
+        </div>
+       
         <div>
           <Table columns={columns} dataSource={data} />
         </div>
