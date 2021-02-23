@@ -101,7 +101,7 @@ const FormsFillingSection = props => {
     <div className="container direction">
   <Row className="header">
   <Col xs={12} xl={4}>
-    <div className="logo"><img src = {`/${hospitalDetails?.logo.path}` }/></div>
+    {/* <div className="logo"><img src = {hospitalDetails?.logo.path ? `/${hospitalDetails?.logo.path}`: '' }/></div> */}
     </Col>
     <Col xs={12} xl={20}>
       <h3> {hospitalDetails?.fullName}</h3>

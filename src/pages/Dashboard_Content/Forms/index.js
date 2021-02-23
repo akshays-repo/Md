@@ -7,19 +7,30 @@ import Dashboard_Content from '..';
 import FormCreation from './formCreaton';
 import ViewCreatedForms from './viewCreatedForms';
 import ViewResponse from './viewResponse'
+import Pdf from "react-to-pdf";
+
+import { message } from 'antd';
+const ref = React.createRef();
+
 const Dashboard_Forms = props => {
 
   const [viewId , setViewId] =useState('')
   const [viewDetails , setViewDetails] =useState('')
-
+  const [response , setResponse] = useState("")
 
 useEffect(() => {
   props.fetchForms();
-  props.fetchFormsResponse();
 }, [])
 
+useEffect(() => {
+  responseFt();
+}, [])
+console.log("payload" ,props)
 
-console.log("sdsd", props.payload)
+const responseFt = async() => {
+  let res = await  props.response();
+  setResponse(res.payload.rows)
+} 
   const viewFormDetails =(e, record) => {
     e.preventDefault();
     setViewDetails(record.response)
@@ -52,21 +63,21 @@ console.log("sdsd", props.payload)
       dataIndex: 'form_name',
       key: 'form_name',
     },
-    {
-      title: 'Submission',
-      dataIndex: 'submission',
-      key: 'submission',
-      render: text => <button  className="view-button button-square"
-      type="primary" >{'Download File'}</button>,
-    },
+    // {
+    //   title: 'Submission',
+    //   dataIndex: 'submission',
+    //   key: 'submission',
+    //   render: text => <button  className="view-button button-square"
+    //   type="primary" >{' Download File '}</button>,
+    // },
     {
       title: 'Action',
       key: 'action',
       render: (record) => (
         <Space size="middle">
-          <span onClick={(e) => viewFormDetails(e, record)}  className="view-color icon-button">
-            <i class="fa fa-eye"></i>
-          </span>
+          <button className="view-button button-square" onClick={(e) => viewFormDetails(e, record)}  className="view-color icon-button">
+            <i class="fa fa-eye"></i>{' Download File '}
+          </button>
         </Space>
       ),
     },
@@ -75,7 +86,7 @@ console.log("sdsd", props.payload)
   const Forms = () => {
     return (
       <div>
-        <div>
+        <div className="mb5">
           <Space direction="horizontal">
             <Button
               className="view-button button-square"
@@ -93,7 +104,7 @@ console.log("sdsd", props.payload)
             </Button>
           </Space>
         </div>
-        <Table columns={columns} dataSource={props.formResponse} />
+        <Table columns={columns} dataSource={response} />
       </div>
     );
   };
@@ -142,13 +153,17 @@ const mapStoreToProps = ({ Forms }) => {
     modal: Forms.modal,
     modal1: Forms.modal1,
     modal2: Forms.modal2,
+    modal3: Forms.modal3,
+
     changed: Forms.changed,
     formResponse:Forms.formResponse,
   };
 };
 const mapDispatchToProps = dispatch => ({
   fetchForms: () => dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_FORM' })),
-  fetchFormsResponse: () => dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_FORM_RESPONSE' })),
+
+
+  response: () => dispatch(actionCreator({ method: 'GET', action_type: 'GET_RESPONSE' })),
 
   addForms: (values, contentType) =>
     dispatch(actionCreator({ method: 'POST', action_type: 'CREATE_FORM', values, contentType })),

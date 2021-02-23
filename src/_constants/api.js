@@ -76,7 +76,7 @@ export const backend_api = {
   EDIT_FORM:'/api/backend/v1/forms',
   FETCH_FORM: '/api/backend/v1/forms',
 
-  FETCH_FORM_RESPONSE:'/api/backend/v1/hospital/response',
+  GET_RESPONSE:'/api/backend/v1/hospital/response',
   FETCH_FROM_BY_ID:'/api/backend/v1/hospital/response',
   DELETE_FORM:'/api/backend/v1/forms',
   FILL_FORM:'/api/backend/v1/response/form',

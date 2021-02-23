@@ -75,10 +75,7 @@ const CustomWidget = () => {
     let op 
     op = data.filter(item => item.id === id);
     let copyUrl =op[0].url
-    console.log("asasasasasa",copyUrl ,id)
-    navigator.clipboard.writeText(copyUrl)
-    // copyUrl.select();
-    // document.execCommand('copy');
+    navigator.clipboard.writeText(copyUrl) 
     message.info('Copied to ClipBoard');
   };
   return (
