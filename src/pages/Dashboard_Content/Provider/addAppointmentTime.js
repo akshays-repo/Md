@@ -156,7 +156,7 @@ const AddAppointmentTime = props => {
                   <Button className="edit-button button-square" htmlType="submit">
                     Save
                   </Button>
-                  <Button onClick={() =>  store.dispatch({ type: 'CLOSE_APPOINTMENT_TYPE_MODAL' })} className="delete-button button-square" type="default">
+                  <Button onClick={() =>  props.handleCancel()} className="delete-button button-square" type="default">
                     Cancel
                   </Button>
                 </Space>
