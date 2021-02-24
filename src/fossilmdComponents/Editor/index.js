@@ -1,9 +1,9 @@
 /* eslint-disable */
 import React, { useEffect, useState } from 'react';
-import callApi from 'utils/callApi';
 // import resizeImage from 'utils/resizeImage'
 import { notification } from 'antd';
-import './index.css';
+import './style.css';
+import callApi from '_utils/callApi';
 
 export default function Editor(props) {
   const { editorHtml, placeholder, onChange } = props;

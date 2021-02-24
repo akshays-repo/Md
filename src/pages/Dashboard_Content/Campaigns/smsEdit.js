@@ -2,38 +2,20 @@ import React, { useEffect, useState } from 'react';
 import { Col, Row, Collapse } from 'antd';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import mblSvg from './assets/smartphone-call.svg'
+import { Switch } from 'antd';
 
 const { Panel } = Collapse;
 
 const SmsEdit = (props) => {
-    const [messageContent , SetMessageContent] =useState("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")
-    const [messageLength , SetMessageLength] = useState(messageContent.length)
-    const [ actionSmsEdit , setActionEdit] = useState({})
-    const handleMessageText = (e) =>{
-        SetMessageLength(e.target.value.length)
-        SetMessageContent(e.target.value)
-        setActionEdit({...actionSmsEdit, sms_content:messageContent  })
-        
-    }
-
     useEffect(() => {
         props.handleSmsEdit("e")
     })
-
-    // useEffect(() => {
-    //     setActionEdit(props.actionSmsEdit)
-    //     console.log("alskdjjgfhd",props.actionSmsEdit)
-
-    // }, [])
-
-    const handleSmsEditSave = () =>{
-
-        let contentType = 'JSON'
-        const {number , unit , ...sentingData} = actionSmsEdit
-        props.editTemplate(actionSmsEdit.id ,  JSON.stringify(sentingData ), contentType);
-    }
   return (
     <div className="smsEditmodalCampaign">
+                   <Switch
+                  defaultChecked={props.emailStatus}
+                  onChange={e => props.handlEmailStatus(e)}
+                />
       <Row className="fullviewModal">
         <Col xl={10}>
           <div className="mobileBg">
@@ -43,11 +25,11 @@ const SmsEdit = (props) => {
             <TextareaAutosize
               rowsMin={13}
               placeholder="Sms Content"
-              defaultValue={actionSmsEdit.sms_content}
+              defaultValue={props.smsContent}
               maxLength={300}
-              onChange={(e) =>handleMessageText(e) }/>
+              onChange={(e) =>props.handleSmsEdit(e.target.value) }/>
               </div>
-                <p className="msgLength">{messageLength}/300</p>
+                <p className="msgLength">{props.smsContent.length}/300</p>
           </div>
           </div>
         

@@ -1,37 +1,54 @@
 import React, { useEffect, useState } from 'react';
 import { TextField } from '@material-ui/core';
 import ReactDOM from 'react-dom';
-import { Editor, EditorState } from 'draft-js';
 import { Col, Row, Collapse } from 'antd';
-import 'draft-js/dist/Draft.css';
+import { Switch } from 'antd';
 
+import Editor from '../../../fossilmdComponents/Editor/index';
 const { Panel } = Collapse;
 
 const EmailEdit = props => {
   const [subject, setSubject] = useState('');
-  const [content, setContent] = React.useState(() => EditorState.createEmpty());
+  const [emailContent, setEmailContent] = useState('');
   // useEffect (() => {
   //     console.log("ashdhsd", props)
   //     setContent(props.email_content)
   // }, [])
+
+  const handleEditorChange = e => {
+    setEmailContent(e);
+    props.handleEmailEdit(e);
+  };
+
   return (
     <div className="remindersEmail">
-      <Row gutter={[16, 16]}>
+               <Switch
+                  defaultChecked={props.smsStatus}
+                  onChange={e => props.handleSmsEditStatus(e)}
+                />
+      <Row gutter={[16, 16]}  
+      //style={{pointerEvents:"none" , opacity:"0.7"} }
+      
+      >
         <Col xs={24} lg={12}>
           <div>
-            <TextField
-              type="text"
-              required
-              value={props.email_sub}
-              label="Subject"
-              //  onChange={(e) => setActionEdit({...actionEdit ,number:e.target.value})}
+ 
+                <TextField
+                  type="text"
+                  required
+                  value={props.emailSubject}
+                  label="Subject"
+                  onChange={e => props.handleEmailEditSubject(e.target.value)}
+                />
+
+          </div>
+          <div>
+            <Editor
+              placeholder="Write something..."
+              editorHtml={props.emailContent || ''}
+              onChange={handleEditorChange}
             />
           </div>
-
-          <Editor
-            editorState={content}
-            //onChange={setEditorState}
-          />
         </Col>
 
         <Col xs={24} lg={12}>

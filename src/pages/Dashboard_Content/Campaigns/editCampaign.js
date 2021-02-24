@@ -33,33 +33,16 @@ const EditCampaign = props => {
 
   const [smsStatus, setSmsStatus] = useState('');
   const [smsContent, setSmsContent] = useState('');
+  const [currentTab, setCurrentTab] = useState('1');
 
   const { id } = useParams();
   useEffect(() => {
     fetchById();
   }, []);
 
-  // clicked: null
-  // createdAt: "2021-02-24T12:34:33.000Z"
-  // email_status: null
-  // email_sub: null
-  // email_template: null
-  // hospitalId: 43
-  // id: 12
-  // name: "cam 7"
-  // open_rate: 0
-  // recipients: 0
-  // sms_status: null
-  // sms_template: null
-  // status: "sent"
-  // total_sent: 0
-  // updatedAt: "2021-02-24T12:34:33.000Z"
-  // users
-
   const fetchById = async () => {
     let response = await props.fetchCampaignbyId(id);
 
-    console.log('repso', response);
     setTitle(response.payload.name);
     setEmailSubject(response.payload.email_sub);
     setEmailContent(response.payload.email_template);
@@ -68,14 +51,41 @@ const EditCampaign = props => {
     setSmsContent(response.payload.sms_template);
   };
 
-  const [currentTab, setCurrentTab] = useState('1');
   const callback = key => {
     setCurrentTab(key);
   };
 
-  const handleEmailEdit = e => {};
+  useEffect(() =>{
+    console.log('email', emailSubject);
+    console.log('email content', emailContent);
+    console.log('email status', emailStatus);
 
-  const handleSmsEdit = e => {};
+
+  },[emailContent, emailStatus , emailStatus])
+
+
+  const handleEmailEdit = e => {
+    console.log('email', e);
+    setEmailContent(e);
+  };
+  const handleEmailEditSubject = e => {
+    console.log('email subject', e);
+    setEmailSubject(e);
+  };
+  const handlEmailStatus = e => {
+    console.log('email status', e);
+    setemailStatus(e);
+  };
+  const handleSmsEdit = e => {
+    console.log("sms content", e)
+    setSmsContent(e)
+  };
+  const handleSmsEditStatus = e => {
+    console.log("sms status", e)
+
+setSmsStatus(e)
+  };
+
 
   return (
     <div className="">
@@ -104,9 +114,21 @@ const EditCampaign = props => {
           <TabPane tab="SMS" key="2" />
         </Tabs>
         {currentTab === '1' ? (
-          <EmailEdit handleEmailEdit={handleEmailEdit} />
+          <EmailEdit
+            handleEmailEdit={handleEmailEdit}
+            handleEmailEditSubject={handleEmailEditSubject}
+            emailContent={emailContent}
+            emailSubject={emailSubject}
+            emailStatus={emailStatus}
+            handlEmailStatus={handlEmailStatus}
+          />
         ) : (
-          <SmsEdit handleSmsEdit={handleSmsEdit} />
+          <SmsEdit
+           handleSmsEdit={handleSmsEdit} 
+           smsContent={smsContent}
+           smsStatus={smsStatus}
+           handleSmsEditStatus={handleSmsEditStatus}
+           />
         )}
       </div>
     </div>
