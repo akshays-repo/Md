@@ -77,7 +77,7 @@ const Dashboard_MyPatients = props => {
         <Space size="middle">
           <Select className="holdActive"
             style={record.status === 'active' ? { color: 'green' } : { color: 'red' }}
-            defaultValue={record.status}
+            value={record.status}
             onChange={e => handleStatus(record.id, e)}
           >
             <Select.Option style={{color:"green"}} value="active">Active</Select.Option>

@@ -19,17 +19,16 @@ import {
   Button,
 } from 'antd';
 
-
-
 const { TabPane } = Tabs;
 
-const Dashboard_Campaigns = (props) => {
+const Dashboard_Campaigns = props => {
   function callback(key) {
     console.log(key);
   }
-useEffect(() => {
-props.fetchProvider()
-}, [])
+  useEffect(() => {
+    props.fetchProvider();
+    props.fetchPatient({ page: 1, limit: 10000 });
+  }, []);
   const columns = [
     {
       title: 'Name',
@@ -107,47 +106,46 @@ props.fetchProvider()
   const Campaigns = () => {
     return (
       <div className="mb5">
-        <button className="view-button button-square" type="primary"
-         onClick={() => store.dispatch({ type: 'OPEN_CREATE_CAMPAIGN_MODAL' })}
-         >
-         NEW CAMPAIGN
-          </button>
+        <button
+          className="view-button button-square"
+          type="primary"
+          onClick={() => store.dispatch({ type: 'OPEN_CREATE_CAMPAIGN_MODAL' })}
+        >
+          NEW CAMPAIGN
+        </button>
 
         <div>
-        <Tabs defaultActiveKey="1" onChange={callback}>
-          <TabPane tab="All" key="1" />
-          <TabPane tab="Sent" key="2" />
-          <TabPane tab="Sheduled" key="3" />
-          <TabPane tab="Draft" key="4" />
-          <TabPane tab="Archived" key="5" />
-          <TabPane tab="Reuse" key="6" />
-        </Tabs>
-
+          <Tabs defaultActiveKey="1" onChange={callback}>
+            <TabPane tab="All" key="1" />
+            <TabPane tab="Sent" key="2" />
+            <TabPane tab="Sheduled" key="3" />
+            <TabPane tab="Draft" key="4" />
+            <TabPane tab="Archived" key="5" />
+            <TabPane tab="Reuse" key="6" />
+          </Tabs>
         </div>
-       
+
         <div>
-          <Table columns={columns} 
-    //      dataSource={props.patientList?.rows} 
-          
+          <Table
+            columns={columns}
+            //      dataSource={props.patientList?.rows}
           />
         </div>
 
-
-      <Modal
-        title="CREATE A NEW  CAMPAIGN"
-        onCancel={() => store.dispatch({ type: 'CLOSE_CREATE_CAMPAIGN_MODAL' })}
-        visible={props.modal}
-        footer={false}
-        width={930}
-      >
-        <FilterSection {...props} />
-      </Modal>
+        <Modal
+          title="CREATE A NEW  CAMPAIGN"
+          onCancel={() => store.dispatch({ type: 'CLOSE_CREATE_CAMPAIGN_MODAL' })}
+          visible={props.modal}
+          footer={false}
+          width={930}
+        >
+          <FilterSection {...props} />
+        </Modal>
       </div>
     );
   };
   return <Dashboard_Content content={Campaigns()} />;
 };
-
 
 const mapStoreToProps = ({ Campaign }) => {
   console.log('state', Campaign);
@@ -157,19 +155,22 @@ const mapStoreToProps = ({ Campaign }) => {
     message: Campaign.message,
     modal: Campaign.modal,
     modal1: Campaign.modal1,
-    changed:Campaign.changed
+    changed: Campaign.changed,
   };
 };
 const mapDispatchToProps = dispatch => ({
-
   fetchProvider: () => dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_PROVIDER' })),
 
-  fetchPatients: (param) => dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_CAMPAIGN_PATIENTS'  , param})),
+  fetchPatients: param =>
+    dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_CAMPAIGN_PATIENTS', param })),
 
-  addUser: values =>
-    dispatch(actionCreator({ method: 'POST', action_type: 'CREATE_USER', values })),
+  fetchPatient: param =>
+    dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_PATIENT', param })),
+
+  createCampaign: (values) =>
+    dispatch(actionCreator({ method: 'POST', action_type: 'CREATE_CAMPAIGN', values  })),
   editUser: (param, values) =>
-    dispatch(actionCreator({ method: 'POST', action_type: 'EDIT_USER', param, values, })),
+    dispatch(actionCreator({ method: 'POST', action_type: 'EDIT_USER', param, values })),
   deleteUser: id => dispatch(actionCreator({ method: 'DELETE', action_type: 'DELETE_USER', id })),
   filterUser: param =>
     dispatch(
@@ -182,5 +183,3 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(mapStoreToProps, mapDispatchToProps)(Dashboard_Campaigns);
-
-

@@ -40,7 +40,7 @@ const Dashboard_Appointments = props => {
       e.preventDefault();
       let parms = {};
       if (searchKey) parms.search = searchKey;
-      if (branchId) parms.search = searchKey;
+      if (branchId) parms.branch_id = branchId;
       if (paymentStatus) parms.payment_status = paymentStatus;
       if (status) parms.status = status;
       if (fromData) parms.fromDate = fromData;

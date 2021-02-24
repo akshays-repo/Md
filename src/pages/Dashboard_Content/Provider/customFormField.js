@@ -156,7 +156,7 @@ const CustomFormField = props => {
           </p>
 
           <Modal
-            title="PREVIEW CUTOM FORM"
+            title="PREVIEW CUSTOM FORM"
             visible={isModalVisible}
             footer={false}
             onCancel={handleCancel}

@@ -313,7 +313,7 @@ const filterSection = () =>{
       </Modal>
       <Modal
         footer={false}
-        title={`EDIT ${editData.fullName}`}
+        title={` ${editData.fullName}`}
         visible={props.modal1}
         onOk={handleOk}
         onCancel={handleCancel}

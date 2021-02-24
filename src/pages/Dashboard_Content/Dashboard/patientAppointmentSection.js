@@ -28,6 +28,7 @@ const PatientAppointment = props => {
   useEffect(() => {
     props.fetchAppointmentHome({ fromDate: moment().format('L'), toDate: moment().format('L')})
     setCurrentButton(1)
+    getToday();
   }, [props.changed]);
 
 
