@@ -82,7 +82,6 @@ export const backend_api = {
   FILL_FORM:'/api/backend/v1/response/form',
   FETCH_FORM_FOR_FILLING:'/api/backend/v1/forms',
   
-
   EDIT_PROVIDER_UNAVAILABLE: '/api/backend/v1/appointments/unavailable',
   DELETE_PROVIDER_UNAVAILABLE: '/api/backend/v1/appointments/unavailable',
   FILTER_APPOINTMENT_CALENDAR: '/api/backend/v1/online_bookings/filter',
@@ -98,7 +97,11 @@ export const backend_api = {
 
   FETCH_CAMPAIGN_PATIENTS:'/api/backend/v1/campaign/patients',
   CREATE_CAMPAIGN:'/api/backend/v1/campaign',
+  FETCH_CAMPAIGN:'/api/backend/v1/campaigns',
+  FETCH_CAMPAIGN_ID:'/api/backend/v1/campaigns',
+
   GET_ALL_PATIENTS:"/api/backend/v1/getpatients",
+
 
 
   LANDING_PAGE_PACKAGES:'/api/backend/v1/packages/public',

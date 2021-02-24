@@ -29,6 +29,30 @@ const Dashboard_Campaigns = props => {
     props.fetchProvider();
     props.fetchPatient({ page: 1, limit: 10000 });
   }, []);
+
+  useEffect(() => {
+    props.fetchCampaigns();
+  }, [props.changed]);
+
+  console.log("provider", props.payload)
+
+
+//   clicked: null
+// createdAt: "2021-02-24T10:30:59.000Z"
+// email_status: null
+// email_sub: null
+// email_template: null
+// hospitalId: 43
+// id: 4
+// name: "Cam 3"
+// open_rate: null
+// recipients: null
+// sms_status: null
+// sms_template: null
+// status: null
+// total_sent: null
+
+
   const columns = [
     {
       title: 'Name',
@@ -38,18 +62,13 @@ const Dashboard_Campaigns = props => {
     },
     {
       title: 'Total Sent',
-      dataIndex: 'totalsent',
-      key: 'totalsent',
-    },
-    {
-      title: 'Booking Date',
-      dataIndex: 'bookingdate',
-      key: 'bookingdate',
+      dataIndex: 'total_sent',
+      key: 'total_sent',
     },
     {
       title: 'Recipents',
-      dataIndex: 'recipents',
-      key: 'recipents',
+      dataIndex: 'recipients',
+      key: 'recipients',
     },
     {
       title: 'Open rate',
@@ -126,9 +145,11 @@ const Dashboard_Campaigns = props => {
         </div>
 
         <div>
+
+
           <Table
             columns={columns}
-            //      dataSource={props.patientList?.rows}
+            dataSource={props.payload}
           />
         </div>
 
@@ -161,14 +182,23 @@ const mapStoreToProps = ({ Campaign }) => {
 const mapDispatchToProps = dispatch => ({
   fetchProvider: () => dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_PROVIDER' })),
 
+  fetchCampaigns: () => dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_CAMPAIGN' })),
+
   fetchPatients: param =>
     dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_CAMPAIGN_PATIENTS', param })),
 
   fetchPatient: param =>
     dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_PATIENT', param })),
 
-  createCampaign: (values) =>
-    dispatch(actionCreator({ method: 'POST', action_type: 'CREATE_CAMPAIGN', values  })),
+  createCampaign: values =>
+    dispatch(
+      actionCreator({
+        method: 'POST',
+        action_type: 'CREATE_CAMPAIGN',
+        values,
+        contentType: 'JSON',
+      }),
+    ),
   editUser: (param, values) =>
     dispatch(actionCreator({ method: 'POST', action_type: 'EDIT_USER', param, values })),
   deleteUser: id => dispatch(actionCreator({ method: 'DELETE', action_type: 'DELETE_USER', id })),

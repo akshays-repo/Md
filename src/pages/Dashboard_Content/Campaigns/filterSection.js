@@ -100,9 +100,10 @@ const FilterSection = props => {
   const filterSubmission = async () => {
     if (toggleState.allpatients) {
       let response = await props.fetchPatients();
-      console.log('prprprprp', props.payload, response);
+      console.log('rows', props.payload, response.payload.rows);
       if (response.error === '') {
         setPatientList(response.payload);
+        console.log("laskjdfh",patientList,)
         handlePatientEditOpen();
       }
     } else {

@@ -81,7 +81,7 @@ const PatientAppointment = props => {
       render: record => (
         <div>
           <Select
-              defaultValue={record.payment_status}
+              value={record.payment_status}
               style={{ width: 120 }}
               onChange={e => handleChangePaymentStatus(record.id, e)}
               className={record.payment_status}

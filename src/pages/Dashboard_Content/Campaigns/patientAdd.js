@@ -19,14 +19,16 @@ import {
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { store } from '../../../reducers/configureStore';
+import { Redirect } from 'react-router';
 
 const PatientAdd = props => {
   const [patientList, setPatientList] = useState([]);
   const [hospitalPatientList, setHospitalPatientList] = useState([]);
- const [campaignTitle , setCampaignTitle] = useState("")
+  const [campaignTitle, setCampaignTitle] = useState('');
   useEffect(() => {
-    setPatientList(props.patientList?.rows);
+    setPatientList(props.patientList.rows);
     setHospitalPatientList(store.getState().Patient.payload);
+    console.log("patient", props.patientList.rows)
   }, []);
 
   const deletePatientFromTable = record => {
@@ -39,22 +41,23 @@ const PatientAdd = props => {
   };
 
   const handleSave = async () => {
-
     let sendingData = {
-        name:campaignTitle,
-        users:patientList
-    }
-if(campaignTitle === ''){
-    Modal.warning({
+      name: campaignTitle,
+      users: patientList,
+      status:"sent"
+    };
+    if (campaignTitle === '') {
+      Modal.warning({
         content: <Result status="warning" title="Please Enter the Campaign Title" />,
-      })}
-      else{
-console.log("sss")
+      });
+    } else {
+      let response = await props.createCampaign(JSON.stringify(sendingData));
+      if (response.error === '') {
+    //   props.handlePatientEditClose();
+    window.location.href = `/campaign/${response.payload.id}`
       }
-
-
+    }
   };
-
   const columns = [
     {
       title: 'First Name',
@@ -90,8 +93,6 @@ console.log("sss")
       setPatientList([...patientList, value]);
       message.success('patient added');
     }
-
-    console.log('aahbfdf', value);
   };
 
   return (
@@ -99,7 +100,12 @@ console.log("sss")
       <div>
         <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
           <Col xs={24} xl={12}>
-            <TextField required label="Title" margin="normal"  onChange={(e)=> setCampaignTitle(e.target.value)}/>
+            <TextField
+              required
+              label="Title"
+              margin="normal"
+              onChange={e => setCampaignTitle(e.target.value)}
+            />
           </Col>
           <Col xs={24} xl={12}>
             <Autocomplete
