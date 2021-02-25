@@ -18,6 +18,7 @@ import {
   Popconfirm,
   Button,
 } from 'antd';
+import { Link } from 'react-router-dom';
 
 const { TabPane } = Tabs;
 
@@ -77,6 +78,7 @@ const Dashboard_Campaigns = props => {
       render: (record) => (
         <Space size="middle" className="edit-color icon-button">
           <i onClick={() =>  window.location.href = `/campaign/${record.id}`} className="fa fa-edit"></i>
+       
         </Space>
       ),
     },
@@ -161,7 +163,7 @@ const mapDispatchToProps = dispatch => ({
         contentType: 'JSON',
       }),
     ),
-    
+
   editUser: (param, values) =>
     dispatch(actionCreator({ method: 'POST', action_type: 'EDIT_USER', param, values })),
   deleteUser: id => dispatch(actionCreator({ method: 'DELETE', action_type: 'DELETE_USER', id })),

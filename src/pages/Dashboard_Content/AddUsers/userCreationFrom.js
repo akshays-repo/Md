@@ -79,7 +79,6 @@ const UserCreationForm = props => {
             // fullName:'',
             email: '',
             status: 'active',
-            provider_typeId: '',
             phone: '',
             password: '',
             c_password: '',
