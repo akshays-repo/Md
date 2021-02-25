@@ -39,6 +39,11 @@
     .slick-slide {
       width: 125px;
   }
+  .ant-carousel {
+    .slick-next {
+      right: 0;
+    }
+  }
   }
   .typeAppointment {
     background-color: rgb(237, 238, 238);
