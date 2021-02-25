@@ -25,10 +25,15 @@ const PatientAdd = props => {
   const [patientList, setPatientList] = useState([]);
   const [hospitalPatientList, setHospitalPatientList] = useState([]);
   const [campaignTitle, setCampaignTitle] = useState('');
+
   useEffect(() => {
-    setPatientList(props.patientList.rows);
+    if(props.editing){
+      setPatientList(props.patientList);
+    }else{
+      setPatientList(props.patientList.rows);
+    }
     setHospitalPatientList(store.getState().Patient.payload);
-    console.log("patient", props.patientList.rows)
+    console.log('patient', props.patientList.rows);
   }, []);
 
   const deletePatientFromTable = record => {
@@ -41,22 +46,31 @@ const PatientAdd = props => {
   };
 
   const handleSave = async () => {
-    let sendingData = {
-      name: campaignTitle,
-      users: patientList,
-      status:"sent"
-    };
-    if (campaignTitle === '') {
-      Modal.warning({
-        content: <Result status="warning" title="Please Enter the Campaign Title" />,
-      });
-    } else {
-      let response = await props.createCampaign(JSON.stringify(sendingData));
-      if (response.error === '') {
-    //   props.handlePatientEditClose();
-    window.location.href = `/campaign/${response.payload.id}`
+    if(props.editing){
+      props.handlepatientList(patientList)
+      props.handlePatientEditClose();
+    }else{
+      let sendingData = {
+        name: campaignTitle,
+        users: patientList,
+        status: 'sent',
+        email_status:'hold',
+        sms_status:'hold'
+
+      };
+      if (campaignTitle === '') {
+        Modal.warning({
+          content: <Result status="warning" title="Please Enter the Campaign Title" />,
+        });
+      } else {
+        let response = await props.createCampaign(JSON.stringify(sendingData));
+        if (response.error === '') {
+          // props.handlePatientEditClose();
+          window.location.href = `/campaign/${response.payload.id}`;
+        }
       }
     }
+    
   };
   const columns = [
     {
@@ -94,18 +108,20 @@ const PatientAdd = props => {
       message.success('patient added');
     }
   };
-
   return (
     <div>
       <div>
         <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
           <Col xs={24} xl={12}>
+            {!props.editing &&
             <TextField
-              required
-              label="Title"
-              margin="normal"
-              onChange={e => setCampaignTitle(e.target.value)}
-            />
+            required
+            label="Title"
+            margin="normal"
+            onChange={e => setCampaignTitle(e.target.value)}
+          />
+            }
+
           </Col>
           <Col xs={24} xl={12}>
             <Autocomplete

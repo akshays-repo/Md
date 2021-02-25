@@ -34,25 +34,6 @@ const Dashboard_Campaigns = props => {
     props.fetchCampaigns();
   }, [props.changed]);
 
-  console.log("provider", props.payload)
-
-
-//   clicked: null
-// createdAt: "2021-02-24T10:30:59.000Z"
-// email_status: null
-// email_sub: null
-// email_template: null
-// hospitalId: 43
-// id: 4
-// name: "Cam 3"
-// open_rate: null
-// recipients: null
-// sms_status: null
-// sms_template: null
-// status: null
-// total_sent: null
-
-
   const columns = [
     {
       title: 'Name',
@@ -93,34 +74,15 @@ const Dashboard_Campaigns = props => {
     {
       title: '',
       key: 'action',
-      render: (text, record) => (
+      render: (record) => (
         <Space size="middle" className="edit-color icon-button">
-          <i className="fa fa-edit"></i>
+          <i onClick={() =>  window.location.href = `/campaign/${record.id}`} className="fa fa-edit"></i>
         </Space>
       ),
     },
   ];
 
-  const data = [
-    {
-      key: '1',
-      name: 'John Brown',
-      age: 32,
-      address: 'New York No. 1 Lake Park',
-    },
-    {
-      key: '2',
-      name: 'Jim Green',
-      age: 42,
-      address: 'London No. 1 Lake Park',
-    },
-    {
-      key: '3',
-      name: 'Joe Black',
-      age: 32,
-      address: 'Sidney No. 1 Lake Park',
-    },
-  ];
+
 
   const Campaigns = () => {
     return (
@@ -199,6 +161,7 @@ const mapDispatchToProps = dispatch => ({
         contentType: 'JSON',
       }),
     ),
+    
   editUser: (param, values) =>
     dispatch(actionCreator({ method: 'POST', action_type: 'EDIT_USER', param, values })),
   deleteUser: id => dispatch(actionCreator({ method: 'DELETE', action_type: 'DELETE_USER', id })),

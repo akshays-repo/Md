@@ -99,6 +99,7 @@ export const backend_api = {
   CREATE_CAMPAIGN:'/api/backend/v1/campaign',
   FETCH_CAMPAIGN:'/api/backend/v1/campaigns',
   FETCH_CAMPAIGN_ID:'/api/backend/v1/campaigns',
+  EDIT_CAMPAIGN:'/api/backend/v1/campaigns',
 
   GET_ALL_PATIENTS:"/api/backend/v1/getpatients",
 

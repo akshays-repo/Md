@@ -71,9 +71,8 @@ export default function Editor(props) {
     <div>
       <div>
         {textarea && (
-          <textarea placeholder={placeholder} className="kt-tinymce-4" onChange={onChange}>
-            {editorHtml}
-          </textarea>
+          <textarea defaultValue={editorHtml} placeholder={placeholder} className="kt-tinymce-4" onChange={onChange}/>
+    
         )}
       </div>
     </div>

@@ -10,42 +10,46 @@ const { Panel } = Collapse;
 const EmailEdit = props => {
   const [subject, setSubject] = useState('');
   const [emailContent, setEmailContent] = useState('');
-  // useEffect (() => {
-  //     console.log("ashdhsd", props)
-  //     setContent(props.email_content)
-  // }, [])
-
+  const [emailStatus , setEmailStatus] = useState(props.emailStatus === 'active' ? true : false)
   const handleEditorChange = e => {
     setEmailContent(e);
     props.handleEmailEdit(e);
   };
 
+  useEffect(() => {
+    setEmailContent(props.emailContent);
+    console.log("asdasd", props.emailStatus)
+    // if(props.emailStatus === 'active' ){
+    //   setEmailStatus(true)
+    // console.log("asdasd hai" , emailStatus)
+
+    // }
+
+  },);
   return (
     <div className="remindersEmail">
-               <Switch
-                  defaultChecked={props.smsStatus}
-                  onChange={e => props.handleSmsEditStatus(e)}
-                />
-      <Row gutter={[16, 16]}  
-      //style={{pointerEvents:"none" , opacity:"0.7"} }
-      
+      <Switch
+        defaultChecked={emailStatus}
+        onChange={e => props.handlEmailStatus(e)}
+      />
+      <Row
+        gutter={[16, 16]}
+        //style={{pointerEvents:"none" , opacity:"0.7"} }
       >
         <Col xs={24} lg={12}>
           <div>
- 
-                <TextField
-                  type="text"
-                  required
-                  value={props.emailSubject}
-                  label="Subject"
-                  onChange={e => props.handleEmailEditSubject(e.target.value)}
-                />
-
+            <TextField
+              type="text"
+              required
+              value={props.emailSubject}
+              label="Subject"
+              onChange={e => props.handleEmailEditSubject(e.target.value)}
+            />
           </div>
           <div>
             <Editor
               placeholder="Write something..."
-              editorHtml={props.emailContent || ''}
+              editorHtml={emailContent}
               onChange={handleEditorChange}
             />
           </div>
