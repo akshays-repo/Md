@@ -60,7 +60,7 @@ const AddAppointmentTime = props => {
   const addAppointment = () => {
     innerForm.current.setFieldValue('formData', [
       ...innerForm.current.values.formData,
-      { type: 'daily', FromTime: '09:00 AM', ToTime: '05:20 PM', frequency: null, unit: null },
+      { type: 'daily', FromTime: '09:00 AM', ToTime: '05:00 PM', frequency: null, unit: null },
     ]);
   };
 

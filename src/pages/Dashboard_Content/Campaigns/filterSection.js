@@ -20,7 +20,7 @@ const FilterSection = props => {
   const [appointmentStart, setAppointmentStart] = useState('');
   const [appointmentEnd, setAppointmentEnd] = useState('');
 
-  const [providerId, setProvider] = useState('');
+  const [providerId, setProvider] = useState();
   const [providerList, setProviderList] = useState([]);
 
   const [patientAddVisible, setPatientAddVisible] = useState(false);
@@ -103,14 +103,20 @@ const FilterSection = props => {
       console.log('rows', props.payload, response.payload.rows);
       if (response.error === '') {
         setPatientList(response.payload);
-        console.log("laskjdfh",patientList,)
+        console.log('laskjdfh', patientList);
         handlePatientEditOpen();
       }
     } else {
       let response = await props.fetchPatients({
         fromAge: ageRangeFrom,
         appointment_startDate: appointmentStart,
+        toAge: ageRangeTo,
+        appointment_endDate: appointmentEnd,
+        lastseen_startDate: lastSeenAfter,
+        lastseen_endDate: lastSeenBefore,
+        provider_id: providerId,
       });
+
       if (response.error === '') {
         setPatientList(response.payload);
         handlePatientEditOpen();

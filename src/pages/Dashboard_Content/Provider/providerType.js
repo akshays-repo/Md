@@ -91,7 +91,7 @@ const ProviderType = props => {
         onCancel={closeEditModal}
         destroyOnClose
       >
-        <ProviderTypeForm id={editId} values={itemRecord} {...props} />
+        <ProviderTypeForm closeEditModal={closeEditModal}   id={editId} values={itemRecord} {...props} />
       </Modal>
     </div>
   );

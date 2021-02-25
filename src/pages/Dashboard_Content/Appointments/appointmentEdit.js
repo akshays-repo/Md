@@ -27,15 +27,11 @@ const AppointmentEdit = props => {
     setPatientDetails(props.view.patiant);
   }, []);
 
-  useEffect(() => {
-    console.log('jcxcxkcxcj', props.view);
-  });
+
 
   const handleFormSubmission = async values => {
-    console.log('asdkjhf', values);
      let contentType = 'JSON';
     await props.editAppointment(props.view.id , JSON.stringify(values),contentType)
-    // const response = await props.createOnlineForm(JSON.stringify({ ...values }), contentType);
 
   };
 
