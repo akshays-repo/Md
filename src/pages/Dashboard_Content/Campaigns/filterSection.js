@@ -23,9 +23,9 @@ const FilterSection = props => {
   const [providerId, setProvider] = useState('');
   const [providerList, setProviderList] = useState([]);
 
-  const [patientAddVisible , setPatientAddVisible] =useState(false)
+  const [patientAddVisible, setPatientAddVisible] = useState(false);
 
-  const [patientList , setPatientList] = useState([])
+  const [patientList, setPatientList] = useState([]);
   const [toggleState, setToggleState] = useState({
     allpatients: false,
     age: false,
@@ -97,20 +97,24 @@ const FilterSection = props => {
       filterSubmission();
     }
   };
-  const filterSubmission = async() => {
+  const filterSubmission = async () => {
     if (toggleState.allpatients) {
-    let response=  await props.fetchPatients();
-    console.log("prprprprp", props.payload , response)
-    if(response.error === '') {
-        setPatientList(response.payload)
-        handlePatientEditOpen()
-    }
+      let response = await props.fetchPatients();
+      console.log('rows', props.payload, response.payload.rows);
+      if (response.error === '') {
+        setPatientList(response.payload);
+        console.log("laskjdfh",patientList,)
+        handlePatientEditOpen();
+      }
     } else {
-        let response=  await props.fetchPatients({ fromAge: ageRangeFrom, appointment_startDate: appointmentStart });
-        if(response.error === '') {
-            setPatientList(response.payload)
-            handlePatientEditOpen()
-        }
+      let response = await props.fetchPatients({
+        fromAge: ageRangeFrom,
+        appointment_startDate: appointmentStart,
+      });
+      if (response.error === '') {
+        setPatientList(response.payload);
+        handlePatientEditOpen();
+      }
     }
   };
 
@@ -122,13 +126,13 @@ const FilterSection = props => {
     // window.location.href = window.location.pathname;
   };
 
-  const handlePatientEditClose = () =>{
-      setPatientAddVisible(false)
-  }
+  const handlePatientEditClose = () => {
+    setPatientAddVisible(false);
+  };
 
-  const handlePatientEditOpen= () =>{
-    setPatientAddVisible(true)
-}
+  const handlePatientEditOpen = () => {
+    setPatientAddVisible(true);
+  };
 
   const warning = () => {
     Modal.warning({
@@ -142,207 +146,221 @@ const FilterSection = props => {
       <p className="lead text-center"> Please choose who you'd like to send this to</p>
       <Space direction="horizontal">
         <div className="boxWrapper">
-        <div className="box">
-          <div className="boxInner"
-            onClick={onClickAllPatients}
-            style={{
-              background: toggleState.allpatients === true ? '#f2f7f7' : 'rgb(214 214 214)',
-            }}
-          >
-                         <span className="tickIcon" onClick={() => onClickAllPatients()}>
-              {toggleState.allpatients ? (
-                <i class="far fa-check-circle fa-lg activeClr" />
-              ) : (
-                <i class="far fa-times-circle fa-lg white" />
-              )}
-            </span>
-            <div className="text-center">
-              <div className="iconRound">
-<span><i class="fas fa-user-injured"></i></span>
-              </div>
-            <p>
-            All active patient</p>
-            </div>
-          </div>
-        </div>
-
-        <div className="box">
-        <div className="boxInner"
-            style={{
-              background: toggleState.age === true ? '#f2f7f7' : 'rgb(214 214 214)',
-            }}
-          >
-                        <span className="tickIcon" onClick={() => onClickDivs('age')}>
-              {toggleState.age ? (
-                <i class="far fa-check-circle fa-lg activeClr" />
-              ) : (
-                <i class="far fa-times-circle fa-lg white" />
-              )}
-            </span>
-            <div className="text-center">
-            <div className="iconRound">
-                <span><i class="far fa-user-friends"></i></span>
-                </div>
-            <p className="bold">Age</p>
-
-            <p style={{fontSize: '12px', height: '50px'}}>
-              Age range b/w {ageRangeFrom} and {ageRangeTo}
-            </p>
-            <Slider range step={1} defaultValue={[20, 50]} onChange={onChangeAge} />
-            </div>
-          </div>
-        </div>
-
-        <div className="box">
-        <div className="boxInner"
-            style={{
-              background: toggleState.lastseen === true ? '#f2f7f7' : 'rgb(214 214 214)',
-            }}
-          >
-                         <span className="tickIcon" onClick={() => onClickDivs('lastseen')}>
-              {toggleState.lastseen ? (
-                <i class="far fa-check-circle fa-lg activeClr" />
-              ) : (
-                <i class="far fa-times-circle fa-lg white" />
-              )}
-            </span>
-            <div className="text-center">
-            <div className="iconRound">
-                <span><i class="far fa-eye"></i></span>
-                </div>
-            <p className="bold">Last seen</p>
-
-            <TextField
-              id="date"
-              label="Last seen after date"
-              type="date"
-              //   defaultValue="2017-05-24"
-              className={''}
-              onChange={e => {
-                setLastSeenAfter(moment(e).format('YYYY-MM-DD'));
-
-                setToggleState({ ...toggleState, lastseen: true, allpatients: false });
-              }}
-              InputLabelProps={{
-                shrink: true,
-              }}
-            />
-            <TextField
-              id="date"
-              label="Last seen before date"
-              type="date"
-              //defaultValue="2017-05-24"
-              className={''}
-              onChange={e => {
-                setLastSeenBefore(moment(e).format('YYYY-MM-DD'));
-                setToggleState({ ...toggleState, lastseen: true, allpatients: false });
-              }}
-              InputLabelProps={{
-                shrink: true,
-              }}
-            />
-          </div>
-          </div>
-        </div>
-
-        <div className="box">
-        <div className="boxInner"
-            style={{
-              background: toggleState.appointment === true ? '#f2f7f7' : 'rgb(214 214 214)',
-            }}
-          >
-                        <span className="tickIcon" onClick={() => onClickDivs('appointment')}>
-              {toggleState.appointment ? (
-                <i class="far fa-check-circle fa-lg activeClr" />
-              ) : (
-                <i class="far fa-times-circle fa-lg white" />
-              )}
-            </span>
-            <div className="text-center">
-            <div className="iconRound">
-                <span><i class="far fa-calendar-check"></i></span>
-                </div>
-            <p className="bold">Appoinment</p>
-
-            <TextField
-              id="date"
-              label="Appointment Start Date"
-              type="date"
-              //   defaultValue="2017-05-24"
-              className={''}
-              onChange={e => {
-                setAppointmentStart(moment(e).format('YYYY-MM-DD'));
-                setToggleState({ ...toggleState, appointment: true, allpatients: false });
-              }}
-              InputLabelProps={{
-                shrink: true,
-              }}
-            />
-            <TextField
-              id="date"
-              label="Appointment Start End"
-              type="date"
-              //     defaultValue="2017-05-24"
-              className={''}
-              onChange={e => {
-                setAppointmentEnd(moment(e).format('YYYY-MM-DD'));
-                setToggleState({ ...toggleState, appointment: true, allpatients: false });
-              }}
-              InputLabelProps={{
-                shrink: true,
-              }}
-            />
-          </div>
-          </div>
-        </div>
-
-        <div className="box">
-          {' '}
-          <div className="boxInner"
-            style={{
-              // width: '130px',
-              // height: '200px',
-              background: toggleState.provider === true ? '#f2f7f7' : 'rgb(214 214 214)', 
-              // rgb(181 181 181)
-            }}
-          >
-                        <span className="tickIcon" onClick={() => onClickDivs('provider')}>
-              {toggleState.provider ? (
-                <i class="far fa-check-circle fa-lg activeClr" />
-              ) : (
-                <i class="far fa-times-circle fa-lg white" />
-              )}
-            </span>
-            <div className="text-center">
-            <div className="iconRound">
-                <span><i class="far fa-list-alt"></i></span>
-                </div>
-            <p className="bold">Provider{' '}</p>
-
-            <InputLabel id="demo-simple-select-label">Provider</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={''}
-              onChange={e => {
-                setProvider(e);
-                setToggleState({ ...toggleState, provider: true, allpatients: false });
+          <div className="box">
+            <div
+              className="boxInner"
+              onClick={onClickAllPatients}
+              style={{
+                background: toggleState.allpatients === true ? '#f2f7f7' : 'rgb(214 214 214)',
               }}
             >
-              {providerList.map(provider => (
-                <MenuItem value={provider.id}>{provider.fullName}</MenuItem>
-              ))}
-            </Select>
+              <span className="tickIcon" onClick={() => onClickAllPatients()}>
+                {toggleState.allpatients ? (
+                  <i class="far fa-check-circle fa-lg activeClr" />
+                ) : (
+                  <i class="far fa-times-circle fa-lg white" />
+                )}
+              </span>
+              <div className="text-center">
+                <div className="iconRound">
+                  <span>
+                    <i class="fas fa-user-injured"></i>
+                  </span>
+                </div>
+                <p>All active patient</p>
+              </div>
+            </div>
           </div>
+
+          <div className="box">
+            <div
+              className="boxInner"
+              style={{
+                background: toggleState.age === true ? '#f2f7f7' : 'rgb(214 214 214)',
+              }}
+            >
+              <span className="tickIcon" onClick={() => onClickDivs('age')}>
+                {toggleState.age ? (
+                  <i class="far fa-check-circle fa-lg activeClr" />
+                ) : (
+                  <i class="far fa-times-circle fa-lg white" />
+                )}
+              </span>
+              <div className="text-center">
+                <div className="iconRound">
+                  <span>
+                    <i class="far fa-user-friends"></i>
+                  </span>
+                </div>
+                <p className="bold">Age</p>
+
+                <p style={{ fontSize: '12px', height: '50px' }}>
+                  Age range b/w {ageRangeFrom} and {ageRangeTo}
+                </p>
+                <Slider range step={1} defaultValue={[20, 50]} onChange={onChangeAge} />
+              </div>
+            </div>
           </div>
-        </div>
+
+          <div className="box">
+            <div
+              className="boxInner"
+              style={{
+                background: toggleState.lastseen === true ? '#f2f7f7' : 'rgb(214 214 214)',
+              }}
+            >
+              <span className="tickIcon" onClick={() => onClickDivs('lastseen')}>
+                {toggleState.lastseen ? (
+                  <i class="far fa-check-circle fa-lg activeClr" />
+                ) : (
+                  <i class="far fa-times-circle fa-lg white" />
+                )}
+              </span>
+              <div className="text-center">
+                <div className="iconRound">
+                  <span>
+                    <i class="far fa-eye"></i>
+                  </span>
+                </div>
+                <p className="bold">Last seen</p>
+
+                <TextField
+                  id="date"
+                  label="Last seen after date"
+                  type="date"
+                  //   defaultValue="2017-05-24"
+                  className={''}
+                  onChange={e => {
+                    setLastSeenAfter(moment(e).format('YYYY-MM-DD'));
+
+                    setToggleState({ ...toggleState, lastseen: true, allpatients: false });
+                  }}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+                <TextField
+                  id="date"
+                  label="Last seen before date"
+                  type="date"
+                  //defaultValue="2017-05-24"
+                  className={''}
+                  onChange={e => {
+                    setLastSeenBefore(moment(e).format('YYYY-MM-DD'));
+                    setToggleState({ ...toggleState, lastseen: true, allpatients: false });
+                  }}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="box">
+            <div
+              className="boxInner"
+              style={{
+                background: toggleState.appointment === true ? '#f2f7f7' : 'rgb(214 214 214)',
+              }}
+            >
+              <span className="tickIcon" onClick={() => onClickDivs('appointment')}>
+                {toggleState.appointment ? (
+                  <i class="far fa-check-circle fa-lg activeClr" />
+                ) : (
+                  <i class="far fa-times-circle fa-lg white" />
+                )}
+              </span>
+              <div className="text-center">
+                <div className="iconRound">
+                  <span>
+                    <i class="far fa-calendar-check"></i>
+                  </span>
+                </div>
+                <p className="bold">Appoinment</p>
+
+                <TextField
+                  id="date"
+                  label="Appointment Start Date"
+                  type="date"
+                  //   defaultValue="2017-05-24"
+                  className={''}
+                  onChange={e => {
+                    setAppointmentStart(moment(e).format('YYYY-MM-DD'));
+                    setToggleState({ ...toggleState, appointment: true, allpatients: false });
+                  }}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+                <TextField
+                  id="date"
+                  label="Appointment Start End"
+                  type="date"
+                  //     defaultValue="2017-05-24"
+                  className={''}
+                  onChange={e => {
+                    setAppointmentEnd(moment(e).format('YYYY-MM-DD'));
+                    setToggleState({ ...toggleState, appointment: true, allpatients: false });
+                  }}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="box">
+            {' '}
+            <div
+              className="boxInner"
+              style={{
+                // width: '130px',
+                // height: '200px',
+                background: toggleState.provider === true ? '#f2f7f7' : 'rgb(214 214 214)',
+                // rgb(181 181 181)
+              }}
+            >
+              <span className="tickIcon" onClick={() => onClickDivs('provider')}>
+                {toggleState.provider ? (
+                  <i class="far fa-check-circle fa-lg activeClr" />
+                ) : (
+                  <i class="far fa-times-circle fa-lg white" />
+                )}
+              </span>
+              <div className="text-center">
+                <div className="iconRound">
+                  <span>
+                    <i class="far fa-list-alt"></i>
+                  </span>
+                </div>
+                <p className="bold">Provider </p>
+
+                <InputLabel id="demo-simple-select-label">Provider</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={''}
+                  onChange={e => {
+                    setProvider(e);
+                    setToggleState({ ...toggleState, provider: true, allpatients: false });
+                  }}
+                >
+                  {providerList.map(provider => (
+                    <MenuItem value={provider.id}>{provider.fullName}</MenuItem>
+                  ))}
+                </Select>
+              </div>
+            </div>
+          </div>
         </div>
       </Space>
       <div className="text-center">
-        <button className="view-button mt8" onClick={e => checkValidation(e)}>NEXT</button>
+        <button className="view-button mt8" onClick={e => checkValidation(e)}>
+          NEXT
+        </button>
       </div>
-
-
 
       <Modal
         title="CREATE A NEW  CAMPAIGN"
@@ -351,7 +369,12 @@ const FilterSection = props => {
         footer={false}
         width={800}
       >
-        <PatientAdd handlePatientEditClose={handlePatientEditClose} handlePatientEditOpen={handlePatientEditOpen} patientList={patientList} {...props} />
+        <PatientAdd
+          handlePatientEditClose={handlePatientEditClose}
+          handlePatientEditOpen={handlePatientEditOpen}
+          patientList={patientList}
+          {...props}
+        />
       </Modal>
     </div>
   );

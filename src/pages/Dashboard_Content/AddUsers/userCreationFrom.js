@@ -58,7 +58,6 @@ const UserCreationForm = props => {
 
   const handleFormSubmission = async(values) => {
     let data = await getFormDataA({ ...values});
-    console.log("ssahdhkzchbcxzBM<",props.editId )
     if(props.editId){
      const {userTypeId , isAdmin , ...rest} = values
      let editData = await getFormDataA({...rest})
@@ -80,7 +79,6 @@ const UserCreationForm = props => {
             // fullName:'',
             email: '',
             status: 'active',
-            provider_typeId: '',
             phone: '',
             password: '',
             c_password: '',

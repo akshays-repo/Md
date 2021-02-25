@@ -40,7 +40,7 @@ const Dashboard_Appointments = props => {
       e.preventDefault();
       let parms = {};
       if (searchKey) parms.search = searchKey;
-      if (branchId) parms.search = searchKey;
+      if (branchId) parms.branch_id = branchId;
       if (paymentStatus) parms.payment_status = paymentStatus;
       if (status) parms.status = status;
       if (fromData) parms.fromDate = fromData;
@@ -115,7 +115,7 @@ const Dashboard_Appointments = props => {
           <div>
             <Select
               value={record.payment_status}
-              style={{ width: 120 }}
+              // style={{ width: 120 }}
               onChange={e => handleChangePaymentStatus(record.id, e)}
               className={record.payment_status}
             >
@@ -136,7 +136,7 @@ const Dashboard_Appointments = props => {
           <div>
             <Select
               value={record.status}
-              style={{ width: 120 }}
+              // style={{ width: 120 }}
               className={record.status}
               onChange={e => handleChangeStatus(record.id, e)}
             >
@@ -184,32 +184,44 @@ const Dashboard_Appointments = props => {
 
     const filterSection = () =>{
       return (
+
       <Space direction={isMobile ? 'vertical' : "horizontal"}>
+          <Row gutter={4} className="inlineFilter">
+          <Col xl={3}>
+
             <Input
               value={searchKey}
               type="text"
               placeholder=" Name Email or Phone"
               onChange={handleChangeSearch}
+              style={{ width: '100%' }}
             />
+</Col>
+<Col xl={3}>
 
             <DatePicker
               placeholder="From Date"
               onChange={e => setFromDate(moment(e).format('YYYY-MM-DD'))}
               value={fromData !== "" ? moment(fromData) : ""}
-              // style={{ width: 200 }}
+              style={{ width: '100%' }}
             />
+            </Col>
+            <Col xl={3}>
+
             <DatePicker
               placeholder="To Date"
               onChange={e => setToDate(moment(e).format('YYYY-MM-DD'))}
               value={toData !== "" ? moment(toData) : ""}
-              // style={{ width: 200 }}
+              style={{ width: '100%' }}
             />
+</Col>
+<Col xl={3}>
 
             <Select
               value={paymentStatus}
               placeholder="Payment"
               onChange={e => setPaymentStatus(e)}
-              // style={{ width: 200 }}
+              style={{ width: '100%' }}
             >
               <Option value="">All</Option>
 
@@ -219,12 +231,14 @@ const Dashboard_Appointments = props => {
               <Option value="requested">Requested</Option>
               <Option value="manually_paid">Manually Paid</Option>
             </Select>
+</Col>
+<Col xl={4}>
 
             <Select
               value={branchId}
               onChange={e => setBranchId(e)}
               placeholder="Branch"
-              // style={{ width: 200 }}
+              style={{ width: '100%' }}
             >
               <Option value="">All</Option>
 
@@ -234,12 +248,14 @@ const Dashboard_Appointments = props => {
                 </Option>
               ))}
             </Select>
+</Col>
+<Col xl={3}>
 
             <Select
               value={status}
               placeholder="status"
               onChange={e => setStatus(e)}
-              // style={{ width: 200 }}
+              style={{ width: '100%' }}
             >
               <Option value="">All</Option>
               <Option value="pending">Pending</Option>
@@ -247,7 +263,10 @@ const Dashboard_Appointments = props => {
               <Option value="cancelled">Cancelled</Option>
               <Option value="completed">Completed</Option>
             </Select>
-            <div className="buttonInline ">
+            </Col>
+            <Col xl={5}>
+
+            <div className="buttonInline">
             <button className="view-button button-square mr2" onClick={handleSearchSubmission}>
               Filter
             </button>
@@ -255,6 +274,8 @@ const Dashboard_Appointments = props => {
               clear
             </button>
             </div>
+            </Col>
+        </Row>
           </Space>
     )}
 
@@ -286,6 +307,7 @@ const Dashboard_Appointments = props => {
         visible={props.modal2}
         footer={false}
         onCancel={() => store.dispatch({ type: 'CLOSE_VIEW_APPOINTMENT_MODAL' })}
+        destroyOnClose
       >
         <AppointmentView {...props} />
       </Modal>
@@ -293,6 +315,7 @@ const Dashboard_Appointments = props => {
         visible={props.modal1}
         footer={false}
         onCancel={() => store.dispatch({ type: 'CLOSE_EDIT_APPOINTMENT_MODAL' })}
+        destroyOnClose
       >
         <AppointmentEdit {...props} />
       </Modal>

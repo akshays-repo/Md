@@ -77,6 +77,9 @@ width: 175px;
       margin-bottom: 15px;
       display: flex;
       justify-content: flex-end;
+      .ant-space-item {
+        width: 100%;
+      }
     }
   }
 }

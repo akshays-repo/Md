@@ -40,8 +40,9 @@ const CustomFormReview = props => {
           {forms.custom_types === 'drop-down' ? (
             <div>
               {' '}
-              <p>{forms.Key_name}</p>
-              <Select style={{ width: 120 }}>
+              <p className="mb0">{forms.Key_name}</p>
+              <Select
+               style={{ width:150 }}>
                 {forms.values.map(option => (
                   <Select.Option value={option}>{option}</Select.Option>
                 ))}
@@ -55,8 +56,10 @@ const CustomFormReview = props => {
           {forms.custom_types === 'date' ? (
             <div>
               {' '}
-              <p>{forms.Key_name}</p>
-              <DatePicker defaultValue={moment('2015/01/01', 'YYYY/MM')} format={'YYYY/MM'} />
+              <p className="mb0">{forms.Key_name}</p>
+              <DatePicker
+              style={{ width:150 }}
+               defaultValue={moment('2015/01/01', 'YYYY/MM')} format={'YYYY/MM'} />
               <p></p>
             </div>
           ) : (
@@ -66,8 +69,10 @@ const CustomFormReview = props => {
           {forms.custom_types === 'number' ? (
             <div>
               {' '}
-              <p>{forms.Key_name}</p>
-              <InputNumber min={1} max={10} defaultValue={3} />
+              <p className="mb0">{forms.Key_name}</p>
+              <InputNumber min={1} max={10} defaultValue={3} 
+              style={{ width:150 }}
+              />
               <p></p>
             </div>
           ) : (

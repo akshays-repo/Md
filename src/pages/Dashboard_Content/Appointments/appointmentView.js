@@ -16,6 +16,8 @@ const AppointmentView = props => {
     setResponse(props.view.response);
     setPatientDetails(props.view.patiant);
   });
+
+  console.log("alskdjh",details.email?.toLowerCase())
   return (
     <div className="appointment-view">
       <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }} className="mt6">
@@ -27,7 +29,7 @@ const AppointmentView = props => {
         </Col>
         <Col xs={24} xl={12}>
           <p>Email </p>
-          <p className="title">{details.email}</p>
+          <p className="title">{details.email?.toLowerCase()}</p>
         </Col>
         <Col xs={24} xl={12}>
           <p>Phone </p> <p className="title"> {details.phone}</p>
@@ -49,7 +51,7 @@ const AppointmentView = props => {
         </Col>
         <Col xs={24} xl={12}>
           <p>Appointment Time slot </p>
-          <p className="title"> {appointmentType?.time_slot} </p>
+          <p className="title"> {appointmentType?.time_slot} minutes</p>
         </Col>
         <Col xs={24} xl={12}>
           <p>Payment Status </p> <p className="title">{details.payment_status}</p>

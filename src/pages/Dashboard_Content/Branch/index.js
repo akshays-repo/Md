@@ -28,6 +28,7 @@ const Dashboard_Branch = props => {
             onCancel={() => store.dispatch({ type: 'CLOSE_CREATE_BRANCH_MODAL' })}
             width={600}
             footer={null}
+            destroyOnClose
           >
             <BranchCreationForm {...props} />
           </Modal>
@@ -57,8 +58,8 @@ const mapDispatchToProps = dispatch => ({
     dispatch(actionCreator({ method: 'GET', action_type: 'FETCH_BRANCH', param })),
   addBranch: values =>
     dispatch(actionCreator({ method: 'POST', action_type: 'CREATE_BRANCH', values })),
-  editBranch: (id, values) =>
-    dispatch(actionCreator({ method: 'PUT', action_type: 'EDIT_BRANCH', id, values })),
+  editBranch: (id, values ,param) =>
+    dispatch(actionCreator({ method: 'PUT', action_type: 'EDIT_BRANCH', id, values , param})),
   deleteBranch: id =>
     dispatch(actionCreator({ method: 'DELETE', action_type: 'DELETE_BRANCH', id })),
   filterBranch: param =>
