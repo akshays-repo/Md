@@ -15,6 +15,8 @@ const ProviderTypeForm = props => {
       const { name, status, hospitalId } = values;
       let filterValues = { name, status, hospitalId };
       await props.editProviderType(props.id, JSON.stringify(filterValues), contentType);
+      props.closeEditModal();
+
     } else {
       await props.addProviderType(JSON.stringify(values), contentType);
     }

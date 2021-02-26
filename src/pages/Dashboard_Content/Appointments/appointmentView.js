@@ -16,6 +16,7 @@ const AppointmentView = props => {
     setResponse(props.view.response);
     setPatientDetails(props.view.patiant);
   });
+  //let email =details.email.toLowerCase()
 
   console.log("alskdjh",details.email?.toLowerCase())
   return (

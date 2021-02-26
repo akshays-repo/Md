@@ -514,6 +514,8 @@ export const UnavailableSchema = Yup.object().shape({
 
 
 export const hospitalUser = Yup.object().shape({
+  fullName: Yup.string()
+  .required('Please enter Full Name'),
   email: Yup.string()
   .required('Please enter email address')
   .email('Please enter valid email'),

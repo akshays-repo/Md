@@ -12,22 +12,25 @@ import { store } from '../../../reducers/configureStore';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import AppointmentView from '../Appointments/appointmentView';
-import AppointmentEdit from '../Appointments/appointmentView';
+import AppointmentEdit from '../Appointments/appointmentEdit';
 
 
 const { Option } = Select;
 //THIS IS ANT DESIGN TABLE : PLEASE REFER THIS IF YOU STUCKED : https://ant.design/components/table/
 const PatientAppointment = props => {
   const [currentButton, setCurrentButton] = useState(1);
-  const handleChangePaymentStatus = () => {};
+
   
+  const handleChangePaymentStatus = async (id, payment_status) => {
+    props.editStatusAppointment(id, { payment_status });
+  };
+
   const handleChangeStatus = async (id, status) => {
     props.editStatusAppointment(id, { status });
   };
 
   useEffect(() => {
     props.fetchAppointmentHome({ fromDate: moment().format('L'), toDate: moment().format('L')})
-    setCurrentButton(1)
     getToday();
   }, [props.changed]);
 
@@ -38,7 +41,7 @@ const PatientAppointment = props => {
   }
   const getToday =() =>{
     setCurrentButton(1)
-    props.fetchAppointmentHome({ fromDate: moment().format('L'), toDate: moment().format('L')})
+    props.fetchAppointmentHome({ fromDate: moment().format('L'), toDate: moment().add(1,'days').format('L')})
   }
 
 
@@ -47,6 +50,10 @@ const PatientAppointment = props => {
     store.dispatch({ type: 'OPEN_VIEW_APPOINTMENT_MODAL' });
   };
 
+  const editAppointment = async id => {
+    await props.viewAppointment(id);
+    store.dispatch({ type: 'OPEN_EDIT_APPOINTMENT_MODAL' });
+  };
 
   const columns = [
     {
@@ -102,7 +109,7 @@ const PatientAppointment = props => {
       render: record => (
         <div>
          <Select
-              defaultValue={record.status}
+              value={record.status}
               style={{ width: 120 }}
               className={record.status}
               onChange={e => handleChangeStatus(record.id, e)}
@@ -129,7 +136,7 @@ const PatientAppointment = props => {
           </span>
           <span
             className="edit-color icon-button"
-            onClick={() => store.dispatch({ type: 'OPEN_EDIT_APPOINTMENT_MODAL' })}
+           onClick={() =>editAppointment(record.id) }
           >
             {' '}
             <i className="fa fa-edit"></i>{' '}
@@ -186,7 +193,7 @@ const PatientAppointment = props => {
         footer={false}
         onCancel={() => store.dispatch({ type: 'CLOSE_EDIT_APPOINTMENT_MODAL' })}
       >
-        <AppointmentEdit {...props} />
+        <AppointmentEdit editAppointment={editAppointment}  {...props} />
       </Modal>
     </div>
   );
@@ -221,6 +228,10 @@ const mapDispatchToProps = dispatch => ({
 
     deleteAppointment: id =>
     dispatch(actionCreator({ method: 'DELETE', action_type: 'DELETE_APPOINTMENT', id })),
+
+    editAppointment: (id, values ,contentType) =>
+    dispatch(actionCreator({ method: 'PUT', action_type: 'EDIT_APPOINTMENT', id, values ,contentType })),
+  
 });
 
 export default connect(mapStoreToProps, mapDispatchToProps)(PatientAppointment);
