@@ -84,7 +84,7 @@ const FormsFillingSection = props => {
   });
 
   const resultSucess = (
-    <Result status="success" title="Successfully Booked the Appoinment" subTitle="Thank you" />
+    <Result status="success" title="Successfully Submitted the Form" subTitle="Thank you" />
   );
 
   const onOkay = () => {

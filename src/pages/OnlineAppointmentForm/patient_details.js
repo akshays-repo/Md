@@ -123,10 +123,14 @@ export const PatientDetails = props => {
       </span>
       <h3>Please enter your exact information</h3> <Divider />
       <div className="">
-        <Row> {generateForm(formField)} </Row>
+        <Row gutter={16} className="pt5"> {generateForm(formField)} </Row>
       </div>{' '}
+      <Row>
+      <Col xs={24} xl={12}>
       {customFormField?.map((forms, index) => (
         <div>
+          
+        
           {forms.custom_types === 'text' || forms.custom_types === 'note' ? (
             <div>
               {' '}
@@ -154,6 +158,7 @@ export const PatientDetails = props => {
           ) : (
             ''
           )}
+         
           {forms.custom_types === 'checkbox' ? (
             <div>
               {' '}
@@ -171,7 +176,7 @@ export const PatientDetails = props => {
           ) : (
             ''
           )}
-
+ 
           {forms.custom_types === 'drop-down' ? (
             <div>
               {' '}
@@ -182,7 +187,7 @@ export const PatientDetails = props => {
               <Select
                 required={forms.required}
                 onChange={e => handleChange(e, index)}
-                style={{ width: 120 }}
+                style={{ width: 170 }}
               >
                 {forms.values.map(option => (
                   <Select.Option value={option}>{option}</Select.Option>
@@ -205,6 +210,7 @@ export const PatientDetails = props => {
                 required={forms.required}
                 onChange={e => handleChange(e, index)}
                 format={'YYYY/MM'}
+                style={{ width: 170 }}
               />
               <p></p>
             </div>
@@ -224,14 +230,19 @@ export const PatientDetails = props => {
                 onChange={e => handleChange(e, index)}
                 min={1}
                 max={100}
+                style={{ width: 170 }}
               />
               <p></p>
             </div>
           ) : (
             ''
           )}
+
         </div>
+                
       ))}
+        </Col>
+                  </Row>
     </>
   );
 };

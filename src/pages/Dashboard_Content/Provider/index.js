@@ -84,7 +84,7 @@ const Dashboard_Provider = props => {
               onClick={() => store.dispatch({ type: 'OPEN_PROVIDER_CREATE_MODAL' })}
               className="button-square"
             >
-              Create a New Provider
+              Create New Provider
             </Button>
           </div>
         </div>

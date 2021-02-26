@@ -250,15 +250,15 @@ const BranchProvider = props => {
       <Col span={24} className="pt2 pb2">
         <Row align="middle">
           <Col span="1"></Col>
-          <Col span="11">
+          <Col span="9">
             <span className="smallText">Availability</span>
           </Col>
-          <Col span="12" className="availDate">
+          <Col span="14" className="availDate">
             {' '}
             <Carousel ref={timeRef} {...carousel_props}>
               {datelist.map((result, i) => {
                 return (
-                  <div className="dateSlide" key={i} style={{ textAlign: 'center', padding: 5 }}>
+                  <div className="dateSlide pl4" key={i} style={{ textAlign: 'center', padding: 5 }}>
                     <label style={{ margin: '0px 8px' }}>{result.day}</label>
                     <br />
                     <label className="datebold">{result.dm}</label>
@@ -274,10 +274,10 @@ const BranchProvider = props => {
         {!loading ? (
           props.provider.map((result, i) => {
             return (
-              <Row align="middle" key={result.id}>
-                <Col span="10">
+              <Row align="top" key={result.id}>
+                <Col span="10 pt3 pb3">
                   <Row style={{ margin: 10, padding: 0 }}>
-                    <Col span="4">
+                    <Col span="3">
                       <Avatar
                         style={{
                           color: 'white',
@@ -289,7 +289,7 @@ const BranchProvider = props => {
                         }
                       ></Avatar>
                     </Col>
-                    <Col span="20">
+                    <Col span="21">
                       <Row>
                         <Col style={{ fontSize: 12 }} span={24}>
                           {result.provider?.provider_type?.name?.toUpperCase() || ''}
@@ -301,7 +301,7 @@ const BranchProvider = props => {
                     </Col>
                   </Row>
                 </Col>
-                <Col span="13">
+                <Col span="14" className="timeslideRight pt4 pb4">
                   <Carousel
                     ref={el => {
                       scheduleRef.current[i] = el;

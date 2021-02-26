@@ -10,14 +10,7 @@ export const CampaignReducer = (state = CampaignState, action) => {
     case 'CREATE_CAMPAIGN':
       message.success('CAMPAIGN CREATED SUCCESSFULLY');
       return { error: action.error, message: action.message, modal: false, changed: true };
-    case 'FETCH_CAMPAIGN_PATIENTS':
-      return {
-        error: action.error,
-        payload: action.payload.rows,
-        message: action.message,
-        changed: false,
-        modal:true
-      };
+      
     case 'EDIT_CAMPAIGN':
       return {
         error: action.error,
@@ -25,6 +18,15 @@ export const CampaignReducer = (state = CampaignState, action) => {
         message: action.message,
         changed: true,
       };
+
+      case'FETCH_CAMPAIGN':
+      return {
+        error: action.error,
+        payload: action.payload.rows,
+        message: action.message,
+        changed: false,
+      };
+
     case 'FILTER_CAMPAIGN':
       return { error: action.error, payload: action.payload, message: action.message };
     case 'DELETE_CAMPAIGN':

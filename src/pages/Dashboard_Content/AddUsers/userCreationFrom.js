@@ -20,11 +20,11 @@ import { hospitalUser ,hospitaEditlUser } from '_utils/Schemas';
 
 const UserCreationForm = props => {
   const formField = [
-    // {
-    //   label: 'Full Name',
-    //   name: 'fullName',
-    //   type: 'text',
-    // },
+    {
+      label: 'Full Name',
+      name: 'fullName',
+      type: 'text',
+    },
     {
       label: 'Email',
       name: 'email',
@@ -58,7 +58,6 @@ const UserCreationForm = props => {
 
   const handleFormSubmission = async(values) => {
     let data = await getFormDataA({ ...values});
-    console.log("ssahdhkzchbcxzBM<",props.editId )
     if(props.editId){
      const {userTypeId , isAdmin , ...rest} = values
      let editData = await getFormDataA({...rest})
@@ -77,10 +76,9 @@ const UserCreationForm = props => {
         enableReinitialize={true}
         initialValues={
           props.editData || {
-            // fullName:'',
+            fullName:'',
             email: '',
             status: 'active',
-            provider_typeId: '',
             phone: '',
             password: '',
             c_password: '',

@@ -98,7 +98,7 @@ const TemplateActions = props => {
         <Col xs={24} lg={12} offset={isMobile ? '' : 6}>
           <div className="templateBox">
             <div className="header">
-              <h5>Reminders</h5>
+           {props.templateActions?.length  > 0 ? <h5>Reminders</h5> :  <h5>!! No Actions  Found for this Template </h5>  }
             </div>
         {props.templateActions?.map(action => {
           color = !color

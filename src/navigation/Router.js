@@ -114,6 +114,12 @@ const routes = [
     authorize: true,
   },
   {
+    path: '/campaign/:id',
+    component: loadable(() => import('../pages/Dashboard_Content/Campaigns/editCampaign')),
+    exact: true,
+    authorize: true,
+  },
+  {
     path: '/forms/:id',
     component: loadable(() => import('../pages/FormsFilling/')),
     exact: true,

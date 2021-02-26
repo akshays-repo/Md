@@ -37,8 +37,11 @@ const BranchListTable = props => {
   };
 
   const handleMenuClick = async( e , id , data) => {
-    const values = await getFormData({ ...data, userTypeId: 3, status: e });
-    props.editBranch(id, values);
+    const sendingData = {
+      userTypeId: 3
+    }
+    const values = await getFormData({ ...sendingData});
+    props.editBranch(id,values, {status: e});
   };
   const menu = <Menu items={menuItems} onClick={handleMenuClick} />;
 
@@ -122,6 +125,7 @@ const BranchListTable = props => {
           onCancel={handleCancel}
           visible={props.modal1}
           footer={false}
+          destroyOnClose
         >
           <BranchCreationForm id={editId} values={editData} {...props} />
         </Modal>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Modal, Tag, Space, Input, Button, Radio, Select, Form } from 'antd';
+import { Table, Modal, Tag, Space, Row, Col, Input, Button, Radio, Select, Form } from 'antd';
 import AddAppointmentTime from './addAppointmentTime';
 import { store } from '../../../reducers/configureStore';
 import ProviderCreationForm from './providerCreationForm';
@@ -224,28 +224,23 @@ const ProviderTable = props => {
 
 const filterSection = () =>{
   return(
-    <Space direction={isMobile ? "vertical" :"horizontal"}>
+    <Space direction={isMobile ? "vertical" :"horizontal"}  style={{ width: '100%' }}>
+        <Row gutter={4} className="inlineFilter">
+          <Col xl={4}>
   <Input
     type="text"
     value={searchKey}
     placeholder=" Name Email or Phone"
     onChange={handleChangeSearch}
+    style={{ width: '100%' }}
   />
+</Col>
 
-  {/* <Select
-    placeholder="Appointment Type"
-    onChange={e => setAppointmentTypeId(e)}
-    style={{ width: 150 }}
-  >
-    {props.appointment_type?.map(type => (
-      <Option value={type.id}>{type.name}</Option>
-    ))}
-  </Select> */}
-
+<Col xl={4}>
   <Select
     onChange={e => setBranchId(e)}
     placeholder="Branch"
-    style={{ width: 200 }}
+    style={{ width: '100%' }}
     value={branchId}
   >
               <Option value="">All</Option>
@@ -254,11 +249,12 @@ const filterSection = () =>{
       <Option value={branch.id}>{branch.fullName}</Option>
     ))}
   </Select>
-
+</Col>
+<Col xl={5}>
   <Select
     placeholder="provider type"
     onChange={e => setProviderTypeId(e)}
-    style={{ width: 200 }}
+    style={{ width: '100%' }}
     value={providerTypeId}
   >
               <Option value="">All</Option>
@@ -267,18 +263,21 @@ const filterSection = () =>{
       <Option value={type.id}>{type.name}</Option>
     ))}
   </Select>
-
+</Col>
+<Col xl={6}>
   <Select
     onChange={e => setStatus(e)}
     placeholder="status"
     value={status}
-    style={{ width: 200 }}
+    style={{ width: '100%' }}
   >
               <Option value="">All</Option>
 
     <Option value="active">ACTIVE</Option>
     <Option value="hold">HOLD</Option>
   </Select>
+  </Col>
+  <Col xl={5}>
 <div className="buttonInline">
   <button className="view-button mr2 button-square" onClick={handleSearchSubmission}>
     Filter
@@ -287,6 +286,8 @@ const filterSection = () =>{
     clear
   </button>
   </div>
+  </Col>
+  </Row>
 </Space>
   )
   
@@ -296,7 +297,7 @@ const filterSection = () =>{
   return (
     <div className="providerFilter">
       <div className="search">
-      <div>{ isMobile ?<button button className="view-button button-square" onClick={() => setMobileFilter(true)}>Filter</button>  : filterSection()}</div>
+      <div style={{width:'100%'}}>{ isMobile ?<button button className="view-button button-square" onClick={() => setMobileFilter(true)}>Filter</button>  : filterSection()}</div>
       </div>
 
       <Table scroll={{ x: 240 }} columns={columns} dataSource={props.provider} />
@@ -313,7 +314,7 @@ const filterSection = () =>{
       </Modal>
       <Modal
         footer={false}
-        title={`EDIT ${editData.fullName}`}
+        title={` ${editData.fullName}`}
         visible={props.modal1}
         onOk={handleOk}
         onCancel={handleCancel}

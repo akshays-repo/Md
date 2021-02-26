@@ -88,7 +88,7 @@ const CustomWidget = () => {
         renderItem={item => (
           <List.Item>
             <Card className="widget_body">
-              <img src={item.button} />
+              <a href={`${currentUrl}/online-appointment/${hospitalId}`}><img src={item.button} /> </a>
               
              <p>{item.url}
              </p>

@@ -6,6 +6,9 @@ body {
   .pending {
     color: #d83810;
   }
+  .mb0 {
+    margin-bottom: 0;
+  }
   .white {
     color: $white;
   }
@@ -228,7 +231,10 @@ body {
   .holdActive {
     min-width:5.5rem;
   }
-
+.whiteBox {
+  background:$white;
+  padding: 25px;
+}
   .container {
     width: 100%;
     display: flex;
