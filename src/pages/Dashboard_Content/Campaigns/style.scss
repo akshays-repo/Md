@@ -135,6 +135,9 @@
 .campaignWrapper {
   .headerTop {
     border-bottom: 1px solid #d9d9d9;
+    @include breakpoint(xs) {
+      padding-bottom: 15px;
+    }
     .rightPosition {
       @include flex(flex-end , start);
     }
@@ -150,6 +153,9 @@
     .tabBox {
       width: 30%;
       padding-top: 18px;
+      @include breakpoint(xs){
+        width: 100%;
+      }
       .ant-tabs-nav {
         &:before {
           border-bottom: transparent;

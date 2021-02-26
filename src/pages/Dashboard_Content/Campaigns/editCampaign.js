@@ -136,7 +136,7 @@ const EditCampaign = props => {
       <div className="whiteBox campaignWrapper">
         <div className="headerTop">
           <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-            <Col xs={10} xl={10}>
+            <Col xs={24} xl={10}>
               <TextField
                 required
                 label="Title"
@@ -146,7 +146,7 @@ const EditCampaign = props => {
               />
             </Col>
 
-            <Col xs={10} xl={10}>
+            <Col xs={12} xl={10}>
               <div>
                 <button className="edit-button mt2" onClick={() => openPatientModal()}>
                   <i class="fas fa-users pr2 " />
@@ -154,7 +154,7 @@ const EditCampaign = props => {
                 </button>
               </div>
             </Col>
-            <Col xs={2} xl={4} className="rightPosition">
+            <Col xs={7} xl={4} className="rightPosition">
               <button className="view-button mt2"
                 onClick={() => {
                   handleSaveEdit();
