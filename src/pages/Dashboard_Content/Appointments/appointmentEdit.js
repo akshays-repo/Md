@@ -60,9 +60,9 @@ const AppointmentEdit = props => {
       <Formik
         enableReinitialize={true}
         initialValues={{
-          appointment_end: moment(props.view.appointment_end).format(),
+          appointment_end: moment(props.view.appointment_end).format('YYYY-MM-DD hh:mm:ss'),
           appointment_for: props.view.appointment_for,
-          appointment_start:moment(props.view.appointment_start).format(),
+          appointment_start:moment(props.view.appointment_start).format('YYYY-MM-DD hh:mm:ss'),
           charge: props.view.charge,
           comment: props.view.comment,
           payment_status:paymentStatus,
