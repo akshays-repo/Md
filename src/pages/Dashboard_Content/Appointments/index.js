@@ -115,7 +115,7 @@ const Dashboard_Appointments = props => {
           <div>
             <Select
               value={record.payment_status}
-              // style={{ width: 120 }}
+              style={{ width: '100%' }}
               onChange={e => handleChangePaymentStatus(record.id, e)}
               className={record.payment_status}
             >
