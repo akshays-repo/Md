@@ -182,10 +182,10 @@ const BranchProvider = props => {
     <Row>
       <Col span={24}>
         <Row>
-          <Col span={21}>
+          <Col xs="24" xl={21}>
             <h5>Our Offices</h5>
           </Col>
-          <Col span={3}>
+          <Col xs={24} xl={3}>
             <Dropdown
               overlay={menu}
               // ref={this.clickId}
@@ -218,7 +218,7 @@ const BranchProvider = props => {
                 backgroundColor: props.values.branch_id === result.id ? '#EDEEEE' : 'white',
               }}
             >
-              <Col span="1">
+              <Col xs={4} xl={1}>
                 <Avatar
                   style={{
                     color: 'white',
@@ -228,13 +228,13 @@ const BranchProvider = props => {
                   {i + 1}
                 </Avatar>
               </Col>
-              <Col span="21">
+              <Col xs={20} xl={21}>
                 <Row>
                   <Col style={{ fontSize: 14 }} span={24}>
                     <span className="smallText">Location</span>
                   </Col>
 
-                  <Col style={{ fontSize: 16 }} span={24}>
+                  <Col className="hospitalName" style={{ fontSize: 16 }} span={24}>
                     <b>{result.fullName.toUpperCase()}</b>
                   </Col>
                   <Col style={{ fontSize: 14 }} span={24}>
@@ -249,11 +249,11 @@ const BranchProvider = props => {
       </Col>
       <Col span={24} className="pt2 pb2">
         <Row align="middle">
-          <Col span="1"></Col>
-          <Col span="9">
+          <Col xs={8} xl={1}></Col>
+          <Col xs={16} xl={9}>
             <span className="smallText">Availability</span>
           </Col>
-          <Col span="14" className="availDate">
+          <Col xs={24} xl={14} className="availDate">
             {' '}
             <Carousel ref={timeRef} {...carousel_props}>
               {datelist.map((result, i) => {
@@ -275,9 +275,9 @@ const BranchProvider = props => {
           props.provider.map((result, i) => {
             return (
               <Row align="top" key={result.id}>
-                <Col span="10 pt3 pb3">
+                <Col xs={24} xl={10} className="pt3 pb3">
                   <Row style={{ margin: 10, padding: 0 }}>
-                    <Col span="3">
+                    <Col xs={6} xl={3}>
                       <Avatar
                         style={{
                           color: 'white',
@@ -289,7 +289,7 @@ const BranchProvider = props => {
                         }
                       ></Avatar>
                     </Col>
-                    <Col span="21">
+                    <Col xs={18} xl={21}>
                       <Row>
                         <Col style={{ fontSize: 12 }} span={24}>
                           {result.provider?.provider_type?.name?.toUpperCase() || ''}
@@ -301,7 +301,7 @@ const BranchProvider = props => {
                     </Col>
                   </Row>
                 </Col>
-                <Col span="14" className="timeslideRight pt4 pb4">
+                <Col xs={24} xl={14} className="timeslideRight pt4 pb4">
                   <Carousel
                     ref={el => {
                       scheduleRef.current[i] = el;

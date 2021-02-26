@@ -15,7 +15,7 @@ const SmsEdit = props => {
       </Col>
       </Row>
       <Row className="fullviewModal">
-        <Col xl={10}>
+        <Col xs={24} xl={10}>
           <div className="mobileBg">
             <div className="mobile-background" style={{ backgroundImage: `url(${mblSvg})` }}>
               <div className="textareaHight">
@@ -25,13 +25,14 @@ const SmsEdit = props => {
                   defaultValue={props.smsContent}
                   maxLength={300}
                   onChange={e => props.handleSmsEdit(e.target.value)}
+                  className="textareamblsize"
                 />
               </div>
               {/* <p className="msgLength">{props.smsContent.length}/300</p> */}
             </div>
           </div>
         </Col>
-        <Col xl={14}>
+        <Col xs={24} xl={14}>
           <div className="modalRight">
             <div>
               <h5>Pro Tips</h5>

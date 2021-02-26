@@ -74,6 +74,10 @@
 .smsEditmodalCampaign {
   .mobileBg {
     height: 450px;
+    position: relative;
+    @include breakpoint(xs) {
+      margin-bottom: 25px;
+    }
   .mobile-background {
     background-repeat: no-repeat;
     height: 100%;
@@ -91,6 +95,10 @@
     resize: none;
     border: none;
     outline: none;
+    @include breakpoint(xs) {
+      width: 60%;
+      left: 60px;
+    }
     }
   }
   .msgLength {
@@ -180,6 +188,13 @@
     }
     .mce-statusbar {
       background: #fff;
+    }
+    .mce-container {
+      #mceu_35-body {
+      button {
+        width: 85px;
+      }
+    }
     }
   }
  }

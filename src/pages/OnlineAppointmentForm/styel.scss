@@ -8,6 +8,10 @@
     padding: 50px;
     background-color: $bg-white;
     @include border-radius(3px);
+    min-height: 100vh;
+    @include breakpoint(xs) {
+      padding: 20px;
+    }
     h1 {
       margin-bottom: 35px;
     }
@@ -25,7 +29,29 @@
     }
     .officesList {
       padding: 10px;
+      @include breakpoint(xs) {
+        @include flex(start, center);
+        .hospitalName b {
+        font-size: 14px!important;
+        }
+      }
     }
+    @include breakpoint(xs) {
+      .ant-carousel {
+      .slick-prev {
+        left: -15px!important;
+    }
+    .slick-next {
+      right: -25px!important;
+  }
+  }
+    }
+    @include breakpoint(xs) {
+    .dateSlide.pl4 {
+padding-left: 0;
+    }
+  }
+
   }
   .smallText {
     font-size: 14px;
@@ -34,6 +60,10 @@
   .datebold {
     font-size: 15px;
     font-weight: 600;
+    @include breakpoint(xs) {
+      font-size: 13px;
+      font-weight: 500;
+    }
   }
   .availDate {
     .slick-slide {
@@ -63,4 +93,11 @@
 
 .timing:hover {
   background-color: #00cbe6;
+}
+
+.ant-menu-vertical {
+  border: 1px solid #f0f0f0;
+  .ant-menu-item {
+    border-bottom: 0;
+  }
 }
