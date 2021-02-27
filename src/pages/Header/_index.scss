@@ -7,9 +7,15 @@
   font-size: 20px;
   padding: 15px 30px;
   height: 75px;
+  display: flex;
+  justify-content: space-between;
   @include fixed;
   @include breakpoint(xs) {
     z-index: 100;
+  }
+  a{
+    text-decoration: none;
+    color: white;
   }
   h3 {
     color: $white;

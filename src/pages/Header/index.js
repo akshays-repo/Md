@@ -12,11 +12,16 @@ const Header = (props) => {
     props.fetchHospital({ userTypeId: 2, page: 1, limit: 200 });
   }, []);
 
-console.log("jsdsdjbsdbdskj" , props.hospital)
 
   return (
     <div className="dashboard__header">
+      <div>
       <h3><Link to="/">{localStorage.getItem('name') || 'Login'}</Link></h3>
+
+      </div>
+      <div>
+        <Link to='/logout'> Log out</Link>
+      </div>
     </div>
   );
 };

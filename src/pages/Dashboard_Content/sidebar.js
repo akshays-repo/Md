@@ -95,13 +95,13 @@ const sideMenuList = [
     wologin: true,
     wlogin: true,
   },
-  {
-    title: 'Log Out',
-    icon: 'fas fa-sign-out-alt',
-    path: '/logout',
-    wologin: true,
-    wlogin: true,
-  },
+  // {
+  //   title: 'Log Out',
+  //   icon: 'fas fa-sign-out-alt',
+  //   path: '/logout',
+  //   wologin: true,
+  //   wlogin: true,
+  // },
 ];
 const Sidebar = (props) => {
   // const {
