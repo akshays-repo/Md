@@ -94,6 +94,9 @@
 .smsEditmodal {
   .mobileBg {
     height: 450px;
+    @include breakpoint(xs) {
+      margin-bottom: 15px;
+    }
   .mobile-background {
     background-repeat: no-repeat;
     height: 100%;

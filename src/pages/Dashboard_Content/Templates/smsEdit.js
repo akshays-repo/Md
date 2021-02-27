@@ -31,7 +31,7 @@ const SmsEdit = (props) => {
   return (
     <div>
       <Row className="fullviewModal">
-        <Col xl={10}>
+        <Col xs={24} xl={10}>
           <div className="mobileBg">
           <div className="mobile-background" style={{ backgroundImage: `url(${mblSvg})` }}>
             <div className="textareaHight">
@@ -50,7 +50,7 @@ const SmsEdit = (props) => {
 
 
         </Col>
-        <Col xl={14}>
+        <Col xs={24} xl={14}>
           <div className="modalRight">
           <div>
             <h5>Pro Tips</h5>
