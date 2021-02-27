@@ -29,6 +29,12 @@ const routes = [
     authorize: true,
   },
   {
+    path: '/settings',
+    component: loadable(() => import('../pages/Dashboard_Content/Settings')),
+    exact: true,
+    authorize: true,
+  },
+  {
     path: '/provider',
     component: loadable(() => import('../pages/Dashboard_Content/Provider')),
     exact: true,
@@ -61,6 +67,12 @@ const routes = [
   {
     path: '/analytics',
     component: loadable(() => import('../pages/Dashboard_Content/Analytics')),
+    exact: true,
+    authorize: true,
+  },
+  {
+    path: '/tutorial',
+    component: loadable(() => import('../pages/Dashboard_Content/Tutorials/index')),
     exact: true,
     authorize: true,
   },
@@ -107,6 +119,7 @@ const routes = [
     exact: true,
     authorize: false,
   },
+
   {
     path: '/templates/:id/actions',
     component: loadable(() => import('../pages/Dashboard_Content/Templates/templateActions')),

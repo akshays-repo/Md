@@ -13,7 +13,7 @@ const { Option } = Select;
 const Dashboard_MyPatients = props => {
   const [editId, setEditId] = useState(null);
   const [editData, setEditData] = useState('');
-  const [mobileFilter , setMobileFilter] = useState(false)
+  const [mobileFilter, setMobileFilter] = useState(false);
 
   const openEditModal = (id, data) => {
     setEditId(id);
@@ -35,12 +35,12 @@ const Dashboard_MyPatients = props => {
   };
 
   useEffect(() => {
-    props.fetchPatient({page:1 , limit:10000});
+    props.fetchPatient({ page: 1, limit: 10000 });
   }, [props.changed, props.deleted]);
 
-  const handleStatus = (id , status) =>{
-        props.editStatusPatient(id , {status})
-  }
+  const handleStatus = (id, status) => {
+    props.editStatusPatient(id, { status });
+  };
 
   const columns = [
     {
@@ -75,16 +75,21 @@ const Dashboard_MyPatients = props => {
       key: '',
       render: (text, record) => (
         <Space size="middle">
-          <Select className="holdActive"
+          <Select
+            className="holdActive"
             style={record.status === 'active' ? { color: 'green' } : { color: 'red' }}
             value={record.status}
             onChange={e => handleStatus(record.id, e)}
           >
-            <Select.Option style={{color:"green"}} value="active">Active</Select.Option>
-            <Select.Option style={{color:"red"}} value="hold">Hold</Select.Option>
+            <Select.Option style={{ color: 'green' }} value="active">
+              Active
+            </Select.Option>
+            <Select.Option style={{ color: 'red' }} value="hold">
+              Hold
+            </Select.Option>
           </Select>
         </Space>
-      )
+      ),
     },
     {
       title: '',
@@ -110,7 +115,6 @@ const Dashboard_MyPatients = props => {
   ];
 
   const MyPatients = () => {
-    
     const [status, setStatus] = useState(null);
     const [search, setSearch] = useState(null);
 
@@ -125,20 +129,18 @@ const Dashboard_MyPatients = props => {
       if (search) parms.search = search;
       if (status) parms.status = status;
       props.filterPatient(parms);
-      setMobileFilter(false)
-
+      setMobileFilter(false);
     };
 
     const clearFilter = e => {
       e.preventDefault();
-      setStatus(null)
-      setSearch(null)
-      props.fetchPatient()
-      setMobileFilter(false)
-
+      setStatus(null);
+      setSearch(null);
+      props.fetchPatient();
+      setMobileFilter(false);
     };
-    const filterSection = () =>{
-      return(
+    const filterSection = () => {
+      return (
         <div>
           <form className="search-area">
             <div style={{ marginBottom: '10px' }} className="search">
@@ -149,8 +151,14 @@ const Dashboard_MyPatients = props => {
                   onChange={handleChangeSearch}
                   value={search}
                 />
-                <Select className="holdActive" placeholder="status" value={status} onChange={e => setStatus(e)} style={{ width: 120 }}>
-              <Option value="">All</Option>
+                <Select
+                  className="holdActive"
+                  placeholder="status"
+                  value={status}
+                  onChange={e => setStatus(e)}
+                  style={{ width: 120 }}
+                >
+                  <Option value="">All</Option>
                   <Option value="hold">Hold</Option>
                   <Option value="active">Active</Option>
                 </Select>
@@ -164,18 +172,23 @@ const Dashboard_MyPatients = props => {
             </div>
           </form>
         </div>
-      )
-    }
-
+      );
+    };
 
     return (
       <div className="mypatient">
-            <div className="pageTitle">
+        <div className="pageTitle">
           <h4>MY PATIENTS</h4>
         </div>
         <div className="search">
-
-{isMobile ? <button className="view-button button-square" onClick={() => setMobileFilter(true)} ><i class="fas fa-filter"/>Filter</button> : filterSection()}
+          {isMobile ? (
+            <button className="view-button button-square" onClick={() => setMobileFilter(true)}>
+              <i class="fas fa-filter" />
+              Filter
+            </button>
+          ) : (
+            filterSection()
+          )}
           <Button className="view-button button-square" type="primary" onClick={showModal}>
             Create a New Patient
           </Button>
@@ -194,16 +207,10 @@ const Dashboard_MyPatients = props => {
           </Modal>
         </div>
         <div className="patient_name"></div>
-        <Table  scroll={{  x: 240 }} columns={columns} dataSource={props.patient} />,
-
-
-<Modal
-        visible={mobileFilter}
-        footer={false}
-        onCancel={() => setMobileFilter(false)}
-      >
-     {filterSection()}
-      </Modal>
+        <Table scroll={{ x: 240 }} columns={columns} dataSource={props.patient} />,
+        <Modal visible={mobileFilter} footer={false} onCancel={() => setMobileFilter(false)}>
+          {filterSection()}
+        </Modal>
       </div>
     );
   };
@@ -239,7 +246,7 @@ const mapDispatchToProps = dispatch => ({
       }),
     ),
 
-    editStatusPatient: (id, param) =>
+  editStatusPatient: (id, param) =>
     dispatch(
       actionCreator({
         method: 'PUT',
@@ -249,10 +256,9 @@ const mapDispatchToProps = dispatch => ({
       }),
     ),
 
-
   deletePatient: id =>
     dispatch(actionCreator({ method: 'DELETE', action_type: 'DELETE_PATIENT', id })),
-    
+
   filterPatient: param =>
     dispatch(
       actionCreator({

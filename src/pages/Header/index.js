@@ -20,7 +20,7 @@ const Header = (props) => {
 
       </div>
       <div>
-        <Link to='/logout'> Log out</Link>
+        <Link to='/logout'> LOGOUT <i class="fas fa-sign-out-alt"/></Link>
       </div>
     </div>
   );

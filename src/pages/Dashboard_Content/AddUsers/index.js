@@ -77,9 +77,9 @@ const AddUsers = props => {
   const addUsers = () => {
     return (
       <div>
-           <div className="pageTitle">
+           {/* <div className="pageTitle">
           <h4>USERS</h4>
-        </div>
+        </div> */}
         <div>
           <div className="provider-head mr2 mb4">
             <Button
@@ -98,7 +98,7 @@ const AddUsers = props => {
 
   return (
     <div>
-      <Dashboard_Content content={addUsers()} />
+      {addUsers()} 
 
       <Modal
         title="Create a New User"
