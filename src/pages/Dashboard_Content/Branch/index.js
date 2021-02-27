@@ -15,6 +15,9 @@ const Dashboard_Branch = props => {
   const Branch = () => {
     return (
       <div>
+            <div className="pageTitle">
+          <h4>BRANCHES</h4>
+        </div>
         <div className="header textRight">
           <button
             type="primary" className="view-button button-square"

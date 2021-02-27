@@ -89,6 +89,13 @@ const sideMenuList = [
     wlogin: true,
   },
   {
+    title: 'Settings',
+    icon: 'fas fa-cog',
+    path: '/settings',
+    wologin: true,
+    wlogin: true,
+  },
+  {
     title: 'Log Out',
     icon: 'fas fa-sign-out-alt',
     path: '/logout',
@@ -96,7 +103,7 @@ const sideMenuList = [
     wlogin: true,
   },
 ];
-const Sidebar = () => {
+const Sidebar = (props) => {
   // const {
   //   avatarlocation = 'https://images.livemint.com/img/2020/07/06/600x338/apollo_1594043446600_1594043458520.jpg',
   // } = JSON.parse(localStorage.getItem('user_data'));
@@ -108,7 +115,9 @@ const Sidebar = () => {
   //   setLogo(data.hospital.logo.path);
   //   setHospitalData(data);
   // }, []);
-  // console.log('sdfsdfsds', logo);
+
+const [currentLocation , setCurrentLocation] =useState( window.location.pathname)
+
 
   return (
     <div className="dashboard__sidebar">
@@ -134,7 +143,7 @@ const Sidebar = () => {
             dataSource={sideMenuList}
             renderItem={item => (
               <List.Item>
-                <List.Item.Meta
+                <List.Item.Meta style={currentLocation === item.path ?{backgroundColor:"#f3f7ff" , color:"#1e5ed2"} : {}}
                   avatar={<i className={item.icon} />}
                   title={<Link to={item.path}>{item.title}</Link>}
                 />

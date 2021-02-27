@@ -89,6 +89,9 @@ const Dashboard_Campaigns = props => {
   const Campaigns = () => {
     return (
       <div className="mb5">
+                    <div className="pageTitle">
+          <h4>CAMPAIGNS</h4>
+        </div>
         <button
           className="view-button button-square"
           type="primary"

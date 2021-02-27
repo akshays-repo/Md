@@ -170,6 +170,9 @@ const Dashboard_MyPatients = props => {
 
     return (
       <div className="mypatient">
+            <div className="pageTitle">
+          <h4>MY PATIENTS</h4>
+        </div>
         <div className="search">
 
 {isMobile ? <button className="view-button button-square" onClick={() => setMobileFilter(true)} ><i class="fas fa-filter"/>Filter</button> : filterSection()}

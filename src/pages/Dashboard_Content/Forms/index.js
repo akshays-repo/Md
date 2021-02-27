@@ -86,6 +86,9 @@ const responseFt = async() => {
   const Forms = () => {
     return (
       <div>
+             <div className="pageTitle">
+          <h4>FORMS</h4>
+        </div>
         <div className="mb5">
           <Space direction="horizontal">
             <Button

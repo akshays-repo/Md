@@ -347,7 +347,6 @@ const FilterSection = props => {
                 <Select
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
-                  value={''}
                   onChange={e => {
                     setProvider(e);
                     setToggleState({ ...toggleState, provider: true, allpatients: false });

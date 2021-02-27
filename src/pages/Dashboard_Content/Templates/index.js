@@ -56,6 +56,9 @@ const Dashboard_Templates = props => {
   const Templates = () => {
     return (
       <div>
+                    <div className="pageTitle">
+          <h4>TEMPLATES</h4>
+        </div>
         <Table columns={columns} dataSource={props.payload} />
       </div>
     );

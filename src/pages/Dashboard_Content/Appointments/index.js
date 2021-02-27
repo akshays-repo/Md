@@ -282,6 +282,9 @@ const Dashboard_Appointments = props => {
 
     return (
       <div className="appointment-section">
+            <div className="pageTitle">
+          <h4>APPOINTMENTS</h4>
+        </div>
         <div className="search">
           {isMobile ? <button className="view-button button-square" onClick={() => setMobileFilter(true)}><i class="fas fa-filter"/>Filter</button> : filterSection() }
          
