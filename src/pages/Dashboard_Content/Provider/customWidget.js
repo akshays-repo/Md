@@ -12,6 +12,7 @@ import Button7 from './assets/booknow-button-7.png';
 import Button8 from './assets/booknow-button-8.png';
 import Button9 from './assets/booknow-button-9.png';
 import Button10 from './assets/booknow-button-10.png';
+import { isMobile } from 'react-device-detect';
 
 const CustomWidget = () => {
   const url = window.location.href;
@@ -83,7 +84,7 @@ const CustomWidget = () => {
   return (
     <div>
       <List
-        grid={{ gutter: 16, column: 4 }}
+        grid={{ gutter: 16, column: isMobile ? 2 : 4 }}
         dataSource={data}
         renderItem={item => (
           <List.Item>
