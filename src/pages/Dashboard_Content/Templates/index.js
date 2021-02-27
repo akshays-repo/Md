@@ -59,7 +59,7 @@ const Dashboard_Templates = props => {
                     <div className="pageTitle">
           <h4>TEMPLATES</h4>
         </div>
-        <Table columns={columns} dataSource={props.payload} />
+        <Table scroll={{  x: 240 }} columns={columns} dataSource={props.payload} />
       </div>
     );
   };

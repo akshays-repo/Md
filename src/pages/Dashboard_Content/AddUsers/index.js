@@ -85,13 +85,13 @@ const AddUsers = props => {
             <Button
               type="primary"
               onClick={() => store.dispatch({ type: 'OPEN_CREATE_USER_MODAL' })}
-              className="button-square"
+              className=" view-button"
             >
               Create A New User
             </Button>
           </div>
         </div>
-        <Table dataSource={props.payload} columns={columns} />
+        <Table scroll={{  x: 240 }} dataSource={props.payload} columns={columns} />
       </div>
     );
   };

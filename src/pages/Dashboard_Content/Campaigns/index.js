@@ -75,21 +75,21 @@ const Dashboard_Campaigns = props => {
     {
       title: '',
       key: 'action',
-      render: (record) => (
+      render: record => (
         <Space size="middle" className="edit-color icon-button">
-          <i onClick={() =>  window.location.href = `/campaign/${record.id}`} className="fa fa-edit"></i>
-       
+          <i
+            onClick={() => (window.location.href = `/campaign/${record.id}`)}
+            className="fa fa-edit"
+          ></i>
         </Space>
       ),
     },
   ];
 
-
-
   const Campaigns = () => {
     return (
       <div className="mb5">
-                    <div className="pageTitle">
+        <div className="pageTitle">
           <h4>CAMPAIGNS</h4>
         </div>
         <button
@@ -112,12 +112,7 @@ const Dashboard_Campaigns = props => {
         </div>
 
         <div>
-
-
-          <Table
-            columns={columns}
-            dataSource={props.payload}
-          />
+          <Table columns={columns} dataSource={props.payload} />
         </div>
 
         <Modal

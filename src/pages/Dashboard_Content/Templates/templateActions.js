@@ -173,7 +173,7 @@ const TemplateActions = props => {
         closable={false}
         onClose={() => setVisible(false)}
         visible={visible}
-        width={400}
+        width={isMobile ? 200 : 400}
         footer={true}
       >
         <Row>

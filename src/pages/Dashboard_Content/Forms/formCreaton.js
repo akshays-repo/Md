@@ -72,6 +72,9 @@ const FormCreation = props => {
       <Menu.Item key="date">Date</Menu.Item>
 
       <Menu.Item key="number">Number</Menu.Item>
+
+      <Menu.Item key="esign">E Sign</Menu.Item>
+
     </Menu>
   );
 

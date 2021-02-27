@@ -106,7 +106,7 @@ const responseFt = async() => {
 View Form            </Button>
           </Space>
         </div>
-        <Table columns={columns} dataSource={response} />
+        <Table scroll={{  x: 240 }} columns={columns} dataSource={response} />
       </div>
     );
   };
