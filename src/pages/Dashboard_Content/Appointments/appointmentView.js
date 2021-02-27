@@ -76,11 +76,11 @@ const AppointmentView = props => {
 
       <div className="responseBox">
         <h5> Response</h5>
-        {response.map(res => (
+        {response?.map(res => (
           <div className="responseBg">
             <p className="question">{res.Key_name}</p>
             <p>
-              {res.answer.map(answer => (
+              {res?.answer?.map(answer => (
                 <p>{answer}</p>
               ))}
             </p>

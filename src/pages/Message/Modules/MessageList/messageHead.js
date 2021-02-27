@@ -3,6 +3,8 @@ import './style.scss';
 import Avatar from '../../assets/icons/noimage.png'
 import { store } from '../../../../reducers/configureStore';
 import { PropertySafetyFilled } from '@ant-design/icons';
+import EllipsisText from 'react-ellipsis-text';
+
 
 const MessageHead = ({
   userId,
@@ -30,7 +32,9 @@ const MessageHead = ({
       </div>
       <div className="middle">
         <span>{userName}</span>
-        <p>{lastMessage}</p>
+        <p><EllipsisText text={lastMessage} length={'37'} /></p>
+
+
       </div>
       <div className="right">
         <div className="lastActive">{lastAcive}</div>

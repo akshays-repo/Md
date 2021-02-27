@@ -92,7 +92,7 @@ const CustomWidget = () => {
               
              <p>{item.url}
              </p>
-              <button className="button-square" onClick={() => copyCodeToClipboard(item.id)} style={{border: 'border: 1px solid #e4eaec;'}}>Copy to ClipBorad</button>
+              <button className="button-square" onClick={() => copyCodeToClipboard(item.id)} style={{border: 'border: 1px solid #e4eaec;'}}>Copy to Clipboard</button>
             </Card>
           </List.Item>
         )}

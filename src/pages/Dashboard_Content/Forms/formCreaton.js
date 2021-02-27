@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Menu, Dropdown, Button, Input, Form, Space, Modal, Switch, message } from 'antd';
+import { Menu, Dropdown, Button, Input, Form, Space, Modal, Switch, message , Result} from 'antd';
 import { DownOutlined, UserOutlined, MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import TextField from '@material-ui/core/TextField';
 import _ from 'lodash';
@@ -13,7 +13,6 @@ const FormCreation = props => {
     if (props.editId !== undefined) {
       setListCustomField(props.editData.custom_form);
       setTitle(props.editData.name);
-      console.log('true true true', props.editId);
     }
   }, []);
 
@@ -54,8 +53,9 @@ const FormCreation = props => {
         await props.addForms(JSON.stringify(sendingData), contentType);
       }
     } else {
-      message.error('Please Check All the Field is Filled or Not ');
-    }
+      Modal.warning({
+        content: <Result status="warning" title="Please make sure the text fields are not blank" />,
+      });    }
   };
 
   // THIS IS THE MENU OF DROPDOWN
@@ -152,7 +152,7 @@ const FormCreation = props => {
           <form>
             <TextField
               required
-              label="TITLE OF THE FORM"
+              label="Title of the Form"
               value={tittle !== '' ? tittle : null}
               onChange={e => setTitle(e.target.value)}
               type="text"
@@ -164,7 +164,7 @@ const FormCreation = props => {
                     <p>Type :{type.custom_types}</p>
                     <TextField
                       required
-                      label="Please enter this field is required"
+                      label="Please Enter Something"
                       value={type.Key_name !== '' ? type.Key_name : null}
                       onChange={e => editOrAddKeyName(e, index)}
                     />

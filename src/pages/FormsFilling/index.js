@@ -6,7 +6,6 @@ import { store } from '../../reducers/configureStore';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router';
 import { isMobile } from 'react-device-detect';
-
 // import { Row, Col } from 'antd';
 
 import {
@@ -25,6 +24,7 @@ import TextField from '@material-ui/core/TextField';
 import { TextField as MatText, Select as MatSelect } from 'formik-material-ui';
 import moment from 'moment';
 import { Formik, Form, Field } from 'formik';
+import { onlineFormFilling } from '_utils/Schemas';
 const FormsFillingSection = props => {
   const [formToFill, setFormToFill] = useState(props.formToFill.custom_form);
   const [hospitalDetails, setHospitalDetails] = useState(props.hospital);
@@ -53,6 +53,7 @@ const FormsFillingSection = props => {
     if (respone.error === '') {
       success();
       innerForm.current.reset();
+      window.location.href = `/`;
     } else {
       console.log('Error');
     }
@@ -125,7 +126,7 @@ const FormsFillingSection = props => {
         }}
         onSubmit={handleFormSubmission}
         innerRef={innerForm}
-        //validationSchema={OnlineBookingSchema}
+       // validationSchema={onlineFormFilling}
       >
         {({ handleSubmit, values, touched, errors, isSubmitting }) => (
           <Form className="" handleSubmit={handleSubmit}>

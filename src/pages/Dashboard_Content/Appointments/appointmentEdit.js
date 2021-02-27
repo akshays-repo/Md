@@ -167,7 +167,7 @@ const AppointmentEdit = props => {
               disabled={isSubmitting}
               className="view-button button-square mt-5"
             >
-              {' Edit a Appointment'}
+              {' Edit an Appointment'}
             </Button>
           </Form>
         )}

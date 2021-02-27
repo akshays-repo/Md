@@ -4,6 +4,7 @@ import MessageHead from './messageHead';
 import { store } from '../../../../reducers/configureStore';
 import MessageUserList from '../MessageUserList';
 import Modal from 'antd/lib/modal/Modal';
+
 import './style.scss';
 const MessageList = props => {
   console.log('Props', props);

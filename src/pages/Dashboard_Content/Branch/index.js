@@ -20,8 +20,7 @@ const Dashboard_Branch = props => {
             type="primary" className="view-button button-square"
             onClick={() => store.dispatch({ type: 'OPEN_CREATE_BRANCH_MODAL' })}
           >
-            Create a New Branch
-          </button>
+Create Branch          </button>
           <Modal
             title="Create A Branch"
             visible={props.modal}

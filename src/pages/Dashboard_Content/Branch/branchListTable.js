@@ -47,7 +47,7 @@ const BranchListTable = props => {
 
   const columns = [
     {
-      title: 'Fullname',
+      title: 'Branch Name',
       dataIndex: 'fullName',
       key: 'fullName',
     },

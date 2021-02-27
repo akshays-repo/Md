@@ -10,7 +10,7 @@ const ViewResponse = props => {
           <div className="responseBg">
             <p className="question">{res.Key_name}</p>
             <p>
-              {res.answer.map(answer => (
+              {res.answer?.map(answer => (
                 <p>{answer}</p>
               ))}
             </p>

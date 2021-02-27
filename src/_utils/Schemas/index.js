@@ -5,7 +5,7 @@ export const regExMobNo = /[6-9]\d{9}$/;
 export const regExPincode = /^[1-9][0-9]{5}$/;
 // export const regExPassword = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 const passRegEx = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
-
+const regExMobNoUs=/^\+(1)([0-9]{10})/
 export const SUPPORTED_FORMATS = ['image/jpg', 'image/jpeg', 'application/pdf', 'image/png'];
 
 const CheckImage = files => {
@@ -393,10 +393,12 @@ export const PatientCreationSchema = Yup.object().shape({
     .required('Please enter email address')
     .email('Please enter valid email'),
   address: Yup.string().required('Please enter address'),
-  phone: Yup.string()
-    .required('Phone number is required')
-    .min(8)
-    .phone('Phone number is not valid'),
+  // phone: Yup.string()
+  //   .required('Phone number is required')
+  //   .min(8)
+  //   .phone('Phone number is not valid'),
+    phone: Yup.string().matches(regExMobNoUs, 'Phone number is not valid').min(8),
+
   dob: Yup.date().required('Please select DOB'),
   zipcode: Yup.string().required('Please enter zipcode'),
 });
@@ -531,5 +533,15 @@ export const hospitaEditlUser = Yup.object().shape({
 phone: Yup.string().required('Phone number is required'),
   
 });
+
+export const onlineFormFilling = Yup.object().shape({
+  email: Yup.string()
+  .required('Please enter email address')
+  .email('Please enter valid email'),
+  name: Yup.string().required('Please enter Name'),
+
+  
+});
+
 
 

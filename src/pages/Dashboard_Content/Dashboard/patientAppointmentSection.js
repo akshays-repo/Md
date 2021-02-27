@@ -19,20 +19,27 @@ const { Option } = Select;
 //THIS IS ANT DESIGN TABLE : PLEASE REFER THIS IF YOU STUCKED : https://ant.design/components/table/
 const PatientAppointment = props => {
   const [currentButton, setCurrentButton] = useState(1);
-
+  const [dashboardStateChanged , setDashboardStateChanged] = useState(false)
   
   const handleChangePaymentStatus = async (id, payment_status) => {
-    props.editStatusAppointment(id, { payment_status });
+    await props.editStatusAppointment(id, { payment_status });
+    setDashboardStateChanged(true)
   };
 
   const handleChangeStatus = async (id, status) => {
-    props.editStatusAppointment(id, { status });
+    await props.editStatusAppointment(id, { status });
+    setDashboardStateChanged(true)
   };
 
   useEffect(() => {
-    props.fetchAppointmentHome({ fromDate: moment().format('L'), toDate: moment().format('L')})
-    getToday();
-  }, [props.changed]);
+    if(currentButton === 1){
+    props.fetchAppointmentHome({ fromDate: moment().format('L'), toDate: moment().add(1,'days').format('L')})
+    setCurrentButton(1)
+    }else{
+    props.fetchAppointmentHome({  fromDate: moment().format('L') })
+    setCurrentButton(2)
+    }
+  }, [props.changed][dashboardStateChanged]);
 
 
   const getUpComing = () =>{
@@ -163,7 +170,7 @@ const PatientAppointment = props => {
           <Button
             className="inactive-button  button-square"
             onClick={getToday}
-            style={currentButton === 1 ? { backgroundColor: '#42a5f6!important' } : {}}
+            style={currentButton === 1 ? { backgroundColor: '#42a5f6' } : {}}
             type="primary"
           >
             {' '}

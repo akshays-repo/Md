@@ -20,7 +20,7 @@ const Dashboard_Forms = props => {
 
 useEffect(() => {
   props.fetchForms();
-}, [])
+}, [props.changed])
 
 useEffect(() => {
   responseFt();
@@ -100,8 +100,7 @@ const responseFt = async() => {
               type="primary"
               onClick={() => store.dispatch({ type: 'OPEN_EDIT_FORM_MODAL' })}
             >
-              View,  Edit, Share Forms
-            </Button>
+View Form            </Button>
           </Space>
         </div>
         <Table columns={columns} dataSource={response} />

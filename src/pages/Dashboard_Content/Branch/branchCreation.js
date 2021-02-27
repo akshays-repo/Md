@@ -62,7 +62,7 @@ const BranchCreationForm = props => {
 
   const formField = [
     {
-      label: 'Fullname',
+      label: 'Branch Name',
       name: 'fullName',
       type: 'text',
     },

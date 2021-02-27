@@ -78,12 +78,12 @@ const PatientCreationForm = props => {
 
   const formField = [
     {
-      label: 'Firstname',
+      label: 'First Name',
       name: 'firstName',
       type: 'text',
     },
     {
-      label: 'Lastname',
+      label: 'Last Name',
       name: 'lastName',
       type: 'text',
     },
@@ -94,7 +94,7 @@ const PatientCreationForm = props => {
       type: 'text',
     },
     {
-      label: 'Phone no.',
+      label: 'Phone no (Eg +14842989675)',
       name: 'phone',
       type: 'text',
     },
@@ -104,7 +104,7 @@ const PatientCreationForm = props => {
       type: 'text',
     },
     {
-      label: 'Zipcode',
+      label: 'Zip Code',
       name: 'zipcode',
       type: 'text',
     },

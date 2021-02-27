@@ -78,7 +78,7 @@ const HardCoreForm = () =>{
         >
           {({ handleSubmit, touched, errors, isSubmitting }) => (
             <Form className="" handleSubmit={handleSubmit}>
-              <h5 className="text-center mb4">Fill the Form To Book A Appointment</h5>{' '}
+              <h5 className="text-center mb4">Fill the Form To Book  an Appointment</h5>{' '}
               <div className="">
                 <Row  gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}> {generateForm(formField)} </Row>
               </div>{' '}
