@@ -2,30 +2,18 @@ import React, { useEffect, useState, useRef } from 'react';
 import { actionCreator } from '../../reducers/actionCreator';
 import { Result, Modal } from 'antd';
 import SignaturePad from 'react-signature-canvas';
-
 import { store } from '../../reducers/configureStore';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router';
 import { isMobile } from 'react-device-detect';
-// import { Row, Col } from 'antd';
-
-import {
-  message,
-  Button,
-  Row,
-  Col,
-  Checkbox,
-  Select,
-  DatePicker,
-  Space,
-  InputNumber,
-  Divider,
-} from 'antd';
+import { Row, Col, Checkbox, Select, DatePicker, InputNumber } from 'antd';
 import TextField from '@material-ui/core/TextField';
 import { TextField as MatText, Select as MatSelect } from 'formik-material-ui';
 import moment from 'moment';
 import { Formik, Form, Field } from 'formik';
 import { onlineFormFilling } from '_utils/Schemas';
+import { getImageUrl } from '_utils/getImageUrl';
+
 const FormsFillingSection = props => {
   const [formToFill, setFormToFill] = useState(props.formToFill.custom_form);
   const [hospitalDetails, setHospitalDetails] = useState(props.hospital);
@@ -36,8 +24,8 @@ const FormsFillingSection = props => {
   }, []);
 
   const innerForm = useRef();
-  const sigRef = useRef({});
-  
+  const sigCanvas = useRef({});
+
   const handleFormSubmission = async values => {
     console.log('response', formToFill);
     let data = {
@@ -84,7 +72,6 @@ const FormsFillingSection = props => {
   useEffect(() => {
     setFormToFill(props.formToFill.custom_form);
     setHospitalDetails(props.formToFill.hospital);
-    console.log('sjlhdasjdjkac b', hospitalDetails, props.formToFill.hospital);
   });
 
   const resultSucess = (
@@ -95,9 +82,17 @@ const FormsFillingSection = props => {
     window.location.href = window.location.pathname;
   };
 
-  const clearSignature = () => sigRef.current.clear();
-  const getSignature = () =>
-    console.log('signature', sigRef.getTrimmedCanvas().toDataURL('image/png'));
+  const clearSignature = () => sigCanvas.current.clear();
+  const getSignature = async index => {
+    let imageData = sigCanvas.current.getTrimmedCanvas().toDataURL('image/png');
+
+    let resp = await fetch(imageData)
+      .then(res => res.blob())
+      .then(console.log());
+    let imageUrl = await getImageUrl(resp);
+    console.log('omahe', imageUrl);
+    handleChange(imageUrl, index)
+  };
 
   const success = () => {
     Modal.success({
@@ -133,7 +128,7 @@ const FormsFillingSection = props => {
               }}
               onSubmit={handleFormSubmission}
               innerRef={innerForm}
-              // validationSchema={onlineFormFilling}
+              validationSchema={onlineFormFilling}
             >
               {({ handleSubmit, values, touched, errors, isSubmitting }) => (
                 <Form className="" handleSubmit={handleSubmit}>
@@ -264,15 +259,23 @@ const FormsFillingSection = props => {
                             {forms.Key_name}
                             {forms.required ? ' * (required) ' : ''}
                           </p>
-                          <div style={{ border: '1px solid ' }}>
+                          <div>
                             <SignaturePad
-                              ref={sigRef}
+                              ref={sigCanvas}
                               canvasProps={{
+                                width: 400,
+                                height: 100,
                                 className: 'signaturepad',
                               }}
                             />
-                            <button onClick={clearSignature}>Clear</button>
-                            <button onClick={getSignature}>Save</button>
+                            <span className="view-button" onClick={clearSignature}>Clear</span>
+                            <span className="view-button"
+                              onClick={() => {
+                                getSignature(index);
+                              }}
+                            >
+                              Save Signature
+                            </span>
                           </div>
                         </div>
                       ) : (
