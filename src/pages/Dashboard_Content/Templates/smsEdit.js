@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Col, Row, Collapse } from 'antd';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import mblSvg from './assets/smartphone-call.svg'
+import { store } from '../../../reducers/configureStore';
 
 const { Panel } = Collapse;
 
@@ -18,12 +19,9 @@ const SmsEdit = (props) => {
 
     useEffect(() => {
         setActionEdit(props.actionSmsEdit)
-        console.log("alskdjjgfhd",props.actionSmsEdit)
-
     }, [])
 
     const handleSmsEditSave = () =>{
-
         let contentType = 'JSON'
         const {number , unit , ...sentingData} = actionSmsEdit
         props.editTemplate(actionSmsEdit.id ,  JSON.stringify(sentingData ), contentType);
@@ -82,7 +80,7 @@ const SmsEdit = (props) => {
           </div>
           <div className="mbltextBtn mt6">
             <button className="view-button mr3" onClick={handleSmsEditSave}>Save</button>
-          <button className="edit-button">Cancel</button>
+          <button className="edit-button"   onClick={() => store.dispatch({ type: 'CLOSE_SMS_EDIT_TEMPLATE_MODAL' })}>Cancel</button>
           </div>
           </div>
         </Col>

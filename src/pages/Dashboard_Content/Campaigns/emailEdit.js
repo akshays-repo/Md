@@ -10,7 +10,7 @@ const { Panel } = Collapse;
 const EmailEdit = props => {
   const [subject, setSubject] = useState('');
   const [emailContent, setEmailContent] = useState('');
-  const [emailStatus , setEmailStatus] = useState(props.emailStatus === 'active' ? true : false)
+  const [emailStatus , setEmailStatus] = useState(props.emailStatus)
   const handleEditorChange = e => {
     setEmailContent(e);
     props.handleEmailEdit(e);
@@ -18,22 +18,12 @@ const EmailEdit = props => {
 
   useEffect(() => {
     setEmailContent(props.emailContent);
-    console.log("asdasd", props.emailStatus)
-    // if(props.emailStatus === 'active' ){
-    //   setEmailStatus(true)
-    // console.log("asdasd hai" , emailStatus)
-
-    // }
-
   },);
   return (
     <div className="remindersEmail">
       <Row gutter={[16, 16]}>
       <Col xs={24} lg={12}  className="switchCampain">
-      <Switch
-        defaultChecked={emailStatus}
-        onChange={e => props.handlEmailStatus(e)}
-      />
+
       </Col>
       </Row>
       <Row gutter={[16, 16]}>

@@ -17,7 +17,7 @@ import {
   Modal,
   Popconfirm,
   Button,
-  message,
+  message,Switch
 } from 'antd';
 
 import { store } from '../../../reducers/configureStore';
@@ -32,7 +32,7 @@ const EditCampaign = props => {
   const [titile, setTitle] = useState('');
   const [emailSubject, setEmailSubject] = useState('');
   const [emailContent, setEmailContent] = useState('');
-  const [emailStatus, setemailStatus] = useState('');
+  const [emailStatus, setemailStatus] = useState(null);
   const [patientList, setPatientList] = useState([]);
 
   const [smsStatus, setSmsStatus] = useState('');
@@ -48,7 +48,7 @@ const EditCampaign = props => {
   }, []);
 
   const fetchById = async () => {
-    let response = await props.fetchCampaignbyId(id);
+    var response = await props.fetchCampaignbyId(id);
     setTitle(response.payload.name);
     setEmailSubject(response.payload.email_sub);
     setEmailContent(response.payload.email_template);
@@ -62,15 +62,16 @@ const EditCampaign = props => {
     setCurrentTab(key);
   };
 
-
   const handleEmailEdit = e => {
     console.log('email', e);
     setEmailContent(e);
   };
+
   const handleEmailEditSubject = e => {
     console.log('email subject', e);
     setEmailSubject(e);
   };
+
   const handlEmailStatus = e => {
     console.log('email status', e ,emailStatus);
     if (e === true) {
@@ -79,7 +80,6 @@ const EditCampaign = props => {
     } else {
       setemailStatus('hold');
     console.log('email status', e , emailStatus);
-
     }
   };
   const handleSmsEdit = e => {
@@ -172,14 +172,20 @@ const EditCampaign = props => {
           </Tabs>
           </div>
           {currentTab === '1' ? (
+                 <div>
+                    <Switch
+                  defaultChecked={emailStatus}
+                  onChange={e => handlEmailStatus(e)}
+                />
             <EmailEdit
               handleEmailEdit={handleEmailEdit}
               handleEmailEditSubject={handleEmailEditSubject}
               emailContent={emailContent}
               emailSubject={emailSubject}
-              emailStatus={emailStatus}
+              emailStatus={emailStatus === 'active' ? true: false}
               handlEmailStatus={handlEmailStatus}
             />
+            </div>
           ) : (
             <SmsEdit
               handleSmsEdit={handleSmsEdit}
