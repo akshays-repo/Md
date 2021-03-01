@@ -8,7 +8,7 @@ const MessageUserList = (props) =>{
 
     console.log("asbdhbf",props.userList )
     const createNewConversation = (uuid , userName , userAvatar) => {
-        console.log("asldj",  userName , userAvatar)
+        console.log("asldj", uuid, userName , userAvatar)
     store.dispatch({ type: 'CLOSE_CONVERSATION_LIST_MODAL' })
     store.dispatch({ type: 'INITIAL_MESSAGE_LOADED' });
     store.dispatch({ type: 'CLEAR_MESSAGE' });
@@ -26,14 +26,16 @@ const MessageUserList = (props) =>{
           title: 'User Name',
           key: 'displayName',
           dataIndex: 'displayName',
+        //  render:record =>(<a> {record.user.displayName}</a>)
         },
+
         {
           title: '',
           key: 'action',
           render: record => (
             <Space size="middle" className="msgIcon">
               <span className="edit-color icon-button" 
-             onClick={() => createNewConversation(record.uuid , record.displayName, record.avatarlocation)}
+             onClick={() => createNewConversation(record.user.uuid , record.user.displayName, record.user.avatarlocation)}
               >
             <i class="fas fa-comment-dots"></i>
               </span>

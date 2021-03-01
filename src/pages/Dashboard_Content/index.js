@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Row, Col } from 'antd';
 import Sidebar from './sidebar';
-import { isMobile } from 'react-device-detect';
+//import { isMobile } from 'react-device-detect';
 import { Drawer, Button, Radio, Space } from 'antd';
+import { useMediaQuery } from 'react-responsive'
 
 
 
@@ -15,23 +16,22 @@ const Dashboard_Content = ({ content }) => {
   const onClose = () => {
     setVisible(false);
   };
+  const isMobile = useMediaQuery({ maxWidth: 767 })
+
   return (
     <div className="dashboard__content">
       <Row>
         <Col xs={24} xl={6} md={6}>
-          {isMobile && <Button className="ml4 mblButton" type="primary"  onClick={showDrawer}>
+          {isMobile && 
+          <Button className="ml4 mblButton" type="primary"  onClick={showDrawer}>
                 <i class="fas fa-bars"></i>
-                </Button>}
+            </Button>}
           <div className="leftblock-sidenav" 
-        //   style={{  overflow: 'auto',
-        // height: '100vh',
-        // position: 'fixed', zIndex: '100' }}
         >
             {isMobile ? (
               <div className="mbl-button pl4"> 
                 <Drawer
                   title=""
-                  // width={ 100% }
                   placement="left"
                   closable={true}
                   onClose={onClose}

@@ -58,7 +58,6 @@ const MessageDetail = props => {
 
     }
   };
-  console.log('messsage to load', props.message);
 
   return (
     <div className="chatmain">
