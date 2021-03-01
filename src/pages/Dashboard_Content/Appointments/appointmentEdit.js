@@ -31,6 +31,8 @@ const AppointmentEdit = props => {
 
   const handleFormSubmission = async values => {
      let contentType = 'JSON';
+     console.log("values",values)
+     values= {...values , appointment_start:moment(values.appointment_start).format('YYYY-MM-DD hh:mm:ss') , appointment_end:moment(values.appointment_end).format('YYYY-MM-DD hh:mm:ss')}
     await props.editAppointment(props.view.id , JSON.stringify(values),contentType)
 
   };
@@ -130,7 +132,7 @@ const AppointmentEdit = props => {
                   //onOk={onOk}
                   name="appointment_start"
                   placeholder="Start Date"
-                  format="YYYY-MM-DD hh:mm a"
+                  format="YYYY-MM-DD hh:mm:ss"
                 />
               </Col>
 
@@ -141,7 +143,7 @@ const AppointmentEdit = props => {
                   showTime
                   //onChange={onChange}
                   //onOk={onOk}
-                  format="YYYY-MM-DD hh:mm a"
+                  format="YYYY-MM-DD hh:mm:ss"
                   name="appointment_end"
                   placeholder="End Date"
                 />
