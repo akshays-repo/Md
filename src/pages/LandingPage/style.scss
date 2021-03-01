@@ -439,7 +439,7 @@ h6 {
         width: 85%;
         max-width: 100%;
         position: absolute;
-        top: -40px;
+        top: -45px;
         right: 0;
       }
     }
@@ -450,6 +450,11 @@ h6 {
     }
   }
 .landing-about {
+  .aboutSection {
+    .about_left {
+      padding: 20px;
+    }
+  }
   @include breakpoint(xs) {
     .about_left {
       display: flex;
@@ -527,6 +532,7 @@ h6 {
             padding-right: 0;
             h5 {
               color: #717171;
+              height: 50px;
             }
             
         }
@@ -639,11 +645,21 @@ h6 {
 .landing-testimonials {
   .banner {
     img {
-      top: 205px;
+      top: 172px;
     }
   }
 }
 }
+}
+
+@media (min-width:$ipad-small) and (max-width:$ipad-landscape) {
+  .landing-testimonials {
+    .banner {
+      img {
+  top: 38px!important;
+}
+    }
+  }
 }
 
 

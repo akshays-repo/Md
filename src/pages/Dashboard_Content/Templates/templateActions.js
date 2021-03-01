@@ -95,7 +95,7 @@ const TemplateActions = props => {
     return (
       <div className="template-action">
         <Row>
-        <Col xs={24} lg={12} offset={isMobile ? '' : 6}>
+        <Col xs={24} lg={18} xl={12} offset={isMobile ? '' : 6}>
           <div className="templateBox">
             <div className="header">
            {props.templateActions?.length  > 0 ? <h5>Reminders</h5> :  <h5>!! No Actions  Found for this Template </h5>  }

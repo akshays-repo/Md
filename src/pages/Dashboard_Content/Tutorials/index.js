@@ -1,6 +1,6 @@
 import React from 'react';
 import Dashboard_Content from '..';
-import { Card, Space } from 'antd';
+import { Row, Col, Card, Space } from 'antd';
 import { isMobile } from 'react-device-detect';
 
 const { Meta } = Card;
@@ -11,13 +11,15 @@ const Tutorials = () => {
         <div className="pageTitle">
           <h4>TUTORIALS</h4>
         </div>
-        <div>
+        <div className="tutorilaSection">
           <h5>Videos</h5>
-          <div>
+          <div className="videoBlock">
               <Space direction={!isMobile ? "horizontal" : "vertical"}>
+              <Row gutter={16}>
+                  <Col xl={6} xs={24}>
               <Card
               hoverable
-              style={{ width: 240 }}
+            
               cover={<img alt="example" src="https://via.placeholder.com/250" />}
             >
               <Meta
@@ -25,10 +27,11 @@ const Tutorials = () => {
                 description="Add , Edit , Delete Provider"
               />
             </Card>
-
+            </Col>
+            <Col xl={6} xs={24}>
             <Card
               hoverable
-              style={{ width: 240 }}
+              
               cover={<img alt="example" src="https://via.placeholder.com/250" />}
             >
               <Meta
@@ -36,10 +39,11 @@ const Tutorials = () => {
                 description="Add , Edit , Delete Patient"
               />
             </Card>
-
+            </Col>
+            <Col xl={6} xs={24}>
             <Card
               hoverable
-              style={{ width: 240 }}
+            
               cover={<img alt="example" src="https://via.placeholder.com/250" />}
             >
               <Meta
@@ -47,10 +51,11 @@ const Tutorials = () => {
                 description="Add , Edit , Delete Message"
               />
             </Card>
-
+</Col>
+<Col xl={6} xs={24}>
             <Card
               hoverable
-              style={{ width: 240 }}
+            
               cover={<img alt="example" src="https://via.placeholder.com/250" />}
             >
               <Meta
@@ -58,6 +63,8 @@ const Tutorials = () => {
                 description="Book Appoinment"
               />
             </Card>
+            </Col>
+            </Row>
               </Space>
            
           </div>

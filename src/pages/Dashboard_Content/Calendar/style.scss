@@ -194,6 +194,7 @@
       background: #f8f9fa;
       .fc-event-main {
         p {
+          
           @include breakpoint(xs) {
             font-size:13px!important;
           }
@@ -201,11 +202,15 @@
       }
     }
 
+
   }
   }
   .fc .fc-daygrid-event p,
   .fc-event .fc-event-main p {
-    font-size: 13px!important;
+    font-size: 12px!important;
+    white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
   }
   
   }
@@ -244,4 +249,29 @@
 }
 .ant-tabs-ink-bar {
   background: #15558d;
+}
+.fc-h-event {
+  border: transparent!important;
+}
+.fc-media-screen {
+.fc-timegrid-event {
+  border: transparent;
+  background-color: #e6f1fb!important;
+}
+}
+
+  .fc {
+    .fc-daygrid-more-link {
+      font-size: 11px;
+      @include breakpoint(xs) {
+      font-size: 10px;
+    }
+    }
+}
+@media (min-width:$ipad-portrait) and (max-width:$ipad-landscape) {
+  .fc {
+    .fc-toolbar {
+      flex-wrap: wrap;
+    }
+  }
 }

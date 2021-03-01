@@ -16,12 +16,12 @@ const Dashboard_Content = ({ content }) => {
   const onClose = () => {
     setVisible(false);
   };
-  const isMobile = useMediaQuery({ maxWidth: 767 })
+  const isMobile = useMediaQuery({ maxWidth: 767})
 
   return (
     <div className="dashboard__content">
       <Row>
-        <Col xs={24} xl={6} md={6}>
+        <Col xs={24} xl={6} md={10} lg={8}>
           {isMobile && 
           <Button className="ml4 mblButton" type="primary"  onClick={showDrawer}>
                 <i class="fas fa-bars"></i>
@@ -45,7 +45,7 @@ const Dashboard_Content = ({ content }) => {
             )}
           </div>
         </Col>
-        <Col xs={24} xl={18} md={18}>
+        <Col xs={24} xl={18} lg={16} md={14}>
           <div className="rightblock-content">{content}</div>
         </Col>
       </Row>

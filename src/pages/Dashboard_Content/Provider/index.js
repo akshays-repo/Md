@@ -153,7 +153,7 @@ const Dashboard_Provider = props => {
         <div className="pageTitle">
           <h4>PROVIDER</h4>
         </div>
-        <div>{ isMobile ?<button button className="view-button button-square" onClick={() => setMobileAction(true)}>Actions</button>  : HeaderSection()}</div>
+        <div className="proMblview">{ isMobile ?<button button className="view-button button-square" onClick={() => setMobileAction(true)}>Actions</button>  : HeaderSection()}</div>
         <Modal
         visible={mobileAction}
         footer={false}
