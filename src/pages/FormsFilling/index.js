@@ -74,13 +74,20 @@ const FormsFillingSection = props => {
     setHospitalDetails(props.formToFill.hospital);
   });
 
-  const resultSucess = (
-    <Result status="success" title="Successfully Submitted the Form" subTitle="Thank you" />
-  );
-
   const onOkay = () => {
     window.location.href = window.location.pathname;
   };
+
+  const resultSucess = (
+    <Result status="success" title="Successfully Submitted the Form" subTitle="Thank you" />
+  );
+  const success = () => {
+    Modal.success({
+      content: resultSucess,
+      onOk: onOkay,
+    });
+  };
+
 
   const clearSignature = () => sigCanvas.current.clear();
   const getSignature = async index => {
@@ -94,12 +101,7 @@ const FormsFillingSection = props => {
     handleChange(imageUrl, index)
   };
 
-  const success = () => {
-    Modal.success({
-      content: resultSucess,
-      onOk: onOkay,
-    });
-  };
+
   return (
     <div className="container direction">
       <Row className="header">
@@ -158,7 +160,7 @@ const FormsFillingSection = props => {
 
                   {formToFill?.map((forms, index) => (
                     <div>
-                      {forms.custom_types === 'text' || forms.custom_types === 'note' ? (
+                      {forms.custom_types === 'text' ? (
                         <div>
                           {' '}
                           <p></p>
@@ -174,6 +176,15 @@ const FormsFillingSection = props => {
                         ''
                       )}
 
+{ forms.custom_types === 'note' ? (
+                        <div>
+                          {' '}
+                          <p>NB:{forms.Key_name}</p>
+                          <p></p>
+                        </div>
+                      ) : (
+                        ''
+                      )}
                       {forms.custom_types === 'checkbox' ? (
                         <div>
                           {' '}
@@ -263,11 +274,13 @@ const FormsFillingSection = props => {
                             <SignaturePad
                               ref={sigCanvas}
                               canvasProps={{
-                                width: 400,
+                                width: 500,
                                 height: 100,
                                 className: 'signaturepad',
                               }}
                             />
+                            <div className="signature-buttons">
+
                             <span className="view-button" onClick={clearSignature}>Clear</span>
                             <span className="view-button"
                               onClick={() => {
@@ -276,6 +289,9 @@ const FormsFillingSection = props => {
                             >
                               Save Signature
                             </span>
+                              </div>
+               
+                         <br/>*please save signature after you completed
                           </div>
                         </div>
                       ) : (

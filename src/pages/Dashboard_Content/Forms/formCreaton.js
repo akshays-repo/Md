@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Menu, Dropdown, Button, Input, Form, Space, Modal, Switch, message , Result} from 'antd';
+import { Menu, Dropdown, Button, Input, Form, Space, Modal, Switch, message, Result } from 'antd';
 import { DownOutlined, UserOutlined, MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import TextField from '@material-ui/core/TextField';
 import _ from 'lodash';
@@ -8,7 +8,7 @@ const FormCreation = props => {
   const [editIndex, setEditIndex] = useState('');
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [tittle, setTitle] = useState('');
-
+  const [esignCount, setEsignCount] = useState(0);
   useEffect(() => {
     if (props.editId !== undefined) {
       setListCustomField(props.editData.custom_form);
@@ -18,15 +18,32 @@ const FormCreation = props => {
 
   //THIS WILL ADD NEW OBJECT TO ARRAY
   const handleMenuClick = e => {
-    let text = e.key;
-    let values = [];
-    if (text === 'checkbox' || text === 'drop-down') {
-      values = [null];
+    if (e.key === 'esign') {
+      setEsignCount(esignCount+1);
     }
-    setListCustomField([
-      ...listCustomField,
-      { custom_types: text, required: '', Key_name: '', values },
-    ]);
+    if (e.key === 'esign' && esignCount > 0) {
+      warning();
+    } else {
+      let text = e.key;
+      let values = [];
+      if (text === 'checkbox' || text === 'drop-down') {
+        values = [null];
+      }
+      setListCustomField([
+        ...listCustomField,
+        { custom_types: text, required: '', Key_name: '', values },
+      ]);
+    }
+  };
+
+  const resultSucess = (
+    <Result status="warning" title="Please note only one E-sign is allowed per Forms" />
+  );
+  const warning = () => {
+    Modal.warning({
+      content: resultSucess,
+      onOk: '',
+    });
   };
 
   const handleFormSubmission = async e => {
@@ -55,7 +72,8 @@ const FormCreation = props => {
     } else {
       Modal.warning({
         content: <Result status="warning" title="Please make sure the text fields are not blank" />,
-      });    }
+      });
+    }
   };
 
   // THIS IS THE MENU OF DROPDOWN
@@ -74,7 +92,6 @@ const FormCreation = props => {
       <Menu.Item key="number">Number</Menu.Item>
 
       <Menu.Item key="esign">E Sign</Menu.Item>
-
     </Menu>
   );
 
@@ -151,7 +168,6 @@ const FormCreation = props => {
       </div>
       <div className="inner-box">
         <div>
-
           <form>
             <TextField
               required
@@ -216,17 +232,19 @@ const FormCreation = props => {
             })}
             {/* {listCustomField?.length > 0 && <Button className="blueDark-button mt8" onClick={handleFormSubmission}>SAVE</Button>} */}
             <div className="custButtons">
-            <Dropdown trigger={['click']} overlay={menu}>
-            <button className="mt-5 btnTransparent" onClick={e => e.preventDefault()}>
-              Add New Field<span className="edit-button"><PlusOutlined /></span>
-            </button>
-          </Dropdown>
-            <button type="submit" className="saveButton mt8" onClick={handleFormSubmission}>
-              SAVE
-            </button>
+              <Dropdown trigger={['click']} overlay={menu}>
+                <button className="mt-5 btnTransparent" onClick={e => e.preventDefault()}>
+                  Add New Field
+                  <span className="edit-button">
+                    <PlusOutlined />
+                  </span>
+                </button>
+              </Dropdown>
+              <button type="submit" className="saveButton mt8" onClick={handleFormSubmission}>
+                SAVE
+              </button>
             </div>
           </form>
- 
         </div>
       </div>
     </div>

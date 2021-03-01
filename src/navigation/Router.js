@@ -76,12 +76,12 @@ const routes = [
     exact: true,
     authorize: true,
   },
-  {
-    path: '/add-users',
-    component: loadable(() => import('../pages/Dashboard_Content/AddUsers')),
-    exact: true,
-    authorize: true,
-  },
+  // {
+  //   path: '/add-users',
+  //   component: loadable(() => import('../pages/Dashboard_Content/AddUsers')),
+  //   exact: true,
+  //   authorize: true,
+  // },
   {
     path: '/campaigns',
     component: loadable(() => import('../pages/Dashboard_Content/Campaigns')),

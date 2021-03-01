@@ -20,7 +20,8 @@ export const BookingEdit = props => {
 
   const handleSubmit = async (values, { resetForm, setSubmitting }) => {
     setSubmitting(true);
-    const response = await props.editAppointment(bookingDetails.id, JSON.stringify({ ...values }));
+    const { appointment_created, ...rest } = values;
+    const response = await props.editAppointment(bookingDetails.id, JSON.stringify({ ...rest }));
     if (response.type === 'FETCH_ERROR') {
       setSubmitting(false);
     } else {
@@ -154,6 +155,21 @@ export const BookingEdit = props => {
                           setFieldValue('branch_id', null);
                           setFieldValue('provider_id', null);
                           val && setFieldValue('appointment_type_id', val);
+                          const appointment_duration = props.appointment_type.filter(
+                            result => result.id === val,
+                          )[0].time_slot;
+                          setFieldValue(
+                            'appointment_end',
+                            moment(values.appointment_start)
+                              .add(appointment_duration, 'minutes')
+                              .format('YYYY-MM-DD hh:mm:ss'),
+                          );
+                          setFieldValue(
+                            'appointment_end_dummy',
+                            moment(values.appointment_start)
+                              .add(appointment_duration, 'minutes')
+                              .format('YYYY-MM-DD hh:mm a'),
+                          );
                         }}
                         style={{ width: '90%' }}
                         bordered={false}
@@ -336,7 +352,7 @@ export const BookingEdit = props => {
                   htmlType="submit"
                   disabled={isSubmitting}
                   shape="round"
-                className="view-button"
+                  className="view-button"
                 >
                   UPDATE APPOINTMENT
                 </button>

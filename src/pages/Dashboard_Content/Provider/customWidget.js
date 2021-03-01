@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { List, Card } from 'antd';
 import { message } from 'antd';
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 
 import Button1 from './assets/button1.png';
 import Button2 from './assets/booknow-button-2.png';
@@ -81,6 +82,10 @@ const CustomWidget = () => {
     navigator.clipboard.writeText(copyUrl) 
     message.info('Copied to ClipBoard');
   };
+
+  const onCopy = () =>{
+    message.info('Copied to ClipBoard');
+  }
   return (
     <div>
       <List
@@ -90,10 +95,15 @@ const CustomWidget = () => {
           <List.Item>
             <Card className="widget_body">
               <a href={`${currentUrl}/online-appointment/${hospitalId}`}><img src={item.button} /> </a>
-              
              <p>{item.url}
              </p>
-              <button className="button-square" onClick={() => copyCodeToClipboard(item.id)} style={{border: 'border: 1px solid #e4eaec;'}}>Copy to Clipboard</button>
+          <CopyToClipboard onCopy={onCopy} 
+          text={item.url}
+          >
+           <button className="button-square" style={{border: 'border: 1px solid #e4eaec;'}}>Copy to Clipboard</button>
+          </CopyToClipboard>
+{/* 
+              <button className="button-square" style={{border: 'border: 1px solid #e4eaec;'}}>Copy to Clipboard</button> */}
             </Card>
           </List.Item>
         )}

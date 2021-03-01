@@ -241,9 +241,10 @@ const TemplateActions = props => {
         onCancel={() => store.dispatch({ type: 'CLOSE_CREATE_TEMPLATE_MODAL' })}
         visible={props.modal}
         footer={false}
-        width={700}
+        width={1000}
+        destroyOnClose
       >
-        <TemplateEmailEdit {...actionEmailEdit} {...props} />
+        <TemplateEmailEdit actionEmailEdit={actionEmailEdit} {...props} />
       </Modal>
 
       <Modal className="smsEditmodal"
