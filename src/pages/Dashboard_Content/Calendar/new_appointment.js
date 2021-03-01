@@ -67,6 +67,21 @@ export const NewAppointment = props => {
                         setFieldValue('provider_id', null);
                         props.fetchBranch();
                         val && setFieldValue('appointment_type_id', val);
+                        const appointment_duration = props.appointment_type.filter(
+                          result => result.id === val,
+                        )[0].time_slot;
+                        setFieldValue(
+                          'appointment_end',
+                          moment(values.appointment_start)
+                            .add(appointment_duration, 'minutes')
+                            .format('YYYY-MM-DD hh:mm:ss'),
+                        );
+                        setFieldValue(
+                          'appointment_end_dummy',
+                          moment(values.appointment_start)
+                            .add(appointment_duration, 'minutes')
+                            .format('YYYY-MM-DD hh:mm a'),
+                        );
                       }}
                       style={{ width: '90%' }}
                       bordered={false}
@@ -131,11 +146,13 @@ export const NewAppointment = props => {
                     >
                       {values.appointment_type_id &&
                         values.branch_id &&
-                        props.provider.map((result, i) => (
-                          <Select.Option key={result.id} value={result.id}>
-                            {result.fullName || result.provider?.fullName || 'Name not found'}
-                          </Select.Option>
-                        ))}
+                        props.provider
+                          .filter(result => result.status === 'active')
+                          .map((result, i) => (
+                            <Select.Option key={result.id} value={result.id}>
+                              {result.fullName || result.provider?.fullName || 'Name not found'}
+                            </Select.Option>
+                          ))}
                     </Select>
                     <ErrorMessage
                       render={msg => <div style={{ color: 'red' }}>{msg}</div>}
@@ -238,7 +255,8 @@ export const NewAppointment = props => {
               </div>
             </Col>
             <Col span={24} offset={20}>
-              <Button className="view-button"
+              <Button
+                className="view-button"
                 htmlType="submit"
                 disabled={isSubmitting}
                 shape="round"

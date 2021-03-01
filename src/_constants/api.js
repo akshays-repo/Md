@@ -73,15 +73,15 @@ export const backend_api = {
   CREATE_PROVIDER_UNAVAILABLE: '/api/backend/v1/appointments/unavailable',
 
   CREATE_FORM: '/api/backend/v1/forms',
-  EDIT_FORM:'/api/backend/v1/forms',
+  EDIT_FORM: '/api/backend/v1/forms',
   FETCH_FORM: '/api/backend/v1/forms',
 
-  GET_RESPONSE:'/api/backend/v1/hospital/response',
-  FETCH_FROM_BY_ID:'/api/backend/v1/hospital/response',
-  DELETE_FORM:'/api/backend/v1/forms',
-  FILL_FORM:'/api/backend/v1/response/form',
-  FETCH_FORM_FOR_FILLING:'/api/backend/v1/forms',
-  
+  GET_RESPONSE: '/api/backend/v1/hospital/response',
+  FETCH_FROM_BY_ID: '/api/backend/v1/hospital/response',
+  DELETE_FORM: '/api/backend/v1/forms',
+  FILL_FORM: '/api/backend/v1/response/form',
+  FETCH_FORM_FOR_FILLING: '/api/backend/v1/forms',
+
   EDIT_PROVIDER_UNAVAILABLE: '/api/backend/v1/appointments/unavailable',
   DELETE_PROVIDER_UNAVAILABLE: '/api/backend/v1/appointments/unavailable',
   FILTER_APPOINTMENT_CALENDAR: '/api/backend/v1/online_bookings/filter',
@@ -95,15 +95,13 @@ export const backend_api = {
   CHECK_HOSPITAL_ONLINE: '/api/backend/v1/users/hospital',
   FETCH_BRANCH_ONLINE: '/api/backend/v1/branches/public',
 
-  FETCH_CAMPAIGN_PATIENTS:'/api/backend/v1/campaign/patients',
-  CREATE_CAMPAIGN:'/api/backend/v1/campaign',
-  FETCH_CAMPAIGN:'/api/backend/v1/campaigns',
-  FETCH_CAMPAIGN_ID:'/api/backend/v1/campaigns',
-  EDIT_CAMPAIGN:'/api/backend/v1/campaigns',
+  FETCH_CAMPAIGN_PATIENTS: '/api/backend/v1/campaign/patients',
+  CREATE_CAMPAIGN: '/api/backend/v1/campaign',
+  FETCH_CAMPAIGN: '/api/backend/v1/campaigns',
+  FETCH_CAMPAIGN_ID: '/api/backend/v1/campaigns',
+  EDIT_CAMPAIGN: '/api/backend/v1/campaigns',
 
-  GET_ALL_PATIENTS:"/api/backend/v1/getpatients",
+  GET_ALL_PATIENTS: '/api/backend/v1/getpatients',
 
-
-
-  LANDING_PAGE_PACKAGES:'/api/backend/v1/packages/public',
+  LANDING_PAGE_PACKAGES: '/api/backend/v1/packages/public',
 };
