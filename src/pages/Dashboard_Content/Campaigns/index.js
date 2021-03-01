@@ -54,8 +54,8 @@ const Dashboard_Campaigns = props => {
     },
     {
       title: 'Open rate',
-      dataIndex: 'openrate',
-      key: 'openrate',
+      dataIndex: 'open_rate',
+      key: 'open_rate',
     },
     {
       title: 'status',

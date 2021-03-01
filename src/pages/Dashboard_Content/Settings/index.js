@@ -1,14 +1,23 @@
-import React from 'react';
+import React , {useState , useEffect } from 'react';
 import Dashboard_Content from '..';
 import { Tabs } from 'antd';
-import { UsergroupAddOutlined } from '@ant-design/icons';
-import AddUsers from '../AddUsers/index'
+import { UsergroupAddOutlined, SettingFilled } from '@ant-design/icons';
+import AddUsers from '../AddUsers/index';
 const { TabPane } = Tabs;
 const Settings = () => {
+
+  const [isAdmin ,setIsAdmin] = useState('')
+  useEffect(() =>{
+      let data = JSON.parse(localStorage.getItem('user_data'));
+      setIsAdmin(data.isAdmin)
+  },[])
+
   const settingsContent = () => {
     function callback(key) {
       console.log(key);
     }
+
+
     return (
       <div>
         <div className="pageTitle">
@@ -16,12 +25,32 @@ const Settings = () => {
         </div>
         <div>
           <Tabs defaultActiveKey="1">
-            <TabPane
+
+          <TabPane
               tab={
                 <span>
-                  <UsergroupAddOutlined />Manage Users</span> } key="1">
-<AddUsers/>
-            </TabPane>
+                  <SettingFilled />
+                  Profile Settings
+                </span>
+              }
+              key="1"
+            ></TabPane>
+
+{isAdmin && 
+       <TabPane
+       tab={
+         <span>
+           <UsergroupAddOutlined />
+           Manage Users
+         </span>
+       }
+       key="2"
+     >
+       <AddUsers />
+     </TabPane>
+}
+     
+
           </Tabs>
         </div>
       </div>

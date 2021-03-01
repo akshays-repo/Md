@@ -11,7 +11,6 @@ const SmsEdit = props => {
     <div className="smsEditmodalCampaign">
        <Row gutter={[16, 16]} className="remindersEmail">
       <Col xs={24} lg={10}  className="switchCampain mb4">
-      <Switch defaultChecked={props.emailStatus ==="active" ? true :false} onChange={e => props.handleSmsEditStatus(e)} />
       </Col>
       </Row>
       <Row className="fullviewModal">

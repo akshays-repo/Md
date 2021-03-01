@@ -3,6 +3,7 @@ import { useParams } from 'react-router';
 import { actionCreator } from '../../../reducers/actionCreator';
 import TextField from '@material-ui/core/TextField';
 import Dashboard_Content from '..';
+import Switch from '@material-ui/core/Switch';
 
 import {
   Tabs,
@@ -17,7 +18,7 @@ import {
   Modal,
   Popconfirm,
   Button,
-  message,Switch
+  message,
 } from 'antd';
 
 import { store } from '../../../reducers/configureStore';
@@ -32,10 +33,10 @@ const EditCampaign = props => {
   const [titile, setTitle] = useState('');
   const [emailSubject, setEmailSubject] = useState('');
   const [emailContent, setEmailContent] = useState('');
-  const [emailStatus, setemailStatus] = useState(null);
+  const [emailStatus, setemailStatus] = useState();
   const [patientList, setPatientList] = useState([]);
-
-  const [smsStatus, setSmsStatus] = useState('');
+  const [apiResponse, setApiResponse] = useState([]);
+  const [smsStatus, setSmsStatus] = useState();
   const [smsContent, setSmsContent] = useState('');
   const [currentTab, setCurrentTab] = useState('1');
 
@@ -46,9 +47,10 @@ const EditCampaign = props => {
     fetchById();
     props.fetchPatient();
   }, []);
-
+  let response;
   const fetchById = async () => {
-    var response = await props.fetchCampaignbyId(id);
+    response = await props.fetchCampaignbyId(id);
+    setApiResponse(response);
     setTitle(response.payload.name);
     setEmailSubject(response.payload.email_sub);
     setEmailContent(response.payload.email_template);
@@ -73,13 +75,13 @@ const EditCampaign = props => {
   };
 
   const handlEmailStatus = e => {
-    console.log('email status', e ,emailStatus);
-    if (e === true) {
+    console.log('email status', e.target.checked, emailStatus);
+    if (e.target.checked === true) {
       setemailStatus('active');
-    console.log('email status', e , emailStatus);
+      console.log('email status', e.target.checked, emailStatus);
     } else {
       setemailStatus('hold');
-    console.log('email status', e , emailStatus);
+      console.log('email status', e.target.checked, emailStatus);
     }
   };
   const handleSmsEdit = e => {
@@ -88,13 +90,14 @@ const EditCampaign = props => {
   };
   const handleSmsEditStatus = e => {
     console.log('sms status', e);
-    if (e === true) {
+    if (e.target.checked === true) {
       setSmsStatus('active');
-    console.log('sms status', e , smsStatus);
+      console.log('sms status', e.target.checked, smsStatus);
     } else {
       setSmsStatus('hold');
-    console.log('sms status', e , smsStatus);
-  };}
+      console.log('sms status', e.target.checked, smsStatus);
+    }
+  };
 
   const handleEditTitle = e => {
     console.log('email edit', e);
@@ -155,7 +158,8 @@ const EditCampaign = props => {
               </div>
             </Col>
             <Col xs={7} xl={4} className="rightPosition">
-              <button className="view-button mt2"
+              <button
+                className="view-button mt2"
                 onClick={() => {
                   handleSaveEdit();
                 }}
@@ -164,37 +168,53 @@ const EditCampaign = props => {
               </button>
             </Col>
           </Row>
-          </div>
-          <div className="tabSection pb8">
+        </div>
+        <div className="tabSection pb8">
           <Tabs defaultActiveKey="1" onChange={callback} className="tabBox">
             <TabPane tab="EMAIL" key="1" />
             <TabPane tab="SMS" key="2" />
           </Tabs>
-          </div>
-          {currentTab === '1' ? (
-                 <div>
-                    <Switch
-                  defaultChecked={emailStatus}
+        </div>
+        {currentTab === '1' ? (
+          <div>
+            {/* <Switch
+                  defaultChecked={apiResponse.payload?.email_status === 'hold' ? false :true}
                   onChange={e => handlEmailStatus(e)}
-                />
+                /> */}
+            <Switch
+              checked={emailStatus === 'hold' ? false : true}
+              onChange={handlEmailStatus}
+              color="primary"
+              name="checkedB"
+              inputProps={{ 'aria-label': 'primary checkbox' }}
+            />
             <EmailEdit
               handleEmailEdit={handleEmailEdit}
               handleEmailEditSubject={handleEmailEditSubject}
               emailContent={emailContent}
               emailSubject={emailSubject}
-              emailStatus={emailStatus === 'active' ? true: false}
+              emailStatus={emailStatus === 'active' ? true : false}
               handlEmailStatus={handlEmailStatus}
             />
-            </div>
-          ) : (
+          </div>
+        ) : (
+          <div>
+            <Switch
+              checked={smsStatus === 'hold' ? false : true}
+              onChange={handleSmsEditStatus}
+              color="primary"
+              name="checkedB"
+              inputProps={{ 'aria-label': 'primary checkbox' }}
+            />
+
             <SmsEdit
               handleSmsEdit={handleSmsEdit}
               smsContent={smsContent}
               smsStatus={smsStatus}
               handleSmsEditStatus={handleSmsEditStatus}
             />
-          )}
-       
+          </div>
+        )}
 
         <Modal
           title="EDIT PATIENT LIST"
