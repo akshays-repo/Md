@@ -16,7 +16,7 @@ const CustomFormReview = props => {
       <HardCoreForm />
       {customForms?.map(forms => (
         <div>
-          {forms.custom_types === 'text' || forms.custom_types === 'note' ? (
+          {forms.custom_types === 'text' ? (
             <div>
               {' '}
               <p></p>
@@ -26,6 +26,16 @@ const CustomFormReview = props => {
           ) : (
             ''
           )}
+{ forms.custom_types === 'note' ? (
+                        <div>
+                          {' '}
+                          <p>NB:{forms.Key_name}</p>
+                          <p></p>
+                        </div>
+                      ) : (
+                        ''
+                      )}
+
           {forms.custom_types === 'checkbox' ? (
             <div>
               {' '}

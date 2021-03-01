@@ -31,6 +31,9 @@
 }
 .signaturepad{
 border: 1px solid #eee;
-
+}
+.signature-buttons{
+    display: flex;
+    justify-content: space-between;
 }
 }

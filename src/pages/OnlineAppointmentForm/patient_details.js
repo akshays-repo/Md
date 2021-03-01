@@ -131,22 +131,10 @@ export const PatientDetails = props => {
         <div>
           
         
-          {forms.custom_types === 'text' || forms.custom_types === 'note' ? (
+          {forms.custom_types === 'text' ? (
             <div>
               {' '}
               <p></p>
-              {/* <Field name={response[index].answer}>
-                {({
-                  field, // { name, value, onChange, onBlur }
-                  form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
-                  meta,
-                }) => (
-                  <div>
-                    <TextField label={forms.Key_name} type="text" placeholder="Email" {...field} />
-                    {/* {meta.touched && meta.error && <div className="error">{meta.error}</div>} */}
-              {/* </div>
-                )} */}
-              {/* </Field> */}
               <TextField
                 onChange={e => handleChangeText(e, index)}
                 id="standard-basic"
@@ -158,7 +146,15 @@ export const PatientDetails = props => {
           ) : (
             ''
           )}
-         
+         { forms.custom_types === 'note' ? (
+                        <div>
+                          {' '}
+                          <p>NB:{forms.Key_name}</p>
+                          <p></p>
+                        </div>
+                      ) : (
+                        ''
+                      )}
           {forms.custom_types === 'checkbox' ? (
             <div>
               {' '}
