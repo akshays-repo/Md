@@ -53,6 +53,10 @@
     min-width: 300px;
     max-width: 320px;
     border-bottom: 1px solid $gray-light;
+    @include breakpoint(xs) {
+      min-width: 240px;
+      max-width: 255px;
+    }
     .profileDashboard {
       // @include margin-padding(10px, 8px);
       .sb-avatar,
