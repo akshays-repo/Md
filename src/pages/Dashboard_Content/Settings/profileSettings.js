@@ -88,7 +88,7 @@ const ProfileSettings = props => {
         innerRef={innerForm}
       >
         {({ handleSubmit, touched, errors, isSubmitting, values }) => (
-          <Form className="login__form" handleSubmit={handleSubmit}>
+          <Form className="login__form mt8" handleSubmit={handleSubmit}>
             <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>{generateForm(formField)}</Row>
 
             <p>
@@ -100,8 +100,8 @@ const ProfileSettings = props => {
                 }}
                 {...getRootProps({ className: 'dropzone' })}
               >
-                <div className="title">
-                  <div
+                <div className="title mt6">
+                  <div className="settingThumb mb4"
                     style={{
                       display: 'flex',
                       flexDirection: 'row',
@@ -127,27 +127,30 @@ const ProfileSettings = props => {
                         }
                       />
                     )}
-                  </div>
-                  <input {...getInputProps()} multiple={false} />
-                  <div className="upload-btn-wrapper">
+
+<input {...getInputProps()} multiple={false} />
+                  <div className="upload-btn-wrapper mt6">
                     <button type="button" className="view-button button-square font-size-md px-5">
                       Browse Image
                     </button>
                   </div>
+                  </div>
+           
                   {/* <span>Upload Patient Image</span> */}
                 </div>
               </div>
 
               {errors.logo && <div className="errormsg">{errors.logo}</div>}
             </p>
-
-            <Button
+<div className="settingBottom mt8">
+            <button
               htmlType="submit"
               disabled={isSubmitting}
               className="view-button button-square mt-5"
             >
               {' Save Changes'}
-            </Button>
+            </button>
+            </div>
           </Form>
         )}
       </Formik>{' '}

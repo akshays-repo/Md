@@ -21,7 +21,7 @@ const Settings = () => {
 
 
     return (
-      <div>
+      <div className="mt6">
         <div className="pageTitle">
           <h4>SETTINGS</h4>
         </div>

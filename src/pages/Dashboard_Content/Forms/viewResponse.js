@@ -9,23 +9,34 @@ console.log("pp",props)
     <div>
       <div ref={ref} className="responseBox">
         <div>
+          <div className="header">
           <h3>{props.viewDetails?.form_name}</h3>
-          <p>Full Name: {props.viewDetails?.name}</p>
-          <p>Email: {props.viewDetails?.email}</p>
-          <p>Phone Number: {props.viewDetails?.phone}</p>
+          </div>
+          <div className="body pb5">
+          <p><span>Full Name</span>: <span className="pl2">{props.viewDetails?.name}</span></p>
+          <p><span>Email</span>:  <span  className="pl2">{props.viewDetails?.email}</span></p>
+          <p><span>Phone Number</span>:  <span className="pl2">{props.viewDetails?.phone}</span></p>
+          </div>
         </div>
-       
+        <div className="responseContent">
         {props.viewDetails?.response.map(res => (
+         
           <div className="responseBg">
+            <div className="fitstColumn">
             <p className="question">{res.Key_name}</p>
+            </div>
+          <div className="secondColumn">
             <p>
               {res.custom_types == 'esign'
                 ? res.answer?.map(answer => <img src={answer} />)
                 : res.answer?.map(answer => <p>{answer}</p>)}
               {}
             </p>
+            </div>
           </div>
+         
         ))}
+         </div>
       </div>
 
       <div style={{ paddingTop: '20px' }}>

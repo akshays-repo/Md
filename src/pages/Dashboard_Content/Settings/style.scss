@@ -10,5 +10,16 @@
     .ant-tabs-tab-btn {
         padding: 0px 5px;
     }
+
+}
+}
+@include breakpoint(xs) {
+    .pdfViewbutton {
+        width: 125px;
+    }
+}
+@media (min-width:$ipad-portrait) and (max-width:$ipad-landscape) {
+.pdfViewbutton {
+    width: 125px;
 }
 }

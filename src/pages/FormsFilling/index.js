@@ -123,7 +123,7 @@ const FormsFillingSection = props => {
           <h3> {hospitalDetails?.fullName}</h3>
           </div>
           <h4 className="text-center">{props.formToFill.name}</h4>
-          <div className="formBook" style={{ boxShadow: '0 0 10px rgb(0 0 0 / 10%)' }}>
+          <div className="formBook" style={{ boxShadow: '0 0 10px rgb(0 0 0 / 10%)', background: ' #f8f8f8' }}>
             <Formik
               enableReinitialize={true}
               initialValues={{
@@ -280,14 +280,15 @@ const FormsFillingSection = props => {
                             <SignaturePad
                               ref={sigCanvas}
                               canvasProps={{
-                                width: 500,
+                                width:250,
                                 height: 100,
                                 className: 'signaturepad',
                               }}
                             />
-                            <div className="signature-buttons">
+                             <p>*please save signature after you completed</p>
+                            <div className="signature-buttons mt6">
 
-                            <span className="view-button" onClick={clearSignature}>Clear</span>
+                            <span className="edit-button mr2" onClick={clearSignature}>Clear</span>
                             <span className="view-button"
                               onClick={() => {
                                 getSignature(index);
@@ -297,7 +298,7 @@ const FormsFillingSection = props => {
                             </span>
                               </div>
                
-                         <br/>*please save signature after you completed
+                        
                           </div>
                         </div>
                       ) : (
@@ -306,7 +307,7 @@ const FormsFillingSection = props => {
                     </div>
                   ))}
 
-                  <div className="w-100 footerButton">
+                  <div className="w-100 footerButton mt5">
                     <button
                       htmlType="submit"
                       //  disabled={isSubmitting}
