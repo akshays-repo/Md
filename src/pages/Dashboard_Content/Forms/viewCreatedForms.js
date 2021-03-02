@@ -80,7 +80,7 @@ const onCopy = () =>{
       >
         <FormCreation editId={editId} editData={editData} {...props} />
       </Modal>
-      <Table columns={columns} dataSource={props.payload} />
+      <Table  scroll={{  x: 240 }}  columns={columns} dataSource={props.payload} />
     </div>
   );
 };

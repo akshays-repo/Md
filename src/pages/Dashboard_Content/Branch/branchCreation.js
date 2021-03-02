@@ -2,12 +2,8 @@ import React, { useRef, useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { BranchSchema } from '_utils/Schemas';
 import { message, Button, Row, Col, Select } from 'antd';
-import { PoweroffOutlined } from '@ant-design/icons';
 import { getFormData } from '_utils';
-import { actionCreator } from 'reducers/actionCreator';
 import { getPlaceList, getCoordinates, getCurrentLocation, getPincode } from '_utils/googleApi';
-import { TextField, Select as MatSelect } from 'formik-material-ui';
-import MenuItem from '@material-ui/core/MenuItem';
 import { generateForm } from '../../../_utils/formgenerator';
 
 const BranchCreationForm = props => {
