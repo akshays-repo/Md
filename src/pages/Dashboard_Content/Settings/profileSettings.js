@@ -7,27 +7,36 @@ import { useDropzone } from 'react-dropzone';
 import { Row, Button } from 'antd';
 
 const ProfileSettings = props => {
+  const [fullName, setFullName] = useState('');
+  const [logo, setLogo] = useState('');
+
+  useEffect(() => {
+    let hospital = JSON.parse(localStorage.getItem('user_data'));
+    setFullName(hospital.hospital.fullName ? hospital.hospital.fullName : '' );
+    setLogo(hospital.hospital.logo ? hospital.hospital.logo : '');
+    console.log("hospital", hospital)
+  }, []);
   const formField = [
     {
       label: 'Hospital Name',
       name: 'fullName',
       type: 'text',
     },
+    // {
+    //   label: 'Phone no.',
+    //   name: 'phone',
+    //   type: 'phone',
+    // },
     {
-      label: 'Phone no.',
-      name: 'phone',
-      type: 'text',
+      label: 'New Password',
+      name: 'password',
+      type: 'password',
     },
     {
-        label: 'New Password',
-        name: 'password',
-        type: 'password',
-      },
-      {
-        label: 'Confirm New Password',
-        name: 'c_password',
-        type: 'password',
-      },
+      label: 'Confirm New Password',
+      name: 'c_password',
+      type: 'password',
+    },
   ];
 
   const [files, setFiles] = useState([]);
@@ -47,7 +56,6 @@ const ProfileSettings = props => {
       innerForm.current.setFieldValue('logo', acceptedFiles);
     },
   });
-
 
   useEffect(
     () => () => {
@@ -70,11 +78,10 @@ const ProfileSettings = props => {
       <Formik
         enableReinitialize={true}
         initialValues={{
-          fullName: '',
-          phone: '',
+          fullName: fullName,
           password: '',
           c_password: '',
-          logo: '',
+          logo: logo,
         }}
         //  validationSchema={props.editId ? hospitaEditlUser : hospitalUser}
         onSubmit={handleFormSubmission}
@@ -82,9 +89,7 @@ const ProfileSettings = props => {
       >
         {({ handleSubmit, touched, errors, isSubmitting, values }) => (
           <Form className="login__form" handleSubmit={handleSubmit}>
-            <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-                {generateForm(formField)}
-            </Row>
+            <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>{generateForm(formField)}</Row>
 
             <p>
               <div
@@ -141,7 +146,7 @@ const ProfileSettings = props => {
               disabled={isSubmitting}
               className="view-button button-square mt-5"
             >
-              {' Save Changes' }
+              {' Save Changes'}
             </Button>
           </Form>
         )}
