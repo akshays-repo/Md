@@ -71,6 +71,7 @@ width: 175px;
       }
 
     }
+
   }
   .providerFilter {
     .search {
@@ -200,5 +201,27 @@ button {
   .proSearchmbl {
    .ant-space-item {
       min-width: 100px;
+      .inlineFilter {
+        input {
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
+
+  .proMblview {
+    display: flex;
+    justify-content: flex-end;
+  }
+  @media (min-width:$ipad-portrait) and (max-width:$ipad-landscape) {
+    .provider {
+      .header {
+        flex-wrap: wrap;
+        justify-content: start;
+        .provider-head {
+         margin-bottom: 10px;
+          min-width: 10rem;
+        }
+      }
     }
   }

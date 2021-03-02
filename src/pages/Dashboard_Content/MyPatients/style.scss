@@ -6,9 +6,12 @@
             margin-bottom: 30px;
             .search-area {
                 display: flex;
+               
+        }
                 .form-control {
                     margin-right: 10px;
-                }
+                 
+                       
             }
         }
         .ant-modal-title{
@@ -27,3 +30,21 @@
 //         border-radius: 100px;
 //     }
 
+
+    @include breakpoint(xs) {
+        .search {
+        .ant-space {
+    display: block;
+    margin-top: 25px;
+    .ant-space-item {
+    input {
+        margin-bottom: 10px;
+    }
+}
+.mbl-button {
+    display: flex;
+    margin-top: 25px;
+}
+}
+}
+    }

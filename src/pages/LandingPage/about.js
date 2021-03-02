@@ -15,7 +15,7 @@ const FossilMdAbout =() =>{
          <img className="circular-square" src={AboutImg} />
           </div>
       </Col>
-      <Col xs={24} lg={12}>
+      <Col xs={24} md={14} lg={12}>
           <div className="aboutText">
               <h5 style={{color: '#05d6e7'}}>ABOUT FOSSILMD</h5>
               <div className="titleCaption">

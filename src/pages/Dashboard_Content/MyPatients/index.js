@@ -141,7 +141,7 @@ const Dashboard_MyPatients = props => {
     };
     const filterSection = () => {
       return (
-        <div>
+        <div className="patientButtonform">
           <form className="search-area">
             <div style={{ marginBottom: '10px' }} className="search">
               <Space direction="horizontal">
@@ -150,24 +150,27 @@ const Dashboard_MyPatients = props => {
                   placeholder=" Name Email or Phone"
                   onChange={handleChangeSearch}
                   value={search}
+                  style={{ width: '100%' }}
                 />
                 <Select
                   className="holdActive"
                   placeholder="status"
                   value={status}
                   onChange={e => setStatus(e)}
-                  style={{ width: 120 }}
+                  style={{ width: '100%' }}
                 >
                   <Option value="">All</Option>
                   <Option value="hold">Hold</Option>
                   <Option value="active">Active</Option>
                 </Select>
-                <button className="view-button button-square" onClick={handleSearchSubmission}>
+                <div className="mbl-button">
+                <button className="view-button mr3 button-square" onClick={handleSearchSubmission}>
                   Filter
                 </button>
                 <button className="edit-button button-square" onClick={clearFilter}>
                   clear
                 </button>
+                </div>
               </Space>
             </div>
           </form>

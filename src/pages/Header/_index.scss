@@ -9,6 +9,7 @@
   height: 75px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   @include fixed;
   @include breakpoint(xs) {
     z-index: 100;
@@ -23,7 +24,7 @@
     @include breakpoint(xs) {
       margin-left:40px;
     }
-    a{
+    a {
       color: $white;
       text-decoration: none;
       font-size: 25px;

@@ -23,7 +23,7 @@ const Dashboard_Templates = props => {
       render: (record, text) => {
         return (
           <Link to={`/templates/${text.id}/actions`}>
-            <img className="pr2" style={{height:"35px"}} src={text.icon}/>{text.name}
+           <div className="iconTd"> <img className="pr2" style={{height:"35px"}} src={text.icon}/>{text.name}</div>
           </Link>
         );
       },
@@ -59,7 +59,9 @@ const Dashboard_Templates = props => {
                     <div className="pageTitle">
           <h4>TEMPLATES</h4>
         </div>
+        <div className="temtableMbl">
         <Table scroll={{  x: 240 }} columns={columns} dataSource={props.payload} />
+        </div>
       </div>
     );
   };

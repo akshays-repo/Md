@@ -46,10 +46,10 @@ const handleEmailEditSave = () =>{
 
   return (
     <div className="remindersEmail">
-      <Row gutter={[16, 16]}>
-        <Col xs={24} lg={12}>
-          <div>
-            <TextField
+ <Row gutter={[16, 16]}>
+    <Col xs={24} lg={12}  >
+        <div>
+        <TextField
               type="text"
               required
               defaultValue={props.actionEmailEdit.email_content}
