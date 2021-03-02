@@ -104,19 +104,25 @@ const FormsFillingSection = props => {
 
   return (
     <div className="container direction">
-      <Row className="header">
+      {/* <Row className="header">
         <Col xs={12} xl={4}>
-          {/* <div className="logo"><img src = {hospitalDetails?.logo.path ? `/${hospitalDetails?.logo.path}`: '' }/></div> */}
+          <div className="logo"><img src = {hospitalDetails?.logo.path ? `/${hospitalDetails?.logo.path}`: '' }/></div>
         </Col>
         <Col xs={12} xl={20}>
+          <div className="frmHeading pt3 pb3">
           <h3> {hospitalDetails?.fullName}</h3>
+          </div>
         </Col>
-      </Row>
+      </Row> */}
 
-      <h4 className="text-center">{props.formToFill.name}</h4>
+    
 
       <Row>
-        <Col xs={24} xl={12} offset={isMobile ? '' : 6}>
+        <Col xs={24} lg={12} xl={15} offset={isMobile ? '' : 4} className="hospitalForm">
+        <div className="frmHeading text-center pt3 pb3">
+          <h3> {hospitalDetails?.fullName}</h3>
+          </div>
+          <h4 className="text-center">{props.formToFill.name}</h4>
           <div className="formBook" style={{ boxShadow: '0 0 10px rgb(0 0 0 / 10%)' }}>
             <Formik
               enableReinitialize={true}

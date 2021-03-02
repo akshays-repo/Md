@@ -37,3 +37,8 @@ border: 1px solid #eee;
     justify-content: space-between;
 }
 }
+@media (min-width:$ipad-portrait) and (max-width:$ipad-landscape) {
+.hospitalForm {
+    margin: 0 auto;
+}
+}

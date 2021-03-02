@@ -23,7 +23,7 @@ const Settings = () => {
         <div className="pageTitle">
           <h4>SETTINGS</h4>
         </div>
-        <div>
+        <div className="settingTab">
           <Tabs defaultActiveKey="1">
 
           <TabPane
