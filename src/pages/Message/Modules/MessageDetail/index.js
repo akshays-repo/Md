@@ -16,8 +16,6 @@ const MessageDetail = props => {
   const messagesEndRef = useRef(null);
 
   const send = () => {
-    console.log("*!#@#!@" , message)
-  console.log("!*****$", props.setRecevierUUID)
     if (message) {
       setMessage('');
       socket.emit('send_message', {

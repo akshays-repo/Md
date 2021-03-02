@@ -7,7 +7,8 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import AppointmentView from './appointmentView';
 import AppointmentEdit from './appointmentEdit';
-import { isMobile } from 'react-device-detect';
+//import { isMobile } from 'react-device-detect';
+import { useMediaQuery } from 'react-responsive'
 
 const { Option } = Select;
 
@@ -30,6 +31,7 @@ const Dashboard_Appointments = props => {
     useEffect(() => {
       props.fetchBranch({ hospitalId: localStorage.getItem('hospital_id'), page: 1, limit: 50 });
     }, []);
+    const isMobile = useMediaQuery({ maxWidth: 1024})
 
     const handleChangeSearch = e => {
       e.preventDefault();

@@ -3,6 +3,8 @@ import Dashboard_Content from '..';
 import { Tabs } from 'antd';
 import { UsergroupAddOutlined, SettingFilled } from '@ant-design/icons';
 import AddUsers from '../AddUsers/index';
+import ProfileSettings from './profileSettings';
+
 const { TabPane } = Tabs;
 const Settings = () => {
 
@@ -34,7 +36,10 @@ const Settings = () => {
                 </span>
               }
               key="1"
-            ></TabPane>
+            >
+<ProfileSettings/>
+
+            </TabPane>
 
 {isAdmin && 
        <TabPane
