@@ -104,4 +104,5 @@ export const backend_api = {
   GET_ALL_PATIENTS: '/api/backend/v1/getpatients',
 
   LANDING_PAGE_PACKAGES: '/api/backend/v1/packages/public',
+
 };

@@ -16,17 +16,18 @@ const ProfileSettings = props => {
     setLogo(hospital.hospital.logo ? hospital.hospital.logo : '');
     console.log("hospital", hospital)
   }, []);
+  
   const formField = [
     {
       label: 'Hospital Name',
       name: 'fullName',
       type: 'text',
     },
-    // {
-    //   label: 'Phone no.',
-    //   name: 'phone',
-    //   type: 'phone',
-    // },
+    {
+      label: 'Email',
+      name: 'email',
+      type: 'email',
+    },
     {
       label: 'New Password',
       name: 'password',
