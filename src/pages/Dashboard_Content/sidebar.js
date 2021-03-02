@@ -111,17 +111,10 @@ const sideMenuList = [
   // },
 ];
 const Sidebar = (props) => {
-  // const {
-  //   avatarlocation = 'https://images.livemint.com/img/2020/07/06/600x338/apollo_1594043446600_1594043458520.jpg',
-  // } = JSON.parse(localStorage.getItem('user_data'));
 
   const [hospitalData, setHospitalData] = useState('');
   const [logo, setLogo] = useState('');
-  // useEffect(() => {
-  //   let data = JSON.parse(localStorage.getItem('user_data'));
-  //   setLogo(data.hospital.logo.path);
-  //   setHospitalData(data);
-  // }, []);
+
 
 const [currentLocation , setCurrentLocation] =useState( window.location.pathname)
 

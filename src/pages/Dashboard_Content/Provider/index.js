@@ -10,7 +10,8 @@ import { store } from '../../../reducers/configureStore';
 import CustomFormField from './customFormField';
 import ProviderType from './providerType';
 import CustomWidget from './customWidget';
-import { isMobile } from 'react-device-detect';
+//import { isMobile } from 'react-device-detect';
+import { useMediaQuery } from 'react-responsive'
 
 
 const Dashboard_Provider = props => {
@@ -30,6 +31,7 @@ const Dashboard_Provider = props => {
     props.fetchProviderType();
     setProviderTypeState(props.ProviderTypePayload);
   }, [props.ProviderTypeChanged, props.ProviderDeleted]);
+  const isMobile = useMediaQuery({ maxWidth: 1024})
 
   useEffect(() => {
     props.fetchBranch({ hospitalId: localStorage.getItem('hospital_id'), page: 1, limit: 50 });
