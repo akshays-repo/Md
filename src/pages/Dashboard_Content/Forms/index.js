@@ -33,7 +33,7 @@ const responseFt = async() => {
 } 
   const viewFormDetails =(e, record) => {
     e.preventDefault();
-    setViewDetails(record.response)
+    setViewDetails(record)
     setViewId(record.id)
     console.log("data",record)
 

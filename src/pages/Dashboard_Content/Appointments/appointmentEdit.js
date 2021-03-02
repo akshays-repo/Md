@@ -66,7 +66,6 @@ const AppointmentEdit = props => {
           payment_status:paymentStatus,
           status:status,
           userTypeId:2,
-
         }}
         //validationSchema={ProviderCreationSchema}
         onSubmit={handleFormSubmission}
