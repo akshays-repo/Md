@@ -209,3 +209,16 @@
    }
  }
 }
+
+@media (min-width:$ipad-portrait) and (max-width:$ipad-landscape) {
+  .campaignWrapper {
+    .headerTop {
+      padding-bottom: 10px;
+    }
+   .tabSection {
+    .tabBox {
+width: 75%;
+    }
+  }
+}
+}
