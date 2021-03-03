@@ -24,9 +24,12 @@ const MessageUserList = (props) =>{
     const columns = [
         {
           title: 'User Name',
-          key: 'displayName',
-          dataIndex: 'displayName',
-        //  render:record =>(<a> {record.user.displayName}</a>)
+          key: '',
+          dataIndex: '',
+        render:record =>
+        <div>
+{record.user.displayName}({record.user.phone})
+        </div>
         },
 
         {

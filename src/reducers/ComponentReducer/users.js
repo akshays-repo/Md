@@ -17,7 +17,7 @@ export const UsersReducer = (state = UsersState, action) => {
     case 'FILTER_USER':
       return { error: action.error, payload: action.payload, message: action.message , };
     case 'DELETE_USER':
-        message.success('BRANCH DELETED SUCCESSFULLY');
+        message.success('USER DELETED SUCCESSFULLY');
       return { error: action.error, message: action.message ,changed:true };
       case 'OPEN_CREATE_USER_MODAL':
         return { ...state, modal: true };

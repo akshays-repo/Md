@@ -37,9 +37,19 @@ const AddUsers = props => {
 
   const columns = [
     {
+      title: 'Full Name',
+      dataIndex: 'fullName',
+      key: 'fullName',
+    },
+    {
       title: 'Email',
       dataIndex: 'email',
       key: 'email',
+    },
+    {
+      title: 'Phone',
+      dataIndex: 'phone',
+      key: 'phone',
     },
     {
       title: 'Phone',
@@ -105,6 +115,7 @@ const AddUsers = props => {
         onCancel={() => store.dispatch({ type: 'CLOSE_CREATE_USER_MODAL' })}
         visible={props.modal}
         footer={false}
+        destroyOnClose
       >
         <UserCreationForm {...props} />
       </Modal>
@@ -114,6 +125,7 @@ const AddUsers = props => {
         onCancel={() => store.dispatch({ type: 'CLOSE_EDIT_USER_MODAL' })}
         visible={props.modal1}
         footer={false}
+        destroyOnClose
       >
         <UserCreationForm editId={editId}  editData={editData} {...props} />
       </Modal>

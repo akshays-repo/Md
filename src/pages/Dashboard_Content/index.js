@@ -16,19 +16,24 @@ const Dashboard_Content = ({ content }) => {
   const onClose = () => {
     setVisible(false);
   };
+<<<<<<< HEAD
   const isMobile = useMediaQuery({ maxWidth: 1024})
+=======
+  const isMobile = useMediaQuery({ maxWidth: 767})
+  const isPortrait = useMediaQuery({ query: '(orientation: portrait)' })
+>>>>>>> 0e1d58c1e5b56bad3c1172c394e0a44059be8d20
 
   return (
     <div className="dashboard__content">
       <Row>
         <Col xs={24} xl={6} md={10} lg={8}>
-          {isMobile && 
+          {(isMobile || isPortrait )&& 
           <Button className="ml4 mblButton" type="primary"  onClick={showDrawer}>
                 <i class="fas fa-bars"></i>
-            </Button>}
+          </Button>}
           <div className="leftblock-sidenav" 
         >
-            {isMobile ? (
+            {(isMobile || isPortrait ) ? (
               <div className="mbl-button pl4"> 
                 <Drawer
                   title=""
@@ -45,7 +50,7 @@ const Dashboard_Content = ({ content }) => {
             )}
           </div>
         </Col>
-        <Col xs={24} xl={18} lg={16} md={14}>
+        <Col xs={24} xl={18} lg={16} md={24}>
           <div className="rightblock-content">{content}</div>
         </Col>
       </Row>

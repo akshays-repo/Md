@@ -2,7 +2,7 @@ import socketIOClient from 'socket.io-client';
 import { DeliveryStatus } from '_constants/message';
 import { store } from '../../../reducers/configureStore';
 import _ from 'lodash'
-export const ENDPOINT = 'http://fossilmdbackend.riolabz.com';
+export const ENDPOINT = 'http://fossilmdbackend.riolabz.com/';
 export const socket = socketIOClient(ENDPOINT);
 
 export const connectToSocket = async () => {
@@ -25,7 +25,7 @@ export const connectToSocket = async () => {
   });
 
   socket.on('create_conversation_success', data => {
-    console.log('message create_conversation_success', data);
+  console.log('message create_conversation_success', data);
     
     socket.emit('get_messages', {
       conversationId: data.conversationId,
@@ -77,9 +77,10 @@ export const connectToSocket = async () => {
   });
 
   socket.on('send_message_success', data => {
+    console.log('message send_message_success', data);
+
     store.dispatch({ type: 'SET_MESSAGE', payload: data.message });
     store.dispatch({ type: 'SET_LATEST_MESSAGE_SUMMARY', payload: data.message });
-    console.log('message send_message_success', data);
   });
 
   socket.on('get_message_success', data => {
@@ -88,9 +89,8 @@ export const connectToSocket = async () => {
 
     store.dispatch({ type: 'CLEAR_MESSAGE' });
     store.dispatch({ type: 'SET_MESSAGE', payload: _.unionBy(oldMessage, data) });
-   
   });
-
+  
   socket.on('message_delivery_status', data => {
     console.log('message message_delivery_status', data);
   });

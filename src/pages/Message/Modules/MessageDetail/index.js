@@ -15,7 +15,12 @@ const MessageDetail = props => {
   const [message, setMessage] = useState('');
   const messagesEndRef = useRef(null);
 
+  
+
+
   const send = () => {
+    console.log("*!#@#!@" , message)
+  console.log("!*****$", props.setRecevierUUID)
     if (message) {
       setMessage('');
       socket.emit('send_message', {
@@ -39,7 +44,6 @@ const MessageDetail = props => {
     messagesEndRef.current.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
   };
 
-  useEffect(() => {});
 
   const handleScroll = e => {
     let element = e.target;

@@ -138,7 +138,7 @@ const PatientCreationForm = props => {
             address: '',
             avatarlocation: '',
             phone: '',
-            image: '',
+            image:  "",
             gender: 'male',
             status: 'active',
             patient_status: 'new',

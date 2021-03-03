@@ -373,8 +373,8 @@ export const BranchSchema = Yup.object().shape({
   email: Yup.string()
     .required('Please enter email')
     .email('Please enter valid email'),
-  phone: Yup.string().required('Please enter phone no '),
-  hospitalId: Yup.number(),
+    phone: Yup.string().matches(regExMobNoUs, 'Phone number is not valid (eg: +14155552671)').min(8).required("phone number is required"),
+    hospitalId: Yup.number(),
   address: Yup.string()
     .required('Please enter address')
     .nullable(),
@@ -397,7 +397,7 @@ export const PatientCreationSchema = Yup.object().shape({
   //   .required('Phone number is required')
   //   .min(8)
   //   .phone('Phone number is not valid'),
-    phone: Yup.string().matches(regExMobNoUs, 'Phone number is not valid').min(8),
+  phone: Yup.string().matches(regExMobNoUs, 'Phone number is not valid (eg: +14155552671)').min(8).required("phone number is required"),
 
   dob: Yup.date().required('Please select DOB'),
   zipcode: Yup.string().required('Please enter zipcode'),
@@ -406,7 +406,7 @@ export const PatientCreationSchema = Yup.object().shape({
 export const ProviderCreationSchema = Yup.object().shape({
   fullName: Yup.string().required('Please enter full name'),
   email: Yup.string().email('Please enter valid email'),
-  phone: Yup.string().required('Phone number is required'),
+  phone: Yup.string().matches(regExMobNoUs, 'Phone number is not valid (eg: +14155552671)').min(8).required("phone number is required"),
 });
 
 export const SchedulingSchema = Yup.object().shape({
@@ -521,7 +521,7 @@ export const hospitalUser = Yup.object().shape({
   email: Yup.string()
   .required('Please enter email address')
   .email('Please enter valid email'),
-phone: Yup.string().required('Phone number is required'),
+  phone: Yup.string().matches(regExMobNoUs, 'Phone number is not valid (eg: +14155552671)').min(8).required("phone number is required"),
   password : Yup.string().password().required('Please enter  password'),
 c_password: Yup.string().oneOf([Yup.ref('password'), 'null'], 'Password must match'),
 });
@@ -530,7 +530,7 @@ export const hospitaEditlUser = Yup.object().shape({
   email: Yup.string()
   .required('Please enter email address')
   .email('Please enter valid email'),
-phone: Yup.string().required('Phone number is required'),
+  phone: Yup.string().matches(regExMobNoUs, 'Phone number is not valid (eg: +14155552671)').min(8).required("phone number is required"),
   
 });
 
@@ -539,9 +539,16 @@ export const onlineFormFilling = Yup.object().shape({
   .required('Please enter email address')
   .email('Please enter valid email'),
   name: Yup.string().required('Please enter Name'),
-
-  
 });
 
+export const profileSettings = Yup.object().shape({
+  fullName: Yup.string()
+  .required('Please enter Full Name'),
+  email: Yup.string()
+  .required('Please enter email address')
+  .email('Please enter valid email'),
+  password : Yup.string().password(),
+c_password: Yup.string().oneOf([Yup.ref('password'), 'null'], 'Password must match'),
+});
 
 
