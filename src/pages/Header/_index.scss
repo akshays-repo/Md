@@ -11,10 +11,12 @@
   justify-content: space-between;
   align-items: center;
   @include fixed;
+
   @include breakpoint(xs) {
     z-index: 100;
   }
-  a{
+ 
+  a {
     text-decoration: none;
     color: white;
   }
@@ -33,5 +35,15 @@
       }
     }
   }
-  
 }
+
+@media(min-width:$ipad-portrait) and (max-width:$ipad-small) {
+.dashboard__header {
+.title {
+  margin-left: 50px;
+}
+}
+}
+
+
+

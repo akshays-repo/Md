@@ -69,11 +69,7 @@
               }
             }
           }
-        
       }
-
-
-
     }
   }
 }
@@ -114,11 +110,14 @@
     resize: none;
     border: none;
     outline: none;
+    @media (min-width:$ipad-portrait) and (max-width:$ipad-landscape) {
+      left: 65px;
+    }
     }
   }
   .msgLength {
     position: absolute;
-    right: 60px;
+    right: 70px;
   }
   }
 }
@@ -160,5 +159,10 @@
     display: flex;
     align-items: center;
     padding-right: 15px;
+  }
+}
+.editTime {
+  .MuiInputLabel-root {
+    font-size: .9rem;
   }
 }

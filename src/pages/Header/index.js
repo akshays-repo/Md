@@ -15,7 +15,7 @@ const Header = (props) => {
 
   return (
     <div className="dashboard__header">
-      <div>
+      <div className="title">
       <h3><Link to="/">{localStorage.getItem('name') || 'Login'}</Link></h3>
 
       </div>

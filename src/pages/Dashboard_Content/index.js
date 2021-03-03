@@ -16,12 +16,8 @@ const Dashboard_Content = ({ content }) => {
   const onClose = () => {
     setVisible(false);
   };
-<<<<<<< HEAD
-  const isMobile = useMediaQuery({ maxWidth: 1024})
-=======
   const isMobile = useMediaQuery({ maxWidth: 767})
   const isPortrait = useMediaQuery({ query: '(orientation: portrait)' })
->>>>>>> 0e1d58c1e5b56bad3c1172c394e0a44059be8d20
 
   return (
     <div className="dashboard__content">
