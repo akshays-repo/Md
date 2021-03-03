@@ -9,20 +9,36 @@ import { profileSettings } from '_utils/Schemas';
 import { actionCreator } from '../../../reducers/actionCreator';
 import { store } from '../../../reducers/configureStore';
 import { connect } from 'react-redux';
+import { message } from 'antd';
 
 const ProfileSettings = props => {
   const [fullName, setFullName] = useState('');
   const [logo, setLogo] = useState('');
   const [email, setEmail] = useState('');
+  const [hospitalId, setHospitalId] = useState('');
+  const [hospitalPhone, setHospitalPhone] = useState('');
+  const [hospitalStatus, setHospitalStatus] = useState('');
+  const [hospitalData, setHospitalData] = useState();
 
   useEffect(() => {
     let hospital = JSON.parse(localStorage.getItem('user_data'));
-    setFullName(hospital.hospital.fullName ? hospital.hospital.fullName : '');
-    setLogo(hospital.hospital.logo ? hospital.hospital.logo : '');
-    setEmail(hospital.email ? hospital.email : '');
-    console.log('hospital', hospital);
+    setHospitalData(hospital);
+    if (hospital.isAdmin === false) {
+      setFullName(hospital.fullName ? hospital.fullName : '');
+      setLogo(hospital.profile_image ? hospital.profile_image : '');
+      setEmail(hospital.email ? hospital.email : '');
+      setHospitalId(hospital.hospitalId);
+      setHospitalPhone(hospital.phone);
+      setHospitalStatus(hospital.status);
+    } else {
+      setFullName(hospital.hospital.fullName ? hospital.hospital.fullName : '');
+      setLogo(hospital.hospital.logo.path ? hospital.hospital.logo.path : '');
+      setEmail(hospital.email ? hospital.email : '');
+      setHospitalId(hospital.hospitalId);
+      setHospitalPhone(hospital.phone);
+      setHospitalStatus(hospital.status);
+    }
   }, []);
-
   const formField = [
     {
       label: 'Hospital Name',
@@ -78,10 +94,28 @@ const ProfileSettings = props => {
       innerForm.current.values.logo.filter(result => result.name != name),
     );
   };
-  const handleFormSubmission =async (values) => {
-    console.log("data",values)
-    let data = await getFormDataA({ ...values});
-    console.log("data", data)
+
+  const handleFormSubmission = async values => {
+    const { c_password, ...rest } = values;
+
+  
+    if (typeof rest.logo === 'string') {
+      delete rest.logo;
+    }else{
+      if (hospitalData.isAdmin === false) {
+        rest.profile_image = rest.logo;
+        delete rest.logo;
+
+      }
+    } 
+
+    let data = await getFormDataA({ ...rest });
+    let response = await props.editProfile(data);
+    if (response.payload.success === true) {
+      localStorage.setItem('token', response.payload.token);
+      localStorage.setItem('user_data', JSON.stringify(response.payload.user));
+      message.success('Profile Updated Succefully');
+    }
   };
 
   return (
@@ -95,6 +129,8 @@ const ProfileSettings = props => {
           c_password: '',
           logo: logo,
           userTypeId: 2,
+          phone: hospitalPhone,
+          status: hospitalStatus,
         }}
         validationSchema={profileSettings}
         onSubmit={handleFormSubmission}
@@ -172,12 +208,20 @@ const ProfileSettings = props => {
   );
 };
 
-
+const mapStoreToProps = ({ Users }) => {
+  console.log('state', Users);
+  return {
+    payload: Users.payload,
+    error: Users.error,
+    message: Users.message,
+    modal: Users.modal,
+    modal1: Users.modal1,
+    changed: Users.changed,
+  };
+};
 const mapDispatchToProps = dispatch => ({
-
-  editUser: (param, values) =>
-    dispatch(actionCreator({ method: 'POST', action_type: 'EDIT_USER', param, values, })),
-
+  editProfile: values =>
+    dispatch(actionCreator({ method: 'POST', action_type: 'EDIT_PROFILE', values })),
 });
 
-export default connect(mapDispatchToProps)(ProfileSettings);
+export default connect(mapStoreToProps, mapDispatchToProps)(ProfileSettings);

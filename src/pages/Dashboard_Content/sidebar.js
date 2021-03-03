@@ -117,7 +117,9 @@ const Sidebar = (props) => {
 
 
 const [currentLocation , setCurrentLocation] =useState( window.location.pathname)
-
+useEffect(() =>{
+  let hospital = JSON.parse(localStorage.getItem('user_data'));
+  setLogo(hospital.hospital.logo.path ? hospital.hospital.logo.path : '');}, [])
 
   return (
     <div className="dashboard__sidebar">

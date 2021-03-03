@@ -39,7 +39,7 @@ const PatientAppointment = props => {
     props.fetchAppointmentHome({  fromDate: moment().format('L') })
     setCurrentButton(2)
     }
-  }, [props.changed][dashboardStateChanged]);
+  }, [dashboardStateChanged]);
 
 
   const getUpComing = () =>{
