@@ -114,8 +114,6 @@ const Sidebar = (props) => {
 
   const [hospitalData, setHospitalData] = useState('');
   const [logo, setLogo] = useState('');
-
-
 const [currentLocation , setCurrentLocation] =useState( window.location.pathname)
 useEffect(() =>{
   let hospital = JSON.parse(localStorage.getItem('user_data'));
