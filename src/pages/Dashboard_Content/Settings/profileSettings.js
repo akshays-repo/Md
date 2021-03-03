@@ -55,11 +55,11 @@ const ProfileSettings = props => {
       name: 'password',
       type: 'password',
     },
-    {
-      label: 'Confirm New Password',
-      name: 'c_password',
-      type: 'password',
-    },
+    // {
+    //   label: 'Confirm New Password',
+    //   name: 'c_password',
+    //   type: 'password',
+    // },
   ];
 
   const [files, setFiles] = useState([]);
@@ -126,7 +126,7 @@ const ProfileSettings = props => {
           fullName: fullName,
           email: email,
           password: '',
-          c_password: '',
+         // c_password: '',
           logo: logo,
           userTypeId: 2,
           phone: hospitalPhone,

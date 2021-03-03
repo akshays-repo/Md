@@ -547,8 +547,8 @@ export const profileSettings = Yup.object().shape({
   email: Yup.string()
   .required('Please enter email address')
   .email('Please enter valid email'),
-  password : Yup.string().password(),
-c_password: Yup.string().oneOf([Yup.ref('password'), 'null'], 'Password must match'),
+  //password : Yup.string().password(),
+//c_password: Yup.string().oneOf([Yup.ref('password'), 'null'], 'Password must match'),
 });
 
 
