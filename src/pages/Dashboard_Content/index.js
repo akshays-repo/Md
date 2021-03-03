@@ -16,7 +16,7 @@ const Dashboard_Content = ({ content }) => {
   const onClose = () => {
     setVisible(false);
   };
-  const isMobile = useMediaQuery({ maxWidth: 767})
+  const isMobile = useMediaQuery({ maxWidth: 1024})
 
   return (
     <div className="dashboard__content">
