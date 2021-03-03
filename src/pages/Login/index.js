@@ -11,14 +11,16 @@ import { connect } from 'react-redux';
 import { actionCreator } from '../../reducers/actionCreator';
 import { Redirect } from 'react-router';
 const FossilMdLoginPage = props => {
+  const [loadings, setLoadings] = useState(false);
+
   const handleFormSubmission = async (values, { setSubmitting }) => {
     //Handle submission goes here
     setSubmitting(true);
-
+    setLoadings(true)
     await props.userLogin(JSON.stringify(values));
     setSubmitting(false);
+    setLoadings(false)
   };
-  const [loadings, setLoadings] = useState(false);
   const innerForm = useRef();
 
   if (props.isLogin) {
@@ -62,7 +64,7 @@ const FossilMdLoginPage = props => {
 <div className="text-center">
                 <button
                   htmlType="submit"
-                  disabled={isSubmitting}
+                  //disabled={isSubmitting}
                   loading={loadings}
                   className="view-button button-square mt8"
                 >

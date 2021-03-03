@@ -105,4 +105,6 @@ export const backend_api = {
 
   LANDING_PAGE_PACKAGES: '/api/backend/v1/packages/public',
 
+  EDIT_PROFILE:"/api/backend/v1/users/update_profile"
+
 };

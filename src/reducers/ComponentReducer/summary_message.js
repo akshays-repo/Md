@@ -9,25 +9,24 @@ export const SummaryMesssageReducer = (state = SummaryMessageState, action) => {
   let message;
   switch (action.type) {
     case 'SET_LATEST_MESSAGE_SUMMARY':
-        const check = state.payload.filter(
-          (result, i) => result.conversationId === action.payload.conversationId,
-        ).length;
-     if(check===0)
-     {
-         state.payload=[...state.payload,action.payload]
-     }
+      const check = state.payload.filter(
+        (result, i) => result.conversationId === action.payload.conversationId,
+      ).length;
+      if (check === 0) {
+        state.payload = [...state.payload, action.payload];
+      }
       console.log('message summary payload', state.payload);
       message = state.payload.map((result, i) => {
         if (result.conversationId === action.payload.conversationId) {
-          action.payload.receiverAvatar =result.receiverAvatar
-          action.payload.receiverDisplayName =result.receiverDisplayName
-          i=i+1;
+          action.payload.receiverAvatar = result.receiverAvatar;
+          action.payload.receiverDisplayName = result.receiverDisplayName;
+          i = i + 1;
           return action.payload;
         } else {
           return result;
         }
       });
-   
+
       message.sort((a, b) => b.id - a.id);
       console.log('MEssage summary', message);
       return {
