@@ -37,9 +37,19 @@ const AddUsers = props => {
 
   const columns = [
     {
+      title: 'Full Name',
+      dataIndex: 'fullName',
+      key: 'fullName',
+    },
+    {
       title: 'Email',
       dataIndex: 'email',
       key: 'email',
+    },
+    {
+      title: 'Phone',
+      dataIndex: 'phone',
+      key: 'phone',
     },
     {
       title: 'Phone',
