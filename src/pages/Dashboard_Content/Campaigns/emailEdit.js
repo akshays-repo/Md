@@ -43,7 +43,7 @@ const EmailEdit = props => {
         gutter={[16, 16]}
         //style={{pointerEvents:"none" , opacity:"0.7"} }
       >
-        <Col xs={24} lg={12}>
+        <Col xs={24} xl={12} lg={24}>
 
           <div className="editorPanel">
             <Editor
@@ -54,7 +54,7 @@ const EmailEdit = props => {
           </div>
         </Col>
 
-        <Col xs={24} lg={12}>
+        <Col xs={24} lg={24} xl={12}>
           <div className="smsEditmodalCampaign campaignAccordion" style={{borderTop: '1px solid #eaeaea'}}>
             <Collapse accordion>
               <Panel header="Comapny" key="1">

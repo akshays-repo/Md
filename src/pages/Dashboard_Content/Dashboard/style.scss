@@ -21,6 +21,16 @@
             }
         }
     }
+    .chartBlock {
+        padding-right: 20px;
+        @media(max-width:991px) {
+            padding-right: 0;
+            margin-bottom: 50px;
+        }
+        @media (min-width:$ipad-portrait) and (max-width:$ipad-landscape) {
+            margin-bottom: 50px;
+          }
+    }
 }
 
 .card-section {

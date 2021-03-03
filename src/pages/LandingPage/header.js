@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./header.css";
 import { CSSTransition } from "react-transition-group";
-import LogoImg from './assets/images/fossilmd.jpg'
+import LogoImg from './assets/images/fossilmd.png'
 
 export default function Header() {
   const [isNavVisible, setNavVisibility] = useState(false);
