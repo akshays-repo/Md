@@ -18,10 +18,11 @@ export default function Editor(props) {
         menubar: 'file view insert format tools table tc help',
         toolbar: [
           'styleselect fontselect fontsizeselect',
-          'undo redo | cut copy | bold italic | link image | alignleft aligncenter alignright alignjustify',
+          'undo redo | cut copy | forecolor backcolor | bold italic | link image | alignleft aligncenter alignright alignjustify',
           'bullist numlist | outdent indent | blockquote subscript superscript | advlist | autolink | lists charmap | print preview |  code',
         ],
-        plugins: 'paste advlist autolink link image lists charmap print preview code',
+        plugins:
+          'paste advlist textcolor colorpicker  autolink link image lists charmap print preview code',
         automatic_uploads: true,
         file_picker_types: 'image',
         image_title: true,
