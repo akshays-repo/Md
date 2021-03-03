@@ -38,7 +38,7 @@ const UserCreationForm = props => {
         ),
       );
 
-      innerForm.current.setFieldValue('logo', acceptedFiles);
+      innerForm.current.setFieldValue('profile_image', acceptedFiles);
     },
   });
   const uploadButton = (
@@ -59,8 +59,8 @@ const UserCreationForm = props => {
     setFiles(prev => prev.filter(result => result.name != name));
 
     innerForm.current.setFieldValue(
-      'logo',
-      innerForm.current.values.logo.filter(result => result.name != name),
+      'profile_image',
+      innerForm.current.values.profile_image.filter(result => result.name != name),
     );
   };
 
@@ -112,24 +112,21 @@ const UserCreationForm = props => {
     }else{
         props.addUser(data)
 
-    }
-
-
-  };
+  };}
 
   return (
     <div>
       <Formik
         enableReinitialize={true}
         initialValues={
-          props.editData || {
+          props.editData|| {
             fullName:'',
             email: '',
             status: 'active',
             phone: '',
             password: '',
             c_password: '',
-            logo:""
+            profile_image:""
           }
         }
         validationSchema={props.editId ? hospitaEditlUser : hospitalUser}
@@ -140,8 +137,6 @@ const UserCreationForm = props => {
         {({ handleSubmit, touched, errors, isSubmitting , values}) => (
           <Form className="login__form" handleSubmit={handleSubmit}>
             <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>{generateForm(formField)}</Row>
-
-
             <p>
                 <div
                   style={{
@@ -159,8 +154,8 @@ const UserCreationForm = props => {
                         flexWrap: 'wrap',
                       }}
                     >
-                      {Array.isArray(values.logo) ? (
-                        values.logo.map((result, i) => (
+                      {Array.isArray(values.profile_image) ? (
+                        values.profile_image.map((result, i) => (
                           <Thumb onImageDelete={onImageDelete} file={result}></Thumb>
                         ))
                       ) : (
@@ -173,7 +168,7 @@ const UserCreationForm = props => {
                             objectFit: 'cover',
                           }}
                           src={
-                            values.logo ||
+                            values.profile_image ||
                             'https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png'
                           }
                         />
@@ -189,7 +184,7 @@ const UserCreationForm = props => {
                   </div>
                 </div>
 
-                {errors.logo && <div className="errormsg">{errors.logo}</div>}
+                {errors.profile_image && <div className="errormsg">{errors.profile_image}</div>}
               </p>
 
             <Button

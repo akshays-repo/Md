@@ -5,18 +5,24 @@ import { getFormDataA } from '_utils';
 import { Thumb } from './thumb';
 import { useDropzone } from 'react-dropzone';
 import { Row, Button } from 'antd';
+import { profileSettings } from '_utils/Schemas';
+import { actionCreator } from '../../../reducers/actionCreator';
+import { store } from '../../../reducers/configureStore';
+import { connect } from 'react-redux';
 
 const ProfileSettings = props => {
   const [fullName, setFullName] = useState('');
   const [logo, setLogo] = useState('');
+  const [email, setEmail] = useState('');
 
   useEffect(() => {
     let hospital = JSON.parse(localStorage.getItem('user_data'));
-    setFullName(hospital.hospital.fullName ? hospital.hospital.fullName : '' );
+    setFullName(hospital.hospital.fullName ? hospital.hospital.fullName : '');
     setLogo(hospital.hospital.logo ? hospital.hospital.logo : '');
-    console.log("hospital", hospital)
+    setEmail(hospital.email ? hospital.email : '');
+    console.log('hospital', hospital);
   }, []);
-  
+
   const formField = [
     {
       label: 'Hospital Name',
@@ -72,7 +78,11 @@ const ProfileSettings = props => {
       innerForm.current.values.logo.filter(result => result.name != name),
     );
   };
-  const handleFormSubmission = () => {};
+  const handleFormSubmission =async (values) => {
+    console.log("data",values)
+    let data = await getFormDataA({ ...values});
+    console.log("data", data)
+  };
 
   return (
     <div>
@@ -80,11 +90,13 @@ const ProfileSettings = props => {
         enableReinitialize={true}
         initialValues={{
           fullName: fullName,
+          email: email,
           password: '',
           c_password: '',
           logo: logo,
+          userTypeId: 2,
         }}
-        //  validationSchema={props.editId ? hospitaEditlUser : hospitalUser}
+        validationSchema={profileSettings}
         onSubmit={handleFormSubmission}
         innerRef={innerForm}
       >
@@ -102,7 +114,8 @@ const ProfileSettings = props => {
                 {...getRootProps({ className: 'dropzone' })}
               >
                 <div className="title mt6">
-                  <div className="settingThumb mb4"
+                  <div
+                    className="settingThumb mb4"
                     style={{
                       display: 'flex',
                       flexDirection: 'row',
@@ -129,28 +142,28 @@ const ProfileSettings = props => {
                       />
                     )}
 
-<input {...getInputProps()} multiple={false} />
-                  <div className="upload-btn-wrapper mt6">
-                    <button type="button" className="view-button button-square font-size-md px-5">
-                      Browse Image
-                    </button>
+                    <input {...getInputProps()} multiple={false} />
+                    <div className="upload-btn-wrapper mt6">
+                      <button type="button" className="view-button button-square font-size-md px-5">
+                        Browse Image
+                      </button>
+                    </div>
                   </div>
-                  </div>
-           
+
                   {/* <span>Upload Patient Image</span> */}
                 </div>
               </div>
 
               {errors.logo && <div className="errormsg">{errors.logo}</div>}
             </p>
-<div className="settingBottom mt8">
-            <button
-              htmlType="submit"
-              disabled={isSubmitting}
-              className="view-button button-square mt-5"
-            >
-              {' Save Changes'}
-            </button>
+            <div className="settingBottom mt8">
+              <button
+                htmlType="submit"
+                disabled={isSubmitting}
+                className="view-button button-square mt-5"
+              >
+                {' Save Changes'}
+              </button>
             </div>
           </Form>
         )}
@@ -159,4 +172,12 @@ const ProfileSettings = props => {
   );
 };
 
-export default ProfileSettings;
+
+const mapDispatchToProps = dispatch => ({
+
+  editUser: (param, values) =>
+    dispatch(actionCreator({ method: 'POST', action_type: 'EDIT_USER', param, values, })),
+
+});
+
+export default connect(mapDispatchToProps)(ProfileSettings);

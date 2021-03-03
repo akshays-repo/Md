@@ -25,7 +25,7 @@ export const connectToSocket = async () => {
   });
 
   socket.on('create_conversation_success', data => {
-    console.log('message create_conversation_success', data);
+  console.log('message create_conversation_success', data);
     
     socket.emit('get_messages', {
       conversationId: data.conversationId,

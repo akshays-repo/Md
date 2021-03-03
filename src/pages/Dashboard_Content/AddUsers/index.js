@@ -115,6 +115,7 @@ const AddUsers = props => {
         onCancel={() => store.dispatch({ type: 'CLOSE_CREATE_USER_MODAL' })}
         visible={props.modal}
         footer={false}
+        destroyOnClose
       >
         <UserCreationForm {...props} />
       </Modal>
@@ -124,6 +125,7 @@ const AddUsers = props => {
         onCancel={() => store.dispatch({ type: 'CLOSE_EDIT_USER_MODAL' })}
         visible={props.modal1}
         footer={false}
+        destroyOnClose
       >
         <UserCreationForm editId={editId}  editData={editData} {...props} />
       </Modal>
