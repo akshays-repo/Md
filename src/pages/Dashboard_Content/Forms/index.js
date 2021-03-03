@@ -75,9 +75,11 @@ const responseFt = async() => {
       key: 'action',
       render: (record) => (
         <Space size="middle">
+          <div className="pdfViewbutton">
           <button className="view-button icon-button button-square" onClick={(e) => viewFormDetails(e, record)}>
             <i class="fa fa-eye"></i>{' View File '}
           </button>
+          </div>
         </Space>
       ),
     },

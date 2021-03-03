@@ -1,0 +1,25 @@
+.settingTab {
+    .ant-tabs-tab {
+        @include breakpoint(xs) {
+        .ant-tabs-tab-btn {
+            padding: 0px 13px;
+        }
+    }
+}
+@media (min-width:$ipad-portrait) and (max-width:$ipad-landscape) {
+    .ant-tabs-tab-btn {
+        padding: 0px 5px;
+    }
+
+}
+}
+@include breakpoint(xs) {
+    .pdfViewbutton {
+        width: 125px;
+    }
+}
+@media (min-width:$ipad-portrait) and (max-width:$ipad-landscape) {
+.pdfViewbutton {
+    width: 125px;
+}
+}

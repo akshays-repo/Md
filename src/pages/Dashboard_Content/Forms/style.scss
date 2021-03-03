@@ -1,14 +1,52 @@
 .responseBox {
-    border-top: 1px solid #dfdfdf;
+    // border-top: 1px solid #dfdfdf;
     padding-top: 20px;
+  height: 630px;
+    .header {
+        border-bottom: 1px solid #e6e6e6;
+        margin-bottom: 18px;
+    }
+    .body {
+        background: #fafafa;
+        padding: 15px;
+        margin-bottom: 15px;
+        p {
+            span {
+                display: inline-block;
+                min-width: 130px;
+                font-weight: 600;
+            }
+        }
+    }
+    .responseContent {
+        border: 1px solid #e4e4e4;
     .responseBg {
-        background: #f5f5f5;
-        padding: 10px;
         border-bottom: 1px solid #e4e4e4;
+        display: flex;
+        .fitstColumn {
+            min-width: 230px;
+    text-transform: capitalize;
+    border-right: 1px solid #e4e4e4;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    p {
+        margin-bottom: 0;
+    }
+        }
         .question {
             font-weight: 600;
         }
+        .secondColumn {
+            padding: 15px;
+            display: flex;
+    align-items: center;
+    p {
+        margin-bottom: 0;
     }
+        }
+    }
+}
 }
 .formtableIcons {
     width: 100%;
