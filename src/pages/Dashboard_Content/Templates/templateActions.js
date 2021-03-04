@@ -173,13 +173,12 @@ const TemplateActions = props => {
         closable={false}
         onClose={() => setVisible(false)}
         visible={visible}
-        width={isMobile ? 200 : 400}
+        width={isMobile ? 240 : 400}
         footer={true}
       >
-        <Row>
-          <Col xl={12}>
-          <InputLabel id="demo-simple-select-label">Enter the Unit</InputLabel>
-
+        <Row gutter={6} className="editTime">
+        <Col lg={12} xl={12}>
+          <InputLabel id="demo-simple-select-label" style={{ paddingTop: '2px' }}>Enter the Unit</InputLabel>
             <TextField
               type="number"
               InputProps={{
@@ -195,18 +194,15 @@ const TemplateActions = props => {
             />
           </Col>
 
-          <Col xl={12}>
+          <Col lg={12} xl={12}>
           <InputLabel id="demo-simple-select-label">Age</InputLabel>
-
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
               defaultValue={actionEdit.unit}
               required
               placeholder="Enter the Unit"
-
               onChange={e => setActionEdit({ ...actionEdit, unit: e.target.value })}
-
               //onChange={handleChange}
             >
               <MenuItem value={'week'}>Week</MenuItem>

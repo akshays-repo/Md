@@ -17,7 +17,7 @@ const Dashboard_Dashboard = () => {
           </div>
         <Row>
  
-          <Col xl={12}>
+          <Col lg={24} md={24} xl={12} >
           <div className="chartBlock">
 
           <Graphs/>
@@ -25,7 +25,7 @@ const Dashboard_Dashboard = () => {
 
           </Col>
 
-          <Col xl={12}>
+          <Col lg={24}  md={24} xl={12}>
             <div className="countBlock">
           <CardsSection />
           </div>

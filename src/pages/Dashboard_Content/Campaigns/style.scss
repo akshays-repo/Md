@@ -90,14 +90,17 @@
       position: absolute;
       right: 0px;
     top: 59px;
-    left: 117px;
-    width: 48%;
+    left: 138px;
+    width: 43%;
     resize: none;
     border: none;
     outline: none;
     @include breakpoint(xs) {
       width: 60%;
       left: 60px;
+    }
+    @media (min-width:$ipad-portrait) and (max-width:$ipad-landscape) {
+      left: 65px;
     }
     }
   }
