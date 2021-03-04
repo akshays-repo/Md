@@ -131,7 +131,7 @@ const AppointmentEdit = props => {
                   //onOk={onOk}
                   name="appointment_start"
                   placeholder="Start Date"
-                  format="YYYY-MM-DD hh:mm:ss"
+                  format="YYYY-MM-DD hh:mm:ss A"
                 />
               </Col>
 
@@ -142,7 +142,7 @@ const AppointmentEdit = props => {
                   showTime
                   //onChange={onChange}
                   //onOk={onOk}
-                  format="YYYY-MM-DD hh:mm:ss"
+                  format="YYYY-MM-DD hh:mm:ss A"
                   name="appointment_end"
                   placeholder="End Date"
                 />

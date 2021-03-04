@@ -192,6 +192,7 @@ const PatientAppointment = props => {
         visible={props.modal2}
         footer={false}
         onCancel={() => store.dispatch({ type: 'CLOSE_VIEW_APPOINTMENT_MODAL' })}
+        destroyOnClose
       >
         <AppointmentView {...props} />
       </Modal>
@@ -199,6 +200,8 @@ const PatientAppointment = props => {
         visible={props.modal1}
         footer={false}
         onCancel={() => store.dispatch({ type: 'CLOSE_EDIT_APPOINTMENT_MODAL' })}
+        destroyOnClose
+
       >
         <AppointmentEdit editAppointment={editAppointment}  {...props} />
       </Modal>
