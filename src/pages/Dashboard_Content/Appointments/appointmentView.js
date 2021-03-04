@@ -30,7 +30,7 @@ const AppointmentView = props => {
         </Col>
         <Col xs={24} xl={12}>
           <p>Email </p>
-          <p className="title">{details.email?.toLowerCase()}</p>
+          <p style={{ textTransform: 'lowercase' }}  className="title">{details.email}</p>
         </Col>
         <Col xs={24} xl={12}>
           <p>Phone </p> <p className="title"> {details.phone}</p>

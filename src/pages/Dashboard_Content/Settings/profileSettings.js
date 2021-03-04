@@ -98,23 +98,37 @@ const ProfileSettings = props => {
   const handleFormSubmission = async values => {
     const { c_password, ...rest } = values;
 
-  
+    //if (rest.password === '') delete rest.password;
     if (typeof rest.logo === 'string') {
       delete rest.logo;
-    }else{
-      if (hospitalData.isAdmin === false) {
+    }
+    if (hospitalData.isAdmin === false) {
+      if (rest.logo) {
         rest.profile_image = rest.logo;
-        delete rest.logo;
-
       }
-    } 
+      delete rest.logo;
+      delete rest.userTypeId;
+      console.log('asasas', rest);
+    }
 
     let data = await getFormDataA({ ...rest });
-    let response = await props.editProfile(data);
-    if (response.payload.success === true) {
-      localStorage.setItem('token', response.payload.token);
-      localStorage.setItem('user_data', JSON.stringify(response.payload.user));
-      message.success('Profile Updated Succefully');
+    let response;
+    if (hospitalData.isAdmin === false) {
+      response = await props.editUser({ id: hospitalData.id }, data);
+      console.log('ress', response);
+      if (response.error === '') {
+        localStorage.setItem('user_data', JSON.stringify(response.payload[0]));
+        message.success('Profile Updated Succefully');
+      }
+    } else {
+      response = await props.editProfile(data);
+      if (response.payload.success === true) {
+        if (response.payload.token) {
+          localStorage.setItem('token', response.payload.token);
+        }
+        localStorage.setItem('user_data', JSON.stringify(response.payload.user));
+        message.success('Profile Updated Succefully');
+      }
     }
   };
 
@@ -126,9 +140,9 @@ const ProfileSettings = props => {
           fullName: fullName,
           email: email,
           password: '',
-         // c_password: '',
+          // c_password: '',
           logo: logo,
-          userTypeId: 2,
+          userTypeId: parseInt(2),
           phone: hospitalPhone,
           status: hospitalStatus,
         }}
@@ -222,6 +236,9 @@ const mapStoreToProps = ({ Users }) => {
 const mapDispatchToProps = dispatch => ({
   editProfile: values =>
     dispatch(actionCreator({ method: 'POST', action_type: 'EDIT_PROFILE', values })),
+
+  editUser: (param, values) =>
+    dispatch(actionCreator({ method: 'POST', action_type: 'EDIT_USER', param, values })),
 });
 
 export default connect(mapStoreToProps, mapDispatchToProps)(ProfileSettings);
