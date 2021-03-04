@@ -188,7 +188,7 @@ const EditCampaign = props => {
               name="checkedB"
               inputProps={{ 'aria-label': 'primary checkbox' }}
             />
-            <div className={emailStatus === "hold" ? "overlay" : ""}>
+            <div className={emailStatus === "hold" ? "overlay" : "overlay-with-out-efffect"}>
             <EmailEdit
               handleEmailEdit={handleEmailEdit}
               handleEmailEditSubject={handleEmailEditSubject}
@@ -209,7 +209,7 @@ const EditCampaign = props => {
               name="checkedB"
               inputProps={{ 'aria-label': 'primary checkbox' }}
             />
-            <div className={smsStatus === "hold" ? "overlay" : ""}>
+            <div className={smsStatus === "hold" ? "overlay" : "overlay-with-out-efffect"}>
             <SmsEdit
               handleSmsEdit={handleSmsEdit}
               smsContent={smsContent}

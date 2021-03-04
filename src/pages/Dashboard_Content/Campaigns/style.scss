@@ -1,75 +1,74 @@
 .ant-tabs {
-    // .ant-tabs-tab.ant-tabs-tab-active {
-    //   .ant-tabs-tab-btn {
-    //     padding: 0 30px;
-    //     font-size: 16px;
-    //   color: #2be0fd;
-    // }
-    .ant-tabs-tab-btn {
-      font-weight: 500;
-      color: #15558d;
-      padding: 0 30px;
-}
+  // .ant-tabs-tab.ant-tabs-tab-active {
+  //   .ant-tabs-tab-btn {
+  //     padding: 0 30px;
+  //     font-size: 16px;
+  //   color: #2be0fd;
+  // }
+  .ant-tabs-tab-btn {
+    font-weight: 500;
+    color: #15558d;
+    padding: 0 30px;
+  }
 }
 .newCampaign {
   .boxWrapper {
     display: flex;
     flex-wrap: wrap;
     max-width: 900px;
-  .box {
-    border: 1px solid #fafafa;
-    margin: 5px;
-    width: 20%;
-    flex-basis: 150px;
-    flex-grow: 1;
-    .boxInner {
-      height: 100%;
-      padding: 10px;
-      @include border-radius(5px);
-      .tickIcon {
-        display: flex;
-        justify-content: flex-end;
-        height: 40px;
-        font-size: 20px;
-        .activeClr {
-          color: #109400;
-        }
-      }
-      .text-center {
-        .MuiInputLabel-animated {
-          font-size: 14px;
-        }
-        .MuiInputBase-input {
-          font-size: 13px;
-        }
-        .iconRound {
-          width: 50px;
-          height: 50px;
-          @include border-radius(50%);
-          background: #e0e0e0;
-          margin: auto;
-          margin-bottom: 25px;
-          @include transit;
-          @include flex(center, center);
-          i {
-            font-size: 25px;
-            color: #ffffff;
+    .box {
+      border: 1px solid #fafafa;
+      margin: 5px;
+      width: 20%;
+      flex-basis: 150px;
+      flex-grow: 1;
+      .boxInner {
+        height: 100%;
+        padding: 10px;
+        @include border-radius(5px);
+        .tickIcon {
+          display: flex;
+          justify-content: flex-end;
+          height: 40px;
+          font-size: 20px;
+          .activeClr {
+            color: #109400;
           }
-&:hover {
- background:#038FDF;
-}
+        }
+        .text-center {
+          .MuiInputLabel-animated {
+            font-size: 14px;
+          }
+          .MuiInputBase-input {
+            font-size: 13px;
+          }
+          .iconRound {
+            width: 50px;
+            height: 50px;
+            @include border-radius(50%);
+            background: #e0e0e0;
+            margin: auto;
+            margin-bottom: 25px;
+            @include transit;
+            @include flex(center, center);
+            i {
+              font-size: 25px;
+              color: #ffffff;
+            }
+            &:hover {
+              background: #038fdf;
+            }
+          }
         }
       }
     }
   }
+  .view-button {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    height: 40px;
+  }
 }
-.view-button {
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-  height: 40px;
-}
-}
-
 
 .smsEditmodalCampaign {
   .mobileBg {
@@ -78,53 +77,52 @@
     @include breakpoint(xs) {
       margin-bottom: 25px;
     }
-  .mobile-background {
-    background-repeat: no-repeat;
+    .mobile-background {
+      background-repeat: no-repeat;
+      height: 100%;
+      background-position: center center;
+      position: relative;
+      .textareaHight {
+        display: block;
+        min-height: 360px;
+        textarea {
+          position: absolute;
+          right: 0px;
+          top: 48px;
+          left: 91px;
+          width: 56%;
+          resize: none;
+          border: none;
+          outline: none;
+          @include breakpoint(xs) {
+            width: 60%;
+            left: 60px;
+          }
+          @media (min-width: $ipad-portrait) and (max-width: $ipad-landscape) {
+            left: 65px;
+          }
+        }
+      }
+      .msgLength {
+        position: absolute;
+        right: 202px;
+      }
+    }
+  }
+  .modalRight {
     height: 100%;
-    background-position: center center;
-    position: relative;
-    .textareaHight {
-      display: block;
-    min-height: 360px;
-    textarea {
-      position: absolute;
-      right: 0px;
-      top: 48px;
-      left: 91px;
-      width: 56%;
-      resize: none;
-      border: none;
-      outline: none;
-    @include breakpoint(xs) {
-      width: 60%;
-      left: 60px;
+    .collapseContent {
+      min-height: 60%;
     }
-    @media (min-width:$ipad-portrait) and (max-width:$ipad-landscape) {
-      left: 65px;
-    }
+    .mbltextBtn {
+      display: flex;
+      justify-content: flex-end;
     }
   }
-  .msgLength {
-    position: absolute;
-    right: 202px;
-  }
-  }
-}
-.modalRight {
-  height: 100%;
-  .collapseContent {
-    min-height: 60%;
-  }
-  .mbltextBtn {
-    display: flex;
-    justify-content: flex-end;
-  }
-}
   .ant-collapse {
     background-color: transparent;
     border: none;
     .ant-collapse-item {
-
       .ant-collapse-content-box {
         background: #fafafa;
       }
@@ -143,14 +141,16 @@
   }
 }
 .overlay {
-
-pointer-events: none;
-filter: blur(1px);
--webkit-filter: blur(1px);
-opacity: 0.5;
-background: #ececec;
-border-radius: 10px;
-margin-top: 10px;
+  pointer-events: none;
+  filter: blur(1px);
+  -webkit-filter: blur(1px);
+  opacity: 0.5;
+  background: #ececec;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+.overlay-with-out-efffect{
+  margin-top: 10px;
 
 }
 .campaignWrapper {
@@ -160,23 +160,22 @@ margin-top: 10px;
       padding-bottom: 15px;
     }
 
-
     .rightPosition {
-      @include flex(flex-end , start);
+      @include flex(flex-end, start);
     }
     .MuiFormControl-marginNormal {
       margin-top: 0;
       margin-bottom: 20px;
-    .MuiInput-underline:before {
-      border-bottom: 1px solid #ececec;
-    }
+      .MuiInput-underline:before {
+        border-bottom: 1px solid #ececec;
+      }
     }
   }
   .tabSection {
     .tabBox {
       width: 30%;
       padding-top: 18px;
-      @include breakpoint(xs){
+      @include breakpoint(xs) {
         width: 100%;
       }
       .ant-tabs-nav {
@@ -191,49 +190,49 @@ margin-top: 10px;
   }
 }
 .remindersEmail {
- .switchCampain {
-   @include flex(flex-end, center);
- }
- .editorPanel {
-  .mce-panel {
-    background: #f5f9ff;
-    border: 0 solid #e3ebf7;
-    .mce-btn {
-      background-color: #dae6f7;
-    }
-    .mce-statusbar {
-      background: #fff;
-    }
-    .mce-container {
-      #mceu_35-body {
-      button {
-        width: 85px;
+  .switchCampain {
+    @include flex(flex-end, center);
+  }
+  .editorPanel {
+    .mce-panel {
+      background: #f5f9ff;
+      border: 0 solid #e3ebf7;
+      .mce-btn {
+        background-color: #dae6f7;
+      }
+      .mce-statusbar {
+        background: #fff;
+      }
+      .mce-container {
+        #mceu_35-body {
+          button {
+            width: 85px;
+          }
+        }
       }
     }
+  }
+  .campaignAccordion {
+    .ant-collapse {
+      .ant-collapse-content {
+        border-top: 1px solid #eaeaea;
+      }
+      .ant-collapse-item {
+        border-bottom: 1px solid #eaeaea;
+      }
     }
   }
- }
- .campaignAccordion {
-   .ant-collapse {
-  .ant-collapse-content {
-    border-top: 1px solid #eaeaea;
-  }
-  .ant-collapse-item {
-    border-bottom: 1px solid #eaeaea;
-  }
-   }
- }
 }
 
-@media (min-width:$ipad-portrait) and (max-width:$ipad-landscape) {
+@media (min-width: $ipad-portrait) and (max-width: $ipad-landscape) {
   .campaignWrapper {
     .headerTop {
       padding-bottom: 10px;
     }
-   .tabSection {
-    .tabBox {
-width: 75%;
+    .tabSection {
+      .tabBox {
+        width: 75%;
+      }
     }
   }
-}
 }
