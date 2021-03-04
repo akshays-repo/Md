@@ -89,12 +89,12 @@
     textarea {
       position: absolute;
       right: 0px;
-    top: 59px;
-    left: 138px;
-    width: 43%;
-    resize: none;
-    border: none;
-    outline: none;
+      top: 48px;
+      left: 91px;
+      width: 56%;
+      resize: none;
+      border: none;
+      outline: none;
     @include breakpoint(xs) {
       width: 60%;
       left: 60px;
@@ -142,13 +142,25 @@
     }
   }
 }
+.overlay {
 
+pointer-events: none;
+filter: blur(1px);
+-webkit-filter: blur(1px);
+opacity: 0.5;
+background: #ececec;
+border-radius: 10px;
+margin-top: 10px;
+
+}
 .campaignWrapper {
   .headerTop {
     border-bottom: 1px solid #d9d9d9;
     @include breakpoint(xs) {
       padding-bottom: 15px;
     }
+
+
     .rightPosition {
       @include flex(flex-end , start);
     }

@@ -19,10 +19,10 @@ const SmsEdit = props => {
             <div className="mobile-background" style={{ backgroundImage: `url(${mblSvg})` }}>
               <div className="textareaHight">
                 <TextareaAutosize
-                  rowsMin={13}
+                  rowsMin={14}
                   placeholder="Sms Content"
                   defaultValue={props.smsContent}
-                  maxLength={300}
+                  maxLength={320}
                   onChange={e => props.handleSmsEdit(e.target.value)}
                   className="textareamblsize"
                 />
